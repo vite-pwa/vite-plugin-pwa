@@ -1,10 +1,10 @@
-<h2 align='center'><samp>vite-plugin-pwa</samp></h2>
-
-<p align='center'>Zero-config PWA for Vite <sup>(alpha)</sup></p>
+<p align='center'>
+<img src='https://repository-images.githubusercontent.com/290129345/d4bfc300-1866-11eb-8602-e672c9dd0e7d' alt="vite-plugin-pwa - Zero-config PWA for Vite">
+</p>
 
 <p align='center'>
 <a href='https://www.npmjs.com/package/vite-plugin-pwa'>
-<img src='https://img.shields.io/npm/v/vite-plugin-pwa?color=222&style=flat-square'>
+<img src='https://img.shields.io/npm/v/vite-plugin-pwa?color=33A6B8&label='>
 </a>
 </p>
 
@@ -56,6 +56,16 @@ Check out the type declaration [src/index.ts](./src/index.ts) and following link
 
 - [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - [Workbox](https://developers.google.com/web/tools/workbox)
+
+## Sponsors
+
+This project is part of my <a href='https://github.com/antfu-sponsors'>Sponsor Program</a>
+
+<p align="center">
+  <a href="https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg">
+    <img src='https://cdn.jsdelivr.net/gh/antfu/static/sponsors.svg'/>
+  </a>
+</p>
 
 ## License
 
