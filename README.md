@@ -1,6 +1,6 @@
 <h2 align='center'><samp>vite-plugin-pwa</samp></h2>
 
-<p align='center'>PWA for Vite <sup>(alpha)</sup></p>
+<p align='center'>Zero-config PWA for Vite <sup>(alpha)</sup></p>
 
 <p align='center'>
 <a href='https://www.npmjs.com/package/vite-plugin-pwa'>
@@ -14,6 +14,7 @@
 
 - Generate Service Worker with Offline support (via [Workbox](https://developers.google.com/web/tools/workbox))
 - Auto inject Web App [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
+- **WIP**: Strategies options
 - **WIP**: Meta injection
 - **WIP**: Icons generation for different dimensions
 
