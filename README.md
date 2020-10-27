@@ -52,7 +52,7 @@ VitePWA({
 })
 ```
 
-Check out the type declaration [src/index.ts](./src/index.ts) and following links for more details.
+Check out the type declaration [src/index.ts](./src/index.ts) and the following links for more details.
 
 - [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - [Workbox](https://developers.google.com/web/tools/workbox)

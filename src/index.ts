@@ -23,7 +23,6 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
-    theme_color: '#42b883',
     lang: 'en',
   }
 
