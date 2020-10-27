@@ -20,7 +20,7 @@
     "dev": "npm run build -- --watch",
     "build": "tsup src/index.ts --dts --format cjs,esm",
     "prepublish": "npm run build",
-    "release": "standard-version && npm publish && git push"
+    "release": "npx bumpp --push --tag --commit"
   },
   "dependencies": {
     "debug": "^4.3.0",
@@ -34,7 +34,6 @@
     "@typescript-eslint/eslint-plugin": "^4.6.0",
     "eslint": "^7.12.1",
     "rollup": "^2.32.1",
-    "standard-version": "^9.0.0",
     "tsup": "^3.7.1",
     "typescript": "^4.0.5",
     "vite": "^1.0.0-rc.8"
