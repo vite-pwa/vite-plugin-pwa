@@ -12,8 +12,11 @@ export const HTMLTransformer = (options: VitePWAOptions): IndexHtmlTransform => 
       `
 <link rel='manifest' href='manifest.json'>
 <script>
-  if('serviceWorker' in navigator)
-    navigator.serviceWorker.register('sw.js', { scope: './' })
+  if('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js', { scope: './' })
+    })
+  }
 </script>
 </head>`,
     )
