@@ -1,6 +1,6 @@
 <h2 align='center'><samp>vite-plugin-pwa</samp></h2>
 
-<p align='center'>Lightweight PWA for Vite</p>
+<p align='center'>PWA for Vite <sup>(alpha)</sup></p>
 
 <p align='center'>
 <a href='https://www.npmjs.com/package/vite-plugin-pwa'>
@@ -8,13 +8,18 @@
 </a>
 </p>
 
-> 🚧 WIP, not working yet
-
 <br>
+
+## Features
+
+- Generate Service Worker with Offline support (via [Workbox](https://developers.google.com/web/tools/workbox))
+- Auto inject Web App [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
+- **WIP**: Meta injection
+- **WIP**: Icons generation for different dimensions
 
 ## Usage
 
-Install
+> This plugin requires Vite `>= v1.0.0-rc.8`
 
 ```bash
 npm i vite-plugin-pwa -D # yarn add vite-plugin-pwa -D
@@ -24,24 +29,32 @@ Add it to `vite.config.js`
 
 ```ts
 // vite.config.js
-import PWA from 'vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa'
 
 export default {
   plugins: [
-    PWA()
+    VitePWA()
   ]
 }
 ```
 
 ## Configuration
 
-The following show the default values of the configuration
-
 ```ts
-PAW({
- 
+VitePWA({
+  manifest: {
+    // content of manifest
+  },
+  workbox: {
+    // workbox options
+  }
 })
 ```
+
+Check out the type declaration [src/index.ts](./src/index.ts) and following links for more details.
+
+- [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
+- [Workbox](https://developers.google.com/web/tools/workbox)
 
 ## License
 

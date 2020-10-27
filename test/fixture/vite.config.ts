@@ -1,9 +1,11 @@
 import { UserConfig } from 'vite'
-import PWA from 'vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa'
 
 const config: UserConfig = {
   plugins: [
-    PWA(),
+    VitePWA({
+
+    }),
   ],
 }
 

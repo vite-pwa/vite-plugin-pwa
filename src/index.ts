@@ -1,32 +1,54 @@
+import fs, { promises as fsp } from 'fs'
+import path from 'path'
 import type { Plugin } from 'vite'
-import { Context } from './context'
-import { createRollupPlugin } from './plugins/build'
-import { createServerPlugin } from './plugins/server'
+import { generateSW } from 'rollup-plugin-workbox'
+import { GenerateSWConfig } from 'workbox-build'
 import { HTMLTransformer } from './transformers/html'
-import { Options } from './types'
+import { ManifestOptions, VitePWAOptions } from './types'
 
-const defaultOptions: Options = {
-  dirs: 'src/components',
-  extensions: 'vue',
-  deep: true,
-}
+export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
+  const root = options.root || process.cwd()
+  const pkg = JSON.parse(fs.readFileSync(path.resolve(root, 'package.json'), 'utf-8'))
 
-function VitePWA(options: Partial<Options> = {}): Plugin {
-  const resolvedOptions: Options = Object.assign({}, defaultOptions, options)
-  const ctx = new Context(resolvedOptions)
+  const defaultWorkbox: GenerateSWConfig = {
+    swDest: 'dist/sw.js',
+    globDirectory: 'dist',
+    offlineGoogleAnalytics: false,
+    mode: process.env.NODE_ENV || 'development',
+  }
+
+  const defaultManifest: Partial<ManifestOptions> = {
+    name: pkg.name,
+    short_name: pkg.name,
+    start_url: '/',
+    display: 'standalone',
+    background_color: '#ffffff',
+    theme_color: '#42b883',
+    lang: 'en',
+  }
+
+  const workbox = Object.assign({}, defaultWorkbox, options.workbox || {})
+  const manifest = Object.assign({}, defaultManifest, options.manifest || {})
+
+  const resolvedOptions: VitePWAOptions = {
+    workbox,
+    manifest,
+  }
 
   return {
-    configureServer: createServerPlugin(ctx),
+    indexHtmlTransforms: [HTMLTransformer(resolvedOptions)],
     rollupInputOptions: {
-      plugins: [
-        createRollupPlugin(ctx),
+      pluginsPostBuild: [
+        generateSW(workbox),
+        {
+          name: 'vite-plugin-pwa-manifest',
+          async writeBundle() {
+            fsp.writeFile('dist/manifest.json', `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8')
+          },
+        },
       ],
     },
-    transforms: [
-      HTMLTransformer(ctx),
-    ],
   }
 }
 
-export type { Options }
-export default VitePWA
+export type { VitePWAOptions as Options }

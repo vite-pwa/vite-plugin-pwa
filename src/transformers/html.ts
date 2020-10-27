@@ -1,16 +1,21 @@
-import { Transform } from 'vite'
-import Debug from 'debug'
-import { Context } from '../context'
+import { IndexHtmlTransform } from 'vite/dist/node/transform'
+import { VitePWAOptions } from '../types'
 
-const debug = Debug('vite-plugin-pwa:transform:html')
+export const HTMLTransformer = (options: VitePWAOptions): IndexHtmlTransform => ({
+  apply: 'post',
+  transform({ code, isBuild }) {
+    if (!isBuild)
+      return code
 
-export const HTMLTransformer = (ctx: Context): Transform => ({
-  test({ path }) {
-    debug(path)
-    return path.endsWith('index.html')
-  },
-  transform({ code }) {
-    debug(code)
-    return code
+    return code.replace(
+      '</head>',
+      `
+<link rel='manifest' href='manifest.json'>
+<script>
+  if('serviceWorker' in navigator)
+    navigator.serviceWorker.register('sw.js', { scope: './' })
+</script>
+</head>`,
+    )
   },
 })
