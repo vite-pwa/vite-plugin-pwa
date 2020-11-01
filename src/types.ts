@@ -42,10 +42,6 @@ export interface ManifestOptions {
    */
   lang: string
   /**
-   * Default: `false`
-   */
-  useWebmanifestExtension: boolean
-  /**
    * Default: A combination of `routerBase` and `options.build.publicPath`
    */
   publicPath: string
