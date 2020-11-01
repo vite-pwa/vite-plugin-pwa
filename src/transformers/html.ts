@@ -7,10 +7,11 @@ export const HTMLTransformer = (options: VitePWAOptions): IndexHtmlTransform => 
     if (!isBuild)
       return code
 
+    const manifestExtension = options.manifest.useWebmanifestExtension ? 'webmanifest' : 'json'
     return code.replace(
       '</head>',
       `
-<link rel='manifest' href='manifest.json'>
+<link rel='manifest' href='manifest.${manifestExtension}'>
 <script>
   if('serviceWorker' in navigator) {
     window.addEventListener('load', () => {

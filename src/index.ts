@@ -1,7 +1,7 @@
 import fs, { promises as fsp } from 'fs'
 import path from 'path'
-import type { Plugin } from 'vite'
 import { generateSW } from 'rollup-plugin-workbox'
+import type { Plugin } from 'vite'
 import { GenerateSWConfig } from 'workbox-build'
 import { HTMLTransformer } from './transformers/html'
 import { ManifestOptions, VitePWAOptions } from './types'
@@ -42,7 +42,8 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
         {
           name: 'vite-plugin-pwa-manifest',
           async writeBundle() {
-            fsp.writeFile('dist/manifest.json', `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8')
+            const manifestExtension = resolvedOptions.manifest.useWebmanifestExtension ? 'webmanifest' : 'json'
+            fsp.writeFile(`dist/manifest.${manifestExtension}`, `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8')
           },
         },
       ],
