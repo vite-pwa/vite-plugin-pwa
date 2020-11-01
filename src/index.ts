@@ -42,8 +42,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
         {
           name: 'vite-plugin-pwa-manifest',
           async writeBundle() {
-            const manifestExtension = resolvedOptions.manifest.useWebmanifestExtension ? 'webmanifest' : 'json'
-            fsp.writeFile(`dist/manifest.${manifestExtension}`, `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8')
+            fsp.writeFile('dist/manifest.webmanifest', `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8')
           },
         },
       ],
