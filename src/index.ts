@@ -9,10 +9,11 @@ import { ManifestOptions, VitePWAOptions } from './types'
 export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
   const root = options.root || process.cwd()
   const pkg = JSON.parse(fs.readFileSync(path.resolve(root, 'package.json'), 'utf-8'))
+  const outDir = options.outDir || 'dist'
 
   const defaultWorkbox: GenerateSWConfig = {
-    swDest: 'dist/sw.js',
-    globDirectory: 'dist',
+    swDest: `${outDir}/sw.js`,
+    globDirectory: outDir,
     offlineGoogleAnalytics: false,
     mode: process.env.NODE_ENV || 'development',
   }
@@ -42,7 +43,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
         {
           name: 'vite-plugin-pwa-manifest',
           async writeBundle() {
-            fsp.writeFile('dist/manifest.webmanifest', `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8')
+            fsp.writeFile(`${outDir}/manifest.webmanifest`, `${JSON.stringify(manifest, null, 2)}\n`, 'utf-8')
           },
         },
       ],
