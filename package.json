@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "dev": "npm run build -- --watch",
-    "build": "tsup src/index.ts --dts --format cjs,esm",
+    "build": "tsup src/index.ts --env.NODE_ENV production --dts --format cjs,esm",
     "prepublishOnly": "npm run build",
     "release": "npx bumpp --push --tag --commit && npm publish",
     "example:dev": "npm -C example run dev",

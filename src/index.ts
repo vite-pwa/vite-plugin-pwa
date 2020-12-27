@@ -15,7 +15,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
     swDest: `${outDir}/sw.js`,
     globDirectory: outDir,
     offlineGoogleAnalytics: false,
-    mode: process.env.NODE_ENV || 'development',
+    mode: process.env.NODE_ENV,
   }
 
   const defaultManifest: Partial<ManifestOptions> = {
