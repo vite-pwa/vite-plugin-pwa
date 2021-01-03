@@ -20,7 +20,7 @@
 
 ## Usage
 
-> This plugin requires Vite `>= v1.0.0-rc.8`
+> ℹ️ **Vite 2 is supported from `v0.3.x`, Vite 1's support is discontinued.**
 
 ```bash
 npm i vite-plugin-pwa -D # yarn add vite-plugin-pwa -D
