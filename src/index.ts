@@ -50,7 +50,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
 <script>
   if('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js', { scope: './' })
+      navigator.serviceWorker.register('${workbox.swDest.replace(outDir, '')}', { scope: './' })
     })
   }
 </script>
