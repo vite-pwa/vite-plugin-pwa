@@ -2,6 +2,7 @@ import fs from 'fs'
 import { resolve } from 'path'
 import type { Plugin, ResolvedConfig } from 'vite'
 import { generateSW, GenerateSWConfig } from 'workbox-build'
+import { cachePreset } from './cache'
 import { ManifestOptions, VitePWAOptions } from './types'
 
 export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
@@ -13,6 +14,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
     swDest: `${outDir}/sw.js`,
     globDirectory: outDir,
     offlineGoogleAnalytics: false,
+    runtimeCaching: cachePreset,
     // prevent tsup replacing `process.env`
     // eslint-disable-next-line dot-notation
     mode: process['env']['NODE_ENV'] || 'production',
