@@ -52,7 +52,6 @@ export interface ManifestOptions {
  */
 export interface VitePWAOptions {
   outDir?: string
-  root?: string
   manifest: Partial<ManifestOptions>
   workbox: Partial<GenerateSWConfig>
 }

@@ -6,43 +6,48 @@ import { cachePreset } from './cache'
 import { ManifestOptions, VitePWAOptions } from './types'
 
 export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
-  const root = options.root || process.cwd()
-  const pkg = JSON.parse(fs.readFileSync(resolve(root, 'package.json'), 'utf-8'))
   const outDir = options.outDir || 'dist'
 
-  const defaultWorkbox: GenerateSWConfig = {
-    swDest: `${outDir}/sw.js`,
-    globDirectory: outDir,
-    offlineGoogleAnalytics: false,
-    runtimeCaching: cachePreset,
-    // prevent tsup replacing `process.env`
-    // eslint-disable-next-line dot-notation
-    mode: process['env']['NODE_ENV'] || 'production',
-  }
-
-  const defaultManifest: Partial<ManifestOptions> = {
-    name: pkg.name,
-    short_name: pkg.name,
-    start_url: '/',
-    display: 'standalone',
-    background_color: '#ffffff',
-    lang: 'en',
-  }
-
-  const workbox = Object.assign({}, defaultWorkbox, options.workbox || {})
-  const manifest = Object.assign({}, defaultManifest, options.manifest || {})
   let viteConfig: ResolvedConfig | undefined
+  let workbox: GenerateSWConfig | undefined
+  let manifest: Partial<ManifestOptions> = {}
 
   return {
     name: 'vite-plugin-pwa',
     enforce: 'post',
     configResolved(config) {
       viteConfig = config
+      const root = viteConfig.root
+      const pkg = fs.existsSync('package.json')
+        ? JSON.parse(fs.readFileSync('package.json', 'utf-8'))
+        : {}
+
+      const defaultWorkbox: GenerateSWConfig = {
+        swDest: resolve(root, `${outDir}/sw.js`),
+        globDirectory: resolve(root, outDir),
+        offlineGoogleAnalytics: false,
+        runtimeCaching: cachePreset,
+        // prevent tsup replacing `process.env`
+        // eslint-disable-next-line dot-notation
+        mode: process['env']['NODE_ENV'] || 'production',
+      }
+
+      const defaultManifest: Partial<ManifestOptions> = {
+        name: pkg.name,
+        short_name: pkg.name,
+        start_url: '/',
+        display: 'standalone',
+        background_color: '#ffffff',
+        lang: 'en',
+      }
+
+      workbox = Object.assign({}, defaultWorkbox, options.workbox || {})
+      manifest = Object.assign({}, defaultManifest, options.manifest || {})
     },
     transformIndexHtml: {
       enforce: 'post',
       transform(html) {
-        if (!viteConfig?.isProduction)
+        if (viteConfig!.command !== 'build')
           return html
 
         return html.replace(
@@ -52,7 +57,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
 <script>
   if('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('${workbox.swDest.replace(outDir, '')}', { scope: './' })
+      navigator.serviceWorker.register('${workbox!.swDest.replace(outDir, '')}', { scope: './' })
     })
   }
 </script>
@@ -70,7 +75,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
       }
     },
     buildEnd() {
-      generateSW(workbox)
+      generateSW(workbox!)
     },
   }
 }
