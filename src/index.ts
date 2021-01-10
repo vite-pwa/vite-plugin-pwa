@@ -6,8 +6,6 @@ import { cachePreset } from './cache'
 import { ManifestOptions, VitePWAOptions } from './types'
 
 export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
-  const outDir = options.outDir || 'dist'
-
   let viteConfig: ResolvedConfig | undefined
   let workbox: GenerateSWConfig | undefined
   let manifest: Partial<ManifestOptions> = {}
@@ -21,6 +19,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
       const pkg = fs.existsSync('package.json')
         ? JSON.parse(fs.readFileSync('package.json', 'utf-8'))
         : {}
+      const outDir = options.outDir || config.build.outDir || 'dist'
 
       const defaultWorkbox: GenerateSWConfig = {
         swDest: resolve(root, `${outDir}/sw.js`),
