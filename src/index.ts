@@ -9,6 +9,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
   let viteConfig: ResolvedConfig | undefined
   let workbox: GenerateSWConfig | undefined
   let manifest: Partial<ManifestOptions> = {}
+  let outDir = 'dist'
 
   return {
     name: 'vite-plugin-pwa',
@@ -19,7 +20,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
       const pkg = fs.existsSync('package.json')
         ? JSON.parse(fs.readFileSync('package.json', 'utf-8'))
         : {}
-      const outDir = options.outDir || config.build.outDir || 'dist'
+      outDir = options.outDir || config.build.outDir || 'dist'
 
       const defaultWorkbox: GenerateSWConfig = {
         swDest: resolve(root, `${outDir}/sw.js`),
