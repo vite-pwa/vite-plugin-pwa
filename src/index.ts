@@ -14,6 +14,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
   return {
     name: 'vite-plugin-pwa',
     enforce: 'post',
+    apply: 'build',
     configResolved(config) {
       viteConfig = config
       const root = viteConfig.root
@@ -47,17 +48,14 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
     transformIndexHtml: {
       enforce: 'post',
       transform(html) {
-        if (viteConfig!.command !== 'build')
-          return html
-
         return html.replace(
           '</head>',
           `
-<link rel="manifest" href="/manifest.webmanifest">
+<link rel="manifest" href="${viteConfig!.build.base}manifest.webmanifest">
 <script>
   if('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-      navigator.serviceWorker.register('${workbox!.swDest.replace(outDir, '')}', { scope: './' })
+      navigator.serviceWorker.register('${viteConfig!.build.base}sw.js', { scope: './' })
     })
   }
 </script>
