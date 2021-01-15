@@ -26,7 +26,7 @@ export interface ManifestOptions {
    */
   scope: string
   /**
-   * Restricts what web pages can be viewed while the manifest is applied
+   * Defines the default orientation for all the website's top-level
    */
   orientation: 'any' | 'natural' | 'landscape' | 'landscape-primary' | 'landscape-secondary' | 'portrait' | 'portrait-primary' | 'portrait-secondary'
   /**
