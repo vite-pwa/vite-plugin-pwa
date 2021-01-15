@@ -32,6 +32,7 @@ importers:
   example:
     dependencies:
       vue: 3.0.5
+      workbox-precaching: 6.0.2
     devDependencies:
       '@vitejs/plugin-vue': 1.0.5_@vue+compiler-sfc@3.0.5
       '@vue/compiler-sfc': 3.0.5_vue@3.0.5
@@ -47,6 +48,7 @@ importers:
       vite: ^2.0.0-beta.23
       vite-plugin-pwa: workspace:*
       vue: ^3.0.5
+      workbox-precaching: ^6.0.2
 lockfileVersion: 5.2
 packages:
   /@antfu/eslint-config-basic/0.4.3_eslint@7.17.0:
