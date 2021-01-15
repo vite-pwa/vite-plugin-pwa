@@ -11,10 +11,10 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     ? JSON.parse(fs.readFileSync('package.json', 'utf-8'))
     : {}
   const {
-    srcDir = options.srcDir || 'public',
-    outDir = options.outDir || viteConfig.build.outDir || 'dist',
-    filename = options.filename || 'sw.js',
-    strategies = options.strategies || 'generateSW',
+    srcDir = 'public',
+    outDir = viteConfig.build.outDir || 'dist',
+    filename = 'sw.js',
+    strategies = 'generateSW',
   } = options
 
   const swSrc = resolve(root, srcDir, filename)
