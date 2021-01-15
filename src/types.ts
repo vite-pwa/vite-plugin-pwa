@@ -22,6 +22,14 @@ export interface ManifestOptions {
    */
   start_url: string
   /**
+   * Restricts what web pages can be viewed while the manifest is applied
+   */
+  scope: string
+  /**
+   * Restricts what web pages can be viewed while the manifest is applied
+   */
+  orientation: 'any' | 'natural' | 'landscape' | 'landscape-primary' | 'landscape-secondary' | 'portrait' | 'portrait-primary' | 'portrait-secondary'
+  /**
    * Default: `standalone`
    */
   display: string
