@@ -14,7 +14,7 @@
 
 - Generate Service Worker with Offline support (via [Workbox](https://developers.google.com/web/tools/workbox))
 - Auto inject Web App [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
-- **WIP**: Strategies options
+- Strategies option
 - **WIP**: Meta injection
 - **WIP**: Icons generation for different dimensions
 
@@ -41,18 +41,44 @@ export default {
 
 ## Configuration
 
+### Simple (generateSW)
+
 ```ts
 VitePWA({
   manifest: {
     // content of manifest
   },
   workbox: {
-    // workbox options
+    // workbox options for generateSW
   }
 })
 ```
 
-Check out the type declaration [src/index.ts](./src/index.ts) and the following links for more details.
+### Advanced (injectManifest)
+
+```js
+// sw.js
+import { precacheAndRoute } from 'workbox-precaching'
+// self.__WB_MANIFEST is default injection point
+precacheAndRoute(self.__WB_MANIFEST)
+```
+
+```ts
+// vite.config.js
+VitePWA({
+  strategies: 'injectManifest',
+  manifest: {
+    // content of manifest
+  },
+  injectManifest: {
+    // workbox options for injectManifest
+  }
+})
+```
+
+### Full config
+
+Check out the type declaration [src/types.ts](./src/types.ts) and the following links for more details.
 
 - [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - [Workbox](https://developers.google.com/web/tools/workbox)
