@@ -1,4 +1,4 @@
-import { GenerateSWConfig } from 'workbox-build'
+import { GenerateSWConfig, InjectManifestConfig } from 'workbox-build'
 
 export interface ManifestOptions {
   /**
@@ -59,7 +59,30 @@ export interface ManifestOptions {
  * Plugin options.
  */
 export interface VitePWAOptions {
+  /**
+   * Default: 'public'
+   */
+  srcDir?: string
+  /**
+   * Default: 'dist'
+   */
   outDir?: string
+  /**
+   * Default: 'sw.js'
+   */
+  filename?: string
+  /**
+   * Default: 'generateSW'
+   */
+  strategies?: 'generateSW' | 'injectManifest'
   manifest: Partial<ManifestOptions>
   workbox: Partial<GenerateSWConfig>
+  injectManifest: Partial<InjectManifestConfig>
+}
+
+export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
+  swDest: string
+  manifest: ManifestOptions
+  workbox: GenerateSWConfig
+  injectManifest: InjectManifestConfig
 }
