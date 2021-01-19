@@ -75,6 +75,7 @@ export interface VitePWAOptions {
    * Default: 'generateSW'
    */
   strategies?: 'generateSW' | 'injectManifest'
+  inline: boolean;
   manifest: Partial<ManifestOptions>
   workbox: Partial<GenerateSWConfig>
   injectManifest: Partial<InjectManifestConfig>
@@ -83,6 +84,7 @@ export interface VitePWAOptions {
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   swDest: string
   manifest: ManifestOptions
+  inline: boolean;
   workbox: GenerateSWConfig
   injectManifest: InjectManifestConfig
 }

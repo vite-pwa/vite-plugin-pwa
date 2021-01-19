@@ -3,6 +3,7 @@ import { generateSW, injectManifest } from 'workbox-build'
 import { injectServiceWorker } from './html'
 import { ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { resolveOptions } from './config'
+import { join } from 'path';
 
 export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
   let viteConfig: ResolvedConfig | undefined
@@ -24,6 +25,8 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
       },
     },
     generateBundle(_, bundle) {
+      const base = viteConfig!.build.base;
+      const basePath = base.startsWith('/') ? `/${base}` : base;
       bundle['manifest.webmanifest'] = {
         isAsset: true,
         type: 'asset',
@@ -31,6 +34,13 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
         source: `${JSON.stringify(resolvedOptions!.manifest, null, 2)}\n`,
         fileName: 'manifest.webmanifest',
       }
+      bundle['registerServiceWorker.js'] = {
+        isAsset: true,
+        type: 'asset',
+        name: undefined,
+        source: `if('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('${join(basePath,resolvedOptions!.filename)}', { scope: './' })})}`.replace(/(?:\r\n|\r|\n)/g, ''),
+        fileName: 'registerServiceWorker.js',
+      };
     },
     buildEnd() {
       const strategies = resolvedOptions!.strategies
