@@ -97,8 +97,6 @@ export interface VitePWAOptions {
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   swDest: string
-  manifest: Partial<ManifestOptions>
-  inlineRegister: boolean
   workbox: GenerateSWConfig
   injectManifest: InjectManifestConfig
   basePath: string
