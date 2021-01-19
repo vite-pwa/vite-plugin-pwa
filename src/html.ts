@@ -27,7 +27,7 @@ export function injectServiceWorker(html: string, base: string, options: Resolve
       '</head>',
       `
   <link rel="manifest" href="${join(basePath, 'manifest.webmanifest')}">
-  <script src="${join(basePath,'registerServiceWorker.js')}.js"></script>
+  <script src="${join(basePath,'registerServiceWorker.js')}"></script>
   </head>`
     );
   }
