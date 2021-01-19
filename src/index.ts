@@ -34,13 +34,15 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
         source: `${JSON.stringify(resolvedOptions!.manifest, null, 2)}\n`,
         fileName: 'manifest.webmanifest',
       }
-      bundle['registerServiceWorker.js'] = {
-        isAsset: true,
-        type: 'asset',
-        name: undefined,
-        source: `if('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('${join(basePath,resolvedOptions!.filename)}', { scope: './' })})}`.replace(/(?:\r\n|\r|\n)/g, ''),
-        fileName: 'registerServiceWorker.js',
-      };
+      if (!resolvedOptions!.inline) {
+        bundle['registerServiceWorker.js'] = {
+          isAsset: true,
+          type: 'asset',
+          name: undefined,
+          source: `if('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('${join(basePath,resolvedOptions!.filename)}', { scope: './' })})}`.replace(/(?:\r\n|\r|\n)/g, ''),
+          fileName: 'registerServiceWorker.js',
+        };
+      }
     },
     buildEnd() {
       const strategies = resolvedOptions!.strategies

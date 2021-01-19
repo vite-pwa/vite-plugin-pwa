@@ -29,6 +29,36 @@ importers:
       typescript: ^4.1.3
       vite: ^2.0.0-beta.23
       workbox-build: ^6.0.2
+  ../../../../../../../projects/forks/vite-plugin-pwa:
+    dependencies:
+      debug: 4.3.2
+      fast-glob: 3.2.4
+      pretty-bytes: 5.5.0
+      workbox-build: 6.0.2
+    devDependencies:
+      '@antfu/eslint-config': 0.4.3_eslint@7.17.0+typescript@4.1.3
+      '@types/debug': 4.1.5
+      '@types/workbox-build': 5.0.0
+      '@typescript-eslint/eslint-plugin': 4.13.0_eslint@7.17.0+typescript@4.1.3
+      eslint: 7.17.0
+      rollup: 2.36.1
+      tsup: 3.11.0_typescript@4.1.3
+      typescript: 4.1.3
+      vite: 2.0.0-beta.23
+    specifiers:
+      '@antfu/eslint-config': ^0.4.3
+      '@types/debug': ^4.1.5
+      '@types/workbox-build': ^5.0.0
+      '@typescript-eslint/eslint-plugin': ^4.13.0
+      debug: ^4.3.2
+      eslint: ^7.17.0
+      fast-glob: ^3.2.4
+      pretty-bytes: ^5.5.0
+      rollup: ^2.36.1
+      tsup: ^3.11.0
+      typescript: ^4.1.3
+      vite: ^2.0.0-beta.23
+      workbox-build: ^6.0.2
   example:
     dependencies:
       vue: 3.0.5
