@@ -1,13 +1,13 @@
 import type { Plugin, ResolvedConfig } from 'vite'
 import { generateSW, injectManifest } from 'workbox-build'
-import { injectServiceWorker } from './html'
+import { generateSWRegister, injectServiceWorker } from './html'
 import { ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { resolveOptions } from './config'
-import { join } from 'path';
+import { FILE_MANIFEST, FILE_SW_REGISTER } from './constants'
 
-export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
-  let viteConfig: ResolvedConfig | undefined
-  let resolvedOptions: ResolvedVitePWAOptions | undefined
+export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin {
+  let viteConfig: ResolvedConfig
+  let options: ResolvedVitePWAOptions
 
   return {
     name: 'vite-plugin-pwa',
@@ -15,41 +15,37 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
     apply: 'build',
     configResolved(config) {
       viteConfig = config
-      resolvedOptions = resolveOptions(options, viteConfig)
+      options = resolveOptions(userOptions, viteConfig)
     },
     transformIndexHtml: {
       enforce: 'post',
       transform(html) {
-        const base = viteConfig!.build.base
-        return injectServiceWorker(html, base, resolvedOptions!)
+        return injectServiceWorker(html, options)
       },
     },
     generateBundle(_, bundle) {
-      const base = viteConfig!.build.base;
-      const basePath = base.startsWith('/') ? `/${base}` : base;
-      bundle['manifest.webmanifest'] = {
+      bundle[FILE_MANIFEST] = {
         isAsset: true,
         type: 'asset',
         name: undefined,
-        source: `${JSON.stringify(resolvedOptions!.manifest, null, 2)}\n`,
-        fileName: 'manifest.webmanifest',
+        source: `${JSON.stringify(options.manifest, null, 2)}\n`,
+        fileName: FILE_MANIFEST,
       }
-      if (!resolvedOptions!.inlineScript) {
-        bundle['registerServiceWorker.js'] = {
+      if (!options.inlineRegister) {
+        bundle[FILE_SW_REGISTER] = {
           isAsset: true,
           type: 'asset',
           name: undefined,
-          source: `if('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('${join(basePath,resolvedOptions!.filename)}', { scope: './' })})}`.replace(/(?:\r\n|\r|\n)/g, ''),
-          fileName: 'registerServiceWorker.js',
-        };
+          source: generateSWRegister(options),
+          fileName: FILE_SW_REGISTER,
+        }
       }
     },
     buildEnd() {
-      const strategies = resolvedOptions!.strategies
-      if (strategies === 'generateSW')
-        generateSW(resolvedOptions!.workbox)
-      if (strategies === 'injectManifest')
-        injectManifest(resolvedOptions!.injectManifest)
+      if (options.strategies === 'injectManifest')
+        injectManifest(options.injectManifest)
+      else
+        generateSW(options.workbox)
     },
   }
 }

@@ -2,15 +2,15 @@ import { GenerateSWConfig, InjectManifestConfig } from 'workbox-build'
 
 export interface ManifestOptions {
   /**
-   * Default: _npm_package_name_
+   * @default _npm_package_name_
    */
   name: string
   /**
-   * Default: _npm_package_name_
+   * @default _npm_package_name_
    */
   short_name: string
   /**
-   * Default: _npm_package_description_
+   * @default _npm_package_description_
    */
   description: string
   /**
@@ -18,7 +18,7 @@ export interface ManifestOptions {
    */
   icons: Record<string, any>[]
   /**
-   * Default: `routerBase + '?standalone=true'`
+   * @default `routerBase + '?standalone=true'`
    */
   start_url: string
   /**
@@ -30,27 +30,27 @@ export interface ManifestOptions {
    */
   orientation: 'any' | 'natural' | 'landscape' | 'landscape-primary' | 'landscape-secondary' | 'portrait' | 'portrait-primary' | 'portrait-secondary'
   /**
-   * Default: `standalone`
+   * @default `standalone`
    */
   display: string
   /**
-   * Default: `#ffffff`
+   * @default `#ffffff`
    */
   background_color: string
   /**
-   * Default: '#42b883
+   * @default '#42b883
    */
   theme_color: string
   /**
-   * Default: `ltr`
+   * @default `ltr`
    */
   dir: 'ltr' | 'rtl'
   /**
-   * Default: `en`
+   * @default `en`
    */
   lang: string
   /**
-   * Default: A combination of `routerBase` and `options.build.publicPath`
+   * @default A combination of `routerBase` and `options.build.publicPath`
    */
   publicPath: string
 }
@@ -60,31 +60,46 @@ export interface ManifestOptions {
  */
 export interface VitePWAOptions {
   /**
-   * Default: 'public'
+   * @default 'public'
    */
   srcDir?: string
   /**
-   * Default: 'dist'
+   * @default 'dist'
    */
   outDir?: string
   /**
-   * Default: 'sw.js'
+   * @default 'sw.js'
    */
   filename?: string
   /**
-   * Default: 'generateSW'
+   * @default 'generateSW'
    */
   strategies?: 'generateSW' | 'injectManifest'
-  inlineScript: boolean;
+  /**
+   * Inject the service worker register inlined in the index.html
+   *
+   * @default true
+   */
+  inlineRegister: boolean
+  /**
+   * The manifest object
+   */
   manifest: Partial<ManifestOptions>
+  /**
+   * The workbox object for `generateSW`
+   */
   workbox: Partial<GenerateSWConfig>
+  /**
+   * The workbox object for `injectManifest`
+   */
   injectManifest: Partial<InjectManifestConfig>
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   swDest: string
-  manifest: ManifestOptions
-  inlineScript: boolean;
+  manifest: Partial<ManifestOptions>
+  inlineRegister: boolean
   workbox: GenerateSWConfig
   injectManifest: InjectManifestConfig
+  basePath: string
 }

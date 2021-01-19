@@ -5,19 +5,25 @@ import { GenerateSWConfig, InjectManifestConfig } from 'workbox-build'
 import { ManifestOptions, VitePWAOptions, ResolvedVitePWAOptions } from './types'
 import { cachePreset } from './cache'
 
+export function resolveBathPath(base: string) {
+  return base.startsWith('/') ? `/${base}` : base
+}
+
 export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: ResolvedConfig): ResolvedVitePWAOptions {
   const root = viteConfig.root
   const pkg = fs.existsSync('package.json')
     ? JSON.parse(fs.readFileSync('package.json', 'utf-8'))
     : {}
+
   const {
     srcDir = 'public',
     outDir = viteConfig.build.outDir || 'dist',
-    inlineScript = true,
+    inlineRegister = true,
     filename = 'sw.js',
     strategies = 'generateSW',
   } = options
 
+  const basePath = resolveBathPath(viteConfig.build.base)
   const swSrc = resolve(root, srcDir, filename)
   const swDest = resolve(root, outDir, filename)
   const outDirRoot = resolve(root, outDir)
@@ -56,11 +62,12 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     swDest,
     srcDir,
     outDir,
-    inlineScript,
+    inlineRegister,
     filename,
     strategies,
     workbox,
     manifest,
     injectManifest,
+    basePath,
   }
 }

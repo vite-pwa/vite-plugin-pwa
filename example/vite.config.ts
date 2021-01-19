@@ -10,6 +10,7 @@ const config: UserConfig = {
     Vue(),
     VitePWA({
       strategies: 'injectManifest',
+      inlineRegister: false,
     }),
   ],
 }

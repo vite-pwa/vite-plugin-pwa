@@ -1,34 +1,33 @@
 import { join } from 'path'
+import { FILE_MANIFEST, FILE_SW_REGISTER } from './constants'
 import { ResolvedVitePWAOptions } from './types'
 
-export function injectServiceWorker(html: string, base: string, options: ResolvedVitePWAOptions) {
-  const basePath = base.startsWith('/') ? `/${base}` : base
-  const { inlineScript } = options;
+export function generateSWRegister(options: ResolvedVitePWAOptions) {
+  return `
+if('serviceWorker' in navigator) {
+window.addEventListener('load', () => {
+navigator.serviceWorker.register('${join(options.basePath, options.filename)}', { scope: './' })
+})
+}`.replace(/\n/g, '')
+}
 
-  if (inlineScript) {
+export function injectServiceWorker(html: string, options: ResolvedVitePWAOptions) {
+  if (options.inlineRegister) {
     return html.replace(
       '</head>',
       `
-  <link rel="manifest" href="${join(basePath, 'manifest.webmanifest')}">
-    <script>
-      if('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('${join(
-            basePath,
-            options.filename
-          )}', { scope: './' })
-        })
-      }
-    </script>
-  </head>`
-    );
-  } else {
+<link rel="manifest" href="${join(options.basePath, FILE_MANIFEST)}">
+<script>${generateSWRegister(options)}</script>
+</head>`.trim(),
+    )
+  }
+  else {
     return html.replace(
       '</head>',
       `
-  <link rel="manifest" href="${join(basePath, 'manifest.webmanifest')}">
-  <script src="${join(basePath,'registerServiceWorker.js')}"></script>
-  </head>`
-    );
+<link rel="manifest" href="${join(options.basePath, FILE_MANIFEST)}">
+<script src="${join(options.basePath, FILE_SW_REGISTER)}"></script>
+</head>`.trim(),
+    )
   }
 }
