@@ -3,9 +3,9 @@ import { ResolvedVitePWAOptions } from './types'
 
 export function injectServiceWorker(html: string, base: string, options: ResolvedVitePWAOptions) {
   const basePath = base.startsWith('/') ? `/${base}` : base
-  const { inline } = options;
+  const { inlineScript } = options;
 
-  if (inline) {
+  if (inlineScript) {
     return html.replace(
       '</head>',
       `
@@ -27,7 +27,7 @@ export function injectServiceWorker(html: string, base: string, options: Resolve
       '</head>',
       `
   <link rel="manifest" href="${join(basePath, 'manifest.webmanifest')}">
-  <script src="registerServiceWorker.js"></script>
+  <script src="${join(basePath,'registerServiceWorker.js')}.js"></script>
   </head>`
     );
   }

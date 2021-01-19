@@ -34,7 +34,7 @@ export function VitePWA(options: Partial<VitePWAOptions> = {}): Plugin {
         source: `${JSON.stringify(resolvedOptions!.manifest, null, 2)}\n`,
         fileName: 'manifest.webmanifest',
       }
-      if (!resolvedOptions!.inline) {
+      if (!resolvedOptions!.inlineScript) {
         bundle['registerServiceWorker.js'] = {
           isAsset: true,
           type: 'asset',

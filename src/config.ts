@@ -13,7 +13,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
   const {
     srcDir = 'public',
     outDir = viteConfig.build.outDir || 'dist',
-    inline = true,
+    inlineScript = true,
     filename = 'sw.js',
     strategies = 'generateSW',
   } = options
@@ -56,7 +56,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     swDest,
     srcDir,
     outDir,
-    inline,
+    inlineScript,
     filename,
     strategies,
     workbox,
