@@ -23,7 +23,8 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     strategies = 'generateSW',
   } = options
 
-  const basePath = resolveBathPath(viteConfig.build.base)
+  // @ts-expect-error
+  const basePath = resolveBathPath(viteConfig.base || viteConfig.build.base)
   const swSrc = resolve(root, srcDir, filename)
   const swDest = resolve(root, outDir, filename)
   const outDirRoot = resolve(root, outDir)
