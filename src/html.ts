@@ -6,7 +6,7 @@ export function generateSWRegister(options: ResolvedVitePWAOptions) {
   return `
 if('serviceWorker' in navigator) {
 window.addEventListener('load', () => {
-navigator.serviceWorker.register('${join(options.basePath, options.filename)}', { scope: './' })
+navigator.serviceWorker.register('${join(options.basePath, options.filename)}', { scope: '${options.scope}' })
 })
 }`.replace(/\n/g, '')
 }

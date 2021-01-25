@@ -6,7 +6,7 @@ import { ManifestOptions, VitePWAOptions, ResolvedVitePWAOptions } from './types
 import { cachePreset } from './cache'
 
 export function resolveBathPath(base: string) {
-  return base.startsWith('/') ? `/${base}` : base
+  return !base.startsWith('/') ? `/${base}` : base
 }
 
 export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: ResolvedConfig): ResolvedVitePWAOptions {
@@ -21,6 +21,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     inlineRegister = true,
     filename = 'sw.js',
     strategies = 'generateSW',
+    scope,
   } = options
 
   // @ts-expect-error
@@ -70,5 +71,6 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     manifest,
     injectManifest,
     basePath,
+    scope: scope || basePath,
   }
 }

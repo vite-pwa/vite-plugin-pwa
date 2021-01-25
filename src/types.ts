@@ -1,4 +1,58 @@
+/* eslint-disable no-use-before-define */
 import { GenerateSWConfig, InjectManifestConfig } from 'workbox-build'
+
+/**
+ * Plugin options.
+ */
+export interface VitePWAOptions {
+  /**
+   * @default 'public'
+   */
+  srcDir?: string
+  /**
+   * @default 'dist'
+   */
+  outDir?: string
+  /**
+   * @default 'sw.js'
+   */
+  filename?: string
+  /**
+   * @default 'generateSW'
+   */
+  strategies?: 'generateSW' | 'injectManifest'
+  /**
+   * The scope to register the Service Worker
+   *
+   * @default same as `base` of Vite's config
+   */
+  scope?: string
+  /**
+   * Inject the service worker register inlined in the index.html
+   *
+   * @default true
+   */
+  inlineRegister: boolean
+  /**
+   * The manifest object
+   */
+  manifest: Partial<ManifestOptions>
+  /**
+   * The workbox object for `generateSW`
+   */
+  workbox: Partial<GenerateSWConfig>
+  /**
+   * The workbox object for `injectManifest`
+   */
+  injectManifest: Partial<InjectManifestConfig>
+}
+
+export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
+  swDest: string
+  workbox: GenerateSWConfig
+  injectManifest: InjectManifestConfig
+  basePath: string
+}
 
 export interface ManifestOptions {
   /**
@@ -53,51 +107,4 @@ export interface ManifestOptions {
    * @default A combination of `routerBase` and `options.build.publicPath`
    */
   publicPath: string
-}
-
-/**
- * Plugin options.
- */
-export interface VitePWAOptions {
-  /**
-   * @default 'public'
-   */
-  srcDir?: string
-  /**
-   * @default 'dist'
-   */
-  outDir?: string
-  /**
-   * @default 'sw.js'
-   */
-  filename?: string
-  /**
-   * @default 'generateSW'
-   */
-  strategies?: 'generateSW' | 'injectManifest'
-  /**
-   * Inject the service worker register inlined in the index.html
-   *
-   * @default true
-   */
-  inlineRegister: boolean
-  /**
-   * The manifest object
-   */
-  manifest: Partial<ManifestOptions>
-  /**
-   * The workbox object for `generateSW`
-   */
-  workbox: Partial<GenerateSWConfig>
-  /**
-   * The workbox object for `injectManifest`
-   */
-  injectManifest: Partial<InjectManifestConfig>
-}
-
-export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
-  swDest: string
-  workbox: GenerateSWConfig
-  injectManifest: InjectManifestConfig
-  basePath: string
 }
