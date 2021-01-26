@@ -34,6 +34,12 @@ export interface VitePWAOptions {
    */
   inlineRegister: boolean
   /**
+   * Minify the generated manifest
+   *
+   * @default true
+   */
+  minify: boolean
+  /**
    * The manifest object
    */
   manifest: Partial<ManifestOptions>
