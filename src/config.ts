@@ -73,6 +73,6 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     injectManifest,
     basePath,
     scope: scope || basePath,
-    minify
+    minify,
   }
 }
