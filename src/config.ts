@@ -22,7 +22,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     filename = 'sw.js',
     strategies = 'generateSW',
     scope,
-    minifyManifest = true,
+    minify = true,
   } = options
 
   // @ts-expect-error
@@ -73,6 +73,6 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     injectManifest,
     basePath,
     scope: scope || basePath,
-    minifyManifest
+    minify
   }
 }

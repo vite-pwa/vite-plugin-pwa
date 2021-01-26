@@ -38,7 +38,7 @@ export interface VitePWAOptions {
    *
    * @default true
    */
-  minifyManifest: boolean
+  minify: boolean
   /**
    * The manifest object
    */
