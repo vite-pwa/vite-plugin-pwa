@@ -3,8 +3,7 @@ import { FILE_MANIFEST, FILE_SW_REGISTER } from './constants'
 import { ResolvedVitePWAOptions } from './types'
 
 export function generateSWRegister(options: ResolvedVitePWAOptions) {
-  return options.minify ? `"serviceWorker"in navigator&&window.addEventListener("load",()=>{navigator.serviceWorker.register("${join(options.basePath, options.filename)}",{scope:"${options.scope}"})});` : 
-`
+  return `
 if('serviceWorker' in navigator) {
 window.addEventListener('load', () => {
 navigator.serviceWorker.register('${join(options.basePath, options.filename)}', { scope: '${options.scope}' })
