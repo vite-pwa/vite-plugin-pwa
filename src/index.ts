@@ -28,7 +28,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin {
         isAsset: true,
         type: 'asset',
         name: undefined,
-        source: `${JSON.stringify(options.manifest, null, 2)}\n`,
+        source: `${JSON.stringify(options.manifest, null, options.minifyManifest ? 0 : 2)}\n`,
         fileName: FILE_MANIFEST,
       }
       if (!options.inlineRegister) {
