@@ -22,23 +22,25 @@
     "prepublishOnly": "npm run build",
     "release": "npx bumpp --push --tag --commit && npm publish",
     "example:dev": "npm -C example run dev",
-    "example:build": "npm -C example run build"
+    "example:build": "npm -C example run build",
+    "example:serve": "npm -C example run serve"
   },
   "dependencies": {
     "debug": "^4.3.2",
     "fast-glob": "^3.2.5",
     "pretty-bytes": "^5.6.0",
+    "rollup": "^2.41.1",
     "workbox-build": "^6.1.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.4.3",
     "@types/debug": "^4.1.5",
     "@types/workbox-build": "^5.0.0",
-    "@typescript-eslint/eslint-plugin": "^4.15.2",
+    "@typescript-eslint/eslint-plugin": "^4.17.0",
     "eslint": "^7.21.0",
     "rollup": "^2.40.0",
-    "tsup": "^4.5.1",
-    "typescript": "^4.2.2",
-    "vite": "^2.0.4"
+    "tsup": "^4.6.1",
+    "typescript": "^4.2.3",
+    "vite": "^2.0.5"
   }
 }
