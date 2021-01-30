@@ -75,6 +75,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
   return {
     base: basePath,
     mode,
+    swSrc,
     swDest,
     srcDir,
     outDir,

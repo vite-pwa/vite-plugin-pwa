@@ -66,6 +66,7 @@ export interface VitePWAOptions {
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
+  swSrc: string
   swDest: string
   workbox: GenerateSWConfig
   injectManifest: InjectManifestConfig
