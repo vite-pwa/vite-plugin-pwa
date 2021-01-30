@@ -39,6 +39,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     // prevent tsup replacing `process.env`
     // eslint-disable-next-line dot-notation
     mode: process['env']['NODE_ENV'] || 'production',
+    navigateFallback: '/index.html',
   }
 
   const defaultInjectManifest: InjectManifestConfig = {
