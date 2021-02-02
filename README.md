@@ -14,7 +14,7 @@
 
 - Generate Service Worker with Offline support (via [Workbox](https://developers.google.com/web/tools/workbox))
 - Auto inject Web App [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
-- Strategies option
+- **WIP**: Strategies option
 - **WIP**: Meta injection
 - **WIP**: Icons generation for different dimensions
 
@@ -54,7 +54,7 @@ VitePWA({
 })
 ```
 
-### Advanced (injectManifest)
+### **WIP**: Advanced (injectManifest)
 
 ```js
 // sw.js
