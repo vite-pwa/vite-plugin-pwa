@@ -6,6 +6,12 @@ import { GenerateSWConfig, InjectManifestConfig } from 'workbox-build'
  */
 export interface VitePWAOptions {
   /**
+   * Build mode
+   *
+   * @default process.env.NODE_ENV or "production"
+   */
+  mode?: 'development' | 'production'
+  /**
    * @default 'public'
    */
   srcDir?: string

@@ -9,7 +9,8 @@ const config: UserConfig = {
   plugins: [
     Vue(),
     VitePWA({
-      strategies: 'injectManifest',
+      mode: 'development',
+      // strategies: 'injectManifest',
       inlineRegister: false,
     }),
   ],

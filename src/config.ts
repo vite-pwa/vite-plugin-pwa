@@ -16,6 +16,9 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     : {}
 
   const {
+    // prevent tsup replacing `process.env`
+    // eslint-disable-next-line dot-notation
+    mode = (process['env']['NODE_ENV'] || 'production') as ('production' | 'development'),
     srcDir = 'public',
     outDir = viteConfig.build.outDir || 'dist',
     inlineRegister = true,
@@ -36,9 +39,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     globDirectory: outDirRoot,
     offlineGoogleAnalytics: false,
     runtimeCaching: cachePreset,
-    // prevent tsup replacing `process.env`
-    // eslint-disable-next-line dot-notation
-    mode: process['env']['NODE_ENV'] || 'production',
+    mode,
     navigateFallback: '/index.html',
   }
 
@@ -63,6 +64,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
   const injectManifest = Object.assign({}, defaultInjectManifest, options.injectManifest || {})
 
   return {
+    mode,
     swDest,
     srcDir,
     outDir,
