@@ -4,18 +4,18 @@
   "private": true,
   "scripts": {
     "dev": "cross-env DEBUG=vite-plugin-pwa:* vite",
-    "build": "cross-env DEBUG=vite-plugin-pwa:* vite build"
+    "build": "cross-env DEBUG=vite-plugin-pwa:* vite build",
+    "serve": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.0.5",
-    "workbox-precaching": "^6.0.2"
+    "vue": "^3.0.5"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.1.2",
+    "@vitejs/plugin-vue": "^1.1.4",
     "@vue/compiler-sfc": "^3.0.5",
     "cross-env": "^7.0.3",
     "typescript": "^4.1.3",
-    "vite": "^2.0.0-beta.49",
+    "vite": "^2.0.0-beta.62",
     "vite-plugin-pwa": "workspace:*"
   }
 }
