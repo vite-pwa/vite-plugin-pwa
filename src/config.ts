@@ -40,7 +40,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     offlineGoogleAnalytics: false,
     runtimeCaching: cachePreset,
     mode,
-    navigateFallback: '/index.html',
+    navigateFallback: 'index.html',
   }
 
   const defaultInjectManifest: InjectManifestConfig = {
@@ -53,7 +53,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
   const defaultManifest: Partial<ManifestOptions> = {
     name: pkg.name,
     short_name: pkg.name,
-    start_url: '/',
+    start_url: './', // Relative to the manifest URL, which already includes the base.
     display: 'standalone',
     background_color: '#ffffff',
     lang: 'en',
