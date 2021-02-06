@@ -1,6 +1,10 @@
-import { join } from 'path'
+import { join as _join } from 'path'
 import { FILE_MANIFEST, FILE_SW_REGISTER } from './constants'
 import { ResolvedVitePWAOptions } from './types'
+
+function join(...args: string[]) {
+  return _join(...args).replace(/\\/g, '/')
+}
 
 export function generateSWRegister(options: ResolvedVitePWAOptions) {
   return `
