@@ -24,15 +24,14 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     inlineRegister = true,
     filename = 'sw.js',
     strategies = 'generateSW',
-    scope,
     minify = true,
   } = options
 
-  // @ts-expect-error
-  const basePath = resolveBathPath(viteConfig.base || viteConfig.build.base)
+  const basePath = resolveBathPath(viteConfig.base)
   const swSrc = resolve(root, srcDir, filename)
   const swDest = resolve(root, outDir, filename)
   const outDirRoot = resolve(root, outDir)
+  const scope = options.scope || basePath
 
   const defaultWorkbox: GenerateSWConfig = {
     swDest,
@@ -53,7 +52,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
   const defaultManifest: Partial<ManifestOptions> = {
     name: pkg.name,
     short_name: pkg.name,
-    start_url: './', // Relative to the manifest URL, which already includes the base.
+    start_url: basePath,
     display: 'standalone',
     background_color: '#ffffff',
     lang: 'en',
@@ -75,7 +74,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     manifest,
     injectManifest,
     basePath,
-    scope: scope || basePath,
+    scope,
     minify,
   }
 }
