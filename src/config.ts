@@ -56,6 +56,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     display: 'standalone',
     background_color: '#ffffff',
     lang: 'en',
+    scope,
   }
 
   const workbox = Object.assign({}, defaultWorkbox, options.workbox || {})
