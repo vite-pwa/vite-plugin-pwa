@@ -1,3 +1,5 @@
+import { join } from 'path'
+import { existsSync } from 'fs'
 import type { Plugin, ResolvedConfig } from 'vite'
 import { generateSW, injectManifest } from 'workbox-build'
 import { generateSWRegister, injectServiceWorker } from './html'
@@ -31,7 +33,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin {
         source: `${JSON.stringify(options.manifest, null, options.minify ? 0 : 2)}\n`,
         fileName: FILE_MANIFEST,
       }
-      if (!options.inlineRegister) {
+      if (!options.inlineRegister && !existsSync(join(viteConfig.root, 'public', FILE_SW_REGISTER))) {
         bundle[FILE_SW_REGISTER] = {
           isAsset: true,
           type: 'asset',
