@@ -3,7 +3,11 @@ import { FILE_MANIFEST, FILE_SW_REGISTER } from './constants'
 import { ResolvedVitePWAOptions } from './types'
 
 function join(...args: string[]) {
-  return _join(...args).replace(/\\/g, '/')
+  const filePath: string = _join(...args).replace(/\\/g, '/');
+  if ( filePath.startsWith('/http') ) {
+    return filePath.slice(1);
+  }
+  return filePath;
 }
 
 export function generateSWRegister(options: ResolvedVitePWAOptions) {
