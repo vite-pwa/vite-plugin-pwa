@@ -36,9 +36,9 @@ export interface VitePWAOptions {
   /**
    * Inject the service worker register inlined in the index.html
    *
-   * @default true
+   * @default 'import'
    */
-  inlineRegister: boolean
+  injectRegister: 'inline' | 'import' | null
   /**
    * Minify the generated manifest
    *

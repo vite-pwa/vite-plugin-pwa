@@ -16,7 +16,7 @@ navigator.serviceWorker.register('${join(options.basePath, options.filename)}', 
 }
 
 export function injectServiceWorker(html: string, options: ResolvedVitePWAOptions) {
-  if (options.inlineRegister) {
+  if (options.injectRegister === 'inline') {
     return html.replace(
       '</head>',
       `
