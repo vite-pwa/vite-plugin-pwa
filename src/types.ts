@@ -38,7 +38,7 @@ export interface VitePWAOptions {
    *
    * @default 'import'
    */
-  injectRegister: 'inline' | 'import' | null
+  injectRegister: 'inline' | 'import' | null | false
   /**
    * Minify the generated manifest
    *
