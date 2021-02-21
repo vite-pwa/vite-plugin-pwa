@@ -33,7 +33,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin {
         source: `${JSON.stringify(options.manifest, null, options.minify ? 0 : 2)}\n`,
         fileName: FILE_MANIFEST,
       }
-      if (!options.inlineRegister && !existsSync(join(viteConfig.root, 'public', FILE_SW_REGISTER))) {
+      if (options.injectRegister === 'import' && !existsSync(join(viteConfig.root, 'public', FILE_SW_REGISTER))) {
         bundle[FILE_SW_REGISTER] = {
           isAsset: true,
           type: 'asset',

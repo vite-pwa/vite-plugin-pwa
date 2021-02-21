@@ -6,7 +6,13 @@ import { ManifestOptions, VitePWAOptions, ResolvedVitePWAOptions } from './types
 import { cachePreset } from './cache'
 
 export function resolveBathPath(base: string) {
+  if (isAbsolute(base))
+    return base
   return !base.startsWith('/') ? `/${base}` : base
+}
+
+export function isAbsolute(url: string) {
+  return url.match(/^(?:[a-z]+:)?\/\//i)
 }
 
 export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: ResolvedConfig): ResolvedVitePWAOptions {
@@ -21,7 +27,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     mode = (process['env']['NODE_ENV'] || 'production') as ('production' | 'development'),
     srcDir = 'public',
     outDir = viteConfig.build.outDir || 'dist',
-    inlineRegister = true,
+    injectRegister = 'import',
     filename = 'sw.js',
     strategies = 'generateSW',
     minify = true,
@@ -68,7 +74,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     swDest,
     srcDir,
     outDir,
-    inlineRegister,
+    injectRegister,
     filename,
     strategies,
     workbox,

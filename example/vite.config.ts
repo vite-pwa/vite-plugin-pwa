@@ -3,15 +3,11 @@ import Vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 
 const config: UserConfig = {
-  build: {
-    // base: '/test/',
-  },
+  base: 'https://github.com/',
   plugins: [
     Vue(),
     VitePWA({
       mode: 'development',
-      // strategies: 'injectManifest',
-      inlineRegister: false,
     }),
   ],
 }
