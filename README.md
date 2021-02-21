@@ -1,3 +1,5 @@
+> This is a modification package for debugging base on v0.5.2, please do not use. Please use the original package [vite-plugin-pwa](https://github.com/antfu/vite-plugin-pwa) .
+
 <p align='center'>
 <img src='https://repository-images.githubusercontent.com/290129345/d4bfc300-1866-11eb-8602-e672c9dd0e7d' alt="vite-plugin-pwa - Zero-config PWA for Vite">
 </p>
