@@ -8,6 +8,7 @@ const config: UserConfig = {
     Vue(),
     VitePWA({
       mode: 'development',
+      base: '/',
     }),
   ],
 }

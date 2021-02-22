@@ -8,7 +8,9 @@ import { cachePreset } from './cache'
 export function resolveBathPath(base: string) {
   if (isAbsolute(base))
     return base
-  return !base.startsWith('/') ? `/${base}` : base
+  return !base.startsWith('/') && !base.startsWith('./')
+    ? `/${base}`
+    : base
 }
 
 export function isAbsolute(url: string) {
@@ -31,9 +33,10 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     filename = 'sw.js',
     strategies = 'generateSW',
     minify = true,
+    base = viteConfig.base,
   } = options
 
-  const basePath = resolveBathPath(viteConfig.base)
+  const basePath = resolveBathPath(base)
   const swSrc = resolve(root, srcDir, filename)
   const swDest = resolve(root, outDir, filename)
   const outDirRoot = resolve(root, outDir)
@@ -70,6 +73,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
   const injectManifest = Object.assign({}, defaultInjectManifest, options.injectManifest || {})
 
   return {
+    base: basePath,
     mode,
     swDest,
     srcDir,
@@ -80,7 +84,6 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     workbox,
     manifest,
     injectManifest,
-    basePath,
     scope,
     minify,
   }

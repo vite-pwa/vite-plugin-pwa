@@ -57,13 +57,18 @@ export interface VitePWAOptions {
    * The workbox object for `injectManifest`
    */
   injectManifest: Partial<InjectManifestConfig>
+  /**
+   * Override Vite's base options only for PWA
+   *
+   * @default "base" options from Vite
+   */
+  base?: string
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   swDest: string
   workbox: GenerateSWConfig
   injectManifest: InjectManifestConfig
-  basePath: string
 }
 
 export interface ManifestOptions {
