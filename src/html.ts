@@ -25,12 +25,19 @@ export function injectServiceWorker(html: string, options: ResolvedVitePWAOption
 </head>`.trim(),
     )
   }
-  else {
+  else if(options.injectRegister === 'import') {
     return html.replace(
       '</head>',
       `
 <link rel="manifest" href="${join(options.base, FILE_MANIFEST)}">
 <script src="${join(options.base, FILE_SW_REGISTER)}"></script>
+</head>`.trim(),
+    )
+  } else {
+    return html.replace(
+      '</head>',
+      `
+<link rel="manifest" href="${join(options.base, FILE_MANIFEST)}">
 </head>`.trim(),
     )
   }
