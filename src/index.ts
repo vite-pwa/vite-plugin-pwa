@@ -43,7 +43,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin {
         }
       }
     },
-    buildEnd() {
+    closeBundle() {
       if (options.strategies === 'injectManifest')
         injectManifest(options.injectManifest)
       else
