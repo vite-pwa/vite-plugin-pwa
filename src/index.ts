@@ -43,11 +43,13 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin {
         }
       }
     },
-    closeBundle() {
-      if (options.strategies === 'injectManifest')
-        injectManifest(options.injectManifest)
-      else
-        generateSW(options.workbox)
+    async closeBundle() {
+      if (!viteConfig.build.ssr) {
+        if (options.strategies === 'injectManifest')
+          await injectManifest(options.injectManifest)
+        else
+          await generateSW(options.workbox)
+      }
     },
   }
 }
