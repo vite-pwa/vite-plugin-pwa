@@ -22,13 +22,15 @@
     "prepublishOnly": "npm run build",
     "release": "npx bumpp --push --tag --commit && npm publish",
     "example:dev": "npm -C example run dev",
-    "example:build": "npm -C example run build"
+    "example:build": "npm -C example run build",
+    "example:run-build": "npm -C example run run-build && cd example && node test-pwa-with-node-static.js"
   },
   "dependencies": {
     "debug": "^4.3.2",
     "fast-glob": "^3.2.5",
     "pretty-bytes": "^5.6.0",
-    "workbox-build": "^6.1.1"
+    "workbox-build": "^6.1.1",
+    "workbox-window": "^6.1.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.4.3",
