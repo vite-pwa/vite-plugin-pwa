@@ -34,7 +34,6 @@ export default defineComponent({
     const updateServiceWorker = registerSW(
       false,
       () => {
-        console.log('UPDATE SW')
         appNeedsRefresh.value = true
       },
       () => {

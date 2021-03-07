@@ -14,7 +14,6 @@ const registerSWScript = (options: ResolvedVitePWAOptions) => `
     // that will reload the page as soon as the previously waiting
     // service worker has taken control.
     wb && wb.addEventListener('controlling', (event) => {
-      console.log(Controlling => \`\${event.isUpdate}\`)
       if (event.isUpdate)
         window.location.reload()
     })
