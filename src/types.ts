@@ -36,7 +36,7 @@ export interface VitePWAOptions {
   /**
    * Inject the service worker register inlined in the index.html
    *
-   * @default 'register'
+   * @default 'import'
    */
   injectRegister: 'inline' | 'import' | 'register' | null | false
   /**
