@@ -3,10 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "start": "npm run build && npm run serve",
     "dev": "cross-env DEBUG=vite-plugin-pwa:* vite",
     "build": "cross-env DEBUG=vite-plugin-pwa:* vite build",
     "run-build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
-    "serve": "esno serve.ts"
+    "serve": "serve dist"
   },
   "dependencies": {
     "vue": "^3.0.7"
@@ -18,6 +19,7 @@
     "@vue/compiler-sfc": "^3.0.7",
     "@vueuse/core": "^4.3.4",
     "cross-env": "^7.0.3",
+    "https-localhost": "^4.6.4",
     "node-static": "^0.7.11",
     "typescript": "^4.2.3",
     "vite": "^2.0.5",
