@@ -23,7 +23,7 @@
     "release": "npx bumpp --push --tag --commit && npm publish",
     "example:dev": "npm -C example run dev",
     "example:build": "npm -C example run build",
-    "example:run-build": "npm -C example run run-build && cd example && node test-pwa-with-node-static.js"
+    "example:start": "npm -C example run start"
   },
   "dependencies": {
     "debug": "^4.3.2",
