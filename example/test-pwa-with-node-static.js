@@ -33,5 +33,5 @@ secureServer.listen(httpsPort, () => {
 const redirectServer = http.createServer(httpsRedirect)
 
 redirectServer.listen(httpPort, () => {
-  console.log(`Server running on http://${hostname}:${httpPort}/`)
+  console.log(`Redirect server running on http://${hostname}:${httpPort}/`)
 })
