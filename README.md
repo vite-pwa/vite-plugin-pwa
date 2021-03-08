@@ -14,8 +14,7 @@
 
 - Generate Service Worker with Offline support (via [Workbox](https://developers.google.com/web/tools/workbox))
 - Auto inject Web App [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
-- **WIP**: Strategies option
-- **WIP**: Meta injection
+- Prompt for new content refreshing 
 - **WIP**: Icons generation for different dimensions
 
 ## Usage
@@ -53,6 +52,39 @@ VitePWA({
   }
 })
 ```
+
+### Prompt for new content 
+
+![](https://user-images.githubusercontent.com/11247099/110332062-d726fa80-805a-11eb-92f4-771499241350.png)
+
+```ts
+// vite.config.js
+VitePWA({
+  injectRegister: 'register',
+})
+```
+
+```ts
+// main.ts
+import { registerSW } from '@virtual/pwa-register'
+
+const updateSW = registerSW({
+  onNeedRefresh() {
+    // show a prompt to user
+  },
+  onOfflineReady() {
+    // ...
+  },
+})
+```
+
+```ts
+// when user clicked the "refresh" button
+updateSW()
+// the page will reload and the up-to-date content will be served.
+```
+
+You can find an example written in Vue 3: [ReloadPrompt.vue](./example/src/ReloadPrompt.vue).
 
 ### **WIP**: Advanced (injectManifest)
 
