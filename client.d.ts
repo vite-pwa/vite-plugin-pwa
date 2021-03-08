@@ -1,5 +1,6 @@
 declare module '@virtual/pwa-register' {
   export type RegisterSWOptions = {
+    auto?: boolean
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
@@ -12,6 +13,7 @@ declare module '@virtual/pwa-register/vue' {
   import type { Ref } from 'vue'
 
   export type RegisterSWOptions = {
+    auto?: boolean
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void

@@ -1,6 +1,7 @@
 import { Workbox, messageSW } from 'workbox-window'
 
 export type RegisterSWOptions = {
+  auto?: boolean
   immediate?: boolean
   onNeedRefresh?: () => void
   onOfflineReady?: () => void
@@ -8,6 +9,7 @@ export type RegisterSWOptions = {
 
 export function registerSW(options: RegisterSWOptions = {}) {
   const {
+    auto = false,
     immediate = true,
     onNeedRefresh,
     onOfflineReady,
@@ -54,7 +56,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
       // Assumes your app has some sort of prompt UI element
       // that a user can either accept or reject.
-      onNeedRefresh?.()
+      auto ? updateServiceWorker() : onNeedRefresh?.()
     }
 
     // Add an event listener to detect when the registered
