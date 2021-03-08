@@ -39,6 +39,7 @@
     "@types/workbox-build": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
     "eslint": "^7.21.0",
+    "esno": "^0.4.6",
     "rollup": "^2.40.0",
     "tsup": "^4.6.1",
     "typescript": "^4.2.3",

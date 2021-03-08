@@ -13,6 +13,7 @@ importers:
       '@types/workbox-build': 5.0.0
       '@typescript-eslint/eslint-plugin': 4.16.1_eslint@7.21.0+typescript@4.2.3
       eslint: 7.21.0
+      esno: 0.4.6
       rollup: 2.40.0
       tsup: 4.6.1_typescript@4.2.3
       typescript: 4.2.3
@@ -26,6 +27,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^4.16.1
       debug: ^4.3.2
       eslint: ^7.21.0
+      esno: ^0.4.6
       fast-glob: ^3.2.5
       pretty-bytes: ^5.6.0
       rollup: ^2.40.0
@@ -2319,6 +2321,15 @@ packages:
       node: '>= 0.4'
     resolution:
       integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==
+  /esbuild-register/2.2.0_esbuild@0.8.57:
+    dependencies:
+      esbuild: 0.8.57
+      jsonc-parser: 3.0.0
+    dev: true
+    peerDependencies:
+      esbuild: '>=0.8.31'
+    resolution:
+      integrity: sha512-27039YMtpC3lI8yYGGm78SAQBtBo/4IPMReWVsNh4++VtvozmasBd1a2HiTdk0297iuA2pMzrzvL5cZJqQCKxQ==
   /esbuild/0.8.53:
     dev: true
     hasBin: true
@@ -2611,6 +2622,14 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-W2aJbXpMNofUp0ztQaF40fveSsJBjlSCSWpy//gzfTvwC+USs/nceBrKmlJOiM8r1bLwP2EuYkCqArn/6QTIgg==
+  /esno/0.4.6:
+    dependencies:
+      esbuild: 0.8.57
+      esbuild-register: 2.2.0_esbuild@0.8.57
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha512-6sjoAqYmkLL5h/9eNchRblH6Eq1WrUmak2ROHjH/6lyakGSmdPsl/pigp+pXez7yqPU0bsy4W5hpyoUUjlxhsQ==
   /espree/6.2.1:
     dependencies:
       acorn: 7.4.1
@@ -3343,6 +3362,10 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==
+  /jsonc-parser/3.0.0:
+    dev: true
+    resolution:
+      integrity: sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==
   /jsonfile/6.1.0:
     dependencies:
       universalify: 2.0.0
