@@ -102,7 +102,8 @@ import { registerSW } from '@virtual/pwa-register'
 const updateSW = registerSW({
   auto: true,  
   onNeedRefresh() {
-    // WARNING: this method will never be called when auto=true.
+    // WARNING: this method will never be called when auto=true, 
+    // and so, you can omit it
   },
   onOfflineReady() {
     // ...

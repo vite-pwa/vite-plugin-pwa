@@ -24,7 +24,7 @@ const close = async() => {
         App ready to work offline
       </span>
       <span v-else>
-        New content available, reload the page to update.
+        New content available, click on reload button to update.
       </span>
     </div>
     <button v-if="needRefresh" @click="updateServiceWorker">
