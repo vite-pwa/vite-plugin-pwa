@@ -2,6 +2,7 @@
 import { useTimeAgo } from '@vueuse/core'
 import PwaToast from './PwaToast.vue'
 
+// replaced dyanmicaly
 const date = '__DATE__'
 const timeAgo = useTimeAgo(date)
 </script>

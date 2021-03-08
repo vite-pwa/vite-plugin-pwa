@@ -1,24 +1,21 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRegisterSW } from 'vite-plugin-pwa-register/vue'
+import { useRegisterSW } from '@virtual/pwa-register/vue'
 
-const hide = ref(false)
 const {
-  updateServiceWorker,
   offlineReady,
   needRefresh,
-} = useRegisterSW({
-  immediate: false,
-})
+  updateServiceWorker,
+} = useRegisterSW({ immediate: false })
 
-const hideToast = async() => {
-  hide.value = true
+const close = async() => {
+  offlineReady.value = false
+  needRefresh.value = false
 }
 </script>
 
 <template>
   <div
-    v-if="!hide && (offlineReady || needRefresh)"
+    v-if="offlineReady || needRefresh"
     class="pwa-toast"
     role="alert"
   >
@@ -33,7 +30,7 @@ const hideToast = async() => {
     <button v-if="needRefresh" @click="updateServiceWorker">
       Reload
     </button>
-    <button @click="hideToast">
+    <button @click="close">
       Close
     </button>
   </div>
@@ -56,7 +53,6 @@ const hideToast = async() => {
   margin-bottom: 8px;
 }
 .pwa-toast button {
-  background-color: white;
   border: 1px solid #8885;
   outline: none;
   margin-right: 5px;

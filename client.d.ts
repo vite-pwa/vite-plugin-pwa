@@ -1,4 +1,4 @@
-declare module 'vite-plugin-pwa-register' {
+declare module '@virtual/pwa-register' {
   export type RegisterSWOptions = {
     immediate?: boolean
     onNeedRefresh?: () => void
@@ -8,7 +8,7 @@ declare module 'vite-plugin-pwa-register' {
   export function registerSW(options?: RegisterSWOptions): () => Promise<void>
 }
 
-declare module 'vite-plugin-pwa-register/vue' {
+declare module '@virtual/pwa-register/vue' {
   import type { Ref } from 'vue'
 
   export type RegisterSWOptions = {
