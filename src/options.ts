@@ -45,6 +45,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     swDest,
     globDirectory: outDirRoot,
     offlineGoogleAnalytics: false,
+    cleanupOutdatedCaches: true,
     mode,
     navigateFallback: 'index.html',
   }

@@ -14,10 +14,6 @@ const config: UserConfig = {
       mode: 'development',
       base: '/',
       injectRegister: 'register',
-      minify: false,
-      workbox: {
-        cleanupOutdatedCaches: true,
-      },
     }),
     replace({
       __DATE__: new Date().toISOString(),
