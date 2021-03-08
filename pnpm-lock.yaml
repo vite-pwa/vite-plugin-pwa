@@ -43,6 +43,7 @@ importers:
       '@types/node-static': 0.7.6
       '@vitejs/plugin-vue': 1.1.5_@vue+compiler-sfc@3.0.7
       '@vue/compiler-sfc': 3.0.7_vue@3.0.7
+      '@vueuse/core': 4.3.4_vue@3.0.7
       cross-env: 7.0.3
       node-static: 0.7.11
       typescript: 4.2.3
@@ -53,6 +54,7 @@ importers:
       '@types/node-static': ^0.7.6
       '@vitejs/plugin-vue': ^1.1.5
       '@vue/compiler-sfc': ^3.0.7
+      '@vueuse/core': ^4.3.4
       cross-env: ^7.0.3
       node-static: ^0.7.11
       typescript: ^4.2.3
@@ -1561,6 +1563,23 @@ packages:
   /@vue/shared/3.0.7:
     resolution:
       integrity: sha512-dn5FyfSc4ky424jH4FntiHno7Ss5yLkqKNmM/NXwANRnlkmqu74pnGetexDFVG5phMk9/FhwovUZCWGxsotVKg==
+  /@vueuse/core/4.3.4_vue@3.0.7:
+    dependencies:
+      '@vueuse/shared': 4.3.4_vue@3.0.7
+      vue-demi: 0.7.1_vue@3.0.7
+    dev: true
+    peerDependencies:
+      vue: '*'
+    resolution:
+      integrity: sha512-OKMJNdQltsMu8l9MMQ0qvjKK4kO5x0tHveqn6ypWcSQ/NSSMRcUynbE4G404DM52Adg3aFtgrirXcM4uoM6cjg==
+  /@vueuse/shared/4.3.4_vue@3.0.7:
+    dependencies:
+      vue-demi: 0.7.1_vue@3.0.7
+    dev: true
+    peerDependencies:
+      vue: '*'
+    resolution:
+      integrity: sha512-O1PxiG8cSD4YQKHJXWAeBVVTJNpBwCse7TkTsMqqLzqOjP2apbncfPzOcYJHVR5NkUXmtvPBIWAQuRavXKmHSw==
   /acorn-jsx/5.3.1_acorn@7.4.1:
     dependencies:
       acorn: 7.4.1
@@ -4379,6 +4398,20 @@ packages:
       fsevents: 2.3.2
     resolution:
       integrity: sha512-QTgEDbq1WsTtr6j+++ewjhBFEk6c8v0xz4fb/OWJQKNYU8ZZtphOshwOqAlnarSstPBtWCBR0tsugXx6ajfoUg==
+  /vue-demi/0.7.1_vue@3.0.7:
+    dependencies:
+      vue: 3.0.7
+    dev: true
+    hasBin: true
+    peerDependencies:
+      '@vue/composition-api': ^1.0.0-beta.1
+      vue: ^2.6.0 || >=3.0.0-rc.1
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+    requiresBuild: true
+    resolution:
+      integrity: sha512-cJ3QnpcbIqdpeV3NnNgSDwneCJifvHct+6JNvfYn/49geK/uv5VJicZDvyg20guNhz+DZmUHBHyRQTJ32lSC2g==
   /vue-eslint-parser/7.5.0_eslint@7.21.0:
     dependencies:
       debug: 4.3.2
