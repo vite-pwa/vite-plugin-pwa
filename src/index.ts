@@ -5,8 +5,10 @@ import { generateSW, injectManifest } from 'workbox-build'
 import { generateSimpleSWRegister, injectServiceWorker } from './html'
 import { generateRegisterSW } from './modules'
 import { ResolvedVitePWAOptions, VitePWAOptions } from './types'
-import { resolveOptions } from './config'
+import { resolveOptions } from './options'
 import { FILE_MANIFEST, FILE_SW_REGISTER, VIRTUAL_MODULES, VIRTUAL_MODULES_MAP } from './constants'
+
+export { cachePreset } from './cache'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   let viteConfig: ResolvedConfig

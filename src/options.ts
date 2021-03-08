@@ -3,7 +3,6 @@ import { resolve } from 'path'
 import { ResolvedConfig } from 'vite'
 import { GenerateSWConfig, InjectManifestConfig } from 'workbox-build'
 import { ManifestOptions, VitePWAOptions, ResolvedVitePWAOptions } from './types'
-import { cachePreset } from './cache'
 
 export function resolveBathPath(base: string) {
   if (isAbsolute(base))
@@ -46,7 +45,6 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     swDest,
     globDirectory: outDirRoot,
     offlineGoogleAnalytics: false,
-    runtimeCaching: cachePreset,
     mode,
     navigateFallback: 'index.html',
   }
