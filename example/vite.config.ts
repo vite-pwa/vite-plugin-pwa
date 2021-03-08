@@ -3,7 +3,7 @@ import Vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 
 const config: UserConfig = {
-  base: process.env.BASE_URL || 'https://github.com/',
+  // base: process.env.BASE_URL || 'https://github.com/',
   build: {
     sourcemap: process.env.SOURCE_MAP === 'true',
   },
@@ -13,6 +13,7 @@ const config: UserConfig = {
       mode: 'development',
       base: '/',
       injectRegister: 'register',
+      minify: false,
       workbox: {
         cleanupOutdatedCaches: true,
       },

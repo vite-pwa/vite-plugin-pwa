@@ -1,6 +1,7 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from 'vue'
 import { registerSW } from 'vite-plugin-pwa-register'
+
 export default defineComponent({
   setup() {
     const offlineAppReady = ref(false)
@@ -60,7 +61,7 @@ export default defineComponent({
 })
 </script>
 <template>
-  <div>Hello World</div>
+  <div>Hello World 1</div>
   <div
     v-if="showToast"
     class="toast-offline-ready"

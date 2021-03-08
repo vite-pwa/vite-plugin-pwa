@@ -6,7 +6,7 @@
     "dev": "cross-env DEBUG=vite-plugin-pwa:* vite",
     "build": "cross-env DEBUG=vite-plugin-pwa:* vite build",
     "run-build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
-    "serve": "vite preview"
+    "serve": "esno serve.ts"
   },
   "dependencies": {
     "node-static": "^0.7.11",
