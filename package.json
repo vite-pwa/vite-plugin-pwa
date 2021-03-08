@@ -17,10 +17,8 @@
     "dist"
   ],
   "scripts": {
-    "dev": "npm run build -- --watch",
-    "build": "nr build:main && nr build:client",
-    "build:main": "tsup src/index.ts --dts --format cjs,esm",
-    "build:client": "tsup src/client --dts --format esm -d dist/client",
+    "dev": "esno scripts/dev.ts",
+    "build": "esno scripts/build.ts",
     "prepublishOnly": "npm run build",
     "release": "npx bumpp --push --tag --commit && npm publish",
     "example:dev": "npm -C example run dev",

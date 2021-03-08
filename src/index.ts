@@ -6,7 +6,7 @@ import { generateSimpleSWRegister, injectServiceWorker } from './html'
 import { generateRegisterSW } from './modules'
 import { ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { resolveOptions } from './config'
-import { FILE_MANIFEST, FILE_SW_REGISTER, VIRTUAL_MODULE } from './constants'
+import { FILE_MANIFEST, FILE_SW_REGISTER, VIRTUAL_MODULES, VIRTUAL_MODULES_MAP } from './constants'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   let viteConfig: ResolvedConfig
@@ -59,13 +59,13 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       resolveId(id, importer, _, ssr) {
         if (ssr || options.injectRegister !== 'register')
           return undefined
-        return id === VIRTUAL_MODULE ? VIRTUAL_MODULE : undefined
+        return VIRTUAL_MODULES.includes(id) ? id : undefined
       },
       load(id, ssr) {
         if (ssr || options.injectRegister !== 'register')
           return undefined
-        if (id === VIRTUAL_MODULE)
-          return generateRegisterSW(options)
+        if (VIRTUAL_MODULES.includes(id))
+          return generateRegisterSW(options, VIRTUAL_MODULES_MAP[id])
       },
     },
   ]

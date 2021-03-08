@@ -1,67 +1,39 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
-import { registerSW } from 'vite-plugin-pwa-register'
+import { ref } from 'vue'
+import { useRegisterSW } from 'vite-plugin-pwa-register/vue'
 
-const offlineAppReady = ref(false)
-const appNeedsRefresh = ref(false)
-const hiddenOfflineAppReady = ref(false)
-const hiddenAppNeedsRefresh = ref(false)
-const showOfflineAppReady = computed(() => {
-  return offlineAppReady.value && !hiddenOfflineAppReady.value
-})
-const showAppNeedsRefresh = computed(() => {
-  return appNeedsRefresh.value && !hiddenAppNeedsRefresh.value
-})
-
-const toastCancelAriaLabel = computed(() => {
-  if (offlineAppReady.value)
-    return 'Undertood'
-  if (appNeedsRefresh.value)
-    return 'Cancel'
-  return null
-})
-
-const showToast = computed(() => {
-  return showOfflineAppReady.value || showAppNeedsRefresh.value
-})
-
-const toastMessage = computed(() => {
-  if (offlineAppReady.value)
-    return 'App ready to work offline'
-  if (appNeedsRefresh.value)
-    return 'New content available, reload the page to update.'
-  return null
-})
-
-const updateServiceWorker = registerSW({
+const hide = ref(false)
+const {
+  updateServiceWorker,
+  offlineReady,
+  needRefresh,
+} = useRegisterSW({
   immediate: false,
-  onNeedRefresh() {
-    appNeedsRefresh.value = true
-  },
-  onOfflineReady() {
-    offlineAppReady.value = true
-  },
 })
 
 const hideToast = async() => {
-  if (offlineAppReady.value)
-    hiddenOfflineAppReady.value = true
-  if (appNeedsRefresh.value)
-    hiddenAppNeedsRefresh.value = true
+  hide.value = true
 }
 </script>
 
 <template>
   <div
-    v-if="showToast"
+    v-if="!hide && (offlineReady || needRefresh)"
     class="pwa-toast"
     role="alert"
   >
-    <div class="message">{{ toastMessage }}</div>
-    <button v-if="appNeedsRefresh" aria-label="Reload page" @click="updateServiceWorker">
+    <div class="message">
+      <span v-if="offlineReady">
+        App ready to work offline
+      </span>
+      <span v-else>
+        New content available, reload the page to update.
+      </span>
+    </div>
+    <button v-if="needRefresh" @click="updateServiceWorker">
       Reload
     </button>
-    <button :aria-label="toastCancelAriaLabel" @click="hideToast">
+    <button @click="hideToast">
       Close
     </button>
   </div>
