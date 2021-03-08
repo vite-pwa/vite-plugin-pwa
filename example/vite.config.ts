@@ -2,6 +2,8 @@ import { UserConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
 
+process.env.NODE_ENV = 'development'
+
 const config: UserConfig = {
   // base: process.env.BASE_URL || 'https://github.com/',
   build: {
@@ -19,6 +21,9 @@ const config: UserConfig = {
       },
     }),
   ],
+  esbuild: {
+    minify: false,
+  },
 }
 
 export default config

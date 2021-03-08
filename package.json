@@ -18,7 +18,9 @@
   ],
   "scripts": {
     "dev": "npm run build -- --watch",
-    "build": "tsup src/index.ts --dts --format cjs,esm",
+    "build": "nr build:main && nr build:client",
+    "build:main": "tsup src/index.ts --dts --format cjs,esm",
+    "build:client": "tsup src/client --dts --format esm -d dist/client",
     "prepublishOnly": "npm run build",
     "release": "npx bumpp --push --tag --commit && npm publish",
     "example:dev": "npm -C example run dev",
@@ -34,6 +36,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.4.3",
+    "@antfu/ni": "^0.5.5",
     "@types/debug": "^4.1.5",
     "@types/workbox-build": "^5.0.0",
     "@typescript-eslint/eslint-plugin": "^4.15.2",

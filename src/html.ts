@@ -6,7 +6,7 @@ function join(...args: string[]) {
   return _join(...args).replace(/\\/g, '/')
 }
 
-export function generateSWRegister(options: ResolvedVitePWAOptions) {
+export function generateSimpleSWRegister(options: ResolvedVitePWAOptions) {
   return `
 if('serviceWorker' in navigator) {
 window.addEventListener('load', () => {
@@ -16,29 +16,24 @@ navigator.serviceWorker.register('${join(options.base, options.filename)}', { sc
 }
 
 export function injectServiceWorker(html: string, options: ResolvedVitePWAOptions) {
+  const manifest = `<link rel="manifest" href="${join(options.base, FILE_MANIFEST)}">`
+
   if (options.injectRegister === 'inline') {
     return html.replace(
       '</head>',
-      `
-<link rel="manifest" href="${join(options.base, FILE_MANIFEST)}">
-<script>${generateSWRegister(options)}</script>
-</head>`.trim(),
+      `${manifest}<script>${generateSimpleSWRegister(options)}</script></head>`,
     )
   }
-  else if(options.injectRegister === 'import') {
+
+  if (options.injectRegister === 'import') {
     return html.replace(
       '</head>',
-      `
-<link rel="manifest" href="${join(options.base, FILE_MANIFEST)}">
-<script src="${join(options.base, FILE_SW_REGISTER)}"></script>
-</head>`.trim(),
-    )
-  } else {
-    return html.replace(
-      '</head>',
-      `
-<link rel="manifest" href="${join(options.base, FILE_MANIFEST)}">
-</head>`.trim(),
+      `${manifest}<script src="${join(options.base, FILE_SW_REGISTER)}"></script></head>`,
     )
   }
+
+  return html.replace(
+    '</head>',
+    `${manifest}</head>`,
+  )
 }

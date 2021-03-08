@@ -2,7 +2,7 @@ import { join } from 'path'
 import { existsSync } from 'fs'
 import type { Plugin, ResolvedConfig } from 'vite'
 import { generateSW, injectManifest } from 'workbox-build'
-import { generateSWRegister, injectServiceWorker } from './html'
+import { generateSimpleSWRegister, injectServiceWorker } from './html'
 import { generateRegisterSW } from './modules'
 import { ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { resolveOptions } from './config'
@@ -40,7 +40,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
             isAsset: true,
             type: 'asset',
             name: undefined,
-            source: generateSWRegister(options),
+            source: generateSimpleSWRegister(options),
             fileName: FILE_SW_REGISTER,
           }
         }
