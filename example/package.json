@@ -9,13 +9,14 @@
     "serve": "esno serve.ts"
   },
   "dependencies": {
-    "node-static": "^0.7.11",
     "vue": "^3.0.6"
   },
   "devDependencies": {
+    "@types/node-static": "^0.7.6",
     "@vitejs/plugin-vue": "^1.1.5",
     "@vue/compiler-sfc": "^3.0.6",
     "cross-env": "^7.0.3",
+    "node-static": "^0.7.11",
     "typescript": "^4.2.2",
     "vite": "^2.0.4",
     "vite-plugin-pwa": "workspace:*"

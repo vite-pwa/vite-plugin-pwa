@@ -35,16 +35,18 @@ importers:
       workbox-window: ^6.1.1
   example:
     dependencies:
-      node-static: 0.7.11
       vue: 3.0.6
     devDependencies:
+      '@types/node-static': 0.7.6
       '@vitejs/plugin-vue': 1.1.5_@vue+compiler-sfc@3.0.6
       '@vue/compiler-sfc': 3.0.6_vue@3.0.6
       cross-env: 7.0.3
+      node-static: 0.7.11
       typescript: 4.2.2
       vite: 2.0.4
       vite-plugin-pwa: link:..
     specifiers:
+      '@types/node-static': ^0.7.6
       '@vitejs/plugin-vue': ^1.1.5
       '@vue/compiler-sfc': ^3.0.6
       cross-env: ^7.0.3
@@ -1220,9 +1222,24 @@ packages:
     dev: true
     resolution:
       integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
+  /@types/mime/1.3.2:
+    dev: true
+    resolution:
+      integrity: sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==
+  /@types/node-static/0.7.6:
+    dependencies:
+      '@types/mime': 1.3.2
+      '@types/node': 14.14.32
+    dev: true
+    resolution:
+      integrity: sha512-7CefAPsr5J6rFtfVuXCuEUNoYcz61FQODNCC7X3dINFHA9k/PGy/odX9jE4WRMMB/GIWvwJZkrm6LucmOvnDJg==
   /@types/node/14.14.31:
     resolution:
       integrity: sha512-vFHy/ezP5qI0rFgJ7aQnjDXwAMrG0KqqIH7tQG5PPv3BWBayOPIQNBjVc/P6hhdZfMx51REc6tfDNXHUio893g==
+  /@types/node/14.14.32:
+    dev: true
+    resolution:
+      integrity: sha512-/Ctrftx/zp4m8JOujM5ZhwzlWLx22nbQJiVqz8/zE15gOeEW+uly3FSX4fGFpcfEvFzXcMCJwq9lGVWgyARXhg==
   /@types/normalize-package-data/2.4.0:
     dev: true
     resolution:
@@ -1771,7 +1788,7 @@ packages:
     resolution:
       integrity: sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
   /colors/1.4.0:
-    dev: false
+    dev: true
     engines:
       node: '>=0.1.90'
     resolution:
@@ -3061,7 +3078,7 @@ packages:
     resolution:
       integrity: sha512-y7FpHSbMUMoyPbYUSzO6PaZ6FyRnQOpHuKwbo1G+Knck95XVU4QAiKdGEnj5wwoS7PlOgthX/09u5iFJ+aYf5Q==
   /mime/1.6.0:
-    dev: false
+    dev: true
     engines:
       node: '>=4'
     hasBin: true
@@ -3079,7 +3096,7 @@ packages:
     resolution:
       integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
   /minimist/0.0.10:
-    dev: false
+    dev: true
     resolution:
       integrity: sha1-3j+YVD2/lggr5IrRoMfNqDYwHc8=
   /minimist/1.2.5:
@@ -3129,7 +3146,7 @@ packages:
       colors: 1.4.0
       mime: 1.6.0
       optimist: 0.6.1
-    dev: false
+    dev: true
     engines:
       node: '>= 0.4.1'
     hasBin: true
@@ -3233,7 +3250,7 @@ packages:
     dependencies:
       minimist: 0.0.10
       wordwrap: 0.0.3
-    dev: false
+    dev: true
     resolution:
       integrity: sha1-2j6nRob6IaGaERwybpDrFaAZZoY=
   /optionator/0.9.1:
@@ -4330,7 +4347,7 @@ packages:
     resolution:
       integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
   /wordwrap/0.0.3:
-    dev: false
+    dev: true
     engines:
       node: '>=0.4.0'
     resolution:
