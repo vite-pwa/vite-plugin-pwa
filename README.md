@@ -86,6 +86,32 @@ updateSW()
 
 You can find an example written in Vue 3: [ReloadPrompt.vue](./example/src/ReloadPrompt.vue).
 
+### Automatic refresh for new content (with no prompt)
+
+```ts
+// vite.config.js
+VitePWA({
+  injectRegister: 'register',
+})
+```
+
+```ts
+// main.ts
+import { registerSW } from '@virtual/pwa-register'
+
+const updateSW = registerSW({
+  auto: true,  
+  onNeedRefresh() {
+    // WARNING: this method will never be called when auto=true.
+  },
+  onOfflineReady() {
+    // ...
+  },
+})
+```
+
+You can find an example written in Vue 3: [ReloadPrompt.vue](./example/src/ReloadPrompt.vue).
+
 ### **WIP**: Advanced (injectManifest)
 
 ```js
