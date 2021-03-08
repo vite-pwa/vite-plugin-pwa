@@ -1,8 +1,7 @@
 import { UserConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
-
-process.env.NODE_ENV = 'development'
+import replace from '@rollup/plugin-replace'
 
 const config: UserConfig = {
   // base: process.env.BASE_URL || 'https://github.com/',
@@ -20,10 +19,10 @@ const config: UserConfig = {
         cleanupOutdatedCaches: true,
       },
     }),
+    replace({
+      __DATE__: new Date().toISOString(),
+    }),
   ],
-  esbuild: {
-    minify: false,
-  },
 }
 
 export default config
