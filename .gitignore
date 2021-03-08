@@ -6,3 +6,4 @@ dist
 *.crt
 *.key
 *.cer
+.idea/
