@@ -27,7 +27,7 @@ const close = async() => {
         New content available, click on reload button to update.
       </span>
     </div>
-    <button v-if="needRefresh" @click="updateServiceWorker(false)">
+    <button v-if="needRefresh" @click="updateServiceWorker()">
       Reload
     </button>
     <button @click="close">
