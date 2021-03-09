@@ -1,9 +1,5 @@
 node_modules
 .DS_Store
 dist
-# for testing purposes
-*.env.local.json
-*.crt
-*.key
-*.cer
+# intellij stuff
 .idea/
