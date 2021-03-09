@@ -1,4 +1,4 @@
-declare module '!virtual/pwa-register' {
+declare module 'virtual:pwa-register' {
   export type RegisterSWOptions = {
     auto?: boolean
     immediate?: boolean
@@ -9,7 +9,7 @@ declare module '!virtual/pwa-register' {
   export function registerSW(options?: RegisterSWOptions): (reloadPage?: boolean) => Promise<void>
 }
 
-declare module '!virtual/pwa-register/vue' {
+declare module 'virtual:pwa-register/vue' {
   import type { Ref } from 'vue'
 
   export type RegisterSWOptions = {
