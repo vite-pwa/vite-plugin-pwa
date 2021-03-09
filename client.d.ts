@@ -6,7 +6,7 @@ declare module '@virtual/pwa-register' {
     onOfflineReady?: () => void
   }
 
-  export function registerSW(options?: RegisterSWOptions): () => Promise<void>
+  export function registerSW(options?: RegisterSWOptions): (reloadPage?: boolean) => Promise<void>
 }
 
 declare module '@virtual/pwa-register/vue' {
@@ -22,6 +22,6 @@ declare module '@virtual/pwa-register/vue' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: Ref<boolean>
     offlineReady: Ref<boolean>
-    updateServiceWorker: () => Promise<void>
+    updateServiceWorker: (reloadPage?: boolean) => Promise<void>
   }
 }

@@ -5,7 +5,7 @@ const {
   offlineReady,
   needRefresh,
   updateServiceWorker,
-} = useRegisterSW({ auto: true, immediate: false })
+} = useRegisterSW()
 
 const close = async() => {
   offlineReady.value = false
@@ -27,7 +27,7 @@ const close = async() => {
         New content available, click on reload button to update.
       </span>
     </div>
-    <button v-if="needRefresh" @click="updateServiceWorker">
+    <button v-if="needRefresh" @click="updateServiceWorker(false)">
       Reload
     </button>
     <button @click="close">

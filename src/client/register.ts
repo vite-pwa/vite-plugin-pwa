@@ -10,7 +10,7 @@ export type RegisterSWOptions = {
 export function registerSW(options: RegisterSWOptions = {}) {
   const {
     auto = false,
-    immediate = true,
+    immediate = false,
     onNeedRefresh,
     onOfflineReady,
   } = options
@@ -18,14 +18,16 @@ export function registerSW(options: RegisterSWOptions = {}) {
   let wb: Workbox | undefined
   let registration: ServiceWorkerRegistration | undefined
 
-  const updateServiceWorker = async() => {
+  const updateServiceWorker = async(reloadPage = true) => {
     // Assuming the user accepted the update, set up a listener
     // that will reload the page as soon as the previously waiting
     // service worker has taken control.
-    wb && wb.addEventListener('controlling', (event) => {
-      if (event.isUpdate)
-        window.location.reload()
-    })
+    if (reloadPage) {
+      wb?.addEventListener('controlling', (event) => {
+        if (event.isUpdate)
+          window.location.reload()
+      })
+    }
 
     if (registration && registration.waiting) {
       // Send a message to the waiting service worker,
@@ -37,6 +39,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
   }
 
   if ('serviceWorker' in navigator) {
+    // __SW__ and __SCOPE__ will be replaced by virtual module
     wb = new Workbox('__SW__', { scope: '__SCOPE__' })
 
     wb.addEventListener('activated', (event) => {
