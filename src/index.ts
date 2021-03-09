@@ -58,6 +58,10 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
     },
     {
       name: 'vite-plugin-pwa:virtual',
+      configResolved(config) {
+        viteConfig = config
+        options = resolveOptions(userOptions, viteConfig)
+      },
       resolveId(id, importer, _, ssr) {
         if (ssr || options.injectRegister !== 'register')
           return undefined
@@ -66,8 +70,13 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       load(id, ssr) {
         if (ssr || options.injectRegister !== 'register')
           return undefined
-        if (VIRTUAL_MODULES.includes(id))
-          return generateRegisterSW(options, VIRTUAL_MODULES_MAP[id])
+        if (VIRTUAL_MODULES.includes(id)) {
+          return generateRegisterSW(
+            options,
+            viteConfig.command === 'build' ? 'build' : 'dev',
+            VIRTUAL_MODULES_MAP[id],
+          )
+        }
       },
     },
   ]

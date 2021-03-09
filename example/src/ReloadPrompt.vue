@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRegisterSW } from '@virtual/pwa-register/vue'
+import { useRegisterSW } from '!virtual/pwa-register/vue'
 
 const {
   offlineReady,

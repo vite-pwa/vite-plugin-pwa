@@ -1,11 +1,7 @@
 import { Workbox, messageSW } from 'workbox-window'
+import { RegisterSWOptions } from '../type'
 
-export type RegisterSWOptions = {
-  auto?: boolean
-  immediate?: boolean
-  onNeedRefresh?: () => void
-  onOfflineReady?: () => void
-}
+export type { RegisterSWOptions }
 
 export function registerSW(options: RegisterSWOptions = {}) {
   const {

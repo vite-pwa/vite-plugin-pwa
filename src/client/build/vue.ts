@@ -1,5 +1,6 @@
 import { ref } from 'vue'
-import { registerSW, RegisterSWOptions } from './register'
+import { RegisterSWOptions } from '../type'
+import { registerSW } from './register'
 
 export type { RegisterSWOptions }
 
