@@ -16,6 +16,7 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
   const offlineReady = ref(false)
 
   const updateServiceWorker = registerSW({
+    auto,
     immediate,
     onNeedRefresh() {
       if (auto) {
