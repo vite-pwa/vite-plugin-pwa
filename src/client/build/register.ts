@@ -44,6 +44,19 @@ export function registerSW(options: RegisterSWOptions = {}) {
       // worker was controlling the page when this version was registered.
       if (!event.isUpdate)
         onOfflineReady?.()
+
+      /* TODO@clientsClaim
+      if (event.isUpdate) {
+        console.log(`WARNING: another service worker is controlling the page => ${auto}`)
+        if (auto)
+          window.location.reload()
+        else
+          onNeedRefresh?.()
+      }
+      else {
+        onOfflineReady?.()
+      }
+      */
     })
 
     const showSkipWaitingPrompt = () => {
@@ -56,6 +69,10 @@ export function registerSW(options: RegisterSWOptions = {}) {
       // Assumes your app has some sort of prompt UI element
       // that a user can either accept or reject.
       auto ? updateServiceWorker() : onNeedRefresh?.()
+
+      /* TODO@clientsClaim
+      onNeedRefresh?.()
+      */
     }
 
     // Add an event listener to detect when the registered
