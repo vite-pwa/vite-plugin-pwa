@@ -14,6 +14,12 @@ const config: UserConfig = {
       mode: 'development',
       base: '/',
       injectRegister: 'register',
+      /* TODO@clientClaims
+      workbox: {
+        clientsClaim: true,
+        skipWaiting: true,
+      },
+      */
     }),
     replace({
       __DATE__: new Date().toISOString(),
