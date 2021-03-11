@@ -36,9 +36,12 @@ export interface VitePWAOptions {
   /**
    * Inject the service worker register inlined in the index.html
    *
-   * @default 'import'
+   * With `auto` set, depends on whether you used the `import { registerSW } from 'virtual:pwa-register'`
+   * it will do nothing or use the `import` mode
+   *
+   * @default 'auto'
    */
-  injectRegister: 'inline' | 'import' | 'register' | null | false
+  injectRegister: 'inline' | 'import' | 'auto' | null | false
   /**
    * Minify the generated manifest
    *

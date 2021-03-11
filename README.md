@@ -58,13 +58,6 @@ VitePWA({
 ![](https://user-images.githubusercontent.com/11247099/110332062-d726fa80-805a-11eb-92f4-771499241350.png)
 
 ```ts
-// vite.config.js
-VitePWA({
-  injectRegister: 'register',
-})
-```
-
-```ts
 // main.ts
 import { registerSW } from '@virtual/pwa-register'
 
@@ -82,32 +75,6 @@ const updateSW = registerSW({
 // when user clicked the "refresh" button
 updateSW()
 // the page will reload and the up-to-date content will be served.
-```
-
-You can find an example written in Vue 3: [ReloadPrompt.vue](./example/src/ReloadPrompt.vue).
-
-### Automatic refresh for new content (with no prompt)
-
-```ts
-// vite.config.js
-VitePWA({
-  injectRegister: 'register',
-})
-```
-
-```ts
-// main.ts
-import { registerSW } from '@virtual/pwa-register'
-
-const updateSW = registerSW({
-  auto: true,  
-  onNeedRefresh() {
-    // WARNING: this method will never be called when auto=true
-  },
-  onOfflineReady() {
-    // ...
-  },
-})
 ```
 
 You can find an example written in Vue 3: [ReloadPrompt.vue](./example/src/ReloadPrompt.vue).

@@ -13,7 +13,6 @@ const config: UserConfig = {
     VitePWA({
       mode: 'development',
       base: '/',
-      injectRegister: 'register',
       /* TODO@clientClaims
       workbox: {
         clientsClaim: true,

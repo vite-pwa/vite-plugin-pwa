@@ -28,7 +28,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     mode = (process['env']['NODE_ENV'] || 'production') as ('production' | 'development'),
     srcDir = 'public',
     outDir = viteConfig.build.outDir || 'dist',
-    injectRegister = 'import',
+    injectRegister = 'auto',
     filename = 'sw.js',
     strategies = 'generateSW',
     minify = true,
