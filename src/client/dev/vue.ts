@@ -7,7 +7,7 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
   const needRefresh = ref(false)
   const offlineReady = ref(false)
 
-  const updateServiceWorker = () => {}
+  const updateServiceWorker = (reloadPage?: boolean) => {}
 
   return {
     updateServiceWorker,

@@ -5,7 +5,6 @@ export type { RegisterSWOptions }
 
 export function registerSW(options: RegisterSWOptions = {}) {
   const {
-    auto = false,
     immediate = false,
     onNeedRefresh,
     onOfflineReady,
@@ -68,11 +67,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
       // Assumes your app has some sort of prompt UI element
       // that a user can either accept or reject.
-      auto ? updateServiceWorker() : onNeedRefresh?.()
-
-      /* TODO@clientsClaim
       onNeedRefresh?.()
-      */
     }
 
     // Add an event listener to detect when the registered

@@ -3,5 +3,5 @@ import { RegisterSWOptions } from '../type'
 export type { RegisterSWOptions }
 
 export function registerSW(options: RegisterSWOptions = {}) {
-  return () => {}
+  return (reloadPage = true) => {}
 }
