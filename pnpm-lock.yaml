@@ -37,59 +37,51 @@ importers:
       vue: ^3.0.7
       workbox-build: ^6.1.1
       workbox-window: ^6.1.1
-  example:
+  examples/vue-basic:
     dependencies:
       vue: 3.0.7
     devDependencies:
       '@rollup/plugin-replace': 2.4.1
-      '@types/node-static': 0.7.6
       '@vitejs/plugin-vue': 1.1.5_@vue+compiler-sfc@3.0.7
       '@vue/compiler-sfc': 3.0.7_vue@3.0.7
       '@vueuse/core': 4.3.4_vue@3.0.7
       cross-env: 7.0.3
       https-localhost: 4.6.4
-      node-static: 0.7.11
       typescript: 4.2.3
       vite: 2.0.5
-      vite-plugin-pwa: link:..
+      vite-plugin-pwa: link:../..
     specifiers:
       '@rollup/plugin-replace': ^2.4.1
-      '@types/node-static': ^0.7.6
       '@vitejs/plugin-vue': ^1.1.5
       '@vue/compiler-sfc': ^3.0.7
       '@vueuse/core': ^4.3.4
       cross-env: ^7.0.3
       https-localhost: ^4.6.4
-      node-static: ^0.7.11
       typescript: ^4.2.3
       vite: ^2.0.5
       vite-plugin-pwa: workspace:*
       vue: ^3.0.7
-  router-example:
+  examples/vue-router:
     dependencies:
       vue: 3.0.7
       vue-router: 4.0.4_vue@3.0.7
     devDependencies:
       '@rollup/plugin-replace': 2.4.1
-      '@types/node-static': 0.7.6
       '@vitejs/plugin-vue': 1.1.5_@vue+compiler-sfc@3.0.7
       '@vue/compiler-sfc': 3.0.7_vue@3.0.7
       '@vueuse/core': 4.3.4_vue@3.0.7
       cross-env: 7.0.3
       https-localhost: 4.6.4
-      node-static: 0.7.11
       typescript: 4.2.3
       vite: 2.0.5
-      vite-plugin-pwa: link:..
+      vite-plugin-pwa: link:../..
     specifiers:
       '@rollup/plugin-replace': ^2.4.1
-      '@types/node-static': ^0.7.6
       '@vitejs/plugin-vue': ^1.1.5
       '@vue/compiler-sfc': ^3.0.7
       '@vueuse/core': ^4.3.4
       cross-env: ^7.0.3
       https-localhost: ^4.6.4
-      node-static: ^0.7.11
       typescript: ^4.2.3
       vite: ^2.0.5
       vite-plugin-pwa: workspace:*
@@ -1289,24 +1281,9 @@ packages:
     dev: true
     resolution:
       integrity: sha1-7ihweulOEdK4J7y+UnC86n8+ce4=
-  /@types/mime/1.3.2:
-    dev: true
-    resolution:
-      integrity: sha512-YATxVxgRqNH6nHEIsvg6k2Boc1JHI9ZbH5iWFFv/MTkchz3b1ieGDa5T0a9RznNdI0KhVbdbWSN+KWWrQZRxTw==
-  /@types/node-static/0.7.6:
-    dependencies:
-      '@types/mime': 1.3.2
-      '@types/node': 14.14.32
-    dev: true
-    resolution:
-      integrity: sha512-7CefAPsr5J6rFtfVuXCuEUNoYcz61FQODNCC7X3dINFHA9k/PGy/odX9jE4WRMMB/GIWvwJZkrm6LucmOvnDJg==
   /@types/node/14.14.31:
     resolution:
       integrity: sha512-vFHy/ezP5qI0rFgJ7aQnjDXwAMrG0KqqIH7tQG5PPv3BWBayOPIQNBjVc/P6hhdZfMx51REc6tfDNXHUio893g==
-  /@types/node/14.14.32:
-    dev: true
-    resolution:
-      integrity: sha512-/Ctrftx/zp4m8JOujM5ZhwzlWLx22nbQJiVqz8/zE15gOeEW+uly3FSX4fGFpcfEvFzXcMCJwq9lGVWgyARXhg==
   /@types/normalize-package-data/2.4.0:
     dev: true
     resolution:
@@ -1983,12 +1960,6 @@ packages:
   /colorette/1.2.2:
     resolution:
       integrity: sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
-  /colors/1.4.0:
-    dev: true
-    engines:
-      node: '>=0.1.90'
-    resolution:
-      integrity: sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
   /commander/2.20.3:
     dev: false
     resolution:
@@ -3595,10 +3566,6 @@ packages:
       brace-expansion: 1.1.11
     resolution:
       integrity: sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
-  /minimist/0.0.10:
-    dev: true
-    resolution:
-      integrity: sha1-3j+YVD2/lggr5IrRoMfNqDYwHc8=
   /minimist/1.2.5:
     resolution:
       integrity: sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
@@ -3651,17 +3618,6 @@ packages:
   /node-releases/1.1.71:
     resolution:
       integrity: sha512-zR6HoT6LrLCRBwukmrVbHv0EpEQjksO6GmFcZQQuCAy139BEsoVKPYnf3jongYW83fAa1torLGYwxxky/p28sg==
-  /node-static/0.7.11:
-    dependencies:
-      colors: 1.4.0
-      mime: 1.6.0
-      optimist: 0.6.1
-    dev: true
-    engines:
-      node: '>= 0.4.1'
-    hasBin: true
-    resolution:
-      integrity: sha512-zfWC/gICcqb74D9ndyvxZWaI1jzcoHmf4UTHWQchBNuNMxdBLJMDiUgZ1tjGLEIe/BMhj2DxKD8HOuc2062pDQ==
   /normalize-package-data/2.5.0:
     dependencies:
       hosted-git-info: 2.8.8
@@ -3774,13 +3730,6 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-kbpaSSGJTWdAY5KPVeMOKXSrPtr8C8C7wodJbcsd51jRnmD+GZu8Y0VoU6Dm5Z4vWr0Ig/1NKuWRKf7j5aaYSg==
-  /optimist/0.6.1:
-    dependencies:
-      minimist: 0.0.10
-      wordwrap: 0.0.3
-    dev: true
-    resolution:
-      integrity: sha1-2j6nRob6IaGaERwybpDrFaAZZoY=
   /optionator/0.9.1:
     dependencies:
       deep-is: 0.1.3
@@ -5082,12 +5031,6 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
-  /wordwrap/0.0.3:
-    dev: true
-    engines:
-      node: '>=0.4.0'
-    resolution:
-      integrity: sha1-o9XabNXAvAAI03I0u68b7WMFkQc=
   /workbox-background-sync/6.1.1:
     dependencies:
       workbox-core: 6.1.1

@@ -1,3 +1,2 @@
 packages:
-  - example
-  - router-example
+  - examples/*

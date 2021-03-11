@@ -21,12 +21,12 @@
     "build": "esno scripts/build.ts",
     "prepublishOnly": "npm run build",
     "release": "npx bumpp --push --tag --commit && npm publish",
-    "example:dev": "npm -C example run dev",
-    "example:build": "npm -C example run build",
-    "example:start": "npm -C example run start",
-    "router-example:dev": "npm -C router-example run dev",
-    "router-example:build": "npm -C router-example run build",
-    "router-example:start": "npm -C router-example run start"
+    "example:dev": "npm -C examples/vue-basic run dev",
+    "example:build": "npm -C examples/vue-basic run build",
+    "example:start": "npm -C examples/vue-basic run start",
+    "example:router:dev": "npm -C examples/vue-router run dev",
+    "example:router:build": "npm -C examples/vue-router run build",
+    "example:router:start": "npm -C examples/vue-router run start"
   },
   "dependencies": {
     "debug": "^4.3.2",
