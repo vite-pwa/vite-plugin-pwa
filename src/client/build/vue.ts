@@ -6,7 +6,6 @@ export type { RegisterSWOptions }
 
 export function useRegisterSW(options: RegisterSWOptions = {}) {
   const {
-    auto = false,
     immediate = true,
     onNeedRefresh,
     onOfflineReady,
@@ -16,17 +15,10 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
   const offlineReady = ref(false)
 
   const updateServiceWorker = registerSW({
-    auto,
     immediate,
     onNeedRefresh() {
-      if (auto) {
-        // noinspection JSIgnoredPromiseFromCall
-        updateServiceWorker()
-      }
-      else {
-        needRefresh.value = true
-        onNeedRefresh?.()
-      }
+      needRefresh.value = true
+      onNeedRefresh?.()
     },
     onOfflineReady() {
       offlineReady.value = true
