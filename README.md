@@ -15,6 +15,8 @@
 - Generate Service Worker with Offline support (via [Workbox](https://developers.google.com/web/tools/workbox))
 - Auto inject Web App [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - Prompt for new content refreshing 
+- Automatic reload when new content available 
+- **WIP**: Network first strategy
 - **WIP**: Icons generation for different dimensions
 
 ## Usage
@@ -81,9 +83,9 @@ You can find an example written in Vue 3: [ReloadPrompt.vue](./example/src/Reloa
 
 You can run the sample using `pnpm run example:router:start`
 
-### Automatic reload when new content 
+### Automatic reload when new content available
 
-With this option, once the service worker detect new content available, then it will update caches and 
+With this option, once the service worker detects new content available, then it will update caches and 
 will reload all browser windows/tabs with the application opened automatically to take the control.
 
 The downside using this option is that the user can lost data on other browser windows/tabs opened if filling a form.
