@@ -26,7 +26,8 @@
     "example:start": "npm -C examples/vue-basic run start",
     "example:router:dev": "npm -C examples/vue-router run dev",
     "example:router:build": "npm -C examples/vue-router run build",
-    "example:router:start": "npm -C examples/vue-router run start"
+    "example:router:start": "npm -C examples/vue-router run start",
+    "example:router:start:claims": "npm -C examples/vue-router run start-claims"
   },
   "dependencies": {
     "debug": "^4.3.2",

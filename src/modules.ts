@@ -12,4 +12,5 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
   return content
     .replace('__SW__', sw)
     .replace('__SCOPE__', scope)
+    .replace('__SW_AUTO_UPDATE__', `${options.injectRegister === 'auto' && options.registerType === 'autoUpdate'}`)
 }

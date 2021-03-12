@@ -79,6 +79,44 @@ updateSW()
 
 You can find an example written in Vue 3: [ReloadPrompt.vue](./example/src/ReloadPrompt.vue).
 
+You can run the sample using `pnpm run example:router:start`
+
+### Automatic reload when new content 
+
+With this option, once the service worker detect new content available, then it will update caches and 
+will reload all browser windows/tabs with the application opened automatically to take the control.
+
+The downside using this option is that the user can lost data on other browser windows/tabs opened if filling a form.
+
+#### Configuration
+
+With this option, the plugin will force `workbox.clientsClaim` and `workbox.skipWaiting` to `true`.
+
+```ts
+VitePWA({
+  registerType: 'autoUpdate',  
+  manifest: {
+    // content of manifest
+  },
+  workbox: {
+    // workbox options for generateSW
+  }
+})
+```
+
+#### Runtime
+
+```ts
+// main.ts
+import { registerSW } from '@virtual/pwa-register'
+
+registerSW()
+```
+
+You can run the sample using `pnpm run example:router:start:claims`
+
+### **WIP**: Network first strategy
+
 ### **WIP**: Advanced (injectManifest)
 
 ```js

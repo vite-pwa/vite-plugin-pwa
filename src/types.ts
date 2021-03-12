@@ -43,6 +43,17 @@ export interface VitePWAOptions {
    */
   injectRegister: 'inline' | 'import' | 'auto' | null | false
   /**
+   * When `injectRegister` is `auto`, how interact with the user on new content found?
+   *
+   * With both options, you need to show a popup/dialog to the user to confirm.
+   *
+   * With `autoUpdate`, the service worker will update caches and reload all browser windows/tabs with the application
+   * opened automatically to take the control when new content is available.
+   *
+   * @default 'autoUpdate'
+   */
+  registerType?: 'prompt' | 'autoUpdate'
+  /**
    * Minify the generated manifest
    *
    * @default true

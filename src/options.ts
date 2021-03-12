@@ -29,6 +29,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     srcDir = 'public',
     outDir = viteConfig.build.outDir || 'dist',
     injectRegister = 'auto',
+    registerType = 'prompt',
     filename = 'sw.js',
     strategies = 'generateSW',
     minify = true,
@@ -71,6 +72,11 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
   const manifest = Object.assign({}, defaultManifest, options.manifest || {})
   const injectManifest = Object.assign({}, defaultInjectManifest, options.injectManifest || {})
 
+  if (injectRegister === 'auto' && registerType === 'autoUpdate') {
+    workbox.skipWaiting = true
+    workbox.clientsClaim = true
+  }
+
   return {
     base: basePath,
     mode,
@@ -78,6 +84,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     srcDir,
     outDir,
     injectRegister,
+    registerType,
     filename,
     strategies,
     workbox,

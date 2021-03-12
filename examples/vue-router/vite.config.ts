@@ -13,12 +13,7 @@ const config: UserConfig = {
     VitePWA({
       mode: 'development',
       base: '/',
-      /* TODO@clientClaims
-      workbox: {
-        clientsClaim: true,
-        skipWaiting: true,
-      },
-      */
+      registerType: process.env.CLAIMS === 'true' ? 'autoUpdate' : undefined,
     }),
     replace({
       __DATE__: new Date().toISOString(),
