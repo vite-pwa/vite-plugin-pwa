@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useTimeAgo } from '@vueuse/core'
-import ReloadPrompt from './ReloadPrompt.vue'
+// import ReloadPrompt from './ReloadPrompt.vue'
 
 // replaced dyanmicaly
 const date = '__DATE__'
@@ -11,5 +11,5 @@ const timeAgo = useTimeAgo(date)
   <div>Built at: {{ date }} ({{ timeAgo }})</div>
   <br>
   <router-view />
-  <ReloadPrompt />
+<!--  <ReloadPrompt />-->
 </template>

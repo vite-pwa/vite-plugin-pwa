@@ -41,7 +41,7 @@ export interface VitePWAOptions {
    *
    * @default 'auto'
    */
-  injectRegister: 'inline' | 'import' | 'auto' | null | false
+  injectRegister: 'inline' | 'import' | 'auto' | 'networkfirst' | null | false
   /**
    * When `injectRegister` is `auto`, how interact with the user on new content found?
    *

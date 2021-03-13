@@ -2,7 +2,7 @@ import { join } from 'path'
 import { existsSync } from 'fs'
 import type { Plugin, ResolvedConfig } from 'vite'
 import { generateSW, injectManifest } from 'workbox-build'
-import { generateSimpleSWRegister, injectServiceWorker } from './html'
+import { generateNetworkFirstWS, generateSimpleSWRegister, injectServiceWorker } from './html'
 import { generateRegisterSW } from './modules'
 import { ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { resolveOptions } from './options'
@@ -58,7 +58,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
           if (options.strategies === 'injectManifest')
             await injectManifest(options.injectManifest)
           else
-            await generateSW(options.workbox)
+            options.injectRegister === 'networkfirst' ? await generateNetworkFirstWS(options) : await generateSW(options.workbox)
         }
       },
     },

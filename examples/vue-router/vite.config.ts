@@ -13,6 +13,7 @@ const config: UserConfig = {
     VitePWA({
       mode: 'development',
       base: '/',
+      injectRegister: 'networkfirst',
       registerType: process.env.CLAIMS === 'true' ? 'autoUpdate' : undefined,
     }),
     replace({
