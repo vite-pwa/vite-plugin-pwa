@@ -14,7 +14,7 @@ const loaing = ref(false)
   <br>
   <!--  <router-view />-->
   <div :class="{ loading }">
-    <router-view v-slot="{ Component }">
+    <router-view v-slot="{ Component, route }">
       <template v-if="Component">
         <transition mode="out-in">
           <keep-alive>
@@ -25,7 +25,7 @@ const loaing = ref(false)
               <template #default>
                 <!-- this will not work: our components has more than one root -->
                 <div>
-                  <component :is="Component" />
+                  <component :is="Component" :key="route.fullPath" />
                 </div>
               </template>
               <template #fallback>
