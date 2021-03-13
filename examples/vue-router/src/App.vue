@@ -6,7 +6,7 @@ import { useTimeAgo } from '@vueuse/core'
 // replaced dyanmicaly
 const date = '__DATE__'
 const timeAgo = useTimeAgo(date)
-const loaing = ref(false)
+const loading = ref(false)
 </script>
 
 <template>
@@ -22,8 +22,9 @@ const loaing = ref(false)
               @pending="loading = true"
               @resolve="loading = false"
             >
+              <!-- this will not work: our components has more than one root -->
+              <!--              <component :is="Component" :key="route.fullPath" />-->
               <template #default>
-                <!-- this will not work: our components has more than one root -->
                 <div>
                   <component :is="Component" :key="route.fullPath" />
                 </div>
