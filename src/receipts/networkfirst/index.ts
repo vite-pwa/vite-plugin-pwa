@@ -117,3 +117,7 @@ setCatchHandler(({ event }): Promise<Response> => {
       return Promise.resolve(Response.error())
   }
 })
+
+// @ts-ignore
+self.skipWaiting()
+workbox.core.clientsClaim()

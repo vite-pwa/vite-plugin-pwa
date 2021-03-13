@@ -10,6 +10,13 @@ const timeAgo = useTimeAgo(date)
 <template>
   <div>Built at: {{ date }} ({{ timeAgo }})</div>
   <br>
-  <router-view />
+  <router-view v-slot="{ Component }">
+    <suspense>
+      <template #fallback>
+        <div>Loading...</div>
+      </template>
+      <component :is="Component" />
+    </suspense>
+  </router-view>
 <!--  <ReloadPrompt />-->
 </template>
