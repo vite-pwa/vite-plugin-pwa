@@ -87,7 +87,11 @@ You can run the example using `pnpm run example:router:start`.
 With this option, once the service worker detects new content available, then it will update caches and 
 will reload all browser windows/tabs with the application opened automatically to take the control.
 
-The downside using this option is that the user can lost data on other browser windows/tabs opened if filling a form.
+The disadvantage of using this option is that the user can lose data in other browser windows / tabs in which the 
+application is open and is filling in a form.
+
+If your application has forms, it is recommended that you change the behavior to use default `prompt` option to allow
+the user decide when to update the content of the application.
 
 #### Configuration
 
