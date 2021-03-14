@@ -16,7 +16,6 @@
 - Auto inject Web App [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - Prompt for new content refreshing 
 - Automatic reload when new content available 
-- **WIP**: Network first strategy
 - **WIP**: Icons generation for different dimensions
 
 ## Usage
@@ -116,8 +115,6 @@ registerSW()
 ```
 
 You can run the example using `pnpm run example:router:start:claims`.
-
-### **WIP**: Network first strategy
 
 ### **WIP**: Advanced (injectManifest)
 
