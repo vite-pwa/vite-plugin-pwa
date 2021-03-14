@@ -1,6 +1,5 @@
 import { createApp, defineAsyncComponent } from 'vue'
 import { createWebHistory, createRouter } from 'vue-router'
-import NProgress from 'nprogress'
 import App from './App.vue'
 import './index.css'
 
@@ -12,8 +11,5 @@ const router = createRouter({
     { path: '/hi/:name', component: defineAsyncComponent(() => import('./pages/hi/[name].vue')), props: true },
   ],
 })
-
-router.beforeEach(() => { NProgress.start() })
-router.afterEach(() => { NProgress.done() })
 
 createApp(App).use(router).mount('#app')

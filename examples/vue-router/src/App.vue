@@ -1,12 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useTimeAgo } from '@vueuse/core'
+import { useRouter } from 'vue-router'
+import NProgress from 'nprogress'
 // import ReloadPrompt from './ReloadPrompt.vue'
 
 // replaced dyanmicaly
 const date = '__DATE__'
 const timeAgo = useTimeAgo(date)
+
+const router = useRouter()
 const loading = ref(false)
+
+router.beforeEach(() => { NProgress.start() })
+router.afterEach(() => { !loading.value && NProgress.done() })
+
+watch(loading, (v) => {
+  !v && NProgress.done()
+}, { immediate: true })
 </script>
 
 <template>
