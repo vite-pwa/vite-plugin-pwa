@@ -47,8 +47,9 @@ export interface VitePWAOptions {
    *
    * Only with `prompt` you will need to show a popup/dialog to the user to confirm.
    *
-   * With `autoUpdate`, the service worker will update caches and reload all browser windows/tabs with the application
-   * opened automatically to take the control when new content is available.
+   * With `autoUpdate`, when new content is available, the new service worker will update caches and reload all browser
+   * windows/tabs with the application open automatically, it must take the control for the application to work
+   * properly.
    *
    * @default 'autoUpdate'
    */
