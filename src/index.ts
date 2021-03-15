@@ -11,7 +11,7 @@ import { FILE_MANIFEST, FILE_SW_REGISTER, VIRTUAL_MODULES, VIRTUAL_MODULES_MAP }
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   let viteConfig: ResolvedConfig
   let options: ResolvedVitePWAOptions
-  let useRegister = false
+  let useImportRegister = false
 
   return [
     {
@@ -39,9 +39,9 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
 
         // if virtual register is requested, do not inject.
         if (options.injectRegister === 'auto')
-          options.injectRegister = useRegister ? null : 'import'
+          options.injectRegister = useImportRegister ? null : 'script'
 
-        if (options.injectRegister === 'import' && !existsSync(join(viteConfig.root, 'public', FILE_SW_REGISTER))) {
+        if (options.injectRegister === 'script' && !existsSync(join(viteConfig.root, 'public', FILE_SW_REGISTER))) {
           bundle[FILE_SW_REGISTER] = {
             isAsset: true,
             type: 'asset',
@@ -73,7 +73,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       },
       load(id) {
         if (VIRTUAL_MODULES.includes(id)) {
-          useRegister = true
+          useImportRegister = true
           return generateRegisterSW(
             options,
             viteConfig.command === 'build' ? 'build' : 'dev',
@@ -85,4 +85,5 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   ]
 }
 
+export { cachePreset } from './cache'
 export type { VitePWAOptions as Options }

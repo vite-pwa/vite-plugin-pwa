@@ -20,8 +20,6 @@
 
 ## Usage
 
-> ℹ️ **Vite 2 is supported from `v0.3.x`, Vite 1's support is discontinued.**
-
 ```bash
 npm i vite-plugin-pwa -D # yarn add vite-plugin-pwa -D
 ```
@@ -56,7 +54,7 @@ VitePWA({
 
 ### Prompt for new content 
 
-![](https://user-images.githubusercontent.com/11247099/110332062-d726fa80-805a-11eb-92f4-771499241350.png)
+![](https://user-images.githubusercontent.com/11247099/111190584-330cf880-85f2-11eb-8dad-20ddb84456cf.png)
 
 ```ts
 // main.ts
@@ -79,8 +77,6 @@ updateSW()
 ```
 
 You can find an example written in Vue 3: [ReloadPrompt.vue](./example/src/ReloadPrompt.vue).
-
-You can run the example using `pnpm run example:router:start`.
 
 ### Automatic reload when new content available
 

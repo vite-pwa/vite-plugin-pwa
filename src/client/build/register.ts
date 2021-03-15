@@ -2,10 +2,7 @@ import { Workbox, messageSW } from 'workbox-window'
 import { RegisterSWOptions } from '../type'
 
 // __SW_AUTO_UPDATE__ will be replaced by virtual module
-const autoUpdateMode = '__SW_AUTO_UPDATE__'
-
-// @ts-ignore
-const auto = autoUpdateMode === 'true'
+const auto = ('__SW_AUTO_UPDATE__' as string) === 'true'
 
 export type { RegisterSWOptions }
 

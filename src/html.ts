@@ -25,7 +25,7 @@ export function injectServiceWorker(html: string, options: ResolvedVitePWAOption
     )
   }
 
-  if (options.injectRegister === 'import') {
+  if (options.injectRegister === 'script') {
     return html.replace(
       '</head>',
       `${manifest}<script src="${join(options.base, FILE_SW_REGISTER)}"></script></head>`,
