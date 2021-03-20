@@ -76,7 +76,7 @@ updateSW()
 // the page will reload and the up-to-date content will be served.
 ```
 
-You can find an example written in Vue 3: [ReloadPrompt.vue](./example/src/ReloadPrompt.vue).
+You can find an example written in Vue 3: [ReloadPrompt.vue](./examples/vue-basic/src/ReloadPrompt.vue).
 
 ### Automatic reload when new content available
 
@@ -113,8 +113,6 @@ import { registerSW } from '@virtual/pwa-register'
 
 registerSW()
 ```
-
-You can run the example using `pnpm run example:router:start:claims`.
 
 ### **WIP**: Advanced (injectManifest)
 
