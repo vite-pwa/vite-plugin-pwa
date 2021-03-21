@@ -58,14 +58,14 @@ VitePWA({
 
 ```ts
 // main.ts
-import { registerSW } from '@virtual/pwa-register'
+import { registerSW } from 'virtual/pwa-register'
 
 const updateSW = registerSW({
   onNeedRefresh() {
     // show a prompt to user
   },
   onOfflineReady() {
-    // ...
+    // show a ready to work offline to user
   },
 })
 ```
@@ -109,9 +109,13 @@ VitePWA({
 
 ```ts
 // main.ts
-import { registerSW } from '@virtual/pwa-register'
+import { registerSW } from 'virtual/pwa-register'
 
-registerSW()
+const updateSW = registerSW({
+  onOfflineReady() {
+    // show a ready to work offline to user
+  },
+})
 ```
 
 ### **WIP**: Advanced (injectManifest)
