@@ -36,9 +36,31 @@ export interface VitePWAOptions {
   /**
    * Inject the service worker register inlined in the index.html
    *
-   * @default 'import'
+   * With `auto` set, depends on whether you used the `import { registerSW } from 'virtual:pwa-register'`
+   * it will do nothing or use the `script` mode
+   *
+   * `inline` - inject a simple register, inlined with the generated html
+   *
+   * `script` - inject <script/> in <head>, with the `sr` to a generated simple register
+   *
+   * `null` - do nothing, you will need to register the sw you self, or imports from `virtual:pwa-register`
+   *
+   * @default 'auto'
    */
-  injectRegister: 'inline' | 'import' | null | false
+  injectRegister: 'inline' | 'script' | 'auto' | null | false
+  /**
+   * Mode for the virtual register.
+   * Does NOT available for `injectRegister` set to `inline` or `script`
+   *
+   * `prompt` - you will need to show a popup/dialog to the user to confirm the reload.
+   *
+   * `autoUpdate` - when new content is available, the new service worker will update caches and reload all browser
+   * windows/tabs with the application open automatically, it must take the control for the application to work
+   * properly.
+   *
+   * @default 'prompt'
+   */
+  registerType?: 'prompt' | 'autoUpdate'
   /**
    * Minify the generated manifest
    *
