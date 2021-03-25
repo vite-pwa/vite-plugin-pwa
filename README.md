@@ -58,7 +58,7 @@ VitePWA({
 
 ```ts
 // main.ts
-import { registerSW } from 'virtual/pwa-register'
+import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
   onNeedRefresh() {
@@ -109,7 +109,7 @@ VitePWA({
 
 ```ts
 // main.ts
-import { registerSW } from 'virtual/pwa-register'
+import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
   onOfflineReady() {
