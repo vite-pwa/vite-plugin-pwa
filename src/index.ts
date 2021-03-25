@@ -66,9 +66,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
         viteConfig = config
         options = resolveOptions(userOptions, viteConfig)
       },
-      resolveId(id, importer, _, ssr) {
-        if (ssr || options.injectRegister !== 'auto')
-          return undefined
+      resolveId(id) {
         return VIRTUAL_MODULES.includes(id) ? VIRTUAL_MODULES_RESOLVE_PREFIX + id : undefined
       },
       load(id) {
