@@ -4,7 +4,7 @@
   "version": "0.6.3",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "types": "index.d.ts",
   "license": "MIT",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "repository": {
@@ -14,7 +14,9 @@
   "homepage": "https://github.com/antfu/vite-plugin-pwa",
   "bugs": "https://github.com/antfu/vite-plugin-pwa/issues",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts",
+    "client.d.ts"
   ],
   "scripts": {
     "dev": "esno scripts/dev.ts",
