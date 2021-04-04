@@ -147,6 +147,21 @@ Check out the type declaration [src/types.ts](./src/types.ts) and the following 
 - [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - [Workbox](https://developers.google.com/web/tools/workbox)
 
+### IDE errors 'Cannot find module' (ts2307)
+
+If your TypeScript build step or IDE complain about not being able to find modules or type definitions on imports, add the following to the `compilerOptions.types` array of your `tsconfig.json`:
+
+```jsonc
+// tsconfig.json
+{
+  "compilerOptions": {
+    "types": [
+      "vite-plugin-pwa/client"
+    ]
+  }
+}
+```
+
 ## Sponsors
 
 This project is part of my <a href='https://github.com/antfu-sponsors'>Sponsor Program</a>
