@@ -149,14 +149,17 @@ Check out the type declaration [src/types.ts](./src/types.ts) and the following 
 
 ### IDE errors 'Cannot find module' (ts2307)
 
-If your typescript build step or IDE complain about not being able to find modules or type definitions on imports, add the following to the `compilerOptions.types` array of your `tsconfig.json`:
+If your TypeScript build step or IDE complain about not being able to find modules or type definitions on imports, add the following to the `compilerOptions.types` array of your `tsconfig.json`:
 
-```
-"types": [
-  ...
-  "vite-plugin-pwa/client",
-  "vite-plugin-vue-layouts/client"
-]
+```jsonc
+// tsconfig.json
+{
+  "compilerOptions": {
+    "types": [
+      "vite-plugin-pwa/client"
+    ]
+  }
+}
 ```
 
 ## Sponsors
