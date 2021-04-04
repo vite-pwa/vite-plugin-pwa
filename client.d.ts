@@ -9,6 +9,7 @@ declare module 'virtual:pwa-register' {
 }
 
 declare module 'virtual:pwa-register/vue' {
+  // @ts-ignore ignore when vue is not installed
   import type { Ref } from 'vue'
 
   export type RegisterSWOptions = {
