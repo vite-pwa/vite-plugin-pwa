@@ -26,6 +26,8 @@
     "example:dev": "npm -C examples/vue-basic run dev",
     "example:build": "npm -C examples/vue-basic run build",
     "example:start": "npm -C examples/vue-basic run start",
+    "example:build:sw": "npm -C examples/vue-basic-inject-manifest run build",
+    "example:start:sw": "npm -C examples/vue-basic-inject-manifest run start",
     "example:router:dev": "npm -C examples/vue-router run dev",
     "example:router:build": "npm -C examples/vue-router run build",
     "example:router:start": "npm -C examples/vue-router run start",
