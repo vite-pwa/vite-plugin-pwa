@@ -36,10 +36,10 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions) {
   if (!im.swDest)
     im.swDest = options.filename || 'sw.js'
   //  lookup for sw.js on target project: relative to vite.config.js
-  // const sw = resolve(slash(join(options.srcDir, im.swSrc)))
-  // before build the sw, we need to add process.env.
-  console.log(resolve('node_modules/.bin/tsup.cmd'))
-  const build = `${resolve('node_modules/.bin/tsup.cmd')} sw.ts --no-splitting --format cjs -d ${resolve(options.outDir)}`
+  const sw = join(options.srcDir, im.swSrc)
+  // todo@antfu: remove .cmd extension if you are not on windows to test it
+  // sw.ts file must be relative, cannot be absolute...
+  const build = `${resolve('node_modules/.bin/tsup.cmd')} ${sw} --no-splitting --format cjs -d ${resolve(options.outDir)}`
   execSync(build, { stdio: 'inherit' })
   // await runEsbuild({
   //   target: 'es5',
@@ -52,21 +52,22 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions) {
   // }, { format: 'cjs' })
   // this will not fail since there is an injectionPoint
   options.injectManifest.swSrc = options.injectManifest.swDest
+  // options.injectManifest.mode won't work!!!
+  // error during build: ValidationError: "mode" is not allowed
+  if (options.injectManifest.mode)
+    delete options.injectManifest.mode
+
   // inject the manifest
   await injectManifest(options.injectManifest)
   // const output = resolve(options.outDir, im.swDest)
+  // after build the sw, we need to add process.env.
   // injectManifest will include process.env.NODE_ENV checks,
   // just write it at the begining of the file
   const output = resolve(options.outDir, im.swDest)
   const content = await fs.readFile(output, 'utf-8')
-  await fs.writeFile(output, `
-var process = {
-  env: {
-    NODE_ENV: '${options.mode}',
-  },
-}  
+  await fs.writeFile(output, `var process = { env: { NODE_ENV: '${options.mode}' }};  
 ${content}
-  `)
+`)
 
   // await injectManifest({
   //   swSrc,

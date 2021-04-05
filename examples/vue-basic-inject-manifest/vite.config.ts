@@ -23,12 +23,13 @@ const config: UserConfig = {
   plugins: [
     Vue(),
     VitePWA({
-      mode: 'development',
+      mode: 'production',
       base: '/',
       srcDir: '',
       strategies: 'injectManifest',
       injectManifest: {
         swSrc: 'sw.ts',
+        mode: 'production', // this won't work!!!
       },
     }),
     replace({
