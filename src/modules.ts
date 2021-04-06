@@ -26,15 +26,6 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   // self.__WB_MANIFEST is default injection point
   precacheAndRoute(self.__WB_MANIFEST)
   */
-  const im = options.injectManifest
-  if (!im.injectionPoint)
-    im.injectionPoint = 'self.__WB_MANIFEST'
-  if (!im.swSrc)
-    im.swSrc = options.filename || 'sw.js'
-  if (!im.swDest)
-    im.swDest = options.filename || 'sw.js'
-  // lookup for sw.js on target project
-  const sw = resolve(join(options.srcDir, im.swSrc))
   const rollup = (await import('rollup')) as typeof Rollup
   // remove this plugin from the compilation: avoid infinite recursion
   // remove also vite html transform and build to avoid rebuilding index.html
@@ -44,7 +35,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
       && p.name !== 'vite:html'
   })
   const bundle = await rollup.rollup({
-    input: sw,
+    input: options.swSrc,
     plugins,
   })
   try {
@@ -52,7 +43,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
       format: 'cjs',
       exports: 'none',
       inlineDynamicImports: true,
-      dir: resolve(options.outDir),
+      dir: options.outDir,
       sourcemap: viteOptions.build.sourcemap,
     })
   }

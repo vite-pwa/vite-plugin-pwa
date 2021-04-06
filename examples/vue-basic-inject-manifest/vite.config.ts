@@ -13,12 +13,7 @@ const config: UserConfig = {
     VitePWA({
       mode: 'development',
       base: '/',
-      srcDir: '',
       strategies: 'injectManifest',
-      injectManifest: {
-        swSrc: 'sw.ts',
-        mode: 'development', // this won't work!!!
-      },
     }),
     replace({
       __DATE__: new Date().toISOString(),

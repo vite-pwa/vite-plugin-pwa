@@ -118,7 +118,9 @@ const updateSW = registerSW({
 })
 ```
 
-### **WIP**: Advanced (injectManifest)
+### Advanced (injectManifest)
+
+You need to include `workbox-*` dependencies as `dev dependencies`.
 
 ```js
 // sw.js
@@ -133,12 +135,11 @@ VitePWA({
   strategies: 'injectManifest',
   manifest: {
     // content of manifest
-  },
-  injectManifest: {
-    // workbox options for injectManifest
   }
 })
 ```
+
+You can find an example written for a Vue 3 project: [sw.ts](./examples/vue-basic-inject-manifest/public/sw.js).
 
 ### Full config
 
