@@ -71,7 +71,6 @@ importers:
       '@vueuse/core': 4.5.0_vue@3.0.7
       cross-env: 7.0.3
       https-localhost: 4.6.4
-      tsup: 4.8.21_typescript@4.2.3
       typescript: 4.2.3
       vite: 2.1.2
       vite-plugin-pwa: link:../..
@@ -83,7 +82,6 @@ importers:
       '@vueuse/core': ^4.5.0
       cross-env: ^7.0.3
       https-localhost: ^4.6.4
-      tsup: ^4.8.21
       typescript: ^4.2.3
       vite: ^2.1.2
       vite-plugin-pwa: workspace:*
@@ -2351,12 +2349,6 @@ packages:
       esbuild: '>=0.8.31'
     resolution:
       integrity: sha512-27039YMtpC3lI8yYGGm78SAQBtBo/4IPMReWVsNh4++VtvozmasBd1a2HiTdk0297iuA2pMzrzvL5cZJqQCKxQ==
-  /esbuild/0.10.2:
-    dev: true
-    hasBin: true
-    requiresBuild: true
-    resolution:
-      integrity: sha512-/5vsZD7wTJJHC3yNXLUjXNvUDwqwNoIMvFvLd9tcDQ9el5l13pspYm3yufavjIeYvNtAbo+6N/6uoWx9dGA6ug==
   /esbuild/0.9.7:
     dev: true
     hasBin: true
@@ -3026,19 +3018,6 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-2ZThXDvvV8fYFRVIxnrMQBipZQDr7MxKAmQK1vujaj9/7eF0efG7BPUKJ7jP7G5SLF37xKDXvO4S/KKLj/Z0og==
-  /globby/11.0.3:
-    dependencies:
-      array-union: 2.1.0
-      dir-glob: 3.0.1
-      fast-glob: 3.2.5
-      ignore: 5.1.8
-      merge2: 1.4.1
-      slash: 3.0.0
-    dev: true
-    engines:
-      node: '>=10'
-    resolution:
-      integrity: sha512-ffdmosjA807y7+lA1NM0jELARVmYul/715xiILEjo3hBLPTcirgQNnXECn5g3mtR8TOLCVbkfua1Hpen25/Xcg==
   /graceful-fs/4.2.6:
     resolution:
       integrity: sha512-nTnJ528pbqxYanhpDYsi4Rd8MAeaBA67+RZ10CM1m3bTAVFEDcd5AuA4a6W5YkGZ1iNXHzZz8T6TBKLeBuNriQ==
@@ -4366,15 +4345,6 @@ packages:
       fsevents: 2.3.2
     resolution:
       integrity: sha512-Zqv3EvNfcllBHyyEUM754npqsZw82VIjK34cDQMwrQ1d6aqxzeYu5yFb7smGkPU4C1Bj7HupIMeT6WU7uIdnMw==
-  /rollup/2.44.0:
-    dev: true
-    engines:
-      node: '>=10.0.0'
-    hasBin: true
-    optionalDependencies:
-      fsevents: 2.3.2
-    resolution:
-      integrity: sha512-rGSF4pLwvuaH/x4nAS+zP6UNn5YUDWf/TeEU5IoXSZKBbKRNTCI3qMnYXKZgrC0D2KzS2baiOZt1OlqhMu5rnQ==
   /run-parallel/1.2.0:
     dependencies:
       queue-microtask: 1.2.3
@@ -4865,30 +4835,6 @@ packages:
         optional: true
     resolution:
       integrity: sha512-BkELaWTQqSV/+cbEl7/gQP0WerLXvkmFnMH9dX9KrZHFGqzDpdMosPZIC3UF2xvvZgmBuTTTwUJAwJsjJx3x9Q==
-  /tsup/4.8.21_typescript@4.2.3:
-    dependencies:
-      cac: 6.7.2
-      chalk: 4.1.0
-      chokidar: 3.5.1
-      debug: 4.3.1
-      esbuild: 0.10.2
-      execa: 5.0.0
-      globby: 11.0.3
-      joycon: 3.0.1
-      postcss-load-config: 3.0.1
-      resolve-from: 5.0.0
-      rollup: 2.44.0
-      sucrase: 3.17.1
-      typescript: 4.2.3
-    dev: true
-    hasBin: true
-    peerDependencies:
-      typescript: ^4.2.3
-    peerDependenciesMeta:
-      typescript:
-        optional: true
-    resolution:
-      integrity: sha512-8paK4Q0jvsbZE7v9ptsL1JxUSs83etaml2IrNBOsnTdgrHD/gq9dvxEcWU7rNdyCCh4UhUZ8RlEjRI3etZyfsw==
   /tsutils/3.20.0_typescript@4.2.3:
     dependencies:
       tslib: 1.14.1
