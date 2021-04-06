@@ -68,12 +68,4 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
 
   // inject the manifest
   await injectManifest(options.injectManifest)
-  // after build the sw, we need to add process.env.NODE_ENV
-  // injectManifest will include process.env.NODE_ENV checks,
-  // just write it at the beginning of the file
-  const output = resolve(options.outDir, im.swDest)
-  const content = await fs.readFile(output, 'utf-8')
-  await fs.writeFile(output, `var process = { env: { NODE_ENV: '${options.mode}' }};  
-${content}
-`)
 }
