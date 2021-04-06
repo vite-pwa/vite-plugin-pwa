@@ -1,19 +1,7 @@
 import { UserConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
-import { VitePWA, Options as VitePWAOptions } from 'vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
-
-const pwaConfig: Partial<VitePWAOptions> = {
-  mode: 'development',
-  base: '/',
-}
-if (process.env.SW === 'true') {
-  pwaConfig.srcDir = ''
-  pwaConfig.strategies = 'injectManifest'
-  pwaConfig.injectManifest = {
-    swSrc: 'sw.ts',
-  }
-}
 
 const config: UserConfig = {
   // base: process.env.BASE_URL || 'https://github.com/',
