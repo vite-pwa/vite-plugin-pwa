@@ -4,6 +4,7 @@ importers:
       debug: 4.3.2
       fast-glob: 3.2.5
       pretty-bytes: 5.6.0
+      rollup: 2.42.4
       workbox-build: 6.1.2
       workbox-window: 6.1.2
     devDependencies:
@@ -14,7 +15,6 @@ importers:
       '@typescript-eslint/eslint-plugin': 4.19.0_eslint@7.22.0+typescript@4.2.3
       eslint: 7.22.0
       esno: 0.5.0
-      rollup: 2.42.4
       tsup: 4.8.19_typescript@4.2.3
       typescript: 4.2.3
       vite: 2.1.2

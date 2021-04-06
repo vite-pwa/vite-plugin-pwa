@@ -54,7 +54,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       async closeBundle() {
         if (!viteConfig.build.ssr) {
           if (options.strategies === 'injectManifest')
-            await generateInjectManifest(options)
+            await generateInjectManifest(options, viteConfig)
           else
             await generateSW(options.workbox)
         }
