@@ -139,7 +139,7 @@ VitePWA({
 })
 ```
 
-You can find an example written for a Vue 3 project: [sw.ts](./examples/vue-basic-inject-manifest/public/sw.js).
+You can find an example written for a Vue 3 project: [sw.js](./examples/vue-basic-inject-manifest/public/sw.js).
 
 ### Full config
 
