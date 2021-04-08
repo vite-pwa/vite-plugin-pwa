@@ -12,6 +12,8 @@ const config: UserConfig = {
     Vue(),
     VitePWA({
       mode: 'development',
+      srcDir: 'src',
+      filename: 'sw.ts',
       base: '/',
       strategies: 'injectManifest',
     }),

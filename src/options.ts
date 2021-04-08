@@ -23,7 +23,7 @@ function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, o
 } {
   const swSrc = resolve(root, srcDir, filename)
   // autodiscover typescript service worker
-  if (injectManifest && extname(filename) === 'ts' && fs.existsSync(swSrc)) {
+  if (injectManifest && extname(filename) === '.ts' && fs.existsSync(swSrc)) {
     const useFilename = `${filename.substring(0, filename.lastIndexOf('.'))}.js`
     // we need to change filename on resolved options, it will be used to register the service worker:
     // generateSimpleSWRegister on html.ts
