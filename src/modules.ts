@@ -26,7 +26,8 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   // self.__WB_MANIFEST is default injection point
   precacheAndRoute(self.__WB_MANIFEST)
   */
-  const rollup = (await import('rollup')) as typeof Rollup
+
+  const rollup = require('rollup') as typeof Rollup
   // remove this plugin from the compilation: avoid infinite recursion
   // remove also vite html transform and build to avoid rebuilding index.html
   const excludedPluginNames = [
