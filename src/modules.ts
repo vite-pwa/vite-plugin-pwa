@@ -44,7 +44,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
       format: 'cjs',
       exports: 'none',
       inlineDynamicImports: true,
-      dir: options.outDir,
+      file: options.injectManifest.swDest,
       sourcemap: viteOptions.build.sourcemap,
     })
   }
