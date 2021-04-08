@@ -15,7 +15,8 @@
 - Generate Service Worker with Offline support (via [Workbox](https://developers.google.com/web/tools/workbox))
 - Auto inject Web App [Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - Prompt for new content refreshing 
-- Automatic reload when new content available 
+- Automatic reload when new content available
+- Advanced (injectManifest)  
 - **WIP**: Icons generation for different dimensions
 
 ## Usage
@@ -120,7 +121,7 @@ const updateSW = registerSW({
 
 ### Advanced (injectManifest)
 
-You need to include `workbox-*` dependencies as `dev dependencies`.
+You will need to include `workbox-*` dependencies as `dev dependencies`.
 
 ```js
 // sw.js
