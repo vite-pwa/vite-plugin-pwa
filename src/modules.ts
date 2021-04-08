@@ -27,6 +27,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   precacheAndRoute(self.__WB_MANIFEST)
   */
 
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const rollup = require('rollup') as typeof Rollup
   // remove this plugin from the compilation: avoid infinite recursion
   // remove also vite html transform and build to avoid rebuilding index.html
