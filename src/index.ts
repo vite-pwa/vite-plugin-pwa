@@ -1,9 +1,9 @@
 import { join } from 'path'
 import { existsSync } from 'fs'
 import type { Plugin, ResolvedConfig } from 'vite'
-import { generateSW, injectManifest } from 'workbox-build'
+import { generateSW } from 'workbox-build'
 import { generateSimpleSWRegister, injectServiceWorker } from './html'
-import { generateRegisterSW } from './modules'
+import { generateInjectManifest, generateRegisterSW } from './modules'
 import { ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { resolveOptions } from './options'
 import { FILE_MANIFEST, FILE_SW_REGISTER, VIRTUAL_MODULES, VIRTUAL_MODULES_MAP, VIRTUAL_MODULES_RESOLVE_PREFIX } from './constants'
@@ -54,7 +54,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       async closeBundle() {
         if (!viteConfig.build.ssr) {
           if (options.strategies === 'injectManifest')
-            await injectManifest(options.injectManifest)
+            await generateInjectManifest(options, viteConfig)
           else
             await generateSW(options.workbox)
         }

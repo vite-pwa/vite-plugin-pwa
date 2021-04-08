@@ -4,6 +4,7 @@ importers:
       debug: 4.3.2
       fast-glob: 3.2.5
       pretty-bytes: 5.6.0
+      rollup: 2.42.4
       workbox-build: 6.1.2
       workbox-window: 6.1.2
     devDependencies:
@@ -14,7 +15,6 @@ importers:
       '@typescript-eslint/eslint-plugin': 4.19.0_eslint@7.22.0+typescript@4.2.3
       eslint: 7.22.0
       esno: 0.5.0
-      rollup: 2.42.4
       tsup: 4.8.19_typescript@4.2.3
       typescript: 4.2.3
       vite: 2.1.2
@@ -61,6 +61,32 @@ importers:
       vite: ^2.1.2
       vite-plugin-pwa: workspace:*
       vue: ^3.0.7
+  examples/vue-basic-inject-manifest:
+    dependencies:
+      vue: 3.0.7
+    devDependencies:
+      '@rollup/plugin-replace': 2.4.1
+      '@vitejs/plugin-vue': 1.1.5_@vue+compiler-sfc@3.0.7
+      '@vue/compiler-sfc': 3.0.7_vue@3.0.7
+      '@vueuse/core': 4.5.0_vue@3.0.7
+      cross-env: 7.0.3
+      https-localhost: 4.6.4
+      typescript: 4.2.3
+      vite: 2.1.2
+      vite-plugin-pwa: link:../..
+      workbox-precaching: 6.1.2
+    specifiers:
+      '@rollup/plugin-replace': ^2.4.1
+      '@vitejs/plugin-vue': ^1.1.5
+      '@vue/compiler-sfc': ^3.0.7
+      '@vueuse/core': ^4.5.0
+      cross-env: ^7.0.3
+      https-localhost: ^4.6.4
+      typescript: ^4.2.3
+      vite: ^2.1.2
+      vite-plugin-pwa: workspace:*
+      vue: ^3.0.7
+      workbox-precaching: ^6.1.2
   examples/vue-router:
     dependencies:
       vue: 3.0.7
@@ -173,7 +199,7 @@ packages:
       integrity: sha512-Zt1yodBx1UcyiePMSkWnU4hPqhwq7hGi2nFL1LeA3EUl+q2LQx16MISgJ0+z7dnmgvP9QtIleuETGOiOH1RcIw==
   /@babel/code-frame/7.12.13:
     dependencies:
-      '@babel/highlight': 7.13.8
+      '@babel/highlight': 7.13.10
     resolution:
       integrity: sha512-HV1Cm0Q3ZrpCR93tkWOYiuYIgLxZXZFVG2VgK+MBWjUqZTundupbfx2aXarXuw5Ko5aMcjtJgbSs4vUGBS5v6g==
   /@babel/compat-data/7.13.8:
@@ -397,11 +423,19 @@ packages:
       '@babel/types': 7.13.0
     resolution:
       integrity: sha512-aan1MeFPxFacZeSz6Ld7YZo5aPuqnKlD7+HZY75xQsueczFccP9A7V05+oe0XpLwHK3oLorPe9eaAUljL7WEaQ==
+  /@babel/highlight/7.13.10:
+    dependencies:
+      '@babel/helper-validator-identifier': 7.12.11
+      chalk: 2.4.2
+      js-tokens: 4.0.0
+    resolution:
+      integrity: sha512-5aPpe5XQPzflQrFwL1/QoeHkP2MsA4JCntcXHRhEsdsfPVkvPi2w7Qix4iV7t5S/oC9OodGrggd8aco1g3SZFg==
   /@babel/highlight/7.13.8:
     dependencies:
       '@babel/helper-validator-identifier': 7.12.11
       chalk: 2.4.2
       js-tokens: 4.0.0
+    dev: true
     resolution:
       integrity: sha512-4vrIhfJyfNf+lCtXC2ck1rKSzDwciqF7IWFhXXrSOUC2O5DrVp+w4c6ed4AllTxhTkUP5x2tYj41VaxdVMMRDw==
   /@babel/parser/7.13.4:
@@ -1897,7 +1931,7 @@ packages:
     dependencies:
       anymatch: 3.1.1
       braces: 3.0.2
-      glob-parent: 5.1.1
+      glob-parent: 5.1.2
       is-binary-path: 2.1.0
       is-glob: 4.0.1
       normalize-path: 3.0.0
@@ -2062,7 +2096,7 @@ packages:
       import-fresh: 3.3.0
       parse-json: 5.2.0
       path-type: 4.0.0
-      yaml: 1.10.0
+      yaml: 1.10.2
     dev: true
     engines:
       node: '>=10'
@@ -2768,7 +2802,7 @@ packages:
     dependencies:
       '@nodelib/fs.stat': 2.0.4
       '@nodelib/fs.walk': 1.2.6
-      glob-parent: 5.1.1
+      glob-parent: 5.1.2
       merge2: 1.4.1
       micromatch: 4.0.2
       picomatch: 2.2.2
@@ -2928,10 +2962,18 @@ packages:
   /glob-parent/5.1.1:
     dependencies:
       is-glob: 4.0.1
+    dev: true
     engines:
       node: '>= 6'
     resolution:
       integrity: sha512-FnI+VGOpnlGHWZxthPGR+QhR78fuiK0sNLkHQv+bL9fQi57lNNdquIbna/WrfROrolq8GK5Ek6BiMwqL/voRYQ==
+  /glob-parent/5.1.2:
+    dependencies:
+      is-glob: 4.0.1
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==
   /glob/7.1.6:
     dependencies:
       fs.realpath: 1.0.0
@@ -4076,9 +4118,9 @@ packages:
       node: '>=0.6'
     resolution:
       integrity: sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
-  /queue-microtask/1.2.2:
+  /queue-microtask/1.2.3:
     resolution:
-      integrity: sha512-dB15eXv3p2jDlbOiNLyMabYg1/sXvppd8DP2J3EOCQ0AkuSXCW2tP7mnVouVLJKgUMY6yP0kcQDVpLCN13h4Xg==
+      integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==
   /randombytes/2.1.0:
     dependencies:
       safe-buffer: 5.2.1
@@ -4305,7 +4347,7 @@ packages:
       integrity: sha512-Zqv3EvNfcllBHyyEUM754npqsZw82VIjK34cDQMwrQ1d6aqxzeYu5yFb7smGkPU4C1Bj7HupIMeT6WU7uIdnMw==
   /run-parallel/1.2.0:
     dependencies:
-      queue-microtask: 1.2.2
+      queue-microtask: 1.2.3
     resolution:
       integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==
   /safe-buffer/5.1.2:
@@ -5110,7 +5152,6 @@ packages:
     resolution:
       integrity: sha512-zSTQWJU+CBHC90N/Dccb9n0IzbTsmnl28usKOlVYbfHS5wit3izpD7djqqHzgzyS+gdemRjY4s02VV9WvyeD1w==
   /workbox-core/6.1.2:
-    dev: false
     resolution:
       integrity: sha512-69rch7EyPsNAx5Y5YlSoHV39/EEE1oDeb5zmLIy6+mgB4BnaG6u/tlDtvjvKqHcPM0gz2L5SzYtTEvWmk5WRTQ==
   /workbox-expiration/6.1.2:
@@ -5139,7 +5180,6 @@ packages:
       workbox-core: 6.1.2
       workbox-routing: 6.1.2
       workbox-strategies: 6.1.2
-    dev: false
     resolution:
       integrity: sha512-jGwv6tMdIecsyBSdVCgXoD7bHxLRI972lvYOfvcosGjP3oFKe8p2DVPsn3TIzEVYTl+b3j59utC7yrOP9oEHSg==
   /workbox-range-requests/6.1.2:
@@ -5162,13 +5202,11 @@ packages:
   /workbox-routing/6.1.2:
     dependencies:
       workbox-core: 6.1.2
-    dev: false
     resolution:
       integrity: sha512-aRcqO+KX9A0J5W6hEeEpGhT6Lesqd3WfgaqlSD5LRajm0vAgYnlQzY37w6uC55Ev7M5Gh/xg0lA99qKc6ozsEA==
   /workbox-strategies/6.1.2:
     dependencies:
       workbox-core: 6.1.2
-    dev: false
     resolution:
       integrity: sha512-IX7UNePHmmfb1dcXSxgcephYShnLc0pmP3MRT/TZGjv8f0qcZYH7Sr/lTmwaxGXQL8yCSCrQICZwJnHLw2G5Ng==
   /workbox-streams/6.1.2:
@@ -5213,6 +5251,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-yr2icI4glYaNG+KWONODapy2/jDdMSDnrONSjblABjD9B4Z5LgiircSt8m8sRZFNi08kG9Sm0uSHtEmP3zaEGg==
+  /yaml/1.10.2:
+    dev: true
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-r3vXyErRCYJ7wg28yvBY5VSoAF8ZvlcW9/BwUzEtUsjvX/DKs24dIkuwjtuprwJJHsbyUbLApepYTR1BN4uHrg==
   /yocto-queue/0.1.0:
     dev: true
     engines:
