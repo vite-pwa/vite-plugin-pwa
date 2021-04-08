@@ -78,7 +78,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     offlineGoogleAnalytics: false,
     cleanupOutdatedCaches: true,
     mode,
-    navigateFallback: '.indexhtml',
+    navigateFallback: 'index.html',
   }
 
   const defaultInjectManifest: InjectManifestConfig = {
