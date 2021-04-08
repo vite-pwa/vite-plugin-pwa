@@ -142,8 +142,7 @@ VitePWA({
 
 You can use Typescript to build your service worker, you can find an example written for a Vue 3 project: 
 [sw.ts](./examples/vue-basic-inject-manifest/src/sw.ts).
-
-To resolve service worker Typescript types, just add `WebWorker` to your lib entry on `tsconfig.json` file, for example:
+To resolve service worker types, just add `WebWorker` to lib entry on your `tsconfig.json` file, for example:
 ```json
 "lib": ["ESNext", "DOM", "WebWorker"],
 ```
