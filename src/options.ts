@@ -1,5 +1,5 @@
 import fs from 'fs'
-import { resolve } from 'path'
+import { resolve, extname } from 'path'
 import { ResolvedConfig } from 'vite'
 import { GenerateSWConfig, InjectManifestConfig } from 'workbox-build'
 import { ManifestOptions, VitePWAOptions, ResolvedVitePWAOptions } from './types'
@@ -16,6 +16,30 @@ export function isAbsolute(url: string) {
   return url.match(/^(?:[a-z]+:)?\/\//i)
 }
 
+function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, outDir: string, filename: string): {
+  swSrc: string
+  swDest: string
+  useFilename?: string
+} {
+  const swSrc = resolve(root, srcDir, filename)
+  // autodiscover typescript service worker
+  if (injectManifest && extname(filename) === 'ts' && fs.existsSync(swSrc)) {
+    const useFilename = `${filename.substring(0, filename.lastIndexOf('.'))}.js`
+    // we need to change filename on resolved options, it will be used to register the service worker:
+    // generateSimpleSWRegister on html.ts
+    // generateRegisterSW on modules.ts
+    return {
+      swSrc,
+      swDest: resolve(root, outDir, useFilename),
+      useFilename,
+    }
+  }
+  return {
+    swSrc,
+    swDest: resolve(root, outDir, filename),
+  }
+}
+
 export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: ResolvedConfig): ResolvedVitePWAOptions {
   const root = viteConfig.root
   const pkg = fs.existsSync('package.json')
@@ -26,7 +50,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     // prevent tsup replacing `process.env`
     // eslint-disable-next-line dot-notation
     mode = (process['env']['NODE_ENV'] || 'production') as ('production' | 'development'),
-    srcDir = 'src',
+    srcDir = 'public',
     outDir = viteConfig.build.outDir || 'dist',
     injectRegister = 'auto',
     registerType = 'prompt',
@@ -37,8 +61,14 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
   } = options
 
   const basePath = resolveBathPath(base)
-  const swSrc = resolve(root, srcDir, filename)
-  const swDest = resolve(root, outDir, filename)
+  // autodiscover typescript with injectManifest
+  const { swSrc, swDest, useFilename } = resolveSwPaths(
+    strategies === 'injectManifest',
+    root,
+    srcDir,
+    outDir,
+    filename,
+  )
   const outDirRoot = resolve(root, outDir)
   const scope = options.scope || basePath
 
@@ -48,7 +78,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     offlineGoogleAnalytics: false,
     cleanupOutdatedCaches: true,
     mode,
-    navigateFallback: 'index.html',
+    navigateFallback: '.indexhtml',
   }
 
   const defaultInjectManifest: InjectManifestConfig = {
@@ -86,7 +116,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     outDir,
     injectRegister,
     registerType,
-    filename,
+    filename: useFilename || filename,
     strategies,
     workbox,
     manifest,
