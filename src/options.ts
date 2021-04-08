@@ -26,7 +26,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     // prevent tsup replacing `process.env`
     // eslint-disable-next-line dot-notation
     mode = (process['env']['NODE_ENV'] || 'production') as ('production' | 'development'),
-    srcDir = 'public',
+    srcDir = 'src',
     outDir = viteConfig.build.outDir || 'dist',
     injectRegister = 'auto',
     registerType = 'prompt',
