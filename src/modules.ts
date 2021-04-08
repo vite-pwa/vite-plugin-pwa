@@ -29,11 +29,12 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   const rollup = (await import('rollup')) as typeof Rollup
   // remove this plugin from the compilation: avoid infinite recursion
   // remove also vite html transform and build to avoid rebuilding index.html
-  const plugins = (viteOptions.plugins as Plugin[]).filter((p) => {
-    return p.name !== 'vite-plugin-pwa'
-      && p.name !== 'vite:build-html'
-      && p.name !== 'vite:html'
-  })
+  const excludedPluginNames = [
+    'vite-plugin-pwa',
+    'vite:build-html',
+    'vite:html',
+  ]
+  const plugins = viteOptions.plugins.filter(p => !excludedPluginNames.includes(p.name)) as Plugin[]
   const bundle = await rollup.rollup({
     input: options.swSrc,
     plugins,
@@ -50,13 +51,14 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   finally {
     await bundle.close()
   }
-  // this will not fail since there is an injectionPoint
-  options.injectManifest.swSrc = options.injectManifest.swDest
-  // options.injectManifest.mode won't work!!!
-  // error during build: ValidationError: "mode" is not allowed
-  if (options.injectManifest.mode)
-    delete options.injectManifest.mode
 
   // inject the manifest
-  await injectManifest(options.injectManifest)
+  await injectManifest({
+    ...options.injectManifest,
+    // this will not fail since there is an injectionPoint
+    swSrc: options.injectManifest.swDest,
+    // options.injectManifest.mode won't work!!!
+    // error during build: ValidationError: "mode" is not allowed
+    mode: undefined,
+  })
 }
