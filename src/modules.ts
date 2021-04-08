@@ -52,13 +52,16 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     await bundle.close()
   }
 
-  // inject the manifest
-  await injectManifest({
+  const injectManifestOptions = {
     ...options.injectManifest,
     // this will not fail since there is an injectionPoint
     swSrc: options.injectManifest.swDest,
-    // options.injectManifest.mode won't work!!!
-    // error during build: ValidationError: "mode" is not allowed
-    mode: undefined,
-  })
+  }
+
+  // options.injectManifest.mode won't work!!!
+  // error during build: ValidationError: "mode" is not allowed
+  delete injectManifestOptions.mode
+
+  // inject the manifest
+  await injectManifest(injectManifestOptions)
 }
