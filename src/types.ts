@@ -12,7 +12,7 @@ export interface VitePWAOptions {
    */
   mode?: 'development' | 'production'
   /**
-   * @default 'src'
+   * @default 'public'
    */
   srcDir?: string
   /**
