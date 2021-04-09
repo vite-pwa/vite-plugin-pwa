@@ -22,7 +22,7 @@ function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, o
   useFilename?: string
 } {
   const swSrc = resolve(root, srcDir, filename)
-  // autodiscover typescript service worker
+  // check typescript service worker: swDest must have js extension
   if (injectManifest && extname(filename) === '.ts' && fs.existsSync(swSrc)) {
     const useFilename = `${filename.substring(0, filename.lastIndexOf('.'))}.js`
     // we need to change filename on resolved options, it will be used to register the service worker:
@@ -61,7 +61,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
   } = options
 
   const basePath = resolveBathPath(base)
-  // autodiscover typescript with injectManifest
+  // check typescript service worker for injectManifest strategy
   const { swSrc, swDest, useFilename } = resolveSwPaths(
     strategies === 'injectManifest',
     root,
