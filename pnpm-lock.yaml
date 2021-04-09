@@ -50,7 +50,7 @@ importers:
       cross-env: ^7.0.3
       https-localhost: ^4.6.4
       typescript: ^4.2.3
-      vite: ^2.1.2
+      vite: ^2.1.5
       vite-plugin-pwa: workspace:*
       vue: ^3.0.7
     dependencies:
@@ -63,7 +63,7 @@ importers:
       cross-env: 7.0.3
       https-localhost: 4.6.4
       typescript: 4.2.3
-      vite: 2.1.2
+      vite: 2.1.5
       vite-plugin-pwa: link:../..
 
   examples/vue-basic-inject-manifest:
@@ -75,7 +75,7 @@ importers:
       cross-env: ^7.0.3
       https-localhost: ^4.6.4
       typescript: ^4.2.3
-      vite: ^2.1.2
+      vite: ^2.1.5
       vite-plugin-pwa: workspace:*
       vue: ^3.0.7
       workbox-precaching: ^6.1.2
@@ -89,7 +89,7 @@ importers:
       cross-env: 7.0.3
       https-localhost: 4.6.4
       typescript: 4.2.3
-      vite: 2.1.2
+      vite: 2.1.5
       vite-plugin-pwa: link:../..
       workbox-precaching: 6.1.2
 
@@ -102,7 +102,7 @@ importers:
       cross-env: ^7.0.3
       https-localhost: ^4.6.4
       typescript: ^4.2.3
-      vite: ^2.1.2
+      vite: ^2.1.5
       vite-plugin-pwa: workspace:*
       vue: ^3.0.7
       vue-router: ^4.0.5
@@ -117,7 +117,7 @@ importers:
       cross-env: 7.0.3
       https-localhost: 4.6.4
       typescript: 4.2.3
-      vite: 2.1.2
+      vite: 2.1.5
       vite-plugin-pwa: link:../..
 
 packages:
@@ -4212,6 +4212,7 @@ packages:
     hasBin: true
     optionalDependencies:
       fsevents: 2.3.2
+    dev: false
 
   /rollup/2.44.0:
     resolution: {integrity: sha512-rGSF4pLwvuaH/x4nAS+zP6UNn5YUDWf/TeEU5IoXSZKBbKRNTCI3qMnYXKZgrC0D2KzS2baiOZt1OlqhMu5rnQ==}
@@ -4829,19 +4830,6 @@ packages:
   /vary/1.1.2:
     resolution: {integrity: sha1-IpnwLG3tMNSllhsLn3RSShj2NPw=}
     engines: {node: '>= 0.8'}
-    dev: true
-
-  /vite/2.1.2:
-    resolution: {integrity: sha512-K96k5Nb1kywggFwZNGf/NQVZIrjMSvjebYWFIEQRu8AQWtzxatMF8/reExFXebmrfWAT3PTUk6l4zJBkpMtyVg==}
-    engines: {node: '>=12.0.0'}
-    hasBin: true
-    dependencies:
-      esbuild: 0.9.7
-      postcss: 8.2.6
-      resolve: 1.20.0
-      rollup: 2.42.4
-    optionalDependencies:
-      fsevents: 2.3.2
     dev: true
 
   /vite/2.1.5:
