@@ -169,6 +169,20 @@ If your TypeScript build step or IDE complain about not being able to find modul
 }
 ```
 
+### Testing service worker
+
+Since this plugin will not generate the service worker on `development`, you can test it on local following these steps:
+1) install `https-localhost` as a `dev` dependency: `npm i --save-dev https-localhost`
+2) add `https-preview` script to your `package.json`:
+```json
+"https-preview": "serve dist"
+```
+3) build your app and run `https-preview`: `npm run build && npm run https-preview`.
+
+First time you run it, it will ask you about installing a certificate (that will be generated for you),
+confirm installation on OS (keychain on macosx and certificate manager on windows) and open `https://localhost` 
+on browser.
+
 ## Sponsors
 
 This project is part of my <a href='https://github.com/antfu-sponsors'>Sponsor Program</a>
