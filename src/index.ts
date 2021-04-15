@@ -38,7 +38,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
             fileName: FILE_MANIFEST,
           }
         }
-        
+
         // if virtual register is requested, do not inject.
         if (options.injectRegister === 'auto')
           options.injectRegister = useImportRegister ? null : 'script'
