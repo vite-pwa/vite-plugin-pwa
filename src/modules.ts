@@ -28,21 +28,25 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   */
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const rollup = require('rollup') as typeof Rollup
-  // remove this plugin from the compilation: avoid infinite recursion
-  // remove also vite html transform and build to avoid rebuilding index.html
-  const excludedPluginNames = [
-    'vite-plugin-pwa',
-    'vite:build-html',
-    'vite:html',
+  const includedPluginNames = [
+    'alias',
+    'vite:dynamic-import-polyfill',
+    'vite:resolve',
+    'vite:esbuild',
+    'replace',
+    'vite:define',
+    'rollup-plugin-dynamic-import-variables',
+    'vite:esbuild-transpile',
+    'vite:terser',
   ]
-  const plugins = viteOptions.plugins.filter(p => !excludedPluginNames.includes(p.name)) as Plugin[]
+  const plugins = viteOptions.plugins.filter(p => includedPluginNames.includes(p.name)) as Plugin[]
   const bundle = await rollup.rollup({
     input: options.swSrc,
     plugins,
   })
   try {
     await bundle.write({
-      format: 'cjs',
+      format: 'es',
       exports: 'none',
       inlineDynamicImports: true,
       file: options.injectManifest.swDest,
