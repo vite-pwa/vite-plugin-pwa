@@ -99,7 +99,9 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
   }
 
   const workbox = Object.assign({}, defaultWorkbox, options.workbox || {})
-  const manifest = Object.assign({}, defaultManifest, options.manifest || {})
+  const manifest = typeof options.manifest === 'boolean' && !options.manifest
+    ? false
+    : Object.assign({}, defaultManifest, options.manifest || {})
   const injectManifest = Object.assign({}, defaultInjectManifest, options.injectManifest || {})
 
   if ((injectRegister === 'auto' || registerType == null) && registerType === 'autoUpdate') {

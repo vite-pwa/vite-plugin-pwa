@@ -70,7 +70,7 @@ export interface VitePWAOptions {
   /**
    * The manifest object
    */
-  manifest: Partial<ManifestOptions>
+  manifest: Partial<ManifestOptions> | false
   /**
    * The workbox object for `generateSW`
    */
