@@ -16,7 +16,7 @@ navigator.serviceWorker.register('${join(options.base, options.filename)}', { sc
 }
 
 export function injectServiceWorker(html: string, options: ResolvedVitePWAOptions) {
-  const manifest = `<link rel="manifest" href="${join(options.base, FILE_MANIFEST)}">`
+  const manifest = options.manifest ? `<link rel="manifest" href="${join(options.base, FILE_MANIFEST)}">` : ''
 
   if (options.injectRegister === 'inline') {
     return html.replace(

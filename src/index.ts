@@ -29,14 +29,16 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
         },
       },
       generateBundle(_, bundle) {
-        bundle[FILE_MANIFEST] = {
-          isAsset: true,
-          type: 'asset',
-          name: undefined,
-          source: `${JSON.stringify(options.manifest, null, options.minify ? 0 : 2)}\n`,
-          fileName: FILE_MANIFEST,
+        if (options.manifest) {
+          bundle[FILE_MANIFEST] = {
+            isAsset: true,
+            type: 'asset',
+            name: undefined,
+            source: `${JSON.stringify(options.manifest, null, options.minify ? 0 : 2)}\n`,
+            fileName: FILE_MANIFEST,
+          }
         }
-
+        
         // if virtual register is requested, do not inject.
         if (options.injectRegister === 'auto')
           options.injectRegister = useImportRegister ? null : 'script'
