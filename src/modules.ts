@@ -1,13 +1,12 @@
-import { join, resolve } from 'path'
+import { resolve } from 'path'
 import { promises as fs } from 'fs'
 import { injectManifest } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
 import Rollup from 'rollup'
 import type { ResolvedVitePWAOptions } from './types'
-import { slash } from './utils'
 
 export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 'build' | 'dev', source = 'register') {
-  const sw = slash(join(options.base, options.filename))
+  const sw = options.base + options.filename
   const scope = options.scope
 
   const content = await fs.readFile(resolve(__dirname, `client/${mode}/${source}.mjs`), 'utf-8')
