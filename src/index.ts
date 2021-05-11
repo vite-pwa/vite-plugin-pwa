@@ -16,7 +16,6 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   return [
     {
       name: 'vite-plugin-pwa',
-      enforce: 'post',
       apply: 'build',
       configResolved(config) {
         viteConfig = config
