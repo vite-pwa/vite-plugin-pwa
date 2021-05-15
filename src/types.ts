@@ -95,7 +95,8 @@ export interface VitePWAOptions {
   include: string | string[] | undefined
   /**
    * By default the icons listed on `manifest` options will be included
-   * on the `manifest` if present under Vite's `publicDir` option directory.
+   * on the service worker *precache* if present under Vite's `publicDir`
+   * option directory.
    */
   includeManifestIcons: true
 }
