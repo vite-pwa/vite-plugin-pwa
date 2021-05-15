@@ -146,7 +146,8 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     const publicDir = viteConfig.publicDir
     useInclude.forEach((p) => {
       addManifestEntry(
-        publicDir, resolve(
+        publicDir,
+        resolve(
           publicDir,
           p,
         ),
@@ -164,7 +165,8 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     Object.keys(icons).forEach((key) => {
       const icon = icons[key as any]
       addManifestEntry(
-        publicDir, resolve(
+        publicDir,
+        resolve(
           publicDir,
           icon.src as string,
         ),
