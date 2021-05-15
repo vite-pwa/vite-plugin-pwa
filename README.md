@@ -17,6 +17,7 @@
 - Prompt for new content refreshing 
 - Automatic reload when new content available
 - Advanced (injectManifest)  
+- Static assets handling
 - **WIP**: Icons generation for different dimensions
 
 ## Usage
@@ -146,6 +147,17 @@ To resolve service worker types, just add `WebWorker` to lib entry on your `tsco
 ```json
 "lib": ["ESNext", "DOM", "WebWorker"],
 ```
+
+### Static assets handling
+
+By default, all icons on `PWA Manifest` option found under Vite's `publicDir` option directory, will be included 
+in the service worker *precache*. You can disable this option using `includeManifestIcons: false`.
+
+You can also add another static assets such as `favicon`, `svg` and `fonts` using `include` option.
+You will need to add these static assets using the relative name to Vite's `publicDir` option directory.
+You don't need to configure `PWA Manifest icons` on `include` option.
+
+You can find an example written for a Vue 3 [here](./examples/vue-router/vite.config.ts#L16).
 
 ### Full config
 
