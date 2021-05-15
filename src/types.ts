@@ -90,12 +90,12 @@ export interface VitePWAOptions {
    *
    * You don't need to add `manifest` icons here, it will be auto included.
    *
-   * The `public` directory will be resolved from Vite's `publicDir` option.
+   * The `public` directory will be resolved from Vite's `publicDir` option directory.
    */
   include: string | string[] | undefined
   /**
    * By default the icons listed on `manifest` options will be included
-   * on the `manifest` if present on Vite's `publicDir`.
+   * on the `manifest` if present under Vite's `publicDir` option directory.
    */
   includeManifestIcons: true
 }
