@@ -1,7 +1,8 @@
+import crypto from 'crypto'
 import fs from 'fs'
-import { resolve, extname } from 'path'
+import { resolve, extname, relative } from 'path'
 import { ResolvedConfig } from 'vite'
-import { GenerateSWConfig, InjectManifestConfig } from 'workbox-build'
+import { GenerateSWConfig, InjectManifestConfig, ManifestEntry } from 'workbox-build'
 import { ManifestOptions, VitePWAOptions, ResolvedVitePWAOptions } from './types'
 
 export function resolveBathPath(base: string) {
@@ -40,6 +41,24 @@ function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, o
   }
 }
 
+function addManifestEntry(
+  publicDir: string,
+  path: string,
+  includeUrl: string[],
+  additionalManifestEntries: ManifestEntry[],
+) {
+  const url = relative(publicDir, path)
+  if (fs.existsSync(path) && !includeUrl.includes(url)) {
+    const cHash = crypto.createHash('MD5')
+    cHash.update(fs.readFileSync(path))
+    includeUrl.push(url)
+    additionalManifestEntries.push({
+      url,
+      revision: `${cHash.digest('hex')}`,
+    })
+  }
+}
+
 export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: ResolvedConfig): ResolvedVitePWAOptions {
   const root = viteConfig.root
   const pkg = fs.existsSync('package.json')
@@ -58,6 +77,8 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     strategies = 'generateSW',
     minify = true,
     base = viteConfig.base,
+    include = undefined,
+    includeManifestIcons = true,
   } = options
 
   const basePath = resolveBathPath(base)
@@ -109,6 +130,50 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     workbox.clientsClaim = true
   }
 
+  // include static assets
+  const includeUrl: string[] = []
+  if (include) {
+    workbox.additionalManifestEntries = workbox.additionalManifestEntries || []
+    if (workbox.additionalManifestEntries.length > 0)
+      includeUrl.push(...workbox.additionalManifestEntries.map(m => m.url))
+
+    const useInclude: string[] = []
+    if (Array.isArray(include))
+      useInclude.push(...include)
+    else
+      useInclude.push(include)
+
+    const publicDir = viteConfig.publicDir
+    useInclude.forEach((p) => {
+      addManifestEntry(
+        publicDir, resolve(
+          publicDir,
+          p,
+        ),
+        includeUrl,
+        workbox.additionalManifestEntries!,
+      )
+    })
+  }
+
+  // include manifest icons
+  if (options.manifest && options.manifest.icons && includeManifestIcons) {
+    workbox.additionalManifestEntries = workbox.additionalManifestEntries || []
+    const publicDir = viteConfig.publicDir
+    const icons = options.manifest.icons
+    Object.keys(icons).forEach((key) => {
+      const icon = icons[key as any]
+      addManifestEntry(
+        publicDir, resolve(
+          publicDir,
+          icon.src as string,
+        ),
+        includeUrl,
+        workbox.additionalManifestEntries!,
+      )
+    })
+  }
+
   return {
     base: basePath,
     mode,
@@ -125,5 +190,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     injectManifest,
     scope,
     minify,
+    include,
+    includeManifestIcons,
   }
 }
