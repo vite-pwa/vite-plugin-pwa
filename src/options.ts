@@ -76,6 +76,28 @@ function addWebManifestEntry(
   }
 }
 
+function resolveAdditionalManifestEntries(
+  useInjectManifest: boolean,
+  includeUrl: string[],
+  injectManifest: Partial<InjectManifestConfig>,
+  workbox: Partial<GenerateSWConfig>,
+): ManifestEntry[] {
+  let additionalManifestEntries: ManifestEntry[]
+
+  if (useInjectManifest)
+    additionalManifestEntries = (injectManifest.additionalManifestEntries = injectManifest.additionalManifestEntries || [])
+
+  else
+    additionalManifestEntries = (workbox.additionalManifestEntries = workbox.additionalManifestEntries || [])
+
+  if (additionalManifestEntries.length > 0) {
+    additionalManifestEntries
+      .filter(me => !includeUrl.includes(me.url))
+      .forEach(me => includeUrl.push(me.url))
+  }
+  return additionalManifestEntries
+}
+
 export function generateWebManifestFile(options: ResolvedVitePWAOptions): string {
   return `${JSON.stringify(options.manifest, null, options.minify ? 0 : 2)}\n`
 }
@@ -151,13 +173,20 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     workbox.clientsClaim = true
   }
 
+  // static assets handling
+  // we need to check inject manisfest strategy
+  // additionalManifestEntries will go to workbox entry
+  // or to injectManifest entry
+  const useInjectManifest = strategies === 'injectManifest'
   // include static assets
   const includeUrl: string[] = []
   if (include) {
-    workbox.additionalManifestEntries = workbox.additionalManifestEntries || []
-    if (workbox.additionalManifestEntries.length > 0)
-      includeUrl.push(...workbox.additionalManifestEntries.map(m => m.url))
-
+    const additionalManifestEntries = resolveAdditionalManifestEntries(
+      useInjectManifest,
+      includeUrl,
+      injectManifest,
+      workbox,
+    )
     const useInclude: string[] = []
     if (Array.isArray(include))
       useInclude.push(...include)
@@ -173,7 +202,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
           p,
         ),
         includeUrl,
-        workbox.additionalManifestEntries!,
+        additionalManifestEntries,
       )
     })
   }
@@ -200,7 +229,12 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
 
   // include manifest icons and manifest.webmanifest
   if (options.manifest) {
-    workbox.additionalManifestEntries = workbox.additionalManifestEntries || []
+    const additionalManifestEntries = resolveAdditionalManifestEntries(
+      useInjectManifest,
+      includeUrl,
+      injectManifest,
+      workbox,
+    )
     // icons
     if (options.manifest.icons && includeManifestIcons) {
       const publicDir = viteConfig.publicDir
@@ -214,7 +248,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
             icon.src as string,
           ),
           includeUrl,
-          workbox.additionalManifestEntries!,
+          additionalManifestEntries,
         )
       })
     }
@@ -222,7 +256,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     addWebManifestEntry(
       resolvedVitePWAOptions,
       includeUrl,
-      workbox.additionalManifestEntries!,
+      additionalManifestEntries,
     )
   }
 
