@@ -26,7 +26,7 @@ const config: UserConfig = {
             type: 'image/png',
           },
           {
-            src: 'pwa-512x512.png',
+            src: '/pwa-512x512.png', // <== don't remove slash, for testing
             sizes: '512x512',
             type: 'image/png',
           },

@@ -12,10 +12,17 @@ function addManifestEntry(
   includeUrl: string[],
   additionalManifestEntries: ManifestEntry[],
 ) {
-  const url = relative(publicDir, path)
-  if (!includeUrl.includes(url) && fs.existsSync(path)) {
+  let usePath
+  // chek only for relative paths
+  if (path.startsWith('/'))
+    usePath = resolve(publicDir, path.substring(1))
+  else
+    usePath = resolve(publicDir, path)
+
+  const url = relative(publicDir, usePath)
+  if (!includeUrl.includes(url) && fs.existsSync(usePath)) {
     const cHash = crypto.createHash('MD5')
-    cHash.update(fs.readFileSync(path))
+    cHash.update(fs.readFileSync(usePath))
     additionalManifestEntries.push({
       url,
       revision: `${cHash.digest('hex')}`,
@@ -99,10 +106,7 @@ export function configureStaticAssets(
     useInclude.forEach((p) => {
       addManifestEntry(
         publicDir,
-        resolve(
-          publicDir,
-          p,
-        ),
+        p,
         includeUrl,
         additionalManifestEntries,
       )
@@ -124,10 +128,7 @@ export function configureStaticAssets(
         const icon = icons[key as any]
         addManifestEntry(
           publicDir,
-          resolve(
-            publicDir,
-            icon.src as string,
-          ),
+          icon.src as string,
           includeUrl,
           additionalManifestEntries,
         )
