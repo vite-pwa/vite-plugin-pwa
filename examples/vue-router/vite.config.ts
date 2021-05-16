@@ -14,14 +14,14 @@ const config: UserConfig = {
       mode: 'development',
       base: '/',
       registerType: process.env.CLAIMS === 'true' ? 'autoUpdate' : undefined,
-      include: ['favicon.svg'],
+      include: ['favicon.svg'], // <== don't add slash, for testing
       manifest: {
         name: 'PWA Router',
         short_name: 'PWA Router',
         theme_color: '#ffffff',
         icons: [
           {
-            src: 'pwa-192x192.png',
+            src: 'pwa-192x192.png', // <== don't add slash, for testing
             sizes: '192x192',
             type: 'image/png',
           },
@@ -31,7 +31,7 @@ const config: UserConfig = {
             type: 'image/png',
           },
           {
-            src: 'pwa-512x512.png',
+            src: 'pwa-512x512.png', // <== don't add slash, for testing
             sizes: '512x512',
             type: 'image/png',
             purpose: 'any maskable',
