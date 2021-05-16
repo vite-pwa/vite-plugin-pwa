@@ -121,7 +121,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     includeManifestIcons,
   }
 
-  manifest && configureStaticAssets(resolvedVitePWAOptions, viteConfig)
+  configureStaticAssets(resolvedVitePWAOptions, viteConfig)
 
   return resolvedVitePWAOptions
 }
