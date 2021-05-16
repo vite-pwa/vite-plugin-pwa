@@ -16,6 +16,30 @@ const config: UserConfig = {
       filename: 'sw.ts',
       base: '/',
       strategies: 'injectManifest',
+      include: ['favicon.svg'],
+      manifest: {
+        name: 'PWA Inject Manifest',
+        short_name: 'PWA Inject',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: 'pwa-192x192.png',
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512x512.png',
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable',
+          },
+        ],
+      },
     }),
     replace({
       __DATE__: new Date().toISOString(),
