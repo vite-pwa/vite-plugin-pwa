@@ -4,6 +4,7 @@ import { resolve, extname, relative } from 'path'
 import { ResolvedConfig } from 'vite'
 import { GenerateSWConfig, InjectManifestConfig, ManifestEntry } from 'workbox-build'
 import { ManifestOptions, VitePWAOptions, ResolvedVitePWAOptions } from './types'
+import { FILE_MANIFEST } from './constants'
 
 export function resolveBathPath(base: string) {
   if (isAbsolute(base))
@@ -51,12 +52,32 @@ function addManifestEntry(
   if (!includeUrl.includes(url) && fs.existsSync(path)) {
     const cHash = crypto.createHash('MD5')
     cHash.update(fs.readFileSync(path))
-    includeUrl.push(url)
     additionalManifestEntries.push({
       url,
       revision: `${cHash.digest('hex')}`,
     })
+    includeUrl.push(url)
   }
+}
+
+function addWebManifestEntry(
+  options: ResolvedVitePWAOptions,
+  includeUrl: string[],
+  additionalManifestEntries: ManifestEntry[],
+) {
+  if (!includeUrl.includes(FILE_MANIFEST)) {
+    const cHash = crypto.createHash('MD5')
+    cHash.update(generateWebManifestFile(options))
+    additionalManifestEntries.push({
+      url: FILE_MANIFEST,
+      revision: `${cHash.digest('hex')}`,
+    })
+    includeUrl.push(FILE_MANIFEST)
+  }
+}
+
+export function generateWebManifestFile(options: ResolvedVitePWAOptions): string {
+  return `${JSON.stringify(options.manifest, null, options.minify ? 0 : 2)}\n`
 }
 
 export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: ResolvedConfig): ResolvedVitePWAOptions {
@@ -157,26 +178,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     })
   }
 
-  // include manifest icons
-  if (options.manifest && options.manifest.icons && includeManifestIcons) {
-    workbox.additionalManifestEntries = workbox.additionalManifestEntries || []
-    const publicDir = viteConfig.publicDir
-    const icons = options.manifest.icons
-    Object.keys(icons).forEach((key) => {
-      const icon = icons[key as any]
-      addManifestEntry(
-        publicDir,
-        resolve(
-          publicDir,
-          icon.src as string,
-        ),
-        includeUrl,
-        workbox.additionalManifestEntries!,
-      )
-    })
-  }
-
-  return {
+  const resolvedVitePWAOptions: ResolvedVitePWAOptions = {
     base: basePath,
     mode,
     swSrc,
@@ -195,4 +197,34 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     include,
     includeManifestIcons,
   }
+
+  // include manifest icons and manifest.webmanifest
+  if (options.manifest) {
+    workbox.additionalManifestEntries = workbox.additionalManifestEntries || []
+    // icons
+    if (options.manifest.icons && includeManifestIcons) {
+      const publicDir = viteConfig.publicDir
+      const icons = options.manifest.icons
+      Object.keys(icons).forEach((key) => {
+        const icon = icons[key as any]
+        addManifestEntry(
+          publicDir,
+          resolve(
+            publicDir,
+            icon.src as string,
+          ),
+          includeUrl,
+          workbox.additionalManifestEntries!,
+        )
+      })
+    }
+    // manifest.webmanifest
+    addWebManifestEntry(
+      resolvedVitePWAOptions,
+      includeUrl,
+      workbox.additionalManifestEntries!,
+    )
+  }
+
+  return resolvedVitePWAOptions
 }

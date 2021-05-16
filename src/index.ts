@@ -5,7 +5,7 @@ import { generateSW } from 'workbox-build'
 import { generateSimpleSWRegister, injectServiceWorker } from './html'
 import { generateInjectManifest, generateRegisterSW } from './modules'
 import { ResolvedVitePWAOptions, VitePWAOptions } from './types'
-import { resolveOptions } from './options'
+import { resolveOptions, generateWebManifestFile } from './options'
 import { FILE_MANIFEST, FILE_SW_REGISTER, VIRTUAL_MODULES, VIRTUAL_MODULES_MAP, VIRTUAL_MODULES_RESOLVE_PREFIX } from './constants'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
@@ -34,7 +34,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
             isAsset: true,
             type: 'asset',
             name: undefined,
-            source: `${JSON.stringify(options.manifest, null, options.minify ? 0 : 2)}\n`,
+            source: generateWebManifestFile(options),
             fileName: FILE_MANIFEST,
           }
         }
