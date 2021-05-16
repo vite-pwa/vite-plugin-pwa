@@ -48,7 +48,7 @@ function addManifestEntry(
   additionalManifestEntries: ManifestEntry[],
 ) {
   const url = relative(publicDir, path)
-  if (fs.existsSync(path) && !includeUrl.includes(url)) {
+  if (!includeUrl.includes(url) && fs.existsSync(path)) {
     const cHash = crypto.createHash('MD5')
     cHash.update(fs.readFileSync(path))
     includeUrl.push(url)
