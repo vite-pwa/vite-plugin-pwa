@@ -16,7 +16,7 @@ const config: UserConfig = {
       filename: 'sw.ts',
       base: '/',
       strategies: 'injectManifest',
-      include: ['/favicon.svg'], // <== don't remove slash, for testing purposes
+      includeAssets: ['/favicon.svg'], // <== don't remove slash, for testing purposes
       manifest: {
         name: 'PWA Inject Manifest',
         short_name: 'PWA Inject',

@@ -48,7 +48,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     strategies = 'generateSW',
     minify = true,
     base = viteConfig.base,
-    include = undefined,
+    includeAssets = undefined,
     includeManifestIcons = true,
   } = options
 
@@ -117,7 +117,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     injectManifest,
     scope,
     minify,
-    include,
+    includeAssets,
     includeManifestIcons,
   }
 

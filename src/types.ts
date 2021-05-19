@@ -92,7 +92,7 @@ export interface VitePWAOptions {
    *
    * The `public` directory will be resolved from Vite's `publicDir` option directory.
    */
-  include: string | string[] | undefined
+  includeAssets: string | string[] | undefined
   /**
    * By default the icons listed on `manifest` option will be included
    * on the service worker *precache* if present under Vite's `publicDir`
