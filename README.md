@@ -160,7 +160,7 @@ You don't need to configure `PWA Manifest icons` on `includeAssets` option.
 
 You can find an example written for a Vue 3 [here](./examples/vue-router/vite.config.ts#L16).
 
-If you need to include other assets that are not under Vite's `publicDir`option directory, you can use the 
+If you need to include other assets that are not under Vite's `publicDir` option directory, you can use the 
 `globPatterns` parameter of [workbox](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.generateSW) 
 or [injectManifest](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.injectManifest)
 plugin options:
