@@ -19,9 +19,9 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       name: 'vite-plugin-pwa',
       enforce: 'post',
       apply: 'build',
-      configResolved(config) {
+      async configResolved(config) {
         viteConfig = config
-        options = resolveOptions(userOptions, viteConfig)
+        options = await resolveOptions(userOptions, viteConfig)
       },
       transformIndexHtml: {
         enforce: 'post',
@@ -65,9 +65,9 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
     },
     {
       name: 'vite-plugin-pwa:virtual',
-      configResolved(config) {
+      async configResolved(config) {
         viteConfig = config
-        options = resolveOptions(userOptions, viteConfig)
+        options = await resolveOptions(userOptions, viteConfig)
       },
       resolveId(id) {
         return VIRTUAL_MODULES.includes(id) ? VIRTUAL_MODULES_RESOLVE_PREFIX + id : undefined

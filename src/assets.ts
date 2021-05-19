@@ -1,75 +1,45 @@
-import { relative, resolve } from 'path'
+import { resolve } from 'path'
 import fs from 'fs'
 import crypto from 'crypto'
+import fg from 'fast-glob'
 import { GenerateSWConfig, InjectManifestConfig, ManifestEntry } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
 import { ResolvedVitePWAOptions } from './types'
 import { FILE_MANIFEST } from './constants'
 
-function addManifestEntry(
+function buildManifestEntry(
   publicDir: string,
-  path: string,
-  includeUrl: string[],
-  additionalManifestEntries: ManifestEntry[],
-) {
-  let usePath
-  // chek only for relative paths
-  if (path.startsWith('/'))
-    usePath = resolve(publicDir, path.substring(1))
-  else
-    usePath = resolve(publicDir, path)
-
-  const url = relative(publicDir, usePath)
-  if (!includeUrl.includes(url) && fs.existsSync(usePath)) {
-    const cHash = crypto.createHash('MD5')
-    cHash.update(fs.readFileSync(usePath))
-    additionalManifestEntries.push({
-      url,
-      revision: `${cHash.digest('hex')}`,
+  url: string,
+): Promise<ManifestEntry> {
+  const cHash = crypto.createHash('MD5')
+  const stream = fs.createReadStream(resolve(publicDir, url))
+  return new Promise((resolve, reject) => {
+    stream.on('error', (err) => {
+      reject(err)
     })
-    includeUrl.push(url)
-  }
+    stream.on('data', (chunk) => {
+      cHash.update(chunk)
+    })
+    stream.on('end', () => {
+      return resolve({
+        url,
+        revision: `${cHash.digest('hex')}`,
+      })
+    })
+  })
 }
 
-function addWebManifestEntry(
-  options: ResolvedVitePWAOptions,
-  includeUrl: string[],
-  additionalManifestEntries: ManifestEntry[],
-) {
-  if (!includeUrl.includes(FILE_MANIFEST)) {
-    const cHash = crypto.createHash('MD5')
-    cHash.update(generateWebManifestFile(options))
-    additionalManifestEntries.push({
-      url: FILE_MANIFEST,
-      revision: `${cHash.digest('hex')}`,
-    })
-    includeUrl.push(FILE_MANIFEST)
-  }
-}
-
-function resolveAdditionalManifestEntries(
+function lookupAdditionalManifestEntries(
   useInjectManifest: boolean,
-  includeUrl: string[],
   injectManifest: Partial<InjectManifestConfig>,
   workbox: Partial<GenerateSWConfig>,
 ): ManifestEntry[] {
-  let additionalManifestEntries: ManifestEntry[]
-
-  if (useInjectManifest)
-    additionalManifestEntries = (injectManifest.additionalManifestEntries = injectManifest.additionalManifestEntries || [])
-
-  else
-    additionalManifestEntries = (workbox.additionalManifestEntries = workbox.additionalManifestEntries || [])
-
-  if (additionalManifestEntries.length > 0) {
-    additionalManifestEntries
-      .filter(me => !includeUrl.includes(me.url))
-      .forEach(me => includeUrl.push(me.url))
-  }
-  return additionalManifestEntries
+  return useInjectManifest
+    ? injectManifest.additionalManifestEntries || []
+    : workbox.additionalManifestEntries || []
 }
 
-export function configureStaticAssets(
+export async function configureStaticAssets(
   resolvedVitePWAOptions: ResolvedVitePWAOptions,
   viteConfig: ResolvedConfig,
 ) {
@@ -82,64 +52,63 @@ export function configureStaticAssets(
     includeManifestIcons,
   } = resolvedVitePWAOptions
 
-  // static assets handling
-  // we need to check inject manisfest strategy
-  // additionalManifestEntries will go to workbox entry
-  // or to injectManifest entry
-  const { publicDir } = viteConfig
   const useInjectManifest = strategies === 'injectManifest'
-  // include static assets
-  const includeUrl: string[] = []
+  const { publicDir } = viteConfig
+  const globs: string[] = []
+  const manifestEntries: ManifestEntry[] = lookupAdditionalManifestEntries(
+    useInjectManifest,
+    injectManifest,
+    workbox,
+  )
   if (includeAssets) {
-    const additionalManifestEntries = resolveAdditionalManifestEntries(
-      useInjectManifest,
-      includeUrl,
-      injectManifest,
-      workbox,
-    )
-    const useInclude: string[] = []
     if (Array.isArray(includeAssets))
-      useInclude.push(...includeAssets)
+      globs.push(...includeAssets)
     else
-      useInclude.push(includeAssets)
-
-    useInclude.forEach((p) => {
-      addManifestEntry(
-        publicDir,
-        p,
-        includeUrl,
-        additionalManifestEntries,
-      )
+      globs.push(includeAssets)
+  }
+  if (includeManifestIcons && manifest && manifest.icons) {
+    const icons = manifest.icons
+    Object.keys(icons).forEach((key) => {
+      const icon = icons[key as any]
+      globs.push(icon.src as string)
     })
   }
-
-  // include manifest icons and manifest.webmanifest
-  if (manifest) {
-    const additionalManifestEntries = resolveAdditionalManifestEntries(
-      useInjectManifest,
-      includeUrl,
-      injectManifest,
-      workbox,
+  if (globs.length > 0) {
+    // we need to make icons relative, we can have for example icon entries with: /pwa.png
+    // fast-glob will not resolve absolute paths
+    let assets = await fg(
+      globs.map((g) => {
+        return g.startsWith('/') ? g.substring(1) : g
+      }), {
+        cwd: publicDir,
+        onlyFiles: true,
+        unique: true,
+      },
     )
-    // icons
-    if (manifest.icons && includeManifestIcons) {
-      const icons = manifest.icons
-      Object.keys(icons).forEach((key) => {
-        const icon = icons[key as any]
-        addManifestEntry(
-          publicDir,
-          icon.src as string,
-          includeUrl,
-          additionalManifestEntries,
-        )
-      })
+    // we also need to remove from the list existing included by the user
+    if (manifestEntries.length > 0) {
+      const included = manifestEntries.map(me => me.url)
+      assets = assets.filter(a => !included.includes(a))
     }
-    // manifest.webmanifest
-    addWebManifestEntry(
-      resolvedVitePWAOptions,
-      includeUrl,
-      additionalManifestEntries,
-    )
+    const assetsEntries = await Promise.all(assets.map((a) => {
+      return buildManifestEntry(publicDir, a)
+    }))
+    manifestEntries.push(...assetsEntries)
+  }
+  if (manifest) {
+    const cHash = crypto.createHash('MD5')
+    cHash.update(generateWebManifestFile(resolvedVitePWAOptions))
+    manifestEntries.push({
+      url: FILE_MANIFEST,
+      revision: `${cHash.digest('hex')}`,
+    })
+  }
+  if (manifestEntries.length > 0) {
+    if (useInjectManifest)
+      injectManifest.additionalManifestEntries = manifestEntries
+
+    else
+      workbox.additionalManifestEntries = manifestEntries
   }
 }
 
