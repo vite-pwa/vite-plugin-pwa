@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve as resolveFs } from 'path'
 import fs from 'fs'
 import crypto from 'crypto'
 import fg from 'fast-glob'
@@ -11,9 +11,9 @@ function buildManifestEntry(
   publicDir: string,
   url: string,
 ): Promise<ManifestEntry> {
-  const cHash = crypto.createHash('MD5')
-  const stream = fs.createReadStream(resolve(publicDir, url))
   return new Promise((resolve, reject) => {
+    const cHash = crypto.createHash('MD5')
+    const stream = fs.createReadStream(resolveFs(publicDir, url))
     stream.on('error', (err) => {
       reject(err)
     })
