@@ -30,7 +30,7 @@ function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, o
   }
 }
 
-export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: ResolvedConfig): ResolvedVitePWAOptions {
+export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: ResolvedConfig): Promise<ResolvedVitePWAOptions> {
   const root = viteConfig.root
   const pkg = fs.existsSync('package.json')
     ? JSON.parse(fs.readFileSync('package.json', 'utf-8'))
@@ -121,7 +121,7 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     includeManifestIcons,
   }
 
-  configureStaticAssets(resolvedVitePWAOptions, viteConfig)
+  await configureStaticAssets(resolvedVitePWAOptions, viteConfig)
 
   return resolvedVitePWAOptions
 }
