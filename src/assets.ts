@@ -78,7 +78,7 @@ export function configureStaticAssets(
     strategies,
     injectManifest,
     workbox,
-    include,
+    includeAssets,
     includeManifestIcons,
   } = resolvedVitePWAOptions
 
@@ -90,7 +90,7 @@ export function configureStaticAssets(
   const useInjectManifest = strategies === 'injectManifest'
   // include static assets
   const includeUrl: string[] = []
-  if (include) {
+  if (includeAssets) {
     const additionalManifestEntries = resolveAdditionalManifestEntries(
       useInjectManifest,
       includeUrl,
@@ -98,10 +98,10 @@ export function configureStaticAssets(
       workbox,
     )
     const useInclude: string[] = []
-    if (Array.isArray(include))
-      useInclude.push(...include)
+    if (Array.isArray(includeAssets))
+      useInclude.push(...includeAssets)
     else
-      useInclude.push(include)
+      useInclude.push(includeAssets)
 
     useInclude.forEach((p) => {
       addManifestEntry(

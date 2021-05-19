@@ -14,7 +14,7 @@ const config: UserConfig = {
       mode: 'development',
       base: '/',
       registerType: process.env.CLAIMS === 'true' ? 'autoUpdate' : undefined,
-      include: ['favicon.svg'], // <== don't add slash, for testing
+      includeAssets: ['favicon.svg'], // <== don't add slash, for testing
       manifest: {
         name: 'PWA Router',
         short_name: 'PWA Router',
