@@ -1,4 +1,4 @@
-import { join } from 'path'
+import { resolve } from 'path'
 import { existsSync } from 'fs'
 import type { Plugin, ResolvedConfig } from 'vite'
 import { generateSW } from 'workbox-build'
@@ -44,7 +44,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
         if (options.injectRegister === 'auto')
           options.injectRegister = useImportRegister ? null : 'script'
 
-        if (options.injectRegister === 'script' && !existsSync(join(viteConfig.root, 'public', FILE_SW_REGISTER))) {
+        if (options.injectRegister === 'script' && !existsSync(resolve(viteConfig.publicDir, FILE_SW_REGISTER))) {
           bundle[FILE_SW_REGISTER] = {
             isAsset: true,
             type: 'asset',
