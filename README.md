@@ -156,7 +156,7 @@ in the service worker *precache*. You can disable this option using `includeMani
 You can also add another static assets such as `favicon`, `svg` and `font` files using `includeAssets` option.
 The `includeAssets` option will be resolved using `fast-glob` found under Vite's `publicDir` option directory, and so
 you can use regular expressions to include those assets, for example: `includeAssets: ['fonts/*.ttf', 'images/*.png']`.
-You don't need to configure `PWA Manifest icons` on `include` option.
+You don't need to configure `PWA Manifest icons` on `includeAssets` option.
 
 You can find an example written for a Vue 3 [here](./examples/vue-router/vite.config.ts#L16).
 
