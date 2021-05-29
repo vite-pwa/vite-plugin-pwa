@@ -190,7 +190,7 @@ export interface ManifestOptions {
    * @default []
    */
   categories: []string
-    /**
+  /**
    * @default ''
    */
   iarc_rating_id: string
