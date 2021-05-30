@@ -96,13 +96,6 @@ export function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: Res
     background_color: '#ffffff',
     lang: 'en',
     scope,
-    related_applications: [],
-    prefer_related_applications: false,
-    protocol_handlers: [],
-    shortcuts: [],
-    screenshots: [],
-    categories: [],
-    iarc_rating_id,    
   }
 
   const workbox = Object.assign({}, defaultWorkbox, options.workbox || {})
