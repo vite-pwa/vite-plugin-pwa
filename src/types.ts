@@ -194,5 +194,4 @@ export interface ManifestOptions {
    * @default ''
    */
   iarc_rating_id: string
-  [key: string]: any
 }
