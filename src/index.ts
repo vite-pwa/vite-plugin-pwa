@@ -62,6 +62,10 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
             await generateSW(options.workbox)
         }
       },
+      async buildEnd(error) {
+        if (error)
+          throw error
+      },
     },
     {
       name: 'vite-plugin-pwa:virtual',
