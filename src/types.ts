@@ -161,4 +161,51 @@ export interface ManifestOptions {
    * @default A combination of `routerBase` and `options.build.publicPath`
    */
   publicPath: string
+  /**
+   * @default []
+   */
+  related_applications: {
+    platform: string,
+    url: string,
+    id?: string,
+  }[]
+  /**
+   * @default false
+   */
+  prefer_related_applications: boolean
+  /**
+   * @default []
+   */
+  protocol_handlers: {
+    protocol: string,
+    url: string,
+  }[]
+  /**
+   * @default []
+   */
+  shortcuts: {
+    name: string,
+    short_name?: string,
+    url: string,
+    description?: string,
+    icons: []string,
+  }[]
+  /**
+   * @default []
+   */
+  screenshots: {
+    src: string,
+    sizes: string,
+    label?: string,
+    platform?: 'narrow' | 'wide' | 'android' | 'ios' | 'kaios' | 'macos' | 'windows' | 'windows10x' | 'chrome_web_store' | 'play' | 'itunes' | 'microsoft-inbox' | 'microsoft-store' | string
+    type?: string,
+  }[]
+  /**
+   * @default []
+   */
+  categories: []string
+  /**
+   * @default ''
+   */
+  iarc_rating_id: string
 }
