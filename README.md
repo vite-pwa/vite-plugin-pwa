@@ -59,7 +59,7 @@ VitePWA({
 ![](https://user-images.githubusercontent.com/11247099/111190584-330cf880-85f2-11eb-8dad-20ddb84456cf.png)
 
 **Warning**: this is the default option when `strategies` and `registerType` are not configured.
-In order for the service worker to be included in the `index.html` page, you must invoke the `registerSW` method
+In order for the service worker to be registered, you must invoke the `registerSW` method
 from the `virtual:pwa-register` module.
 
 ```ts
@@ -102,7 +102,7 @@ if (typeof window !== 'undefined') {
 
 ### Automatic reload when new content available
 
-**Warning**: in order for the service worker to be included in the `index.html` page, you must invoke the` registerSW`
+**Warning**: in order for the service worker to be registered, you must invoke the` registerSW`
 method from the `virtual:pwa-register` module.
 
 With this option, once the service worker detects new content available, then it will update caches and 
