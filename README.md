@@ -199,12 +199,22 @@ To resolve service worker types, just add `WebWorker` to lib entry on your `tsco
 ### Network first strategy
 
 We have created a `workbox-recipe` to be used with `network first strategy`, and so you don't need to create it using
-`injectManifest`.
+`injectManifest`. 
 
-By default, the service worker will use [Custom Cache Network Race Strategy](https://developers.google.com/web/tools/workbox/modules/workbox-strategies#custom_cache_network_race_strategy).
-You can see an article [here](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race).
+There are 2 available cache strategies:
+- [Custom Cache Network Race Strategy](https://developers.google.com/web/tools/workbox/modules/workbox-strategies#custom_cache_network_race_strategy)
+- `Network First Cache Strategy`
 
-You can disable `Custom Cache Network Race Strategy` using `networkFirst: { raceStrategy: false }`.
+By default, the service worker will use `Custom Cache Network Race Strategy`.
+You can see an explanation [here](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race).
+
+To configure `Network First Cache Strategy` instead `Custom Cache Network Race Strategy`: 
+```ts
+VitePWA({
+  strategies: 'networkFirst',
+  networkFirst: { raceStrategy: false }
+})
+````
 
 You can find an example written for a Vue 3 [here](./examples/vue-networkfirst).
 
@@ -213,7 +223,7 @@ You can find an example written for a Vue 3 [here](./examples/vue-networkfirst).
 ```ts
 VitePWA({
   strategies: 'networkFirst',
-  networkFirst: { /* options */ }  
+  networkFirst: { /* options */ },  
   manifest: {
     // content of manifest
   }
