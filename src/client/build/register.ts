@@ -7,6 +7,12 @@ const autoUpdateMode = '__SW_AUTO_UPDATE__'
 // @ts-ignore
 const auto = autoUpdateMode === 'true'
 
+// __SW_NETWORK_FIRST__ will be replaced by virtual module
+const networkFirstMode = '__SW_NETWORK_FIRST__'
+
+// @ts-ignore
+const networkFirst = networkFirstMode === 'true'
+
 export type { RegisterSWOptions }
 
 export function registerSW(options: RegisterSWOptions = {}) {
@@ -19,25 +25,28 @@ export function registerSW(options: RegisterSWOptions = {}) {
   let wb: Workbox | undefined
   let registration: ServiceWorkerRegistration | undefined
 
+  const sendSkipWaiting = async() => {
+    if (registration && registration.waiting) {
+      // Send a message to the waiting service worker,
+      // instructing it to activate.
+      // Note: for this to work, you have to add a message
+      // listener in your service worker. See below.
+      await messageSW(registration.waiting, { type: 'SKIP_WAITING' })
+    }
+  }
+
   const updateServiceWorker = async(reloadPage = true) => {
-    if (!auto) {
+    if (!auto && !networkFirst) {
       // Assuming the user accepted the update, set up a listener
       // that will reload the page as soon as the previously waiting
       // service worker has taken control.
-      if (reloadPage) {
+      if (reloadPage && !networkFirst) {
         wb?.addEventListener('controlling', (event) => {
           if (event.isUpdate)
             window.location.reload()
         })
       }
-
-      if (registration && registration.waiting) {
-        // Send a message to the waiting service worker,
-        // instructing it to activate.
-        // Note: for this to work, you have to add a message
-        // listener in your service worker. See below.
-        await messageSW(registration.waiting, { type: 'SKIP_WAITING' })
-      }
+      await sendSkipWaiting()
     }
   }
 
@@ -50,12 +59,19 @@ export function registerSW(options: RegisterSWOptions = {}) {
       // event.isUpdate will be true if another version of the service
       // worker was controlling the page when this version was registered.
       if (event.isUpdate)
-        auto && window.location.reload()
+        auto && !networkFirst && window.location.reload()
       else
         onOfflineReady?.()
     })
 
-    if (!auto) {
+    if (networkFirst) {
+      // Add an event listener to detect when the registered
+      // service worker has installed but is waiting to activate.
+      wb.addEventListener('waiting', sendSkipWaiting)
+      // @ts-ignore
+      wb.addEventListener('externalwaiting', sendSkipWaiting)
+    }
+    else if (!auto) {
       const showSkipWaitingPrompt = () => {
         // \`event.wasWaitingBeforeRegister\` will be false if this is
         // the first time the updated service worker is waiting.

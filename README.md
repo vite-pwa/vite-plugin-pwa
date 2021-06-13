@@ -17,6 +17,7 @@
 - Prompt for new content refreshing 
 - Automatic reload when new content available
 - Advanced (injectManifest)  
+- Network first strategy
 - Static assets handling
 
 ## Usage
@@ -193,6 +194,64 @@ You can use Typescript to build your service worker, you can find an example wri
 To resolve service worker types, just add `WebWorker` to lib entry on your `tsconfig.json` file, for example:
 ```json
 "lib": ["ESNext", "DOM", "WebWorker"],
+```
+
+### Network first strategy
+
+We have created a `workbox-recipe` to be used with `network first strategy`, and so you don't need to create it using
+`injectManifest`.
+
+By default, the service worker will use [Custom Cache Network Race Strategy](https://developers.google.com/web/tools/workbox/modules/workbox-strategies#custom_cache_network_race_strategy).
+You can see an article [here](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race).
+
+You can disable `Custom Cache Network Race Strategy` using `networkFirst: { raceStrategy: false }`.
+
+You can find an example written for a Vue 3 [here](./examples/vue-networkfirst).
+
+#### Configuration
+
+```ts
+VitePWA({
+  strategies: 'networkFirst',
+  networkFirst: { /* options */ }  
+  manifest: {
+    // content of manifest
+  }
+})
+```
+
+#### Runtime
+
+This will be only necessary when you need to notify the user that your application is `ready to work offline`.
+
+**Warning**: in order for the service worker to be registered, you must invoke the` registerSW`
+method from the `virtual:pwa-register` module if you are using it.
+
+```ts
+// main.ts
+import { registerSW } from 'virtual:pwa-register'
+
+const updateSW = registerSW({
+  onOfflineReady() {
+    // show a ready to work offline to user
+  },
+})
+```
+
+#### SSR/SSG
+
+If you are using `SSR/SSG`, you need to import `virtual:pwa-register` module using dynamic import and checking if
+`window` is not `undefined`:
+
+```ts
+// pwa.ts
+import { registerSW } from 'virtual:pwa-register'
+registerSW({ /* options */})
+
+// main.ts
+if (typeof window !== 'undefined') {
+    import('./pwa')
+}
 ```
 
 ### Static assets handling

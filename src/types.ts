@@ -26,7 +26,7 @@ export interface VitePWAOptions {
   /**
    * @default 'generateSW'
    */
-  strategies?: 'generateSW' | 'injectManifest'
+  strategies?: 'generateSW' | 'injectManifest' | 'networkFirst'
   /**
    * The scope to register the Service Worker
    *
@@ -99,6 +99,29 @@ export interface VitePWAOptions {
    * option directory.
    */
   includeManifestIcons: true
+  /**
+   * Configuration for `networkFirst` strategy.
+   * Keep it here if in future we need to extend its configuration.
+   */
+  networkFirst?: {
+    /**
+     * Should we use `Custom Cache Network Race Strategy` or `NetworkFirst`?
+     * @default true
+     */
+    raceStrategy?: boolean
+    /**
+     * @default false
+     */
+    debug?: boolean
+    /**
+     * @default 'same-origin'
+     */
+    credentials?: RequestCredentials
+    /**
+     * Only for `NetworkFirst`.
+     */
+    networkTimeoutSeconds?: number
+  }
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
