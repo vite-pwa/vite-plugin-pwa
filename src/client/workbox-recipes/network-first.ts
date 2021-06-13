@@ -4,7 +4,8 @@ import { registerRoute, setCatchHandler, setDefaultHandler } from 'workbox-routi
 import {
   NetworkFirst,
   NetworkOnly,
-  Strategy, StrategyHandler,
+  Strategy,
+  StrategyHandler,
 } from 'workbox-strategies'
 import { ManifestEntry } from 'workbox-build'
 
