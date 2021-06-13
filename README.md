@@ -18,7 +18,6 @@
 - Automatic reload when new content available
 - Advanced (injectManifest)  
 - Static assets handling
-- **WIP**: Icons generation for different dimensions
 
 ## Usage
 
