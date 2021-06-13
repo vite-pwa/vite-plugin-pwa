@@ -29,7 +29,6 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   const rollup = require('rollup') as typeof Rollup
   const includedPluginNames = [
     'alias',
-    'vite:dynamic-import-polyfill',
     'vite:resolve',
     'vite:esbuild',
     'replace',
