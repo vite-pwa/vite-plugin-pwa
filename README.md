@@ -198,7 +198,7 @@ To resolve service worker types, just add `WebWorker` to lib entry on your `tsco
 
 ### Network first strategy
 
-We have created a `workbox-recipe` to be used with `network first strategy`, and so you don't need to create it using
+We have created a service worker to be used with `network first strategy`, and so you don't need to create it using
 `injectManifest`. 
 
 There are 2 available cache strategies:
