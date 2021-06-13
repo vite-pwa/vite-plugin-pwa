@@ -58,6 +58,10 @@ VitePWA({
 
 ![](https://user-images.githubusercontent.com/11247099/111190584-330cf880-85f2-11eb-8dad-20ddb84456cf.png)
 
+**Warning**: this is the default option when `strategies` and `registerType` are not configured.
+In order for the service worker to be registered, you must invoke the `registerSW` method
+from the `virtual:pwa-register` module.
+
 ```ts
 // main.ts
 import { registerSW } from 'virtual:pwa-register'
@@ -80,7 +84,26 @@ updateSW()
 
 You can find an example written in Vue 3: [ReloadPrompt.vue](./examples/vue-basic/src/ReloadPrompt.vue).
 
+#### SSR/SSG
+
+If you are using `SSR/SSG`, you need to import `virtual:pwa-register` module using dynamic import and checking if
+`window` is not `undefined`:
+
+```ts
+// pwa.ts
+import { registerSW } from 'virtual:pwa-register'
+registerSW({ /* options */})
+
+// main.ts
+if (typeof window !== 'undefined') {
+    import('./pwa')
+}
+```
+
 ### Automatic reload when new content available
+
+**Warning**: in order for the service worker to be registered, you must invoke the` registerSW`
+method from the `virtual:pwa-register` module.
 
 With this option, once the service worker detects new content available, then it will update caches and 
 will reload all browser windows/tabs with the application opened automatically to take the control.
@@ -120,6 +143,22 @@ const updateSW = registerSW({
 })
 ```
 
+#### SSR/SSG
+
+If you are using `SSR/SSG`, you need to import `virtual:pwa-register` module using dynamic import and checking if
+`window` is not `undefined`:
+
+```ts
+// pwa.ts
+import { registerSW } from 'virtual:pwa-register'
+registerSW({ /* options */})
+
+// main.ts
+if (typeof window !== 'undefined') {
+    import('./pwa')
+}
+```
+
 ### Advanced (injectManifest)
 
 You will need to include `workbox-*` dependencies as `dev dependencies`.
@@ -138,6 +177,15 @@ VitePWA({
   manifest: {
     // content of manifest
   }
+})
+```
+
+If you need your custom service worker works with `Prompt for new content` behavior, you need to include on it at least
+this code (see also this example: [sw.ts](./examples/vue-basic-inject-manifest/src/sw.ts)):
+```ts
+self.addEventListener('message', (event) => {
+  if (event.data && event.data.type === 'SKIP_WAITING')
+    self.skipWaiting()
 })
 ```
 
