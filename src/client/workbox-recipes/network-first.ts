@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { cacheNames } from 'workbox-core'
+import { clientsClaim, cacheNames } from 'workbox-core'
 import { registerRoute, setCatchHandler, setDefaultHandler } from 'workbox-routing'
 import {
   NetworkFirst,
@@ -133,9 +133,5 @@ setCatchHandler(({ event }): Promise<Response> => {
   }
 })
 
-// this is necessary, since the new service worker will keep on skipWaiting state
-// and then, caches will not be cleared since it is not activated
-self.addEventListener('message', async(event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING')
-    await self.skipWaiting()
-})
+self.skipWaiting()
+clientsClaim()
