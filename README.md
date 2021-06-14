@@ -286,7 +286,7 @@ VitePWA({
     globPatterns: [],
     // ...
   },
-  // or for injectManifest strategy
+  // or for injectManifest/networkFirst strategies
   injectManifest: {
     globPatterns: [],
     // ...
