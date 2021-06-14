@@ -25,28 +25,25 @@ export function registerSW(options: RegisterSWOptions = {}) {
   let wb: Workbox | undefined
   let registration: ServiceWorkerRegistration | undefined
 
-  const sendSkipWaiting = async() => {
-    if (registration && registration.waiting) {
-      // Send a message to the waiting service worker,
-      // instructing it to activate.
-      // Note: for this to work, you have to add a message
-      // listener in your service worker. See below.
-      await messageSW(registration.waiting, { type: 'SKIP_WAITING' })
-    }
-  }
-
   const updateServiceWorker = async(reloadPage = true) => {
     if (!auto && !networkFirst) {
       // Assuming the user accepted the update, set up a listener
       // that will reload the page as soon as the previously waiting
       // service worker has taken control.
-      if (reloadPage && !networkFirst) {
+      if (reloadPage) {
         wb?.addEventListener('controlling', (event) => {
           if (event.isUpdate)
             window.location.reload()
         })
       }
-      await sendSkipWaiting()
+
+      if (registration && registration.waiting) {
+        // Send a message to the waiting service worker,
+        // instructing it to activate.
+        // Note: for this to work, you have to add a message
+        // listener in your service worker. See below.
+        await messageSW(registration.waiting, { type: 'SKIP_WAITING' })
+      }
     }
   }
 
@@ -64,14 +61,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
         onOfflineReady?.()
     })
 
-    if (networkFirst) {
-      // Add an event listener to detect when the registered
-      // service worker has installed but is waiting to activate.
-      wb.addEventListener('waiting', sendSkipWaiting)
-      // @ts-ignore
-      wb.addEventListener('externalwaiting', sendSkipWaiting)
-    }
-    else if (!auto) {
+    if (!auto && !networkFirst) {
       const showSkipWaitingPrompt = () => {
         // \`event.wasWaitingBeforeRegister\` will be false if this is
         // the first time the updated service worker is waiting.
