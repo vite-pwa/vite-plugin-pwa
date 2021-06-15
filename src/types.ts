@@ -105,7 +105,7 @@ export interface VitePWAOptions {
    */
   networkFirst?: {
     /**
-     * Should we use `Custom Cache Network Race Strategy` or `NetworkFirst`?
+     * Should we use `Custom Cache Network Race Strategy` or `Network First Cache Strategy`?
      * @default true
      */
     raceStrategy?: boolean
@@ -118,7 +118,7 @@ export interface VitePWAOptions {
      */
     credentials?: RequestCredentials
     /**
-     * Only for `NetworkFirst`.
+     * Only for `Network First Cache Strategy`.
      */
     networkTimeoutSeconds?: number
   }
