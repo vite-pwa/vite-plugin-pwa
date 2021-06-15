@@ -208,14 +208,6 @@ There are 2 available cache strategies:
 By default, the service worker will use `Custom Cache Network Race Strategy`.
 You can see an explanation [here](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race).
 
-To configure `Network First Cache Strategy` instead `Custom Cache Network Race Strategy`: 
-```ts
-VitePWA({
-  strategies: 'networkFirst',
-  networkFirst: { raceStrategy: false }
-})
-````
-
 You can find an example written for a Vue 3 [here](./examples/vue-networkfirst).
 
 #### Configuration
@@ -224,6 +216,17 @@ You can find an example written for a Vue 3 [here](./examples/vue-networkfirst).
 VitePWA({
   strategies: 'networkFirst',
   networkFirst: { /* options */ },  
+  manifest: {
+    // content of manifest
+  }
+})
+```
+
+To configure `Network First Cache Strategy` instead `Custom Cache Network Race Strategy`:
+```ts
+VitePWA({
+  strategies: 'networkFirst',
+  networkFirst: { raceStrategy: false, /* other options */ },
   manifest: {
     // content of manifest
   }
