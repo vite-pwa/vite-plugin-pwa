@@ -202,11 +202,12 @@ We have created a service worker to be used with `network first strategy`, and s
 `injectManifest`. 
 
 There are 2 available cache strategies:
-- [Custom Cache Network Race Strategy](https://developers.google.com/web/tools/workbox/modules/workbox-strategies#custom_cache_network_race_strategy)
 - `Network First Cache Strategy`
+- [Custom Cache Network Race Strategy](https://developers.google.com/web/tools/workbox/modules/workbox-strategies#custom_cache_network_race_strategy)
 
-By default, the service worker will use `Custom Cache Network Race Strategy`.
-You can see an explanation [here](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race).
+By default, the service worker will use `Network First Cache Strategy`.
+
+You can see an explanation for `Custom Cache Network Race Strategy` [here](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race).
 
 You can find an example written for a Vue 3 [here](./examples/vue-networkfirst).
 
@@ -222,11 +223,11 @@ VitePWA({
 })
 ```
 
-To configure `Network First Cache Strategy` instead `Custom Cache Network Race Strategy`:
+To configure `Custom Cache Network Race Strategy` instead `Network First Cache Strategy`:
 ```ts
 VitePWA({
   strategies: 'networkFirst',
-  networkFirst: { raceStrategy: false, /* other options */ },
+  networkFirst: { raceStrategy: true, /* other options */ },
   manifest: {
     // content of manifest
   }
