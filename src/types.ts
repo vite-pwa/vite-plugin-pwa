@@ -106,7 +106,7 @@ export interface VitePWAOptions {
     /**
      * Should we use `Custom Cache Network Race Strategy` or `Network First Cache Strategy`?
      *
-     * By default using `Network First Cache Strategy`: `raceStrategy: false`.
+     * By default using `Network First Cache Strategy`.
      *
      * @default false
      */
