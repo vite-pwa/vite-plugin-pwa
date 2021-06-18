@@ -100,16 +100,20 @@ export interface VitePWAOptions {
    */
   includeManifestIcons: true
   /**
-   * Configuration for `networkFirst` strategy.
-   * Keep it here if in future we need to extend its configuration.
+   * Configuration for `Network First` strategy.
    */
   networkFirst?: {
     /**
      * Should we use `Custom Cache Network Race Strategy` or `Network First Cache Strategy`?
-     * @default true
+     *
+     * By default using `Network First Cache Strategy`: `raceStrategy: false`.
+     *
+     * @default false
      */
     raceStrategy?: boolean
     /**
+     * Enable this option to see `cache` cleanup and `network/cache` errors on console.
+     *
      * @default false
      */
     debug?: boolean
