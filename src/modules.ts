@@ -20,7 +20,7 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
 
 export async function generateNetworkFirstWS(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig) {
   const {
-    raceStrategy = true,
+    raceStrategy = false,
     debug = false,
     credentials = 'same-origin',
     networkTimeoutSeconds = 0,
