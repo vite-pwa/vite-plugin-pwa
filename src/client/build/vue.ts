@@ -9,6 +9,8 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
     immediate = true,
     onNeedRefresh,
     onOfflineReady,
+    onRegistered,
+    onRegisterError,
   } = options
 
   const needRefresh = ref(false)
@@ -24,6 +26,8 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
       offlineReady.value = true
       onOfflineReady?.()
     },
+    onRegistered,
+    onRegisterError,
   })
 
   return {

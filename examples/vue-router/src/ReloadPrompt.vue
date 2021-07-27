@@ -6,7 +6,11 @@ const {
   offlineReady,
   needRefresh,
   updateServiceWorker,
-} = useRegisterSW()
+} = useRegisterSW({
+  onRegistered(r) {
+    console.log(`SW Registered: ${r}`)
+  },
+})
 
 const close = async() => {
   offlineReady.value = false

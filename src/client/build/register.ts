@@ -14,6 +14,8 @@ export function registerSW(options: RegisterSWOptions = {}) {
     immediate = false,
     onNeedRefresh,
     onOfflineReady,
+    onRegistered,
+    onRegisterError,
   } = options
 
   let wb: Workbox | undefined
@@ -76,7 +78,12 @@ export function registerSW(options: RegisterSWOptions = {}) {
     }
 
     // register the service worker
-    wb.register({ immediate }).then(r => registration = r)
+    wb.register({ immediate }).then((r) => {
+      registration = r
+      onRegistered?.(r)
+    }).catch((e) => {
+      onRegisterError?.(e)
+    })
   }
 
   return updateServiceWorker
