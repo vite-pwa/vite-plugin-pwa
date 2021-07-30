@@ -236,7 +236,7 @@ import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
   // other options
-  onRegisted(r) {
+  onRegistered(r) {
     r && setInterval(() => {
       r.update()
     }, 60 * 60 * 1000 /* 1 hour: timeout in milliseconds */)
