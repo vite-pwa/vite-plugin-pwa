@@ -79,14 +79,11 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
         generateBundle: _generateBundle,
         generateSW: _generateSW,
         extendManifestEntries(fn: ExtendManifestEntriesHook) {
-          const result = fn(options.workbox.additionalManifestEntries || [])
+          const configField = options.strategies === 'generateSW' ? 'workbox' : 'injectManifest'
+          const result = fn(options[configField].additionalManifestEntries || [])
 
-          if (result != null) {
-            if (options.strategies === 'generateSW')
-              options.workbox.additionalManifestEntries = result
-            else
-              options.injectManifest.additionalManifestEntries = result
-          }
+          if (result != null)
+            options[configField].additionalManifestEntries = result
         },
       },
     },
