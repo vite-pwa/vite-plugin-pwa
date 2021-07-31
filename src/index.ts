@@ -70,8 +70,12 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
         extendManifestEntries(fn: ExtendManifestEntriesHook) {
           const result = fn(options.workbox.additionalManifestEntries || [])
 
-          if (result != null)
-            options.workbox.additionalManifestEntries = result
+          if (result != null) {
+            if (options.strategies === 'generateSW')
+              options.workbox.additionalManifestEntries = result
+            else
+              options.injectManifest.additionalManifestEntries = result
+          }
         },
       },
     },
