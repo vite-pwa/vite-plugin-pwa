@@ -1,5 +1,6 @@
 /* eslint-disable no-use-before-define */
-import { GenerateSWConfig, InjectManifestConfig, ManifestEntry } from 'workbox-build'
+import type { GenerateSWConfig, InjectManifestConfig, ManifestEntry } from 'workbox-build'
+import type { OutputBundle } from 'rollup'
 
 /**
  * Plugin options.
@@ -212,6 +213,14 @@ export interface ManifestOptions {
 
 export interface VitePluginPWAAPI {
   extendManifestEntries(fn: ExtendManifestEntriesHook): void
+  /*
+   * Explicitly generate the manifests.
+   */
+  generateBundle(bundle?: OutputBundle): OutputBundle
+  /*
+   * Explicitly generate the PWA services worker.
+   */
+  generateSW(): Promise<void>
 }
 
 export type ExtendManifestEntriesHook = (manifestEntries: ManifestEntry[]) => ManifestEntry[] | null

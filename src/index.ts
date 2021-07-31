@@ -1,5 +1,6 @@
 import { resolve } from 'path'
 import { existsSync } from 'fs'
+import type { OutputBundle } from 'rollup'
 import type { Plugin, ResolvedConfig } from 'vite'
 import { generateSW } from 'workbox-build'
 import { generateSimpleSWRegister, injectServiceWorker } from './html'
@@ -13,6 +14,40 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   let viteConfig: ResolvedConfig
   let options: ResolvedVitePWAOptions
   let useImportRegister = false
+
+  async function _generateSW() {
+    if (options.strategies === 'injectManifest')
+      await generateInjectManifest(options, viteConfig)
+    else
+      await generateSW(options.workbox)
+  }
+
+  function _generateBundle(bundle: OutputBundle = {}) {
+    if (options.manifest) {
+      bundle[FILE_MANIFEST] = {
+        isAsset: true,
+        type: 'asset',
+        name: undefined,
+        source: generateWebManifestFile(options),
+        fileName: FILE_MANIFEST,
+      }
+    }
+
+    // if virtual register is requested, do not inject.
+    if (options.injectRegister === 'auto')
+      options.injectRegister = useImportRegister ? null : 'script'
+
+    if (options.injectRegister === 'script' && !existsSync(resolve(viteConfig.publicDir, FILE_SW_REGISTER))) {
+      bundle[FILE_SW_REGISTER] = {
+        isAsset: true,
+        type: 'asset',
+        name: undefined,
+        source: generateSimpleSWRegister(options),
+        fileName: FILE_SW_REGISTER,
+      }
+    }
+    return bundle
+  }
 
   return [
     {
@@ -30,43 +65,19 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
         },
       },
       generateBundle(_, bundle) {
-        if (options.manifest) {
-          bundle[FILE_MANIFEST] = {
-            isAsset: true,
-            type: 'asset',
-            name: undefined,
-            source: generateWebManifestFile(options),
-            fileName: FILE_MANIFEST,
-          }
-        }
-
-        // if virtual register is requested, do not inject.
-        if (options.injectRegister === 'auto')
-          options.injectRegister = useImportRegister ? null : 'script'
-
-        if (options.injectRegister === 'script' && !existsSync(resolve(viteConfig.publicDir, FILE_SW_REGISTER))) {
-          bundle[FILE_SW_REGISTER] = {
-            isAsset: true,
-            type: 'asset',
-            name: undefined,
-            source: generateSimpleSWRegister(options),
-            fileName: FILE_SW_REGISTER,
-          }
-        }
+        _generateBundle(bundle)
       },
       async closeBundle() {
-        if (!viteConfig.build.ssr) {
-          if (options.strategies === 'injectManifest')
-            await generateInjectManifest(options, viteConfig)
-          else
-            await generateSW(options.workbox)
-        }
+        if (!viteConfig.build.ssr)
+          await _generateSW()
       },
       async buildEnd(error) {
         if (error)
           throw error
       },
       api: <VitePluginPWAAPI>{
+        generateBundle: _generateBundle,
+        generateSW: _generateSW,
         extendManifestEntries(fn: ExtendManifestEntriesHook) {
           const result = fn(options.workbox.additionalManifestEntries || [])
 
