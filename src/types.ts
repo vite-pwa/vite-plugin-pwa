@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import { GenerateSWConfig, InjectManifestConfig } from 'workbox-build'
+import { GenerateSWConfig, InjectManifestConfig, ManifestEntry } from 'workbox-build'
 
 /**
  * Plugin options.
@@ -209,3 +209,9 @@ export interface ManifestOptions {
    */
   iarc_rating_id: string
 }
+
+export interface VitePluginPWAAPI {
+  extendManifestEntries(fn: ExtendManifestEntriesHook): void
+}
+
+export type ExtendManifestEntriesHook = (manifestEntries: ManifestEntry[]) => ManifestEntry[] | null
