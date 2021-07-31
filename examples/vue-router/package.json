@@ -4,11 +4,15 @@
   "private": true,
   "scripts": {
     "start": "npm run run-build && npm run serve",
+    "start-reloadsw": "npm run run-build-reloadsw && npm run serve",
     "start-claims": "npm run run-build-claims && npm run serve",
+    "start-claims-reloadsw": "npm run run-build-reloadsw-claims && npm run serve",
     "dev": "cross-env DEBUG=vite-plugin-pwa:* vite",
     "build": "cross-env DEBUG=vite-plugin-pwa:* vite build",
     "run-build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
+    "run-build-reloadsw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true RELOAD_SW=true vite build",
     "run-build-claims": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true CLAIMS=true vite build",
+    "run-build-reloadsw-claims": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true CLAIMS=true RELOAD_SW=true vite build",
     "serve": "serve dist"
   },
   "dependencies": {

@@ -2,16 +2,32 @@
 <script setup lang="ts">
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 
+// replaced dyanmicaly
+const reloadSW: any = '__RELOAD_SW__'
+
 const {
   offlineReady,
   needRefresh,
   updateServiceWorker,
-} = useRegisterSW()
+} = useRegisterSW({
+  onRegistered(r) {
+    if (reloadSW === 'true') {
+      r && setInterval(async() => {
+        console.log('Checking for sw update')
+        await r.update()
+      }, 20000 /* 20s for testing purposes */)
+    }
+    else {
+      console.log(`SW Registered: ${r}`)
+    }
+  },
+})
 
 const close = async() => {
   offlineReady.value = false
   needRefresh.value = false
 }
+
 </script>
 
 <template>

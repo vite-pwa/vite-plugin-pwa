@@ -31,7 +31,9 @@
     "example:router:dev": "npm -C examples/vue-router run dev",
     "example:router:build": "npm -C examples/vue-router run build",
     "example:router:start": "npm -C examples/vue-router run start",
+    "example:router:start:reloadsw": "npm -C examples/vue-router run start-reloadsw",
     "example:router:start:claims": "npm -C examples/vue-router run start-claims",
+    "example:router:start:claims:reloadsw": "npm -C examples/vue-router run start-claims-reloadsw",
     "example:dev:cdn": "npm -C examples/vue-basic-cdn run dev",
     "example:build:cdn": "npm -C examples/vue-basic-cdn run build",
     "example:start:cdn": "npm -C examples/vue-basic-cdn run start"

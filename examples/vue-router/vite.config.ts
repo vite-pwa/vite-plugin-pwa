@@ -41,6 +41,7 @@ const config: UserConfig = {
     }),
     replace({
       __DATE__: new Date().toISOString(),
+      __RELOAD_SW__: process.env.RELOAD_SW === 'true' ? 'true' : 'false',
     }),
   ],
 }
