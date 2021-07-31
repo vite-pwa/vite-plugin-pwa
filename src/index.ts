@@ -118,5 +118,6 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   ]
 }
 
+export * from './types'
 export { cachePreset } from './cache'
 export type { VitePWAOptions as Options }
