@@ -1,0 +1,32 @@
+{
+  "name": "vite-plugin-pwa-docs",
+  "version": "0.0.0",
+  "private": "true",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build && esno scripts/build.ts",
+    "serve": "npm run build && serve .vitepress/dist"
+  },
+  "dependencies": {
+    "vue": "^3.1.5",
+    "vue-global-api": "^0.4.1",
+    "@vueuse/core": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^9.0.11",
+    "@vueuse/core": "^5.2.0",
+    "esbuild-register": "^2.6.0",
+    "eslint": "^7.32.0",
+    "fast-glob": "^3.2.7",
+    "fs-extra": "^10.0.0",
+    "https-localhost": "^4.6.5",
+    "@iconify/json": "^1.1.381",
+    "typescript": "^4.3.5",
+    "vite": "^2.4.4",
+    "vite-plugin-components": "^0.13.2",
+    "vite-plugin-pwa": "workspace:*",
+    "vite-plugin-icons": "^0.6.5",
+    "vite-plugin-windicss": "^1.2.7",
+    "vitepress": "^0.15.6"
+  }
+}
