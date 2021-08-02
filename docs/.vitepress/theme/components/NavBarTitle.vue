@@ -1,22 +1,11 @@
-<script setup lang="ts">
-import { isDark } from '../composables/dark'
-</script>
-
 <template>
   <a
     class="nav-bar-title"
     href="/"
     aria-label="Vite Plugin PWA, back to home`"
   >
-    <img
-      class="logo"
-      width="36"
-      height="36"
-      :class="isDark ? 'dark' : null"
-      src="/favicon.svg"
-      alt="Logo"
-    >
-    <span class="title">Vite Plugin PWA</span>
+    <PwaLogo class="logo" alt="Vite Plugin PWA Logo" />
+    <span class="title">Vite PWA</span>
   </a>
 </template>
 
@@ -38,10 +27,6 @@ import { isDark } from '../composables/dark'
   margin-right: .5rem;
   height: 2.2rem;
   vertical-align: middle;
-  /*noinspection CssUnusedSymbol*/
-  &.dark {
-    filter: var(--hero-filter);
-  }
 }
 
 .title {

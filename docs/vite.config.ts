@@ -2,7 +2,10 @@ import { defineConfig } from 'vite'
 import Components from 'vite-plugin-components'
 import WindiCSS from 'vite-plugin-windicss'
 import Icons, { ViteIconsResolver } from 'vite-plugin-icons'
+import replace from '@rollup/plugin-replace'
 import { VitePWA } from '../dist/'
+
+import * as pwaPackage from '../package.json'
 
 export default defineConfig({
   build: {
@@ -21,6 +24,10 @@ export default defineConfig({
     },
   },
   plugins: [
+    replace({
+      __PWA_VERSION__: pwaPackage.version,
+    }),
+
     // https://github.com/antfu/vite-plugin-components
     Components({
       dirs: [

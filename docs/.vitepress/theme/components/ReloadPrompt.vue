@@ -1,18 +1,9 @@
 <script setup lang="ts">
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 
-const {
-  offlineReady,
-  needRefresh,
-  updateServiceWorker,
-} = useRegisterSW({
-  onRegistered() {
-    console.log('SW registered')
-  }
-})
+const { needRefresh, updateServiceWorker } = useRegisterSW()
 
 const close = async() => {
-  offlineReady.value = false
   needRefresh.value = false
 }
 </script>
@@ -27,14 +18,13 @@ const close = async() => {
       New content available, click the reload button to update.
     </div>
     <button
-      v-if="needRefresh"
-      class="border border-$c-divider bg-$c-brand text-white mr-2 px-3 py-1 rounded hover:bg-$c-brand-dark"
+      class="border border-$c-divider bg-$c-brand text-black mr-2 px-3 py-1 rounded hover:bg-$c-brand-light"
       @click="updateServiceWorker()"
     >
       Reload
     </button>
     <button
-      class="border border-$c-divider bg-$c-brand text-white mr-2 px-3 py-1 rounded hover:bg-$c-brand-dark"
+      class="border border-$c-divider bg-$c-brand text-black mr-2 px-3 py-1 rounded hover:bg-$c-brand-light"
       @click="close"
     >
       Close

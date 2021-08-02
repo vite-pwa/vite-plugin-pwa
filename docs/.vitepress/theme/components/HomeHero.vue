@@ -11,23 +11,20 @@ const heroImage = computed(() => data.value.heroImage)
 
     <p class="hero-img">
       <a href="https://github.com/antfu/vite-plugin-pwa" target="_blank" rel="noopener">
-        <img :src="heroImage" alt="Zero-config PWA for Vite" width="840" height="420">
+        <img :src="heroImage" alt="Zero-config PWA for Vite" width="840" height="420" loading="lazy">
       </a>
       <br>
     </p>
-    <div class="description">
-      <!-- todo@userquin: replace with version? -->
-      Zero-config PWA for Vite
-    </div>
+
+    <p class="version-img">
+      <a href='https://www.npmjs.com/package/vite-plugin-pwa'>
+        <PluginVersion />
+      </a>
+    </p>
 
     <div class="nav-link action">
-      <a href="/guide" class="item action mx-2">Get Started </a>
+      <a href="/guide" class="item action mx-2">Get Started</a>
     </div>
-
-<!--    <NavLink-->
-<!--      :item="{ link: data.actionLink, text: data.actionText }"-->
-<!--      class="action mx-2"-->
-<!--    />-->
 
   </header>
 </template>
@@ -44,7 +41,11 @@ const heroImage = computed(() => data.value.heroImage)
       filter: var(--hero-filter);
     }
   }
+  .version-img {
+    text-align: center;
+  }
 }
+
 
 @media (min-width: 421px) and (max-width: 890px) {
   .home-hero {
@@ -55,6 +56,9 @@ const heroImage = computed(() => data.value.heroImage)
 @media (max-width: 420px) {
   .home-hero {
     margin: 0 0;
+  }
+  .version-img {
+    margin-bottom: 0;
   }
 }
 
@@ -95,7 +99,7 @@ const heroImage = computed(() => data.value.heroImage)
 }
 
 .action {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
   display: inline-block;
 }
 
@@ -118,14 +122,14 @@ const heroImage = computed(() => data.value.heroImage)
   font-size: 1.1rem;
   font-weight: 500;
   border: 0;
-  color: #ffffff;
+  color: #0c0c0c;
   background-color: var(--c-brand);
   transition: background-color 0.1s ease;
 }
 
 .action :deep(.item:hover) {
   text-decoration: none;
-  color: #ffffff;
+  color: #0c0c0c;
   background-color: var(--c-brand-light);
 }
 

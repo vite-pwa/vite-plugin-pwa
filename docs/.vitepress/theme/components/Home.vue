@@ -1,5 +1,5 @@
 <template>
-  <main class="home" aria-labelledby="main-title">
+  <main class="home">
     <HomeHero />
     <slot name="hero" />
     <HomeFeatures />

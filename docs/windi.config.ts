@@ -10,7 +10,7 @@ export default defineConfig({
   theme: {
     extend: {
       colors: {
-        primary: '#3eaf7c',
+        primary: '#2e859c',
       },
     },
   },

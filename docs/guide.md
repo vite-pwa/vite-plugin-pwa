@@ -1,6 +1,5 @@
 ---
 title: Get Started
-sidebar: 'auto'
 ---
 # Get Started
 
@@ -10,22 +9,24 @@ Zero config [PWA](https://developers.google.com/web/progressive-web-apps) soluti
 
 Add `vite-plugin-pwa` dependency to your project:
 
-- YARN:
 ```shell
+# YARN
 yarn add -D vite-plugin-pwa
 ```
-- NPM:
+
 ```shell
+# NPM
 npm i --save-dev vite-plugin-pwa
 ```
-- NPM:
+
 ```shell
+# PNPM
 pnpm i -D vite-plugin-pwa
 ```
 
 ## Setup
 
-Edit your `vite.config.ts` file to add `Vite Plugin PWA`:
+Edit your `vite.config.ts` file to add `Vite Plugin PWA Plugin`:
 
 ```ts
 // vite.config.ts
