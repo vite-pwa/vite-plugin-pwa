@@ -44,6 +44,7 @@ importers:
   docs:
     specifiers:
       '@iconify/json': ^1.1.381
+      '@rollup/plugin-replace': ^3.0.0
       '@types/fs-extra': ^9.0.11
       '@vueuse/core': ^5.2.0
       esbuild-register: ^2.6.0
@@ -51,6 +52,7 @@ importers:
       fast-glob: ^3.2.7
       fs-extra: ^10.0.0
       https-localhost: ^4.6.5
+      prism-theme-vars: ^0.2.2
       typescript: ^4.3.5
       vite: ^2.4.4
       vite-plugin-components: ^0.13.2
@@ -66,12 +68,14 @@ importers:
       vue-global-api: 0.4.1_vue@3.1.5
     devDependencies:
       '@iconify/json': 1.1.381
+      '@rollup/plugin-replace': 3.0.0
       '@types/fs-extra': 9.0.12
       esbuild-register: 2.6.0
       eslint: 7.32.0
       fast-glob: 3.2.7
       fs-extra: 10.0.0
       https-localhost: 4.6.5
+      prism-theme-vars: 0.2.2
       typescript: 4.3.5
       vite: 2.4.4
       vite-plugin-components: 0.13.2_vite@2.4.4
@@ -4533,6 +4537,10 @@ packages:
     resolution: {integrity: sha512-FFw039TmrBqFK8ma/7OL3sDz/VytdtJr044/QUJtH0wK9lb9jLq9tJyIxUwtQJHwar2BqtiA4iCWSwo9JLkzFg==}
     engines: {node: '>=6'}
     dev: false
+
+  /prism-theme-vars/0.2.2:
+    resolution: {integrity: sha512-EL9ifuU/F8tEldoCa2sspiiLWysCL54xDbf2gN/ubwdtbuJROqOGopG5kSwunapwaioT+jLUQ/Ky+7jnv62xJA==}
+    dev: true
 
   /prismjs/1.24.1:
     resolution: {integrity: sha512-mNPsedLuk90RVJioIky8ANZEwYm5w9LcvCXrxHlwf4fNVSn8jEipMybMkWUyyF0JhnC+C4VcOVSBuHRKs1L5Ow==}

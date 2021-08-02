@@ -145,7 +145,8 @@ textarea {
 
 a {
   text-decoration: none;
-  color: var(--c-brand);
+  font-weight: bolder;
+  color: var(--c-brand-active);
 }
 
 a:hover {

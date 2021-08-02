@@ -1,4 +1,5 @@
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
     "baseUrl": ".",
     "module": "ESNext",
@@ -22,5 +23,5 @@
       "~/*": ["src/*"]
     }
   },
-  "exclude": ["dist","node_modules"],
+  "exclude": ["dist","node_modules"]
 }

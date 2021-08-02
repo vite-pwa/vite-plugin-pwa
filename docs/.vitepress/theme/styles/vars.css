@@ -19,9 +19,9 @@
     --c-text-light-3: #90a4b7;
 
     --c-brand: #2e859c;
-    --c-brand-active: #65b5cd;
+    --c-brand-active: #2c7f95;
     --c-brand-dark: #00586e;
-    --c-brand-light: #65b5cd;
+    --c-brand-light: #bce1eb;
 
     --c-disabled-bg: #e5e5e5;
     --c-disabled-fg: #666;
@@ -64,9 +64,12 @@
     --header-height: 3.6rem;
     --sidebar-width: 17.5rem;
     --scrollbar-width: 6px;
+
+    --pwa-logo-p: #3e3e3e;
 }
 
 html.dark {
+
     --c-bg: #111;
     --c-bg-semi: rgba(17,17,17,0.8);
     --c-bg-secondary: #222;
@@ -81,14 +84,15 @@ html.dark {
     --code-highlight: rgba(0, 0, 0, .66);
 
     --c-brand: #c77b66;
-    --c-brand-active: #fcab94;
-    --c-brand-dark: #934e3b;
-    --c-brand-light: #fcab94;
+    --c-brand-active: #d59b8b;
+    --c-brand-dark: #834230;
+    --c-brand-light: #e1b8ad;
 
     --c-disabled-bg: #333;
     --c-disabled-fg: #aaa;
 
-    --hero-filter: invert(94%);
+    --pwa-logo-p: #b9b9b9;
+    --hero-filter: invert(93.2%);
 }
 
 /** Fallback Styles */
@@ -105,5 +109,6 @@ html.dark {
     --code-font-family: var(--font-family-mono);
     --code-font-size: 14px;
 
+    --pwa-logo-w: var(--c-brand);
     --hero-filter: initial;
 }

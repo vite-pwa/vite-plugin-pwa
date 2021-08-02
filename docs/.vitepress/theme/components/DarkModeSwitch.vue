@@ -6,7 +6,7 @@ const toggle = useToggle(isDark)
 </script>
 
 <template>
-  <button aria-label="Toggle Theme" class="icon-button" @click="toggle">
+  <button tabindex="0" aria-label="Toggle Theme" class="icon-button" @click="toggle">
     <carbon-moon v-show="isDark" />
     <carbon-sun v-show="!isDark" />
   </button>
