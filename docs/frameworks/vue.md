@@ -72,20 +72,37 @@ const close = async() => {
 </style>
 ```
 
+### Manual Service Worker Updates
+
+As explained in [Manual Service Worker Updates](/guide/manual-sw-updates.html), you can use this code to configure this 
+behavior on your application with the virtual module `virtual:pwa-register/vue`:
+
+```ts
+import { useRegisterSW } from 'virtual:pwa-register/vue'
+
+const updateServiceWorker = registerSW({
+  onRegistered(r) {
+    r && setInterval(() => {
+      r.update()
+    }, 60 * 60 * 1000 /* 1 hour: interval in milliseconds */)
+  }
+})
+```
+
 ## Vue 2
 
 Since this plugin only supports `Vuejs 3`, you cannot use the virtual module `virtual:pwa-register/vue`.
 
-You can copy `useRegisterSW.ts` `mixin` in your application to make it working:
+You can copy `useRegisterSW.js` `mixin` in your application to make it working:
 
-```ts
+```js
 export default {
   name: "useRegisterSW",
   data() {
     return {
       updateSW: undefined,
       offlineReady: false,
-      needRefresh: false
+      needRefresh: false  
     }
   },
   async mounted() {
@@ -101,7 +118,13 @@ export default {
         onNeedRefresh() {
           vm.needRefresh = true
           vm.onNeedRefreshFn()
-        }
+        },
+        onRegistered(swRegistration) {
+          swRegistration && vm.handleSWManualUpdates(swRegistration)   
+        },
+        onRegisterError(e) {
+          vm.handleSWRegisterError(e)    
+        }  
       })
     } catch {
       console.log("PWA disabled.")
@@ -121,7 +144,9 @@ export default {
     },
     updateServiceWorker() {
       this.updateSW && this.updateSW(true)
-    }
+    },
+    handleSWManualUpdates(swRegistration) {}, 
+    handleSWRegisterError(error) {} 
   }
 }
 ```
@@ -186,3 +211,28 @@ export default {
 }
 </style>
 ```
+
+### Manual Service Worker Updates
+
+As explained in [Manual Service Worker Updates](/guide/manual-sw-updates.html), you can use this code to configure this
+behavior on your application with the `` `mixin`:
+
+```vue
+<script>
+import useRegisterSW from './useRegisterSW'
+
+export default {
+  name: "reload-prompt",
+  mixins: [useRegisterSW],
+  methods: {
+    handleSWManualUpdates(r) {
+      r && setInterval(() => {
+        r.update()
+      }, 60 * 60 * 1000 /* 1 hour: interval in milliseconds */)
+    }
+  }
+}
+</script>
+
+```
+
