@@ -4,24 +4,14 @@ import fs from 'fs-extra'
 
 const firaFont = 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap'
 
-export const githubusercontent1 = 'https://repository-images.githubusercontent.com'
-export const githubusercontent2 = 'https://user-images.githubusercontent.com'
-
-export const hero = `${githubusercontent1}/290129345/d4bfc300-1866-11eb-8602-e672c9dd0e7d`
-export const prompt = `${githubusercontent2}/11247099/111190584-330cf880-85f2-11eb-8dad-20ddb84456cf.png`
-
 const googleapis = 'https://fonts.googleapis.com'
 const gstatic = 'https://fonts.gstatic.com'
 
 const preconnect = `
     <link rel="dns-prefetch" href="${googleapis}">
     <link rel="dns-prefetch" href="${gstatic}">
-    <link rel="dns-prefetch" href="${githubusercontent1}">
-    <link rel="dns-prefetch" href="${githubusercontent2}">
     <link rel="preconnect" crossorigin="anonymous" href="${googleapis}">
     <link rel="preconnect" crossorigin="anonymous" href="${gstatic}">
-    <link rel="preconnect" crossorigin="anonymous" href="${githubusercontent1}">
-    <link rel="preconnect" crossorigin="anonymous" href="${githubusercontent2}">
 `
 
 export const optimizePages = async() => {
@@ -30,11 +20,15 @@ export const optimizePages = async() => {
   await Promise.all(names.map(async(i) => {
     let html = await fs.readFile(i, 'utf-8')
 
-    const home = i.endsWith('/index.html')
+    let preloadImg = ''
 
-    const netlify = home
-      ? `\n\t<link rel="prefetch" href="/netlify.svg">\n\t<link rel="prefetch" href="${hero}">\n\t<link rel="prefetch" href="${prompt}">`
-      : ''
+    if (i.endsWith('/index.html'))
+      preloadImg = '<link rel="prefetch" href="/hero.png">'
+
+    else if (i.endsWith('/prompt-for-update.html'))
+      preloadImg = '<link rel="prefetch" href="/prompt-update.png">'
+
+    const netlify = `\n\t<link rel="prefetch" href="/netlify.svg">\n\t${preloadImg}`
 
     html = html.replace(
       /<link rel="stylesheet" href="(.*?)">/g,
@@ -51,9 +45,7 @@ export const optimizePages = async() => {
     <noscript>
       <link rel="stylesheet" href="${firaFont}" />
     </noscript>
-    <link rel="prefetch" href="/manifest.webmanifest">${netlify}\n
-    <meta property="og:image" content="${hero}"\n
-    <meta name="twitter:image" content="${hero}"\n`).trim()
+    <link rel="prefetch" href="/manifest.webmanifest">${netlify}\n`).trim()
 
     html = html.replace(
       '</head>',
@@ -69,6 +61,7 @@ export const optimizePages = async() => {
 
     await fs.writeFile(i, html, 'utf-8')
 
+    // todo@userquin: we need to add critical again
     // await critical.generate({
     //   inline: true,
     //   base: './.vitepress/dist/',
