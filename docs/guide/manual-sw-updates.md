@@ -1,6 +1,6 @@
 # Manual Service Worker Updates
 
-As explained in [Manual Updates](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#manual_updates) 
+As explained in [Manual Updates](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#manual_updates) <outbound-link />
 entry on `The Service Worker Lifecycle`, you can use this code to configure this behavior on your application:
 
 ```ts
