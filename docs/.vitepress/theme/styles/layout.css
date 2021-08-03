@@ -284,14 +284,8 @@ form {
   text-align: center;
 
 }
-.version-img img {
-  filter: var(--hero-filter);
-}
 
 html.dark .version-img {
   text-align: center;
-}
-html.dark .version-img img {
-  filter: var(--hero-filter);
 }
 

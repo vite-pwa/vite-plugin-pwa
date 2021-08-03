@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { useFrontmatter } from 'vitepress'
-
-const data = useFrontmatter()
-
-const heroImage = computed(() => data.value.heroImage)
+import { isDark } from '../composables/dark'
 </script>
 
 <template>
@@ -11,42 +7,34 @@ const heroImage = computed(() => data.value.heroImage)
 
     <p class="hero-img">
       <a href="https://github.com/antfu/vite-plugin-pwa" target="_blank" rel="noopener">
-        <img :src="heroImage" alt="Zero-config PWA for Vite" width="840" height="420">
+        <img v-show="isDark" src="/banner_dark.svg" alt="Zero-config PWA for Vite" width="700">
+        <img v-show="!isDark" src="/banner_light.svg" alt="Zero-config PWA for Vite" width="700">
       </a>
-      <br>
     </p>
 
-    <p class="version-img">
+    <!-- <p class="version-img">
       <a href="https://www.npmjs.com/package/vite-plugin-pwa" target="_blank" rel="noopener">
         <img src="https://img.shields.io/npm/v/vite-plugin-pwa?color=2e859c&label="  alt="Zero-config PWA for Vite NPM" width="45" height="20">
       </a>
       <br>
-    </p>
+    </p> -->
 
-
-    <NavLink :item="{ link: '/guide/', text: 'Get Started' }" class="action mx-2" />
-
+    <div class="-mt-10 mb-40">
+      <NavLink :item="{ link: '/guide/', text: 'Get Started' }" class="action mx-2" />
+    </div>
   </header>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .home-hero {
-  margin: 0 0 2.75rem;
-  padding: 0 1.5rem;
+  margin: 0 0 1rem;
+  padding: 0;
   text-align: center;
   .hero-img {
     text-align: center;
     img {
       object-fit: scale-down;
-      filter: var(--hero-filter);
     }
-  }
-}
-
-
-@media (min-width: 421px) and (max-width: 890px) {
-  .home-hero {
-    margin: 0 0 4.25rem;
   }
 }
 
@@ -119,14 +107,14 @@ const heroImage = computed(() => data.value.heroImage)
   font-size: 1.1rem;
   font-weight: 500;
   border: 0;
-  color: #0c0c0c;
+  color: var(--c-bg);
   background-color: var(--c-brand);
   transition: background-color 0.1s ease;
 }
 
 .action :deep(.item:hover) {
   text-decoration: none;
-  color: #0c0c0c;
+  color: var(--c-bg);
   background-color: var(--c-brand-light);
 }
 

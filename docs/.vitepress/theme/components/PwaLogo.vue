@@ -1,29 +1,8 @@
 <template>
-  <svg
-      class="pwa-logo"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
-      x="0px"
-      y="0px"
-      viewBox="0 0 410 401"
-      width="48"
-      height="48"
-  >
-    <g transform="matrix(.18288 0 0 .20215 26.512 127.72)" stroke-linejoin="round" stroke-width=".2">
-      <path class="p_a" d="m1436.6 603.3 56.39-142.6h162.82l-77.27-216.32 96.64-244.39 276.8 734.93h-204.13l-47.3-131.63z"/>
-      <path class="w" d="m1262.5 734.94 296.32-734.93-196.45 9.7657e-4 -202.7 474.93-144.14-474.93h-151l-154.77 474.93-109.15-216.42-98.773 304.3 100.28 172.12h193.33l139.86-425.91 133.35 425.91z"/>
-      <path class="p_a" d="m186.48 482.64h121c36.654 0 69.293-4.091 97.917-12.273l118.75-365.85c-6.664-10.562-14.272-20.549-22.824-29.959-44.905-49.705-110.6-74.556-197.1-74.556h-304.22v734.93h186.48zm160.17-313.56c17.54 17.653 26.309 41.276 26.309 70.871 0 29.822-7.713 53.474-23.138 70.956-16.91 19.425-48.047 29.137-93.409 29.137h-69.928v-197.44h70.442c42.277 0 72.185 8.827 89.724 26.481z"/>
-    </g>
-  </svg>
+  <img v-show="!isDark" src="/icon_light.svg" height="50" class="align-middle" alt="Vite Plugin PWA Logo"/>
+  <img v-show="isDark" src="/icon_dark.svg" height="50" class="align-middle" alt="Vite Plugin PWA Logo"/>
 </template>
 
-<style scoped>
-svg.pwa-logo > g > path {
-  &.p_a {
-    fill: var(--pwa-logo-p);
-  }
-  &.w {
-    fill: var(--pwa-logo-w);
-  }
-}
-</style>
+<script setup lang="ts">
+import { isDark } from '../composables/dark'
+</script>
