@@ -51,7 +51,9 @@ export const optimizePages = async() => {
     <noscript>
       <link rel="stylesheet" href="${firaFont}" />
     </noscript>
-    <link rel="prefetch" href="/manifest.webmanifest">${netlify}\n`).trim()
+    <link rel="prefetch" href="/manifest.webmanifest">${netlify}\n
+    <meta property="og:image" content="${hero}"\n
+    <meta name="twitter:image" content="${hero}"\n`).trim()
 
     html = html.replace(
       '</head>',
