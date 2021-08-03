@@ -2,7 +2,7 @@
 
 ## Vue 3
 
-You can use the builtin `Vite` virtual module `virtual:pwa-register/vue` for `Vuejs 3` which will return
+You can use the built-in `Vite` virtual module `virtual:pwa-register/vue` for `Vuejs 3` which will return
 `composition api` references (`ref<boolean>`) for `offlineReady` and `needRefresh`.
 
 You can use this `ReloadPrompt.vue` component:
@@ -72,20 +72,52 @@ const close = async() => {
 </style>
 ```
 
+### Periodic SW Updates
+
+As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.html), you can use this code to configure this 
+behavior on your application with the virtual module `virtual:pwa-register/vue`:
+
+```ts
+import { useRegisterSW } from 'virtual:pwa-register/vue'
+
+const updateServiceWorker = useRegisterSW({
+  onRegistered(r) {
+    r && setInterval(() => {
+      r.update()
+    }, 60 * 60 * 1000 /* 1 hour: interval in milliseconds */)
+  }
+})
+```
+
+### SW Registration Errors
+
+As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can notify the user with
+following code:
+
+```ts
+import { useRegisterSW } from 'virtual:pwa-register/vue'
+
+const updateServiceWorker = useRegisterSW({
+  onRegiterError(error) {
+    // notify the user an error occur
+  }
+})
+```
+
 ## Vue 2
 
 Since this plugin only supports `Vuejs 3`, you cannot use the virtual module `virtual:pwa-register/vue`.
 
-You can copy `useRegisterSW.ts` `mixin` in your application to make it working:
+You can copy `useRegisterSW.js` `mixin` to your `@/mixins/` directory in your application to make it working:
 
-```ts
+```js
 export default {
   name: "useRegisterSW",
   data() {
     return {
       updateSW: undefined,
       offlineReady: false,
-      needRefresh: false
+      needRefresh: false  
     }
   },
   async mounted() {
@@ -101,7 +133,13 @@ export default {
         onNeedRefresh() {
           vm.needRefresh = true
           vm.onNeedRefreshFn()
-        }
+        },
+        onRegistered(swRegistration) {
+          swRegistration && vm.handleSWManualUpdates(swRegistration)   
+        },
+        onRegisterError(e) {
+          vm.handleSWRegisterError(e)    
+        }  
       })
     } catch {
       console.log("PWA disabled.")
@@ -121,7 +159,9 @@ export default {
     },
     updateServiceWorker() {
       this.updateSW && this.updateSW(true)
-    }
+    },
+    handleSWManualUpdates(swRegistration) {}, 
+    handleSWRegisterError(error) {} 
   }
 }
 ```
@@ -130,7 +170,7 @@ You can use this `ReloadPrompt.vue` component:
 
 ```vue
 <script>
-import useRegisterSW from './useRegisterSW'
+import useRegisterSW from '@/mixins/useRegisterSW'
 
 export default {
   name: "reload-prompt",
@@ -186,3 +226,48 @@ export default {
 }
 </style>
 ```
+
+### Periodic SW Updates
+
+As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.html), you can use this code to configure this
+behavior on your application with the `useRegisterSW.js` `mixin`:
+
+```vue
+<script>
+import useRegisterSW from '@/mixins/useRegisterSW'
+
+export default {
+  name: "reload-prompt",
+  mixins: [useRegisterSW],
+  methods: {
+    handleSWManualUpdates(r) {
+      r && setInterval(() => {
+        r.update()
+      }, 60 * 60 * 1000 /* 1 hour: interval in milliseconds */)
+    }
+  }
+}
+</script>
+```
+
+### SW Registration Errors
+
+As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can notify the user with 
+following code:
+
+```vue
+<script>
+import useRegisterSW from '@/mixins/useRegisterSW'
+
+export default {
+  name: "reload-prompt",
+  mixins: [useRegisterSW],
+  methods: {
+    handleSWRegisterError(r) {
+      // notify the user an error occur
+    }
+  }
+}
+</script>
+```
+

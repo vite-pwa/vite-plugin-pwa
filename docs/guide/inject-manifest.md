@@ -5,7 +5,7 @@ With this option you can build your own service worker.
 ## Custom Service worker
 
 We recommend use [Workbox](https://developers.google.com/web/tools/workbox) <outbound-link /> to build your service worker,
-you will need to include `workbox-*` dependencies as `dev dependencies` to your poject.
+you will need to include `workbox-*` dependencies as `dev dependencies` to your project.
 
 ### Setup
 

@@ -47,5 +47,7 @@ export const defineConfig({
 - [Automatic reload](/guide/auto-update.html) when new content available
 - [Advanced (injectManifest)](/guide/inject-manifest.html) with Offline support
 - [Static assets handling](/guide/static-assets.html)
+- [Periodic SW updates](/guide/periodic-sw-updates.html)
+- [SW registration errors](/guide/sw-registration-errors.html)
 
 

@@ -26,6 +26,14 @@ const Guide = [
     link: '/guide/static-assets'
   },
   {
+    text: 'Periodic SW updates',
+    link: '/guide/periodic-sw-updates'
+  },
+  {
+    text: 'SW Registration Errors',
+    link: '/guide/sw-registration-errors'
+  },
+  {
     text: 'IDE Support',
     link: '/guide/ide',
   },
@@ -60,7 +68,7 @@ const Deployment = [
 
 const Frameworks = [
   {
-    text: 'Frameworks',
+    text: 'Vite',
     link: '/frameworks/',
   },
   {

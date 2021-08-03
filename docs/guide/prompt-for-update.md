@@ -18,7 +18,7 @@ import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
   onNeedRefresh() {
-    // show a prompt to user
+    // show a prompt to user with refresh and cancel buttons
   },
   onOfflineReady() {
     // show a ready to work offline message to user
@@ -26,13 +26,8 @@ const updateSW = registerSW({
 })
 ```
 
-when user clicked the "refresh" button 
-
-```ts
-updateSW()
-```
-
-the page will reload and the up-to-date content will be served.
+when user clicked the "refresh" button then call `updateSW()` function; the page will reload and the up-to-date 
+content will be served.
 
 ### SSR/SSG
 
