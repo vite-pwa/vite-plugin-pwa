@@ -91,7 +91,7 @@ const updateServiceWorker = useRegisterSW({
 
 ### SW Registration Errors
 
-As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can to notify the user with
+As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can notify the user with
 following code:
 
 ```ts
@@ -252,7 +252,7 @@ export default {
 
 ### SW Registration Errors
 
-As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can to notify the user with 
+As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can notify the user with 
 following code:
 
 ```vue
