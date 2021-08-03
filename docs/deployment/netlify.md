@@ -16,7 +16,17 @@ Netlify will redirect automatically, so you don't worry about it.
 
 ## Basic deployment example
 
+Add `netlify.toml` file to the root directory with the content:
+
 ```toml
+[build.environment]
+  NPM_FLAGS = "--prefix=/dev/null"
+  NODE_VERSION = "14"
+
+[build]
+  publish = "dist"
+  command = "npx pnpm i --store=node_modules/.pnpm-store && npx pnpm run build"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
@@ -26,4 +36,13 @@ Netlify will redirect automatically, so you don't worry about it.
   for = "/manifest.webmanifest"
   [headers.values]
     Content-Type = "application/manifest+json"
+```
+
+
+Add `_header` file to `public` directory with the content:
+
+```txt
+/assets/*
+  cache-control: max-age=31536000
+  cache-control: immutable
 ```
