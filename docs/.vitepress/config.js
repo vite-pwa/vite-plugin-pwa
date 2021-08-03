@@ -22,12 +22,12 @@ const Guide = [
     link: '/guide/inject-manifest'
   },
   {
-    text: 'Static assets handling',
-    link: '/guide/static-assets'
+    text: 'Manual SW updates',
+    link: '/guide/manual-sw-updates'
   },
   {
-    text: 'Automatic SW updates',
-    link: '/guide/automatic-sw-updates'
+    text: 'Static assets handling',
+    link: '/guide/static-assets'
   },
   {
     text: 'IDE Support',
