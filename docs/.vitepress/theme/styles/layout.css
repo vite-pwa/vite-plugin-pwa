@@ -209,7 +209,7 @@ td {
 blockquote {
   margin: 1rem 0;
   border-left: 0.2rem solid #dfe2e5;
-  padding: 0.25rem 0 0.25rem 1rem;
+  padding: 0.25rem 0.25rem 0.25rem 1rem;
   font-size: 1rem;
   color: var(--c-text);
   @apply bg-gray-400 bg-opacity-10;
@@ -279,3 +279,19 @@ form {
   font-size: 0.95rem;
   opacity: 0.7;
 }
+
+.version-img {
+  text-align: center;
+
+}
+.version-img img {
+  filter: var(--hero-filter);
+}
+
+html.dark .version-img {
+  text-align: center;
+}
+html.dark .version-img img {
+  filter: var(--hero-filter);
+}
+

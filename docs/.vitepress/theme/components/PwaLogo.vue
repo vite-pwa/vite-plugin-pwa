@@ -6,8 +6,8 @@
       x="0px"
       y="0px"
       viewBox="0 0 410 401"
-      width="36"
-      height="36"
+      width="48"
+      height="48"
   >
     <g transform="matrix(.18288 0 0 .20215 26.512 127.72)" stroke-linejoin="round" stroke-width=".2">
       <path class="p_a" d="m1436.6 603.3 56.39-142.6h162.82l-77.27-216.32 96.64-244.39 276.8 734.93h-204.13l-47.3-131.63z"/>

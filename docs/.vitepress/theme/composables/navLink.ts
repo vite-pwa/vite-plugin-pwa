@@ -1,4 +1,4 @@
-import { computed, Ref, ref } from 'vue'
+import { computed, Ref } from 'vue'
 import { useRoute } from 'vitepress'
 import type { DefaultTheme } from '../config'
 import { isExternal as isExternalCheck } from '../utils'
@@ -11,6 +11,7 @@ export function useNavLink(item: Ref<DefaultTheme.NavItemWithLink>) {
   const isExternal = isExternalCheck(item.value.link)
 
   const props = computed(() => {
+    const link = interpret(item.value.link)
     const routePath = normalizePath(`/${route.data.relativePath}`)
 
     let active = false
@@ -18,7 +19,7 @@ export function useNavLink(item: Ref<DefaultTheme.NavItemWithLink>) {
       active = new RegExp(item.value.activeMatch).test(routePath)
     }
     else {
-      const itemPath = normalizePath(withBase(item.value.link))
+      const itemPath = normalizePath(withBase(link))
       active
         = itemPath === '/'
           ? itemPath === routePath
@@ -30,7 +31,7 @@ export function useNavLink(item: Ref<DefaultTheme.NavItemWithLink>) {
         active,
         isExternal,
       },
-      'href': isExternal ? item.value.link : withBase(item.value.link),
+      'href': isExternal ? link : withBase(link),
       'target': item.value.target || isExternal ? '_blank' : null,
       'rel': item.value.rel || isExternal ? 'noopener noreferrer' : null,
       'aria-label': item.value.ariaLabel,
@@ -43,16 +44,15 @@ export function useNavLink(item: Ref<DefaultTheme.NavItemWithLink>) {
   }
 }
 
+function interpret(path = '') {
+  return path
+    .replace(/{{pathname}}/, typeof window === 'undefined' ? '/' : location.pathname)
+}
+
 function normalizePath(path: string): string {
   return path
     .replace(/#.*$/, '')
     .replace(/\?.*$/, '')
     .replace(/\.(html|md)$/, '')
     .replace(/\/index$/, '/')
-}
-
-function normalizePathWithHash(path: string): string {
-  const hash = path.match(/#.*$/)?.[0] || ''
-  path = normalizePath(path) + hash
-  return path
 }

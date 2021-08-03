@@ -4,8 +4,7 @@
     href="/"
     aria-label="Vite Plugin PWA, back to home`"
   >
-    <PwaLogo class="logo" alt="Vite Plugin PWA Logo" />
-    <span class="title">Vite PWA</span>
+    <span class="title">Vite Plugin</span>&#160;<PwaLogo class="logo" alt="Vite Plugin PWA Logo" />
   </a>
 </template>
 
@@ -25,7 +24,7 @@
 
 .logo {
   margin-right: .5rem;
-  height: 2.2rem;
+  height: 3rem;
   vertical-align: middle;
 }
 

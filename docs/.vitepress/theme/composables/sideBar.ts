@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import { useRoute, useSiteDataByRoute } from 'vitepress'
 // import { Header } from '/@types/shared'
-import { useActiveSidebarLinks } from '../composables/activeSidebarLink'
+import { useActiveSidebarLinks } from './activeSidebarLink'
 import { getSideBarConfig } from '../support/sideBar'
 import { DefaultTheme } from '../config'
 

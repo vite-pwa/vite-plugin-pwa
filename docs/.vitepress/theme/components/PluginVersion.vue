@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // replace dinamically
 const pwaVersion = '__PWA_VERSION__'
-const version = `v${pwaVersion}`
+const version = `PWA build version: v${pwaVersion}`
 </script>
 
 <template>

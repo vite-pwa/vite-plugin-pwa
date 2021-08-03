@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useData } from 'vitepress'
+import { useFrontmatter } from 'vitepress'
 
-const { frontmatter: data } = useData()
+const data = useFrontmatter()
 
 const heroImage = computed(() => data.value.heroImage)
 </script>
@@ -17,14 +17,14 @@ const heroImage = computed(() => data.value.heroImage)
     </p>
 
     <p class="version-img">
-      <a href='https://www.npmjs.com/package/vite-plugin-pwa'>
-        <PluginVersion />
+      <a href="https://www.npmjs.com/package/vite-plugin-pwa" target="_blank" rel="noopener">
+        <img src="https://img.shields.io/npm/v/vite-plugin-pwa?color=2e859c&label="  alt="Zero-config PWA for Vite NPM" width="45" height="20" loading="lazy">
       </a>
+      <br>
     </p>
 
-    <div class="nav-link action">
-      <a href="/guide" class="item action mx-2">Get Started</a>
-    </div>
+
+    <NavLink :item="{ link: '/guide/', text: 'Get Started' }" class="action mx-2" />
 
   </header>
 </template>
@@ -40,9 +40,6 @@ const heroImage = computed(() => data.value.heroImage)
       object-fit: scale-down;
       filter: var(--hero-filter);
     }
-  }
-  .version-img {
-    text-align: center;
   }
 }
 

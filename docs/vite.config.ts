@@ -4,8 +4,8 @@ import WindiCSS from 'vite-plugin-windicss'
 import Icons, { ViteIconsResolver } from 'vite-plugin-icons'
 import replace from '@rollup/plugin-replace'
 import { VitePWA } from '../dist/'
-
 import * as pwaPackage from '../package.json'
+import { hero, prompt } from './scripts/assets'
 
 export default defineConfig({
   build: {
@@ -25,6 +25,8 @@ export default defineConfig({
   },
   plugins: [
     replace({
+      __HERO_URL__: hero,
+      __PROMPT_URL__: prompt,
       __PWA_VERSION__: pwaPackage.version,
     }),
 
