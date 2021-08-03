@@ -63,7 +63,15 @@ export default defineConfig({
     VitePWA({
       outDir: '.vitepress/dist',
       registerType: 'prompt',
-      includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'safari-pinned-tab.svg', 'netlify.svg'],
+      includeAssets: [
+        'favicon.svg',
+        'favicon.ico',
+        'robots.txt',
+        'safari-pinned-tab.svg',
+        'netlify.svg',
+        'hero.png',
+        'prompt-update.png',
+      ],
       mode: 'development',
       manifest: {
         name: 'Vite Plugin PWA',
@@ -91,34 +99,6 @@ export default defineConfig({
       },
       workbox: {
         runtimeCaching: [
-          {
-            urlPattern: /^https:\/\/repository-images\.githubusercontent\.com\/.*/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'githubusercontent-assets-cache',
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
-          {
-            urlPattern: /^https:\/\/user-images\.githubusercontent\.com\/.*/i,
-            handler: 'CacheFirst',
-            options: {
-              cacheName: 'githubusercontent-assets-cache',
-              expiration: {
-                maxEntries: 10,
-                maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days
-              },
-              cacheableResponse: {
-                statuses: [0, 200],
-              },
-            },
-          },
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
             handler: 'CacheFirst',
