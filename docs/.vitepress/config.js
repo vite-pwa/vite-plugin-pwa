@@ -60,7 +60,7 @@ const Deployment = [
 
 const Frameworks = [
   {
-    text: 'Frameworks',
+    text: 'Vite',
     link: '/frameworks/',
   },
   {
