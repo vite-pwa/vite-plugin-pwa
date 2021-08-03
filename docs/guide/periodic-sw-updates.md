@@ -1,7 +1,8 @@
-# Manual Service Worker Updates
+# Periodic Service Worker Updates
 
 As explained in [Manual Updates](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#manual_updates) <outbound-link />
-entry on `The Service Worker Lifecycle`, you can use this code to configure this behavior on your application:
+entry on `The Service Worker Lifecycle`, you can use this code to configure periodic service worker updates on your 
+application:
 
 ```ts
 import { registerSW } from 'virtual:pwa-register'

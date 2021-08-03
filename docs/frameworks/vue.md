@@ -72,9 +72,9 @@ const close = async() => {
 </style>
 ```
 
-### Manual Service Worker Updates
+### Periodic Service Worker Updates
 
-As explained in [Manual Service Worker Updates](/guide/manual-sw-updates.html), you can use this code to configure this 
+As explained in [Periodic Service Worker Updates](/guide/manual-sw-updates.html), you can use this code to configure this 
 behavior on your application with the virtual module `virtual:pwa-register/vue`:
 
 ```ts
@@ -212,10 +212,10 @@ export default {
 </style>
 ```
 
-### Manual Service Worker Updates
+### Periodic Service Worker Updates
 
-As explained in [Manual Service Worker Updates](/guide/manual-sw-updates.html), you can use this code to configure this
-behavior on your application with the `` `mixin`:
+As explained in [Periodic Service Worker Updates](/guide/manual-sw-updates.html), you can use this code to configure this
+behavior on your application with the `useRegisterSW.js` `mixin`:
 
 ```vue
 <script>

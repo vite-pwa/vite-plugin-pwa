@@ -22,8 +22,8 @@ const Guide = [
     link: '/guide/inject-manifest'
   },
   {
-    text: 'Manual SW updates',
-    link: '/guide/manual-sw-updates'
+    text: 'Periodic SW updates',
+    link: '/guide/periodic-sw-updates'
   },
   {
     text: 'Static assets handling',

@@ -46,7 +46,7 @@ export const defineConfig({
 - [Prompt for update](/guide/prompt-for-update.html): prompt for new content refreshing
 - [Automatic reload](/guide/auto-update.html) when new content available
 - [Advanced (injectManifest)](/guide/inject-manifest.html) with Offline support
-- [Manual SW updates](/guide/manual-sw-updates.html)
+- [Periodic SW updates](/guide/periodic-sw-updates.html)
 - [Static assets handling](/guide/static-assets.html)
 
 
