@@ -2,7 +2,7 @@
 
 ## Vue 3
 
-You can use the builtin `Vite` virtual module `virtual:pwa-register/vue` for `Vuejs 3` which will return
+You can use the built-in `Vite` virtual module `virtual:pwa-register/vue` for `Vuejs 3` which will return
 `composition api` references (`ref<boolean>`) for `offlineReady` and `needRefresh`.
 
 You can use this `ReloadPrompt.vue` component:
