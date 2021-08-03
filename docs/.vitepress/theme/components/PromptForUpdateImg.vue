@@ -5,12 +5,11 @@
 
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
 .prompt-img {
   text-align: center;
   img {
     object-fit: scale-down;
-    filter: var(--hero-filter);
   }
 }
 </style>

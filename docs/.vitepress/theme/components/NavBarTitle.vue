@@ -4,7 +4,7 @@
     href="/"
     aria-label="Vite Plugin PWA, back to home`"
   >
-    <span class="title">Vite Plugin</span>&#160;<PwaLogo class="logo" alt="Vite Plugin PWA Logo" />
+    <span class="title">Vite Plugin</span>&#160;<PwaLogo />
   </a>
 </template>
 
@@ -20,12 +20,6 @@
 
 .nav-bar-title:hover {
   text-decoration: none;
-}
-
-.logo {
-  margin-right: .5rem;
-  height: 3rem;
-  vertical-align: middle;
 }
 
 .title {

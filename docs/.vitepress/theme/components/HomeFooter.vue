@@ -1,15 +1,8 @@
 <template>
   <footer v-if="$frontmatter.footer" class="footer">
-    <div class="container">
-      <p class="text">
-        {{ $frontmatter.footer }}
-      </p>
-      <p class="text-center opacity-75">
-        <a href="https://www.netlify.com" target="_blank" rel="noopener">
-          <img src="/netlify.svg" alt="Deploys by Netlify" width="114" height="51">
-        </a>
-      </p>
-    </div>
+    <p class="text">
+      {{ $frontmatter.footer }}
+    </p>
   </footer>
 </template>
 
