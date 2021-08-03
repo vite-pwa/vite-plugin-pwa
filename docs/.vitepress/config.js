@@ -4,6 +4,130 @@ const githubusercontent = 'https://repository-images.githubusercontent.com'
 
 const hero = `${githubusercontent}/290129345/d4bfc300-1866-11eb-8602-e672c9dd0e7d`
 
+const Guide = [
+  {
+    text: 'Getting Started',
+    link: '/guide/',
+  },
+  {
+    text: 'Generate Service Worker',
+    link: '/guide/generate'
+  },
+  {
+    text: 'Auto inject Web App Manifest',
+    link: '/guide/register-manifest'
+  },
+  {
+    text: 'Prompt for update',
+    link: '/guide/prompt-for-update'
+  },
+  {
+    text: 'Automatic reload',
+    link: '/guide/auto-update'
+  },
+  {
+    text: 'Advanced (injectManifest)',
+    link: '/guide/inject-manifest'
+  },
+  {
+    text: 'Static assets handling',
+    link: '/guide/static-assets'
+  },
+  {
+    text: 'IDE Support',
+    link: '/guide/ide',
+  },
+  {
+    text: 'Testing Service Worker',
+    link: '/guide/testing',
+  },
+]
+
+const Deployment = [
+  {
+    text: 'Deployment',
+    link: '/deployment/',
+  },
+  {
+    text: 'Netlify',
+    link: '/deployment/netlify',
+  },
+  {
+    text: 'AWS Amplify',
+    link: '/deployment/aws',
+  },
+  {
+    text: 'Vercel',
+    link: '/deployment/vercel',
+  },
+  {
+    text: 'Apache Http Server 2.4+',
+    link: '/deployment/apache',
+  },
+]
+
+const Frameworks = [
+  {
+    text: 'Frameworks',
+    link: '/frameworks/',
+  },
+  {
+    text: 'Vuejs',
+    link: '/frameworks/vue',
+  },
+  {
+    text: 'React',
+    link: '/frameworks/react',
+  },
+  {
+    text: 'Vanilla',
+    link: '/frameworks/vanilla',
+  },
+  {
+    text: 'Svelte',
+    link: '/frameworks/svelte',
+  },
+  {
+    text: 'Vitepress',
+    link: '/frameworks/vitepress',
+  },
+]
+
+const Workbox = [
+  {
+    text: 'Workbox',
+    link: '/workbox/',
+  },
+  {
+    text: 'generateWS',
+    link: '/workbox/generate-ws',
+  },
+  {
+    text: 'injectManifest',
+    link: '/workbox/inject-manifest',
+  },
+]
+
+const slidebars = [
+  {
+    text: 'Guide',
+    children: Guide,
+  },
+  {
+    text: 'Frameworks',
+    children: Frameworks,
+  },
+  {
+    text: 'Deployment',
+    children: Deployment,
+  },
+  {
+    text: 'Workbox',
+    children: Workbox,
+  },
+]
+
+
 /**
  * @type {import('vitepress').UserConfig}
  */
@@ -11,14 +135,6 @@ const config = {
   title: 'Vite Plugin PWA',
   description: 'Zero-config PWA for Vite',
   lang: 'en-US',
-  themeConfig: {
-    logo: '/favicon.svg',
-    repo: 'antfu/vite-plugin-pwa',
-    docsDir: 'docs',
-    editLinks: true,
-    editLinkText: 'Edit this page',
-    lastUpdated: 'Last Updated',
-  },
   head: [
     ['meta', { name: 'theme-color', content: '#ffffff' }],
     ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
@@ -33,6 +149,45 @@ const config = {
     ['meta', { name: 'twitter:image', content: hero }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: "180x180" }],
   ],
+  themeConfig: {
+    logo: '/favicon.svg',
+    repo: 'antfu/vite-plugin-pwa',
+    docsDir: 'docs',
+    editLinks: true,
+    editLinkText: 'Edit this page',
+    lastUpdated: 'Last Updated',
+    /*
+      algolia: {
+        apiKey: 'todo@antfu: replace this',
+        indexName: 'vite-plugin-pwa',
+        searchParameters: {
+          // for translations maintainers: change the filter to your locale code (subdomain name)
+          facetFilters: ['language:en']
+        }
+      },
+    */
+    nav: [
+      {
+        text: 'Guide',
+        items: Guide,
+      },
+      {
+        text: 'Deployment',
+        items: Deployment,
+      },
+      {
+        text: 'Workbox',
+        items: Workbox,
+      },
+    ],
+    sidebar: {
+      '/guide/': slidebars,
+      '/frameworks/': slidebars,
+      '/deployment/': slidebars,
+      '/workbox/': slidebars,
+      '/': slidebars,
+    },
+  },
 }
 
 module.exports = config

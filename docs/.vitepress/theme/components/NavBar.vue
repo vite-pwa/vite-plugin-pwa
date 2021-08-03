@@ -1,17 +1,20 @@
 <script setup lang="ts">
+defineProps({
+  showSidebar: { type: Boolean, required: true },
+})
 defineEmits(['toggle'])
 </script>
 
 <template>
-  <header class="nav-bar">
-    <ToggleSideBarButton @toggle="$emit('toggle')" />
+  <header class="nav-bar" :class="{'no-toggle-btn': !showSidebar}">
+    <ToggleSideBarButton v-if="showSidebar"  @toggle="$emit('toggle')" />
 
     <NavBarTitle />
 
     <div class="flex-grow" />
 
     <div class="nav">
-<!--      <NavLinks />-->
+      <NavLinks />
     </div>
 
     <div class="nav-icons">
@@ -44,6 +47,10 @@ defineEmits(['toggle'])
   padding: 0.7rem 1.5rem 0.7rem 4rem;
   height: var(--header-height);
   background-color: var(--c-bg);
+}
+
+.nav-bar.no-toggle-btn {
+  padding-left: 1.5rem;
 }
 
 .nav-bar.root {

@@ -1,12 +1,12 @@
 import { computed } from 'vue'
-import { useData } from 'vitepress'
+import { useSiteDataByRoute, usePageData } from 'vitepress'
 import { endingSlashRE, isNullish, isExternal } from '../utils'
 
 const bitbucketRE = /bitbucket.org/
 
 export function useEditLink() {
-
-  const { site, page } = useData()
+  const site = useSiteDataByRoute()
+  const page = usePageData()
 
   const url = computed(() => {
     const showEditLink = isNullish(page.value.frontmatter.editLink)

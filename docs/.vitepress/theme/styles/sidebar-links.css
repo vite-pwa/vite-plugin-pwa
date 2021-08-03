@@ -13,11 +13,11 @@
 
 a.sidebar-link-item:hover {
   text-decoration: none;
-  color: var(--c-brand);
+  color: var(--c-text);
 }
 
 a.sidebar-link-item.active {
-  color: var(--c-brand);
+  color: var(--c-text);
 }
 
 .sidebar > .sidebar-links {
@@ -47,7 +47,7 @@ a.sidebar-link-item.active {
 }
 
 .sidebar > .sidebar-links > .sidebar-link > a.sidebar-link-item.active {
-  border-left-color: var(--c-brand);
+  border-left-color: var(--c-brand-dark);
   font-weight: 600;
 }
 
@@ -60,7 +60,7 @@ a.sidebar-link-item.active {
 }
 
 .sidebar > .sidebar-links > .sidebar-link > .sidebar-links > .sidebar-link > a.sidebar-link-item.active {
-  border-left-color: var(--c-brand);
+  border-left-color: var(--c-brand-dark);
   font-weight: 600;
 }
 

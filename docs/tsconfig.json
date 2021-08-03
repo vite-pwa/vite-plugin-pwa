@@ -16,12 +16,19 @@
     "forceConsistentCasingInFileNames": true,
     "types": [
       "@types/fs-extra",
+      "node",
       "vite/client",
-      "vite-plugin-pwa/client"
+      "vite-plugin-pwa/client",
+      "vitepress"
     ],
     "paths": {
       "~/*": ["src/*"]
     }
   },
+  "include": [
+    "./*.ts",
+    "./.vitepress/**/*.ts",
+    "./.vitepress/**/*.vue"
+  ],
   "exclude": ["dist","node_modules"]
 }

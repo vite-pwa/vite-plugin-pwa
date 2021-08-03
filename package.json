@@ -20,8 +20,8 @@
   "bugs": "https://github.com/antfu/vite-plugin-pwa/issues",
   "scripts": {
     "docs": "npm -C docs run dev",
-    "docs:build": "npm run build && npm -C docs run build",
-    "docs:serve": "npm run build && npm -C docs run serve",
+    "docs:build": "npm -C docs run build",
+    "docs:serve": "npm -C docs run serve",
     "dev": "esno scripts/dev.ts",
     "build": "esno scripts/build.ts",
     "prepublishOnly": "npm run build",

@@ -13,13 +13,6 @@ import 'virtual:windi.css'
 const theme = {
     Layout,
     NotFound,
-    enhanceApp({ app, router }) {
-        // @ts-ignore
-        if  (typeof window !== 'undefined') {
-            console.log(app)
-            console.log(router)
-        }
-    },
 }
 
 export default theme

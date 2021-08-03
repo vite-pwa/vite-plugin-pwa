@@ -29,6 +29,6 @@
     "vite-plugin-pwa": "workspace:*",
     "vite-plugin-icons": "^0.6.5",
     "vite-plugin-windicss": "^1.2.7",
-    "vitepress": "^0.15.6"
+    "vitepress": "^0.14.1"
   }
 }

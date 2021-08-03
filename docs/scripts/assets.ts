@@ -2,34 +2,27 @@ import fg from 'fast-glob'
 import fs from 'fs-extra'
 // import critical from 'critical'
 
-const fireFont = 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap'
+const firaFont = 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap'
 
-const githubusercontent = 'https://repository-images.githubusercontent.com'
+export const githubusercontent1 = 'https://repository-images.githubusercontent.com'
+export const githubusercontent2 = 'https://user-images.githubusercontent.com'
 
-const hero = `${githubusercontent}/290129345/d4bfc300-1866-11eb-8602-e672c9dd0e7d`
+export const hero = `${githubusercontent1}/290129345/d4bfc300-1866-11eb-8602-e672c9dd0e7d`
+export const prompt = `${githubusercontent2}/11247099/111190584-330cf880-85f2-11eb-8dad-20ddb84456cf.png`
 
 const googleapis = 'https://fonts.googleapis.com'
 const gstatic = 'https://fonts.gstatic.com'
 
-const preconnectHome = `
+const preconnect = `
     <link rel="dns-prefetch" href="${googleapis}">
     <link rel="dns-prefetch" href="${gstatic}">
-    <link rel="dns-prefetch" href="${githubusercontent}">
+    <link rel="dns-prefetch" href="${githubusercontent1}">
+    <link rel="dns-prefetch" href="${githubusercontent2}">
     <link rel="preconnect" crossorigin="anonymous" href="${googleapis}">
     <link rel="preconnect" crossorigin="anonymous" href="${gstatic}">
-    <link rel="preconnect" crossorigin="anonymous" href="${githubusercontent}">
+    <link rel="preconnect" crossorigin="anonymous" href="${githubusercontent1}">
+    <link rel="preconnect" crossorigin="anonymous" href="${githubusercontent2}">
 `
-
-const preconnectOther = `
-    <link rel="dns-prefetch" href="${googleapis}">
-    <link rel="dns-prefetch" href="${gstatic}">
-    <link rel="preconnect" crossorigin="anonymous" href="${googleapis}">
-    <link rel="preconnect" crossorigin="anonymous" href="${gstatic}">
-`
-
-const preconnect = (home: boolean) => {
-  return home ? preconnectHome : preconnectOther
-}
 
 export const optimizePages = async() => {
   const names = await fg('./.vitepress/dist/**/*.html', { onlyFiles: true })
@@ -40,23 +33,23 @@ export const optimizePages = async() => {
     const home = i.endsWith('/index.html')
 
     const netlify = home
-      ? `\n\t<link rel="prefetch" href="/netlify.svg">\n\t<link rel="prefetch" href="${hero}">`
+      ? `\n\t<link rel="prefetch" href="/netlify.svg">\n\t<link rel="prefetch" href="${hero}">\n\t<link rel="prefetch" href="${prompt}">`
       : ''
 
     html = html.replace(
       /<link rel="stylesheet" href="(.*?)">/g,
       `
-    ${preconnect(home)}
+    ${preconnect}
     <link rel="preload" as="style" href="$1" />
     <link rel="stylesheet" href="$1" />
     <link
       rel="preload"
       as="style"
       onload="this.onload=null;this.rel='stylesheet'"
-      href="${fireFont}"
+      href="${firaFont}"
     />
     <noscript>
-      <link rel="stylesheet" href="${fireFont}" />
+      <link rel="stylesheet" href="${firaFont}" />
     </noscript>
     <link rel="prefetch" href="/manifest.webmanifest">${netlify}\n`).trim()
 

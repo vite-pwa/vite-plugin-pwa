@@ -2,7 +2,6 @@
   <main class="home">
     <HomeHero />
     <slot name="hero" />
-    <HomeFeatures />
     <slot name="features" />
     <HomeFooter />
     <slot name="footer" />

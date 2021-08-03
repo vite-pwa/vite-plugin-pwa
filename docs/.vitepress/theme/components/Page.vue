@@ -7,9 +7,9 @@
         <Content />
       </div>
 
-<!--      <PageFooter />-->
+      <PageFooter />
 
-<!--      <NextAndPrevLinks />-->
+      <NextAndPrevLinks />
 
       <slot name="bottom" />
     </div>
