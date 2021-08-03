@@ -108,7 +108,7 @@ const updateServiceWorker = useRegisterSW({
 
 Since this plugin only supports `Vuejs 3`, you cannot use the virtual module `virtual:pwa-register/vue`.
 
-You can copy `useRegisterSW.js` `mixin` in your application to make it working:
+You can copy `useRegisterSW.js` `mixin` to your `@/mixins/` directory in your application to make it working:
 
 ```js
 export default {
@@ -170,7 +170,7 @@ You can use this `ReloadPrompt.vue` component:
 
 ```vue
 <script>
-import useRegisterSW from './useRegisterSW'
+import useRegisterSW from '@/mixins/useRegisterSW'
 
 export default {
   name: "reload-prompt",
@@ -234,7 +234,7 @@ behavior on your application with the `useRegisterSW.js` `mixin`:
 
 ```vue
 <script>
-import useRegisterSW from './useRegisterSW'
+import useRegisterSW from '@/mixins/useRegisterSW'
 
 export default {
   name: "reload-prompt",
@@ -257,7 +257,7 @@ following code:
 
 ```vue
 <script>
-import useRegisterSW from './useRegisterSW'
+import useRegisterSW from '@/mixins/useRegisterSW'
 
 export default {
   name: "reload-prompt",
