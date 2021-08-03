@@ -38,7 +38,6 @@ Add `netlify.toml` file to the root directory with the content:
     Content-Type = "application/manifest+json"
 ```
 
-
 Add `_header` file to `public` directory with the content:
 
 ```txt
