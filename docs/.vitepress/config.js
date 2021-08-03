@@ -1,9 +1,5 @@
 require('esbuild-register')
 
-const githubusercontent = 'https://repository-images.githubusercontent.com'
-
-const hero = `${githubusercontent}/290129345/d4bfc300-1866-11eb-8602-e672c9dd0e7d`
-
 const Guide = [
   {
     text: 'Getting Started',
@@ -12,10 +8,6 @@ const Guide = [
   {
     text: 'Generate Service Worker',
     link: '/guide/generate'
-  },
-  {
-    text: 'Auto inject Web App Manifest',
-    link: '/guide/register-manifest'
   },
   {
     text: 'Prompt for update',
@@ -80,10 +72,6 @@ const Frameworks = [
     link: '/frameworks/react',
   },
   {
-    text: 'Vanilla',
-    link: '/frameworks/vanilla',
-  },
-  {
     text: 'Svelte',
     link: '/frameworks/svelte',
   },
@@ -142,11 +130,9 @@ const config = {
     ['link', { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#ffffff' }],
     ['meta', { name: 'author', content: 'Anthony Fu' }],
     ['meta', { property: 'og:title', content: 'Vite Plugin PWA' }],
-    ['meta', { property: 'og:image', content: hero }],
     ['meta', { property: 'og:description', content: 'Zero-config PWA for Vite' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:creator', content: '@antfu7' }],
-    ['meta', { name: 'twitter:image', content: hero }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: "180x180" }],
   ],
   themeConfig: {
@@ -170,6 +156,10 @@ const config = {
       {
         text: 'Guide',
         items: Guide,
+      },
+      {
+        text: 'Frameworks',
+        items: Frameworks,
       },
       {
         text: 'Deployment',
