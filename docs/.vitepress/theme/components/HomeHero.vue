@@ -11,14 +11,14 @@ const heroImage = computed(() => data.value.heroImage)
 
     <p class="hero-img">
       <a href="https://github.com/antfu/vite-plugin-pwa" target="_blank" rel="noopener">
-        <img :src="heroImage" alt="Zero-config PWA for Vite" width="840" height="420" loading="lazy">
+        <img :src="heroImage" alt="Zero-config PWA for Vite" width="840" height="420">
       </a>
       <br>
     </p>
 
     <p class="version-img">
       <a href="https://www.npmjs.com/package/vite-plugin-pwa" target="_blank" rel="noopener">
-        <img src="https://img.shields.io/npm/v/vite-plugin-pwa?color=2e859c&label="  alt="Zero-config PWA for Vite NPM" width="45" height="20" loading="lazy">
+        <img src="https://img.shields.io/npm/v/vite-plugin-pwa?color=2e859c&label="  alt="Zero-config PWA for Vite NPM" width="45" height="20">
       </a>
       <br>
     </p>
