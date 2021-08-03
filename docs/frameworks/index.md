@@ -9,8 +9,8 @@ The only official framework supported and provided by this plugin is `vuejs 3` a
 ## Usage
 
 This plugin exposes a `Vite` virtual module to interact with the service worker, you must import this virtual module 
-when you need to work with `Prompt for new content refreshing`, since the virtual module will expose the methods to 
-interact with the service worker:
+when you need to work with [Prompt for update](/guide/prompt-for-update.html) on new content available, since the 
+virtual module will expose the methods to interact with the service worker:
 
 ```ts
 import { registerSW } from 'virtual:pwa-register'
@@ -19,6 +19,19 @@ const updateSW = registerSW({
   onNeedRefresh() {
     // show a prompt to user
   },
+  onOfflineReady() {
+    // show a ready to work offline to user
+  }
+})
+```
+
+You must also import the virtual module when you need to work with [Automatic reload](/guide/auto-update.html) when new
+content available, and you need to notify the user the application is ready to work `offline`:
+
+```ts
+import { registerSW } from 'virtual:pwa-register'
+
+const updateSW = registerSW({
   onOfflineReady() {
     // show a ready to work offline to user
   }
