@@ -26,6 +26,10 @@ const Guide = [
     link: '/guide/static-assets'
   },
   {
+    text: 'Automatic SW updates',
+    link: '/guide/automatic-sw-updates'
+  },
+  {
     text: 'IDE Support',
     link: '/guide/ide',
   },
