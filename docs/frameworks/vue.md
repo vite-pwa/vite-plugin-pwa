@@ -72,19 +72,34 @@ const close = async() => {
 </style>
 ```
 
-### Periodic Service Worker Updates
+### Periodic SW Updates
 
-As explained in [Periodic Service Worker Updates](/guide/manual-sw-updates.html), you can use this code to configure this 
+As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.html), you can use this code to configure this 
 behavior on your application with the virtual module `virtual:pwa-register/vue`:
 
 ```ts
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 
-const updateServiceWorker = registerSW({
+const updateServiceWorker = useRegisterSW({
   onRegistered(r) {
     r && setInterval(() => {
       r.update()
     }, 60 * 60 * 1000 /* 1 hour: interval in milliseconds */)
+  }
+})
+```
+
+### SW Registration Errors
+
+As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can to notify the user with
+following code:
+
+```ts
+import { useRegisterSW } from 'virtual:pwa-register/vue'
+
+const updateServiceWorker = useRegisterSW({
+  onRegiterError(error) {
+    // notify the user an error occur
   }
 })
 ```
@@ -212,9 +227,9 @@ export default {
 </style>
 ```
 
-### Periodic Service Worker Updates
+### Periodic SW Updates
 
-As explained in [Periodic Service Worker Updates](/guide/manual-sw-updates.html), you can use this code to configure this
+As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.html), you can use this code to configure this
 behavior on your application with the `useRegisterSW.js` `mixin`:
 
 ```vue
@@ -233,6 +248,26 @@ export default {
   }
 }
 </script>
+```
 
+### SW Registration Errors
+
+As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can to notify the user with 
+following code:
+
+```vue
+<script>
+import useRegisterSW from './useRegisterSW'
+
+export default {
+  name: "reload-prompt",
+  mixins: [useRegisterSW],
+  methods: {
+    handleSWRegisterError(r) {
+      // notify the user an error occur
+    }
+  }
+}
+</script>
 ```
 
