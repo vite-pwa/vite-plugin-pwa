@@ -35,9 +35,7 @@ You must include the following code on your `main.ts` or `main.js` file:
 import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
-  onOfflineReady() {
-    // show a ready to work offline to user
-  },
+  onOfflineReady() {},
 })
 ```
 
