@@ -20,14 +20,13 @@ export const optimizePages = async() => {
   await Promise.all(names.map(async(i) => {
     let html = await fs.readFile(i, 'utf-8')
 
-    let preloadImg = ''
+    let preloadImg = '\n\t<link rel="prefetch" href="/icon_light.svg">\n\t<link rel="prefetch" href="/icon_dark.svg">'
 
     if (i.endsWith('/dist/index.html'))
-      preloadImg = '\n\t<link rel="prefetch" href="/banner_light.svg">\n\t<link rel="prefetch" href="/banner_dark.svg">'
+      preloadImg = `${preloadImg}\n\t<link rel="prefetch" href="/banner_light.svg">\n\t<link rel="prefetch" href="/banner_dark.svg">`
 
     else if (i.endsWith('/prompt-for-update.html'))
-      preloadImg = '\n\t<link rel="prefetch" href="/prompt-update.png">'
-
+      preloadImg = `${preloadImg}\n\t<link rel="prefetch" href="/prompt-update.png">`
 
     html = html.replace(
       /<link rel="stylesheet" href="(.*?)">/g,
