@@ -5,7 +5,7 @@ defineEmits(['toggle'])
 <template>
   <div
       role="button"
-      aria-label="Show/hide navigation menu"
+      aria-label="Toggle navigation menu"
       tabindex="0"
       class="sidebar-button"
       @keydown.enter="$emit('toggle')"
