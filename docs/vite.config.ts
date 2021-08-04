@@ -90,7 +90,7 @@ export default defineConfig({
           },
           {
             src: 'icon_light.svg',
-            sizes: '512x512',
+            sizes: '155x155',
             type: 'image/svg',
             purpose: 'any maskable',
           },
