@@ -7,8 +7,8 @@ import { isDark } from '../composables/dark'
 
     <p class="hero-img">
       <a href="https://github.com/antfu/vite-plugin-pwa" target="_blank" rel="noopener">
-        <img v-show="isDark" src="/banner_dark.svg" alt="Zero-config PWA for Vite" width="700">
-        <img v-show="!isDark" src="/banner_light.svg" alt="Zero-config PWA for Vite" width="700">
+        <img v-show="isDark" src="/banner_dark.svg" alt="Zero-config PWA for Vite" width="700" height="259">
+        <img v-show="!isDark" src="/banner_light.svg" alt="Zero-config PWA for Vite" width="700" height="259">
       </a>
     </p>
 
