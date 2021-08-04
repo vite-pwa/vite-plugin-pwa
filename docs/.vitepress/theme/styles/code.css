@@ -13,7 +13,7 @@ html:not(.dark) {
   --prism-background: #fafafa;
   --prism-inline-background: #f5f5f5;
   --prism-comment: #a0ada0;
-  --prism-string: #b56959;
+  --prism-string: #a56051;
   --prism-literal: #2f8a89;
   --prism-number: #296aa3;
   --prism-keyword: #1c6b48;
@@ -23,7 +23,7 @@ html:not(.dark) {
   --prism-deleted: #a14f55;
   --prism-class: #2993a3;
   --prism-builtin: #ab5959;
-  --prism-property: #b58451;
+  --prism-property: #926a41;
   --prism-namespace: #b05a78;
   --prism-punctuation: #8e8f8b;
   --prism-decorator: #bd8f8f;
