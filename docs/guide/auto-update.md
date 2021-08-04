@@ -28,6 +28,8 @@ VitePWA({
 
 ## Runtime
 
+You must include the following code on your `main.ts` or `main.js` file:
+
 ```ts
 // main.ts
 import { registerSW } from 'virtual:pwa-register'
@@ -39,21 +41,28 @@ const updateSW = registerSW({
 })
 ```
 
+You will need to show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
+
+When the user click the `OK` button, just hide the prompt shown on `onOfflineReady` method.
+
 ### SSR/SSG
 
 If you are using `SSR/SSG`, you need to import `virtual:pwa-register` module using dynamic import and checking if
-`window` is not `undefined`:
+`window` is not `undefined`.
+
+You can register the service worker on `src/pwa.ts` module:
 
 ```ts
-// pwa.ts
 import { registerSW } from 'virtual:pwa-register'
-registerSW({ /* options */})
+
+registerSW({ ... })
 ```
 
+and then import it from your `maint.ts`:
+
 ```ts
-// main.ts
 if (typeof window !== 'undefined') {
-    import('./pwa')
+   import('./pwa')
 }
 ```
 
