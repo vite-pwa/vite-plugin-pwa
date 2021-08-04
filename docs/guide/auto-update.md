@@ -31,7 +31,6 @@ VitePWA({
 You must include the following code on your `main.ts` or `main.js` file:
 
 ```ts
-// main.ts
 import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
