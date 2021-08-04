@@ -1,3 +1,3 @@
 # Vercel
 
-WIP
+> Work in progress

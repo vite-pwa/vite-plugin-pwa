@@ -1,3 +1,3 @@
 # Svelte
 
-WIP
+> Work in progress

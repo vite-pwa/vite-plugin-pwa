@@ -1,3 +1,3 @@
 # AWS Amplify
 
-WIP
+> Work in progress

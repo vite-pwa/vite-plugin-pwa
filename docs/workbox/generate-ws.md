@@ -1,3 +1,3 @@
 # generateWS
 
-WIP
+> Work in progress

@@ -1,3 +1,3 @@
 # injectManifest
 
-WIP
+> Work in progress
