@@ -82,14 +82,24 @@ defineEmits(['toggle'])
 }
 
 .nav-icons {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 40px);
+  grid-column-gap: 0.5rem;
   padding: 2px 0 0;
   align-items: center;
   border-bottom: 0;
   margin-left: 12px;
-}
-
-.nav-icons .item {
-  padding-left: 12px;
+  .item {
+    width: 40px;
+    height: 40px;
+    .icon-button {
+      width: 40px;
+      height: 40px;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
+    }
+  }
 }
 </style>
