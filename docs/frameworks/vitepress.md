@@ -1,7 +1,7 @@
 # Vitepress
 
 Since [Vitepress](https://vitepress.vuejs.org/) <outbound-link /> is built using [Vuejs 3](https://v3.vuejs.org/) <outbound-link /> and 
-[Vite](https://vitejs.dev/) <outbound-link />, the integration with this plugin is graceful.
+on top of [Vite](https://vitejs.dev/) <outbound-link />, the integration with this plugin is graceful.
 
 ## Setup
 
