@@ -6,8 +6,8 @@ You can handle Service Worker registration errors if you want to notify the user
 import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
-  onRegiterError(error) {
-    // notify the user an error occur
-  }
+  onRegiterError(error) {}
 })
 ```
+
+and then inside `onRegisterError`, just notify the user that there was an error registering the service worker. 
