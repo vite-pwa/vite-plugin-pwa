@@ -22,13 +22,12 @@ export const optimizePages = async() => {
 
     let preloadImg = ''
 
-    if (i.endsWith('/index.html'))
-      preloadImg = '<link rel="prefetch" href="/hero.png">'
+    if (i.endsWith('/dist/index.html'))
+      preloadImg = '\n\t<link rel="prefetch" href="/banner_light.svg">\n\t<link rel="prefetch" href="/banner_dark.svg">'
 
     else if (i.endsWith('/prompt-for-update.html'))
-      preloadImg = '<link rel="prefetch" href="/prompt-update.png">'
+      preloadImg = '\n\t<link rel="prefetch" href="/prompt-update.png">'
 
-    const netlify = `\n\t<link rel="prefetch" href="/netlify.svg">\n\t${preloadImg}`
 
     html = html.replace(
       /<link rel="stylesheet" href="(.*?)">/g,
@@ -45,7 +44,7 @@ export const optimizePages = async() => {
     <noscript>
       <link rel="stylesheet" href="${firaFont}" />
     </noscript>
-    <link rel="prefetch" href="/manifest.webmanifest">${netlify}\n`).trim()
+    <link rel="prefetch" href="/manifest.webmanifest">${preloadImg}\n`).trim()
 
     html = html.replace(
       '</head>',
