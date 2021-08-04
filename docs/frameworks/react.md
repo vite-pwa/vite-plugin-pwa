@@ -1,3 +1,3 @@
 # React
 
-WIP
+> Work in progress

@@ -71,7 +71,6 @@ export default defineConfig({
         'icon_dark.svg',
         'prompt-update.png',
       ],
-      mode: 'development',
       manifest: {
         name: 'Vite Plugin PWA',
         short_name: 'PWA for Vite',
