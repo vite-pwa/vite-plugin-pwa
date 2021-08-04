@@ -95,8 +95,6 @@ const pageClasses = computed(() => {
       </template>
     </SideBar>
 
-    <div role="button" aria-label="Toogle navigation menu" tabindex="0" class="sidebar-mask" @click="toggleSidebar(false)" />
-
     <Home v-if="enableHome">
       <template #hero>
         <slot name="home-hero" />
