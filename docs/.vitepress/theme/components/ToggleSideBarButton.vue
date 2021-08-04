@@ -3,12 +3,18 @@ defineEmits(['toggle'])
 </script>
 
 <template>
-  <div role="button" aria-label="Show/hide navigation menu" tabindex="0" class="sidebar-button" @click="$emit('toggle')">
+  <div
+      role="button"
+      aria-label="Show/hide navigation menu"
+      tabindex="0"
+      class="sidebar-button"
+      @keydown.enter="$emit('toggle')"
+      @click="$emit('toggle')"
+  >
     <svg
-      tabindex="-1"
       class="icon"
       xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
+      focusable="false"
       role="img"
       viewBox="0 0 448 512"
     >
