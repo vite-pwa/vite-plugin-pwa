@@ -20,15 +20,13 @@ export const optimizePages = async() => {
   await Promise.all(names.map(async(i) => {
     let html = await fs.readFile(i, 'utf-8')
 
-    let preloadImg = ''
+    let preloadImg = '\n\t<link rel="prefetch" href="/icon_light.svg">\n\t<link rel="prefetch" href="/icon_dark.svg">'
 
-    if (i.endsWith('/index.html'))
-      preloadImg = '<link rel="prefetch" href="/hero.png">'
+    if (i.endsWith('/dist/index.html'))
+      preloadImg = `${preloadImg}\n\t<link rel="prefetch" href="/banner_light.svg">\n\t<link rel="prefetch" href="/banner_dark.svg">`
 
     else if (i.endsWith('/prompt-for-update.html'))
-      preloadImg = '<link rel="prefetch" href="/prompt-update.png">'
-
-    const netlify = `\n\t<link rel="prefetch" href="/netlify.svg">\n\t${preloadImg}`
+      preloadImg = `${preloadImg}\n\t<link rel="prefetch" href="/prompt-update.png">`
 
     html = html.replace(
       /<link rel="stylesheet" href="(.*?)">/g,
@@ -45,7 +43,7 @@ export const optimizePages = async() => {
     <noscript>
       <link rel="stylesheet" href="${firaFont}" />
     </noscript>
-    <link rel="prefetch" href="/manifest.webmanifest">${netlify}\n`).trim()
+    <link rel="prefetch" href="/manifest.webmanifest">${preloadImg}\n`).trim()
 
     html = html.replace(
       '</head>',
@@ -58,6 +56,8 @@ export const optimizePages = async() => {
         + '    })()\n'
         + '  </script></head>',
     )
+
+    html = html.replaceAll(/aria-hidden="true"/gi, 'tabindex="-1" aria-hidden="true"')
 
     await fs.writeFile(i, html, 'utf-8')
 

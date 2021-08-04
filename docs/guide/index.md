@@ -10,18 +10,18 @@ you can find more information on [Workbox](/workbox/) section.
 
 Add `vite-plugin-pwa` dependency to your project:
 
+With **YARN**:
 ```shell
-# YARN
 yarn add vite-plugin-pwa -D
 ```
 
+With **NPM**:
 ```shell
-# NPM
 npm i vite-plugin-pwa -D
 ```
 
+With **PNPM**:
 ```shell
-# PNPM
 pnpm i vite-plugin-pwa -D
 ```
 
@@ -30,11 +30,10 @@ pnpm i vite-plugin-pwa -D
 Edit your `vite.config.ts` file to add `Vite Plugin PWA`:
 
 ```ts
-// vite.config.ts
 import { VitePWA } from 'vite-plugin-pwa'
 export const defineConfig({
   plugins: [
-    VitePWA({ /* options*/ })
+    VitePWA({})
   ]    
 })
 ```

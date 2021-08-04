@@ -2,20 +2,23 @@
 
 As explained in [Manual Updates](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#manual_updates) <outbound-link />
 entry on `The Service Worker Lifecycle`, you can use this code to configure periodic service worker updates on your 
-application:
+application on your `main.ts` or `main.js`:
 
 ```ts
 import { registerSW } from 'virtual:pwa-register'
 
+const intervalMS = 60 * 60 * 1000
+
 const updateSW = registerSW({
-  // other options
   onRegistered(r) {
     r && setInterval(() => {
       r.update()
-    }, 60 * 60 * 1000 /* 1 hour: interval in milliseconds */)
+    }, intervalMS)
   }
 })
 ```
+
+The interval must be in milliseconds, in the example above it is configured to check the service worker every hour.
 
 > Since `workbox-window` uses a time-based `heuristic` algorithm to handle service worker updates, if you
 build your service worker and register it again, if the time between last registration and the new one is less than

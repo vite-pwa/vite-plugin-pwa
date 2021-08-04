@@ -1,11 +1,11 @@
 # Vitepress
 
 Since [Vitepress](https://vitepress.vuejs.org/) <outbound-link /> is built using [Vuejs 3](https://v3.vuejs.org/) <outbound-link /> and 
-[Vite](https://vitejs.dev/) <outbound-link />, the integration with this plugin is graceful.
+on top of [Vite](https://vitejs.dev/) <outbound-link />, the integration with this plugin is graceful.
 
 ## Setup
 
-Just follow the [Generate Service Worker](/guide/generate.html) section and use one of the `registerType` to configure
+Just follow the [Generate Service Worker](/guide/generate.html) section and use one of the `registerType` option to configure
 the behavior:
 
 - [Prompt for update](/guide/prompt-for-update.html): prompt for new content refreshing

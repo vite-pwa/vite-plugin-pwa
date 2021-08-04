@@ -17,33 +17,39 @@ You must include the following code on your `main.ts` or `main.js` file:
 import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
-  onNeedRefresh() {
-    // show a prompt to user with refresh and cancel buttons
-  },
-  onOfflineReady() {
-    // show a ready to work offline message to user
-  },
+  onNeedRefresh() {},
+  onOfflineReady() {},
 })
 ```
 
-when user clicked the "refresh" button then call `updateSW()` function; the page will reload and the up-to-date 
-content will be served.
+You will need to:
+- show a prompt to the user with refresh and cancel buttons inside `onNeedRefresh` method.
+- show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
+
+When the user clicked the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will 
+reload and the up-to-date content will be served.
+
+In any case, when the user click the `Cancel` or `OK` buttons, just hide the prompt shown on `onNeedRefresh` or 
+`onOfflineReady` methods.
 
 ### SSR/SSG
 
 If you are using `SSR/SSG`, you need to import `virtual:pwa-register` module using dynamic import and checking if
-`window` is not `undefined`:
+`window` is not `undefined`.
+
+You can register the service worker on `src/pwa.ts` module:
 
 ```ts
-// pwa.ts
 import { registerSW } from 'virtual:pwa-register'
-registerSW({ /* options */})
+
+registerSW({ ... })
 ```
 
+and then import it from your `maint.ts`:
+
 ```ts
-// main.ts
 if (typeof window !== 'undefined') {
-    import('./pwa')
+  import('./pwa')
 }
 ```
 
