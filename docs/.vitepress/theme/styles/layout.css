@@ -263,7 +263,7 @@ form {
   display: flex;
   font-size: 1.05rem;
   border: 0;
-  outline: none;
+  /*outline: none;*/
   background: none;
   color: var(--c-text);
   opacity: 0.8;
