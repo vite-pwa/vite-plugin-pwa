@@ -57,6 +57,8 @@ export const optimizePages = async() => {
         + '  </script></head>',
     )
 
+    html = html.replaceAll(/aria-hidden="true"/gi, 'tabindex="-1" aria-hidden="true"')
+
     await fs.writeFile(i, html, 'utf-8')
 
     // todo@userquin: we need to add critical again
