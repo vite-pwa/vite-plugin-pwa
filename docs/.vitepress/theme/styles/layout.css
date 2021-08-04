@@ -289,3 +289,7 @@ html.dark .version-img {
   text-align: center;
 }
 
+html.dark .prompt-img img {
+  filter: invert(93%);
+}
+
