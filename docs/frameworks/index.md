@@ -16,18 +16,20 @@ virtual module will expose the methods to interact with the service worker:
 import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
-  onNeedRefresh() {
-    // show a prompt to user with refresh and cancel buttons
-  },
-  onOfflineReady() {
-    // show a ready to work offline to user
-  }
+  onNeedRefresh() {},
+  onOfflineReady() {}
 })
 ```
 
-when user clicked the "refresh" button then call `updateSW()` function; the page will reload and the up-to-date
-content will be served.
+You will need to:
+- show a prompt to the user with refresh and cancel buttons inside `onNeedRefresh` method.
+- show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
 
+When the user clicked the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will
+reload and the up-to-date content will be served.
+
+In any case, when the user click the `Cancel` or `OK` buttons, just hide the prompt shown on `onNeedRefresh` or
+`onOfflineReady` methods.
 
 You must also import the virtual module when you need to work with [Automatic reload](/guide/auto-update.html) when new
 content available, and you need to notify the user the application is ready to work `offline`:
@@ -36,11 +38,13 @@ content available, and you need to notify the user the application is ready to w
 import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
-  onOfflineReady() {
-    // show a ready to work offline to user
-  }
+  onOfflineReady() {}
 })
 ```
+
+You will need to show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
+
+When the user click the `OK` button, just hide the prompt shown on `onOfflineReady` method.
 
 ## Frameworks
 

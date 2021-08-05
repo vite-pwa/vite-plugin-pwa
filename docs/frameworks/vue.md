@@ -80,14 +80,25 @@ behavior on your application with the virtual module `virtual:pwa-register/vue`:
 ```ts
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 
+const intervalMS = 60 * 60 * 1000
+
 const updateServiceWorker = useRegisterSW({
   onRegistered(r) {
     r && setInterval(() => {
       r.update()
-    }, 60 * 60 * 1000 /* 1 hour: interval in milliseconds */)
+    }, intervalMS)
   }
 })
 ```
+
+The interval must be in milliseconds, in the example above it is configured to check the service worker every hour.
+
+> Since `workbox-window` uses a time-based `heuristic` algorithm to handle service worker updates, if you
+build your service worker and register it again, if the time between last registration and the new one is less than
+1 minute, then, `workbox-window` will handle the `service worker update found` event as an external event, and so the
+behavior could be strange (for example, if using `prompt`, instead showing the dialog for new content available, the
+ready  to work offline dialog will be shown; if using `autoUpdate`, the ready to work offline dialog will be shown and
+shouldn't be shown).
 
 ### SW Registration Errors
 
@@ -98,11 +109,11 @@ following code:
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 const updateServiceWorker = useRegisterSW({
-  onRegiterError(error) {
-    // notify the user an error occur
-  }
+  onRegiterError(error) {}
 })
 ```
+
+and then inside `onRegisterError`, just notify the user that there was an error registering the service worker.
 
 ## Vue 2
 
@@ -236,6 +247,8 @@ behavior on your application with the `useRegisterSW.js` `mixin`:
 <script>
 import useRegisterSW from '@/mixins/useRegisterSW'
 
+const intervalMS = 60 * 60 * 1000
+
 export default {
   name: "reload-prompt",
   mixins: [useRegisterSW],
@@ -243,12 +256,21 @@ export default {
     handleSWManualUpdates(r) {
       r && setInterval(() => {
         r.update()
-      }, 60 * 60 * 1000 /* 1 hour: interval in milliseconds */)
+      }, intervalMS)
     }
   }
 }
 </script>
 ```
+
+The interval must be in milliseconds, in the example above it is configured to check the service worker every hour.
+
+> Since `workbox-window` uses a time-based `heuristic` algorithm to handle service worker updates, if you
+build your service worker and register it again, if the time between last registration and the new one is less than
+1 minute, then, `workbox-window` will handle the `service worker update found` event as an external event, and so the
+behavior could be strange (for example, if using `prompt`, instead showing the dialog for new content available, the
+ready  to work offline dialog will be shown; if using `autoUpdate`, the ready to work offline dialog will be shown and
+shouldn't be shown).
 
 ### SW Registration Errors
 
@@ -263,11 +285,11 @@ export default {
   name: "reload-prompt",
   mixins: [useRegisterSW],
   methods: {
-    handleSWRegisterError(r) {
-      // notify the user an error occur
-    }
+    handleSWRegisterError(r) {}
   }
 }
 </script>
 ```
+
+and then inside `onRegisterError`, just notify the user that there was an error registering the service worker. 
 
