@@ -41,7 +41,7 @@ export const optimizePages = async() => {
       href="${firaFont}"
     />
     <noscript>
-      <link rel="stylesheet" href="${firaFont}" />
+      <link rel="stylesheet" crossorigin="anonymous" href="${firaFont}" />
     </noscript>
     <link rel="prefetch" href="/manifest.webmanifest">${preloadImg}\n`).trim()
 
