@@ -18,7 +18,7 @@ function toggle() {
 </script>
 
 <template>
-  <div class="nav-dropdown-link" :class="{ open }">
+  <div class="nav-dropdown-link">
     <button type="button" class="button" :aria-label="item.ariaLabel" @click="toggle">
       <span class="button-text">{{ item.text }}</span>
       <span class="button-arrow" :class="open ? 'down' : 'right'" />
@@ -46,8 +46,8 @@ function toggle() {
     overflow: visible;
   }
 
-  .nav-dropdown-link:hover .dialog,
-  .nav-dropdown-link:focus-within .dialog {
+  .nav-dropdown-link:hover .dialog/*,
+  .nav-dropdown-link:focus-within .dialog*/ {
     display: block;
   }
 }
@@ -72,11 +72,9 @@ function toggle() {
   cursor: pointer;
 }
 
-/*
 .button:focus {
   outline: 0;
 }
-*/
 
 @media (min-width: 720px) {
   .button {
