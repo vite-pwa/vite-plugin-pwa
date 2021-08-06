@@ -20,7 +20,7 @@ On `index.html` file you must configure the `css` `link`, you **MUST** also incl
 for the external resources 
 (see [Handle Third Party Requests](https://developers.google.com/web/tools/workbox/guides/handle-third-party-requests) <outbound-link />):
 
-<details open>
+<details>
   <summary><strong>index.html</strong> code</summary>
 
 ```html
@@ -36,7 +36,7 @@ for the external resources
 
 Then on your `vite.config.ts` file add the following code:
 
-<details open>
+<details>
   <summary><strong>VitePWA options</strong> code</summary>
 
 ```ts
@@ -83,7 +83,7 @@ You can add this code to the plugin on your `vite.config.ts` file to add a `Back
 
 > You also need to add the logic to interact from the client logic: [Generate Service Worker](/guide/generate.html).
 
-<details open>
+<details>
   <summary><strong>VitePWA options</strong> code</summary>
 
 ```ts

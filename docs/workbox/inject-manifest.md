@@ -13,7 +13,7 @@ You can find the documentation for this method on `workbox` site: [injectManifes
 You can use the following code to create your custom service worker to be used with network first strategy. We also include
 how to configure [Custom Cache Network Race Strategy](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race) <outbound-link />.
 
-<details open>
+<details>
   <summary><strong>VitePWA options</strong> code</summary>
 
 ```ts
@@ -32,7 +32,7 @@ dependencies:
 - `workbox-strategies`
 - `workbox-build`
 
-<details open>
+<details>
   <summary><strong>src/sw.ts</strong> code</summary>
 
 ```ts
@@ -176,7 +176,7 @@ You can use this code on your custom service worker (`src/sw.ts`) to enable `Ser
 
 > You also need to add the logic to interact from the client logic: [Advanced (injectManifest)](/guide/inject-manifest.html).
 
-<details open>
+<details>
   <summary><strong>src/sw.ts</strong> code</summary>
 
 ```ts

@@ -4,7 +4,7 @@ As explained in [Manual Updates](https://developers.google.com/web/fundamentals/
 entry on `The Service Worker Lifecycle`, you can use this code to configure periodic service worker updates on your 
 application on your `main.ts` or `main.js`:
 
-<details open>
+<details>
   <summary><strong>main.ts / main.js</strong> code</summary>
 
 ```ts

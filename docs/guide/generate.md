@@ -2,7 +2,7 @@
 
 Edit your `vite.config.ts` file to add `Vite Plugin PWA Plugin`:
 
-<details open>
+<details>
   <summary><strong>VitePWA options</strong> code</summary>
 
 ```ts
@@ -68,7 +68,7 @@ Once generated, download the ZIP and use
 You will also need to change your `index.html` file to include at least the following content to meet PWA requirements,
 you must change the `title` and the `description`, `favicon.svg` is the svg you have created:
 
-<details open>
+<details>
   <summary><strong>index.html</strong> code</summary>
 
 ```html
