@@ -1,17 +1,17 @@
-import { ref } from 'vue'
+import { writable } from 'svelte/store'
 import { RegisterSWOptions } from '../type'
 
 export type { RegisterSWOptions }
 
 export function useRegisterSW(_options: RegisterSWOptions = {}) {
-  const needRefresh = ref(false)
-  const offlineReady = ref(false)
+  const needRefresh = writable(false)
+  const offlineReady = writable(false)
 
   const updateServiceWorker = (_reloadPage?: boolean) => {}
 
   return {
-    updateServiceWorker,
-    offlineReady,
     needRefresh,
+    offlineReady,
+    updateServiceWorker,
   }
 }
