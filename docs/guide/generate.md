@@ -2,6 +2,9 @@
 
 Edit your `vite.config.ts` file to add `Vite Plugin PWA Plugin`:
 
+<details>
+  <summary><strong>VitePWA options</strong> code</summary>
+
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
 export const defineConfig({
@@ -36,6 +39,7 @@ export const defineConfig({
   ]    
 })
 ```
+</details>
 
 You will need to create your `robots.txt`, `favicon.svg` and/or `favicon.ico`, `apple-touch-icon.png`.
 
@@ -64,6 +68,9 @@ Once generated, download the ZIP and use
 You will also need to change your `index.html` file to include at least the following content to meet PWA requirements,
 you must change the `title` and the `description`, `favicon.svg` is the svg you have created:
 
+<details>
+  <summary><strong>index.html</strong> code</summary>
+
 ```html
 <head>
   <meta charset="utf-8">
@@ -77,6 +84,7 @@ you must change the `title` and the `description`, `favicon.svg` is the svg you 
   <meta name="theme-color" content="#ffffff">
 </head>
 ```
+</details>
 
 The `theme-color` in the html and the` theme_color` in the PWA `manifest` entry should match, change it to the color 
 you want. 

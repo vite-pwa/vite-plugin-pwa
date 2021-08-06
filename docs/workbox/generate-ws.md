@@ -3,18 +3,25 @@
 You must read [Which Mode to Use](https://developers.google.com/web/tools/workbox/modules/workbox-build#which_mode_to_use) <outbound-link />
 before decide using this strategy on `vite-plugin-pwa` plugin.
 
-You can find the documentation for this method on `workbox` site: [generateWS](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.generateSW) <outbound-link />
+You can find the documentation for this method on `workbox` site: [generateWS](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.generateSW) <outbound-link />.
 
-## Cache external resources
+You can find a guide for plugins on `workbox` site: [Using Plugins](https://developers.google.com/web/tools/workbox/guides/using-plugins) <outbound-link />.
 
-If you use some `CDN` to download some resources like `fonts` and `css` you must include them into the service worker
-precache, and so your application can work when offline.
+## Cache External Resources
+
+If you use some `CDN` to download some resources like `fonts` and `css`, you must include them into the service worker
+precache, and so your application will work when offline.
 
 > You also need to add the logic to interact from the client logic: [Generate Service Worker](/guide/generate.html).
 
-The following example will use `css` from `https://fonts.gstatic.com` and `fonts` from `https://fonts.googleapis.com`.
+The following example will use `css` from `https://fonts.googleapis.com` and `fonts` from `https://fonts.gstatic.com`.
 
-On `index.html` file we must configure the `css`, you **MUST** include `crossorigin="anonymous"` for the external resources:
+On `index.html` file you must configure the `css` `link`, you **MUST** also include `crossorigin="anonymous"` attribute
+for the external resources 
+(see [Handle Third Party Requests](https://developers.google.com/web/tools/workbox/guides/handle-third-party-requests) <outbound-link />):
+
+<details>
+  <summary><strong>index.html</strong> code</summary>
 
 ```html
 <head>
@@ -25,8 +32,12 @@ On `index.html` file we must configure the `css`, you **MUST** include `crossori
   <link rel="stylesheet" crossorigin="anonymous" href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" />
 </head>
 ```
+</details>
 
 Then on your `vite.config.ts` file add the following code:
+
+<details>
+  <summary><strong>VitePWA options</strong> code</summary>
 
 ```ts
 VitePWA({
@@ -64,12 +75,16 @@ VitePWA({
   }
 })  
 ```
+</details>
 
 ## Background Sync
 
-You can add this code to the plugin on your `vite.config.ts` to add a `Background Sync` manager to your service worker:
+You can add this code to the plugin on your `vite.config.ts` file to add a `Background Sync` manager to your service worker:
 
 > You also need to add the logic to interact from the client logic: [Generate Service Worker](/guide/generate.html).
+
+<details>
+  <summary><strong>VitePWA options</strong> code</summary>
 
 ```ts
 VitePWA({
@@ -90,3 +105,4 @@ VitePWA({
   }
 })
 ```
+</details>

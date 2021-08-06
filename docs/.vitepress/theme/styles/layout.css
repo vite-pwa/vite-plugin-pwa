@@ -293,3 +293,10 @@ html.dark .prompt-img img {
   filter: invert(93%);
 }
 
+details summary {
+  cursor: pointer;
+}
+details summary strong {
+  color: var(--c-brand-active);
+}
+

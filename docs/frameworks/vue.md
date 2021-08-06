@@ -7,6 +7,9 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/vue` for `V
 
 You can use this `ReloadPrompt.vue` component:
 
+<details>
+  <summary><strong>ReloadPrompt.vue</strong> code</summary>
+
 ```vue
 <script setup lang="ts">
 import { useRegisterSW } from 'virtual:pwa-register/vue'
@@ -71,6 +74,7 @@ const close = async() => {
 }
 </style>
 ```
+</details>
 
 ### Periodic SW Updates
 
@@ -120,6 +124,9 @@ and then inside `onRegisterError`, just notify the user that there was an error 
 Since this plugin only supports `Vuejs 3`, you cannot use the virtual module `virtual:pwa-register/vue`.
 
 You can copy `useRegisterSW.js` `mixin` to your `@/mixins/` directory in your application to make it working:
+
+<details>
+  <summary><strong>useRegisterSW.js</strong> code</summary>
 
 ```js
 export default {
@@ -176,8 +183,12 @@ export default {
   }
 }
 ```
+</details>
 
 You can use this `ReloadPrompt.vue` component:
+
+<details>
+  <summary><strong>ReloadPrompt.vue</strong> code</summary>
 
 ```vue
 <script>
@@ -237,6 +248,7 @@ export default {
 }
 </style>
 ```
+</details>
 
 ### Periodic SW Updates
 
