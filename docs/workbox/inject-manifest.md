@@ -8,7 +8,7 @@ looking for some plugin on `workbox` site on [Runtime Caching Entry](https://dev
 
 You can find the documentation for this method on `workbox` site: [injectManifest](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.injectManifest) <outbound-link />
 
-## Network First Service Worker
+## Network First Strategy
 
 You can use the following code to create your custom service worker to be used with network first strategy. We also include
 how to configure [Custom Cache Network Race Strategy](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race) <outbound-link />.
@@ -25,7 +25,9 @@ VitePWA({
 ```
 </details>
 
-then in your `src/sw.ts` file, remember you will also need to add following `workbox` dependencies as `dev`
+> You also need to add the logic to interact from the client logic: [Advanced (injectManifest)](/guide/inject-manifest.html).
+
+Then in your `src/sw.ts` file, remember you will also need to add following `workbox` dependencies as `dev`
 dependencies:
 - `workbox-core`
 - `workbox-routing`
