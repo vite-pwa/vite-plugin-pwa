@@ -55,7 +55,7 @@ declare let self: ServiceWorkerGlobalScope
 declare type ExtendableEvent = any
 
 const data = {
-  race: true,
+  race: false,
   debug: false,
   credentials: 'same-origin',
   networkTimeoutSeconds: 0,
