@@ -14,6 +14,7 @@ const config: UserConfig = {
       mode: 'development',
       base: '/',
       registerType: process.env.CLAIMS === 'true' ? 'autoUpdate' : undefined,
+      includeAssets: ['favicon.svg'],
       manifest: {
         name: 'PWA Router',
         short_name: 'PWA Router',
@@ -37,17 +38,6 @@ const config: UserConfig = {
           },
         ],
       },
-      // https://github.com/sveltejs/kit/issues/587
-      workbox:  {
-        globPatterns: ['*.*', 'assets/*.*'],
-        globIgnores: [
-          'sw.js', // <== MUST BE EXCLUDED
-          'workbox-*.js', // <== MUST BE EXCLUDED
-          'assets/*.map', // <== SHOULD BE EXCLUDED
-          'pwa-*.png', // <== INCLUDED BY DEFAULT, JUST AVOID DUPLICATES
-          'manifest.webmanifest'// <== INCLUDED BY DEFAULT, JUST AVOID DUPLICATES
-        ]
-      }
     }),
     replace({
       __DATE__: new Date().toISOString(),

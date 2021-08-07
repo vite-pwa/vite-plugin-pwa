@@ -13,17 +13,30 @@ const config: UserConfig = {
     VitePWA({
       mode: 'development',
       base: '/',
-      // https://github.com/sveltejs/kit/issues/587
-      workbox:  {
-        globPatterns: ['*.*', 'assets/*.*'],
-        globIgnores: [
-          'sw.js', // <== MUST BE EXCLUDED
-          'workbox-*.js', // <== MUST BE EXCLUDED
-          'assets/*.map', // <== SHOULD BE EXCLUDED
-          'pwa-*.png', // <== INCLUDED BY DEFAULT, JUST AVOID DUPLICATES
-          'manifest.webmanifest'// <== INCLUDED BY DEFAULT, JUST AVOID DUPLICATES
-        ]
-      }
+      includeAssets: ['favicon.svg'],
+      manifest: {
+        name: 'PWA Router',
+        short_name: 'PWA Router',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            src: 'pwa-192x192.png', // <== don't add slash, for testing
+            sizes: '192x192',
+            type: 'image/png',
+          },
+          {
+            src: '/pwa-512x512.png', // <== don't remove slash, for testing
+            sizes: '512x512',
+            type: 'image/png',
+          },
+          {
+            src: 'pwa-512x512.png', // <== don't add slash, for testing
+            sizes: '512x512',
+            type: 'image/png',
+            purpose: 'any maskable',
+          },
+        ],
+      },
     }),
     replace({
       __DATE__: new Date().toISOString(),

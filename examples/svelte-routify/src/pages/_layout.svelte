@@ -1,11 +1,6 @@
-<script lang="ts">
-  // https://github.com/sveltejs/kit/issues/587
-  import logo from '../assets/svelte.png'
-</script>
-
 <main>
-  <img src={logo} alt="Svelte Logo" width="128" height="128"/>
-  <h1>Hi Svelte PWA!</h1>
+  <img src="/favicon.svg" alt="PWA Logo" width="60" height="60"/>
+  <h1>Svelte PWA!</h1>
 
   <slot />
 
@@ -21,11 +16,6 @@
         text-align: center;
         padding: 1em;
         margin: 0 auto;
-    }
-
-    img {
-        height: 128px;
-        width: 128px;
     }
 
     h1 {

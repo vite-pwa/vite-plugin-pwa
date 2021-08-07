@@ -1,12 +1,16 @@
 <script lang="ts">
-  import logo from './assets/svelte.png'
   import Counter from './lib/Counter.svelte'
   import ReloadPrompt from "./lib/ReloadPrompt.svelte";
+
+  // replaced dyanmicaly
+  const date = '__DATE__'
 </script>
 
 <main>
-  <img src={logo} alt="Svelte Logo" width="128" height="128"/>
-  <h1>Hi Svelte PWA!</h1>
+  <img src="/favicon.svg" alt="PWA Logo" width="60" height="60"/>
+  <h1>Svelte PWA!</h1>
+
+  <div class="built">Built at: { date }</div>
 
   <Counter />
 
@@ -25,11 +29,6 @@
     margin: 0 auto;
   }
 
-  img {
-    height: 128px;
-    width: 128px;
-  }
-
   h1 {
     color: #ff3e00;
     text-transform: uppercase;
@@ -38,6 +37,10 @@
     line-height: 1.1;
     margin: 2rem auto;
     max-width: 14rem;
+  }
+
+  .built {
+      margin: 1rem 0;
   }
 
 
