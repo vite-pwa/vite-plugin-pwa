@@ -1,0 +1,39 @@
+{
+  "name": "example-react-router",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run run-build && npm run serve",
+    "start-reloadsw": "npm run run-build-reloadsw && npm run serve",
+    "start-claims": "npm run run-build-claims && npm run serve",
+    "start-claims-reloadsw": "npm run run-build-reloadsw-claims && npm run serve",
+    "dev": "cross-env DEBUG=vite-plugin-pwa:* vite",
+    "build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
+    "run-build": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
+    "run-build-reloadsw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true RELOAD_SW=true vite build",
+    "run-build-claims": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true CLAIMS=true vite build",
+    "run-build-reloadsw-claims": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true CLAIMS=true RELOAD_SW=true vite build",
+    "serve": "serve dist"
+  },
+  "dependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-router": "^5.2.0",
+    "react-router-config": "^5.1.1",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "@types/react-router-config": "^5.0.3",
+    "@types/react-router-dom": "^5.1.8",
+    "@rollup/plugin-replace": "^3.0.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "@vitejs/plugin-react-refresh": "^1.3.1",
+    "cross-env": "^7.0.3",
+    "https-localhost": "^4.6.5",
+    "typescript": "^4.3.5",
+    "vite": "^2.4.4",
+    "vite-plugin-pwa": "workspace:*",
+    "workbox-window": "^6.1.5"
+  }
+}
