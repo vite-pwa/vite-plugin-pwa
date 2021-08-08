@@ -21,9 +21,7 @@ VitePWA({
 
 ### Runtime
 
-Your custom service worker SHOULDN'T reside on `public` directory, put it on root directory or in `src` folder.
-
-Your custom service worker should have at least this code:
+Your custom service worker (`public/sw.js`) should have at least this code:
 ```js
 import { precacheAndRoute } from 'workbox-precaching'
 
