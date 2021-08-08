@@ -96,4 +96,4 @@ We provide the following example projects:
     - [React Basic Example](/examples/react.html#basic): `Ready to work offline` and `Prompt for update`.
     - [React Router Examples](/examples/react.html#router): set of examples with disparate behaviors.
     - [React injectManifest Example](/examples/react.html#injectmanifest): `Ready to work offline` and `Prompt for update`.
-
+- [Vitepress](/examples/vitepress): `Prompt for update`.   
