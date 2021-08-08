@@ -1,6 +1,6 @@
 {
   "name": "vite-plugin-pwa",
-  "version": "0.9.3",
+  "version": "0.10.0",
   "description": "Zero-config PWA for Vite",
   "license": "MIT",
   "repository": {
