@@ -86,4 +86,13 @@ pnpm run example:react:router:start:claims:reloadsw
 
 ## injectManifest
 
-> Work in progress: coming soon.
+This example project can be found on `examples/react-basic-inject-manifest` package/directory with the following behavior:
+- Custom `Typescript Service Worker`.
+- Show `Ready to work offlline` on first visit and once the `service worker` ready.
+- Show `Prompt for update` when new `service worker` available.
+
+To run this example project, execute the following script from your shell (from root folder):
+```shell
+pnpm run example:react:start:sw
+```
+
