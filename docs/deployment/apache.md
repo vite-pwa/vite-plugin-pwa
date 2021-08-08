@@ -12,6 +12,8 @@ You need to configure the following mime type (see basic configuration bellow):
 
 ## Basic configuration with http to https redirection
 
+Update your `httpd.conf` configuration file with:
+
 ```conf
 # httpd.conf
 ServerRoot "<your apache server root>"

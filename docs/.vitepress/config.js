@@ -61,6 +61,10 @@ const Deployment = [
     link: '/deployment/vercel',
   },
   {
+    text: 'NGINX',
+    link: '/deployment/nginx',
+  },
+  {
     text: 'Apache Http Server 2.4+',
     link: '/deployment/apache',
   },
@@ -72,7 +76,7 @@ const Frameworks = [
     link: '/frameworks/',
   },
   {
-    text: 'Vuejs',
+    text: 'Vue',
     link: '/frameworks/vue',
   },
   {
@@ -86,6 +90,25 @@ const Frameworks = [
   {
     text: 'Vitepress',
     link: '/frameworks/vitepress',
+  },
+]
+
+const Examples = [
+  {
+    text: 'Examples',
+    link: '/examples/',
+  },
+  {
+    text: 'Vue',
+    link: '/examples/vue',
+  },
+  {
+    text: 'React',
+    link: '/examples/react',
+  },
+  {
+    text: 'Svelte',
+    link: '/examples/svelte',
   },
 ]
 
@@ -112,6 +135,10 @@ const slidebars = [
   {
     text: 'Frameworks',
     children: Frameworks,
+  },
+  {
+    text: 'Examples',
+    children: Examples,
   },
   {
     text: 'Deployment',
@@ -170,6 +197,10 @@ const config = {
         items: Frameworks,
       },
       {
+        text: 'Examples',
+        items: Examples,
+      },
+      {
         text: 'Deployment',
         items: Deployment,
       },
@@ -181,6 +212,7 @@ const config = {
     sidebar: {
       '/guide/': slidebars,
       '/frameworks/': slidebars,
+      '/examples/': slidebars,
       '/deployment/': slidebars,
       '/workbox/': slidebars,
       '/': slidebars,

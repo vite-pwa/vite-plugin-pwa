@@ -13,20 +13,21 @@ Since this plugin will not generate the service worker on `development`, you can
 If you want to test your service worker using `https`, follow these steps:
 
 1) add `https-localhost` as `dev dependency`:
-```shell
-# YARN
-yarn add https-localhost -D
-```
 
-```shell
-# NPM
-npm i https-localhost -D
-```
-
-```shell
-# PNPM
-pnpm i https-localhost -D
-```
+    with **YARN**:
+    ```shell
+    yarn add https-localhost -D
+    ```
+    
+    with **NPM**:
+    ```shell
+    npm i https-localhost -D
+    ```
+    
+    with **PNPM**:
+    ```shell
+    pnpm i https-localhost -D
+    ```
 
 2) add `https-preview` script to your `package.json`:
 ```json
@@ -34,20 +35,21 @@ pnpm i https-localhost -D
 ```
 
 3) build your app and run `https-preview`:
-```shell
-# YARN
-yarn build && yarn https-preview
-```
 
-```shell
-# NPM
-npm run build && npm run https-preview`
-```
-
-```shell
-# PNPM
-pnpm run build && pnpm run https-preview`
-```
+    with **YARN**:
+    ```shell
+    yarn build && yarn https-preview
+    ```
+    
+    with **NPM**:
+    ```shell
+    npm run build && npm run https-preview`
+    ```
+    
+    with **PNPM**:
+    ```shell
+    pnpm run build && pnpm run https-preview`
+    ```
 
 First time you run the script, `https-localhost`  will ask you about installing `localhost` certificate 
 (that will be generated for you), confirm installation on OS (keychain on MACOSX and certificate manager on WINDOWS)

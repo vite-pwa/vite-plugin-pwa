@@ -1,102 +1,37 @@
-# Svelte (WIP)
+# Svelte
 
 If you are using [Svelte Kit](https://kit.svelte.dev) <outbound-link /> you should use its 
 [service worker module](https://kit.svelte.dev/docs#modules-$service-worker) <outbound-link />.
 
-## Using Svelte
-
-> Work in progress: once integrated on the plugin, `PWA Module Example` bellow will be removed from this entry, and the 
-logic may change: this documentation page can also change.
-
 You can use the built-in `Vite` virtual module `virtual:pwa-register/svelte` for `Svelte` which will return
-`readable` stores (`Readable<boolean>`) for `offlineReady` and `needRefresh`.
+`writable` stores (`Writable<boolean>`) for `offlineReady` and `needRefresh`.
 
-In the meantime, just use the code provided on `PWA Module Example` bellow.
+> You will need to add `workbox-window` as a `dev` dependency to your `Vite` project.
 
-> You will need to add `workbox-window` as a `dev` dependency to your `Vite` project (we're fixing it).
+## Prompt for update
 
-### PWA Module Example
-
-You can use this module (`src/pwa.ts`) to register and interact with the service worker:
-
-<details>
-  <summary><strong>src/pwa.ts</strong> code</summary>
-
-```ts
-import { Readable, writable } from 'svelte/store';
-import { onMount } from 'svelte';
-import { registerSW } from 'virtual:pwa-register';
-
-export function useRegisterSW(
-  onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void,
-  onRegisterError?: (error: any) => void
-): {
-  offlineReady: Readable<boolean>
-  needRefresh: Readable<boolean>
-  updateSW: () => void
-  close: () => void
-} {
-  let updateServiceWorker: ((reloadPage?: boolean) => Promise<void>) | undefined
-
-  const offlineReady = writable(false)
-  const needRefresh = writable(false)
-
-  onMount(async() => {
-    updateServiceWorker = registerSW({
-      onOfflineReady() {
-        offlineReady.set(true);
-      },
-      onNeedRefresh() {
-        needRefresh.set(true);
-      },
-      onRegistered,
-      onRegisterError
-    })
-  })
-
-  function updateSW() {
-    needRefresh.set(false);
-    updateServiceWorker?.(true);
-  }
-
-  function close() {
-    offlineReady.set(false);
-    needRefresh.set(false);
-  }
-
-  return {
-    offlineReady,
-    needRefresh,
-    updateSW,
-    close
-  }
-
-}
-```
-</details>
-
-
-### Prompt for update
-
-You can use this code for your `components/ReloadPrompt.svelte` component:
+You can use this `ReloadPrompt.svelte` component:
 
 <details>
   <summary><strong>components/ReloadPrompt.svelte</strong> code</summary>
 
-```sveltehtml
+```html
 <script lang="ts">
-  // once integrated on the plugin, the import should be
-  // import { useRegisterSW } from 'virtual:pwa-register/svelte';
-  import { useRegisterSW } from '../pwa';
+  import { useRegisterSW } from 'virtual:pwa-register/svelte';
 
-  const { offlineReady, needRefresh, updateSW, close } = useRegisterSW(
-    (swr) => {
+  const { offlineReady, needRefresh, updateServiceWorker } = useRegisterSW({
+    onRegistered(swr) {
       console.log(`SW registered: ${swr}`);
     },
-    (error) => {
+    onRegisterError(error) {
       console.log('SW registration error', error);
     }
-  );
+  });
+
+  function close() {
+    offlineReady.set(false)
+    needRefresh.set(false)
+  }
 
   $: toast = $offlineReady || $needRefresh;
 </script>
@@ -118,7 +53,7 @@ You can use this code for your `components/ReloadPrompt.svelte` component:
       {/if}
     </div>
     {#if $needRefresh}
-      <button on:click={updateSW}>
+      <button on:click={() => updateServiceWorker(true))}>
         Reload
       </button>
     {/if}
@@ -156,15 +91,13 @@ You can use this code for your `components/ReloadPrompt.svelte` component:
 ```
 </details>
 
-### Periodic SW Updates
+## Periodic SW Updates
 
 As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.html), you can use this code to configure this
 behavior on your application with the virtual module `virtual:pwa-register/svelte`:
 
 ```ts
-// once integrated on the plugin, the import should be
-// import { useRegisterSW } from 'virtual:pwa-register/svelte';
-import { useRegisterSW } from '../pwa';
+import { useRegisterSW } from 'virtual:pwa-register/svelte';
 
 const intervalMS = 60 * 60 * 1000
 
@@ -186,15 +119,13 @@ behavior could be strange (for example, if using `prompt`, instead showing the d
 ready  to work offline dialog will be shown; if using `autoUpdate`, the ready to work offline dialog will be shown and
 shouldn't be shown).
 
-### SW Registration Errors
+## SW Registration Errors
 
 As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can notify the user with
 following code:
 
 ```ts
-// once integrated on the plugin, the import should be
-// import { useRegisterSW } from 'virtual:pwa-register/svelte';
-import { useRegisterSW } from '../pwa';
+import { useRegisterSW } from 'virtual:pwa-register/svelte';
 
 const updateServiceWorker = useRegisterSW({
   onRegiterError(error) {}

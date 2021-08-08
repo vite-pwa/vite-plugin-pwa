@@ -22,8 +22,8 @@ You can also integrate [Periodic SW updates](/guide/periodic-sw-updates.html).
 
 ## Build
 
-Since `Vitepress` will generate the pages at the end of the process, you need to regenerate the Service Worker of
-your application when the process finish, since the Service Worker will not have the pages on its precache.
+Since `Vitepress` will generate the pages at the end of the build process, you will need to regenerate the Service 
+Worker  of your application when the build process finish (the Service Worker will not have the pages on its precache).
 
 Take a look at build `Vitepress` site [docs:build script](https://github.com/antfu/vite-plugin-pwa/blob/master/docs/package.json#L7) <outbound-link />.
 
