@@ -110,6 +110,10 @@ const Examples = [
     text: 'Svelte',
     link: '/examples/svelte',
   },
+  {
+    text: 'Vitepress',
+    link: '/examples/vitepress',
+  },
 ]
 
 const Workbox = [

@@ -6,7 +6,22 @@ Since this plugin will not generate the service worker on `development`, you can
 ```json
 "serve": "vite preview"
 ```
-2) build your app and run `serve`: `npm run build && npm run serve`.
+2) build your app and run `serve`:
+
+   with **YARN**:
+    ```shell
+    yarn build && yarn serve
+    ```
+
+   with **NPM**:
+    ```shell
+    npm run build && npm run serve
+    ```
+
+   with **PNPM**:
+    ```shell
+    pnpm run build && pnpm run serve
+    ```
 
 ## Testing Service Worker over https
 

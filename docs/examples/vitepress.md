@@ -4,7 +4,7 @@ You can test `Vitepress` using the source code of this site, you can find it und
 
 The behavior used in this site is only `Prompt for update`.
 
-To run this site on local, executing the following script from your shell (from root folder):
+To run this site on local, execute the following script from your shell (from root folder):
 ```shell
 pnpm run docs:serve
 ```

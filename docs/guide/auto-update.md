@@ -55,7 +55,7 @@ import { registerSW } from 'virtual:pwa-register'
 registerSW({ ... })
 ```
 
-and then import it from your `maint.ts`:
+and then import it from your `main.ts`:
 
 ```ts
 if (typeof window !== 'undefined') {
