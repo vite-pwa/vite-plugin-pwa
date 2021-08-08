@@ -10,6 +10,10 @@
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block
 
+/examples/
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+
 /deployment/
   X-Frame-Options: DENY
   X-XSS-Protection: 1; mode=block

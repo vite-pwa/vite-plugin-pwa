@@ -1,9 +1,11 @@
-# Vuejs
+# Vue
 
 ## Vue 3
 
-You can use the built-in `Vite` virtual module `virtual:pwa-register/vue` for `Vuejs 3` which will return
+You can use the built-in `Vite` virtual module `virtual:pwa-register/vue` for `Vue 3` which will return
 `composition api` references (`ref<boolean>`) for `offlineReady` and `needRefresh`.
+
+### Prompt for update
 
 You can use this `ReloadPrompt.vue` component:
 
@@ -121,7 +123,7 @@ and then inside `onRegisterError`, just notify the user that there was an error 
 
 ## Vue 2
 
-Since this plugin only supports `Vuejs 3`, you cannot use the virtual module `virtual:pwa-register/vue`.
+Since this plugin only supports `Vue 3`, you cannot use the virtual module `virtual:pwa-register/vue`.
 
 You can copy `useRegisterSW.js` `mixin` to your `@/mixins/` directory in your application to make it working:
 
@@ -184,6 +186,8 @@ export default {
 }
 ```
 </details>
+
+### Prompt for update
 
 You can use this `ReloadPrompt.vue` component:
 

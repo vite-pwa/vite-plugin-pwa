@@ -4,8 +4,6 @@
 
 This plugin is Framework-agnostic and so you can use it with Vanilla Javascript, Typescript and with any framework.
 
-The only official framework supported and provided by this plugin is `vuejs 3` and `vuejs 2` via `mixin`.
-
 ## Usage
 
 This plugin exposes a `Vite` virtual module to interact with the service worker, you must import this virtual module 
@@ -46,9 +44,22 @@ You will need to show a ready to work offline message to the user with an OK but
 
 When the user click the `OK` button, just hide the prompt shown on `onOfflineReady` method.
 
+## Custom Vite Virtual Modules
+
+This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.org/) <outbound-link />, 
+[Svelte](https://svelte.dev/docs) <outbound-link /> and [React](https://reactjs.org/) <outbound-link />.  
+
+These custom virtual modules will expose a wrapper for `virtual:pwa-register` using framework `reactivity system`, that is:
+- `virtual:pwa-register/vue`: [ref](https://v3.vuejs.org/api/refs-api.html#ref) <outbound-link /> for `Vue 3`.
+- `virtual:pwa-register/svelte`: [writable](https://svelte.dev/docs#writable) <outbound-link /> for `Svelte`.
+- `virtual:pwa-register/react`: [useState](https://reactjs.org/docs/hooks-reference.html#usestate) <outbound-link /> for `React`.
+
+**Note**: for [Vue 2](https://vuejs.org/) <outbound-link /> you need to use a custom `mixin` provided on 
+[Vue 2](/frameworks/vue.html#vue-2) section.
+
 ## Frameworks
 
-- [Vuejs](/frameworks/vue)
+- [Vue](/frameworks/vue)
 - [React](/frameworks/react)
 - [Svelte](/frameworks/svelte)
 - [Vitepress](/frameworks/vitepress)
