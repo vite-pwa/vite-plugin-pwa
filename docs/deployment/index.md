@@ -13,8 +13,8 @@ you must configure your server to meet PWA requirements, that is, your server mu
 - [Netlify](/deployment/netlify)
 - [Vercel](/deployment/vercel)
 - [AWS Amplity](/deployment/aws)
-- [Apache Http Server 2.4+](/deployment/apache)
 - [NGINX](/deployment/nginx)
+- [Apache Http Server 2.4+](/deployment/apache)
 
 
 ## Testing your application on production
