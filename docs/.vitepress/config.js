@@ -61,12 +61,12 @@ const Deployment = [
     link: '/deployment/vercel',
   },
   {
-    text: 'NGINX',
-    link: '/deployment/nginx',
-  },
-  {
     text: 'Apache Http Server 2.4+',
     link: '/deployment/apache',
+  },
+  {
+    text: 'NGINX',
+    link: '/deployment/nginx',
   },
 ]
 
@@ -109,6 +109,10 @@ const Examples = [
   {
     text: 'Svelte',
     link: '/examples/svelte',
+  },
+  {
+    text: 'Vitepress',
+    link: '/examples/vitepress',
   },
 ]
 
