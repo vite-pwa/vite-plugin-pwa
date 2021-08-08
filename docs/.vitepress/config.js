@@ -61,12 +61,12 @@ const Deployment = [
     link: '/deployment/vercel',
   },
   {
-    text: 'Apache Http Server 2.4+',
-    link: '/deployment/apache',
-  },
-  {
     text: 'NGINX',
     link: '/deployment/nginx',
+  },
+  {
+    text: 'Apache Http Server 2.4+',
+    link: '/deployment/apache',
   },
 ]
 
