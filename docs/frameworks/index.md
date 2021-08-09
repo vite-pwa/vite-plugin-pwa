@@ -7,8 +7,7 @@ This plugin is Framework-agnostic and so you can use it with Vanilla Javascript,
 ## Usage
 
 This plugin exposes a `Vite` virtual module to interact with the service worker, you must import this virtual module 
-when you need to work with [Prompt for update](/guide/prompt-for-update.html) on new content available, since the 
-virtual module will expose the methods to interact with the service worker:
+when you need to work with [Prompt for update](/guide/prompt-for-update.html) on new content available:
 
 ```ts
 import { registerSW } from 'virtual:pwa-register'
@@ -23,7 +22,7 @@ You will need to:
 - show a prompt to the user with refresh and cancel buttons inside `onNeedRefresh` method.
 - show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
 
-When the user click the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will
+When the user clicks the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will
 reload and the up-to-date content will be served.
 
 In any case, when the user clicks the `Cancel` or `OK` buttons in case `onNeedRefresh` or `onOfflineReady` respectively,
