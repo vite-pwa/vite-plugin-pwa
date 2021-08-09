@@ -23,10 +23,11 @@ You will need to:
 - show a prompt to the user with refresh and cancel buttons inside `onNeedRefresh` method.
 - show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
 
-When the user clicked the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will
+When the user click the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will
 reload and the up-to-date content will be served.
 
-In any case, when the user click the `Cancel` or `OK` buttons, just hide the prompt shown on `onNeedRefresh` or
+In any case, when the user click the `Cancel` or `OK` buttons, for `onNeedRefresh` and `onOfflineReady` respectively,
+just hide the prompt shown on `onNeedRefresh` or
 `onOfflineReady` methods.
 
 You must also import the virtual module when you need to work with [Automatic reload](/guide/auto-update.html) when new
