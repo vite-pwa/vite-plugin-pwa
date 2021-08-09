@@ -1,8 +1,8 @@
 // port from https://raw.githubusercontent.com/shadowwalker/next-pwa/master/cache.js
 
-import { RuntimeCachingEntry } from 'workbox-build'
+import { RuntimeCaching } from 'workbox-build'
 
-export const cachePreset: RuntimeCachingEntry[] = [
+export const cachePreset: RuntimeCaching[] = [
   {
     urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
     handler: 'CacheFirst',

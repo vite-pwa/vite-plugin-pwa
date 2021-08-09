@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { resolve, extname } from 'path'
 import { ResolvedConfig } from 'vite'
-import { GenerateSWConfig, InjectManifestConfig } from 'workbox-build'
+import { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
 import { ManifestOptions, VitePWAOptions, ResolvedVitePWAOptions } from './types'
 import { configureStaticAssets } from './assets'
 import { resolveBathPath } from './utils'
@@ -64,7 +64,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
   const outDirRoot = resolve(root, outDir)
   const scope = options.scope || basePath
 
-  const defaultWorkbox: GenerateSWConfig = {
+  const defaultWorkbox: GenerateSWOptions = {
     swDest,
     globDirectory: outDirRoot,
     offlineGoogleAnalytics: false,
@@ -73,7 +73,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     navigateFallback: 'index.html',
   }
 
-  const defaultInjectManifest: InjectManifestConfig = {
+  const defaultInjectManifest: InjectManifestOptions = {
     swSrc,
     swDest,
     globDirectory: outDirRoot,
