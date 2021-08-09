@@ -64,17 +64,15 @@
     "example:react:router:start:claims:reloadsw": "npm -C examples/react-router run start-claims-reloadsw"
   },
   "peerDependencies": {
-    "vite": "^2.0.0",
-    "workbox-build": "^6.1.5",
-    "workbox-window": "^6.1.5"
+    "vite": "^2.0.0"
   },
   "dependencies": {
     "debug": "^4.3.2",
     "fast-glob": "^3.2.7",
     "pretty-bytes": "^5.6.0",
     "rollup": "^2.56.1",
-    "workbox-build": "^6.2.2",
-    "workbox-window": "^6.2.2"
+    "workbox-build": "6.1.5",
+    "workbox-window": "6.1.5"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.7.0",
