@@ -30,7 +30,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <img src="/favicon.svg" width="60" height="60">
+  <img src="/favicon.svg" alt="PWA Logo" width="60" height="60">
   <br>
   <div>Built at: {{ date }} ({{ timeAgo }})</div>
   <br>
