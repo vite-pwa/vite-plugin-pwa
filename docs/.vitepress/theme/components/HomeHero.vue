@@ -5,12 +5,14 @@ import { isDark } from '../composables/dark'
 <template>
   <header class="home-hero">
 
-    <p class="hero-img">
+    <p class="hero-img -mb-15">
       <a href="https://github.com/antfu/vite-plugin-pwa" target="_blank" rel="noopener">
         <img v-show="isDark" src="/banner_dark.svg" alt="Zero-config PWA for Vite" width="700" height="259">
         <img v-show="!isDark" src="/banner_light.svg" alt="Zero-config PWA for Vite" width="700" height="259">
       </a>
     </p>
+
+    <p class="text-lg">Zero-config PWA for Vite</p>
 
     <!-- <p class="version-img">
       <a href="https://www.npmjs.com/package/vite-plugin-pwa" target="_blank" rel="noopener">
@@ -19,7 +21,7 @@ import { isDark } from '../composables/dark'
       <br>
     </p> -->
 
-    <div class="-mt-10 mb-40">
+    <div class="mt-10 mb-20">
       <NavLink :item="{ link: '/guide/', text: 'Get Started' }" class="action mx-2" />
     </div>
   </header>

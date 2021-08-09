@@ -2,6 +2,7 @@
   <main class="home">
     <HomeHero />
     <slot name="hero" />
+    <HomeFeatures />
     <slot name="features" />
     <HomeFooter />
     <slot name="footer" />
@@ -26,5 +27,4 @@
     width: clamp(100px, 100%, 420px);
   }
 }
-
 </style>
