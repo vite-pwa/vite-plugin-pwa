@@ -15,7 +15,7 @@ won't be regenerated/versioned if noe source code changed (on your project you s
 you should want to only regenerate/version the service worker when your source code change).
 
 > **TRY TO AVOID INCLUDING AUTOMATIC TIMESTAMP ON YOU APPLICATION IF YOU DON'T CHANGE YOUR CODE**. 
-We use the timestamp in example projects to avoid touching some file each time we need to test: for example, to test 
+We use the timestamp in example projects to avoid having to touch a file each time we need to test: for example, to test 
 `Prompt for update`, we need to install the service worker first time (first build), then rebuild and restart the 
 example project and finally refresh the browser to check the `Prompt for update` is shown.
 
