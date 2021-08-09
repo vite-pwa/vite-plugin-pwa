@@ -1,16 +1,12 @@
 <script setup lang="ts">
-import type { DefaultTheme } from './config'
 import {
   useRoute,
-  useSiteData,
-  useSiteDataByRoute,
+  useData,
 } from 'vitepress'
 
 // generic state
 const route = useRoute()
-const siteData = useSiteData<DefaultTheme.Config>()
-const siteRouteData = useSiteDataByRoute()
-const theme = computed(() => siteData.value.themeConfig)
+const { site, page, theme } = useData()
 
 // custom layout
 const isCustomLayout = computed(() => !!route.data.frontmatter.customLayout)
@@ -19,13 +15,13 @@ const enableHome = computed(() => !!route.data.frontmatter.home)
 
 // navbar
 const showNavbar = computed(() => {
-  const { themeConfig } = siteRouteData.value
+  const { themeConfig } = site.value
   const { frontmatter } = route.data
   if (frontmatter.navbar === false || themeConfig.navbar === false)
     return false
 
   return (
-      siteData.value.title
+      page.value.title
       || themeConfig.logo
       || themeConfig.repo
       || themeConfig.nav
@@ -39,7 +35,7 @@ const openSideBar = ref(false)
 
 const showSidebar = computed(() => {
   const { frontmatter } = route.data
-  const { themeConfig } = siteRouteData.value
+  const { themeConfig } = site.value
   return (
       !frontmatter.home
       && frontmatter.sidebar !== false
