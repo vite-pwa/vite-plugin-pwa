@@ -7,6 +7,13 @@
     "type": "git",
     "url": "https://github.com/antfu/vite-plugin-pwa"
   },
+  "keywords": [
+    "pwa",
+    "workbox",
+    "vite",
+    "vite-plugin"
+  ],
+  "funding": "https://github.com/sponsors/antfu",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "files": [
     "dist",
