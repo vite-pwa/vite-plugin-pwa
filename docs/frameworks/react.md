@@ -136,7 +136,7 @@ following code:
 import { useRegisterSW } from 'virtual:pwa-register/react';
 
 const updateServiceWorker = useRegisterSW({
-  onRegiterError(error) {}
+  onRegisterError(error) {}
 })
 ```
 

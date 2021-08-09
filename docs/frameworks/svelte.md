@@ -53,7 +53,7 @@ You can use this `ReloadPrompt.svelte` component:
       {/if}
     </div>
     {#if $needRefresh}
-      <button on:click={() => updateServiceWorker(true))}>
+      <button on:click={() => updateServiceWorker(true)}>
         Reload
       </button>
     {/if}
@@ -128,7 +128,7 @@ following code:
 import { useRegisterSW } from 'virtual:pwa-register/svelte';
 
 const updateServiceWorker = useRegisterSW({
-  onRegiterError(error) {}
+  onRegisterError(error) {}
 })
 ```
 
