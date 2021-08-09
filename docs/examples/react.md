@@ -42,7 +42,7 @@ pnpm run example:react:start
 
 ## Router
 
-The router used on this example project is `react-router`.
+The router used on this example project is [react-router](https://reactrouter.com/) <outbound-link />.
 
 This example project can be found on `examples/react-router` package/directory with the following behaviors:
 - `Prompt for update`:

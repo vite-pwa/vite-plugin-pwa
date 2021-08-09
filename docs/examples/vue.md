@@ -42,6 +42,8 @@ pnpm run example:start
 
 ## Router
 
+The router used on this example project is [vue-router](https://next.router.vuejs.org/) <outbound-link />.
+
 This example project can be found on `examples/vue-router` package/directory with the following behaviors:
 - `Prompt for update`:
   - Show `Ready to work offlline` on first visit and once the `service worker` ready.
