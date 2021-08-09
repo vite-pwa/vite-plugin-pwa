@@ -29,8 +29,8 @@ You will need to:
 When the user click the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will 
 reload and the up-to-date content will be served.
 
-In any case, when the user click the `Cancel` or `OK` buttons for `onNeedRefresh` and `onOfflineReady` respectively, 
-just hide the prompt shown on `onNeedRefresh` or `onOfflineReady` methods.
+In any case, when the user clicks the `Cancel` or `OK` buttons in case `onNeedRefresh` or `onOfflineReady` respectively, 
+close the corresponding showed prompt.
 
 ### SSR/SSG
 
