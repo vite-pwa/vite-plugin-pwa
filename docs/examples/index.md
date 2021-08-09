@@ -1,6 +1,6 @@
 # Examples
 
-You can find a set of example projects on [Vite Plugin PWA GitHub repo](https://github.com/antfu/vite-plugin-pwa/tree/master/examples) <outbound-link />.
+You can find a set of example projects on [Vite Plugin PWA GitHub repo](https://github.com/antfu/vite-plugin-pwa/tree/main/examples) <outbound-link />.
 
 All the example projects are under `examples` package/directory of the repo root directory.
 
