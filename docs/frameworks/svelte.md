@@ -74,8 +74,8 @@ You can use this `ReloadPrompt.svelte` component:
         border-radius: 4px;
         z-index: 1;
         text-align: left;
-        background-color: aqua;
         box-shadow: 3px 4px 5px 0 #8885;
+        background-color: white;
     }
     .pwa-toast .message {
         margin-bottom: 8px;
