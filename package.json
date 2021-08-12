@@ -72,8 +72,8 @@
   },
   "peerDependencies": {
     "vite": "^2.0.0",
-    "workbox-build": "^6.1.5",
-    "workbox-window": "^6.1.5"
+    "workbox-build": "^6.2.2",
+    "workbox-window": "^6.2.2"
   },
   "dependencies": {
     "debug": "^4.3.2",
