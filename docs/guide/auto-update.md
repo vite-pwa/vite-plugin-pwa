@@ -1,3 +1,7 @@
+---
+title: Automatic reload | Guide
+---
+
 # Automatic reload
 
 > In order for the service worker to be registered, you must invoke the` registerSW`

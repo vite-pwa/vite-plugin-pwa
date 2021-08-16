@@ -1,3 +1,7 @@
+---
+title: injectManifest | Workbox
+---
+
 # injectManifest
 
 You must read [Which Mode to Use](https://developers.google.com/web/tools/workbox/modules/workbox-build#which_mode_to_use) <outbound-link />

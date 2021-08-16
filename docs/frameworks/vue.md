@@ -1,3 +1,7 @@
+---
+title: Vue | Frameworks
+---
+
 # Vue
 
 ## Vue 3

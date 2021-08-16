@@ -1,3 +1,7 @@
+---
+title: Service Worker Registration Errors | Guide
+---
+
 # Service Worker Registration Errors
 
 You can handle Service Worker registration errors if you want to notify the user with following code on your `main.ts` 

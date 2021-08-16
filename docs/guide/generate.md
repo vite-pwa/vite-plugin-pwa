@@ -1,3 +1,7 @@
+---
+title: Generate Service Worker | Guide
+---
+
 # Generate Service Worker
 
 Edit your `vite.config.ts` file to add `Vite Plugin PWA Plugin`:

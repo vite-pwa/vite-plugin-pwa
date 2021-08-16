@@ -1,4 +1,8 @@
-# Examples
+---
+title: Getting Started | Examples
+---
+
+# Getting Started
 
 You can find a set of example projects on [Vite Plugin PWA GitHub repo](https://github.com/antfu/vite-plugin-pwa/tree/main/examples) <outbound-link />.
 
@@ -96,4 +100,4 @@ We provide the following example projects:
     - [React Basic Example](/examples/react.html#basic): `Ready to work offline` and `Prompt for update`.
     - [React Router Examples](/examples/react.html#router): set of examples with disparate behaviors.
     - [React injectManifest Example](/examples/react.html#injectmanifest): `Ready to work offline` and `Prompt for update`.
-- [Vitepress](/examples/vitepress): `Prompt for update`.   
+- [VitePress](/examples/vitepress): `Prompt for update`.   

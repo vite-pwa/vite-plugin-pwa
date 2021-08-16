@@ -1,3 +1,7 @@
+---
+title: React | Examples
+---
+
 # React
 
 All `React` example projects can be found on `examples` package/directory and start with `react-` prefix.

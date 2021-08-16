@@ -1,3 +1,7 @@
+---
+title: Prompt for new content refreshing | Guide
+---
+
 # Prompt for new content refreshing
 
 <prompt-for-update-img />

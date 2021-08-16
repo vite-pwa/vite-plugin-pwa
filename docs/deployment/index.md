@@ -1,6 +1,8 @@
-# Deployment
+---
+title: Getting Started | Deployment
+---
 
-## Overview
+# Getting Started
 
 Since you need to install your application as a [Progressive Web App](https://web.dev/progressive-web-apps/) <outbound-link />
 you must configure your server to meet PWA requirements, that is, your server must:

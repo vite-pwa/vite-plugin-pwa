@@ -1,6 +1,8 @@
-# Workbox
+---
+title: Getting Started | Workbox
+---
 
-## Introduction
+# Getting Started
 
 **Workbox** is a huge package with a lot of modules to just make service worker development not to be a hassle and avoid 
 dealing with low level service worker api.
@@ -9,7 +11,7 @@ In this document we focus only on
 [workbox-build](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build) <outbound-link /> 
 module from **Workbox**.
 
-### workbox-build module
+## workbox-build module
 
 This module is for build process purpose (it is a `node` module), that is, `Vite Plugin PWA` will use it to build your 
 service worker.
@@ -27,7 +29,7 @@ the code for you).
 
 `injectManifest` method will get your custom service worker and build/compile it.
 
-### How is `workbox-build` related to `vite-plugin-pwa`?
+## How is `workbox-build` related to `vite-plugin-pwa`?
 
 `vite-plugin-pwa` will use internally `generateWS` and `injectManifest` `workbox` methods when `strategies` 
 option is `generateWS` and `injectManifest` respectively.

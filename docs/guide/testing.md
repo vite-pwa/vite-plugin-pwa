@@ -1,3 +1,7 @@
+---
+title: Testing Service Worker | Guide
+---
+
 # Testing Service Worker
 
 Since this plugin will not generate the service worker on `development`, you can test it on local following these steps:

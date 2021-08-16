@@ -1,3 +1,7 @@
+---
+title: Svelte | Examples
+---
+
 # Svelte
 
 All `Svelte` example projects can be found on `examples` package/directory and start with `svelte-` prefix.

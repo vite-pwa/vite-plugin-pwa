@@ -1,6 +1,8 @@
-# Vite 
+---
+title: Getting Started | Frameworks
+---
 
-## Virtual Module
+# Getting Started 
 
 This plugin is Framework-agnostic and so you can use it with Vanilla Javascript, Typescript and with any framework.
 
@@ -61,4 +63,4 @@ These custom virtual modules will expose a wrapper for `virtual:pwa-register` us
 - [Vue](/frameworks/vue)
 - [React](/frameworks/react)
 - [Svelte](/frameworks/svelte)
-- [Vitepress](/frameworks/vitepress)
+- [VitePress](/frameworks/vitepress)

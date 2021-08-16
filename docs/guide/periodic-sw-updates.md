@@ -1,3 +1,7 @@
+---
+title: Periodic Service Worker Updates | Guide
+---
+
 # Periodic Service Worker Updates
 
 As explained in [Manual Updates](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#manual_updates) <outbound-link />

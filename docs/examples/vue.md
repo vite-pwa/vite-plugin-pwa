@@ -1,3 +1,7 @@
+---
+title: Vue | Examples
+---
+
 # Vue
 
 All `Vue 3` example projects can be found on `examples` package/directory and start with `vue-` prefix.

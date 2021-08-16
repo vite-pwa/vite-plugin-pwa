@@ -1,3 +1,7 @@
+---
+title: Svelte | Frameworks
+---
+
 # Svelte
 
 If you are using [Svelte Kit](https://kit.svelte.dev) <outbound-link /> you should use its 
