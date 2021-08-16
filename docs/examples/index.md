@@ -11,7 +11,7 @@ your target project.
 
 > All example projects use `@rollup/plugin-replace` to configure a timestamp initialized to `now` on each build, and so,
 the service worker will be regenerated/versioned on each build: this timestamp will help us since the service worker 
-won't be regenerated/versioned if noe source code changed (on your project you shouldn't want this behavior, 
+won't be regenerated/versioned if none source code changed (on your project you shouldn't want this behavior, 
 you should want to only regenerate/version the service worker when your source code change).
 
 > **TRY TO AVOID INCLUDING AUTOMATIC TIMESTAMP ON YOU APPLICATION IF YOU DON'T CHANGE YOUR CODE**. 
