@@ -160,7 +160,7 @@ const slidebars = [
  */
 const config = {
   title: 'Vite Plugin PWA',
-  description: 'Zero-config PWA for Vite',
+  description: 'Zero-config PWA Framework-agnostic Plugin for Vite',
   lang: 'en-US',
   head: [
     ['meta', { name: 'theme-color', content: '#ffffff' }],
@@ -168,8 +168,9 @@ const config = {
     ['link', { rel: 'alternate icon', href: '/favicon.ico', type: 'image/png', sizes: '16x16' }],
     ['link', { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#ffffff' }],
     ['meta', { name: 'author', content: 'Anthony Fu' }],
+    ['meta', { name: 'keywords', content: 'pwa, workbox, vite, vite-plugin' }],
     ['meta', { property: 'og:title', content: 'Vite Plugin PWA' }],
-    ['meta', { property: 'og:description', content: 'Zero-config PWA for Vite' }],
+    ['meta', { property: 'og:description', content: 'Zero-config PWA Framework-agnostic Plugin for Vite' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:creator', content: '@antfu7' }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: "180x180" }],
