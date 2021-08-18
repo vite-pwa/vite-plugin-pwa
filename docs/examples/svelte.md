@@ -1,3 +1,7 @@
+---
+title: Svelte | Examples
+---
+
 # Svelte
 
 All `Svelte` example projects can be found on `examples` package/directory and start with `svelte-` prefix.
@@ -42,7 +46,7 @@ pnpm run example:svelte:start
 
 ## Router
 
-The router used on this example project is `@roxi/routify`.
+The router used on this example project is [@roxi/routify](https://routify.dev/) <outbound-link />.
 
 This example project can be found on `examples/react-routify` package/directory with the following behaviors:
 - `Prompt for update`:

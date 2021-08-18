@@ -1,3 +1,7 @@
+---
+title: Automatic reload | Guide
+---
+
 # Automatic reload
 
 > In order for the service worker to be registered, you must invoke the` registerSW`
@@ -40,7 +44,7 @@ const updateSW = registerSW({
 
 You will need to show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
 
-When the user click the `OK` button, just hide the prompt shown on `onOfflineReady` method.
+When the user clicks the `OK` button, just hide the prompt shown on `onOfflineReady` method.
 
 ### SSR/SSG
 

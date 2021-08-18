@@ -18,8 +18,8 @@ const config: UserConfig = {
       strategies: 'injectManifest',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'PWA Router',
-        short_name: 'PWA Router',
+        name: 'PWA Inject Manifest',
+        short_name: 'PWA Inject',
         theme_color: '#ffffff',
         icons: [
           {

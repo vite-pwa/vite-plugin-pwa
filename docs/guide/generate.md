@@ -1,3 +1,7 @@
+---
+title: Generate Service Worker | Guide
+---
+
 # Generate Service Worker
 
 Edit your `vite.config.ts` file to add `Vite Plugin PWA Plugin`:
@@ -10,7 +14,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export const defineConfig({
   plugins: [
     VitePWA({
-      includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'safari-pinned-tab.svg'],  
+      includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],  
       manifest: {
         name: 'Name of your app',
         short_name: 'Short name of your app',
@@ -41,7 +45,7 @@ export const defineConfig({
 ```
 </details>
 
-You will need to create your `robots.txt`, `favicon.svg` and/or `favicon.ico`, `apple-touch-icon.png`.
+You will need to create your `robots.txt`, `favicon.svg`,  `favicon.ico`, `apple-touch-icon.png`.
 
 You can create `robots.tx` on `public` directory with the following content:
 ```txt
@@ -63,7 +67,6 @@ Once generated, download the ZIP and use
 - use `android-chrome-512x512.png` for `pwa-512x512.png`
 - `apple-touch-icon.png` is `apple-touch-icon.png`
 - `favicon.ico` is `favicon.ico`
-- `safari-pinned-tab.svg` is `safari-pinned-tab.svg`
 
 You will also need to change your `index.html` file to include at least the following content to meet PWA requirements,
 you must change the `title` and the `description`, `favicon.svg` is the svg you have created:
@@ -85,6 +88,8 @@ you must change the `title` and the `description`, `favicon.svg` is the svg you 
 </head>
 ```
 </details>
+
+For `mask-icon` in the html use the `svg` or the `png` used to generate the `favicon` package.
 
 The `theme-color` in the html and the` theme_color` in the PWA `manifest` entry should match, change it to the color 
 you want. 

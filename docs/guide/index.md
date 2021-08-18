@@ -1,14 +1,16 @@
-# Get Started
+---
+title: Getting Started | Guide
+---
 
-## Overview
+# Getting Started
 
 `Vite Plugin PWA` uses [Workbox](https://developers.google.com/web/tools/workbox) <outbound-link /> library to build the service worker,
 you can find more information on [Workbox](/workbox/) section.
 
 
-### Installation
+## Installation
 
-Add `vite-plugin-pwa` dependency to your project:
+Add `vite-plugin-pwa` dependency to your project as a `dev dependency`:
 
 With **YARN**:
 ```shell
@@ -25,7 +27,7 @@ With **PNPM**:
 pnpm i vite-plugin-pwa -D
 ```
 
-### Setup
+## Setup
 
 Edit your `vite.config.ts` file to add `Vite Plugin PWA`:
 
@@ -38,7 +40,7 @@ export const defineConfig({
 })
 ```
 
-### Features
+## Features
 
 - [Generate Service Worker](/guide/generate.html) with Offline support
 - Auto inject [Web App manifests](https://developer.mozilla.org/en-US/docs/Web/Manifest) <outbound-link />

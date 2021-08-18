@@ -1,3 +1,7 @@
+---
+title: Netlify | Deployment
+---
+
 # Netlify
 
 ## Configure `manifest.webmanifest` mime type

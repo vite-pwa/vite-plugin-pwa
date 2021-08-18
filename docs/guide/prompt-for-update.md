@@ -1,3 +1,7 @@
+---
+title: Prompt for new content refreshing | Guide
+---
+
 # Prompt for new content refreshing
 
 <prompt-for-update-img />
@@ -26,11 +30,11 @@ You will need to:
 - show a prompt to the user with refresh and cancel buttons inside `onNeedRefresh` method.
 - show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
 
-When the user click the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will 
+When the user clicks the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will 
 reload and the up-to-date content will be served.
 
-In any case, when the user click the `Cancel` or `OK` buttons for `onNeedRefresh` and `onOfflineReady` respectivelly, 
-just hide the prompt shown on `onNeedRefresh` or `onOfflineReady` methods.
+In any case, when the user clicks the `Cancel` or `OK` buttons in case `onNeedRefresh` or `onOfflineReady` respectively, 
+close the corresponding showed prompt.
 
 ### SSR/SSG
 

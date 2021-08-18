@@ -1,6 +1,10 @@
-# Examples
+---
+title: Getting Started | Examples
+---
 
-You can find a set of example projects on [Vite Plugin PWA GitHub repo](https://github.com/antfu/vite-plugin-pwa/tree/master/examples) <outbound-link />.
+# Getting Started
+
+You can find a set of example projects on [Vite Plugin PWA GitHub repo](https://github.com/antfu/vite-plugin-pwa/tree/main/examples) <outbound-link />.
 
 All the example projects are under `examples` package/directory of the repo root directory.
 
@@ -11,11 +15,11 @@ your target project.
 
 > All example projects use `@rollup/plugin-replace` to configure a timestamp initialized to `now` on each build, and so,
 the service worker will be regenerated/versioned on each build: this timestamp will help us since the service worker 
-won't be regenerated/versioned if noe source code changed (on your project you shouldn't want this behavior, 
+won't be regenerated/versioned if none source code changed (on your project you shouldn't want this behavior, 
 you should want to only regenerate/version the service worker when your source code change).
 
 > **TRY TO AVOID INCLUDING AUTOMATIC TIMESTAMP ON YOU APPLICATION IF YOU DON'T CHANGE YOUR CODE**. 
-We use the timestamp in example projects to avoid touching some file each time we need to test: for example, to test 
+We use the timestamp in example projects to avoid having to touch a file each time we need to test: for example, to test 
 `Prompt for update`, we need to install the service worker first time (first build), then rebuild and restart the 
 example project and finally refresh the browser to check the `Prompt for update` is shown.
 
@@ -24,7 +28,7 @@ example project and finally refresh the browser to check the `Prompt for update`
 If you want to run any of the example projects you will need to download/clone to your local machine the 
 `Vite Plugin PWA GitHub repo`.
 
-You will need `node 14` to be able to build the `Vite Plugin PWA`.
+You will need `node 12` to be able to build the `Vite Plugin PWA`.
 
 Once the repo is on your local machine, you must install project dependencies and build the `Vite Plugin PWA`, 
 just run (from root directory):
@@ -96,4 +100,4 @@ We provide the following example projects:
     - [React Basic Example](/examples/react.html#basic): `Ready to work offline` and `Prompt for update`.
     - [React Router Examples](/examples/react.html#router): set of examples with disparate behaviors.
     - [React injectManifest Example](/examples/react.html#injectmanifest): `Ready to work offline` and `Prompt for update`.
-- [Vitepress](/examples/vitepress): `Prompt for update`.   
+- [VitePress](/examples/vitepress): `Prompt for update`.   

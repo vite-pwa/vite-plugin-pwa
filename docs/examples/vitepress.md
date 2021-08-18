@@ -1,6 +1,10 @@
-# Vitepress
+---
+title: VitePress | Examples
+---
 
-You can test `Vitepress` using the source code of this site, you can find it under `docs` package/directory.
+# VitePress
+
+You can test `VitePress` using the source code of this site, you can find it under `docs` package/directory.
 
 The behavior used in this site is only `Prompt for update`.
 

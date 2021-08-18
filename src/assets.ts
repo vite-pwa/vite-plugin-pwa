@@ -2,7 +2,7 @@ import { resolve as resolveFs } from 'path'
 import fs from 'fs'
 import crypto from 'crypto'
 import fg from 'fast-glob'
-import { GenerateSWConfig, InjectManifestConfig, ManifestEntry } from 'workbox-build'
+import { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
 import { ResolvedVitePWAOptions } from './types'
 import { FILE_MANIFEST } from './constants'
@@ -31,9 +31,9 @@ function buildManifestEntry(
 
 function lookupAdditionalManifestEntries(
   useInjectManifest: boolean,
-  injectManifest: Partial<InjectManifestConfig>,
-  workbox: Partial<GenerateSWConfig>,
-): ManifestEntry[] {
+  injectManifest: Partial<InjectManifestOptions>,
+  workbox: Partial<GenerateSWOptions>,
+): (string | ManifestEntry)[] {
   return useInjectManifest
     ? injectManifest.additionalManifestEntries || []
     : workbox.additionalManifestEntries || []
@@ -55,7 +55,7 @@ export async function configureStaticAssets(
   const useInjectManifest = strategies === 'injectManifest'
   const { publicDir } = viteConfig
   const globs: string[] = []
-  const manifestEntries: ManifestEntry[] = lookupAdditionalManifestEntries(
+  const manifestEntries: (string | ManifestEntry)[] = lookupAdditionalManifestEntries(
     useInjectManifest,
     injectManifest,
     workbox,
@@ -87,7 +87,12 @@ export async function configureStaticAssets(
     )
     // we also need to remove from the list existing included by the user
     if (manifestEntries.length > 0) {
-      const included = manifestEntries.map(me => me.url)
+      const included = manifestEntries.map((me) => {
+        if (typeof me === 'string')
+          return me
+        else
+          return me.url
+      })
       assets = assets.filter(a => !included.includes(a))
     }
     const assetsEntries = await Promise.all(assets.map((a) => {

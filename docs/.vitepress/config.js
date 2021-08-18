@@ -45,7 +45,7 @@ const Guide = [
 
 const Deployment = [
   {
-    text: 'Deployment',
+    text: 'Getting Started',
     link: '/deployment/',
   },
   {
@@ -72,7 +72,7 @@ const Deployment = [
 
 const Frameworks = [
   {
-    text: 'Vite',
+    text: 'Getting Started',
     link: '/frameworks/',
   },
   {
@@ -88,14 +88,14 @@ const Frameworks = [
     link: '/frameworks/svelte',
   },
   {
-    text: 'Vitepress',
+    text: 'VitePress',
     link: '/frameworks/vitepress',
   },
 ]
 
 const Examples = [
   {
-    text: 'Examples',
+    text: 'Getting Started',
     link: '/examples/',
   },
   {
@@ -111,14 +111,14 @@ const Examples = [
     link: '/examples/svelte',
   },
   {
-    text: 'Vitepress',
+    text: 'VitePress',
     link: '/examples/vitepress',
   },
 ]
 
 const Workbox = [
   {
-    text: 'Workbox',
+    text: 'Getting Started',
     link: '/workbox/',
   },
   {

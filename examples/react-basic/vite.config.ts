@@ -15,8 +15,8 @@ const config: UserConfig = {
       base: '/',
       includeAssets: ['favicon.svg'],
       manifest: {
-        name: 'PWA Router',
-        short_name: 'PWA Router',
+        name: 'PWA Basic',
+        short_name: 'PWA Basic',
         theme_color: '#ffffff',
         icons: [
           {

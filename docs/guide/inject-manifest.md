@@ -1,3 +1,7 @@
+---
+title: Advanced (injectManifest) | Guide
+---
+
 # Advanced (injectManifest)
 
 With this option you can build your own service worker.

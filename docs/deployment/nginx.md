@@ -1,3 +1,7 @@
+---
+title: NGINX | Deployment
+---
+
 # NGINX
 
 ## Configure `manifest.webmanifest` mime type

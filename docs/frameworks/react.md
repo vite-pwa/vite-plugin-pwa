@@ -1,3 +1,7 @@
+---
+title: React | Frameworks
+---
+
 # React
 
 You can use the built-in `Vite` virtual module `virtual:pwa-register/react` for `React` which will return
@@ -136,7 +140,7 @@ following code:
 import { useRegisterSW } from 'virtual:pwa-register/react';
 
 const updateServiceWorker = useRegisterSW({
-  onRegiterError(error) {}
+  onRegisterError(error) {}
 })
 ```
 

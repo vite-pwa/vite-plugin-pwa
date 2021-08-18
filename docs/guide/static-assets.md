@@ -1,3 +1,7 @@
+---
+title: Static assets handling | Guide
+---
+
 # Static assets handling
 
 By default, all icons on `PWA Manifest` option found under Vite's `publicDir` option directory, will be included

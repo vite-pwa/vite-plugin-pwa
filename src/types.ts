@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import type { GenerateSWConfig, InjectManifestConfig, ManifestEntry } from 'workbox-build'
+import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle } from 'rollup'
 
 /**
@@ -75,11 +75,11 @@ export interface VitePWAOptions {
   /**
    * The workbox object for `generateSW`
    */
-  workbox: Partial<GenerateSWConfig>
+  workbox: Partial<GenerateSWOptions>
   /**
    * The workbox object for `injectManifest`
    */
-  injectManifest: Partial<InjectManifestConfig>
+  injectManifest: Partial<InjectManifestOptions>
   /**
    * Override Vite's base options only for PWA
    *
@@ -105,8 +105,8 @@ export interface VitePWAOptions {
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   swSrc: string
   swDest: string
-  workbox: GenerateSWConfig
-  injectManifest: InjectManifestConfig
+  workbox: GenerateSWOptions
+  injectManifest: InjectManifestOptions
 }
 
 export interface ManifestOptions {
@@ -223,4 +223,4 @@ export interface VitePluginPWAAPI {
   generateSW(): Promise<void>
 }
 
-export type ExtendManifestEntriesHook = (manifestEntries: ManifestEntry[]) => ManifestEntry[] | null
+export type ExtendManifestEntriesHook = (manifestEntries: (string | ManifestEntry)[]) => (string | ManifestEntry)[] | undefined

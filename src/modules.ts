@@ -63,7 +63,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
 
   // options.injectManifest.mode won't work!!!
   // error during build: ValidationError: "mode" is not allowed
-  delete injectManifestOptions.mode
+  // delete injectManifestOptions.mode
 
   // inject the manifest
   await injectManifest(injectManifestOptions)
