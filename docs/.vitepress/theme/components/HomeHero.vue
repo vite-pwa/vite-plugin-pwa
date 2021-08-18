@@ -12,7 +12,7 @@ import { isDark } from '../composables/dark'
       </a>
     </p>
 
-    <p class="text-lg">Zero-config PWA for Vite</p>
+    <p class="text-lg">Zero-config PWA Framework-agnostic Plugin for Vite</p>
 
     <!-- <p class="version-img">
       <a href="https://www.npmjs.com/package/vite-plugin-pwa" target="_blank" rel="noopener">
