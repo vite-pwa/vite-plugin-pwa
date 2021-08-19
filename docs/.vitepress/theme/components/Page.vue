@@ -21,7 +21,7 @@
   padding-top: var(--header-height);
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .page {
     margin-left: var(--sidebar-width);
   }

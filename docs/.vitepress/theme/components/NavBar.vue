@@ -58,7 +58,7 @@ defineEmits(['toggle'])
   background-color: var(--c-bg-semi);
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .nav-bar {
     padding: 0.7rem 0.8rem 0.7rem 1.5rem;
   }
@@ -72,7 +72,7 @@ defineEmits(['toggle'])
   display: none;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .nav {
     display: flex;
   }
