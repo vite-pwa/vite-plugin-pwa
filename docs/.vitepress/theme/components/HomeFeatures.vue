@@ -110,7 +110,7 @@ const features = computed<Feature[]>(() => {
 
 .feature {
   flex-shrink: 0;
-  padding: 20px 24px;
+  padding: 1rem;
   width: 100%;
 }
 
