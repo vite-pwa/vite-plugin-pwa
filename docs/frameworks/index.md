@@ -60,7 +60,17 @@ These custom virtual modules will expose a wrapper for `virtual:pwa-register` us
 
 ## Frameworks
 
-- [Vue](/frameworks/vue)
-- [React](/frameworks/react)
-- [Svelte](/frameworks/svelte)
-- [VitePress](/frameworks/vitepress)
+<ul aria-describedby="frameworks">
+<md-list-anchor href="/frameworks/vue.html">
+  <template #link>Vue</template>
+</md-list-anchor>
+<md-list-anchor href="/frameworks/react.html">
+  <template #link>React</template>
+</md-list-anchor>
+<md-list-anchor href="/frameworks/svelte.html">
+  <template #link>Svelte</template>
+</md-list-anchor>
+<md-list-anchor href="/frameworks/vitepress.html">
+  <template #link>VitePress</template>
+</md-list-anchor>
+</ul>
