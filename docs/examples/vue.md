@@ -91,7 +91,7 @@ pnpm run example:router:start:claims:reloadsw
 ## injectManifest
 
 This example project can be found on `examples/vue-basic-inject-manifest` package/directory with the following behavior:
-- Custom `Typescript Service Worker`.
+- Custom `TypeScript Service Worker`.
 - Show `Ready to work offlline` on first visit and once the `service worker` ready.
 - Show `Prompt for update` when new `service worker` available.
 

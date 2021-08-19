@@ -4,7 +4,7 @@ title: Getting Started | Frameworks
 
 # Getting Started 
 
-This plugin is Framework-agnostic and so you can use it with Vanilla Javascript, Typescript and with any framework.
+This plugin is Framework-agnostic and so you can use it with Vanilla JavaScript, TypeScript and with any framework.
 
 ## Usage
 
