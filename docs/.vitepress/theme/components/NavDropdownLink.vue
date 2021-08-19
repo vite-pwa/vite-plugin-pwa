@@ -18,8 +18,8 @@ function toggle() {
 </script>
 
 <template>
-  <div class="nav-dropdown-link">
-    <button type="button" class="button" :aria-label="item.ariaLabel" @click="toggle">
+  <div class="nav-dropdown-link" :class="{ open }">
+    <button type="button" class="button" :aria-label="item.ariaLabel" @click="toggle" @keydown.enter="toggle">
       <span class="button-text">{{ item.text }}</span>
       <span class="button-arrow" :class="open ? 'down' : 'right'" />
     </button>
