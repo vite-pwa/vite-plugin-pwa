@@ -32,7 +32,7 @@ const { props: linkProps, isExternal } = useNavLink(propsRefs.item)
   white-space: nowrap;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .item {
     padding: 0 24px 0 12px;
     line-height: 32px;
@@ -58,7 +58,7 @@ const { props: linkProps, isExternal } = useNavLink(propsRefs.item)
   color: var(--c-text);
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .arrow {
     display: inline-block;
     margin-right: 8px;

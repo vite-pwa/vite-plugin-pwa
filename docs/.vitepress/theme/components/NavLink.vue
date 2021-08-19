@@ -41,7 +41,7 @@ const { props: linkProps, isExternal } = useNavLink(propsRefs.item)
   color: var(--c-text);
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .item {
     border-bottom: 2px solid transparent;
     padding: 0;

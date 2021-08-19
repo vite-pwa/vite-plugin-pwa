@@ -30,7 +30,7 @@ const show = computed(() => links.value)
   border-bottom: 1px solid var(--c-divider);
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .nav-links {
     display: flex;
     padding: 2px 0 0;
