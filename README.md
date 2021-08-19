@@ -1,5 +1,5 @@
 <p align='center'>
-<img src='https://repository-images.githubusercontent.com/290129345/d4bfc300-1866-11eb-8602-e672c9dd0e7d' alt="vite-plugin-pwa - Zero-config PWA for Vite">
+<img src='https://vite-plugin-pwa.netlify.app/banner_light.svg' alt="vite-plugin-pwa - Zero-config PWA for Vite"><br>
 Zero-config PWA Framework-agnostic Plugin for Vite
 </p>
 
@@ -33,7 +33,7 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 - 📖 [**Documentation & guides**](https://vite-plugin-pwa.netlify.app/)
 - 👌 **Zero-Config**: sensible built-in default configs for common use cases
 - 🔩 **Extensible**: expose the full ability to customize the behavior of the plugin
-- 🦾 **Type Strong**: written in [Typescript](https://www.typescriptlang.org/)
+- 🦾 **Type Strong**: written in [TypeScript](https://www.typescriptlang.org/)
 - 🔌 **Offline Support**: generate service worker with offline support (via Workbox)
 - ⚡ **Fully tree shakable**: auto inject Web App Manifest
 - 💬 **Prompt for new content**: built-in support for Vanilla JavaScript, Vue 3, React, and Svelte
@@ -50,7 +50,7 @@ npm i vite-plugin-pwa -D # yarn add vite-plugin-pwa -D
 
 > 🎩 From version `0.11.0`, `workbox` has been updated to version `6.2.2` (previous versions were using `6.1.5` 
 version): if you are using advanced configuration like `workbox` or `injectManifest` options, you must review the plugin
-configuration, since this new version of `workbox` has breaking changes!!!
+configuration, since this new version of `workbox` has breaking changes!
 
 Add `VitePWA` plugin to `vite.config.js / vite.config.ts` and configure it:
 
