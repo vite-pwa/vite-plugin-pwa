@@ -24,7 +24,7 @@ a.sidebar-link-item.active {
   padding: .75rem 0 5rem;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .sidebar > .sidebar-links {
     padding: 1.5rem 0;
   }
@@ -34,7 +34,7 @@ a.sidebar-link-item.active {
   padding-top: .5rem;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .sidebar > .sidebar-links > .sidebar-link + .sidebar-link {
     padding-top: 1.25rem;
   }

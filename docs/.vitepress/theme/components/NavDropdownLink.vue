@@ -18,8 +18,8 @@ function toggle() {
 </script>
 
 <template>
-  <div class="nav-dropdown-link">
-    <button type="button" class="button" :aria-label="item.ariaLabel" @click="toggle">
+  <div class="nav-dropdown-link" :class="{ open }">
+    <button type="button" class="button" :aria-label="item.ariaLabel" @click="toggle" @keydown.enter="toggle">
       <span class="button-text">{{ item.text }}</span>
       <span class="button-arrow" :class="open ? 'down' : 'right'" />
     </button>
@@ -40,7 +40,7 @@ function toggle() {
   cursor: pointer;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .nav-dropdown-link {
     height: auto;
     overflow: visible;
@@ -76,7 +76,7 @@ function toggle() {
   outline: 0;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .button {
     border-bottom: 2px solid transparent;
     padding: 0 4px;
@@ -101,7 +101,7 @@ function toggle() {
   transform: rotate(-90deg);
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .button-arrow.right {
     transform: rotate(0);
   }
@@ -114,7 +114,7 @@ function toggle() {
   @apply md:dark:(border border-gray-400 border-opacity-20);
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .dialog {
     display: none;
     position: absolute;

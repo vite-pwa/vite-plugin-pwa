@@ -17,8 +17,17 @@ This module is for build process purpose (it is a `node` module), that is, `Vite
 service worker.
 
 We focus on 2 methods of this module:
-- [generateWS](/workbox/generate-ws): for generating the service worker.
-- [injectManifest](/workbox/inject-manifest): to build your own service worker.
+
+<ul aria-describedby="workbox-build-module">
+<md-list-anchor href="/workbox/generate-ws.html">
+  <template #link>generateWS</template>
+  <template #trailing>: for generating the service worker.</template>
+</md-list-anchor>
+<md-list-anchor href="/workbox/inject-manifest.html">
+  <template #link>injectManifest</template>
+  <template #trailing>: to build your own service worker.</template>
+</md-list-anchor>
+</ul>
 
 You must read [Which Mode to Use](https://developers.google.com/web/tools/workbox/modules/workbox-build#which_mode_to_use) <outbound-link />
 before decide what strategy to use.

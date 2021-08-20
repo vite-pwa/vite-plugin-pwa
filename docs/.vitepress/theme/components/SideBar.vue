@@ -31,7 +31,7 @@ defineProps({
   transition: transform 0.25s ease;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .sidebar {
     transform: translateX(0);
   }
@@ -45,7 +45,7 @@ defineProps({
   display: block;
 }
 
-@media (min-width: 720px) {
+@media (min-width: 780px) {
   .nav {
     display: none;
   }

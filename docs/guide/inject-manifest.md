@@ -80,9 +80,9 @@ clientsClaim()
 > You also need to add the code to your application described on [Automatic reload](/guide/auto-update.html#runtime)
 
 
-## Typescript support 
+## TypeScript support 
 
-You can use Typescript to write your custom service worker. To resolve service worker types, just add `WebWorker` to `lib` 
+You can use TypeScript to write your custom service worker. To resolve service worker types, just add `WebWorker` to `lib` 
 entry on your `tsconfig.json` file:
 
 ```json

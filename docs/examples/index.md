@@ -88,16 +88,67 @@ the `Service Worker` is serving all assets instead request them to the server.
 ## Available Example Projects
 
 We provide the following example projects:
-- [Vue 3](/examples/vue.html):
-    - [Vue 3 Basic Example](/examples/vue.html#basic): `Ready to work offline` and `Prompt for update`.
-    - [Vue 3 Router Examples](/examples/vue.html#router): set of examples with disparate behaviors.
-    - [Vue 3 injectManifest Example](/examples/vue.html#injectmanifest): `Ready to work offline` and `Prompt for update`.
-- [Svelte](/examples/svelte.html):
-    - [Svelte Basic Example](/examples/svelte.html#basic): `Ready to work offline` and `Prompt for update`.
-    - [Svelte Router Examples](/examples/svelte.html#router): set of examples with disparate behaviors.
-    - [Svelte injectManifest Example](/examples/svelte.html#injectmanifest): `Ready to work offline` and `Prompt for update`.
-- [React](/examples/react.html):
-    - [React Basic Example](/examples/react.html#basic): `Ready to work offline` and `Prompt for update`.
-    - [React Router Examples](/examples/react.html#router): set of examples with disparate behaviors.
-    - [React injectManifest Example](/examples/react.html#injectmanifest): `Ready to work offline` and `Prompt for update`.
-- [VitePress](/examples/vitepress): `Prompt for update`.   
+
+<ul aria-describedby="available-example-projects">
+<md-list-anchor id="vue-examples" href="/examples/vue.html">
+  <template #link>Vue 3</template>
+  <template #nested>
+    <ul aria-describedby="vue-examples">
+      <md-list-anchor href="/examples/vue.html#basic">
+        <template #link>Vue 3 Basic Example</template>
+        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+      </md-list-anchor>
+      <md-list-anchor href="/examples/vue.html#router">
+        <template #link>Vue 3 Router Examples</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
+      </md-list-anchor>
+      <md-list-anchor href="/examples/vue.html#injectmanifest">
+        <template #link>Vue 3 injectManifest Example</template>
+        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+      </md-list-anchor>
+    </ul>
+  </template>
+</md-list-anchor>
+<md-list-anchor id="svelte-examples" href="/examples/svelte.html">
+  <template #link>Svelte</template>
+  <template #nested>
+    <ul aria-describedby="svelte-examples">
+      <md-list-anchor href="/examples/svelte.html#basic">
+        <template #link>Svelte Basic Example</template>
+        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+      </md-list-anchor>
+      <md-list-anchor href="/examples/svelte.html#router">
+        <template #link>Svelte Router Examples</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
+      </md-list-anchor>
+      <md-list-anchor href="/examples/svelte.html#injectmanifest">
+        <template #link>Svelte injectManifest Example</template>
+        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+      </md-list-anchor>
+    </ul>
+  </template>
+</md-list-anchor>
+<md-list-anchor id="react-examples" href="/examples/react.html">
+  <template #link>React</template>
+  <template #nested>
+    <ul aria-describedby="react-examples">
+      <md-list-anchor href="/examples/react.html#basic">
+        <template #link>React Basic Example</template>
+        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+      </md-list-anchor>
+      <md-list-anchor href="/examples/react.html#router">
+        <template #link>React Router Examples</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
+      </md-list-anchor>
+      <md-list-anchor href="/examples/react.html#injectmanifest">
+        <template #link>React injectManifest Example</template>
+        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+      </md-list-anchor>
+    </ul>
+  </template>
+</md-list-anchor>
+<md-list-anchor href="/examples/vitepress.html">
+  <template #link>VitePress</template>
+  <template #trailing>: <code>Prompt for update</code>.</template>
+</md-list-anchor>
+</ul>

@@ -42,13 +42,37 @@ export const defineConfig({
 
 ## Features
 
-- [Generate Service Worker](/guide/generate.html) with Offline support
-- Auto inject [Web App manifests](https://developer.mozilla.org/en-US/docs/Web/Manifest) <outbound-link />
-- [Prompt for update](/guide/prompt-for-update.html): prompt for new content refreshing
-- [Automatic reload](/guide/auto-update.html) when new content available
-- [Advanced (injectManifest)](/guide/inject-manifest.html) with Offline support
-- [Static assets handling](/guide/static-assets.html)
-- [Periodic SW updates](/guide/periodic-sw-updates.html)
-- [SW registration errors](/guide/sw-registration-errors.html)
+<ul aria-describedby="features">
+<md-list-anchor href="/guide/generate.html">
+  <template #link>Generate Service Worker</template>
+  <template #trailing>&#160;with Offline support</template>
+</md-list-anchor>
+<md-list-anchor href="https://developer.mozilla.org/en-US/docs/Web/Manifest" external>
+  <template #heading>Auto inject&#160;</template>
+  <template #link>Web App manifests</template>
+  <template #trailing>&#160;</template>
+</md-list-anchor>
+<md-list-anchor href="/guide/prompt-for-update.html">
+  <template #link>Prompt for update</template>
+  <template #trailing>: prompt for new content refreshing</template>
+</md-list-anchor>
+<md-list-anchor href="/guide/auto-update.html">
+  <template #link>Automatic reload</template>
+  <template #trailing>&#160;when new content available</template>
+</md-list-anchor>
+<md-list-anchor href="/guide/auto-update.html">
+  <template #link>Advanced (injectManifest)</template>
+  <template #trailing>&#160;with Offline support</template>
+</md-list-anchor>
+<md-list-anchor href="/guide/static-assets.html">
+  <template #link>Static assets handling</template>
+</md-list-anchor>
+<md-list-anchor href="/guide/periodic-sw-updates.html">
+  <template #link>Periodic SW updates</template>
+</md-list-anchor>
+<md-list-anchor href="/guide/sw-registration-errors.html">
+  <template #link>SW registration errors</template>
+</md-list-anchor>
+</ul>
 
 
