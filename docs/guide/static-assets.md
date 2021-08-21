@@ -17,7 +17,26 @@ If you need to include other assets that are not under Vite's `publicDir` option
 or [injectManifest](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.injectManifest) <outbound-link />
 plugin options.
 
-If you use `generateWS` strategy, then you need to configure:
+> <br /> :::warning::: **WARNING**<br /><br />
+If you configure `globPatterns` on `workbox` or `injectManifest` plugin option, you **MUST** include all your assets
+patterns: `globPatterns` will be used by `workbox-build` to match files on `dist` folder.
+<br />
+<br />
+By default, `globPatterns` will be `**.{js,css,html}`: `workbox` will use
+[glob primer](https://github.com/isaacs/node-glob#glob-primer) <outbound-link /> to match files using `globPatterns`
+as filter.
+<br />
+<br />
+A common pitfall is to only include some assets and forget to add `css`, `js` and `html` assets pattern, and then your 
+service worker will complain about missing resources.
+<br />
+<br />
+For example, if you don't include `html` assets pattern, you will get this error from your service worker: 
+**WorkboxError non-precached-url index.html**.
+<br />
+<br />
+
+If you use `generateWS` strategy, then you need to configure `globPatterns` inside `workbox` plugin option:
 
 ```ts
 VitePWA({
@@ -27,7 +46,7 @@ VitePWA({
 })
 ```
 
-If you use `injectManifest` strategy, then you need to configure:
+If you use `injectManifest` strategy, then you need to configure`globPatterns` inside `injectManifest` plugin option:
 
 ```ts
 VitePWA({
@@ -36,5 +55,3 @@ VitePWA({
   }  
 })
 ```
-
-
