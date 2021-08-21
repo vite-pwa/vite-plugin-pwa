@@ -65,7 +65,7 @@ This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.o
   <template #trailing>&#160;for <code>Svelte</code>.</template>
 </md-list-anchor>
 <md-list-anchor href="https://reactjs.org/docs/hooks-reference.html#usestate" external>
-  <template #heading><code>virtual:pwa-register/vue</code>:&#160;</template>
+  <template #heading><code>virtual:pwa-register/react</code>:&#160;</template>
   <template #link>useState</template>
   <template #trailing>&#160;for <code>React</code>.</template>
 </md-list-anchor>
