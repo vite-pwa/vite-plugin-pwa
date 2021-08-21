@@ -57,7 +57,7 @@ export function getFlatSideBarLinks(
 ): DefaultTheme.SideBarLink[] {
     return sidebar.reduce<DefaultTheme.SideBarLink[]>((links, item) => {
         if (item.link)
-            links.push({ text: item.text, link: removeExtention(item.link) })
+            links.push({ text: item.text, link: removeExtention(item.link), useLinkText: item.useLinkText })
 
         if (isSideBarGroup(item))
             links = [...links, ...getFlatSideBarLinks(item.children)]

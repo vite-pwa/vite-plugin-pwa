@@ -89,11 +89,11 @@ the `Service Worker` is serving all assets instead request them to the server.
 
 We provide the following example projects:
 
-<ul aria-describedby="available-example-projects">
+<ul aria-labelledby="available-example-projects">
 <md-list-anchor id="vue-examples" href="/examples/vue.html">
   <template #link>Vue 3</template>
   <template #nested>
-    <ul aria-describedby="vue-examples">
+    <ul aria-labelledby="vue-examples">
       <md-list-anchor href="/examples/vue.html#basic">
         <template #link>Vue 3 Basic Example</template>
         <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
@@ -112,7 +112,7 @@ We provide the following example projects:
 <md-list-anchor id="svelte-examples" href="/examples/svelte.html">
   <template #link>Svelte</template>
   <template #nested>
-    <ul aria-describedby="svelte-examples">
+    <ul aria-labelledby="svelte-examples">
       <md-list-anchor href="/examples/svelte.html#basic">
         <template #link>Svelte Basic Example</template>
         <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
@@ -131,7 +131,7 @@ We provide the following example projects:
 <md-list-anchor id="react-examples" href="/examples/react.html">
   <template #link>React</template>
   <template #nested>
-    <ul aria-describedby="react-examples">
+    <ul aria-labelledby="react-examples">
       <md-list-anchor href="/examples/react.html#basic">
         <template #link>React Basic Example</template>
         <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>

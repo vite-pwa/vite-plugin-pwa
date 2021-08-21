@@ -12,7 +12,7 @@ you must configure your server to meet PWA requirements, that is, your server mu
 
 ## Servers
 
-<ul aria-describedby="servers">
+<ul aria-labelledby="servers">
 <md-list-anchor href="/deployment/netlify.html">
   <template #link>Netlify</template>
 </md-list-anchor>

@@ -18,7 +18,7 @@ service worker.
 
 We focus on 2 methods of this module:
 
-<ul aria-describedby="workbox-build-module">
+<ul aria-labelledby="workbox-build-module">
 <md-list-anchor href="/workbox/generate-ws.html">
   <template #link>generateWS</template>
   <template #trailing>: for generating the service worker.</template>

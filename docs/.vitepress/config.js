@@ -134,23 +134,38 @@ const Workbox = [
 const slidebars = [
   {
     text: 'Guide',
-    children: Guide,
+    children: Guide.map((e) => {
+      e.useLinkText = `${e.text} | Guide`
+      return e
+    }),
   },
   {
     text: 'Frameworks',
-    children: Frameworks,
+    children: Frameworks.map((e) => {
+      e.useLinkText = `${e.text} | Frameworks`
+      return e
+    }),
   },
   {
     text: 'Examples',
-    children: Examples,
+    children: Examples.map((e) => {
+      e.useLinkText = `${e.text} | Examples`
+      return e
+    }),
   },
   {
     text: 'Deployment',
-    children: Deployment,
+    children: Deployment.map((e) => {
+      e.useLinkText = `${e.text} | Deployment`
+      return e
+    }),
   },
   {
     text: 'Workbox',
-    children: Workbox,
+    children: Workbox.map((e) => {
+      e.useLinkText = `${e.text} | Workbox`
+      return e
+    }),
   },
 ]
 
