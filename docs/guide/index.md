@@ -42,7 +42,7 @@ export const defineConfig({
 
 ## Features
 
-<ul aria-describedby="features">
+<ul aria-labelledby="features">
 <md-list-anchor href="/guide/generate.html">
   <template #link>Generate Service Worker</template>
   <template #trailing>&#160;with Offline support</template>
