@@ -31,7 +31,6 @@ const { hasLinks, prev, next } = useNextAndPrevLinks()
 .container {
   display: grid;
   grid-template-columns: 1fr;
-  /*align-items: center;*/
   grid-row-gap: 0.5rem;
   border-top: 1px solid var(--c-divider);
   padding-top: 1rem;
@@ -44,7 +43,7 @@ const { hasLinks, prev, next } = useNextAndPrevLinks()
 .prev,
 .next {
   display: flex;
-  /*justify-content: center;*/
+  justify-content: center;
   min-height: 48px;
   padding: 0 0.5rem;
 }
