@@ -50,17 +50,33 @@ When the user clicks the `OK` button, just hide the prompt shown on `onOfflineRe
 This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.org/) <outbound-link />, 
 [Svelte](https://svelte.dev/docs) <outbound-link /> and [React](https://reactjs.org/) <outbound-link />.  
 
-These custom virtual modules will expose a wrapper for `virtual:pwa-register` using framework `reactivity system`, that is:
-- `virtual:pwa-register/vue`: [ref](https://v3.vuejs.org/api/refs-api.html#ref) <outbound-link /> for `Vue 3`.
-- `virtual:pwa-register/svelte`: [writable](https://svelte.dev/docs#writable) <outbound-link /> for `Svelte`.
-- `virtual:pwa-register/react`: [useState](https://reactjs.org/docs/hooks-reference.html#usestate) <outbound-link /> for `React`.
+<p id="virtual-modules-frameworks">These custom virtual modules will expose a wrapper for 
+<code>virtual:pwa-register</code> using framework <code>reactivity system</code>, that is:</p>
+
+<ul aria-labelledby="virtual-modules-frameworks">
+<md-list-anchor href="https://v3.vuejs.org/api/refs-api.html#ref" external>
+  <template #heading><code>virtual:pwa-register/vue</code>:&#160;</template>
+  <template #link>ref</template>
+  <template #trailing>&#160;for <code>Vue 3</code>.</template>
+</md-list-anchor>
+<md-list-anchor href="https://svelte.dev/docs#writable" external>
+  <template #heading><code>virtual:pwa-register/svelte</code>:&#160;</template>
+  <template #link>writable</template>
+  <template #trailing>&#160;for <code>Svelte</code>.</template>
+</md-list-anchor>
+<md-list-anchor href="https://reactjs.org/docs/hooks-reference.html#usestate" external>
+  <template #heading><code>virtual:pwa-register/vue</code>:&#160;</template>
+  <template #link>useState</template>
+  <template #trailing>&#160;for <code>React</code>.</template>
+</md-list-anchor>
+</ul>
 
 **Note**: for [Vue 2](https://vuejs.org/) <outbound-link /> you need to use a custom `mixin` provided on 
 [Vue 2](/frameworks/vue.html#vue-2) section.
 
 ## Frameworks
 
-<ul aria-describedby="frameworks">
+<ul aria-labelledby="frameworks">
 <md-list-anchor href="/frameworks/vue.html">
   <template #link>Vue</template>
 </md-list-anchor>
