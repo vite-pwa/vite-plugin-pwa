@@ -99,11 +99,13 @@ export namespace DefaultTheme {
   export interface SideBarLink {
     text: string
     link: string
+    useLinkText?: string
   }
 
   export interface SideBarGroup {
     text: string
     link?: string
+    useLinkText?: string
 
     /**
      * @default false

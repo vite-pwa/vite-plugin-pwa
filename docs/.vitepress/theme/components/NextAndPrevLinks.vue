@@ -7,16 +7,16 @@ const { hasLinks, prev, next } = useNextAndPrevLinks()
 
 <template>
   <div v-if="hasLinks" class="next-and-prev-link">
-    <div class="container">
-      <div class="prev">
+    <div class="container" :class="!next || !prev ? 'empty' : null">
+      <div class="prev" :class="prev ? ull : 'empty'">
         <a v-if="prev" class="link" :href="withBase(prev.link)">
           <ArrowLeft class="icon icon-prev" />
           <span class="text">{{ prev.text }}</span>
         </a>
       </div>
-      <div class="next">
+      <div class="next" :class="next ? null : 'empty'">
         <a v-if="next" class="link" :href="withBase(next.link)">
-          <span class="text">{{ next.text }}</span>
+          <span class="text">{{ next.useLinkText ? next.useLinkText : next.text }}</span>
           <ArrowRight class="icon icon-next" />
         </a>
       </div>
@@ -29,24 +29,29 @@ const { hasLinks, prev, next } = useNextAndPrevLinks()
   padding-top: 1rem;
 }
 .container {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr;
+  /*align-items: center;*/
+  grid-row-gap: 0.5rem;
   border-top: 1px solid var(--c-divider);
   padding-top: 1rem;
+  min-height: 48px;
+  width: 100%;
+}
+.container.empty {
+  grid-row-gap: 0;
 }
 .prev,
 .next {
   display: flex;
-  flex-shrink: 0;
-  width: 50%;
+  /*justify-content: center;*/
+  min-height: 48px;
+  padding: 0 0.5rem;
 }
-.prev {
-  justify-content: flex-start;
-  padding-right: 12px;
-}
-.next {
-  justify-content: flex-end;
-  padding-left: 12px;
+.prev.empty,
+.next.empty {
+  max-height: 0;
+  min-height: 0;
 }
 .link {
   display: inline-flex;
@@ -54,6 +59,7 @@ const { hasLinks, prev, next } = useNextAndPrevLinks()
   max-width: 100%;
   font-size: 1rem;
   font-weight: 500;
+  padding: 0 0.5rem;
 }
 .text {
   display: block;
@@ -74,5 +80,24 @@ const { hasLinks, prev, next } = useNextAndPrevLinks()
 }
 .icon-next {
   margin-left: 8px;
+}
+@media (min-width: 780px) {
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: space-between;
+    grid-row-gap: 0;
+  }
+  .prev,
+  .next {
+    flex-shrink: 0;
+  }
+  .prev {
+    justify-content: flex-start;
+    padding-right: 1rem;
+  }
+  .next {
+    justify-content: flex-end;
+    padding-left: 1rem;
+  }
 }
 </style>

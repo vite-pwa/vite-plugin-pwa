@@ -47,6 +47,7 @@ const Deployment = [
   {
     text: 'Getting Started',
     link: '/deployment/',
+    useLinkText: 'Getting Started | Deployment'
   },
   {
     text: 'Netlify',
@@ -74,6 +75,7 @@ const Frameworks = [
   {
     text: 'Getting Started',
     link: '/frameworks/',
+    useLinkText: 'Getting Started | Frameworks'
   },
   {
     text: 'Vue',
@@ -97,6 +99,7 @@ const Examples = [
   {
     text: 'Getting Started',
     link: '/examples/',
+    useLinkText: 'Getting Started | Examples'
   },
   {
     text: 'Vue',
@@ -120,6 +123,7 @@ const Workbox = [
   {
     text: 'Getting Started',
     link: '/workbox/',
+    useLinkText: 'Getting Started | Workbox'
   },
   {
     text: 'generateWS',
