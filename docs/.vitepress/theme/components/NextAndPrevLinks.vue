@@ -11,7 +11,7 @@ const { hasLinks, prev, next } = useNextAndPrevLinks()
       <div class="prev" :class="prev ? ull : 'empty'">
         <a v-if="prev" class="link" :href="withBase(prev.link)">
           <ArrowLeft class="icon icon-prev" />
-          <span class="text">{{ prev.text }}</span>
+          <span class="text">{{ prev.useLinkText ? prev.useLinkText : prev.text }}</span>
         </a>
       </div>
       <div class="next" :class="next ? null : 'empty'">
@@ -80,7 +80,7 @@ const { hasLinks, prev, next } = useNextAndPrevLinks()
 .icon-next {
   margin-left: 8px;
 }
-@media (min-width: 780px) {
+@media (min-width: 915px) {
   .container {
     grid-template-columns: repeat(2, 1fr);
     justify-content: space-between;
