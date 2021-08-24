@@ -101,6 +101,12 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     workbox.clientsClaim = true
   }
 
+  // use vite build.sourcemap to configure `generateSW` sourcemap
+  if (strategies === 'generateSW' && workbox.sourcemap === undefined) {
+    const sourcemap = viteConfig.build?.sourcemap
+    workbox.sourcemap = sourcemap === true || sourcemap === 'inline' || sourcemap === 'hidden'
+  }
+
   const resolvedVitePWAOptions: ResolvedVitePWAOptions = {
     base: basePath,
     mode,
