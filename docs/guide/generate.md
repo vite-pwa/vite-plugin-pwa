@@ -47,7 +47,7 @@ export const defineConfig({
 
 You will need to create your `robots.txt`, `favicon.svg`,  `favicon.ico`, `apple-touch-icon.png`.
 
-You can create `robots.tx` on `public` directory with the following content:
+You can create `robots.txt` on `public` directory with the following content:
 ```txt
 User-agent: *
 Allow: /
