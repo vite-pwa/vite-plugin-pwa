@@ -29,10 +29,12 @@ const navigate = () => {
       <span :id="props.id" class="li-anchor-link">
         <slot name="link"></slot>
       </span>
+      <span class="li-anchor-external" v-if="isExternal">
+        <OutboundLink />
+      </span>
       <span v-if="$slots['trailing']" class="trailing-text">
         <slot name="trailing"></slot>
       </span>
-      <OutboundLink v-if="isExternal" />
     </div>
     <slot name="nested"></slot>
   </li>
@@ -64,5 +66,7 @@ const navigate = () => {
 .li-anchor .li-anchor-container:hover .li-anchor-link {
   text-decoration: underline;
 }
-
+.li-anchor-link + .li-anchor-external:before {
+  content: " ";
+}
 </style>
