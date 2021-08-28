@@ -14,6 +14,12 @@ from the `virtual:pwa-register` module.
 
 Go to [Generate Service Worker](/guide/generate.html) section for basic configuration options.
 
+### Cleanup Outdated Caches
+
+<CleanupOutdatedCaches />
+
+<GenerateSWCleanupOutdatedCaches />
+
 ## Runtime
 
 You must include the following code on your `main.ts` or `main.js` file:
@@ -36,24 +42,8 @@ reload and the up-to-date content will be served.
 In any case, when the user clicks the `Cancel` or `OK` buttons in case `onNeedRefresh` or `onOfflineReady` respectively, 
 close the corresponding showed prompt.
 
+
 ### SSR/SSG
 
-If you are using `SSR/SSG`, you need to import `virtual:pwa-register` module using dynamic import and checking if
-`window` is not `undefined`.
-
-You can register the service worker on `src/pwa.ts` module:
-
-```ts
-import { registerSW } from 'virtual:pwa-register'
-
-registerSW({ ... })
-```
-
-and then import it from your `main.ts`:
-
-```ts
-if (typeof window !== 'undefined') {
-  import('./pwa')
-}
-```
+<SsrSsg />
 
