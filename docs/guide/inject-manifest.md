@@ -32,6 +32,12 @@ import { precacheAndRoute } from 'workbox-precaching'
 precacheAndRoute(self.__WB_MANIFEST)
 ```
 
+### Cleanup Outdated Caches
+
+<CleanupOutdatedCaches />
+
+<InjectManifestCleanupOutdatedCaches />
+
 ## Prompt for new content
 
 If you need your custom service worker works with `Prompt for new content` behavior, you need to change
@@ -53,7 +59,7 @@ self.addEventListener('message', (event) => {
 ## Auto update for new content
 
 If you need your custom service worker works with `Auto update for new content` behavior, you need to change
-your service worker code and the configuration options.
+your service worker code and the plugin configuration options.
 
 ### Setup
 
@@ -114,6 +120,3 @@ declare let self: ServiceWorkerGlobalScope
 
 precacheAndRoute(self.__WB_MANIFEST)
 ```
-
-
-

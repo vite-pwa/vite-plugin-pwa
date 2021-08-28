@@ -109,25 +109,6 @@ We provide the following example projects:
     </ul>
   </template>
 </md-list-anchor>
-<md-list-anchor id="svelte-examples" href="/examples/svelte.html">
-  <template #link>Svelte</template>
-  <template #nested>
-    <ul aria-labelledby="svelte-examples">
-      <md-list-anchor href="/examples/svelte.html#basic">
-        <template #link>Svelte Basic Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
-      </md-list-anchor>
-      <md-list-anchor href="/examples/svelte.html#router">
-        <template #link>Svelte Router Examples</template>
-        <template #trailing>: set of examples with disparate behaviors.</template>
-      </md-list-anchor>
-      <md-list-anchor href="/examples/svelte.html#injectmanifest">
-        <template #link>Svelte injectManifest Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
-      </md-list-anchor>
-    </ul>
-  </template>
-</md-list-anchor>
 <md-list-anchor id="react-examples" href="/examples/react.html">
   <template #link>React</template>
   <template #nested>
@@ -142,6 +123,25 @@ We provide the following example projects:
       </md-list-anchor>
       <md-list-anchor href="/examples/react.html#injectmanifest">
         <template #link>React injectManifest Example</template>
+        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+      </md-list-anchor>
+    </ul>
+  </template>
+</md-list-anchor>
+<md-list-anchor id="svelte-examples" href="/examples/svelte.html">
+  <template #link>Svelte</template>
+  <template #nested>
+    <ul aria-labelledby="svelte-examples">
+      <md-list-anchor href="/examples/svelte.html#basic">
+        <template #link>Svelte Basic Example</template>
+        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+      </md-list-anchor>
+      <md-list-anchor href="/examples/svelte.html#router">
+        <template #link>Svelte Router Examples</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
+      </md-list-anchor>
+      <md-list-anchor href="/examples/svelte.html#injectmanifest">
+        <template #link>Svelte injectManifest Example</template>
         <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
       </md-list-anchor>
     </ul>
