@@ -3,8 +3,10 @@ import {
   useRoute,
   useData,
 } from 'vitepress'
-import { onClickOutside } from '@vueuse/core'
-import { useDebounceFn } from '@vueuse/shared'
+import {
+  onClickOutside,
+  useDebounceFn,
+} from '@vueuse/core'
 
 // generic state
 const route = useRoute()
