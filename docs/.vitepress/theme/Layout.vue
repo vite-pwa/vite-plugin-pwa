@@ -3,6 +3,10 @@ import {
   useRoute,
   useData,
 } from 'vitepress'
+import {
+  onClickOutside,
+  useDebounceFn,
+} from '@vueuse/core'
 
 // generic state
 const route = useRoute()
@@ -31,6 +35,7 @@ const showNavbar = computed(() => {
 const isHome = computed(() => route.path === '/' || route.path === '/index.html')
 
 // sidebar
+const sideBarRef = ref(null)
 const openSideBar = ref(false)
 
 const showSidebar = computed(() => {
@@ -48,6 +53,19 @@ const showSidebar = computed(() => {
 const toggleSidebar = (to?: boolean) => {
   openSideBar.value = typeof to === 'boolean' ? to : !openSideBar.value
 }
+
+const debounceClickOutside = useDebounceFn(() => {
+  openSideBar.value = false
+}, 128)
+
+onClickOutside(sideBarRef, () => {
+  // we need only debounce if shown
+  // if the toggleSidebar clicked when hidden and we don't debounce
+  // the sidebar will be closed
+  if (showNavbar.value && openSideBar.value) {
+    debounceClickOutside()
+  }
+})
 
 const hideSidebar = toggleSidebar.bind(null, false)
 // close the sidebar when navigating to a different location
@@ -82,7 +100,7 @@ const pageClasses = computed(() => {
       </template>-->
     </NavBar>
 
-    <SideBar :open="openSideBar">
+    <SideBar ref="sideBarRef" :open="openSideBar">
       <template #sidebar-top>
         <slot name="sidebar-top" />
       </template>
