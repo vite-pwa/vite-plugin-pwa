@@ -11,7 +11,7 @@ or `main.js`:
 import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
-  onRegiterError(error) {}
+  onRegisterError(error) {}
 })
 ```
 
