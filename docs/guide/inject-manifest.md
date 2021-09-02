@@ -38,6 +38,10 @@ precacheAndRoute(self.__WB_MANIFEST)
 
 <InjectManifestCleanupOutdatedCaches />
 
+### Generate SW Source Map
+
+<InjectManifestSourceMap />
+
 ## Prompt for new content
 
 If you need your custom service worker works with `Prompt for new content` behavior, you need to change
