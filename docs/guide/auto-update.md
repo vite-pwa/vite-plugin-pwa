@@ -36,6 +36,10 @@ VitePWA({
 
 <GenerateSWCleanupOutdatedCaches />
 
+### Generate SW Source Map
+
+<GenerateSWSourceMap />
+
 ## Runtime
 
 You must include the following code on your `main.ts` or `main.js` file:
