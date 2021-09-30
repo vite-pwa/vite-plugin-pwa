@@ -50,7 +50,7 @@ VitePWAPlugin workbox-build::generateSW warnings:
 If there are warnings when building your service worker via `generateSW` from `workbox-build`, all these warnings
 will be logged to console: **available only from version 0.11.3**.
 
-## Log `injecManifest` result
+## Log `generateSW` result
 
 From version `0.11.3`, the result of `generateSW` from `workbox-build` will be logged when `vite.logLevel` is `undefined`
 or `info`.
