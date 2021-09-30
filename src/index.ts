@@ -2,9 +2,8 @@ import { resolve } from 'path'
 import { existsSync } from 'fs'
 import type { OutputBundle } from 'rollup'
 import type { Plugin, ResolvedConfig } from 'vite'
-import { generateSW } from 'workbox-build'
 import { generateSimpleSWRegister, injectServiceWorker } from './html'
-import { generateInjectManifest, generateRegisterSW } from './modules'
+import { generateInjectManifest, generateServiceWorker, generateRegisterSW } from './modules'
 import { ExtendManifestEntriesHook, ResolvedVitePWAOptions, VitePluginPWAAPI, VitePWAOptions } from './types'
 import { resolveOptions } from './options'
 import { generateWebManifestFile } from './assets'
@@ -19,7 +18,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
     if (options.strategies === 'injectManifest')
       await generateInjectManifest(options, viteConfig)
     else
-      await generateSW(options.workbox)
+      await generateServiceWorker(options, viteConfig)
   }
 
   function _generateBundle(bundle: OutputBundle = {}) {

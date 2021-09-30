@@ -1,6 +1,7 @@
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
-import { injectManifest } from 'workbox-build'
+import type { BuildResult } from 'workbox-build'
+import { generateSW, injectManifest } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
 import Rollup from 'rollup'
 import type { ResolvedVitePWAOptions } from './types'
@@ -15,6 +16,38 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
     .replace('__SW__', sw)
     .replace('__SCOPE__', scope)
     .replace('__SW_AUTO_UPDATE__', `${options.registerType === 'autoUpdate'}`)
+}
+
+function logWorkboxResult(strategyLog: string, buildResult: BuildResult, viteOptions: ResolvedConfig) {
+  const { count, size, filePaths, warnings } = buildResult
+  // log build result
+  if (viteOptions.logLevel === undefined || viteOptions.logLevel === 'info') {
+    // eslint-disable-next-line no-console
+    console.info([
+      '',
+      `${strategyLog} result: `,
+      `  - Total number of precached entries: ${count} entries`,
+      `  - Aggregate size of all the precached entries: ${size} bytes`,
+      '  - Written to swDest: ',
+      filePaths.map(fp => `    - ${fp}`).join('\r\n'),
+    ].join('\r\n'))
+  }
+
+  // log build warning
+  // eslint-disable-next-line no-console
+  warnings && warnings.length > 0 && console.warn([
+    '',
+    `${strategyLog} warnings: `,
+    ...warnings.map(w => `  - ${w}`),
+    '',
+  ].join('\r\n'))
+}
+
+export async function generateServiceWorker(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig) {
+  // generate the service worker
+  const buildResult = await generateSW(options.workbox)
+  // log workbox result
+  logWorkboxResult('VitePWAPlugin workbox-build::generateSW', buildResult, viteOptions)
 }
 
 export async function generateInjectManifest(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig) {
@@ -66,5 +99,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   // delete injectManifestOptions.mode
 
   // inject the manifest
-  await injectManifest(injectManifestOptions)
+  const buildResult = await injectManifest(injectManifestOptions)
+  // log workbox result
+  logWorkboxResult('VitePWAPlugin workbox-build::injectManifest', buildResult, viteOptions)
 }

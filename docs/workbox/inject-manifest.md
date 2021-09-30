@@ -12,6 +12,56 @@ looking for some plugin on `workbox` site on [Runtime Caching Entry](https://dev
 
 You can find the documentation for this method on `workbox` site: [injectManifest](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.injectManifest) <outbound-link />
 
+## Missing assets from SW precache manifest
+
+If you encounter that some asset is missing from the service worker precache manifest, you should review if it exceeds the
+`maximumFileSizeToCacheInBytes`, the default value is **2MiB**.
+
+You can increase the value to your needs, for example to allow assets up to **3MB**:
+```ts
+injectManifest: {
+  maximumFileSizeToCacheInBytes: 3000000  
+}
+```
+
+When some asset exceeds the `maximumFileSizeToCacheInBytes` value, it will be logged to the console when building
+your project: **available only from version 0.11.3**.
+
+For example, if we configure `injectManifest` plugin option with:
+```ts
+injectManifest: {
+  maximumFileSizeToCacheInBytes: 100  
+}
+```
+
+you will see on the console messages like following, **available only from version `0.11.3`**:
+
+```shell
+VitePWAPlugin workbox-build::injectManifest warnings:
+  - assets/index.40de6d3d.css is 461 B, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
+  - assets/index.7628d999.js is 2.5 kB, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
+  - assets/my-worker.5c299b37.js is 192 B, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
+  - assets/vendor.04fc395e.js is 53.7 kB, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
+  - index.html is 777 B, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
+```
+
+If there are warnings when building your service worker via `injectManifest` from `workbox-build`, all these warnings 
+will be logged to console: **available only from version `0.11.3`**.
+
+## Log `injecManifest` result
+
+From version `0.11.3`, the result of `injectManifest` from `workbox-build` will be logged when `vite.logLevel` is `undefined`
+or `info`.
+
+Once you run the `build` command, you will see messages like following on console:
+```shell
+VitePWAPlugin workbox-build::injectManifest result:
+  - Total number of precached entries: 9 entries
+  - Aggregate size of all the precached entries: 57667 bytes
+  - Written to swDest:
+    - <root>/dist/sw.js
+```
+
 ## Network First Strategy
 
 You can use the following code to create your custom service worker to be used with network first strategy. We also include
