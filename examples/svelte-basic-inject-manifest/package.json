@@ -21,7 +21,7 @@
     "svelte-check": "^2.2.4",
     "svelte-preprocess": "^4.7.4",
     "typescript": "^4.3.5",
-    "vite": "^2.4.4",
+    "vite": "^2.6.2",
     "vite-plugin-pwa": "workspace:*",
     "workbox-precaching": "^6.2.2"
   },
