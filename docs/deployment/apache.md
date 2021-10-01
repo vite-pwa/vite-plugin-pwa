@@ -7,7 +7,8 @@ title: Apache Http Server 2.4+ | Deployment
 ## Configure `manifest.webmanifest` mime type
 
 You need to configure the following mime type (see basic configuration bellow):
-```conf
+
+```ini
 <IfModule mod_mime.c>
    # Manifest file
    AddType application/manifest+json webmanifest
@@ -18,7 +19,7 @@ You need to configure the following mime type (see basic configuration bellow):
 
 Update your `httpd.conf` configuration file with:
 
-```conf
+```ini
 # httpd.conf
 ServerRoot "<your apache server root>"
 

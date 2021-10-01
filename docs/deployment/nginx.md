@@ -9,7 +9,7 @@ title: NGINX | Deployment
 You should check if your `NGINX` server has the `manifest.webmanifest` mime type configured, check `/etc/nginx/mime.types`
 (default mime configuration file):
 
-```conf
+```ini
 # /etc/nginx/mime.types
 types {
   ...
@@ -25,7 +25,7 @@ types {
 
 Update your `server.conf` configuration file with:
 
-```conf
+```ini
 server {
   listen 80;
   server_name yourdomain.com www.yourdomain.com;

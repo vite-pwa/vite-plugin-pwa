@@ -118,18 +118,3 @@ The interval must be in milliseconds, in the example above it is configured to c
 
 <HeuristicWorkboxWindow />
 
-## SW Registration Errors
-
-As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can notify the user with
-following code:
-
-```ts
-import { useRegisterSW } from 'virtual:pwa-register/svelte';
-
-const updateServiceWorker = useRegisterSW({
-  onRegisterError(error) {}
-})
-```
-
-and then inside `onRegisterError`, just notify the user that there was an error registering the service worker.
-

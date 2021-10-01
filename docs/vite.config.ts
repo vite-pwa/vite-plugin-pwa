@@ -1,10 +1,11 @@
 import { defineConfig } from 'vite'
-import Components from 'vite-plugin-components'
+import Components from 'unplugin-vue-components/vite'
 import WindiCSS from 'vite-plugin-windicss'
-import Icons, { ViteIconsResolver } from 'vite-plugin-icons'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
 import replace from '@rollup/plugin-replace'
-import { VitePWA } from '../dist/'
-import * as pwaPackage from '../package.json'
+import { VitePWA } from '../dist'
+import { version } from '../package.json'
 
 export default defineConfig({
   build: {
@@ -25,7 +26,8 @@ export default defineConfig({
   },
   plugins: [
     replace({
-      __PWA_VERSION__: pwaPackage.version,
+      preventAssignment: true,
+      __PWA_VERSION__: version,
     }),
 
     // https://github.com/antfu/vite-plugin-components
@@ -37,14 +39,14 @@ export default defineConfig({
       extensions: ['vue', 'md'],
 
       // allow auto import and register components used in markdown
-      customLoaderMatcher: id => id.endsWith('.md'),
+      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
 
       // generate `components.d.ts` for ts support with Volar
-      globalComponentsDeclaration: false,
+      dts: false,
       // auto import icons
-      customComponentResolvers: [
+      resolvers: [
         // https://github.com/antfu/vite-plugin-icons
-        ViteIconsResolver({
+        IconsResolver({
           componentPrefix: '',
           // enabledCollections: ['carbon'],
         }),

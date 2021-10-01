@@ -70,8 +70,8 @@ export const defineConfig({
 <md-list-anchor href="/guide/periodic-sw-updates.html">
   <template #link>Periodic SW updates</template>
 </md-list-anchor>
-<md-list-anchor href="/guide/sw-registration-errors.html">
-  <template #link>SW registration errors</template>
+<md-list-anchor href="/guide/faq.html">
+  <template #link>FAQ</template>
 </md-list-anchor>
 </ul>
 

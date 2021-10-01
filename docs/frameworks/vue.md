@@ -106,21 +106,6 @@ The interval must be in milliseconds, in the example above it is configured to c
 
 <HeuristicWorkboxWindow />
 
-### SW Registration Errors
-
-As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can notify the user with
-following code:
-
-```ts
-import { useRegisterSW } from 'virtual:pwa-register/vue'
-
-const updateServiceWorker = useRegisterSW({
-  onRegiterError(error) {}
-})
-```
-
-and then inside `onRegisterError`, just notify the user that there was an error registering the service worker.
-
 ## Vue 2
 
 Since this plugin only supports `Vue 3`, you cannot use the virtual module `virtual:pwa-register/vue`.
@@ -282,25 +267,3 @@ export default {
 The interval must be in milliseconds, in the example above it is configured to check the service worker every hour.
 
 <HeuristicWorkboxWindow />
-
-### SW Registration Errors
-
-As explained in [SW Registration Errors](/guide/sw-registration-errors.html), you can notify the user with 
-following code:
-
-```vue
-<script>
-import useRegisterSW from '@/mixins/useRegisterSW'
-
-export default {
-  name: "reload-prompt",
-  mixins: [useRegisterSW],
-  methods: {
-    handleSWRegisterError(r) {}
-  }
-}
-</script>
-```
-
-and then inside `onRegisterError`, just notify the user that there was an error registering the service worker. 
-
