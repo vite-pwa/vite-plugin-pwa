@@ -36,9 +36,15 @@ If you find any assets are missing from the service worker's precache manifest, 
 `maximumFileSizeToCacheInBytes`, the default value is **2 MiB**.
 
 You can increase the value to your needs, for example to allow assets up to **3 MiB**:
-
+- when using `generateSW` strategy:
 ```ts
 workbox: {
+  maximumFileSizeToCacheInBytes: 3000000
+}
+```
+- when using `injectManifest` strategy:
+```ts
+injectManifest: {
   maximumFileSizeToCacheInBytes: 3000000
 }
 ```
