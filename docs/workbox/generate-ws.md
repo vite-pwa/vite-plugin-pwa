@@ -24,21 +24,6 @@ workbox: {
 }
 ```
 
-## Log `generateSW` result
-
-From version `0.11.3`, the result of `generateSW` from `workbox-build` will be logged when `vite.logLevel` is `undefined`
-or `info`.
-
-Once you run the `build` command, you will see messages like following on console:
-```shell
-VitePWAPlugin workbox-build::generateSW result:
-  - Total number of precached entries: 12 entries
-  - Aggregate size of all the precached entries: 85895 bytes
-  - Written to swDest:
-    - <root>/dist/sw.js
-    - <root>/dist/workbox-4c95f9b5.js
-```
-
 ## Cache External Resources
 
 If you use some `CDN` to download some resources like `fonts` and `css`, you must include them into the service worker
