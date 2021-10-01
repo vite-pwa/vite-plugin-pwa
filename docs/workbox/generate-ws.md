@@ -11,19 +11,6 @@ You can find the documentation for this method on `workbox` site: [generateWS](h
 
 You can find a guide for plugins on `workbox` site: [Using Plugins](https://developers.google.com/web/tools/workbox/guides/using-plugins) <outbound-link />.
 
-## Missing assets from SW precache manifest
-
-If you find any assets are missing from the service worker's precache manifest, you should check if they exceed the
-`maximumFileSizeToCacheInBytes`, the default value is **2 MiB**.
-
-You can increase the value to your needs, for example to allow assets up to **3 MiB**:
-
-```ts
-workbox: {
-  maximumFileSizeToCacheInBytes: 3000000
-}
-```
-
 ## Cache External Resources
 
 If you use some `CDN` to download some resources like `fonts` and `css`, you must include them into the service worker
