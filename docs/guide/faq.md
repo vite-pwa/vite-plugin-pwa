@@ -1,3 +1,7 @@
+---
+title: FAQ | Guide
+---
+
 # FAQ
 
 ## IDE errors 'Cannot find module' (ts2307)
