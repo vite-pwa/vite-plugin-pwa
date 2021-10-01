@@ -14,7 +14,7 @@ You can find the documentation for this method on `workbox` site: [injectManifes
 
 ## Missing assets from SW precache manifest
 
-If you encounter that some asset is missing from the service worker precache manifest, you should review if it exceeds the
+If you find any assets are missing from the service worker's precache manifest, you should check if they exceed the
 `maximumFileSizeToCacheInBytes`, the default value is **2MiB**.
 
 You can increase the value to your needs, for example to allow assets up to **3MB**:
@@ -24,10 +24,11 @@ injectManifest: {
 }
 ```
 
-When some asset exceeds the `maximumFileSizeToCacheInBytes` value, it will be logged to the console when building
+When any assets exceed the `maximumFileSizeToCacheInBytes` value, they will be logged to the console when building
 your project: **available only from version 0.11.3**.
 
-For example, if we configure `injectManifest` plugin option with:
+For example, if we configure `injectManifest` plugin option with (please, don't do this on your projects, it's just for 
+testing purposes):
 ```ts
 injectManifest: {
   maximumFileSizeToCacheInBytes: 100  
@@ -45,7 +46,7 @@ VitePWAPlugin workbox-build::injectManifest warnings:
   - index.html is 777 B, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
 ```
 
-If there are warnings when building your service worker via `injectManifest` from `workbox-build`, all these warnings 
+If there are **warnings** when building your service worker via `injectManifest` from `workbox-build`, all these warnings 
 will be logged to console: **available only from version `0.11.3`**.
 
 ## Log `injecManifest` result
