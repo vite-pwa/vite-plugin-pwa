@@ -14,42 +14,15 @@ You can find a guide for plugins on `workbox` site: [Using Plugins](https://deve
 ## Missing assets from SW precache manifest
 
 If you find any assets are missing from the service worker's precache manifest, you should check if they exceed the
-`maximumFileSizeToCacheInBytes`, the default value is **2MiB**.
+`maximumFileSizeToCacheInBytes`, the default value is **2 MiB**.
 
-You can increase the value to your needs, for example to allow assets up to **3MB**:
+You can increase the value to your needs, for example to allow assets up to **3 MiB**:
+
 ```ts
 workbox: {
-  maximumFileSizeToCacheInBytes: 3000000  
+  maximumFileSizeToCacheInBytes: 3000000
 }
 ```
-
-When any assets exceed the `maximumFileSizeToCacheInBytes` value, they will be logged to the console when building
-your project: **available only from version 0.11.3**.
-
-For example, if we configure `workbox` plugin option with (please, don't do this on your projects, it's just for
-testing purposes):
-```ts
-workbox: {
-  maximumFileSizeToCacheInBytes: 100  
-}
-```
-
-you will see on the console messages like following, **available only from version 0.11.3**:
-
-```shell
-VitePWAPlugin workbox-build::generateSW warnings:
-  - assets/[name].19b70817.js is 468 B, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
-  - assets/about.dbc02b0b.js is 379 B, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
-  - assets/home.49c5ea42.js is 828 B, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
-  - assets/index.09ee2ee1.js is 3.71 kB, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
-  - assets/index.40de6d3d.css is 461 B, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
-  - assets/my-worker.5c299b37.js is 192 B, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
-  - assets/vendor.31de95e7.js is 79.1 kB, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
-  - index.html is 777 B, and won't be precached. Configure maximumFileSizeToCacheInBytes to change this limit.
-```
-
-If there are **warnings** when building your service worker via `generateSW` from `workbox-build`, all these warnings
-will be logged to console: **available only from version 0.11.3**.
 
 ## Log `generateSW` result
 
