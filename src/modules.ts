@@ -1,9 +1,10 @@
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
-import { injectManifest } from 'workbox-build'
+import { generateSW, injectManifest } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
 import Rollup from 'rollup'
 import type { ResolvedVitePWAOptions } from './types'
+import { logWorkboxResult } from './log'
 
 export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 'build' | 'dev', source = 'register') {
   const sw = options.base + options.filename
@@ -15,6 +16,13 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
     .replace('__SW__', sw)
     .replace('__SCOPE__', scope)
     .replace('__SW_AUTO_UPDATE__', `${options.registerType === 'autoUpdate'}`)
+}
+
+export async function generateServiceWorker(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig) {
+  // generate the service worker
+  const buildResult = await generateSW(options.workbox)
+  // log workbox result
+  logWorkboxResult('generateSW', buildResult, viteOptions)
 }
 
 export async function generateInjectManifest(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig) {
@@ -66,5 +74,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   // delete injectManifestOptions.mode
 
   // inject the manifest
-  await injectManifest(injectManifestOptions)
+  const buildResult = await injectManifest(injectManifestOptions)
+  // log workbox result
+  logWorkboxResult('injectManifest', buildResult, viteOptions)
 }

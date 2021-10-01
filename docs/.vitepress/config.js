@@ -30,16 +30,12 @@ const Guide = [
     link: '/guide/periodic-sw-updates'
   },
   {
-    text: 'SW Registration Errors',
-    link: '/guide/sw-registration-errors'
-  },
-  {
-    text: 'IDE Support',
-    link: '/guide/ide',
-  },
-  {
     text: 'Testing Service Worker',
     link: '/guide/testing',
+  },
+  {
+    text: 'FAQ',
+    link: '/guide/faq',
   },
 ]
 
