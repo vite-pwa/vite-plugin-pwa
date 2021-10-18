@@ -46,7 +46,7 @@ const ReloadPrompt: Component = () => {
   return (
     <div class={styles.Container}>
       { (offlineReady() || needRefresh())
-        && <div className={styles.Toast}>
+        && <div class={styles.Toast}>
             <div class={styles.Message}>
               { offlineReady()
                 ? <span>App ready to work offline</span>

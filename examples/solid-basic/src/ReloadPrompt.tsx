@@ -25,17 +25,17 @@ const ReloadPrompt: Component = () => {
   }
 
   return (
-    <div className={styles.Container}>
+    <div class={styles.Container}>
       { (offlineReady() || needRefresh())
-          && <div className={styles.Toast}>
-            <div className={styles.Message}>
+          && <div class={styles.Toast}>
+            <div class={styles.Message}>
               { offlineReady()
                 ? <span>App ready to work offline</span>
                 : <span>New content available, click on reload button to update.</span>
               }
             </div>
-            { needRefresh() && <button className={styles.ToastButton} onClick={() => updateServiceWorker(true)}>Reload</button> }
-            <button className={styles.ToastButton} onClick={() => close()}>Close</button>
+            { needRefresh() && <button class={styles.ToastButton} onClick={() => updateServiceWorker(true)}>Reload</button> }
+            <button class={styles.ToastButton} onClick={() => close()}>Close</button>
           </div>
       }
     </div>
