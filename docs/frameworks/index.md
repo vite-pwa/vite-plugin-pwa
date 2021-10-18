@@ -48,7 +48,8 @@ When the user clicks the `OK` button, just hide the prompt shown on `onOfflineRe
 ## Custom Vite Virtual Modules
 
 This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.org/) <outbound-link />,
-[React](https://reactjs.org/) <outbound-link /> and [Svelte](https://svelte.dev/docs) <outbound-link />.  
+[React](https://reactjs.org/) <outbound-link />, [Svelte](https://svelte.dev/docs) <outbound-link /> and
+[SolidJS](https://www.solidjs.com/) <outbound-link />.  
 
 <p id="virtual-modules-frameworks">These custom virtual modules will expose a wrapper for 
 <code>virtual:pwa-register</code> using framework <code>reactivity system</code>, that is:</p>
@@ -69,6 +70,11 @@ This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.o
   <template #link>writable</template>
   <template #trailing>&#160;for <code>Svelte</code>.</template>
 </md-list-anchor>
+<md-list-anchor href="https://www.solidjs.com/docs/latest/api#createsignal" external>
+  <template #heading><code>virtual:pwa-register/solid</code>:&#160;</template>
+  <template #link>createSignal</template>
+  <template #trailing>&#160;for <code>SolidJS</code>.</template>
+</md-list-anchor>
 </ul>
 
 **Note**: for [Vue 2](https://vuejs.org/) <outbound-link /> you need to use a custom `mixin` provided on 
@@ -88,5 +94,8 @@ This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.o
 </md-list-anchor>
 <md-list-anchor href="/frameworks/vitepress.html">
   <template #link>VitePress</template>
+</md-list-anchor>
+<md-list-anchor href="/frameworks/solidjs.html">
+  <template #link>SolidJS</template>
 </md-list-anchor>
 </ul>

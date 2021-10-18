@@ -14,7 +14,7 @@ features:
   - title: ⚡ Fully tree shakable
     details: Auto inject Web App Manifest
   - title: 💬 Prompt for new content
-    details: Built-in support for Vanilla JavaScript, Vue 3, React, and Svelte
+    details: Built-in support for Vanilla JavaScript, Vue 3, React, Svelte and SolidJS
   - title: ⚙️ Stale-while-revalidate
     details: Automatic reload when new content is available
   - title: ✨ Static assets handling

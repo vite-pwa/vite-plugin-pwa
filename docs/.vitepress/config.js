@@ -87,6 +87,10 @@ const Frameworks = [
     text: 'VitePress',
     link: '/frameworks/vitepress',
   },
+  {
+    text: 'SolidJS',
+    link: '/frameworks/solidjs',
+  },
 ]
 
 const Examples = [
@@ -109,6 +113,10 @@ const Examples = [
   {
     text: 'VitePress',
     link: '/examples/vitepress',
+  },
+  {
+    text: 'SolidJS',
+    link: '/examples/solidjs',
   },
 ]
 

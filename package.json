@@ -68,12 +68,23 @@
     "example:react:router:start": "npm -C examples/react-router run start",
     "example:react:router:start:reloadsw": "npm -C examples/react-router run start-reloadsw",
     "example:react:router:start:claims": "npm -C examples/react-router run start-claims",
-    "example:react:router:start:claims:reloadsw": "npm -C examples/react-router run start-claims-reloadsw"
+    "example:react:router:start:claims:reloadsw": "npm -C examples/react-router run start-claims-reloadsw",
+    "example:solid:dev": "npm -C examples/solid-basic run dev",
+    "example:solid:build": "npm -C examples/solid-basic run build",
+    "example:solid:start": "npm -C examples/solid-basic run start",
+    "example:solid:build:sw": "npm -C examples/solid-basic-inject-manifest run build",
+    "example:solid:start:sw": "npm -C examples/solid-basic-inject-manifest run start",
+    "example:solid:router:dev": "npm -C examples/solid-router run dev",
+    "example:solid:router:build": "npm -C examples/solid-router run build",
+    "example:solid:router:start": "npm -C examples/solid-router run start",
+    "example:solid:router:start:reloadsw": "npm -C examples/solid-router run start-reloadsw",
+    "example:solid:router:start:claims": "npm -C examples/solid-router run start-claims",
+    "example:solid:router:start:claims:reloadsw": "npm -C examples/solid-router run start-claims-reloadsw"
   },
   "peerDependencies": {
     "vite": "^2.0.0",
-    "workbox-build": "^6.2.2",
-    "workbox-window": "^6.2.2"
+    "workbox-build": "^6.3.0",
+    "workbox-window": "^6.3.0"
   },
   "dependencies": {
     "chalk": "^4.1.2",
@@ -95,6 +106,7 @@
     "esno": "^0.10.0",
     "react": "^17.0.2",
     "rollup": "^2.58.0",
+    "solid-js": "^1.1.6",
     "svelte": "^3.43.1",
     "tsup": "^5.2.1",
     "typescript": "^4.4.3",
