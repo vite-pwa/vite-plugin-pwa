@@ -32,6 +32,20 @@ import { precacheAndRoute } from 'workbox-precaching'
 precacheAndRoute(self.__WB_MANIFEST)
 ```
 
+### Offline support
+
+To allow your application to work offline, you will need to add a default handler to route all routes to the main page. 
+You will need to install `workbox-routing` as a `dev dependency` and use the following code on your custom service 
+worker:
+```js
+import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching'
+import { registerRoute, NavigationRoute } from 'workbox-routing'
+
+precacheAndRoute(self.__WB_MANIFEST)
+
+registerRoute(new NavigationRoute(createHandlerBoundToURL('index.html')))
+```
+
 ### Cleanup Outdated Caches
 
 <CleanupOutdatedCaches />
