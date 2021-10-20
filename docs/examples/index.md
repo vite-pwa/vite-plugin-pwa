@@ -151,16 +151,12 @@ We provide the following example projects:
   <template #link>SolidJS</template>
   <template #nested>
     <ul aria-labelledby="solid-examples">
-      <md-list-anchor href="/examples/solidjs.html#basic">
-        <template #link>SolidJS Basic Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
-      </md-list-anchor>
-      <md-list-anchor href="/examples/solidjs.html#router">
-        <template #link>SolidJS Router Examples</template>
+      <md-list-anchor href="/examples/solidjs.html#generatesw">
+        <template #link>SolidJS generateSW Router Example</template>
         <template #trailing>: set of examples with disparate behaviors.</template>
       </md-list-anchor>
       <md-list-anchor href="/examples/solidjs.html#injectmanifest">
-        <template #link>SolidJS injectManifest Example</template>
+        <template #link>SolidJS injectManifest Router Example</template>
         <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
       </md-list-anchor>
     </ul>

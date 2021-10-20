@@ -4,19 +4,11 @@ title: SolidJS | Examples
 
 # SolidJS
 
-All `SolidJS` example projects can be found on `examples` package/directory and start with `solid-` prefix.
+The `SolidJS` example project can be found on `examples/solid-router` package/directory.
 
-All `SolidJS` examples have been created using `https://github.com/solidjs/templates` template with `NPX`:
-```shell
-npx degit solidjs/templates/ts-minimal solid-basic
-> cloned solidjs/templates#HEAD to solid-basic
-```
+The router used on this example project is [solid-app-router](https://github.com/solidjs/solid-app-router) <outbound-link />.
 
-```shell
-npx degit solidjs/templates/ts-minimal solid-basic-inject-manifest
-> cloned solidjs/templates#HEAD to solid-basic-inject-manifest
-```
-
+The `SolidJS` example has been created using `https://github.com/solidjs/templates` template with `NPX`:
 ```shell
 npx degit solidjs/templates/ts-router solid-router
 > cloned solidjs/templates#HEAD to solid-router
@@ -27,22 +19,9 @@ To test `new content available`, you should rerun the corresponding script, and 
 If you are running an example with `Periodic SW updates`, you will need to wait 1 minute:
 <HeuristicWorkboxWindow />
 
-## Basic
+## generateSW
 
-This example project can be found on `examples/solid-basic` package/directory with the following behavior:
-- Show `Ready to work offlline` on first visit and once the `service worker` ready.
-- Show `Prompt for update` when new `service worker` available.
-
-To run this example project, execute the following script from your shell (from root folder):
-```shell
-pnpm run example:solid:start
-```
-
-## Router
-
-The router used on this example project is [solid-app-router](https://github.com/solidjs/solid-app-router) <outbound-link />.
-
-This example project can be found on `examples/solid-router` package/directory with the following behaviors:
+`generateSW` has the following behaviors:
 - `Prompt for update`:
     - Show `Ready to work offlline` on first visit and once the `service worker` ready.
     - Show `Prompt for update` when new `service worker` available.
@@ -61,7 +40,7 @@ This example project can be found on `examples/solid-router` package/directory w
     - The example project will register a `Periodic service worker updates`
     - When new content available, the service worker will be updated automatically.
 
-To run this example project, execute one of the following scripts from your shell (from root folder):
+To run each behavior, execute one of the following scripts from your shell (from root folder):
 - `Prompt for update`:
 ```shell
 pnpm run example:solid:router:start
@@ -84,13 +63,13 @@ pnpm run example:solid:router:start:claims:reloadsw
 
 ## injectManifest
 
-This example project can be found on `examples/solid-basic-inject-manifest` package/directory with the following behavior:
-- Custom `TypeScript Service Worker`.
+`injectManifest` has the following behavior:
+- Custom `TypeScript Service Worker` with offline support.
 - Show `Ready to work offlline` on first visit and once the `service worker` ready.
 - Show `Prompt for update` when new `service worker` available.
 
-To run this example project, execute the following script from your shell (from root folder):
+To run this behavior, execute the following script from your shell (from root folder):
 ```shell
-pnpm run example:solid:start:sw
+pnpm run example:solid:router:start:sw
 ```
 
