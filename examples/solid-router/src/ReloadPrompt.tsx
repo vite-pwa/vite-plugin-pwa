@@ -4,7 +4,7 @@ import { useRegisterSW } from 'virtual:pwa-register/solid'
 import styles from './ReloadPrompt.module.css'
 
 const ReloadPrompt: Component = () => {
-  // replaced dyanmicaly
+  // replaced dynamically
   const reloadSW = '__RELOAD_SW__'
   const {
     needRefresh: [needRefresh, setNeedRefresh],

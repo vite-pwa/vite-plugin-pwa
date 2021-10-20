@@ -69,17 +69,14 @@
     "example:react:router:start:reloadsw": "npm -C examples/react-router run start-reloadsw",
     "example:react:router:start:claims": "npm -C examples/react-router run start-claims",
     "example:react:router:start:claims:reloadsw": "npm -C examples/react-router run start-claims-reloadsw",
-    "example:solid:dev": "npm -C examples/solid-basic run dev",
-    "example:solid:build": "npm -C examples/solid-basic run build",
-    "example:solid:start": "npm -C examples/solid-basic run start",
-    "example:solid:build:sw": "npm -C examples/solid-basic-inject-manifest run build",
-    "example:solid:start:sw": "npm -C examples/solid-basic-inject-manifest run start",
     "example:solid:router:dev": "npm -C examples/solid-router run dev",
     "example:solid:router:build": "npm -C examples/solid-router run build",
     "example:solid:router:start": "npm -C examples/solid-router run start",
     "example:solid:router:start:reloadsw": "npm -C examples/solid-router run start-reloadsw",
     "example:solid:router:start:claims": "npm -C examples/solid-router run start-claims",
-    "example:solid:router:start:claims:reloadsw": "npm -C examples/solid-router run start-claims-reloadsw"
+    "example:solid:router:start:claims:reloadsw": "npm -C examples/solid-router run start-claims-reloadsw",
+    "example:solid:router:build:sw": "npm -C examples/solid-router run build-sw",
+    "example:solid:router:start:sw": "npm -C examples/solid-router run start-sw"
   },
   "peerDependencies": {
     "vite": "^2.0.0",
