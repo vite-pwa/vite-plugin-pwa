@@ -1,0 +1,18 @@
+.Home {
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto;
+}
+
+.Home-built {
+  margin: 1rem 0;
+}
+
+.Home-title {
+  color: #03607c;
+  font-size: 2.2rem;
+}
+
+button {
+  font-size: calc(10px + 2vmin);
+}

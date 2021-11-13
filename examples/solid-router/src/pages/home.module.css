@@ -1,0 +1,8 @@
+.Home {
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto;
+}
+button {
+  font-size: calc(10px + 2vmin);
+}

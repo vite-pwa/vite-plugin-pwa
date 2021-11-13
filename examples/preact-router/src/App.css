@@ -1,0 +1,18 @@
+.App {
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto;
+}
+
+.App-built {
+  margin: 1rem 0;
+}
+
+.App-title {
+  color: #03607c;
+  font-size: 2.2rem;
+}
+
+button {
+  font-size: calc(10px + 2vmin);
+}
