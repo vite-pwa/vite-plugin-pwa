@@ -6,6 +6,22 @@ title: Getting Started | Frameworks
 
 This plugin is Framework-agnostic and so you can use it with Vanilla JavaScript, TypeScript and with any framework.
 
+## Type declarations
+
+```ts
+declare module 'virtual:pwa-register' {
+  export type RegisterSWOptions = {
+    immediate?: boolean
+    onNeedRefresh?: () => void
+    onOfflineReady?: () => void
+    onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
+    onRegisterError?: (error: any) => void
+  }
+
+  export function registerSW(options?: RegisterSWOptions): (reloadPage?: boolean) => Promise<void>
+}
+```
+
 ## Usage
 
 This plugin exposes a `Vite` virtual module to interact with the service worker, you must import this virtual module 

@@ -9,6 +9,29 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/solid` for 
 
 > You will need to add `workbox-window` as a `dev` dependency to your `Vite` project.
 
+## Type declarations
+
+```ts
+declare module 'virtual:pwa-register/solid' {
+  // @ts-ignore ignore when react is not installed
+  import { Accessor, Setter } from 'solid-js'
+
+  export type RegisterSWOptions = {
+    immediate?: boolean
+    onNeedRefresh?: () => void
+    onOfflineReady?: () => void
+    onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
+    onRegisterError?: (error: any) => void
+  }
+
+  export function useRegisterSW(options?: RegisterSWOptions): {
+    needRefresh: [Accessor<boolean>, Setter<boolean>]
+    offlineReady: [Accessor<boolean>, Setter<boolean>]
+    updateServiceWorker: (reloadPage?: boolean) => Promise<void>
+  }
+}
+```
+
 ## Prompt for update
 
 You can use this `ReloadPrompt.tsx` component:
