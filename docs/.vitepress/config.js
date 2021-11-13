@@ -84,6 +84,14 @@ const Frameworks = [
     link: '/frameworks/svelte',
   },
   {
+    text: 'SolidJS',
+    link: '/frameworks/solidjs',
+  },
+  {
+    text: 'Preact',
+    link: '/frameworks/preact',
+  },
+  {
     text: 'VitePress',
     link: '/frameworks/vitepress',
   },
@@ -105,6 +113,14 @@ const Examples = [
   {
     text: 'Svelte',
     link: '/examples/svelte',
+  },
+  {
+    text: 'SolidJS',
+    link: '/examples/solidjs',
+  },
+  {
+    text: 'Preact',
+    link: '/examples/preact',
   },
   {
     text: 'VitePress',

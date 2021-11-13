@@ -47,7 +47,7 @@ export const defineConfig({
   <template #link>Generate Service Worker</template>
   <template #trailing>&#160;with Offline support</template>
 </md-list-anchor>
-<md-list-anchor href="https://developer.mozilla.org/en-US/docs/Web/Manifest" external>
+<md-list-anchor href="https://developer.mozilla.org/en-US/docs/Web/Manifest" :external="true">
   <template #heading>Auto inject&#160;</template>
   <template #link>Web App manifests</template>
   <template #trailing>&#160;</template>

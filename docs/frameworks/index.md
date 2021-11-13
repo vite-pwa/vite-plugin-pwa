@@ -48,26 +48,37 @@ When the user clicks the `OK` button, just hide the prompt shown on `onOfflineRe
 ## Custom Vite Virtual Modules
 
 This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.org/) <outbound-link />,
-[React](https://reactjs.org/) <outbound-link /> and [Svelte](https://svelte.dev/docs) <outbound-link />.  
+[React](https://reactjs.org/) <outbound-link />, [Svelte](https://svelte.dev/docs) <outbound-link />, 
+[SolidJS](https://www.solidjs.com/) <outbound-link /> and [Preact](https://preactjs.com/) <outbound-link />.  
 
 <p id="virtual-modules-frameworks">These custom virtual modules will expose a wrapper for 
 <code>virtual:pwa-register</code> using framework <code>reactivity system</code>, that is:</p>
 
 <ul aria-labelledby="virtual-modules-frameworks">
-<md-list-anchor href="https://v3.vuejs.org/api/refs-api.html#ref" external>
+<md-list-anchor href="https://v3.vuejs.org/api/refs-api.html#ref" :external="true">
   <template #heading><code>virtual:pwa-register/vue</code>:&#160;</template>
   <template #link>ref</template>
   <template #trailing>&#160;for <code>Vue 3</code>.</template>
 </md-list-anchor>
-<md-list-anchor href="https://reactjs.org/docs/hooks-reference.html#usestate" external>
+<md-list-anchor href="https://reactjs.org/docs/hooks-reference.html#usestate" :external="true">
   <template #heading><code>virtual:pwa-register/react</code>:&#160;</template>
   <template #link>useState</template>
   <template #trailing>&#160;for <code>React</code>.</template>
 </md-list-anchor>
-<md-list-anchor href="https://svelte.dev/docs#writable" external>
+<md-list-anchor href="https://svelte.dev/docs#writable" :external="true">
   <template #heading><code>virtual:pwa-register/svelte</code>:&#160;</template>
   <template #link>writable</template>
   <template #trailing>&#160;for <code>Svelte</code>.</template>
+</md-list-anchor>
+<md-list-anchor href="https://www.solidjs.com/docs/latest/api#createsignal" :external="true">
+  <template #heading><code>virtual:pwa-register/solid</code>:&#160;</template>
+  <template #link>createSignal</template>
+  <template #trailing>&#160;for <code>SolidJS</code>.</template>
+</md-list-anchor>
+<md-list-anchor href="https://preactjs.com/guide/v10/hooks#usestate" :external="true">
+  <template #heading><code>virtual:pwa-register/preact</code>:&#160;</template>
+  <template #link>useState</template>
+  <template #trailing>&#160;for <code>Preact</code>.</template>
 </md-list-anchor>
 </ul>
 
@@ -85,6 +96,12 @@ This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.o
 </md-list-anchor>
 <md-list-anchor href="/frameworks/svelte.html">
   <template #link>Svelte</template>
+</md-list-anchor>
+<md-list-anchor href="/frameworks/solidjs.html">
+  <template #link>SolidJS</template>
+</md-list-anchor>
+<md-list-anchor href="/frameworks/preact.html">
+  <template #link>Preact</template>
 </md-list-anchor>
 <md-list-anchor href="/frameworks/vitepress.html">
   <template #link>VitePress</template>
