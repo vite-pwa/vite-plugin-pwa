@@ -68,7 +68,7 @@ declare module 'virtual:pwa-register/react' {
 }
 
 declare module 'virtual:pwa-register/solid' {
-  // @ts-ignore ignore when react is not installed
+  // @ts-ignore ignore when solid-js is not installed
   import { Accessor, Setter } from 'solid-js'
 
   export type RegisterSWOptions = {
