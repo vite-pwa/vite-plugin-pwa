@@ -110,6 +110,9 @@ importers:
       typescript: ^4.4.4
       vite: ^2.6.14
       vite-plugin-pwa: workspace:*
+      workbox-precaching: ^6.4.0
+      workbox-routing: ^6.4.0
+      workbox-window: ^6.4.0
     dependencies:
       preact: 10.5.15
       preact-router: 3.2.1_preact@10.5.15
@@ -122,6 +125,9 @@ importers:
       typescript: 4.4.4
       vite: 2.6.14
       vite-plugin-pwa: link:../..
+      workbox-precaching: 6.4.0
+      workbox-routing: 6.4.0
+      workbox-window: 6.4.0
 
   examples/react-basic:
     specifiers:
@@ -201,8 +207,6 @@ importers:
       typescript: ^4.4.4
       vite: ^2.6.14
       vite-plugin-pwa: workspace:*
-      workbox-precaching: ^6.4.0
-      workbox-routing: ^6.4.0
       workbox-window: ^6.4.0
     dependencies:
       react: 17.0.2
@@ -222,8 +226,6 @@ importers:
       typescript: 4.4.4
       vite: 2.6.14
       vite-plugin-pwa: link:../..
-      workbox-precaching: 6.4.0
-      workbox-routing: 6.4.0
       workbox-window: 6.4.0
 
   examples/solid-router:
