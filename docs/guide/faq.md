@@ -52,3 +52,85 @@ injectManifest: {
   maximumFileSizeToCacheInBytes: 3000000
 }
 ```
+
+## `navigator / window` is `undefined`
+
+If you are getting `navigator is undefined` or `window is undefined` errors when building your application when using `vite-plugin-pwa`
+and showing a dialog for `prompt for update` or `app ready to work offline` when using `prompt` or `autoUpdate` strategies
+respectively, you will be using your application on a `SSR` and/or `SSG` environment.
+
+In that case, your code will be called on client but also on server side, and so, when building the application your 
+server logic will be invoked, and you haven't `navigator / window` on server, it is `undefined`.
+
+You can work around this problem following [SSR/SSG: Prompt for update](/guide/prompt-for-update.html#ssr-ssg) or 
+[SSR/SSG: Automatic reload](/guide/auto-update.html#ssr-ssg) entries.
+
+If you are using `autoUpdate` strategy and a `router` with `isReady` support (that is, the router allow register a callback
+to be called when the current component route finish loading), you can delay the service worker registration to be on the 
+router callback.
+
+For example, using `vue-router`, you can register the service worker for `autoUpdate` strategy using this code:
+
+```ts
+import type { Router } from 'vue-router'
+export const registerPWA = (router: Router) => {
+  router.isReady(async() => {
+    const { registerSW } = await import('virtual:pwa-register')
+    registerSW({ immediate: true })
+  })
+}
+```
+
+You can see an example for `autoUpdate` strategy on a `SSR / SSG` environment ([vite-ssg](https://github.com/antfu/vite-ssg) <outbound-link />)
+on [Vitesse Template](https://github.com/antfu/vitesse/blob/main/src/modules/pwa.ts) <outbound-link />. 
+
+If you are using `prompt` strategy, you will need to load the `ReloadPrompt` component using dynamic import with async fashion,
+for example, using `vue 3`:
+
+```vue
+// src/App.vue
+<script setup lang='ts'>
+import { defineAsyncComponent } from 'vue'
+const ClientReloadPrompt = typeof 'window' !== undefined 
+  ? defineAsyncComponent(() => import('./ReloadPrompt.vue'))
+  : null
+</script>
+<template>
+  <router-view/>
+  <template v-if='ClientReloadPrompt'>
+    <ClientReloadPrompt />
+  </template>
+</template>
+```
+
+or using `svelte`:
+
+```html
+<script>
+  import { onMount } from 'svelte';
+  import { browser, dev } from '$app/env';
+  let ReloadPrompt;
+  onMount(async () => {
+    !dev && browser && (ReloadPrompt = (await import('$lib/components/ReloadPrompt/index.svelte')).default)
+  })
+</script>
+...
+{#if ReloadPrompt}
+<svelte:component this={ReloadPrompt}/>
+{/if}
+```
+
+You can check your `SSR / SSG` environment to see if it provides some way to register components only on client side.
+Following with `vite-ssg` on `Vitesse Template`, it provides `ClientOnly` functional component, that will prevent 
+registering components on server side, and so you can use the original code but enclosing `ReloadPrompt` component with 
+it:
+
+```vue
+// src/App.vue
+<template>
+  ...
+  <ClientOnly>
+    <ReloadPrompt />
+  </ClientOnly>
+</template>
+```

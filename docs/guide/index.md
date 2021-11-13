@@ -7,6 +7,8 @@ title: Getting Started | Guide
 `Vite Plugin PWA` uses [Workbox](https://developers.google.com/web/tools/workbox) <outbound-link /> library to build the service worker,
 you can find more information on [Workbox](/workbox/) section.
 
+If you are new to **Progressive Web Apps (PWA)**, we suggest read this guide before starting writing code (it is still work in progress): 
+[Learn PWA](https://web.dev/learn/pwa/) <outbound-link />.
 
 ## Installation
 
