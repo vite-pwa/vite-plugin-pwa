@@ -1,14 +1,15 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import { RouteComponentProps } from 'react-router'
+import { useParams } from 'react-router'
 
-function Hi(props: RouteComponentProps<{ name: string }>) {
+function Hi() {
   // replaced dyanmicaly
   const date = '__DATE__'
+  const params = useParams()
   return (
     <div>
       <div><strong>/hi</strong> route, built at: { date }</div>
-      <p>Hi: { props.match.params.name }</p>
+      <p>Hi: { params.name }</p>
       <br />
       <a href="/">Go Home</a>
     </div>
