@@ -55,14 +55,31 @@ injectManifest: {
 
 ## `navigator / window` is `undefined`
 
-If you are getting `navigator is undefined` or `window is undefined` errors when building your application when using `vite-plugin-pwa`
-and showing a dialog for `prompt for update` or `app ready to work offline` when using `prompt` or `autoUpdate` strategies
-respectively, you will be using your application on a `SSR` and/or `SSG` environment.
+If you are getting `navigator is undefined` or` window is undefined` errors when building your application, you have 
+configured your application in an `SSR / SSG` environment.
 
-In that case, your code will be called on client but also on server side, and so, when building the application your 
-server logic will be invoked, and you haven't `navigator / window` on server, it is `undefined`.
+The error could be due to using this plugin or another library not aware of `SSR / SSG`:  your code will be called on 
+the client but also on the server side on build process, so when building the application your server logic will be 
+invoked, and there is no `navigator / window` on the server, it is `undefined`.
 
-You can work around this problem following [SSR/SSG: Prompt for update](/guide/prompt-for-update.html#ssr-ssg) or 
+### Third party libraries
+
+If the cause of the error is a third party library that is not aware of the `SSR / SSG` environment, the way to work 
+around the error is to import it with a dynamic import when` window` is defined:
+
+```ts
+if (typeof window !== 'undefined')
+  import('./library-not-ssr-ssg-aware')  
+```
+
+Alternatively, if your framework supports component `onMount / onMounted` lifecycle hook, you can import the third 
+party library on the callback, since the frameworks should call this lifecycle hook only on client side, you should
+check your framework documentation.
+
+### Vite PWA Virtual Module
+
+If the cause of the error is the virtual module of this plugin, you can work around this problem following 
+[SSR/SSG: Prompt for update](/guide/prompt-for-update.html#ssr-ssg) or
 [SSR/SSG: Automatic reload](/guide/auto-update.html#ssr-ssg) entries.
 
 If you are using `autoUpdate` strategy and a `router` with `isReady` support (that is, the router allow register a callback
@@ -106,17 +123,17 @@ const ClientReloadPrompt = typeof 'window' !== undefined
 or using `svelte`:
 
 ```html
+<!-- App.svelte -->
 <script>
   import { onMount } from 'svelte';
-  import { browser, dev } from '$app/env';
-  let ReloadPrompt;
+  let ClientReloadPrompt;
   onMount(async () => {
-    !dev && browser && (ReloadPrompt = (await import('$lib/components/ReloadPrompt/index.svelte')).default)
+    typeof 'window' !== undefined && (ClientReloadPrompt = await import('$lib/ReloadPrompt.svelte')).default)
   })
 </script>
 ...
-{#if ReloadPrompt}
-<svelte:component this={ReloadPrompt}/>
+{#if ClientReloadPrompt}
+<svelte:component this={ClientReloadPrompt}/>
 {/if}
 ```
 
