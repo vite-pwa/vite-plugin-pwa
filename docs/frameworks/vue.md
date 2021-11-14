@@ -9,6 +9,29 @@ title: Vue | Frameworks
 You can use the built-in `Vite` virtual module `virtual:pwa-register/vue` for `Vue 3` which will return
 `composition api` references (`ref<boolean>`) for `offlineReady` and `needRefresh`.
 
+### Type declarations
+
+```ts
+declare module 'virtual:pwa-register/vue' {
+  // @ts-ignore ignore when vue is not installed
+  import type { Ref } from 'vue'
+
+  export type RegisterSWOptions = {
+    immediate?: boolean
+    onNeedRefresh?: () => void
+    onOfflineReady?: () => void
+    onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
+    onRegisterError?: (error: any) => void
+  }
+
+  export function useRegisterSW(options?: RegisterSWOptions): {
+    needRefresh: Ref<boolean>
+    offlineReady: Ref<boolean>
+    updateServiceWorker: (reloadPage?: boolean) => Promise<void>
+  }
+}
+```
+
 ### Prompt for update
 
 You can use this `ReloadPrompt.vue` component:

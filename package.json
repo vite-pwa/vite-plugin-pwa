@@ -68,37 +68,55 @@
     "example:react:router:start": "npm -C examples/react-router run start",
     "example:react:router:start:reloadsw": "npm -C examples/react-router run start-reloadsw",
     "example:react:router:start:claims": "npm -C examples/react-router run start-claims",
-    "example:react:router:start:claims:reloadsw": "npm -C examples/react-router run start-claims-reloadsw"
+    "example:react:router:start:claims:reloadsw": "npm -C examples/react-router run start-claims-reloadsw",
+    "example:solid:router:dev": "npm -C examples/solid-router run dev",
+    "example:solid:router:build": "npm -C examples/solid-router run build",
+    "example:solid:router:start": "npm -C examples/solid-router run start",
+    "example:solid:router:start:reloadsw": "npm -C examples/solid-router run start-reloadsw",
+    "example:solid:router:start:claims": "npm -C examples/solid-router run start-claims",
+    "example:solid:router:start:claims:reloadsw": "npm -C examples/solid-router run start-claims-reloadsw",
+    "example:solid:router:build:sw": "npm -C examples/solid-router run build-sw",
+    "example:solid:router:start:sw": "npm -C examples/solid-router run start-sw",
+    "example:preact:router:dev": "npm -C examples/solid-router run dev",
+    "example:preact:router:build": "npm -C examples/preact-router run build",
+    "example:preact:router:start": "npm -C examples/preact-router run start",
+    "example:preact:router:start:reloadsw": "npm -C examples/preact-router run start-reloadsw",
+    "example:preact:router:start:claims": "npm -C examples/preact-router run start-claims",
+    "example:preact:router:start:claims:reloadsw": "npm -C examples/preact-router run start-claims-reloadsw",
+    "example:preact:router:build:sw": "npm -C examples/preact-router run build-sw",
+    "example:preact:router:start:sw": "npm -C examples/preact-router run start-sw"
   },
   "peerDependencies": {
     "vite": "^2.0.0",
-    "workbox-build": "^6.2.2",
-    "workbox-window": "^6.2.2"
+    "workbox-build": "^6.4.0",
+    "workbox-window": "^6.4.0"
   },
   "dependencies": {
     "chalk": "^4.1.2",
     "debug": "^4.3.2",
     "fast-glob": "^3.2.7",
     "pretty-bytes": "^5.6.0",
-    "rollup": "^2.58.0",
-    "workbox-build": "^6.3.0",
-    "workbox-window": "^6.3.0"
+    "rollup": "^2.60.0",
+    "workbox-build": "^6.4.0",
+    "workbox-window": "^6.4.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.9.0",
-    "@antfu/ni": "^0.9.3",
+    "@antfu/eslint-config": "^0.10.0",
+    "@antfu/ni": "^0.10.2",
     "@types/debug": "^4.1.7",
-    "@types/react": "^17.0.26",
+    "@types/react": "^17.0.34",
     "@types/workbox-build": "^5.0.1",
-    "@typescript-eslint/eslint-plugin": "^4.32.0",
-    "eslint": "^7.32.0",
-    "esno": "^0.10.0",
+    "@typescript-eslint/eslint-plugin": "^5.3.1",
+    "eslint": "^8.2.0",
+    "esno": "^0.12.0",
+    "preact": "^10.5.15",
     "react": "^17.0.2",
-    "rollup": "^2.58.0",
-    "svelte": "^3.43.1",
-    "tsup": "^5.2.1",
-    "typescript": "^4.4.3",
-    "vite": "^2.6.2",
-    "vue": "^3.2.19"
+    "rollup": "^2.60.0",
+    "solid-js": "^1.2.3",
+    "svelte": "^3.44.1",
+    "tsup": "^5.7.0",
+    "typescript": "^4.4.4",
+    "vite": "^2.6.14",
+    "vue": "^3.2.21"
   }
 }

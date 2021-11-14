@@ -11,6 +11,29 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/svelte` for
 `writable` stores (`Writable<boolean>`) for `offlineReady` and `needRefresh`.
 
 > You will need to add `workbox-window` as a `dev` dependency to your `Vite` project.
+> 
+## Type declarations
+
+```ts
+declare module 'virtual:pwa-register/svelte' {
+  // @ts-ignore ignore when svelte is not installed
+  import { Writable } from 'svelte/store'
+
+  export type RegisterSWOptions = {
+    immediate?: boolean
+    onNeedRefresh?: () => void
+    onOfflineReady?: () => void
+    onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
+    onRegisterError?: (error: any) => void
+  }
+
+  export function useRegisterSW(options?: RegisterSWOptions): {
+    needRefresh: Writable<boolean>
+    offlineReady: Writable<boolean>
+    updateServiceWorker: (reloadPage?: boolean) => Promise<void>
+  }
+}
+```
 
 ## Prompt for update
 

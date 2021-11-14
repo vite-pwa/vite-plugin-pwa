@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router'
 import './Home.css'
 
 function Home() {
@@ -8,7 +8,7 @@ function Home() {
 
   const [name, setName] = useState('')
 
-  const router = useHistory()
+  const router = useNavigate()
 
   // @ts-ignore
   const handleChange = (event) => {
@@ -19,7 +19,7 @@ function Home() {
   const handleSubmit = (event) => {
     event.preventDefault()
     if (name)
-      router.push(`/hi/${name}`)
+      router(`/hi/${name}`)
   }
 
   return (
