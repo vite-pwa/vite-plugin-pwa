@@ -41,7 +41,7 @@ You can use this `ReloadPrompt.tsx` component:
 
 ```tsx
 // eslint-disable-next-line no-use-before-define
-import { Component } from "solid-js";
+import { Component, Show } from "solid-js";
 import styles from './ReloadPrompt.module.css'
 
 import { useRegisterSW } from 'virtual:pwa-register/solid'
