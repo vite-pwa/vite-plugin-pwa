@@ -6,7 +6,7 @@ import styles from './app.module.css'
 import ReloadPrompt from './ReloadPrompt'
 
 const App: Component = () => {
-  // replaced dyanmicaly
+  // replaced dynamically
   const date = '__DATE__'
 
   const Route = useRoutes(routes)
