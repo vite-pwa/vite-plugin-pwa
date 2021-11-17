@@ -68,7 +68,7 @@ const ReloadPrompt: Component = () => {
 
   return (
     <div class={styles.Container}>
-      <Show when={(offlineReady() || needRefresh()}>
+      <Show when={offlineReady() || needRefresh()}>
         <div class={styles.Toast}>
           <div class={styles.Message}>
             <Show
