@@ -87,7 +87,7 @@ declare module 'virtual:pwa-register/solid' {
 }
 
 declare module 'virtual:pwa-register/preact' {
-  // @ts-ignore ignore when preact is not installed
+  // @ts-ignore ignore when preact/hooks is not installed
   import { StateUpdater } from 'preact/hooks'
 
   export type RegisterSWOptions = {

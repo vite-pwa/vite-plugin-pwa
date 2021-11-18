@@ -13,7 +13,7 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/preact` for
 
 ```ts
 declare module 'virtual:pwa-register/preact' {
-  // @ts-ignore ignore when preact is not installed
+  // @ts-ignore ignore when preact/hooks is not installed
   import { StateUpdater } from 'preact/hooks'
 
   export type RegisterSWOptions = {
