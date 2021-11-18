@@ -36,7 +36,7 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 - 🦾 **Type Strong**: written in [TypeScript](https://www.typescriptlang.org/)
 - 🔌 **Offline Support**: generate service worker with offline support (via Workbox)
 - ⚡ **Fully tree shakable**: auto inject Web App Manifest
-- 💬 **Prompt for new content**: built-in support for Vanilla JavaScript, Vue 3, React, and Svelte
+- 💬 **Prompt for new content**: built-in support for Vanilla JavaScript, Vue 3, React, Svelte, SolidJS and Preact
 - ⚙️ **Stale-while-revalidate**: automatic reload when new content is available
 - ✨ **Static assets handling**: configure static assets for offline support
 
@@ -67,6 +67,8 @@ export default {
 
 Read the [📖 documentation](https://vite-plugin-pwa.netlify.app/guide/) for a complete guide on how to configure and use 
 this plugin.
+
+Check out the client type declarations [client.d.ts](./client.d.ts) for built-in frameworks support.
 
 ## 👀 Full config
 
