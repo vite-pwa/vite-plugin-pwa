@@ -108,7 +108,7 @@ for example, using `vue 3`:
 // src/App.vue
 <script setup lang='ts'>
 import { defineAsyncComponent } from 'vue'
-const ClientReloadPrompt = typeof 'window' !== undefined 
+const ClientReloadPrompt = typeof window !== 'undefined' 
   ? defineAsyncComponent(() => import('./ReloadPrompt.vue'))
   : null
 </script>
@@ -128,7 +128,7 @@ or using `svelte`:
   import { onMount } from 'svelte';
   let ClientReloadPrompt;
   onMount(async () => {
-    typeof 'window' !== undefined && (ClientReloadPrompt = await import('$lib/ReloadPrompt.svelte')).default)
+    typeof window !== 'undefined' && (ClientReloadPrompt = await import('$lib/ReloadPrompt.svelte')).default)
   })
 </script>
 ...
