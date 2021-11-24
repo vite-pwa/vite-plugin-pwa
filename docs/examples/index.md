@@ -87,6 +87,8 @@ the `Service Worker` is serving all assets instead request them to the server.
 
 ## Available Example Projects
 
+> <RunExamples />
+
 We provide the following example projects:
 
 <ul aria-labelledby="available-example-projects">
