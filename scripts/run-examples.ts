@@ -1,5 +1,5 @@
+import { execSync } from 'child_process'
 import prompts from 'prompts'
-
 import {
   yellow,
   green,
@@ -169,14 +169,8 @@ async function init() {
       )
       useReloadSW = reloadSW
     }
-    // user choice associated with prompts
-    // @ts-ignore
-    console.log(useFramework.name)
-    console.log(useStrategy.name)
-    console.log(useBehaviour?.name)
-    console.log(useReloadSW)
     let script = ''
-    if (useStrategy === 'injectManifest') {
+    if (useStrategy.name === 'injectManifest') {
       script = '-sw'
     }
     else {
@@ -192,8 +186,10 @@ async function init() {
         script += '-reloadsw'
     }
 
-    script = `pnpm -C examples/${useFramework.dir} run start${script}`
-    console.log(script)
+    execSync(`pnpm run start${script}`, {
+      stdio: 'inherit',
+      cwd: `examples/${useFramework.dir}`,
+    })
   }
   catch (cancelled) {
     // @ts-ignore
