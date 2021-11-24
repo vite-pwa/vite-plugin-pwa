@@ -43,7 +43,13 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 ## 📦 Install
 
 ```bash
-npm i vite-plugin-pwa -D # yarn add vite-plugin-pwa -D
+npm i vite-plugin-pwa -D 
+
+# yarn 
+yarn add vite-plugin-pwa -D
+
+# pnpm 
+pnpm add vite-plugin-pwa -D
 ```
 
 ## 🦄 Usage
