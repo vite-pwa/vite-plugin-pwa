@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { url } from '@roxi/routify'
 </script>
 

@@ -94,12 +94,8 @@ We provide the following example projects:
   <template #link>Vue 3</template>
   <template #nested>
     <ul aria-labelledby="vue-examples">
-      <md-list-anchor href="/examples/vue.html#basic">
-        <template #link>Vue 3 Basic Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
-      </md-list-anchor>
-      <md-list-anchor href="/examples/vue.html#router">
-        <template #link>Vue 3 Router Examples</template>
+      <md-list-anchor href="/examples/vue.html#generatesw">
+        <template #link>Vue 3 genertateSW Router Examples</template>
         <template #trailing>: set of examples with disparate behaviors.</template>
       </md-list-anchor>
       <md-list-anchor href="/examples/vue.html#injectmanifest">
@@ -113,12 +109,8 @@ We provide the following example projects:
   <template #link>React</template>
   <template #nested>
     <ul aria-labelledby="react-examples">
-      <md-list-anchor href="/examples/react.html#basic">
-        <template #link>React Basic Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
-      </md-list-anchor>
-      <md-list-anchor href="/examples/react.html#router">
-        <template #link>React Router Examples</template>
+      <md-list-anchor href="/examples/react.html#generatesw">
+        <template #link>React generatesSw Router Example</template>
         <template #trailing>: set of examples with disparate behaviors.</template>
       </md-list-anchor>
       <md-list-anchor href="/examples/react.html#injectmanifest">
@@ -132,12 +124,8 @@ We provide the following example projects:
   <template #link>Svelte</template>
   <template #nested>
     <ul aria-labelledby="svelte-examples">
-      <md-list-anchor href="/examples/svelte.html#basic">
-        <template #link>Svelte Basic Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
-      </md-list-anchor>
-      <md-list-anchor href="/examples/svelte.html#router">
-        <template #link>Svelte Router Examples</template>
+      <md-list-anchor href="/examples/svelte.html#generatesw">
+        <template #link>Svelte generatesSw Router Example</template>
         <template #trailing>: set of examples with disparate behaviors.</template>
       </md-list-anchor>
       <md-list-anchor href="/examples/svelte.html#injectmanifest">

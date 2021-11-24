@@ -1,9 +1,9 @@
 import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
-import { ManifestOptions, VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
+import { VitePWA } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
 
-const pwaOptions: Partial<VitePWAOptions> = {
+const pwaOptions = {
   mode: 'development',
   base: '/',
   includeAssets: ['favicon.svg'],
@@ -38,8 +38,8 @@ if (process.env.SW === 'true') {
   pwaOptions.srcDir = 'src'
   pwaOptions.filename = 'sw.ts'
   pwaOptions.strategies = 'injectManifest'
-  ;(pwaOptions.manifest as Partial<ManifestOptions>).name = 'PWA Inject Manifest'
-  ;(pwaOptions.manifest as Partial<ManifestOptions>).short_name = 'PWA Inject'
+  pwaOptions.manifest.name = 'PWA Inject Manifest'
+  pwaOptions.manifest.short_name = 'PWA Inject'
 }
 else {
   if (process.env.CLAIMS === 'true')
@@ -57,8 +57,9 @@ export default defineConfig({
     sourcemap: process.env.SOURCE_MAP === 'true',
   },
   plugins: [
-    Vue(),
+    svelte(),
     VitePWA(pwaOptions),
     replace(replaceOptions),
   ],
 })
+
