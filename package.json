@@ -56,6 +56,7 @@
     "@antfu/eslint-config": "^0.10.0",
     "@antfu/ni": "^0.10.2",
     "@types/debug": "^4.1.7",
+    "@types/prompts": "^2.0.14",
     "@types/react": "^17.0.34",
     "@types/workbox-build": "^5.0.1",
     "@typescript-eslint/eslint-plugin": "^5.3.1",

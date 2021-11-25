@@ -96,61 +96,55 @@ async function init() {
     const onCancel = () => {
       throw new Error(`${red('✖')} Operation cancelled`)
     }
-    const { framework: useFramework } = await prompts(
-      [
-        {
-          type: 'select',
-          name: 'framework',
-          message: 'Select a framework:',
-          initial: 0,
-          choices: FRAMEWORKS.map((framework) => {
-            const frameworkColor = framework.color
-            return {
-              title: frameworkColor(framework.name),
-              value: framework,
-            }
-          }),
-        },
-      ],
+    const { framework: useFramework }: { framework: Framework } = await prompts(
+      {
+        type: 'select',
+        name: 'framework',
+        message: 'Select a framework:',
+        initial: 0,
+        choices: FRAMEWORKS.map((framework) => {
+          const frameworkColor = framework.color
+          return {
+            title: frameworkColor(framework.name),
+            value: framework,
+          }
+        }),
+      },
       { onCancel },
     )
-    const { strategy: useStrategy } = await prompts(
-      [
-        {
-          type: 'select',
-          name: 'strategy',
-          message: 'Select a strategy:',
-          initial: 0,
-          choices: useFramework.strategies.map((strategy) => {
-            const strategyColor = strategy.color
-            return {
-              title: strategyColor(strategy.name),
-              value: strategy,
-            }
-          }),
-        },
-      ],
+    const { strategy: useStrategy }: { strategy: Strategy } = await prompts(
+      {
+        type: 'select',
+        name: 'strategy',
+        message: 'Select a strategy:',
+        initial: 0,
+        choices: useFramework.strategies.map((strategy) => {
+          const strategyColor = strategy.color
+          return {
+            title: strategyColor(strategy.name),
+            value: strategy,
+          }
+        }),
+      },
       { onCancel },
     )
     let useBehaviour: Behavior | undefined
     let useReloadSW: boolean | undefined
     if (useStrategy.behaviors) {
-      const { behavior } = await prompts(
-        [
-          {
-            type: 'select',
-            name: 'behavior',
-            message: 'Select a behavior:',
-            initial: 0,
-            choices: useStrategy.behaviors.map((behavior) => {
-              const behaviorColor = behavior.color
-              return {
-                title: behaviorColor(behavior.display),
-                value: behavior,
-              }
-            }),
-          },
-        ],
+      const { behavior }: { behavior: Behavior } = await prompts(
+        {
+          type: 'select',
+          name: 'behavior',
+          message: 'Select a behavior:',
+          initial: 0,
+          choices: useStrategy.behaviors.map((behavior) => {
+            const behaviorColor = behavior.color
+            return {
+              title: behaviorColor(behavior.display),
+              value: behavior,
+            }
+          }),
+        },
         { onCancel },
       )
       useBehaviour = behavior
