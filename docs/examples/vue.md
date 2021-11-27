@@ -4,21 +4,23 @@ title: Vue | Examples
 
 # Vue
 
-All `Vue 3` example projects can be found on `examples` package/directory and start with `vue-` prefix.
+The `Vue 3` example project can be found on `examples/vue-router` package/directory.
 
-All `Vue 3` examples have been created using `create-vite` template with `PNPM`:
+The router used on this example project is [vue-router](https://next.router.vuejs.org/) <outbound-link />.
+
+The `Vue 3` example has been created using `create-vite` template with `PNPM`:
 ```shell
 pnpx create-vite
 + create-vite 2.5.4
-√ Project name: ... vue-basic
+√ Project name: ... vue-router
 √ Select a framework: » vue
 √ Select a variant: » vue-ts
 
-Scaffolding project in examples\vue-basic...
+Scaffolding project in examples\vue-router...
 
 Done. Now run:
 
-  cd vue-basic
+  cd vue-router
   npm install
   npm run dev
 ```
@@ -28,22 +30,13 @@ To test `new content available`, you should rerun the corresponding script, and 
 If you are running an example with `Periodic SW updates`, you will need to wait 1 minute:
 <HeuristicWorkboxWindow />
 
-## Basic
+## Executing the examples
 
-This example project can be found on `examples/vue-basic` package/directory with the following behavior:
-- Show `Ready to work offlline` on first visit and once the `service worker` ready.
-- Show `Prompt for update` when new `service worker` available.
+<RunExamples />
 
-To run this example project, execute the following script from your shell (from root folder):
-```shell
-pnpm run example:start
-```
+## generateSW
 
-## Router
-
-The router used on this example project is [vue-router](https://next.router.vuejs.org/) <outbound-link />.
-
-This example project can be found on `examples/vue-router` package/directory with the following behaviors:
+`generateSW` has the following behaviors:
 - `Prompt for update`:
   - Show `Ready to work offlline` on first visit and once the `service worker` ready.
   - Show `Prompt for update` when new `service worker` available.
@@ -61,36 +54,11 @@ This example project can be found on `examples/vue-router` package/directory wit
   - Show `Ready to work offlline` on first visit and once the `service worker` ready.
   - The example project will register a `Periodic service worker updates`
   - When new content available, the service worker will be updated automatically.
-
-To run this example project, execute one of the following scripts from your shell (from root folder):
-- `Prompt for update`:
-```shell
-pnpm run example:router:start
-```
-
-- `Auto update`:
-```shell
-pnpm run example:router:start:claims
-```
-
-- `Prompt for update` with `Periodic service worker updates`:
-```shell
-pnpm run example:router:start:reloadsw
-```
-
-- `Auto update` with `Periodic service worker updates`:
-```shell
-pnpm run example:router:start:claims:reloadsw
-```
 
 ## injectManifest
 
-This example project can be found on `examples/vue-basic-inject-manifest` package/directory with the following behavior:
-- Custom `TypeScript Service Worker`.
+`injectManifest` has the following behavior:
+- Custom `TypeScript Service Worker` with offline support.
 - Show `Ready to work offlline` on first visit and once the `service worker` ready.
 - Show `Prompt for update` when new `service worker` available.
-
-To run this example project, execute the following script from your shell (from root folder):
-```shell
-pnpm run example:start:sw
-```
+- 

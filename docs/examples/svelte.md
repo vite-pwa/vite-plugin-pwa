@@ -4,21 +4,23 @@ title: Svelte | Examples
 
 # Svelte
 
-All `Svelte` example projects can be found on `examples` package/directory and start with `svelte-` prefix.
+The `Svelte` example project can be found on `examples/react-routify` package/directory.
 
-All `Svelte` examples have been created using `create-vite` template with `PNPM`:
+The router used on this example project is [@roxi/routify](https://routify.dev/) <outbound-link />.
+
+The `Svelte` example has been created using `create-vite` template with `PNPM`:
 ```shell
 pnpx create-vite
 + create-vite 2.5.4
-√ Project name: ... svelte-basic
+√ Project name: ... svelte-routify
 √ Select a framework: » svelte
 √ Select a variant: » svelte-ts
 
-Scaffolding project in examples\svelte-basic...
+Scaffolding project in examples\svelte-routify...
 
 Done. Now run:
 
-  cd svelte-basic
+  cd svelte-routify
   npm install
   npm run dev
 ```
@@ -28,72 +30,34 @@ To test `new content available`, you should rerun the corresponding script, and 
 If you are running an example with `Periodic SW updates`, you will need to wait 1 minute:
 <HeuristicWorkboxWindow />
 
-## Basic
+## Executing the examples
 
-This example project can be found on `examples/svelte-basic` package/directory with the following behavior:
-- Show `Ready to work offlline` on first visit and once the `service worker` ready.
-- Show `Prompt for update` when new `service worker` available.
+<RunExamples />
 
-To run this example project, execute the following script from your shell (from root folder):
-```shell
-pnpm run example:svelte:start
-```
+## generateSW
 
-## Router
-
-The router used on this example project is [@roxi/routify](https://routify.dev/) <outbound-link />.
-
-This example project can be found on `examples/react-routify` package/directory with the following behaviors:
+`generateSW` has the following behaviors:
 - `Prompt for update`:
-    - Show `Ready to work offlline` on first visit and once the `service worker` ready.
-    - Show `Prompt for update` when new `service worker` available.
+  - Show `Ready to work offlline` on first visit and once the `service worker` ready.
+  - Show `Prompt for update` when new `service worker` available.
 
 - `Auto update`:
-    - Show `Ready to work offlline` on first visit and once the `service worker` ready.
-    - When new content available, the service worker will be updated automatically.
+  - Show `Ready to work offlline` on first visit and once the `service worker` ready.
+  - When new content available, the service worker will be updated automatically.
 
 - `Prompt for update` with `Periodic service worker updates`:
-    - Show `Ready to work offlline` on first visit and once the `service worker` ready.
-    - Show `Prompt for update` when new `service worker` available.
-    - The example project will register a `Periodic service worker updates`
+  - Show `Ready to work offlline` on first visit and once the `service worker` ready.
+  - Show `Prompt for update` when new `service worker` available.
+  - The example project will register a `Periodic service worker updates`
 
 - `Auto update` with `Periodic service worker updates`:
-    - Show `Ready to work offlline` on first visit and once the `service worker` ready.
-    - The example project will register a `Periodic service worker updates`
-    - When new content available, the service worker will be updated automatically.
-
-To run this example project, execute one of the following scripts from your shell (from root folder):
-- `Prompt for update`:
-```shell
-pnpm run example:svelte:routify:start
-```
-
-- `Auto update`:
-```shell
-pnpm run example:svelte:routify:start:claims
-```
-
-- `Prompt for update` with `Periodic service worker updates`:
-```shell
-pnpm run example:svelte:routify:start:reloadsw
-```
-
-- `Auto update` with `Periodic service worker updates`:
-```shell
-pnpm run example:svelte:routify:start:claims:reloadsw
-```
-
+  - Show `Ready to work offlline` on first visit and once the `service worker` ready.
+  - The example project will register a `Periodic service worker updates`
+  - When new content available, the service worker will be updated automatically.
+  
 ## injectManifest
 
-This example project can be found on `examples/svelte-basic-inject-manifest` package/directory with the following behavior:
-- Custom `TypeScript Service Worker`.
+`injectManifest` has the following behavior:
+- Custom `TypeScript Service Worker` with offline support.
 - Show `Ready to work offlline` on first visit and once the `service worker` ready.
 - Show `Prompt for update` when new `service worker` available.
-
-To run this example project, execute the following script from your shell (from root folder):
-```shell
-pnpm run example:svelte:start:sw
-```
-
-
-

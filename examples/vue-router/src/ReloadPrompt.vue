@@ -10,6 +10,7 @@ const {
   needRefresh,
   updateServiceWorker,
 } = useRegisterSW({
+  immediate: true,
   onRegistered(r) {
     if (reloadSW === 'true') {
       r && setInterval(async() => {

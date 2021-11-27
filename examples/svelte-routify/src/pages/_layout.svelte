@@ -1,6 +1,13 @@
+<script lang="ts">
+    // replaced dyanmicaly
+    const date = '__DATE__'
+</script>
+
 <main>
   <img src="/favicon.svg" alt="PWA Logo" width="60" height="60"/>
   <h1>Svelte PWA!</h1>
+
+  <div class="built">Built at: { date }</div>
 
   <slot />
 

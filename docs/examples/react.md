@@ -4,21 +4,23 @@ title: React | Examples
 
 # React
 
-All `React` example projects can be found on `examples` package/directory and start with `react-` prefix.
+The `React` example project can be found on `examples/react-router` package/directory.
 
-All `React` examples have been created using `create-vite` template with `PNPM`:
+The router used on this example project is [react-router](https://reactrouter.com/) <outbound-link />.
+
+The `React` example has been created using `create-vite` template with `PNPM`:
 ```shell
 pnpx create-vite
 + create-vite 2.5.4
-√ Project name: ... react-basic
+√ Project name: ... react-router
 √ Select a framework: » react
 √ Select a variant: » react-ts
 
-Scaffolding project in examples\react-basic...
+Scaffolding project in examples\react-router...
 
 Done. Now run:
 
-  cd react-basic
+  cd react-router
   npm install
   npm run dev
 ```
@@ -28,70 +30,34 @@ To test `new content available`, you should rerun the corresponding script, and 
 If you are running an example with `Periodic SW updates`, you will need to wait 1 minute:
 <HeuristicWorkboxWindow />
 
-## Basic
+## Executing the examples
 
-This example project can be found on `examples/react-basic` package/directory with the following behavior:
-- Show `Ready to work offlline` on first visit and once the `service worker` ready.
-- Show `Prompt for update` when new `service worker` available.
+<RunExamples />
 
-To run this example project, execute the following script from your shell (from root folder):
-```shell
-pnpm run example:react:start
-```
+## generateSW
 
-## Router
-
-The router used on this example project is [react-router](https://reactrouter.com/) <outbound-link />.
-
-This example project can be found on `examples/react-router` package/directory with the following behaviors:
+`generateSW` has the following behaviors:
 - `Prompt for update`:
-    - Show `Ready to work offlline` on first visit and once the `service worker` ready.
-    - Show `Prompt for update` when new `service worker` available.
+  - Show `Ready to work offlline` on first visit and once the `service worker` ready.
+  - Show `Prompt for update` when new `service worker` available.
 
 - `Auto update`:
-    - Show `Ready to work offlline` on first visit and once the `service worker` ready.
-    - When new content available, the service worker will be updated automatically.
+  - Show `Ready to work offlline` on first visit and once the `service worker` ready.
+  - When new content available, the service worker will be updated automatically.
 
 - `Prompt for update` with `Periodic service worker updates`:
-    - Show `Ready to work offlline` on first visit and once the `service worker` ready.
-    - Show `Prompt for update` when new `service worker` available.
-    - The example project will register a `Periodic service worker updates`
+  - Show `Ready to work offlline` on first visit and once the `service worker` ready.
+  - Show `Prompt for update` when new `service worker` available.
+  - The example project will register a `Periodic service worker updates`
 
 - `Auto update` with `Periodic service worker updates`:
-    - Show `Ready to work offlline` on first visit and once the `service worker` ready.
-    - The example project will register a `Periodic service worker updates`
-    - When new content available, the service worker will be updated automatically.
-
-To run this example project, execute one of the following scripts from your shell (from root folder):
-- `Prompt for update`:
-```shell
-pnpm run example:react:router:start
-```
-
-- `Auto update`:
-```shell
-pnpm run example:react:router:start:claims
-```
-
-- `Prompt for update` with `Periodic service worker updates`:
-```shell
-pnpm run example:react:router:start:reloadsw
-```
-
-- `Auto update` with `Periodic service worker updates`:
-```shell
-pnpm run example:react:router:start:claims:reloadsw
-```
+  - Show `Ready to work offlline` on first visit and once the `service worker` ready.
+  - The example project will register a `Periodic service worker updates`
+  - When new content available, the service worker will be updated automatically.
 
 ## injectManifest
 
-This example project can be found on `examples/react-basic-inject-manifest` package/directory with the following behavior:
-- Custom `TypeScript Service Worker`.
+`injectManifest` has the following behavior:
+- Custom `TypeScript Service Worker` with offline support.
 - Show `Ready to work offlline` on first visit and once the `service worker` ready.
 - Show `Prompt for update` when new `service worker` available.
-
-To run this example project, execute the following script from your shell (from root folder):
-```shell
-pnpm run example:react:start:sw
-```
-

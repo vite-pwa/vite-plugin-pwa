@@ -4,7 +4,7 @@
   // replaced dyanmicaly
   const date = '__DATE__'
 
-  $: name = $params.name
+  $: name = decodeURIComponent($params.name || '')
 </script>
 
 <div><strong>/hi</strong> route, built at: { date }</div>
