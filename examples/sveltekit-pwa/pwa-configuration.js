@@ -51,6 +51,7 @@ const workboxOrInjectManifestEntry = {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   manifestTransforms: [async(entries) => {
     // manifest.webmanifest is added always by pwa plugin, so we remove it
+    // EXCLUDE from the sw precache sw and workbox-*
     const manifest = entries.filter(({ url }) =>
       url !== 'manifest.webmanifest' && url !== 'sw.js' && !url.startsWith('workbox-')
     ).map((e) => {

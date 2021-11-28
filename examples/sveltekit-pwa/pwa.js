@@ -1,7 +1,7 @@
 import { resolveConfig } from 'vite'
 import replace from '@rollup/plugin-replace'
-import { VitePWA } from 'vite-plugin-pwa';
-import { copyFileSync } from 'fs';
+import { VitePWA } from 'vite-plugin-pwa'
+import { copyFileSync } from 'fs'
 import minimist from 'minimist'
 
 const args = minimist(process.argv.slice(2))
