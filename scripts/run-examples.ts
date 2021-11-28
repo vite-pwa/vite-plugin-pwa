@@ -21,7 +21,7 @@ type Strategy = {
   name: string
   display: string
   color: Color
-  behaviors?: Behavior[]
+  behaviors: Behavior[]
 }
 
 type Framework = {
@@ -55,6 +55,7 @@ const STRATEGIES: Strategy[] = [
     name: 'injectManifest',
     display: 'injectManifest',
     color: blue,
+    behaviors: BEHAVIORS,
   },
 ]
 
@@ -81,6 +82,12 @@ const FRAMEWORKS: Framework[] = [
     name: 'svelte',
     color: red,
     dir: 'svelte-routify',
+    strategies: STRATEGIES,
+  },
+  {
+    name: 'sveltekit',
+    color: blue,
+    dir: 'sveltekit-pwa',
     strategies: STRATEGIES,
   },
   {
@@ -128,57 +135,50 @@ async function init() {
       },
       { onCancel },
     )
-    let useBehaviour: Behavior | undefined
-    let useReloadSW: boolean | undefined
-    if (useStrategy.behaviors) {
-      const { behavior }: { behavior: Behavior } = await prompts(
+    const { behavior: useBehavior }: { behavior: Behavior } = await prompts(
+      {
+        type: 'select',
+        name: 'behavior',
+        message: 'Select a behavior:',
+        initial: 0,
+        choices: useStrategy.behaviors.map((behavior) => {
+          const behaviorColor = behavior.color
+          return {
+            title: behaviorColor(behavior.display),
+            value: behavior,
+          }
+        }),
+      },
+      { onCancel },
+    )
+    const { reloadSW: useReloadSW }: { reloadSW: boolean } = await prompts(
+      [
         {
-          type: 'select',
-          name: 'behavior',
-          message: 'Select a behavior:',
-          initial: 0,
-          choices: useStrategy.behaviors.map((behavior) => {
-            const behaviorColor = behavior.color
-            return {
-              title: behaviorColor(behavior.display),
-              value: behavior,
-            }
-          }),
+          type: 'toggle',
+          name: 'reloadSW',
+          message: 'Enable periodic SW updates?',
+          initial: false,
+          active: 'yes',
+          inactive: 'no',
         },
-        { onCancel },
-      )
-      useBehaviour = behavior
-      const { reloadSW } = await prompts(
-        [
-          {
-            type: 'toggle',
-            name: 'reloadSW',
-            message: 'Enable periodic SW updates?',
-            initial: false,
-            active: 'yes',
-            inactive: 'no',
-          },
-        ],
-        { onCancel },
-      )
-      useReloadSW = reloadSW
-    }
+      ],
+      { onCancel },
+    )
     let script = ''
-    if (useStrategy.name === 'injectManifest') {
+    if (useStrategy.name === 'injectManifest')
       script = '-sw'
+
+    switch (useBehavior.name) {
+      case 'prompt':
+        break
+      case 'claims':
+      default:
+        script += '-claims'
+        break
     }
-    else {
-      switch (useBehaviour!.name) {
-        case 'prompt':
-          break
-        case 'claims':
-        default:
-          script = '-claims'
-          break
-      }
-      if (useReloadSW === true)
-        script += '-reloadsw'
-    }
+
+    if (useReloadSW)
+      script += '-reloadsw'
 
     execSync(`pnpm run start${script}`, {
       stdio: 'inherit',

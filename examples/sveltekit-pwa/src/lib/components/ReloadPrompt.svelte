@@ -1,45 +1,39 @@
 <script lang="ts">
   import { useRegisterSW } from 'virtual:pwa-register/svelte'
-
   // replaced dynamically
   const buildDate = '__DATE__'
-  // replaced dyanmicaly
-  const reloadSW = '__RELOAD_SW__'
-
+  // replaced dynamically: we need to use `JSON.parse` to allow compare to reloadSW==='true'
+  // if used with literal it will be removed, since it is evaluated at build time by sveltekit
+  const reloadSW = JSON.parse('__RELOAD_SW__')
   const {
-      offlineReady,
-      needRefresh,
-      updateServiceWorker,
+    offlineReady,
+    needRefresh,
+    updateServiceWorker
   } = useRegisterSW({
     onRegistered(r) {
-        if (reloadSW === 'true') {
-            r && setInterval(() => {
-                console.log('Checking for sw update')
-                r.update()
-            }, 20000 /* 20s for testing purposes */)
-        }
-        else {
-            console.log(`SW Registered: ${r}`)
-        }
+      if (reloadSW === 'true') {
+        r && setInterval(() => {
+          console.log('Checking for sw update')
+          r.update()
+        }, 20000 /* 20s for testing purposes */)
+      }
+      else {
+        console.log(`SW Registered: ${r}`)
+      }
     },
     onRegisterError(error) {
       console.log('SW registration error', error)
     },
   })
-
-  function close() {
-      offlineReady.set(false)
-      needRefresh.set(false)
+  const close = () => {
+    offlineReady.set(false)
+    needRefresh.set(false)
   }
-
-  $: toast = $offlineReady || $needRefresh;
+  $: toast = $offlineReady || $needRefresh
 </script>
 
 {#if toast}
-  <div
-    class="pwa-toast"
-    role="alert"
-  >
+  <div class="pwa-toast" role="alert">
     <div class="message">
       {#if $offlineReady}
       <span>

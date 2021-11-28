@@ -137,6 +137,21 @@ We provide the following example projects:
     </ul>
   </template>
 </md-list-anchor>
+<md-list-anchor id="sveltekit-examples" href="/examples/sveltekit.html">
+  <template #link>SvelteKit</template>
+  <template #nested>
+    <ul aria-labelledby="sveltekit-examples">
+      <md-list-anchor href="/examples/sveltekit.html#generatesw">
+        <template #link>SvelteKit generatesSw Example</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
+      </md-list-anchor>
+      <md-list-anchor href="/examples/sveltekit.html#injectmanifest">
+        <template #link>SvelteKit injectManifest Example</template>
+        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+      </md-list-anchor>
+    </ul>
+  </template>
+</md-list-anchor>
 <md-list-anchor id="solid-examples" href="/examples/solidjs.html">
   <template #link>SolidJS</template>
   <template #nested>
