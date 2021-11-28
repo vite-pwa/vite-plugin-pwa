@@ -203,7 +203,7 @@ const config = {
     ['link', { rel: 'alternate icon', href: '/favicon.ico', type: 'image/png', sizes: '16x16' }],
     ['link', { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#ffffff' }],
     ['meta', { name: 'author', content: 'Anthony Fu' }],
-    ['meta', { name: 'keywords', content: 'react, pwa, vue, preact, svelte, sveltekit, workbox, solidjs, vite, vite-plugin' }],
+    ['meta', { name: 'keywords', content: 'react, pwa, vue, vitepress, preact, svelte, sveltekit, workbox, solidjs, vite, vite-plugin' }],
     ['meta', { property: 'og:title', content: 'Vite Plugin PWA' }],
     ['meta', { property: 'og:description', content: 'Zero-config PWA Framework-agnostic Plugin for Vite' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
