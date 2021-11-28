@@ -16,18 +16,20 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
   const [needRefresh, setNeedRefresh] = useState(false)
   const [offlineReady, setOfflineReady] = useState(false)
 
-  const updateServiceWorker = registerSW({
-    immediate,
-    onOfflineReady() {
-      setOfflineReady(true)
-      onOfflineReady?.()
-    },
-    onNeedRefresh() {
-      setNeedRefresh(true)
-      onNeedRefresh?.()
-    },
-    onRegistered,
-    onRegisterError,
+  const [updateServiceWorker] = useState(() => {
+    return registerSW({
+      immediate,
+      onOfflineReady() {
+        setOfflineReady(true)
+        onOfflineReady?.()
+      },
+      onNeedRefresh() {
+        setNeedRefresh(true)
+        onNeedRefresh?.()
+      },
+      onRegistered,
+      onRegisterError,
+    })
   })
 
   return {
