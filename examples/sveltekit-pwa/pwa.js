@@ -20,7 +20,7 @@ const swDestinations = [
 ]
 
 const buildPwa = async() => {
-const { pwaConfiguration, replaceOptions } = await import('./pwa-configuration.js')
+	const { pwaConfiguration, replaceOptions } = await import('./pwa-configuration.js')
 	const config = await resolveConfig({
 		plugins: [
 			VitePWA(pwaConfiguration),
