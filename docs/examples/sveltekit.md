@@ -6,7 +6,7 @@ title: SvelteKit | Examples
 
 The `SvelteKit` example project can be found on `examples/sveltekit-pwa` package/directory and it is configured with `@sveltejs/adapter-static` adapter.
 
-The `SvelteKit` example has been created using `svelte@next` template with `PNPM`:
+The `SvelteKit` example has been created using `svelte@next` template with `pnpm`:
 ```shell
 pnpm create svelte@next sveltekit-pwa
 + create-svelte 2.0.0-next.89
