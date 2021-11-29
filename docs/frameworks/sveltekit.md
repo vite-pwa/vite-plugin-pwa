@@ -51,7 +51,7 @@ When using `Vite PWA Plugin` with any `SvelteKit Adapter` you need to provide an
 
 The biggest difference between this plugin and the SvelteKit service worker module is that this plugin does not require integration into the application logic - just configuration. You can take a look at [SvelteKit example](https://github.com/antfu/vite-plugin-pwa/tree/main/examples/sveltekit-pwa) <outbound-link /> to configure the additional scripts on your application, it is quite complex since we use it for multiple behaviors with the same codebase.
 
-As an example using [@sveltejs/adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) <outbound-link /> with `generateSW` strategy and `Prompt for update` behavior, you will need:
+As an example, when using [@sveltejs/adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) <outbound-link /> with `generateSW` strategy and `Prompt for update` behavior, you will need:
 
 <details>
 <summary>1) add <strong>pwa.js</strong> script</summary>
