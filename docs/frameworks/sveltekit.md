@@ -9,7 +9,7 @@ title: SvelteKit | Frameworks
 
 You should remove all references to [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker) <outbound-link /> to disable it on your application.
 
-Since `SvelteKit` will use `SSR / SSG`, we need to add the `ReloadPrompt` component using `dynamic import`. `Vite Plugin PWA` will only register the service worker on build, it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker) <outbound-link />.
+Since `SvelteKit` uses `SSR / SSG`, we need to add the `ReloadPrompt` component using `dynamic import`. `Vite Plugin PWA` will only register the service worker on build, it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker) <outbound-link />.
 
 The best place to include the `ReloadPrompt` is on the main layout of the application:
 
