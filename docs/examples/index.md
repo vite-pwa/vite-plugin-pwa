@@ -102,7 +102,7 @@ We provide the following example projects:
       </md-list-anchor>
       <md-list-anchor href="/examples/vue.html#injectmanifest">
         <template #link>Vue 3 injectManifest Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
       </md-list-anchor>
     </ul>
   </template>
@@ -117,7 +117,7 @@ We provide the following example projects:
       </md-list-anchor>
       <md-list-anchor href="/examples/react.html#injectmanifest">
         <template #link>React injectManifest Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
       </md-list-anchor>
     </ul>
   </template>
@@ -132,7 +132,7 @@ We provide the following example projects:
       </md-list-anchor>
       <md-list-anchor href="/examples/svelte.html#injectmanifest">
         <template #link>Svelte injectManifest Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
       </md-list-anchor>
     </ul>
   </template>
@@ -147,7 +147,7 @@ We provide the following example projects:
       </md-list-anchor>
       <md-list-anchor href="/examples/sveltekit.html#injectmanifest">
         <template #link>SvelteKit injectManifest Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
       </md-list-anchor>
     </ul>
   </template>
@@ -162,7 +162,7 @@ We provide the following example projects:
       </md-list-anchor>
       <md-list-anchor href="/examples/solidjs.html#injectmanifest">
         <template #link>SolidJS injectManifest Router Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
       </md-list-anchor>
     </ul>
   </template>
@@ -177,7 +177,7 @@ We provide the following example projects:
       </md-list-anchor>
       <md-list-anchor href="/examples/preact.html#injectmanifest">
         <template #link>Preact injectManifest Router Example</template>
-        <template #trailing>: <code>Ready to work offline</code> and <code>Prompt for update</code>.</template>
+        <template #trailing>: set of examples with disparate behaviors.</template>
       </md-list-anchor>
     </ul>
   </template>
