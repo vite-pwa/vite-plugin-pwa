@@ -53,20 +53,15 @@ const workboxOrInjectManifestEntry = {
     // manifest.webmanifest is added always by pwa plugin, so we remove it
     // EXCLUDE from the sw precache sw and workbox-*
     const manifest = entries.filter(({ url }) =>
-      url !== 'manifest.webmanifest' && url !== 'sw.js' && !url.startsWith('workbox-')
+      url !== 'manifest.webmanifest' && !url.endsWith('sw.js') && !url.startsWith('workbox-')
     ).map((e) => {
-      const url = e.url
-      if (url) {
-        if (url.endsWith('.html')) {
-          if (url === 'index.html') {
-            e.url = '/'
-            console.log(`${url} => ${e.url}`)
-          }
-          else {
-            e.url = `/${url.substring(0, url.lastIndexOf('/'))}`
-            console.log(`${url} => ${e.url}`)
-          }
-        }
+      let url = e.url
+      if (url && url.endsWith('.html')) {
+        if (url.startsWith('/'))
+          url = url.slice(1)
+
+        e.url = url === 'index.html' ? '/' : `/${url.substring(0, url.lastIndexOf('/'))}`
+        console.log(`${url} => ${e.url}`)
       }
 
       return e

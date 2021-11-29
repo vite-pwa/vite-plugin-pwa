@@ -167,16 +167,12 @@ const pwaConfiguration = {
       const manifest = entries.filter(({ url }) =>
         url !== 'manifest.webmanifest' && url !== 'sw.js' && !url.startsWith('workbox-')
       ).map((e) => {
-        const url = e.url;
-        if (url) {
-          if (url.endsWith('.html')) {
-            if (url === 'index.html') {
-              e.url = '/';
-            }
-            else {
-              e.url = `/${url.substring(0, url.lastIndexOf('/'))}`;
-            }
-          }
+        let url = e.url;
+        if (url && url.endsWith('.html')) {
+          if (url.startsWith('/'))
+            url = url.slice(1)
+
+          e.url = url === 'index.html' ? '/' : `/${url.substring(0, url.lastIndexOf('/'))}`
         }
 
         return e
