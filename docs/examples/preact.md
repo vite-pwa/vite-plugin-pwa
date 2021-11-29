@@ -8,7 +8,11 @@ The `Preact` example project can be found on `examples/preact-router` package/di
 
 The router used on this example project is [preact-router](https://github.com/preactjs/preact-router) <outbound-link />.
 
-The `Preact` example has been created using `create-vite` template with `PNPM`:
+The `Preact` example has been created using `create-vite` template with `pnpx`:
+
+<details>
+    <summary><strong>pnpx create-vite</strong></summary>
+
 ```shell
 pnpx create-vite
 + create-vite 2.6.6
@@ -24,7 +28,7 @@ Done. Now run:
   npm install
   npm run dev
 ```
-
+</details>
 
 To test `new content available`, you should rerun the corresponding script, and then refresh the page.
 

@@ -7,6 +7,10 @@ title: SvelteKit | Examples
 The `SvelteKit` example project can be found on `examples/sveltekit-pwa` package/directory and it is configured with `@sveltejs/adapter-static` adapter.
 
 The `SvelteKit` example has been created using `svelte@next` template with `pnpm`:
+
+<details>
+    <summary><strong>pnpm create svelte@next sveltekit-pwa</strong></summary>
+
 ```shell
 pnpm create svelte@next sveltekit-pwa
 + create-svelte 2.0.0-next.89
@@ -41,6 +45,7 @@ Next steps:
   3: git init && git add -A && git commit -m "Initial commit" (optional)
   4: npm run dev -- --open
 ```
+</details>
 
 To test `new content available`, you should rerun the corresponding script, and then refresh the page.
 

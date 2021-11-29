@@ -8,7 +8,11 @@ The `React` example project can be found on `examples/react-router` package/dire
 
 The router used on this example project is [react-router](https://reactrouter.com/) <outbound-link />.
 
-The `React` example has been created using `create-vite` template with `PNPM`:
+The `React` example has been created using `create-vite` template with `pnpx`:
+
+<details>
+    <summary><strong>pnpx create-vite</strong></summary>
+
 ```shell
 pnpx create-vite
 + create-vite 2.5.4
@@ -24,6 +28,7 @@ Done. Now run:
   npm install
   npm run dev
 ```
+</details>
 
 To test `new content available`, you should rerun the corresponding script, and then refresh the page.
 
