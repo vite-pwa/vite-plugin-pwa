@@ -22,13 +22,13 @@ const swDestinations = [
 const buildPwa = async() => {
 	const { pwaConfiguration, replaceOptions } = await import('./pwa-configuration.js')
 	const config = await resolveConfig({
-		plugins: [
-			VitePWA(pwaConfiguration),
-			replace(replaceOptions),
-		]
-	},
-	'build',
-	'production'
+			plugins: [
+				VitePWA(pwaConfiguration),
+				replace(replaceOptions),
+			]
+		},
+		'build',
+		'production'
 	)
 	// when `vite-plugin-pwa` is presented, use it to regenerate SW after rendering
 	const pwaPlugin = config.plugins.find(i => i.name === 'vite-plugin-pwa')?.api
