@@ -35,13 +35,13 @@
 	<div class="pwa-toast" role="alert">
 		<div class="message">
 			{#if $offlineReady}
-        <span>
-          App ready to work offline
-        </span>
-      {:else}
-        <span>
-          New content available, click on reload button to update.
-        </span>
+				<span>
+					App ready to work offline
+				</span>
+			{:else}
+				<span>
+					New content available, click on reload button to update.
+				</span>
 			{/if}
 		</div>
 		{#if $needRefresh}
