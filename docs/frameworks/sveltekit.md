@@ -119,31 +119,30 @@ buildPwa()
 const pwaConfiguration = {
   srcDir: './build',
   outDir: './.svelte-kit/output/client',
-  mode: 'development',
   includeManifestIcons: false,
-  scope: '/',
   base: '/',
+  scope: '/',
   manifest: {
-    short_name: "Svelte Society",
-    name: "Svelte Society",
-    start_url: "/",
+    short_name: "<YOUR APP SHORT NAME>",
+    name: "<YOUR APP NAME>",
     scope: "/",
+    start_url: "/",
     display: "standalone",
     theme_color: "#ffffff",
     background_color: "#ffffff",
     icons: [
       {
-        src: "/images/pwa-192x192.png",
+        src: "/pwa-192x192.png",
         sizes: "192x192",
         type: "image/png"
       },
       {
-        src: "/images/pwa-512x512.png",
+        src: "/pwa-512x512.png",
         "sizes": "512x512",
         "type": "image/png"
       },
       {
-        src: "/images/pwa-512x512.png",
+        src: "/pwa-512x512.png",
         "sizes": "512x512",
         "type": "image/png",
         purpose: 'any maskable'
@@ -151,8 +150,8 @@ const pwaConfiguration = {
     ]
   },
   workbox: {
-    mode: 'development',
-    navigateFallback: "/",
+    // mode: 'development',
+    navigateFallback: '/',
     // vite and sveltekit are not aligned: pwa plugin will use /\.[a-f0-9]{8}\./ by default: #164 optimize workbox work
     dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
     globDirectory: './build/',
