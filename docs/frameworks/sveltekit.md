@@ -45,11 +45,7 @@ The best place to include the `ReloadPrompt` is on the main layout of the applic
 
 ## SvelteKit Adapters
 
-The main problem with the current implementation of the service worker module of `SvelteKit` is that you don't have access to the result applied by any adapter you have configured on your application.
-
-The service worker module of `SvelteKit` will be called before the adapter logic is applied, and so, inside the service worker module, you don't have access to those resources.
-
-Your application will not work when the user is offline, since the pages will not be included on the service worker precache manifest.
+The main problem with the current implementation of the service worker module of `SvelteKit` is that you don't have access to the result applied by any adapter you have configured on your application. The service worker module of `SvelteKit` will be called before the adapter logic is applied, and so, inside the service worker module, you don't have access to those resources. Your application will not work when the user is offline, since the pages will not be included on the service worker precache manifest.
 
 When using `Vite PWA Plugin` with any `SvelteKit Adapter` you need to provide an additional script to rebuild your `pwa` once `SvelteKit` finish building your application, that is, when the adapter configured finish its job.
 
