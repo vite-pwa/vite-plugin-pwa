@@ -84,7 +84,7 @@ location / {
     expires off;
     add_header Cache-Control "public, max-age=0, s-maxage=0, must-revalidate" always;
     ...
-    try_files /index.html =404;
+    try_files $uri /index.html =404;
 }
 ```
 
