@@ -55,7 +55,7 @@ The biggest difference between this plugin and the SvelteKit service worker modu
 
 Before generating the service worker, `manifestTransforms` entry will allow us to transform the resulting precache manifest entries.
 
-The entries provided on `manifestTransforms` (on `workbox` or `injectManifest` pwa plugin option) entry callback from `workbox-build` node module, will contain all the assets specified on the `srcDir` pwa plugin option with the url and their corresponding revision calculated (hash).
+The entries provided in the `manifestTransforms` option (under `workbox` or `injectManifest`) will contain all the assets specified in the `srcDir` option with the URL and their corresponding revision calculated (e.g. to include the hash).
 
 Since `SvelteKit` uses the router name of the directory (for simple cases) for all the generated pages, you can use `manifestTransforms` to modify the url for all pages generated. You must add the logic to do the right mapping using the corresponding adapter.
 
