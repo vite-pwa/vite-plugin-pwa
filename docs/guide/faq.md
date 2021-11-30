@@ -19,6 +19,16 @@ add the following to the `compilerOptions.types` array of your `tsconfig.json`:
 }
 ```
 
+## Web app manifest and 401 status code (Unauthorized)
+
+[Browsers send requests for the web manifest without credentials](https://web.dev/add-manifest/#link-manifest), so if your site sits behind auth, the request will fail with a 401 Unauthorized error – even if the user is logged in.
+
+To send the request with credentials, the `<link rel="manifest">` needs a `crossorigin="use-credentials"` attribute, which you can enable via `useCredentials` in the [plugin options](https://github.com/antfu/vite-plugin-pwa/blob/main/src/types.ts#L79):
+
+```ts
+useCredentials: true;
+```
+
 ## Service Worker Registration Errors
 
 You can handle Service Worker registration errors if you want to notify the user with following code on your `main.ts` 
