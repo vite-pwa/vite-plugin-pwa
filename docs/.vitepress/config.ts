@@ -1,4 +1,4 @@
-require('esbuild-register')
+import type { UserConfig } from 'vitepress'
 
 const Guide = [
   {
@@ -155,45 +155,41 @@ const slidebars = [
   {
     text: 'Guide',
     children: Guide.map((e) => {
-      e.useLinkText = `${e.text} | Guide`
+      (e as any).useLinkText = `${e.text} | Guide`
       return e
     }),
   },
   {
     text: 'Frameworks',
     children: Frameworks.map((e) => {
-      e.useLinkText = `${e.text} | Frameworks`
+      (e as any).useLinkText = `${e.text} | Frameworks`
       return e
     }),
   },
   {
     text: 'Examples',
     children: Examples.map((e) => {
-      e.useLinkText = `${e.text} | Examples`
+      (e as any).useLinkText = `${e.text} | Examples`
       return e
     }),
   },
   {
     text: 'Deployment',
     children: Deployment.map((e) => {
-      e.useLinkText = `${e.text} | Deployment`
+      (e as any).useLinkText = `${e.text} | Deployment`
       return e
     }),
   },
   {
     text: 'Workbox',
     children: Workbox.map((e) => {
-      e.useLinkText = `${e.text} | Workbox`
+      (e as any).useLinkText = `${e.text} | Workbox`
       return e
     }),
   },
 ]
 
-
-/**
- * @type {import('vitepress').UserConfig}
- */
-const config = {
+const config: UserConfig = {
   title: 'Vite Plugin PWA',
   description: 'Zero-config PWA Framework-agnostic Plugin for Vite',
   lang: 'en-US',
@@ -260,4 +256,4 @@ const config = {
   },
 }
 
-module.exports = config
+export default config
