@@ -43,19 +43,19 @@ const replaceOptions = {
 }
 
 const workboxOrInjectManifestEntry = {
-	// vite and sveltekit are not aligned: pwa plugin will use /\.[a-f0-9]{8}\./ by default: #164 optimize workbox work
+	// vite and SvelteKit are not aligned: pwa plugin will use /\.[a-f0-9]{8}\./ by default: #164 optimize workbox work
 	dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
 	globDirectory: './build/',
 	globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
 	globIgnores: sw ? (claims ? ['**/claims-sw*'] : ['**/prompt-sw*']) : ['**/sw*', '**/workbox-*'],
-	// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+	// Before generating the service worker, manifestTransforms entry will allow us to transform the resulting precache manifest.
+	// The entries received in the callback from workbox-build module, will contain all the assets specified on srcDir option with the url and its corresponding revision calculated (hash).
+	// Since SvelteKit uses the router name of the directory for all the generated pages, we add a callback to modify the url for all pages.
 	manifestTransforms: [async(entries) => {
-		/**
-		 * manifest.webmanifest is added always by pwa plugin, so we remove it.
-		 * EXCLUDE from the sw precache sw and workbox-*
-		 */
+		// manifest.webmanifest is added always by pwa plugin, so we remove it.
+		// EXCLUDE from the sw precache sw and workbox-*
 		const manifest = entries.filter(({ url }) =>
-		  url !== 'manifest.webmanifest' && !url.endsWith('sw.js') && !url.startsWith('workbox-')
+			url !== 'manifest.webmanifest' && !url.endsWith('sw.js') && !url.startsWith('workbox-')
 		).map((e) => {
 			let url = e.url
 			if (url && url.endsWith('.html')) {
