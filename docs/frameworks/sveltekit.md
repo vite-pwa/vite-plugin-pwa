@@ -57,7 +57,7 @@ Before generating the service worker, `manifestTransforms` entry will allow us t
 
 The entries provided in the `manifestTransforms` option (under `workbox` or `injectManifest`) will contain all the assets specified in the `srcDir` option with the URL and their corresponding revision calculated (e.g. to include the hash).
 
-Since `SvelteKit` uses the router name of the directory (for simple cases) for all the generated pages, you can use `manifestTransforms` to modify the url for all pages generated. You must add the logic to do the right mapping using the corresponding adapter.
+Since `SvelteKit` uses the name of the directory (for simple cases) for all the generated pages, you can use `manifestTransforms` to modify the URL for all pages generated. You must add the logic to do the right mapping for the corresponding adapter.
 
 Of course, more complex page directories will force you to modify the `manifestTransforms` entry logic. For an example, see the `pwa-configuration.js` module in the next example using `@sveltejs/adapter-static`.
 
