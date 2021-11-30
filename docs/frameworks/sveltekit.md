@@ -51,6 +51,18 @@ When using `Vite PWA Plugin` with any `SvelteKit Adapter` you need to provide an
 
 The biggest difference between this plugin and the SvelteKit service worker module is that this plugin does not require integration into the application logic - just configuration. You can take a look at [SvelteKit example](https://github.com/antfu/vite-plugin-pwa/tree/main/examples/sveltekit-pwa) <outbound-link /> to configure the additional scripts on your application, it is quite complex since we use it for multiple behaviors with the same codebase.
 
+### Workbox manifestTransforms
+
+Before generating the service worker, `manifestTransforms` entry will allow us to transform the resulting precache manifest entries.
+
+The entries provided on `manifestTransforms` (on `workbox` or `injectManifest` pwa plugin option) entry callback from `workbox-build` node module, will contain all the assets specified on the `srcDir` pwa plugin option with the url and their corresponding revision calculated (hash).
+
+Since `SvelteKit` uses the router name of the directory (for simple cases) for all the generated pages, you can use `manifestTransforms` to modify the url for all pages generated. You must add the logic to do the right mapping using the corresponding adapter.
+
+Of course, a more complex page directories will force you to modify the `manifestTransforms` entry logic, see the `pwa-configuration.js` module in the next example using `@sveltejs/adapter-static`.
+
+### Static Adapter example
+
 As an example, when using [@sveltejs/adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) <outbound-link /> with `generateSW` strategy and `Prompt for update` behavior, you will need:
 
 <details>
@@ -139,9 +151,6 @@ const pwaConfiguration = {
 		globDirectory: './build/',
 		globPatterns: ['robots.txt', '**/*.{js,css,html,ico,png,svg,webmanifest}'],
 		globIgnores: ['**/sw*', '**/workbox-*'],
-		// Before generating the service worker, manifestTransforms entry will allow us to transform the resulting precache manifest.
-		// The entries received in the callback from workbox-build module, will contain all the assets specified on srcDir option with the url and its corresponding revision calculated (hash).
-		// Since SvelteKit uses the router name of the directory for all the generated pages, we add a callback to modify the url for all pages.
 		manifestTransforms: [async(entries) => {
 			// manifest.webmanifest is added always by pwa plugin, so we remove it.
 			// EXCLUDE from the sw precache sw and workbox-*
