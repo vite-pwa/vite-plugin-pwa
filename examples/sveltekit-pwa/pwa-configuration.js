@@ -48,9 +48,7 @@ const workboxOrInjectManifestEntry = {
 	globDirectory: './build/',
 	globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
 	globIgnores: sw ? (claims ? ['**/claims-sw*'] : ['**/prompt-sw*']) : ['**/sw*', '**/workbox-*'],
-	// Before generating the service worker, manifestTransforms entry will allow us to transform the resulting precache manifest.
-	// The entries received in the callback from workbox-build module, will contain all the assets specified on srcDir option with the url and its corresponding revision calculated (hash).
-	// Since SvelteKit uses the router name of the directory for all the generated pages, we add a callback to modify the url for all pages.
+	// Before generating the service worker, manifestTransforms entry will allow us to transform the resulting precache manifest. See the manifestTransforms docs for mode details.
 	manifestTransforms: [async(entries) => {
 		// manifest.webmanifest is added always by pwa plugin, so we remove it.
 		// EXCLUDE from the sw precache sw and workbox-*
