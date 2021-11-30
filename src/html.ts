@@ -12,7 +12,8 @@ navigator.serviceWorker.register('${options.base + options.filename}', { scope: 
 }
 
 export function injectServiceWorker(html: string, options: ResolvedVitePWAOptions) {
-  const manifest = options.manifest ? `<link rel="manifest" href="${options.base + FILE_MANIFEST}">` : ''
+  const crossorigin = options.useCredentials ? ' crossorigin="use-credentials"' : ''
+  const manifest = options.manifest ? `<link rel="manifest" href="${options.base + FILE_MANIFEST}"${crossorigin}>` : ''
 
   if (options.injectRegister === 'inline') {
     return html.replace(
