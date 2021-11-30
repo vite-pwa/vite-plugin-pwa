@@ -59,7 +59,7 @@ The entries provided in the `manifestTransforms` option (under `workbox` or `inj
 
 Since `SvelteKit` uses the router name of the directory (for simple cases) for all the generated pages, you can use `manifestTransforms` to modify the url for all pages generated. You must add the logic to do the right mapping using the corresponding adapter.
 
-Of course, a more complex page directories will force you to modify the `manifestTransforms` entry logic, see the `pwa-configuration.js` module in the next example using `@sveltejs/adapter-static`.
+Of course, more complex page directories will force you to modify the `manifestTransforms` entry logic. For an example, see the `pwa-configuration.js` module in the next example using `@sveltejs/adapter-static`.
 
 ### Static Adapter example
 
