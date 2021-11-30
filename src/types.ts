@@ -73,6 +73,11 @@ export interface VitePWAOptions {
    */
   manifest: Partial<ManifestOptions> | false
   /**
+   * Whether to add the `crossorigin="use-credentials"` attribute to `<link rel="manifest">`
+   * @default false
+   */
+  useCredentials?: boolean
+  /**
    * The workbox object for `generateSW`
    */
   workbox: Partial<GenerateSWOptions>

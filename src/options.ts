@@ -50,6 +50,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     base = viteConfig.base,
     includeAssets = undefined,
     includeManifestIcons = true,
+    useCredentials = false,
   } = options
 
   const basePath = resolveBathPath(base)
@@ -122,6 +123,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     strategies,
     workbox,
     manifest,
+    useCredentials,
     injectManifest,
     scope,
     minify,
