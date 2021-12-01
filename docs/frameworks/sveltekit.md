@@ -53,13 +53,11 @@ The biggest difference between this plugin and the SvelteKit service worker modu
 
 ### Workbox manifestTransforms
 
-Before generating the service worker, `manifestTransforms` entry will allow us to transform the resulting precache manifest entries.
+We must provide a list of URLs for the service worker to load and precache. We provide these to workbox using the [the `manifestTransforms` option](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.ManifestTransform) under `workbox` or [`injectManifest`](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.injectManifest). The [manifest entries](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.ManifestEntry) provided via this option will contain all the assets specified in the `srcDir` option.
 
-The entries provided in the `manifestTransforms` option (under `workbox` or `injectManifest`) will contain all the assets specified in the `srcDir` option with the URL and their corresponding revision calculated (e.g. to include the hash).
+Since `SvelteKit` outputs an `.html` page for each pre-rendered page, you can use `manifestTransforms` to generate the URL from the prerendered HTML file path. For an example, see the `pwa-configuration.js` module in the next example using `@sveltejs/adapter-static`.
 
-Since `SvelteKit` uses the name of the directory (for simple cases) for all the generated pages, you can use `manifestTransforms` to modify the URL for all pages generated. You must add the logic to do the right mapping for the corresponding adapter.
-
-Of course, more complex page directories will force you to modify the `manifestTransforms` entry logic. For an example, see the `pwa-configuration.js` module in the next example using `@sveltejs/adapter-static`.
+Pages which are not prerendered or are generated with a unique adapter will need to be handled separately and the `manifestTransforms` logic will need to be modified accordingly.
 
 ### Static Adapter example
 
