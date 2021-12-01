@@ -33,22 +33,23 @@ const pwaOptions = {
 }
 
 const replaceOptions = { __DATE__: new Date().toISOString() }
+const claims = process.env.CLAIMS === 'true'
+const reload = process.env.RELOAD_SW === 'true'
 
 if (process.env.SW === 'true') {
   pwaOptions.srcDir = 'src'
-  pwaOptions.filename = 'sw.ts'
+  pwaOptions.filename = claims ? 'claims-sw.ts' : 'prompt-sw.ts'
   pwaOptions.strategies = 'injectManifest'
   pwaOptions.manifest.name = 'PWA Inject Manifest'
   pwaOptions.manifest.short_name = 'PWA Inject'
 }
-else {
-  if (process.env.CLAIMS === 'true')
-    pwaOptions.registerType = 'autoUpdate'
 
-  if (process.env.RELOAD_SW === 'true') {
-    // @ts-ignore
-    replaceOptions.__RELOAD_SW__ = 'true'
-  }
+if (claims)
+  pwaOptions.registerType = 'autoUpdate'
+
+if (reload) {
+  // @ts-ignore
+  replaceOptions.__RELOAD_SW__ = 'true'
 }
 
 export default defineConfig({

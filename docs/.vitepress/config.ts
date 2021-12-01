@@ -1,4 +1,4 @@
-require('esbuild-register')
+import type { UserConfig } from 'vitepress'
 
 const Guide = [
   {
@@ -84,6 +84,10 @@ const Frameworks = [
     link: '/frameworks/svelte',
   },
   {
+    text: 'SvelteKit',
+    link: '/frameworks/sveltekit',
+  },
+  {
     text: 'SolidJS',
     link: '/frameworks/solidjs',
   },
@@ -113,6 +117,10 @@ const Examples = [
   {
     text: 'Svelte',
     link: '/examples/svelte',
+  },
+  {
+    text: 'SvelteKit',
+    link: '/examples/sveltekit',
   },
   {
     text: 'SolidJS',
@@ -147,45 +155,41 @@ const slidebars = [
   {
     text: 'Guide',
     children: Guide.map((e) => {
-      e.useLinkText = `${e.text} | Guide`
+      (e as any).useLinkText = `${e.text} | Guide`
       return e
     }),
   },
   {
     text: 'Frameworks',
     children: Frameworks.map((e) => {
-      e.useLinkText = `${e.text} | Frameworks`
+      (e as any).useLinkText = `${e.text} | Frameworks`
       return e
     }),
   },
   {
     text: 'Examples',
     children: Examples.map((e) => {
-      e.useLinkText = `${e.text} | Examples`
+      (e as any).useLinkText = `${e.text} | Examples`
       return e
     }),
   },
   {
     text: 'Deployment',
     children: Deployment.map((e) => {
-      e.useLinkText = `${e.text} | Deployment`
+      (e as any).useLinkText = `${e.text} | Deployment`
       return e
     }),
   },
   {
     text: 'Workbox',
     children: Workbox.map((e) => {
-      e.useLinkText = `${e.text} | Workbox`
+      (e as any).useLinkText = `${e.text} | Workbox`
       return e
     }),
   },
 ]
 
-
-/**
- * @type {import('vitepress').UserConfig}
- */
-const config = {
+const config: UserConfig = {
   title: 'Vite Plugin PWA',
   description: 'Zero-config PWA Framework-agnostic Plugin for Vite',
   lang: 'en-US',
@@ -195,7 +199,7 @@ const config = {
     ['link', { rel: 'alternate icon', href: '/favicon.ico', type: 'image/png', sizes: '16x16' }],
     ['link', { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#ffffff' }],
     ['meta', { name: 'author', content: 'Anthony Fu' }],
-    ['meta', { name: 'keywords', content: 'react, pwa, vue, preact, svelte, workbox, solidjs, vite, vite-plugin' }],
+    ['meta', { name: 'keywords', content: 'react, pwa, vue, vitepress, preact, svelte, sveltekit, workbox, solidjs, vite, vite-plugin' }],
     ['meta', { property: 'og:title', content: 'Vite Plugin PWA' }],
     ['meta', { property: 'og:description', content: 'Zero-config PWA Framework-agnostic Plugin for Vite' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
@@ -252,4 +256,4 @@ const config = {
   },
 }
 
-module.exports = config
+export default config

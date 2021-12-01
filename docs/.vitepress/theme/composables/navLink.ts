@@ -2,11 +2,9 @@ import { computed, Ref } from 'vue'
 import { useRoute, withBase } from 'vitepress'
 import type { DefaultTheme } from '../config'
 import { isExternal as isExternalCheck } from '../utils'
-// import { useUrl } from './url'
 
 export function useNavLink(item: Ref<DefaultTheme.NavItemWithLink>) {
   const route = useRoute()
-  // const { withBase } = useUrl()
 
   const isExternal = isExternalCheck(item.value.link)
 
@@ -24,6 +22,12 @@ export function useNavLink(item: Ref<DefaultTheme.NavItemWithLink>) {
         = itemPath === '/'
           ? itemPath === routePath
           : routePath.startsWith(itemPath)
+      // fix /frameworks/sveltekit and /frameworks/svelte
+      if (routePath === '/frameworks/sveltekit' && itemPath === '/frameworks/svelte' && active)
+        active = false
+      // fix /examples/sveltekit and /examples/svelte
+      if (routePath === '/examples/sveltekit' && itemPath === '/examples/svelte' && active)
+        active = false
     }
 
     return {

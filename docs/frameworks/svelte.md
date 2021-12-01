@@ -4,9 +4,6 @@ title: Svelte | Frameworks
 
 # Svelte
 
-If you are using [Svelte Kit](https://kit.svelte.dev) <outbound-link /> you should use its 
-[service worker module](https://kit.svelte.dev/docs#modules-$service-worker) <outbound-link />.
-
 You can use the built-in `Vite` virtual module `virtual:pwa-register/svelte` for `Svelte` which will return
 `writable` stores (`Writable<boolean>`) for `offlineReady` and `needRefresh`.
 

@@ -9,6 +9,9 @@
     "start-claims": "npm run run-build-claims && npm run serve",
     "start-claims-reloadsw": "npm run run-build-reloadsw-claims && npm run serve",
     "start-sw": "npm run run-build-sw && npm run serve",
+    "start-sw-reloadsw": "npm run run-build-sw-reloadsw && npm run serve",
+    "start-sw-claims": "npm run run-build-sw-claims && npm run serve",
+    "start-sw-claims-reloadsw": "npm run run-build-sw-reloadsw-claims && npm run serve",
     "dev": "cross-env DEBUG=vite-plugin-pwa:* vite",
     "build": "routify -b && cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
     "run-build": "routify -b && cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
@@ -16,6 +19,9 @@
     "run-build-claims": "routify -b && cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true CLAIMS=true vite build",
     "run-build-reloadsw-claims": "routify -b && cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true CLAIMS=true RELOAD_SW=true vite build",
     "run-build-sw": "rimraf dist && cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true SW=true vite build",
+    "run-build-sw-reloadsw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true RELOAD_SW=true vite build",
+    "run-build-sw-claims": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true CLAIMS=true SW=true vite build",
+    "run-build-sw-reloadsw-claims": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true CLAIMS=true RELOAD_SW=true SW=true vite build",
     "serve": "serve dist"
   },
   "devDependencies": {
@@ -33,6 +39,7 @@
     "svelte-preprocess": "^4.9.8",
     "typescript": "^4.4.4",
     "vite": "^2.6.14",
+    "workbox-core": "^6.4.0",
     "workbox-precaching": "^6.4.0",
     "workbox-routing": "^6.4.0",
     "vite-plugin-pwa": "workspace:*"

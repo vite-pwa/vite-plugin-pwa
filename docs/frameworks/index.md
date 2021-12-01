@@ -113,6 +113,9 @@ This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.o
 <md-list-anchor href="/frameworks/svelte.html">
   <template #link>Svelte</template>
 </md-list-anchor>
+<md-list-anchor href="/frameworks/sveltekit.html">
+  <template #link>SvelteKit</template>
+</md-list-anchor>
 <md-list-anchor href="/frameworks/solidjs.html">
   <template #link>SolidJS</template>
 </md-list-anchor>
