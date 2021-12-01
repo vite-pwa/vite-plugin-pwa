@@ -140,6 +140,10 @@ export interface ManifestOptions {
    */
   scope: string
   /**
+   * A string that represents the identity for the application
+   */
+  id: string
+  /**
    * Defines the default orientation for all the website's top-level
    */
   orientation: 'any' | 'natural' | 'landscape' | 'landscape-primary' | 'landscape-secondary' | 'portrait' | 'portrait-primary' | 'portrait-secondary'
