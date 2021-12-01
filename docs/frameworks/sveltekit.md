@@ -159,10 +159,16 @@ const pwaConfiguration = {
 			).map((e) => {
 				let url = e.url;
 				if (url && url.endsWith('.html')) {
-					if (url.startsWith('/'))
+					if (url.startsWith('/')) {
 						url = url.slice(1)
-					
-					e.url = url === 'index.html' ? '/' : `/${url.substring(0, url.lastIndexOf('/'))}`
+					}
+					if (url === 'index.html') {
+						e.url = url === 'index.html' ? '/'
+					} else if (url.endsWith('index.html')) {
+						e.url = `/${url.substring(0, url.lastIndexOf('/'))}`
+					} else if (url.endsWith('.html')) {
+						e.url = `/${url.substring(0, url.length - '.html'.length)}`
+					}
 				}
 				
 				return e
