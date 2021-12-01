@@ -161,7 +161,7 @@ const pwaConfiguration = {
 						url = url.slice(1)
 					}
 					if (url === 'index.html') {
-						e.url = url === 'index.html' ? '/'
+						e.url = '/'
 					} else if (url.endsWith('index.html')) {
 						e.url = `/${url.substring(0, url.lastIndexOf('/'))}`
 					} else if (url.endsWith('.html')) {
