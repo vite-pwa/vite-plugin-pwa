@@ -140,7 +140,7 @@ export interface ManifestOptions {
    */
   scope: string
   /**
-   * a string that represents the identity for the application
+   * A string that represents the identity for the application
    */
   id: string
   /**
