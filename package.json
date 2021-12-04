@@ -8,8 +8,15 @@
     "url": "https://github.com/antfu/vite-plugin-pwa"
   },
   "keywords": [
+    "react",
     "pwa",
+    "vue",
+    "vitepress",
+    "preact",
+    "svelte",
+    "sveltekit",
     "workbox",
+    "solidjs",
     "vite",
     "vite-plugin"
   ],
