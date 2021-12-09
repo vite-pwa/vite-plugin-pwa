@@ -28,17 +28,17 @@
     "cross-env": "^7.0.3",
     "https-localhost": "^4.7.0",
     "rimraf": "^3.0.2",
-    "typescript": "^4.4.4",
-    "vite": "^2.6.14",
+    "typescript": "^4.5.2",
+    "vite": "^2.7.1",
     "vite-plugin-pwa": "workspace:*",
-    "vite-plugin-solid": "^2.1.2",
-    "workbox-core": "^6.4.0",
-    "workbox-precaching": "^6.4.0",
-    "workbox-routing": "^6.4.0",
-    "workbox-window": "^6.4.0"
+    "vite-plugin-solid": "^2.1.3",
+    "workbox-core": "^6.4.2",
+    "workbox-precaching": "^6.4.2",
+    "workbox-routing": "^6.4.2",
+    "workbox-window": "^6.4.2"
   },
   "dependencies": {
-    "solid-app-router": "^0.1.11",
-    "solid-js": "^1.2.3"
+    "solid-app-router": "^0.1.14",
+    "solid-js": "^1.2.6"
   }
 }

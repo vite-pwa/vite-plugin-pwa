@@ -75,6 +75,7 @@ export default defineConfig({
         'prompt-update.png',
       ],
       manifest: {
+        id: '/',
         name: 'Vite Plugin PWA',
         short_name: 'PWA for Vite',
         description: 'Zero-config PWA for Vite',
