@@ -51,34 +51,33 @@
     "workbox-window": "^6.4.0"
   },
   "dependencies": {
-    "chalk": "^4.1.2",
-    "debug": "^4.3.2",
+    "debug": "^4.3.3",
     "fast-glob": "^3.2.7",
     "pretty-bytes": "^5.6.0",
-    "rollup": "^2.60.0",
-    "workbox-build": "^6.4.0",
-    "workbox-window": "^6.4.0"
+    "rollup": "^2.60.2",
+    "workbox-build": "^6.4.2",
+    "workbox-window": "^6.4.2"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.10.0",
-    "@antfu/ni": "^0.10.2",
+    "@antfu/eslint-config": "^0.12.2",
+    "@antfu/ni": "^0.11.1",
     "@types/debug": "^4.1.7",
-    "@types/prompts": "^2.0.14",
-    "@types/react": "^17.0.34",
+    "@types/prompts": "^2.4.0",
+    "@types/react": "^17.0.37",
     "@types/workbox-build": "^5.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.3.1",
-    "eslint": "^8.2.0",
-    "esno": "^0.12.0",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "eslint": "^8.4.1",
+    "esno": "^0.12.1",
     "kolorist": "^1.5.0",
-    "preact": "^10.5.15",
+    "preact": "^10.6.3",
     "prompts": "^2.4.2",
     "react": "^17.0.2",
-    "rollup": "^2.60.0",
-    "solid-js": "^1.2.3",
-    "svelte": "^3.44.1",
-    "tsup": "^5.7.0",
-    "typescript": "^4.4.4",
-    "vite": "^2.6.14",
-    "vue": "^3.2.21"
+    "rollup": "^2.60.2",
+    "solid-js": "^1.2.6",
+    "svelte": "^3.44.2",
+    "tsup": "^5.10.3",
+    "typescript": "^4.5.2",
+    "vite": "^2.7.1",
+    "vue": "^3.2.24"
   }
 }

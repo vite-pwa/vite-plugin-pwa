@@ -2,7 +2,7 @@
 import { relative } from 'path'
 import { BuildResult } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
-import { cyan, dim, green, magenta, yellow } from 'chalk'
+import { cyan, dim, green, magenta, yellow } from 'kolorist'
 import { version } from '../package.json'
 
 export function logWorkboxResult(strategy: string, buildResult: BuildResult, viteOptions: ResolvedConfig) {

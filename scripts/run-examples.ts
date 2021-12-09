@@ -103,7 +103,7 @@ async function init() {
     const onCancel = () => {
       throw new Error(`${red('✖')} Operation cancelled`)
     }
-    const { framework: useFramework }: { framework: Framework } = await prompts(
+    const { framework } = await prompts(
       {
         type: 'select',
         name: 'framework',
@@ -113,13 +113,14 @@ async function init() {
           const frameworkColor = framework.color
           return {
             title: frameworkColor(framework.name),
-            value: framework,
+            value: framework.name,
           }
         }),
       },
       { onCancel },
     )
-    const { strategy: useStrategy }: { strategy: Strategy } = await prompts(
+    const useFramework = FRAMEWORKS.find(f => f.name === framework)!
+    const { strategy } = await prompts(
       {
         type: 'select',
         name: 'strategy',
@@ -129,13 +130,14 @@ async function init() {
           const strategyColor = strategy.color
           return {
             title: strategyColor(strategy.name),
-            value: strategy,
+            value: strategy.name,
           }
         }),
       },
       { onCancel },
     )
-    const { behavior: useBehavior }: { behavior: Behavior } = await prompts(
+    const useStrategy = STRATEGIES.find(e => e.name === strategy)!
+    const { behavior } = await prompts(
       {
         type: 'select',
         name: 'behavior',
@@ -145,12 +147,13 @@ async function init() {
           const behaviorColor = behavior.color
           return {
             title: behaviorColor(behavior.display),
-            value: behavior,
+            value: behavior.name,
           }
         }),
       },
       { onCancel },
     )
+    const useBehavior = BEHAVIORS.find(b => b.name === behavior)!
     const { reloadSW: useReloadSW }: { reloadSW: boolean } = await prompts(
       [
         {
