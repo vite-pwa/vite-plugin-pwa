@@ -51,6 +51,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     includeAssets = undefined,
     includeManifestIcons = true,
     useCredentials = false,
+    disable = false,
   } = options
 
   const basePath = resolveBathPath(base)
@@ -129,6 +130,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     minify,
     includeAssets,
     includeManifestIcons,
+    disable,
   }
 
   await configureStaticAssets(resolvedVitePWAOptions, viteConfig)

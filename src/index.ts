@@ -15,6 +15,9 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   let useImportRegister = false
 
   async function _generateSW() {
+    if (options.disable)
+      return
+
     if (options.strategies === 'injectManifest')
       await generateInjectManifest(options, viteConfig)
     else
@@ -22,6 +25,9 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   }
 
   function _generateBundle(bundle: OutputBundle = {}) {
+    if (options.disable)
+      return
+
     if (options.manifest) {
       bundle[FILE_MANIFEST] = {
         isAsset: true,
@@ -60,14 +66,14 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       transformIndexHtml: {
         enforce: 'post',
         transform(html) {
-          return injectServiceWorker(html, options)
+          return options.disable ? html : injectServiceWorker(html, options)
         },
       },
       generateBundle(_, bundle) {
         _generateBundle(bundle)
       },
       async closeBundle() {
-        if (!viteConfig.build.ssr)
+        if (!viteConfig.build.ssr && !options.disable)
           await _generateSW()
       },
       async buildEnd(error) {
@@ -75,9 +81,15 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
           throw error
       },
       api: <VitePluginPWAAPI>{
+        get disabled() {
+          return options.disable
+        },
         generateBundle: _generateBundle,
         generateSW: _generateSW,
         extendManifestEntries(fn: ExtendManifestEntriesHook) {
+          if (options.disable)
+            return
+
           const configField = options.strategies === 'generateSW' ? 'workbox' : 'injectManifest'
           const result = fn(options[configField].additionalManifestEntries || [])
 
@@ -105,7 +117,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
           useImportRegister = true
           return generateRegisterSW(
             options,
-            viteConfig.command === 'build' ? 'build' : 'dev',
+            !options.disable && viteConfig.command === 'build' ? 'build' : 'dev',
             VIRTUAL_MODULES_MAP[id],
           )
         }
