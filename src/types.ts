@@ -103,8 +103,10 @@ export interface VitePWAOptions {
    * By default the icons listed on `manifest` option will be included
    * on the service worker *precache* if present under Vite's `publicDir`
    * option directory.
+   *
+   * @default true
    */
-  includeManifestIcons: true
+  includeManifestIcons: boolean
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
