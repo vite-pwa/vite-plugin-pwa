@@ -7,8 +7,7 @@ import {
   blue,
   magenta,
   red,
-  bgWhite,
-  black,
+  inverse,
 } from 'kolorist'
 
 type Color = (str: string | number) => string
@@ -109,7 +108,7 @@ async function init() {
       {
         type: 'select',
         name: 'framework',
-        message: bgWhite(black('Select a framework:')),
+        message: inverse('Select a framework:'),
         initial: 0,
         choices: FRAMEWORKS.map((framework) => {
           const frameworkColor = framework.color
@@ -126,7 +125,7 @@ async function init() {
       {
         type: 'select',
         name: 'strategy',
-        message: bgWhite(black('Select a strategy:')),
+        message: inverse('Select a strategy:'),
         initial: 0,
         choices: useFramework.strategies.map((strategy) => {
           const strategyColor = strategy.color
@@ -143,7 +142,7 @@ async function init() {
       {
         type: 'select',
         name: 'behavior',
-        message: bgWhite(black('Select a behavior:')),
+        message: inverse('Select a behavior:'),
         initial: 0,
         choices: useStrategy.behaviors.map((behavior) => {
           const behaviorColor = behavior.color
@@ -161,7 +160,7 @@ async function init() {
         {
           type: 'toggle',
           name: 'reloadSW',
-          message: bgWhite(black('Enable periodic SW updates?')),
+          message: inverse('Enable periodic SW updates?'),
           initial: false,
           active: 'yes',
           inactive: 'no',
