@@ -100,11 +100,19 @@ export interface VitePWAOptions {
    */
   includeAssets: string | string[] | undefined
   /**
-   * By default the icons listed on `manifest` option will be included
+   * By default, the icons listed on `manifest` option will be included
    * on the service worker *precache* if present under Vite's `publicDir`
    * option directory.
+   *
+   * @default true
    */
-  includeManifestIcons: true
+  includeManifestIcons: boolean
+  /**
+   * Disable service worker registration and generation on `build`?
+   *
+   * @default false
+   */
+  disable: boolean
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
@@ -221,6 +229,10 @@ export interface ManifestOptions {
 }
 
 export interface VitePluginPWAAPI {
+  /**
+   * Is the plugin disabled?
+   */
+  disabled: boolean
   extendManifestEntries(fn: ExtendManifestEntriesHook): void
   /*
    * Explicitly generate the manifests.
