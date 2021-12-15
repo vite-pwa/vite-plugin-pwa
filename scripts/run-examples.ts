@@ -7,7 +7,7 @@ import {
   blue,
   magenta,
   red,
-  inverse,
+  bold,
 } from 'kolorist'
 
 type Color = (str: string | number) => string
@@ -22,14 +22,12 @@ type Strategy = {
   name: string
   display: string
   color: Color
-  behaviors: Behavior[]
 }
 
 type Framework = {
   name: string
   color: Color
   dir: string
-  strategies: Strategy[]
 }
 
 const BEHAVIORS: Behavior[] = [
@@ -50,13 +48,11 @@ const STRATEGIES: Strategy[] = [
     name: 'generateSW',
     display: 'generateSW',
     color: green,
-    behaviors: BEHAVIORS,
   },
   {
     name: 'injectManifest',
     display: 'injectManifest',
     color: blue,
-    behaviors: BEHAVIORS,
   },
 ]
 
@@ -65,114 +61,106 @@ const FRAMEWORKS: Framework[] = [
     name: 'vue',
     color: green,
     dir: 'vue-router',
-    strategies: STRATEGIES,
   },
   {
     name: 'react',
     color: cyan,
     dir: 'react-router',
-    strategies: STRATEGIES,
   },
   {
     name: 'preact',
     color: magenta,
     dir: 'preact-router',
-    strategies: STRATEGIES,
   },
   {
     name: 'svelte',
     color: red,
     dir: 'svelte-routify',
-    strategies: STRATEGIES,
   },
   {
     name: 'sveltekit',
     color: blue,
     dir: 'sveltekit-pwa',
-    strategies: STRATEGIES,
   },
   {
     name: 'solid',
     color: yellow,
     dir: 'solid-router',
-    strategies: STRATEGIES,
   },
 ]
 
+type PromptResult = {
+  framework: Framework
+  strategy: Strategy
+  behavior: Behavior
+  reloadSW: boolean
+}
+
 async function init() {
   try {
-    const onCancel = () => {
-      throw new Error(`${red('✖')} Operation cancelled`)
-    }
-    const { framework } = await prompts(
+    const { framework, strategy, behavior, reloadSW }: PromptResult = await prompts([
       {
         type: 'select',
         name: 'framework',
-        message: inverse('Select a framework:'),
+        message: bold(green('Select a framework:')),
         initial: 0,
+        // @ts-ignore
         choices: FRAMEWORKS.map((framework) => {
           const frameworkColor = framework.color
           return {
             title: frameworkColor(framework.name),
-            value: framework.name,
+            value: framework,
           }
         }),
       },
-      { onCancel },
-    )
-    const useFramework = FRAMEWORKS.find(f => f.name === framework)!
-    const { strategy } = await prompts(
       {
         type: 'select',
         name: 'strategy',
-        message: inverse('Select a strategy:'),
+        message: bold(green('Select a strategy:')),
         initial: 0,
-        choices: useFramework.strategies.map((strategy) => {
+        // @ts-ignore
+        choices: STRATEGIES.map((strategy) => {
           const strategyColor = strategy.color
           return {
             title: strategyColor(strategy.name),
-            value: strategy.name,
+            value: strategy,
           }
         }),
       },
-      { onCancel },
-    )
-    const useStrategy = STRATEGIES.find(e => e.name === strategy)!
-    const { behavior } = await prompts(
       {
         type: 'select',
         name: 'behavior',
-        message: inverse('Select a behavior:'),
+        message: bold(green('Select a behavior:')),
         initial: 0,
-        choices: useStrategy.behaviors.map((behavior) => {
+        // @ts-ignore
+        choices: BEHAVIORS.map((behavior) => {
           const behaviorColor = behavior.color
           return {
             title: behaviorColor(behavior.display),
-            value: behavior.name,
+            value: behavior,
           }
         }),
       },
-      { onCancel },
-    )
-    const useBehavior = BEHAVIORS.find(b => b.name === behavior)!
-    const { reloadSW: useReloadSW }: { reloadSW: boolean } = await prompts(
-      [
-        {
-          type: 'toggle',
-          name: 'reloadSW',
-          message: inverse('Enable periodic SW updates?'),
-          initial: false,
-          active: 'yes',
-          inactive: 'no',
-        },
-      ],
-      { onCancel },
-    )
+      {
+        type: 'toggle',
+        name: 'reloadSW',
+        message: bold(green('Enable periodic SW updates?')),
+        initial: false,
+        active: 'yes',
+        inactive: 'no',
+      },
+    ],
+    {
+      onCancel: () => {
+        throw new Error(`${red('✖')} Operation cancelled`)
+      },
+    })
+
     let script = ''
-    if (useStrategy.name === 'injectManifest')
+    if (strategy.name === 'injectManifest')
       script = '-sw'
 
-    switch (useBehavior.name) {
+    switch (behavior.name) {
       case 'prompt':
         break
       case 'claims':
@@ -181,12 +169,12 @@ async function init() {
         break
     }
 
-    if (useReloadSW)
+    if (reloadSW)
       script += '-reloadsw'
 
     execSync(`pnpm run start${script}`, {
       stdio: 'inherit',
-      cwd: `examples/${useFramework.dir}`,
+      cwd: `examples/${framework.dir}`,
     })
   }
   catch (cancelled) {
