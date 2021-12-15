@@ -7,7 +7,7 @@ import {
   blue,
   magenta,
   red,
-  bold,
+  reset,
 } from 'kolorist'
 
 type Color = (str: string | number) => string
@@ -102,7 +102,7 @@ async function init() {
       {
         type: 'select',
         name: 'framework',
-        message: bold(green('Select a framework:')),
+        message: reset('Select a framework:'),
         initial: 0,
         // @ts-ignore
         choices: FRAMEWORKS.map((framework) => {
@@ -116,7 +116,7 @@ async function init() {
       {
         type: 'select',
         name: 'strategy',
-        message: bold(green('Select a strategy:')),
+        message: reset('Select a strategy:'),
         initial: 0,
         // @ts-ignore
         choices: STRATEGIES.map((strategy) => {
@@ -130,7 +130,7 @@ async function init() {
       {
         type: 'select',
         name: 'behavior',
-        message: bold(green('Select a behavior:')),
+        message: reset('Select a behavior:'),
         initial: 0,
         // @ts-ignore
         choices: BEHAVIORS.map((behavior) => {
@@ -144,7 +144,7 @@ async function init() {
       {
         type: 'toggle',
         name: 'reloadSW',
-        message: bold(green('Enable periodic SW updates?')),
+        message: reset('Enable periodic SW updates?'),
         initial: false,
         active: 'yes',
         inactive: 'no',
