@@ -29,7 +29,7 @@ types {
 You can validate the setting by checking the HTTP headers once the app is deployed
 
 ```shell script
-curl -s -I -X GET https://yourserver/manifest.webmanifest | grep content-type
+curl -s -I -X GET https://yourserver/manifest.webmanifest | grep content-type -i
 ```
 
 and check that the result is `content-type: application/manifest+json`.
