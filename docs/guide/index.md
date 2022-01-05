@@ -33,7 +33,7 @@ Edit your `vite.config.ts` file to add `Vite Plugin PWA`:
 
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
-export const defineConfig({
+export default defineConfig({
   plugins: [
     VitePWA({})
   ]    

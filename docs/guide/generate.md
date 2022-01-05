@@ -11,7 +11,7 @@ Edit your `vite.config.ts` file to add `Vite Plugin PWA Plugin`:
 
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
-export const defineConfig({
+export default defineConfig({
   plugins: [
     VitePWA({
       includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],  
