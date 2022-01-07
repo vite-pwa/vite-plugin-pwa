@@ -9,7 +9,7 @@ this code on your plugin configuration:
 
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
-export const defineConfig({
+export default defineConfig({
   plugins: [
     VitePWA({
       workbox: {
