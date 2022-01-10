@@ -278,8 +278,6 @@ export type DevOptions = {
    * If you use `navigateFallback` with `injectManifest` strategy, configure the corresponding `url`.
    *
    * **WARNING**: this option will only be used when using `injectManifest` strategy.
-   *
-   * @default 'index.html'
    */
   navigateFallback?: string
 }
