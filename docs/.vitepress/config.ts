@@ -30,6 +30,10 @@ const Guide = [
     link: '/guide/periodic-sw-updates'
   },
   {
+    text: 'Development',
+    link: '/guide/development',
+  },
+  {
     text: 'Testing Service Worker',
     link: '/guide/testing',
   },

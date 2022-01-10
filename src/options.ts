@@ -52,6 +52,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     includeManifestIcons = true,
     useCredentials = false,
     disable = false,
+    devOptions = { enabled: false, type: 'classic' },
   } = options
 
   const basePath = resolveBathPath(base)
@@ -111,6 +112,16 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     workbox.sourcemap = sourcemap === true || sourcemap === 'inline' || sourcemap === 'hidden'
   }
 
+  if (devOptions.enabled && viteConfig.command === 'serve') {
+    // `generateSW` will work only with `type: 'classic'`
+    if (strategies === 'generateSW')
+      devOptions.type = 'classic'
+  }
+  else {
+    devOptions.enabled = false
+    devOptions.type = 'classic'
+  }
+
   const resolvedVitePWAOptions: ResolvedVitePWAOptions = {
     base: basePath,
     mode,
@@ -131,6 +142,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     includeAssets,
     includeManifestIcons,
     disable,
+    devOptions,
   }
 
   await configureStaticAssets(resolvedVitePWAOptions, viteConfig)

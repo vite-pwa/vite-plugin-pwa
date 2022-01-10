@@ -13,3 +13,7 @@ export function resolveBathPath(base: string) {
 export function isAbsolute(url: string) {
   return url.match(/^(?:[a-z]+:)?\/\//i)
 }
+
+export function normalizePath(path: string) {
+  return path.replace(/\\/g, '/')
+}

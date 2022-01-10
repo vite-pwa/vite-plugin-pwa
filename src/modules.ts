@@ -1,6 +1,6 @@
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
-import { generateSW, injectManifest } from 'workbox-build'
+import { BuildResult, injectManifest, generateSW } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
 import Rollup from 'rollup'
 import type { ResolvedVitePWAOptions } from './types'
@@ -16,13 +16,16 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
     .replace('__SW__', sw)
     .replace('__SCOPE__', scope)
     .replace('__SW_AUTO_UPDATE__', `${options.registerType === 'autoUpdate'}`)
+    .replace('__TYPE__', `${options.devOptions.enabled ? options.devOptions.type : 'classic'}`)
 }
 
-export async function generateServiceWorker(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig) {
+export async function generateServiceWorker(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig): Promise<BuildResult> {
   // generate the service worker
   const buildResult = await generateSW(options.workbox)
   // log workbox result
   logWorkboxResult('generateSW', buildResult, viteOptions)
+
+  return buildResult
 }
 
 export async function generateInjectManifest(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig) {

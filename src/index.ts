@@ -8,6 +8,7 @@ import { ExtendManifestEntriesHook, ResolvedVitePWAOptions, VitePluginPWAAPI, Vi
 import { resolveOptions } from './options'
 import { generateWebManifestFile } from './assets'
 import { FILE_MANIFEST, FILE_SW_REGISTER, VIRTUAL_MODULES, VIRTUAL_MODULES_MAP, VIRTUAL_MODULES_RESOLVE_PREFIX } from './constants'
+import { loadDev, resolveDevId, swDevOptions } from './dev'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   let viteConfig: ResolvedConfig
@@ -114,13 +115,37 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
           return
 
         if (VIRTUAL_MODULES.includes(id)) {
-          useImportRegister = true
-          return generateRegisterSW(
-            options,
-            !options.disable && viteConfig.command === 'build' ? 'build' : 'dev',
-            VIRTUAL_MODULES_MAP[id],
-          )
+          if (viteConfig.command === 'serve' && options.devOptions.enabled) {
+            return generateRegisterSW(
+              { ...options, filename: swDevOptions.swUrl },
+              'build',
+              VIRTUAL_MODULES_MAP[id],
+            )
+          }
+          else {
+            useImportRegister = true
+            return generateRegisterSW(
+              options,
+              !options.disable && viteConfig.command === 'build' ? 'build' : 'dev',
+              VIRTUAL_MODULES_MAP[id],
+            )
+          }
         }
+      },
+    },
+    {
+      name: 'vite-plugin-pwa:dev-sw',
+      apply: 'serve',
+      enforce: 'pre',
+      async configResolved(config) {
+        viteConfig = config
+        options = await resolveOptions(userOptions, viteConfig)
+      },
+      resolveId(id) {
+        return resolveDevId(id, options)
+      },
+      async load(id) {
+        return await loadDev(id, options, viteConfig)
       },
     },
   ]
