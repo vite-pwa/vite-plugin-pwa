@@ -44,9 +44,9 @@ the code for you).
 option is `generateWS` and `injectManifest` respectively.
 
 When you configure `strategies: 'generateWS'` option (it is the default value) on your `vite.config.ts` file, then the 
-plugin invoke the workbox `generateWS` method: the options passed to the `workbox` method will be the provided on 
-the plugin configuration.
+plugin invoke the workbox `generateWS` method: the options passed to the `workbox-build` method will be the provided on 
+`workbox` option of the plugin configuration.
 
 When you configure `strategies: 'injectManifest'` plugin option on your `vite.config.ts` file, the plugin will first 
 build your custom service worker via `rollup` and then, with previous build result will call to workbox `injectManifest` 
-method: the options passed to the `workbox` method will be the provided on the plugin configuration.
+method: the options passed to the `workbox-build` method will be the provided on `injectManifest` option of the plugin configuration.
