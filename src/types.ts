@@ -267,7 +267,7 @@ export type DevOptions = {
    */
   type?: WorkerType
   /**
-   * This option will enable you to not use the `runtimeConfig` configured on `workbox.runtimeConfig` option.
+   * This option will enable you to not use the `runtimeConfig` configured on `workbox.runtimeConfig` plugin option.
    *
    * **WARNING**: this option will only be used when using `generateSW` strategy.
    *
@@ -275,7 +275,8 @@ export type DevOptions = {
    */
   disableRuntimeConfig?: boolean
   /**
-   * If you use `navigateFallback` with `injectManifest` strategy, configure the corresponding `url`.
+   * This options will allow you to configure the `registerRoute` when using `registerRoute` for `offline` support:,
+   * configure here the corresponding `url`, for example `navigateFallback: 'index.html'`.
    *
    * **WARNING**: this option will only be used when using `injectManifest` strategy.
    */
