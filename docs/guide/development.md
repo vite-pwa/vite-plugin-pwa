@@ -88,15 +88,34 @@ You can use `type: 'module'` when registering the service worker (right now only
 
 > **Warning**: when building the application, the PWA Plugin will always register your service worker with `type: 'classic'` for compatibility with all browsers.
 
-When using this strategy, the plugin will delegate the service worker compilation to `Vite`, so if you're using `import` 
+When using this strategy, the plugin will delegate the service worker compilation to `Vite`, so if you're using `import` statements 
 instead `importScripts` in your custom service worker, you should configure `type: 'module'` on development options.
 
 If you are using `registerRoute` in your custom service worker you should add `navigateFallback` on development options,
 the PWA plugin will include it on `self.__WB_MANIFEST`.
 
-You should not use `HMR` on your custom service worker, since we cannot use yet dynamic imports on service workers: `import.meta.hot`.
+You should not use `HMR (Hot Module Replacement)` on your custom service worker, since we cannot use yet dynamic imports on service workers: `import.meta.hot`.
 
-When you change your service worker, `Vite` will force a full reload, since we're using `workbox-window` to register it 
+If you register your custom service worker (not using PWA virtual module and configuring `injectRegister: false` or `injectRegister: null`), use the following code (remember also to add `scope` option if necessary):
+```js
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register(
+    import.meta.env.MODE === 'production' ? '/sw.js' : '/dev-sw.js?dev-sw'
+  );
+}
+```
+
+If you are also using `import` statements instead `importScripts`, use the following code (remember also to add the `scope` option if necessary):
+```ts
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register(
+    import.meta.env.MODE === 'production' ? '/sw.js' : '/dev-sw.js?dev-sw',
+    { 'type': import.meta.env.MODE === 'production' ? 'classic' : 'module' }
+  );
+}
+```
+
+When you change your service worker source code, `Vite` will force a full reload, since we're using `workbox-window` to register it 
 (by default, you can register it manually) you may have some problems with the service worker events:
 
 <HeuristicWorkboxWindow />
