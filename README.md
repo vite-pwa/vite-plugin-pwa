@@ -39,6 +39,7 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 - 💬 **Prompt for new content**: built-in support for Vanilla JavaScript, Vue 3, React, Svelte, SolidJS and Preact
 - ⚙️ **Stale-while-revalidate**: automatic reload when new content is available
 - ✨ **Static assets handling**: configure static assets for offline support
+- 🐞 **Development Support**: debug your custom service worker logic as you develop your application
 
 ## 📦 Install
 
