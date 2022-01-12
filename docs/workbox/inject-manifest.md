@@ -220,3 +220,5 @@ self.addEventListener('push', function(event) {
 })
 ```
 </details>
+
+You can check this awesome repo [YT Playlist Notifier](https://github.com/jeffposnick/yt-playlist-notifier) using `Server Push Notifications` and some other cool service worker capabilities from the major collaborator of [Workbox](https://developers.google.com/web/tools/workbox).
