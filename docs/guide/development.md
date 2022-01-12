@@ -62,7 +62,7 @@ export type DevOptions = {
    */
   disableRuntimeConfig?: boolean
   /**
-   * This options will allow you to configure the `registerRoute` when using `registerRoute` for `offline` support:,
+   * This option will allow you to configure the `navigateFallback` when using `registerRoute` for `offline` support:,
    * configure here the corresponding `url`, for example `navigateFallback: 'index.html'`.
    *
    * **WARNING**: this option will only be used when using `injectManifest` strategy.   
