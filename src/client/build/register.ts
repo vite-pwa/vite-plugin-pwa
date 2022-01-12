@@ -44,8 +44,8 @@ export function registerSW(options: RegisterSWOptions = {}) {
   }
 
   if ('serviceWorker' in navigator) {
-    // __SW__ and __SCOPE__ will be replaced by virtual module
-    wb = new Workbox('__SW__', { scope: '__SCOPE__' })
+    // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
+    wb = new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
 
     wb.addEventListener('activated', (event) => {
       // this will only controls the offline request.

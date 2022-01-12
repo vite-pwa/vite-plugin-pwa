@@ -113,6 +113,10 @@ export interface VitePWAOptions {
    * @default false
    */
   disable: boolean
+  /**
+   * Development options.
+   */
+  devOptions?: DevOptions
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
@@ -245,3 +249,36 @@ export interface VitePluginPWAAPI {
 }
 
 export type ExtendManifestEntriesHook = (manifestEntries: (string | ManifestEntry)[]) => (string | ManifestEntry)[] | undefined
+
+/**
+ * Development options.
+ */
+export type DevOptions = {
+  /**
+   * Should the service worker be available on development?.
+   *
+   * @default false
+   */
+  enabled?: boolean
+  /**
+   * The service worker type.
+   *
+   * @default 'classic'
+   */
+  type?: WorkerType
+  /**
+   * This option will enable you to not use the `runtimeConfig` configured on `workbox.runtimeConfig` plugin option.
+   *
+   * **WARNING**: this option will only be used when using `generateSW` strategy.
+   *
+   * @default false
+   */
+  disableRuntimeConfig?: boolean
+  /**
+   * This options will allow you to configure the `registerRoute` when using `registerRoute` for `offline` support:,
+   * configure here the corresponding `url`, for example `navigateFallback: 'index.html'`.
+   *
+   * **WARNING**: this option will only be used when using `injectManifest` strategy.
+   */
+  navigateFallback?: string
+}
