@@ -47,6 +47,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     'rollup-plugin-dynamic-import-variables',
     'vite:esbuild-transpile',
     'vite:terser',
+    'commonjs'
   ]
   const plugins = viteOptions.plugins.filter(p => includedPluginNames.includes(p.name)) as Plugin[]
   const bundle = await rollup.rollup({
