@@ -210,7 +210,7 @@ export interface ManifestOptions {
     short_name?: string
     url: string
     description?: string
-    icons?: Record<string, any>[]
+    icons: Record<string, any>[]
   }[]
   /**
    * @default []
