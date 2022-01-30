@@ -39,6 +39,8 @@ function lookupAdditionalManifestEntries(
     : workbox.additionalManifestEntries || []
 }
 
+// we need to make icons relative, we can have for example icon entries with: /pwa.png
+// fast-glob will not resolve absolute paths
 function normalizeIconPath(path: string) {
   return path.startsWith('/') ? path.substring(1) : path
 }
@@ -74,6 +76,8 @@ export async function configureStaticAssets(
     workbox,
   )
   if (includeAssets) {
+    // we need to make icons relative, we can have for example icon entries with: /pwa.png
+    // fast-glob will not resolve absolute paths
     if (Array.isArray(includeAssets))
       globs.push(...includeAssets.map(normalizeIconPath))
     else
@@ -86,8 +90,6 @@ export async function configureStaticAssets(
     })
   }
   if (globs.length > 0) {
-    // we need to make icons relative, we can have for example icon entries with: /pwa.png
-    // fast-glob will not resolve absolute paths
     let assets = await fg(
       globs, {
         cwd: publicDir,
