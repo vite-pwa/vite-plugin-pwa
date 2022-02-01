@@ -6,7 +6,7 @@ title: Netlify | Deployment
 
 ## Configure `manifest.webmanifest` mime type
 
-You need to configure the header entry on `netlify.toml` file (see basic deployment bellow):
+You need to configure the header entry on `netlify.toml` file (see basic deployment below):
 ```toml
 [[headers]]
   for = "/manifest.webmanifest"

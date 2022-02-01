@@ -6,7 +6,7 @@ title: Development | Guide
 
 From version `v0.11.13` you can use the service worker on development.
 
-The PWA will not be registered, only the service worker logic, check the details for each strategy bellow.
+The PWA will not be registered, only the service worker logic, check the details for each strategy below.
 
 > **Warning**: there will be only one single registration on the service worker precache manifest (`self.__WB_MANIFEST`) 
 when necessary: `navigateFallback`.
