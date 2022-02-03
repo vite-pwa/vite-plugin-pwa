@@ -30,7 +30,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       return
 
     if (options.manifest) {
-      bundle[FILE_MANIFEST] = {
+      bundle[options.manifestFilename] = {
         isAsset: true,
         type: 'asset',
         name: undefined,
