@@ -35,7 +35,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
         type: 'asset',
         name: undefined,
         source: generateWebManifestFile(options),
-        fileName: FILE_MANIFEST,
+        fileName: manifestFilename,
       }
     }
 
