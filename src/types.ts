@@ -25,6 +25,10 @@ export interface VitePWAOptions {
    */
   filename?: string
   /**
+   * @default 'manifest.webmanifest'
+   */
+  manifestFilename?: string
+  /**
    * @default 'generateSW'
    */
   strategies?: 'generateSW' | 'injectManifest'
