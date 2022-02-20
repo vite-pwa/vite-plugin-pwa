@@ -43,6 +43,8 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     'vite:resolve',
     'vite:esbuild',
     'vite:json',
+    'vite:worker',
+    'vite:worker-import-meta-url',
     'replace',
     'vite:define',
     'rollup-plugin-dynamic-import-variables',
