@@ -33,6 +33,10 @@ You will need `node 12` to be able to build the `Vite Plugin PWA`.
 Once the repo is on your local machine, you must install project dependencies and build the `Vite Plugin PWA`, 
 just run (from root directory):
 ```shell
+pnpm install
+pnpm run build
+
+# or of course... =)
 pnpm install && pnpm run build
 ```
 
