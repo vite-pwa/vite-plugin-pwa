@@ -59,7 +59,7 @@ Double check that **you do not** have caching features enabled, especially `immu
 
 NGINX will add `E-Tag`-headers itself, so there is not much to in that regard.
 
-As a general rule, everything in `/assets/` can have a very long cache time, as everything in there should contain a hash in the filename.
+As a general rule, files in `/assets/` can have a very long cache time, as everything in there should contain a hash in the filename.
 
 An example configuration inside your `server` block could be:
 

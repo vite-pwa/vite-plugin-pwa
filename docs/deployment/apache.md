@@ -6,7 +6,7 @@ title: Apache Http Server 2.4+ | Deployment
 
 ## Configure `manifest.webmanifest` mime type
 
-You need to configure the following mime type (see basic configuration bellow):
+You need to configure the following mime type (see basic configuration below):
 
 ```ini
 <IfModule mod_mime.c>
