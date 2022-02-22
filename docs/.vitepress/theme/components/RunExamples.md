@@ -14,7 +14,6 @@ cd vite-plugin-pwa
 pnpm run install  # (if you need to)
 pnpm run build
 pnpm run examples
-
 ```
 
 If you don't do `pnpx run build` first,
