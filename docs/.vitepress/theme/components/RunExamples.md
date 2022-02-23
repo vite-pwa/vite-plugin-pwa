@@ -11,12 +11,12 @@ pnpm run examples
 
 ```shell
 cd vite-plugin-pwa
-pnpm run install  # (if you need to)
+pnpm run install
 pnpm run build
 pnpm run examples
 ```
 
-If you don't do `pnpx run build` first,
+If you don't do `pnpm run build` first,
 you may see an error like, `failed to load config` or `Please verify that the package.json has a valid "main" entry`.
 
 </details>
