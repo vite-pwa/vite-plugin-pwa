@@ -4,7 +4,7 @@ title: Svelte | Examples
 
 # Svelte
 
-The `Svelte` example project can be found on `examples/react-routify` package/directory.
+The `Svelte` example project can be found on `examples/svelte-routify` package/directory.
 
 The router used on this example project is [@roxi/routify](https://routify.dev/) <outbound-link />.
 
