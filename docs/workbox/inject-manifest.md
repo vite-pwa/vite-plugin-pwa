@@ -178,45 +178,6 @@ clientsClaim()
 
 ## Server Push Notifications
 
-You can use this code on your custom service worker (`src/sw.ts`) to enable `Server Push Notifications`:
+You should check the `workbox` documentation: [Introduction to push notifications](https://developers.google.com/web/ilt/pwa/introduction-to-push-notifications). 
 
-> You also need to add the logic to interact from the client logic: [Advanced (injectManifest)](/guide/inject-manifest.html).
-
-<details>
-  <summary><strong>src/sw.ts</strong> code</summary>
-
-```ts
-function getEndpoint() {
-  return self.registration.pushManager.getSubscription()
-  .then(function(subscription) {
-    if (subscription) {
-      return subscription.endpoint
-    }
-
-    throw new Error('User not subscribed')
-  });
-}
-
-// Register event listener for the ‘push’ event.
-self.addEventListener('push', function(event) {
-  // Keep the service worker alive until the notification is created.
-  event.waitUntil(
-    getEndpoint()
-    .then(function(endpoint) {
-      // Retrieve the textual payload from the server using a GET request. We are using the endpoint as an unique ID 
-      // of the user for simplicity.
-      return fetch('./getPayload?endpoint=' + endpoint)
-    })
-    .then(function(response) {
-      return response.text()
-    })
-    .then(function(payload) {
-      // Show a notification with title ‘ServiceWorker Cookbook’ and use the payload as the body.
-      self.registration.showNotification('ServiceWorker Cookbook', {
-        body: payload
-      });
-    })
-  );
-})
-```
-</details>
+You can check this awesome repo [YT Playlist Notifier](https://github.com/jeffposnick/yt-playlist-notifier) using `Server Push Notifications` and some other cool service worker capabilities from the major collaborator of [Workbox](https://developers.google.com/web/tools/workbox).

@@ -6,12 +6,28 @@ title: Netlify | Deployment
 
 ## Configure `manifest.webmanifest` mime type
 
-You need to configure the header entry on `netlify.toml` file (see basic deployment bellow):
+You need to register the correct MIME type for the web manifest by adding a headers table to your `netlify.toml` file (see basic deployment below):
 ```toml
 [[headers]]
   for = "/manifest.webmanifest"
   [headers.values]
     Content-Type = "application/manifest+json"
+```
+
+## Cache-Control
+
+As a general rule, files in `/assets/` can have a very long cache time, as everything in there should contain a hash in the filename.
+
+Add another headers table to your `netlify.toml` file (see basic deployment below):
+
+```toml
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    cache-control = '''
+    max-age=31536000,
+    immutable
+    '''
 ```
 
 ## Configure http to https redirection
@@ -40,12 +56,12 @@ Add `netlify.toml` file to the root directory with the content:
   for = "/manifest.webmanifest"
   [headers.values]
     Content-Type = "application/manifest+json"
-```
 
-Add `_header` file to `public` directory with the content:
-
-```txt
-/assets/*
-  cache-control: max-age=31536000
-  cache-control: immutable
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    cache-control = '''
+    max-age=31536000,
+    immutable
+    '''
 ```
