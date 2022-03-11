@@ -1,10 +1,19 @@
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
-import { BuildResult, injectManifest, generateSW } from 'workbox-build'
+import type { BuildResult } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
 import Rollup from 'rollup'
 import type { ResolvedVitePWAOptions } from './types'
 import { logWorkboxResult } from './log'
+
+function loadWorkboxBuild() {
+  // Uses require to lazy load.
+  // "workbox-build" is very large and it makes config loading slow.
+  // Since it is not always used, load this when it is needed.
+
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  return require('workbox-build')
+}
 
 export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 'build' | 'dev', source = 'register') {
   const sw = options.base + options.filename
@@ -20,6 +29,8 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
 }
 
 export async function generateServiceWorker(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig): Promise<BuildResult> {
+  const { generateSW } = loadWorkboxBuild()
+
   // generate the service worker
   const buildResult = await generateSW(options.workbox)
   // log workbox result
@@ -75,6 +86,8 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   // options.injectManifest.mode won't work!!!
   // error during build: ValidationError: "mode" is not allowed
   // delete injectManifestOptions.mode
+
+  const { injectManifest } = loadWorkboxBuild()
 
   // inject the manifest
   const buildResult = await injectManifest(injectManifestOptions)
