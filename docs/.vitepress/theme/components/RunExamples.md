@@ -11,7 +11,7 @@ pnpm run examples
 
 ```shell
 cd vite-plugin-pwa
-pnpm run install
+pnpm install
 pnpm run build
 pnpm run examples
 ```
