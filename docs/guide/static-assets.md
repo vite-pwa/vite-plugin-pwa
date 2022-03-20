@@ -22,7 +22,7 @@ If you configure `globPatterns` on `workbox` or `injectManifest` plugin option, 
 patterns: `globPatterns` will be used by `workbox-build` to match files on `dist` folder.
 <br />
 <br />
-By default, `globPatterns` will be `**.{js,css,html}`: `workbox` will use
+By default, `globPatterns` will be `**/*.{js,css,html}`: `workbox` will use
 [glob primer](https://github.com/isaacs/node-glob#glob-primer) <outbound-link /> to match files using `globPatterns`
 as filter.
 <br />
