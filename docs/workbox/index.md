@@ -19,8 +19,8 @@ service worker.
 We focus on 2 methods of this module:
 
 <ul aria-labelledby="workbox-build-module">
-<md-list-anchor href="/workbox/generate-ws.html">
-  <template #link>generateWS</template>
+<md-list-anchor href="/workbox/generate-sw.html">
+  <template #link>generateSW</template>
   <template #trailing>: for generating the service worker.</template>
 </md-list-anchor>
 <md-list-anchor href="/workbox/inject-manifest.html">
@@ -32,19 +32,19 @@ We focus on 2 methods of this module:
 You must read [Which Mode to Use](https://developers.google.com/web/tools/workbox/modules/workbox-build#which_mode_to_use) <outbound-link />
 before decide what strategy to use.
 
-`generateWS` method will abstract you from using service worker api when building the service worker. 
-This method can be configured using plugins instead writing your own service worker code (`generateWS` will generate 
+`generateSW` method will abstract you from using service worker api when building the service worker. 
+This method can be configured using plugins instead writing your own service worker code (`generateSW` will generate 
 the code for you).
 
 `injectManifest` method will get your custom service worker and build/compile it.
 
 ## How is `workbox-build` related to `vite-plugin-pwa`?
 
-`vite-plugin-pwa` will use internally `generateWS` and `injectManifest` `workbox` methods when `strategies` 
-option is `generateWS` and `injectManifest` respectively.
+`vite-plugin-pwa` will use internally `generateSW` and `injectManifest` `workbox` methods when `strategies` 
+option is `generateSW` and `injectManifest` respectively.
 
-When you configure `strategies: 'generateWS'` option (it is the default value) on your `vite.config.ts` file, then the 
-plugin invoke the workbox `generateWS` method: the options passed to the `workbox-build` method will be the provided on 
+When you configure `strategies: 'generateSW'` option (it is the default value) on your `vite.config.ts` file, then the 
+plugin invoke the workbox `generateSW` method: the options passed to the `workbox-build` method will be the provided on 
 `workbox` option of the plugin configuration.
 
 When you configure `strategies: 'injectManifest'` plugin option on your `vite.config.ts` file, the plugin will first 

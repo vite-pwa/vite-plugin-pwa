@@ -36,7 +36,7 @@ For example, if you don't include `html` assets pattern, you will get this error
 <br />
 <br />
 
-If you use `generateWS` strategy, then you need to configure `globPatterns` inside `workbox` plugin option:
+If you use `generateSW` strategy, then you need to configure `globPatterns` inside `workbox` plugin option:
 
 ```ts
 VitePWA({
