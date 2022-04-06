@@ -17,7 +17,7 @@ you must configure your server to meet PWA requirements, that is, your server mu
   <template #link>Netlify</template>
 </md-list-anchor>
 <md-list-anchor href="/deployment/aws.html">
-  <template #link>AWS Amplity</template>
+  <template #link>AWS Amplify</template>
 </md-list-anchor>
 <md-list-anchor href="/deployment/vercel.html">
   <template #link>Vercel</template>
