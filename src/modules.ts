@@ -5,6 +5,7 @@ import { ResolvedConfig } from 'vite'
 import Rollup from 'rollup'
 import type { ResolvedVitePWAOptions } from './types'
 import { logWorkboxResult } from './log'
+import { defaultInjectManifestVitePlugins } from './constants'
 
 export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 'build' | 'dev', source = 'register') {
   const sw = options.base + options.filename
@@ -38,16 +39,14 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   */
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const rollup = require('rollup') as typeof Rollup
-  const includedPluginNames = [
-    'alias',
-    'vite:resolve',
-    'vite:esbuild',
-    'replace',
-    'vite:define',
-    'rollup-plugin-dynamic-import-variables',
-    'vite:esbuild-transpile',
-    'vite:terser',
-  ]
+  const vitePlugins = options.vitePlugins
+  const includedPluginNames: string[] = []
+  if (typeof vitePlugins === 'function')
+    includedPluginNames.push(...vitePlugins(viteOptions.plugins.map(p => p.name)))
+  else
+    includedPluginNames.push(...vitePlugins)
+  if (includedPluginNames.length === 0)
+    includedPluginNames.push(...defaultInjectManifestVitePlugins)
   const plugins = viteOptions.plugins.filter(p => includedPluginNames.includes(p.name)) as Plugin[]
   const bundle = await rollup.rollup({
     input: options.swSrc,

@@ -11,3 +11,15 @@ export const VIRTUAL_MODULES_MAP: Record<string, string> = {
 }
 export const VIRTUAL_MODULES_RESOLVE_PREFIX = '/@vite-plugin-pwa/'
 export const VIRTUAL_MODULES = Object.keys(VIRTUAL_MODULES_MAP)
+export const defaultInjectManifestVitePlugins = [
+  'alias',
+  'commonjs',
+  'vite:resolve',
+  'vite:esbuild',
+  'replace',
+  'vite:define',
+  'rollup-plugin-dynamic-import-variables',
+  'vite:esbuild-transpile',
+  'vite:json',
+  'vite:terser',
+]
