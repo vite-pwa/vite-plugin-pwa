@@ -3,7 +3,7 @@ import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'wo
 import type { OutputBundle } from 'rollup'
 
 export type InjectManifestVitePlugins = string[] | ((vitePluginIds: string[]) => string[])
-export type CustomInjectManifest = InjectManifestOptions & {
+export type CustomInjectManifestOptions = InjectManifestOptions & {
   /**
    * `Vite` plugin ids to use on `Rollup` build.
    *
@@ -94,7 +94,7 @@ export interface VitePWAOptions {
   /**
    * The workbox object for `injectManifest`
    */
-  injectManifest: Partial<CustomInjectManifest>
+  injectManifest: Partial<CustomInjectManifestOptions>
   /**
    * Override Vite's base options only for PWA
    *
