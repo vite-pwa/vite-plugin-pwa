@@ -2,6 +2,7 @@ import { resolve } from 'path'
 import { promises as fs } from 'fs'
 import { BuildResult, injectManifest, generateSW } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
+// eslint-disable-next-line import/default
 import Rollup from 'rollup'
 import type { ResolvedVitePWAOptions } from './types'
 import { logWorkboxResult } from './log'
@@ -47,7 +48,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   if (includedPluginNames.length === 0)
     includedPluginNames.push(...defaultInjectManifestVitePlugins)
 
-  const plugins = viteOptions.plugins.filter(p => includedPluginNames.includes(p.name)) as Plugin[]
+  const plugins = viteOptions.plugins.filter(p => includedPluginNames.includes(p.name))
   // eslint-disable-next-line @typescript-eslint/no-var-requires
   const rollup = require('rollup') as typeof Rollup
   const bundle = await rollup.rollup({
