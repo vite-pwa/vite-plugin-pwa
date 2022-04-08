@@ -2,7 +2,6 @@ import { resolve } from 'path'
 import { promises as fs } from 'fs'
 import { BuildResult, injectManifest, generateSW } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
-import { rollup } from 'rollup'
 import type { ResolvedVitePWAOptions } from './types'
 import { logWorkboxResult } from './log'
 import { defaultInjectManifestVitePlugins } from './constants'
@@ -48,6 +47,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     includedPluginNames.push(...defaultInjectManifestVitePlugins)
 
   const plugins = viteOptions.plugins.filter(p => includedPluginNames.includes(p.name))
+  const { rollup } = await import('rollup')
   const bundle = await rollup({
     input: options.swSrc,
     plugins,
