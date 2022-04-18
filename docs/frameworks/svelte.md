@@ -14,9 +14,9 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/svelte` for
 ```ts
 declare module 'virtual:pwa-register/svelte' {
   // @ts-ignore ignore when svelte is not installed
-  import { Writable } from 'svelte/store'
+  import type { Writable } from 'svelte/store'
 
-  export type RegisterSWOptions = {
+  export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void

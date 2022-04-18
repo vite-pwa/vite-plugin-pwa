@@ -8,12 +8,12 @@ function Home() {
 
   const [name, setName] = useState('')
 
-  // @ts-ignore
+  // @ts-expect-error just ignore
   const handleChange = (event) => {
     setName(event.target.value || '')
   }
 
-  // @ts-ignore
+  // @ts-expect-error just ignore
   const handleSubmit = (event) => {
     event.preventDefault()
     if (name)

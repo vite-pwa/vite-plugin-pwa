@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
 import { useRegisterSW } from 'virtual:pwa-register/vue'
 
@@ -14,11 +13,13 @@ const {
   onRegistered(r) {
     if (reloadSW === 'true') {
       r && setInterval(async() => {
+        // eslint-disable-next-line no-console
         console.log('Checking for sw update')
         await r.update()
       }, 20000 /* 20s for testing purposes */)
     }
     else {
+      // eslint-disable-next-line no-console
       console.log(`SW Registered: ${r}`)
     }
   },

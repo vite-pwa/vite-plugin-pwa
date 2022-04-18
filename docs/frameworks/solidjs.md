@@ -14,9 +14,9 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/solid` for 
 ```ts
 declare module 'virtual:pwa-register/solid' {
   // @ts-ignore ignore when solid-js is not installed
-  import { Accessor, Setter } from 'solid-js'
+  import type { Accessor, Setter } from 'solid-js'
 
-  export type RegisterSWOptions = {
+  export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void

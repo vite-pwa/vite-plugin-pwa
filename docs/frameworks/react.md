@@ -14,9 +14,9 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/react` for 
 ```ts
 declare module 'virtual:pwa-register/react' {
   // @ts-ignore ignore when react is not installed
-  import { Dispatch, SetStateAction } from 'react'
+  import type { Dispatch, SetStateAction } from 'react'
 
-  export type RegisterSWOptions = {
+  export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void

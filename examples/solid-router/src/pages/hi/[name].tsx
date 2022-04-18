@@ -1,10 +1,10 @@
 /* eslint-disable react/react-in-jsx-scope,react/no-unknown-property */
-import { useData, Link } from 'solid-app-router'
+import { Link, useRouteData } from 'solid-app-router'
 
 export default function Hi() {
   // replaced dyanmicaly
   const date = '__DATE__'
-  const data: { name: string } = useData()
+  const data: { name: string } = useRouteData()
 
   return (
     <div>

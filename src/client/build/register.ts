@@ -1,10 +1,11 @@
 import { Workbox, messageSW } from 'workbox-window'
-import { RegisterSWOptions } from '../type'
+import type { RegisterSWOptions } from '../type'
 
 // __SW_AUTO_UPDATE__ will be replaced by virtual module
 const autoUpdateMode = '__SW_AUTO_UPDATE__'
 
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+// @ts-ignore replace at build
 const auto = autoUpdateMode === 'true'
 
 export type { RegisterSWOptions }
@@ -73,7 +74,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
       // Add an event listener to detect when the registered
       // service worker has installed but is waiting to activate.
       wb.addEventListener('waiting', showSkipWaitingPrompt)
-      // @ts-ignore
+      // @ts-expect-error event listener provided by workbox-window
       wb.addEventListener('externalwaiting', showSkipWaitingPrompt)
     }
 

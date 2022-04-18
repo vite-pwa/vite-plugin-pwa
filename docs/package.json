@@ -8,28 +8,28 @@
     "serve": "npm run build && serve .vitepress/dist"
   },
   "dependencies": {
-    "@vueuse/core": "^7.2.2",
-    "@vueuse/shared": "^7.2.2",
-    "vue": "^3.2.24",
+    "@vueuse/core": "^8.2.6",
+    "@vueuse/shared": "^8.2.6",
+    "vue": "^3.2.33",
     "vue-global-api": "^0.4.1"
   },
   "devDependencies": {
-    "@iconify/json": "^2.0.8",
-    "@rollup/plugin-replace": "^3.0.0",
+    "@iconify/json": "^2.1.29",
+    "@rollup/plugin-replace": "^4.0.0",
     "@types/fs-extra": "^9.0.13",
-    "@vueuse/core": "^7.2.2",
-    "esbuild-register": "^3.2.0",
-    "eslint": "^8.4.1",
-    "fast-glob": "^3.2.7",
-    "fs-extra": "^10.0.0",
-    "https-localhost": "^4.7.0",
+    "@vueuse/core": "^8.2.6",
+    "esbuild-register": "^3.3.2",
+    "eslint": "^8.13.0",
+    "fast-glob": "^3.2.11",
+    "fs-extra": "^10.1.0",
+    "https-localhost": "^4.7.1",
     "prism-theme-vars": "^0.2.2",
-    "typescript": "^4.5.2",
-    "unplugin-icons": "^0.12.23",
-    "unplugin-vue-components": "^0.17.6",
-    "vite": "^2.7.1",
+    "typescript": "^4.6.3",
+    "unplugin-icons": "^0.14.1",
+    "unplugin-vue-components": "^0.19.3",
+    "vite": "^2.9.5",
     "vite-plugin-pwa": "workspace:*",
-    "vite-plugin-windicss": "^1.5.4",
-    "vitepress": "^0.20.4"
+    "vite-plugin-windicss": "^1.8.4",
+    "vitepress": "^0.22.3"
   }
 }

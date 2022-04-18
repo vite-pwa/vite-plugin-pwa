@@ -1,5 +1,5 @@
 import { createSignal } from 'solid-js'
-import { RegisterSWOptions } from '../type'
+import type { RegisterSWOptions } from '../type'
 import { registerSW } from './register'
 
 export type { RegisterSWOptions }
