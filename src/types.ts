@@ -2,6 +2,16 @@
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle } from 'rollup'
 
+export type InjectManifestVitePlugins = string[] | ((vitePluginIds: string[]) => string[])
+export type CustomInjectManifestOptions = InjectManifestOptions & {
+  /**
+   * `Vite` plugin ids to use on `Rollup` build.
+   *
+   * **WARN**: this option is for advanced usage, beware, you can break the service worker build.
+   */
+  vitePlugins?: InjectManifestVitePlugins
+}
+
 /**
  * Plugin options.
  */
@@ -88,7 +98,7 @@ export interface VitePWAOptions {
   /**
    * The workbox object for `injectManifest`
    */
-  injectManifest: Partial<InjectManifestOptions>
+  injectManifest: Partial<CustomInjectManifestOptions>
   /**
    * Override Vite's base options only for PWA
    *
@@ -128,6 +138,7 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   swDest: string
   workbox: GenerateSWOptions
   injectManifest: InjectManifestOptions
+  vitePlugins: InjectManifestVitePlugins
 }
 
 export interface ManifestOptions {

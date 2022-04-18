@@ -5,6 +5,7 @@ import { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
 import { ManifestOptions, VitePWAOptions, ResolvedVitePWAOptions } from './types'
 import { configureStaticAssets } from './assets'
 import { resolveBathPath } from './utils'
+import { defaultInjectManifestVitePlugins } from './constants'
 
 function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, outDir: string, filename: string): {
   swSrc: string
@@ -100,7 +101,8 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
   const manifest = typeof options.manifest === 'boolean' && !options.manifest
     ? false
     : Object.assign({}, defaultManifest, options.manifest || {})
-  const injectManifest = Object.assign({}, defaultInjectManifest, options.injectManifest || {})
+  const { vitePlugins = defaultInjectManifestVitePlugins, ...userInjectManifest } = options.injectManifest || {}
+  const injectManifest = Object.assign({}, defaultInjectManifest, userInjectManifest)
 
   if ((injectRegister === 'auto' || registerType == null) && registerType === 'autoUpdate') {
     workbox.skipWaiting = true
@@ -145,6 +147,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     includeManifestIcons,
     disable,
     devOptions,
+    vitePlugins,
   }
 
   await configureStaticAssets(resolvedVitePWAOptions, viteConfig)
