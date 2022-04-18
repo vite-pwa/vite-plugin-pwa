@@ -5,7 +5,6 @@ import fg from 'fast-glob'
 import { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import { ResolvedConfig } from 'vite'
 import { ResolvedVitePWAOptions } from './types'
-import { FILE_MANIFEST } from './constants'
 
 function buildManifestEntry(
   publicDir: string,
@@ -50,6 +49,7 @@ export async function configureStaticAssets(
     workbox,
     includeAssets,
     includeManifestIcons,
+    manifestFilename,
   } = resolvedVitePWAOptions
 
   const useInjectManifest = strategies === 'injectManifest'
@@ -104,7 +104,7 @@ export async function configureStaticAssets(
     const cHash = crypto.createHash('MD5')
     cHash.update(generateWebManifestFile(resolvedVitePWAOptions))
     manifestEntries.push({
-      url: FILE_MANIFEST,
+      url: manifestFilename,
       revision: `${cHash.digest('hex')}`,
     })
   }

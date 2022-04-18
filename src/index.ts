@@ -7,7 +7,7 @@ import { generateInjectManifest, generateServiceWorker, generateRegisterSW } fro
 import { ExtendManifestEntriesHook, ResolvedVitePWAOptions, VitePluginPWAAPI, VitePWAOptions } from './types'
 import { resolveOptions } from './options'
 import { generateWebManifestFile } from './assets'
-import { FILE_MANIFEST, FILE_SW_REGISTER, VIRTUAL_MODULES, VIRTUAL_MODULES_MAP, VIRTUAL_MODULES_RESOLVE_PREFIX } from './constants'
+import { FILE_SW_REGISTER, VIRTUAL_MODULES, VIRTUAL_MODULES_MAP, VIRTUAL_MODULES_RESOLVE_PREFIX } from './constants'
 import { loadDev, resolveDevId, swDevOptions } from './dev'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
@@ -30,12 +30,12 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       return
 
     if (options.manifest) {
-      bundle[FILE_MANIFEST] = {
+      bundle[options.manifestFilename] = {
         isAsset: true,
         type: 'asset',
         name: undefined,
         source: generateWebManifestFile(options),
-        fileName: FILE_MANIFEST,
+        fileName: options.manifestFilename,
       }
     }
 
