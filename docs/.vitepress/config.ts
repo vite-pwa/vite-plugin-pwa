@@ -146,8 +146,8 @@ const Workbox = [
     link: '/workbox/',
   },
   {
-    text: 'generateWS',
-    link: '/workbox/generate-ws',
+    text: 'generateSW',
+    link: '/workbox/generate-sw',
   },
   {
     text: 'injectManifest',

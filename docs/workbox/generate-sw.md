@@ -1,13 +1,13 @@
 ---
-title: generateWS | Workbox
+title: generateSW | Workbox
 ---
 
-# generateWS
+# generateSW
 
 You must read [Which Mode to Use](https://developers.google.com/web/tools/workbox/modules/workbox-build#which_mode_to_use) <outbound-link />
 before decide using this strategy on `vite-plugin-pwa` plugin.
 
-You can find the documentation for this method on `workbox` site: [generateWS](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.generateSW) <outbound-link />.
+You can find the documentation for this method on `workbox` site: [generateSW](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.generateSW) <outbound-link />.
 
 You can find a guide for plugins on `workbox` site: [Using Plugins](https://developers.google.com/web/tools/workbox/guides/using-plugins) <outbound-link />.
 

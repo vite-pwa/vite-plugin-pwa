@@ -7,7 +7,7 @@ title: injectManifest | Workbox
 You must read [Which Mode to Use](https://developers.google.com/web/tools/workbox/modules/workbox-build#which_mode_to_use) <outbound-link />
 before decide using this strategy on `vite-plugin-pwa` plugin.
 
-Before writing your custom service worker, check if `workbox` can generate the code for you using `generateWS` strategy,
+Before writing your custom service worker, check if `workbox` can generate the code for you using `generateSW` strategy,
 looking for some plugin on `workbox` site on [Runtime Caching Entry](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.RuntimeCachingEntry) <outbound-link />.
 
 You can find the documentation for this method on `workbox` site: [injectManifest](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.injectManifest) <outbound-link />
