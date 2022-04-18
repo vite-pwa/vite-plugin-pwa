@@ -38,6 +38,21 @@ function lookupAdditionalManifestEntries(
     : workbox.additionalManifestEntries || []
 }
 
+// we need to make icons relative, we can have for example icon entries with: /pwa.png
+// fast-glob will not resolve absolute paths
+function normalizeIconPath(path: string) {
+  return path.startsWith('/') ? path.substring(1) : path
+}
+
+function includeIcons(icons: Record<string, any>[], globs: string[]) {
+  Object.keys(icons).forEach((key) => {
+    const icon = icons[key as any]
+    const src = normalizeIconPath(icon.src as string)
+    if (!globs.includes(src))
+      globs.push(src)
+  })
+}
+
 export async function configureStaticAssets(
   resolvedVitePWAOptions: ResolvedVitePWAOptions,
   viteConfig: ResolvedConfig,
@@ -61,25 +76,22 @@ export async function configureStaticAssets(
     workbox,
   )
   if (includeAssets) {
+    // we need to make icons relative, we can have for example icon entries with: /pwa.png
+    // fast-glob will not resolve absolute paths
     if (Array.isArray(includeAssets))
-      globs.push(...includeAssets)
+      globs.push(...includeAssets.map(normalizeIconPath))
     else
-      globs.push(includeAssets)
+      globs.push(normalizeIconPath(includeAssets))
   }
-  if (includeManifestIcons && manifest && manifest.icons) {
-    const icons = manifest.icons
-    Object.keys(icons).forEach((key) => {
-      const icon = icons[key as any]
-      globs.push(icon.src as string)
+  if (includeManifestIcons && manifest) {
+    manifest.icons && includeIcons(manifest.icons, globs)
+    manifest.shortcuts && manifest.shortcuts.forEach((s) => {
+      s.icons && includeIcons(s.icons, globs)
     })
   }
   if (globs.length > 0) {
-    // we need to make icons relative, we can have for example icon entries with: /pwa.png
-    // fast-glob will not resolve absolute paths
     let assets = await fg(
-      globs.map((g) => {
-        return g.startsWith('/') ? g.substring(1) : g
-      }), {
+      globs, {
         cwd: publicDir,
         onlyFiles: true,
         unique: true,
