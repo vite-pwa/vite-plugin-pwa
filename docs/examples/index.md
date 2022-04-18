@@ -28,12 +28,14 @@ example project and finally refresh the browser to check the `Prompt for update`
 If you want to run any of the example projects you will need to download/clone to your local machine the 
 `Vite Plugin PWA GitHub repo`.
 
-You will need `node 12` to be able to build the `Vite Plugin PWA`.
+You will need `node 12` (or newer) to be able to build the `Vite Plugin PWA`.
 
 Once the repo is on your local machine, you must install project dependencies and build the `Vite Plugin PWA`, 
-just run (from root directory):
+just run (from `vite-plugin-pwa` directory cloned locally):
+
 ```shell
-pnpm install && pnpm run build
+pnpm install
+pnpm run build
 ```
 
 If you don't have installed `PNPM`, you must install it globally via `npm`:
