@@ -1,5 +1,5 @@
 declare module 'virtual:pwa-register' {
-  export type RegisterSWOptions = {
+  export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
@@ -11,10 +11,11 @@ declare module 'virtual:pwa-register' {
 }
 
 declare module 'virtual:pwa-register/vue' {
+  // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
   // @ts-ignore ignore when vue is not installed
   import type { Ref } from 'vue'
 
-  export type RegisterSWOptions = {
+  export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
@@ -30,10 +31,11 @@ declare module 'virtual:pwa-register/vue' {
 }
 
 declare module 'virtual:pwa-register/svelte' {
+  // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
   // @ts-ignore ignore when svelte is not installed
-  import { Writable } from 'svelte/store'
+  import type { Writable } from 'svelte/store'
 
-  export type RegisterSWOptions = {
+  export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
@@ -49,10 +51,11 @@ declare module 'virtual:pwa-register/svelte' {
 }
 
 declare module 'virtual:pwa-register/react' {
+  // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
   // @ts-ignore ignore when react is not installed
-  import { Dispatch, SetStateAction } from 'react'
+  import type { Dispatch, SetStateAction } from 'react'
 
-  export type RegisterSWOptions = {
+  export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
@@ -68,10 +71,11 @@ declare module 'virtual:pwa-register/react' {
 }
 
 declare module 'virtual:pwa-register/solid' {
+  // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
   // @ts-ignore ignore when solid-js is not installed
-  import { Accessor, Setter } from 'solid-js'
+  import type { Accessor, Setter } from 'solid-js'
 
-  export type RegisterSWOptions = {
+  export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
@@ -87,10 +91,11 @@ declare module 'virtual:pwa-register/solid' {
 }
 
 declare module 'virtual:pwa-register/preact' {
+  // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
   // @ts-ignore ignore when preact/hooks is not installed
-  import { StateUpdater } from 'preact/hooks'
+  import type { StateUpdater } from 'preact/hooks'
 
-  export type RegisterSWOptions = {
+  export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void

@@ -60,7 +60,7 @@ const workboxOrInjectManifestEntry = {
 				if (url.startsWith('/'))
 					url = url.slice(1)
 
-				e.url = url === 'index.html' ? '/' : `/${url.substring(0, url.lastIndexOf('/'))}`
+				e.url = url === 'index.html' ? '/' : `/${url.substring(0, url.lastIndexOf('.'))}`
 				console.log(`${url} => ${e.url}`)
 			}
 

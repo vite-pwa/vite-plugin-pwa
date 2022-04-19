@@ -1,6 +1,5 @@
-import { join as _join } from 'path'
 import { FILE_SW_REGISTER } from './constants'
-import { ResolvedVitePWAOptions } from './types'
+import type { ResolvedVitePWAOptions } from './types'
 
 export function generateSimpleSWRegister(options: ResolvedVitePWAOptions) {
   return `

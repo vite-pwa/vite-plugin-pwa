@@ -10,7 +10,7 @@ This plugin is Framework-agnostic and so you can use it with Vanilla JavaScript,
 
 ```ts
 declare module 'virtual:pwa-register' {
-  export type RegisterSWOptions = {
+  export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void

@@ -1,6 +1,6 @@
 // port from https://raw.githubusercontent.com/shadowwalker/next-pwa/master/cache.js
 
-import { RuntimeCaching } from 'workbox-build'
+import type { RuntimeCaching } from 'workbox-build'
 
 export const cachePreset: RuntimeCaching[] = [
   {

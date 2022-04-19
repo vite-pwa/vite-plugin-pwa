@@ -59,6 +59,13 @@ pnpm add vite-plugin-pwa -D
 version): if you are using advanced configuration like `workbox` or `injectManifest` options, you must review the plugin
 configuration, since this new version of `workbox` has breaking changes!
 
+> 🎩 Changes on version `0.12.0`:
+> - `TypeScript` updated to `4.6.3` version, client and `DevOptions` types changed to interface.
+> - If you were using shortcuts on the `PWA Manifest`, there is a breaking change to add correct type for shortcuts icons, you should review all icon declarations.
+> - You can change the `PWA Manifest File` name, which default value is `manifest.webmanifest`, use `manifestFilename` plugin option to change it.
+> - `workbox-build` now loads on demand, if you are starting the development server and don't use `DevOptions`, `workbox-build` will not be loaded and the development server will boot faster.
+> - You can now provide which `Vite` plugins add to the `service worker` build: we have added `vite:json` and `commonsjs`, check `defaultInjectManifestVitePlugins` on `src/constants.ts` module. Beware using this option since you can break your project build.
+
 Add `VitePWA` plugin to `vite.config.js / vite.config.ts` and configure it:
 
 ```ts

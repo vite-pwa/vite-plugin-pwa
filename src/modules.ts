@@ -1,7 +1,7 @@
 import { resolve } from 'path'
 import { promises as fs } from 'fs'
 import type { BuildResult } from 'workbox-build'
-import { ResolvedConfig } from 'vite'
+import type { ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions } from './types'
 import { logWorkboxResult } from './log'
 import { defaultInjectManifestVitePlugins } from './constants'

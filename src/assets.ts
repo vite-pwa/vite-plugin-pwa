@@ -2,9 +2,9 @@ import { resolve as resolveFs } from 'path'
 import fs from 'fs'
 import crypto from 'crypto'
 import fg from 'fast-glob'
-import { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
-import { ResolvedConfig } from 'vite'
-import { ResolvedVitePWAOptions } from './types'
+import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
+import type { ResolvedConfig } from 'vite'
+import type { ResolvedVitePWAOptions } from './types'
 
 function buildManifestEntry(
   publicDir: string,

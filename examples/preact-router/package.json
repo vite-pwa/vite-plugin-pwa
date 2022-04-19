@@ -24,21 +24,21 @@
     "serve": "serve dist"
   },
   "dependencies": {
-    "preact": "^10.6.3",
-    "preact-router": "^3.2.1"
+    "preact": "^10.7.1",
+    "preact-router": "^4.0.1"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.1.5",
-    "@rollup/plugin-replace": "^3.0.0",
+    "@preact/preset-vite": "^2.2.0",
+    "@rollup/plugin-replace": "^4.0.0",
     "cross-env": "^7.0.3",
-    "https-localhost": "^4.7.0",
+    "https-localhost": "^4.7.1",
     "rimraf": "^3.0.2",
-    "typescript": "^4.5.2",
-    "vite": "^2.7.1",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.5",
     "vite-plugin-pwa": "workspace:*",
-    "workbox-core": "^6.4.2",
-    "workbox-precaching": "^6.4.2",
-    "workbox-routing": "^6.4.2",
-    "workbox-window": "^6.4.2"
+    "workbox-core": "^6.5.3",
+    "workbox-precaching": "^6.5.3",
+    "workbox-routing": "^6.5.3",
+    "workbox-window": "^6.5.3"
   }
 }

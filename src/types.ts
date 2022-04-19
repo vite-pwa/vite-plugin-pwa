@@ -268,7 +268,7 @@ export type ExtendManifestEntriesHook = (manifestEntries: (string | ManifestEntr
 /**
  * Development options.
  */
-export type DevOptions = {
+export interface DevOptions {
   /**
    * Should the service worker be available on development?.
    *

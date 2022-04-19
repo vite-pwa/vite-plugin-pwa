@@ -1,8 +1,8 @@
 import { basename, resolve } from 'path'
 import { existsSync, promises as fs } from 'fs'
-import { LoadResult } from 'rollup'
-import { ResolvedConfig } from 'vite'
-import { ResolvedVitePWAOptions } from './types'
+import type { LoadResult } from 'rollup'
+import type { ResolvedConfig } from 'vite'
+import type { ResolvedVitePWAOptions } from './types'
 import { generateServiceWorker } from './modules'
 import { normalizePath } from './utils'
 
