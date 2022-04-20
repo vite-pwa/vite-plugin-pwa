@@ -64,7 +64,7 @@ configuration, since this new version of `workbox` has breaking changes!
 > - If you were using shortcuts on the `PWA Manifest`, there is a breaking change to add correct type for shortcuts icons, you should review all icon declarations.
 > - You can change the `PWA Manifest File` name, which default value is `manifest.webmanifest`, use `manifestFilename` plugin option to change it.
 > - `workbox-build` now loads on demand, if you are starting the development server and don't use `DevOptions`, `workbox-build` will not be loaded and the development server will boot faster.
-> - You can now provide which `Vite` plugins add to the `service worker` build: we have added `vite:json` and `commonsjs`, check `defaultInjectManifestVitePlugins` on `src/constants.ts` module. Beware using this option since you can break your project build.
+> - You can now provide which `Vite` plugins add to the `service worker` build: we have added `vite:json` and `commonjs`, check `defaultInjectManifestVitePlugins` on `src/constants.ts` module. Beware using this option since you can break your project build.
 
 Add `VitePWA` plugin to `vite.config.js / vite.config.ts` and configure it:
 
