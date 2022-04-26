@@ -41,7 +41,12 @@ export default defineConfig({
   ]    
 })
 ```
-
+Then register the server worker:
+```ts
+import { registerSW } from "virtual:pwa-register";
+registerSW();
+```
+> note: if you encounter typing issues about `virtual:pwa-register`, check the FAQ [here](https://vite-plugin-pwa.netlify.app/guide/faq.html#ide-errors-cannot-find-module-ts2307).
 ## Features
 
 <ul aria-labelledby="features">
