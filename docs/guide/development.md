@@ -84,7 +84,15 @@ Uncaught (in promise) TypeError: Failed to execute 'importScripts' on 'WorkerGlo
 
 ## injectManifest strategy
 
-You can use `type: 'module'` when registering the service worker (right now only supported on latest versions of `Chromium` based browsers: `Chromium/Chrome/Edge`).
+You can use `type: 'module'` when registering the service worker (right now only supported on latest versions of `Chromium` based browsers: `Chromium/Chrome/Edge`):
+
+```ts
+devOptions: {
+  enabled: true,
+  type: 'module',
+  /* other options */  
+}
+```
 
 > **Warning**: when building the application, the PWA Plugin will always register your service worker with `type: 'classic'` for compatibility with all browsers.
 
