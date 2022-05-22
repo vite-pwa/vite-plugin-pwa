@@ -25,8 +25,8 @@ function toggle() {
     </button>
 
     <ul class="dialog">
-      <li v-for="item in item.items" :key="item.text" class="dialog-item">
-        <NavDropdownLinkItem :item="item" />
+      <li v-for="i in item.items" :key="i.text" class="dialog-item">
+        <NavDropdownLinkItem :item="i" />
       </li>
     </ul>
   </div>

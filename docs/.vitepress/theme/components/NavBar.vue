@@ -6,8 +6,8 @@ defineEmits(['toggle'])
 </script>
 
 <template>
-  <header class="nav-bar" :class="{'no-toggle-btn': !showSidebar}">
-    <ToggleSideBarButton v-if="showSidebar"  @toggle="$emit('toggle')" />
+  <header class="nav-bar" :class="{ 'no-toggle-btn': !showSidebar }">
+    <ToggleSideBarButton v-if="showSidebar" @toggle="$emit('toggle')" />
 
     <NavBarTitle />
 

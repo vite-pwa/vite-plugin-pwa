@@ -1,7 +1,8 @@
-import { FunctionalComponent, h, VNode } from 'vue'
-import { useRoute, useData } from 'vitepress'
-import { DefaultTheme } from '../config'
-import { joinUrl, isActive } from '../utils'
+import type { FunctionalComponent, VNode } from 'vue'
+import { h } from 'vue'
+import { useData, useRoute } from 'vitepress'
+import type { DefaultTheme } from '../config'
+import { isActive, joinUrl } from '../utils'
 
 export interface Header {
   level: number

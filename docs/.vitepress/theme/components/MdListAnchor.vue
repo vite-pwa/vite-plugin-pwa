@@ -9,34 +9,33 @@ const props = defineProps<{
 
 const router = useRouter()
 const anchor = ref(null)
-const isExternal = computed(() => props.external === true )
-
+const isExternal = computed(() => props.external === true)
 
 const navigate = () => {
   if (isExternal.value)
-    window.open(props.href, '_blank', 'noreferrer noopener');
+    window.open(props.href, '_blank', 'noreferrer noopener')
   else
     router.go(props.href)
 }
 </script>
 
 <template>
-  <li class="li-anchor" :class="[{ 'external': isExternal }]">
+  <li class="li-anchor" :class="[{ external: isExternal }]">
     <div role="link" tabindex="0" class="li-anchor-container" @click="navigate" @keydown.enter="navigate">
-      <span v-if="$slots['heading']" class="heading-text">
-        <slot name="heading"></slot>
+      <span v-if="$slots.heading" class="heading-text">
+        <slot name="heading" />
       </span>
       <span :id="props.id" class="li-anchor-link">
-        <slot name="link"></slot>
+        <slot name="link" />
       </span>
-      <span class="li-anchor-external" v-if="isExternal">
+      <span v-if="isExternal" class="li-anchor-external">
         <OutboundLink />
       </span>
-      <span v-if="$slots['trailing']" class="trailing-text">
-        <slot name="trailing"></slot>
+      <span v-if="$slots.trailing" class="trailing-text">
+        <slot name="trailing" />
       </span>
     </div>
-    <slot name="nested"></slot>
+    <slot name="nested" />
   </li>
 </template>
 

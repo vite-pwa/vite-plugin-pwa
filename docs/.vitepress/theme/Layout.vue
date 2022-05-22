@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {
-  useRoute,
   useData,
+  useRoute,
 } from 'vitepress'
 import {
   onClickOutside,
@@ -25,7 +25,7 @@ const showNavbar = computed(() => {
     return false
 
   return (
-      page.value.title
+    page.value.title
       || themeConfig.logo
       || themeConfig.repo
       || themeConfig.nav
@@ -42,7 +42,7 @@ const showSidebar = computed(() => {
   const { frontmatter } = route.data
   const { themeConfig } = site.value
   return (
-      !frontmatter.home
+    !frontmatter.home
       && frontmatter.sidebar !== false
       && ((typeof themeConfig.sidebar === 'object'
               && Object.keys(themeConfig.sidebar).length !== 0)
@@ -62,9 +62,8 @@ onClickOutside(sideBarRef, () => {
   // we need only debounce if shown
   // if the toggleSidebar clicked when hidden and we don't debounce
   // the sidebar will be closed
-  if (showNavbar.value && openSideBar.value) {
+  if (showNavbar.value && openSideBar.value)
     debounceClickOutside()
-  }
 })
 
 const hideSidebar = toggleSidebar.bind(null, false)
@@ -87,17 +86,16 @@ const pageClasses = computed(() => {
 
 <template>
   <div class="theme" :class="pageClasses">
-
     <NavBar
-        v-if="showNavbar"
-        :show-sidebar="showSidebar"
-        @toggle="toggleSidebar"
+      v-if="showNavbar"
+      :show-sidebar="showSidebar"
+      @toggle="toggleSidebar"
     >
-<!--      <template #search>
+      <!--      <template #search>
         <slot name="navbar-search">
           <AlgoliaSearchBox v-if="theme.algolia" :options="theme.algolia" />
         </slot>
-      </template>-->
+      </template> -->
     </NavBar>
 
     <SideBar ref="sideBarRef" :open="openSideBar">
@@ -129,13 +127,11 @@ const pageClasses = computed(() => {
         <slot name="page-bottom" />
       </template>
     </Page>
-
   </div>
 
-<!--  <Debug />-->
+  <!--  <Debug /> -->
 
   <ClientOnly>
     <ReloadPrompt />
   </ClientOnly>
-
 </template>

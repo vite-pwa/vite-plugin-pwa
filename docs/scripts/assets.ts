@@ -14,10 +14,10 @@ const preconnect = `
     <link rel="preconnect" crossorigin="anonymous" href="${gstatic}">
 `
 
-export const optimizePages = async() => {
+export const optimizePages = async () => {
   const names = await fg('./.vitepress/dist/**/*.html', { onlyFiles: true })
 
-  await Promise.all(names.map(async(i) => {
+  await Promise.all(names.map(async (i) => {
     let html = await fs.readFile(i, 'utf-8')
 
     let preloadImg = '\n\t<link rel="prefetch" href="/icon_light.svg">\n\t<link rel="prefetch" href="/icon_dark.svg">'

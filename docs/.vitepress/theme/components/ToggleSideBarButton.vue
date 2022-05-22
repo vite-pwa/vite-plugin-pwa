@@ -4,12 +4,12 @@ defineEmits(['toggle'])
 
 <template>
   <div
-      role="button"
-      aria-label="Toggle navigation menu"
-      tabindex="0"
-      class="sidebar-button"
-      @keydown.enter="$emit('toggle')"
-      @click="$emit('toggle')"
+    role="button"
+    aria-label="Toggle navigation menu"
+    tabindex="0"
+    class="sidebar-button"
+    @keydown.enter="$emit('toggle')"
+    @click="$emit('toggle')"
   >
     <svg
       class="icon"

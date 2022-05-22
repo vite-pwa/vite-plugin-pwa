@@ -90,9 +90,7 @@ export namespace DefaultTheme {
 
   export type SideBarConfig = SideBarItem[] | 'auto' | false
 
-  export interface MultiSideBarConfig {
-    [path: string]: SideBarConfig
-  }
+  export type MultiSideBarConfig = Record<string, SideBarConfig>
 
   export type SideBarItem = SideBarLink | SideBarGroup
 
