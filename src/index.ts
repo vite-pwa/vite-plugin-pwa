@@ -15,6 +15,10 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   let options: ResolvedVitePWAOptions
   let useImportRegister = false
 
+  function _isDisabled() {
+    return options?.disable
+  }
+
   async function _generateSW() {
     if (options.disable)
       return
@@ -83,8 +87,10 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       },
       api: <VitePluginPWAAPI>{
         get disabled() {
-          return options.disable
+          // some app frameworks copy the options: for example Astro
+          return options?.disable
         },
+        isDisabled: _isDisabled,
         generateBundle: _generateBundle,
         generateSW: _generateSW,
         extendManifestEntries(fn: ExtendManifestEntriesHook) {

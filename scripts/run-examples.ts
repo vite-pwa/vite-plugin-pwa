@@ -1,30 +1,30 @@
 import { execSync } from 'child_process'
 import prompts from 'prompts'
 import {
-  yellow,
-  green,
-  cyan,
   blue,
+  cyan,
+  green,
   magenta,
   red,
   reset,
+  yellow,
 } from 'kolorist'
 
 type Color = (str: string | number) => string
 
-type Behavior = {
+interface Behavior {
   name: string
   display: string
   color: Color
 }
 
-type Strategy = {
+interface Strategy {
   name: string
   display: string
   color: Color
 }
 
-type Framework = {
+interface Framework {
   name: string
   color: Color
   dir: string
@@ -58,38 +58,38 @@ const STRATEGIES: Strategy[] = [
 
 const FRAMEWORKS: Framework[] = [
   {
-    name: 'vue',
+    name: 'Vue',
     color: green,
     dir: 'vue-router',
   },
   {
-    name: 'react',
+    name: 'React',
     color: cyan,
     dir: 'react-router',
   },
   {
-    name: 'preact',
+    name: 'Preact',
     color: magenta,
     dir: 'preact-router',
   },
   {
-    name: 'svelte',
+    name: 'Svelte',
     color: red,
     dir: 'svelte-routify',
   },
   {
-    name: 'sveltekit',
+    name: 'SvelteKit',
     color: blue,
     dir: 'sveltekit-pwa',
   },
   {
-    name: 'solid',
+    name: 'Solid',
     color: yellow,
     dir: 'solid-router',
   },
 ]
 
-type PromptResult = {
+interface PromptResult {
   framework: Framework
   strategy: Strategy
   behavior: Behavior
@@ -104,7 +104,7 @@ async function init() {
         name: 'framework',
         message: reset('Select a framework:'),
         initial: 0,
-        // @ts-ignore
+        // @ts-expect-error ignore it
         choices: FRAMEWORKS.map((framework) => {
           const frameworkColor = framework.color
           return {
@@ -118,7 +118,7 @@ async function init() {
         name: 'strategy',
         message: reset('Select a strategy:'),
         initial: 0,
-        // @ts-ignore
+        // @ts-expect-error ignore it
         choices: STRATEGIES.map((strategy) => {
           const strategyColor = strategy.color
           return {
@@ -132,7 +132,7 @@ async function init() {
         name: 'behavior',
         message: reset('Select a behavior:'),
         initial: 0,
-        // @ts-ignore
+        // @ts-expect-error ignore it
         choices: BEHAVIORS.map((behavior) => {
           const behaviorColor = behavior.color
           return {
@@ -178,7 +178,7 @@ async function init() {
     })
   }
   catch (cancelled) {
-    // @ts-ignore
+    // @ts-expect-error ignore it
     console.log(cancelled.message)
   }
 }

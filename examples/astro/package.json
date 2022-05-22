@@ -1,0 +1,33 @@
+{
+  "name": "example-astro",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "npm run run-build && npm run serve",
+    "start-reloadsw": "npm run run-build-reloadsw && npm run serve",
+    "start-sw": "npm run run-build-sw && npm run serve",
+    "start-sw-reloadsw": "npm run run-build-sw-reloadsw && npm run serve",
+    "dev": "cross-env DEBUG=vite-plugin-pwa:* astro dev --experimental-integrations",
+    "build": "rimraf dist && cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true astro build --experimental-integrations",
+    "run-build": "rimraf dist && cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true astro build --experimental-integrations",
+    "run-build-reloadsw": "rimraf dist && cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true RELOAD_SW=true astro build --experimental-integrations",
+    "run-build-sw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true SW=true astro build --experimental-integrations",
+    "run-build-sw-reloadsw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true RELOAD_SW=true SW=true astro build --experimental-integrations",
+    "serve": "astro preview --experimental-integrations"
+  },
+  "devDependencies": {
+    "@rollup/plugin-replace": "^4.0.0",
+    "astro": "^1.0.0-beta.31",
+    "cross-env": "^7.0.3",
+    "https-localhost": "^4.7.1",
+    "rimraf": "^3.0.2",
+    "serialize-javascript": "^6.0.0",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.9",
+    "vite-plugin-pwa": "workspace:*",
+    "workbox-core": "^6.5.3",
+    "workbox-precaching": "^6.5.3",
+    "workbox-routing": "^6.5.3",
+    "workbox-window": "^6.5.3"
+  }
+}

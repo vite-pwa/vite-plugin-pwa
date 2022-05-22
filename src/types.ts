@@ -252,6 +252,7 @@ export interface VitePluginPWAAPI {
    * Is the plugin disabled?
    */
   disabled: boolean
+  isDisabled(): Boolean
   extendManifestEntries(fn: ExtendManifestEntriesHook): void
   /*
    * Explicitly generate the manifests.
