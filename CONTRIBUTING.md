@@ -35,4 +35,12 @@ The `vite-plugin-pwa` repo includes a set of examples where you can test the cha
 
 > The default options from the `cli` are just to check your changes are not breaking major ui/app frameworks build: `generateSW` strategy, `Prompt for update` behavior and `Enable periodic SW updates` to `no`. 
 
-> If your changes are specific to some behavior, just use the corresponding option on the `cli`
+> If your changes are specific to some behavior, just use the corresponding option on the `cli`.
+
+## Testing website docs changes
+
+`vite-plugin-pwa` uses `Vitepress` for the website docs, if your changes are about the documentation, you can find the website on the `docs` folder. 
+
+Once you made the changes to the documentation, you can test them running `pnpm run docs` from the root folder.
+
+To check the website build, just run `pnpm run docs:serve` from the root folder.
