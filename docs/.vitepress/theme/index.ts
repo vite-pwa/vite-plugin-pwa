@@ -11,8 +11,8 @@ import './styles/sidebar-links.css'
 import 'virtual:windi.css'
 
 const theme = {
-    Layout,
-    NotFound,
+  Layout,
+  NotFound,
 }
 
 export default theme

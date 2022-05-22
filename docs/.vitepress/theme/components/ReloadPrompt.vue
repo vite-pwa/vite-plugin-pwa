@@ -3,7 +3,7 @@ import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 const { needRefresh, updateServiceWorker } = useRegisterSW()
 
-const close = async() => {
+const close = async () => {
   needRefresh.value = false
 }
 </script>

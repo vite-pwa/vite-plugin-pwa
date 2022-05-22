@@ -7,27 +7,27 @@ const Guide = [
   },
   {
     text: 'Generate Service Worker',
-    link: '/guide/generate'
+    link: '/guide/generate',
   },
   {
     text: 'Prompt for update',
-    link: '/guide/prompt-for-update'
+    link: '/guide/prompt-for-update',
   },
   {
     text: 'Automatic reload',
-    link: '/guide/auto-update'
+    link: '/guide/auto-update',
   },
   {
     text: 'Advanced (injectManifest)',
-    link: '/guide/inject-manifest'
+    link: '/guide/inject-manifest',
   },
   {
     text: 'Static assets handling',
-    link: '/guide/static-assets'
+    link: '/guide/static-assets',
   },
   {
     text: 'Periodic SW updates',
-    link: '/guide/periodic-sw-updates'
+    link: '/guide/periodic-sw-updates',
   },
   {
     text: 'Development',
@@ -208,7 +208,7 @@ const config: UserConfig = {
     ['meta', { property: 'og:description', content: 'Zero-config PWA Framework-agnostic Plugin for Vite' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:creator', content: '@antfu7' }],
-    ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: "180x180" }],
+    ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' }],
   ],
   themeConfig: {
     logo: '/favicon.svg',

@@ -14,10 +14,10 @@ const preconnect = `
     <link rel="preconnect" crossorigin="anonymous" href="${gstatic}">
 `
 
-export const optimizePages = async() => {
+export const optimizePages = async () => {
   const names = await fg('./.vitepress/dist/**/*.html', { onlyFiles: true })
 
-  await Promise.all(names.map(async(i) => {
+  await Promise.all(names.map(async (i) => {
     let html = await fs.readFile(i, 'utf-8')
 
     let preloadImg = '\n\t<link rel="prefetch" href="/icon_light.svg">\n\t<link rel="prefetch" href="/icon_dark.svg">'
@@ -50,7 +50,7 @@ export const optimizePages = async() => {
       '\t<link rel="manifest" href="/manifest.webmanifest">\n<script>\n'
         + '    (function() {\n'
         + '      const prefersDark = window.matchMedia && window.matchMedia(\'(prefers-color-scheme: dark)\').matches\n'
-        + '      const setting = localStorage.getItem(\'color-schema\') || \'auto\'\n'
+        + '      const setting = localStorage.getItem(\'vueuse-color-schema\') || \'auto\'\n'
         + '      if (setting === \'dark\' || (prefersDark && setting !== \'light\'))\n'
         + '        document.documentElement.classList.toggle(\'dark\', true)\n'
         + '    })()\n'

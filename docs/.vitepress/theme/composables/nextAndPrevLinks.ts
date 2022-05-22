@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import { useData } from 'vitepress'
-import { isArray, ensureStartingSlash, removeExtention } from '../utils'
-import { getSideBarConfig, getFlatSideBarLinks } from '../support/sideBar'
+import { ensureStartingSlash, isArray, removeExtention } from '../utils'
+import { getFlatSideBarLinks, getSideBarConfig } from '../support/sideBar'
 
 export function useNextAndPrevLinks() {
   const { page, theme } = useData()
@@ -29,11 +29,15 @@ export function useNextAndPrevLinks() {
       && index.value < candidates.value.length - 1
     )
       return candidates.value[index.value + 1]
+
+    return undefined
   })
 
   const prev = computed(() => {
     if (theme.value.prevLinks !== false && index.value > 0)
       return candidates.value[index.value - 1]
+
+    return undefined
   })
 
   const hasLinks = computed(() => !!next.value || !!prev.value)

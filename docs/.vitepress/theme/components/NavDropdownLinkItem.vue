@@ -16,7 +16,7 @@ const { props: linkProps, isExternal } = useNavLink(propsRefs.item)
     <a class="item" v-bind="linkProps">
       <!-- <span class="arrow" /> -->
       <span class="text md:ml-2">{{ item.text }}</span>
-      <span class="icon"><OutboundLink v-if="isExternal" class="ml-0.5 opacity-50 align-middle"/></span>
+      <span class="icon"><OutboundLink v-if="isExternal" class="ml-0.5 opacity-50 align-middle" /></span>
     </a>
   </div>
 </template>
