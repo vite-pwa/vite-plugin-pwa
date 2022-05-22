@@ -70,6 +70,9 @@ export function astroIntegration<T extends UserConfig>(): AstroIntegration<T> {
             manifestEntries.push(...addRoutes)
             return manifestEntries
           })
+          // generate the manifest.webmanifest file
+          api.generateBundle()
+          // regenerate the sw
           await api.generateSW()
         }
       },

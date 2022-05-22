@@ -5,9 +5,7 @@ import {
 	VitePWA,
 } from 'vite-plugin-pwa';
 import replace from '@rollup/plugin-replace';
-import crypto  from 'crypto';
-import fs from 'fs'
-import { resolve as resolveFs } from 'path'
+
 
 const pwaOptions = {
 	mode: 'development',
@@ -38,6 +36,9 @@ const pwaOptions = {
 		],
 	},
 	workbox: {
+		navigateFallback: '/',
+		// we don't need the html files: we only need the navigation fallback
+		globPatterns: ['**/*.{js,css}'],
 		dontCacheBustURLsMatching,
 	},
 	devOptions: {
