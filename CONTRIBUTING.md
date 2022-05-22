@@ -35,7 +35,7 @@ The `vite-plugin-pwa` repo includes a set of examples where you can test the cha
 
 > The default options from the `cli` are just to check your changes are not breaking major ui/app frameworks build: `generateSW` strategy, `Prompt for update` behavior and `Enable periodic SW updates` to `no`. 
 
-> If your changes are specific to a specific behavior, just use the corresponding option on the `cli`.
+> If your changes are specific to some behavior, just use the corresponding option on the `cli`.
 
 ## Testing website docs changes
 
