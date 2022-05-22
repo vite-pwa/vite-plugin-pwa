@@ -24,7 +24,7 @@
     "serve": "serve dist"
   },
   "dependencies": {
-    "preact": "^10.7.1",
+    "preact": "^10.7.2",
     "preact-router": "^4.0.1"
   },
   "devDependencies": {
@@ -33,8 +33,8 @@
     "cross-env": "^7.0.3",
     "https-localhost": "^4.7.1",
     "rimraf": "^3.0.2",
-    "typescript": "^4.6.3",
-    "vite": "^2.9.5",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.9",
     "vite-plugin-pwa": "workspace:*",
     "workbox-core": "^6.5.3",
     "workbox-precaching": "^6.5.3",

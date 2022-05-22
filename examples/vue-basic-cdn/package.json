@@ -10,17 +10,17 @@
     "serve": "serve dist"
   },
   "dependencies": {
-    "vue": "^3.2.33"
+    "vue": "^3.2.35"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^4.0.0",
-    "@vitejs/plugin-vue": "^2.3.1",
-    "@vue/compiler-sfc": "^3.2.33",
-    "@vueuse/core": "^8.2.6",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "@vue/compiler-sfc": "^3.2.35",
+    "@vueuse/core": "^8.5.0",
     "cross-env": "^7.0.3",
     "https-localhost": "^4.7.1",
-    "typescript": "^4.6.3",
-    "vite": "^2.9.5",
+    "typescript": "^4.6.4",
+    "vite": "^2.9.9",
     "vite-plugin-pwa": "workspace:*"
   }
 }
