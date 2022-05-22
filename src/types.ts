@@ -298,3 +298,4 @@ export interface DevOptions {
    */
   navigateFallback?: string
 }
+

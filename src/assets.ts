@@ -6,13 +6,14 @@ import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'wo
 import type { ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions } from './types'
 
-function buildManifestEntry(
+export function buildManifestEntry(
   publicDir: string,
   url: string,
+  path: string | undefined = undefined,
 ): Promise<ManifestEntry> {
   return new Promise((resolve, reject) => {
     const cHash = crypto.createHash('MD5')
-    const stream = fs.createReadStream(resolveFs(publicDir, url))
+    const stream = fs.createReadStream(resolveFs(publicDir, path ?? url))
     stream.on('error', (err) => {
       reject(err)
     })

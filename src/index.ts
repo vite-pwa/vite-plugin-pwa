@@ -9,6 +9,7 @@ import { resolveOptions } from './options'
 import { generateWebManifestFile } from './assets'
 import { FILE_SW_REGISTER, VIRTUAL_MODULES, VIRTUAL_MODULES_MAP, VIRTUAL_MODULES_RESOLVE_PREFIX } from './constants'
 import { loadDev, resolveDevId, swDevOptions } from './dev'
+import { astroDontCacheBustURLsMatching, astroIntegration } from './astro'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   let viteConfig: ResolvedConfig
@@ -160,4 +161,5 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
 export * from './types'
 export { cachePreset } from './cache'
 export { defaultInjectManifestVitePlugins } from './constants'
+export { astroDontCacheBustURLsMatching, astroIntegration }
 export type { VitePWAOptions as Options }
