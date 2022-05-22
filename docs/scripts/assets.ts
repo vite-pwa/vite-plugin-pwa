@@ -50,7 +50,7 @@ export const optimizePages = async() => {
       '\t<link rel="manifest" href="/manifest.webmanifest">\n<script>\n'
         + '    (function() {\n'
         + '      const prefersDark = window.matchMedia && window.matchMedia(\'(prefers-color-scheme: dark)\').matches\n'
-        + '      const setting = localStorage.getItem(\'color-schema\') || \'auto\'\n'
+        + '      const setting = localStorage.getItem(\'vueuse-color-schema\') || \'auto\'\n'
         + '      if (setting === \'dark\' || (prefersDark && setting !== \'light\'))\n'
         + '        document.documentElement.classList.toggle(\'dark\', true)\n'
         + '    })()\n'
