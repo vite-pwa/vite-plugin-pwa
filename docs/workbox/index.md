@@ -4,17 +4,15 @@ title: Getting Started | Workbox
 
 # Getting Started
 
-**Workbox** is a huge package with a lot of modules to just make service worker development not to be a hassle and avoid 
-dealing with low level service worker api.
+[**Workbox**](https://developers.google.com/web/tools/workbox/) is a massive package with many modules to make service worker development more enjoyable and remove the need to deal with the low-level service worker API.
 
-In this document we focus only on 
+In this document, we focus only on the 
 [workbox-build](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build) <outbound-link /> 
 module from **Workbox**.
 
 ## workbox-build module
 
-This module is for build process purpose (it is a `node` module), that is, `Vite Plugin PWA` will use it to build your 
-service worker.
+This module is for build process purposes (a `node` module); that is, `Vite Plugin PWA` will use it to build your service-worker.
 
 We focus on 2 methods of this module:
 
@@ -25,28 +23,22 @@ We focus on 2 methods of this module:
 </md-list-anchor>
 <md-list-anchor href="/workbox/inject-manifest.html">
   <template #link>injectManifest</template>
-  <template #trailing>: to build your own service worker.</template>
+  <template #trailing>: For when you need more control over your service worker.</template>
 </md-list-anchor>
 </ul>
 
-You must read [Which Mode to Use](https://developers.google.com/web/tools/workbox/modules/workbox-build#which_mode_to_use) <outbound-link />
-before decide what strategy to use.
+You should read [Which Mode to Use](https://developers.google.com/web/tools/workbox/modules/workbox-build#which_mode_to_use) <outbound-link /> before deciding which strategy to use.
 
-`generateSW` method will abstract you from using service worker api when building the service worker. 
-This method can be configured using plugins instead writing your own service worker code (`generateSW` will generate 
+In short, the `generateSW` function abstracts away the need to work directly with the service worker API when building the service worker. This method can be configured using plugins instead of writing your own service worker code (`generateSW` will generate 
 the code for you).
 
-`injectManifest` method will get your custom service worker and build/compile it.
+While the `injectManifest` method will use your existing service worker and build/compile it.
 
 ## How is `workbox-build` related to `vite-plugin-pwa`?
 
-`vite-plugin-pwa` will use internally `generateSW` and `injectManifest` `workbox` methods when `strategies` 
-option is `generateSW` and `injectManifest` respectively.
+`vite-plugin-pwa` uses `generateSW` and `injectManifest` `workbox` methods internally when the `strategies` option is set to `generateSW` and `injectManifest` respectively.
 
-When you configure `strategies: 'generateSW'` option (it is the default value) on your `vite.config.ts` file, then the 
-plugin invoke the workbox `generateSW` method: the options passed to the `workbox-build` method will be the provided on 
-`workbox` option of the plugin configuration.
+When you configure `strategies: 'generateSW'` option (the default value) in your `vite.config.*` file, the 
+plugin invokes workbox' `generateSW` method. The options passed to the `workbox-build` method will be those provided via the `workbox` option of the plugin configuration.
 
-When you configure `strategies: 'injectManifest'` plugin option on your `vite.config.ts` file, the plugin will first 
-build your custom service worker via `rollup` and then, with previous build result will call to workbox `injectManifest` 
-method: the options passed to the `workbox-build` method will be the provided on `injectManifest` option of the plugin configuration.
+When you configure `strategies: with the 'injectManifest'` option, the plugin will first build your custom service worker via `rollup`. With the build result, Vite-Plugin-PWA will call Workbox' `injectManifest` method passing those options provided via the `workbox` option of the plugin configuration.
