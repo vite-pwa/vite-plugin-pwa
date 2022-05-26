@@ -4,7 +4,7 @@ title: Getting Started | Workbox
 
 # Getting Started
 
-[**Workbox**](https://developers.google.com/web/tools/workbox/) is a massive package with many modules to make service worker development more enjoyable and remove the need to deal with the low-level service worker API.
+[**Workbox**](https://developers.google.com/web/tools/workbox/)<outbound-link /> is a massive package with many modules to make service worker development more enjoyable and remove the need to deal with the low-level service worker API.
 
 In this document, we focus only on the 
 [workbox-build](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build) <outbound-link /> 
@@ -41,4 +41,4 @@ While the `injectManifest` method will use your existing service worker and buil
 When you configure `strategies: 'generateSW'` option (the default value) in your `vite.config.*` file, the 
 plugin invokes workbox' `generateSW` method. The options passed to the `workbox-build` method will be those provided via the `workbox` option of the plugin configuration.
 
-When you configure `strategies: with the 'injectManifest'` option, the plugin will first build your custom service worker via `rollup`. With the build result, Vite-Plugin-PWA will call Workbox' `injectManifest` method passing those options provided via the `workbox` option of the plugin configuration.
+When you configure `strategies: with the 'injectManifest'` option, the plugin will first build your custom service worker via `rollup`. With the build result, vite-plugin-pwa will call Workbox' `injectManifest` method passing those options provided via the `workbox` option of the plugin configuration.
