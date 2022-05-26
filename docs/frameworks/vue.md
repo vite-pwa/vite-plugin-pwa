@@ -69,7 +69,31 @@ Lastly we need to update the `dev` script in `package.json`. Open up your `packa
 }
 ```
 
-From your terminal run, `npm run dev:pwa` and open your browser to `http://localhost:3000`. Open the `Application` tab of your browser’s developer tools. You should now see a service worker called `dev-sw.js` active and running.
+From your terminal run, `npm run dev:pwa`. You should see output similar to the following:
+
+```bash
+> cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true vite
+
+
+  vite v2.9.9 dev server running at:
+
+  > Local: http://localhost:3000/
+  > Network: use `--host` to expose
+
+  ready in 299ms.
+
+
+PWA v0.12.0
+mode      generateSW
+precache  1 entries (0.00 KiB)
+files generated
+  dev-dist/sw.js.map
+  dev-dist/sw.js
+  dev-dist/workbox-b3e22772.js.map
+  dev-dist/workbox-b3e22772.js
+```
+
+Open your browser to `http://localhost:3000`. Open the `Application` tab of your browser’s developer tools. You should now see a service worker called `dev-sw.js` active and running.
 
 ### Prompt for update
 
