@@ -4,7 +4,7 @@ title: Getting Started | Workbox
 
 # Getting Started
 
-[**Workbox**](https://developers.google.com/web/tools/workbox/)<outbound-link /> is a massive package with many modules to make service worker development more enjoyable and remove the need to deal with the low-level service worker API.
+[**Workbox**](https://developers.google.com/web/tools/workbox/) <outbound-link /> is a massive package with many modules to make service worker development more enjoyable and remove the need to deal with the low-level service worker API.
 
 In this document, we focus only on the 
 [workbox-build](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build) <outbound-link /> 
