@@ -32,6 +32,45 @@ declare module 'virtual:pwa-register/vue' {
 }
 ```
 
+### Basic default service worker
+
+Before looking at some of the API methods like `offlineReady`, `needRefresh`, and `updateServiceWorker`, let’s get a basic working service worker up and running. If you have not already done so, first read the [getting started](../guide/index.md) and [generate service worker](../guide/generate.md) docs. In your Vite config you created in the getting started guide add the following:
+
+```js
+devOptions: {
+  enabled: process.env.SW_DEV === "true",
+  /* when using generateSW the PWA plugin will switch to classic */
+  type: "module",
+  navigateFallback: "index.html",
+}
+```
+
+Next, open `App.vue` and add the following to the `script` block:
+
+```vue
+<script setup>
+import { useRegisterSW } from "virtual:pwa-register/vue";
+
+useRegisterSW({
+  immediate: true,
+  onRegistered(r) {
+    console.log(`SW Registered: ${r}`);
+  },
+});
+</script>
+```
+
+Lastly we need to update the `dev` script in `package.json`. Open up your `package.json` and either change your existing `dev` script or, add the following:
+
+```json
+"scripts": {
+  ...
+  "dev:pwa": "cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true vite",
+}
+```
+
+From your terminal run, `npm run dev:pwa` and open your browser to `http://localhost:3000`. Open the `Application` tab of your browser’s developer tools. You should now see a service worker called `dev-sw.js` active and running.
+
 ### Prompt for update
 
 You can use this `ReloadPrompt.vue` component:
