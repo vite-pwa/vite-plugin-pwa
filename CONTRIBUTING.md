@@ -1,7 +1,8 @@
-# vite-plugin-pwa Contributing Guide
+# Contributing Guide
 
-Hi! We are really excited that you are interested in contributing to `vite-plugin-pwa`. Before submitting your contribution, please make sure to take a moment and read through the following guide:
+Hi! We are really excited that you are interested in contributing to `vite-plugin-pwa`. Before submitting your contribution, please make sure to take a moment and read through the following guide.
 
+Refer also to https://github.com/antfu/contribute.
 ## Set up your local development environment
 
 The `vite-plugin-pwa` repo is a monorepo using pnpm workspaces. The package manager used to install and link dependencies must be [pnpm](https://pnpm.io/).
