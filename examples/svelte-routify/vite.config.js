@@ -30,6 +30,12 @@ const pwaOptions = {
       },
     ],
   },
+  devOptions: {
+    enabled: process.env.SW_DEV === 'true',
+    /* when using generateSW the PWA plugin will switch to classic */
+    type: 'module',
+    navigateFallback: 'index.html',
+  },
 }
 
 const replaceOptions = { __DATE__: new Date().toISOString() }

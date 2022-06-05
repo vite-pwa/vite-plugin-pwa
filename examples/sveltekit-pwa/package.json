@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "dev": "svelte-kit dev",
+    "dev": "cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true svelte-kit dev",
+    "dev-claims": "cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true CLAIMS=true SW=true svelte-kit dev",
     "build": "svelte-kit build",
     "package": "svelte-kit package",
     "preview": "svelte-kit preview",

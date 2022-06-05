@@ -33,3 +33,13 @@ export function injectServiceWorker(html: string, options: ResolvedVitePWAOption
     `${manifest}</head>`,
   )
 }
+
+export function injectDevManifest(html: string, options: ResolvedVitePWAOptions) {
+  const crossorigin = options.useCredentials ? ' crossorigin="use-credentials"' : ''
+  const manifest = options.manifest ? `<link rel="manifest" href="${options.base}${options.manifestFilename}"${crossorigin}>` : ''
+
+  return html.replace(
+    '</head>',
+      `${manifest}</head>`,
+  )
+}

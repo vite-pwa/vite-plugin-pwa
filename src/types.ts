@@ -296,4 +296,13 @@ export interface DevOptions {
    * **WARNING**: this option will only be used when using `injectManifest` strategy.
    */
   navigateFallback?: string
+
+  /**
+   * On dev mode the `manifest.webmanifest` file can be on other path.
+   *
+   * For example, **SvelteKit** will request `/_app/manifest.webmanifest`.
+   *
+   * @default `${vite.base}${pwaOptions.manifestFilename}`
+   */
+  webManifestUrl?: string
 }
