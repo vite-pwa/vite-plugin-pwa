@@ -5,7 +5,6 @@ title: SvelteKit | Frameworks
 # SvelteKit
 
 > For `Type declarations`, `Prompt for update` and `Periodic SW Updates` go to [Svelte](/frameworks/svelte.html) entry.
-> 
 
 You should remove all references to [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker) <outbound-link /> to disable it on your application.
 
@@ -18,19 +17,19 @@ The best place to include the `ReloadPrompt` is on the main layout of the applic
 
 ```html
 <script>
-	import { onMount } from 'svelte'
-	import { browser, dev } from '$app/env'
+  import { onMount } from 'svelte'
+  import { browser, dev } from '$app/env'
 
-	let ReloadPrompt
-	onMount(async () => {
-		!dev && browser && (ReloadPrompt = (await import('$lib/components/ReloadPrompt.svelte')).default)
-	})
+  let ReloadPrompt
+  onMount(async () => {
+    !dev && browser && (ReloadPrompt = (await import('$lib/components/ReloadPrompt.svelte')).default)
+  })
 </script>
 
 <svelte:head>
-	{#if (!dev && browser)}
-		<link rel="manifest" href="/_app/manifest.webmanifest">
-	{/if}
+  {#if (!dev && browser)}
+    <link rel="manifest" href="/_app/manifest.webmanifest">
+  {/if}
 </svelte:head>
 
 <main>
@@ -38,7 +37,7 @@ The best place to include the `ReloadPrompt` is on the main layout of the applic
 </main>
 
 {#if ReloadPrompt}
-	<svelte:component this={ReloadPrompt} />
+  <svelte:component this={ReloadPrompt} />
 {/if}
 ```
 </details>
@@ -67,37 +66,37 @@ As an example, when using [@sveltejs/adapter-static](https://github.com/sveltejs
 <summary>1) add <strong>pwa.js</strong> script</summary>
 
 ```js
+import { copyFileSync } from 'fs'
 import { resolveConfig } from 'vite'
-import { VitePWA } from 'vite-plugin-pwa';
-import { pwaConfiguration } from './pwa-configuration.js';
-import { copyFileSync } from 'fs';
+import { VitePWA } from 'vite-plugin-pwa'
+import { pwaConfiguration } from './pwa-configuration.js'
 
 const webmanifestDestinations = [
-	'./.svelte-kit/output/client/',
-	'./build/',
+  './.svelte-kit/output/client/',
+  './build/',
 ]
 
 const swDestinations = [
-	'./build/',
+  './build/',
 ]
 
-const buildPwa = async() => {
-	const config = await resolveConfig({ plugins: [VitePWA({ ...pwaConfiguration })] }, 'build', 'production' )
-	// when `vite-plugin-pwa` is present, use it to regenerate SW after rendering
-	const pwaPlugin = config.plugins.find(i => i.name === 'vite-plugin-pwa')?.api
-	if (pwaPlugin?.generateSW) {
-		console.log('Generating PWA...')
-		await pwaPlugin.generateSW()
-		webmanifestDestinations.forEach(d => {
-			copyFileSync('./.svelte-kit/output/client/_app/manifest.webmanifest', `${d}/manifest.webmanifest`)
-		})
-		// don't copy workbox, SvelteKit will copy it
-		swDestinations.forEach(d => {
-			copyFileSync('./.svelte-kit/output/client/sw.js', `${d}/sw.js`)
-		})
-		console.log('Generation of PWA complete')
-	}
-} 
+const buildPwa = async () => {
+  const config = await resolveConfig({ plugins: [VitePWA({ ...pwaConfiguration })] }, 'build', 'production')
+  // when `vite-plugin-pwa` is present, use it to regenerate SW after rendering
+  const pwaPlugin = config.plugins.find(i => i.name === 'vite-plugin-pwa')?.api
+  if (pwaPlugin?.generateSW) {
+    console.log('Generating PWA...')
+    await pwaPlugin.generateSW()
+    webmanifestDestinations.forEach((d) => {
+      copyFileSync('./.svelte-kit/output/client/_app/manifest.webmanifest', `${d}/manifest.webmanifest`)
+    })
+    // don't copy workbox, SvelteKit will copy it
+    swDestinations.forEach((d) => {
+      copyFileSync('./.svelte-kit/output/client/sw.js', `${d}/sw.js`)
+    })
+    console.log('Generation of PWA complete')
+  }
+}
 
 buildPwa()
 ```
@@ -109,75 +108,75 @@ buildPwa()
 
 ```js
 const pwaConfiguration = {
-	srcDir: './build',
-	outDir: './.svelte-kit/output/client',
-	includeManifestIcons: false,
-	base: '/',
-	scope: '/',
-	manifest: {
-	short_name: "<YOUR APP SHORT NAME>",
-	name: "<YOUR APP NAME>",
-	scope: "/",
-	start_url: "/",
-	display: "standalone",
-	theme_color: "#ffffff",
-	background_color: "#ffffff",
-	icons: [
-		{
-			src: "/pwa-192x192.png",
-			sizes: "192x192",
-			type: "image/png"
-		},
-		{
-			src: "/pwa-512x512.png",
-			"sizes": "512x512",
-			"type": "image/png"
-		},
-		{
-			src: "/pwa-512x512.png",
-			"sizes": "512x512",
-			"type": "image/png",
-			purpose: 'any maskable'
-		}
-	]
-	},
-	workbox: {
-		// mode: 'development',
-		navigateFallback: '/',
-		// vite and SvelteKit are not aligned: pwa plugin will use /\.[a-f0-9]{8}\./ by default: #164 optimize workbox work
-		dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
-		globDirectory: './build/',
-		globPatterns: ['robots.txt', '**/*.{js,css,html,ico,png,svg,webmanifest}'],
-		globIgnores: ['**/sw*', '**/workbox-*'],
-		manifestTransforms: [async(entries) => {
-			// manifest.webmanifest is added always by pwa plugin, so we remove it.
-			// EXCLUDE from the sw precache sw and workbox-*
-			const manifest = entries.filter(({ url }) =>
-				url !== 'manifest.webmanifest' && url !== 'sw.js' && !url.startsWith('workbox-')
-			).map((e) => {
-				let url = e.url;
-				if (url && url.endsWith('.html')) {
-					if (url.startsWith('/')) {
-						url = url.slice(1)
-					}
-					if (url === 'index.html') {
-						e.url = '/'
-					} else if (url.endsWith('index.html')) {
-						e.url = `/${url.substring(0, url.lastIndexOf('/'))}`
-					} else if (url.endsWith('.html')) {
-						e.url = `/${url.substring(0, url.length - '.html'.length)}`
-					}
-				}
-				
-				return e
-			});
-			
-			return { manifest };
-		}]
-	}
-};
+  srcDir: './build',
+  outDir: './.svelte-kit/output/client',
+  includeManifestIcons: false,
+  base: '/',
+  scope: '/',
+  manifest: {
+    short_name: '<YOUR APP SHORT NAME>',
+    name: '<YOUR APP NAME>',
+    scope: '/',
+    start_url: '/',
+    display: 'standalone',
+    theme_color: '#ffffff',
+    background_color: '#ffffff',
+    icons: [
+      {
+        src: '/pwa-192x192.png',
+        sizes: '192x192',
+        type: 'image/png'
+      },
+      {
+        src: '/pwa-512x512.png',
+        sizes: '512x512',
+        type: 'image/png'
+      },
+      {
+        src: '/pwa-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+        purpose: 'any maskable'
+      }
+    ]
+  },
+  workbox: {
+    // mode: 'development',
+    navigateFallback: '/',
+    // vite and SvelteKit are not aligned: pwa plugin will use /\.[a-f0-9]{8}\./ by default: #164 optimize workbox work
+    dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
+    globDirectory: './build/',
+    globPatterns: ['robots.txt', '**/*.{js,css,html,ico,png,svg,webmanifest}'],
+    globIgnores: ['**/sw*', '**/workbox-*'],
+    manifestTransforms: [async (entries) => {
+      // manifest.webmanifest is added always by pwa plugin, so we remove it.
+      // EXCLUDE from the sw precache sw and workbox-*
+      const manifest = entries.filter(({ url }) =>
+        url !== 'manifest.webmanifest' && url !== 'sw.js' && !url.startsWith('workbox-')
+      ).map((e) => {
+        let url = e.url
+        if (url && url.endsWith('.html')) {
+          if (url.startsWith('/'))
+            url = url.slice(1)
 
-export { pwaConfiguration };
+          if (url === 'index.html')
+            e.url = '/'
+          else if (url.endsWith('index.html'))
+            e.url = `/${url.substring(0, url.lastIndexOf('/'))}`
+          else if (url.endsWith('.html'))
+            e.url = `/${url.substring(0, url.length - '.html'.length)}`
+
+        }
+
+        return e
+      })
+
+      return { manifest }
+    }]
+  }
+}
+
+export { pwaConfiguration }
 ```
 </details>
 
@@ -185,8 +184,10 @@ export { pwaConfiguration };
 <summary>3) modify your <strong>build</strong> script</summary>
 
 ```json
-"scripts": {
-	"build": "svelte-kit build && node ./pwa.js"
+{
+  "scripts": {
+    "build": "svelte-kit build && node ./pwa.js"
+  }
 }
 ```
 </details>
@@ -196,28 +197,28 @@ export { pwaConfiguration };
 <summary>4) add <strong>Vite Plugin PWA</strong> to <strong>svelte.config.js</strong></summary>
 
 ```js
-import adapter from '@sveltejs/adapter-static';
-import preprocess from 'svelte-preprocess';
-import { VitePWA } from 'vite-plugin-pwa';
+import adapter from '@sveltejs/adapter-static'
+import preprocess from 'svelte-preprocess'
+import { VitePWA } from 'vite-plugin-pwa'
 import { pwaConfiguration } from './pwa-configuration.js'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-	// Consult https://github.com/sveltejs/svelte-preprocess
-	// for more information about preprocessors
-	preprocess: preprocess(),
+  // Consult https://github.com/sveltejs/svelte-preprocess
+  // for more information about preprocessors
+  preprocess: preprocess(),
 
-	kit: {
-		adapter: adapter(),
-		
-		// hydrate the <div id="svelte"> element in src/app.html
-		target: '#svelte',
-		vite: {
-			plugins: [VitePWA(pwaConfiguration)]
-		}
-	}
-};
+  kit: {
+    adapter: adapter(),
 
-export default config;
+    // hydrate the <div id="svelte"> element in src/app.html
+    target: '#svelte',
+    vite: {
+      plugins: [VitePWA(pwaConfiguration)]
+    }
+  }
+}
+
+export default config
 ```
 </details>

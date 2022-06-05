@@ -13,7 +13,7 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/svelte` for
 
 ```ts
 declare module 'virtual:pwa-register/svelte' {
-  // @ts-ignore ignore when svelte is not installed
+  // @ts-expect-error ignore when svelte is not installed
   import type { Writable } from 'svelte/store'
 
   export interface RegisterSWOptions {
@@ -121,7 +121,7 @@ As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.htm
 behavior on your application with the virtual module `virtual:pwa-register/svelte`:
 
 ```ts
-import { useRegisterSW } from 'virtual:pwa-register/svelte';
+import { useRegisterSW } from 'virtual:pwa-register/svelte'
 
 const intervalMS = 60 * 60 * 1000
 

@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope,react/no-unknown-property */
 import { Link, useRouteData } from 'solid-app-router'
 
 export default function Hi() {

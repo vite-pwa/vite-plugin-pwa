@@ -1,4 +1,4 @@
-/* eslint-disable react/react-in-jsx-scope,react/no-unknown-property */
+/* eslint-disable react/no-unknown-property */
 import type { Component } from 'solid-js'
 import { Show } from 'solid-js'
 import { useRegisterSW } from 'virtual:pwa-register/solid'

@@ -3,11 +3,11 @@ import type { RegisterSWOptions } from '../type'
 
 export type { RegisterSWOptions }
 
-export function useRegisterSW(options: RegisterSWOptions = {}) {
+export function useRegisterSW(_options: RegisterSWOptions = {}) {
   const needRefresh = createSignal(false)
   const offlineReady = createSignal(false)
 
-  const updateServiceWorker = (reloadPage?: boolean) => {}
+  const updateServiceWorker = (_reloadPage?: boolean) => {}
 
   return {
     needRefresh,

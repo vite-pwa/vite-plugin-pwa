@@ -1,4 +1,3 @@
-/* eslint-disable react/react-in-jsx-scope,react/no-unknown-property */
 export default function NotFound() {
   return (
     <section>

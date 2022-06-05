@@ -22,7 +22,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
   let wb: Workbox | undefined
   let registration: ServiceWorkerRegistration | undefined
 
-  const updateServiceWorker = async(reloadPage = true) => {
+  const updateServiceWorker = async (reloadPage = true) => {
     if (!auto) {
       // Assuming the user accepted the update, set up a listener
       // that will reload the page as soon as the previously waiting

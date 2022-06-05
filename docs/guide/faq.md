@@ -26,7 +26,7 @@ add the following to the `compilerOptions.types` array of your `tsconfig.json`:
 To send the request with credentials, the `<link rel="manifest">` needs a `crossorigin="use-credentials"` attribute, which you can enable via `useCredentials` in the [plugin options](https://github.com/antfu/vite-plugin-pwa/blob/main/src/types.ts#L79):
 
 ```ts
-useCredentials: true;
+useCredentials: true
 ```
 
 ## Service Worker Registration Errors
@@ -101,7 +101,7 @@ For example, using `vue-router`, you can register the service worker for `autoUp
 ```ts
 import type { Router } from 'vue-router'
 export const registerPWA = (router: Router) => {
-  router.isReady().then(async() => {
+  router.isReady().then(async () => {
     const { registerSW } = await import('virtual:pwa-register')
     registerSW({ immediate: true })
   })
@@ -122,9 +122,10 @@ const ClientReloadPrompt = typeof window !== 'undefined'
   ? defineAsyncComponent(() => import('./ReloadPrompt.vue'))
   : null
 </script>
+
 <template>
-  <router-view/>
-  <template v-if='ClientReloadPrompt'>
+  <router-view />
+  <template v-if="ClientReloadPrompt">
     <ClientReloadPrompt />
   </template>
 </template>

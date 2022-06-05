@@ -8,7 +8,11 @@ Since this plugin will not generate the service worker on `development`, you can
 
 1) add `serve` script to your `package.json` or modify existing with:
 ```json
-"serve": "vite preview"
+{
+  "scripts": {
+    "serve": "vite preview"
+  }
+}
 ```
 2) build your app and run `serve`:
 
@@ -49,8 +53,13 @@ If you want to test your service worker using `https`, follow these steps:
     ```
 
 2) add `https-preview` script to your `package.json`:
+
 ```json
-"https-preview": "serve dist"
+{
+  "scripts": {
+    "https-preview": "serve dist"
+  }
+}
 ```
 
 3) build your app and run `https-preview`:

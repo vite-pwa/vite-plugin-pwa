@@ -13,7 +13,7 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/vue` for `V
 
 ```ts
 declare module 'virtual:pwa-register/vue' {
-  // @ts-ignore ignore when vue is not installed
+  // @ts-expect-error ignore when vue is not installed
   import type { Ref } from 'vue'
 
   export interface RegisterSWOptions {
@@ -49,7 +49,7 @@ const {
   updateServiceWorker,
 } = useRegisterSW()
 
-const close = async() => {
+const close = async () => {
   offlineReady.value = false
   needRefresh.value = false
 }
@@ -57,9 +57,9 @@ const close = async() => {
 
 <template>
   <div
-      v-if="offlineReady || needRefresh"
-      class="pwa-toast"
-      role="alert"
+    v-if="offlineReady || needRefresh"
+    class="pwa-toast"
+    role="alert"
   >
     <div class="message">
       <span v-if="offlineReady">
@@ -140,17 +140,17 @@ You can copy `useRegisterSW.js` `mixin` to your `@/mixins/` directory in your ap
 
 ```js
 export default {
-  name: "useRegisterSW",
+  name: 'useRegisterSW',
   data() {
     return {
       updateSW: undefined,
       offlineReady: false,
-      needRefresh: false  
+      needRefresh: false
     }
   },
   async mounted() {
     try {
-      const { registerSW } = await import("virtual:pwa-register")
+      const { registerSW } = await import('virtual:pwa-register')
       const vm = this
       this.updateSW = registerSW({
         immediate: true,
@@ -163,14 +163,15 @@ export default {
           vm.onNeedRefreshFn()
         },
         onRegistered(swRegistration) {
-          swRegistration && vm.handleSWManualUpdates(swRegistration)   
+          swRegistration && vm.handleSWManualUpdates(swRegistration)
         },
         onRegisterError(e) {
-          vm.handleSWRegisterError(e)    
-        }  
+          vm.handleSWRegisterError(e)
+        }
       })
-    } catch {
-      console.log("PWA disabled.")
+    }
+    catch {
+      console.log('PWA disabled.')
     }
 
   },
@@ -180,16 +181,16 @@ export default {
       this.needRefresh = false
     },
     onOfflineReadyFn() {
-      console.log("onOfflineReady")
+      console.log('onOfflineReady')
     },
     onNeedRefreshFn() {
-      console.log("onNeedRefresh")
+      console.log('onNeedRefresh')
     },
     updateServiceWorker() {
       this.updateSW && this.updateSW(true)
     },
-    handleSWManualUpdates(swRegistration) {}, 
-    handleSWRegisterError(error) {} 
+    handleSWManualUpdates(swRegistration) {},
+    handleSWRegisterError(error) {}
   }
 }
 ```
@@ -207,16 +208,16 @@ You can use this `ReloadPrompt.vue` component:
 import useRegisterSW from '@/mixins/useRegisterSW'
 
 export default {
-  name: "reload-prompt",
+  name: 'ReloadPrompt',
   mixins: [useRegisterSW]
 }
 </script>
 
 <template>
   <div
-      v-if="offlineReady || needRefresh"
-      class="pwa-toast"
-      role="alert"
+    v-if="offlineReady || needRefresh"
+    class="pwa-toast"
+    role="alert"
   >
     <div class="message">
       <span v-if="offlineReady">
@@ -274,7 +275,7 @@ import useRegisterSW from '@/mixins/useRegisterSW'
 const intervalMS = 60 * 60 * 1000
 
 export default {
-  name: "reload-prompt",
+  name: 'ReloadPrompt',
   mixins: [useRegisterSW],
   methods: {
     handleSWManualUpdates(r) {

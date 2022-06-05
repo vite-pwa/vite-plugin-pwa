@@ -24,13 +24,13 @@ export default defineConfig({
   plugins: [
     VitePWA({
       /* other options */
-      /* enable sw on development */  
+      /* enable sw on development */
       devOptions: {
         enabled: true
-        /* other options */  
+        /* other options */
       }
     })
-  ]    
+  ]
 })
 ```
 
@@ -65,7 +65,7 @@ export interface DevOptions {
    * This option will allow you to configure the `navigateFallback` when using `registerRoute` for `offline` support:,
    * configure here the corresponding `url`, for example `navigateFallback: 'index.html'`.
    *
-   * **WARNING**: this option will only be used when using `injectManifest` strategy.   
+   * **WARNING**: this option will only be used when using `injectManifest` strategy.
    */
   navigateFallback?: string
 }
@@ -85,6 +85,8 @@ Uncaught (in promise) TypeError: Failed to execute 'importScripts' on 'WorkerGlo
 ## injectManifest strategy
 
 You can use `type: 'module'` when registering the service worker (right now only supported on latest versions of `Chromium` based browsers: `Chromium/Chrome/Edge`):
+
+<!--eslint-skip-->
 
 ```ts
 devOptions: {
@@ -109,7 +111,7 @@ If you register your custom service worker (not using PWA virtual module and con
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register(
     import.meta.env.MODE === 'production' ? '/sw.js' : '/dev-sw.js?dev-sw'
-  );
+  )
 }
 ```
 
@@ -118,8 +120,8 @@ If you are also using `import` statements instead `importScripts`, use the follo
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register(
     import.meta.env.MODE === 'production' ? '/sw.js' : '/dev-sw.js?dev-sw',
-    { 'type': import.meta.env.MODE === 'production' ? 'classic' : 'module' }
-  );
+    { type: import.meta.env.MODE === 'production' ? 'classic' : 'module' }
+  )
 }
 ```
 

@@ -12,7 +12,7 @@ const {
   immediate: true,
   onRegistered(r) {
     if (reloadSW === 'true') {
-      r && setInterval(async() => {
+      r && setInterval(async () => {
         // eslint-disable-next-line no-console
         console.log('Checking for sw update')
         await r.update()
@@ -25,11 +25,10 @@ const {
   },
 })
 
-const close = async() => {
+const close = async () => {
   offlineReady.value = false
   needRefresh.value = false
 }
-
 </script>
 
 <template>

@@ -96,7 +96,11 @@ You can use TypeScript to write your custom service worker. To resolve service w
 entry on your `tsconfig.json` file:
 
 ```json
-"lib": ["ESNext", "DOM", "WebWorker"],
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM", "WebWorker"]
+  }
+}
 ```
 
 ### Setup

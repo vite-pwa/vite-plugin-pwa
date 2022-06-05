@@ -24,6 +24,10 @@
     "run-build-sw-reloadsw-claims": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true CLAIMS=true RELOAD_SW=true SW=true vite build",
     "serve": "serve dist"
   },
+  "dependencies": {
+    "solid-app-router": "^0.3.3",
+    "solid-js": "^1.4.2"
+  },
   "devDependencies": {
     "@rollup/plugin-replace": "^4.0.0",
     "cross-env": "^7.0.3",
@@ -37,9 +41,5 @@
     "workbox-precaching": "^6.5.3",
     "workbox-routing": "^6.5.3",
     "workbox-window": "^6.5.3"
-  },
-  "dependencies": {
-    "solid-app-router": "^0.3.3",
-    "solid-js": "^1.4.2"
   }
 }

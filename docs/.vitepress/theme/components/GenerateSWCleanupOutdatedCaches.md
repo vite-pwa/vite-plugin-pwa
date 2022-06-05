@@ -13,9 +13,9 @@ export default defineConfig({
   plugins: [
     VitePWA({
       workbox: {
-        cleanupOutdatedCaches: false  
-      }  
+        cleanupOutdatedCaches: false
+      }
     })
-  ]    
+  ]
 })
 ```

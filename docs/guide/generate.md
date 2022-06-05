@@ -14,7 +14,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   plugins: [
     VitePWA({
-      includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],  
+      includeAssets: ['favicon.svg', 'favicon.ico', 'robots.txt', 'apple-touch-icon.png'],
       manifest: {
         name: 'Name of your app',
         short_name: 'Short name of your app',
@@ -40,7 +40,7 @@ export default defineConfig({
         ]
       }
     })
-  ]    
+  ]
 })
 ```
 </details>

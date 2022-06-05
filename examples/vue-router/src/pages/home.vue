@@ -14,6 +14,7 @@ const go = () => {
     router.push(`/hi/${encodeURIComponent(name.value)}`)
 }
 </script>
+
 <template>
   <div>Home route, built at: {{ date }} ({{ timeAgo }})</div>
   <br>

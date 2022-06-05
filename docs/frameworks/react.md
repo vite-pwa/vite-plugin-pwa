@@ -13,7 +13,7 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/react` for 
 
 ```ts
 declare module 'virtual:pwa-register/react' {
-  // @ts-ignore ignore when react is not installed
+  // @ts-expect-error ignore when react is not installed
   import type { Dispatch, SetStateAction } from 'react'
 
   export interface RegisterSWOptions {
@@ -40,7 +40,6 @@ You can use this `ReloadPrompt.tsx` component:
   <summary><strong>ReloadPrompt.tsx</strong> code</summary>
 
 ```tsx
-// eslint-disable-next-line no-use-before-define
 import React from 'react'
 import './ReloadPrompt.css'
 
@@ -53,11 +52,11 @@ function ReloadPrompt() {
     updateServiceWorker,
   } = useRegisterSW({
     onRegistered(r) {
-        // eslint-disable-next-line prefer-template
-        console.log('SW Registered: ' + r)
+      // eslint-disable-next-line prefer-template
+      console.log('SW Registered: ' + r)
     },
     onRegisterError(error) {
-        console.log('SW registration error', error)
+      console.log('SW registration error', error)
     },
   })
 
@@ -72,8 +71,8 @@ function ReloadPrompt() {
         && <div className="ReloadPrompt-toast">
             <div className="ReloadPrompt-message">
               { offlineReady
-                    ? <span>App ready to work offline</span>
-                    : <span>New content available, click on reload button to update.</span>
+                ? <span>App ready to work offline</span>
+                : <span>New content available, click on reload button to update.</span>
               }
             </div>
             { needRefresh && <button className="ReloadPrompt-toast-button" onClick={() => updateServiceWorker(true)}>Reload</button> }
@@ -132,7 +131,7 @@ As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.htm
 behavior on your application with the virtual module `virtual:pwa-register/react`:
 
 ```ts
-import { useRegisterSW } from 'virtual:pwa-register/react';
+import { useRegisterSW } from 'virtual:pwa-register/react'
 
 const intervalMS = 60 * 60 * 1000
 

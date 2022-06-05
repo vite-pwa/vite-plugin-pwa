@@ -1,4 +1,3 @@
-/* eslint-disable no-use-before-define */
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle } from 'rollup'
 

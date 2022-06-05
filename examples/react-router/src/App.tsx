@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-use-before-define
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 import ReloadPrompt from './ReloadPrompt'

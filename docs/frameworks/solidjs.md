@@ -13,7 +13,7 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/solid` for 
 
 ```ts
 declare module 'virtual:pwa-register/solid' {
-  // @ts-ignore ignore when solid-js is not installed
+  // @ts-expect-error ignore when solid-js is not installed
   import type { Accessor, Setter } from 'solid-js'
 
   export interface RegisterSWOptions {
@@ -40,24 +40,23 @@ You can use this `ReloadPrompt.tsx` component:
   <summary><strong>ReloadPrompt.tsx</strong> code</summary>
 
 ```tsx
-// eslint-disable-next-line no-use-before-define
-import { Component, Show } from "solid-js";
+import type { Component } from 'solid-js'
+import { Show } from 'solid-js'
+import { useRegisterSW } from 'virtual:pwa-register/solid'
 import styles from './ReloadPrompt.module.css'
 
-import { useRegisterSW } from 'virtual:pwa-register/solid'
-
-const ReloadPrompt: Component = () => {  
+const ReloadPrompt: Component = () => {
   const {
     offlineReady: [offlineReady, setOfflineReady],
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
   } = useRegisterSW({
     onRegistered(r) {
-        // eslint-disable-next-line prefer-template
-        console.log('SW Registered: ' + r)
+      // eslint-disable-next-line prefer-template
+      console.log('SW Registered: ' + r)
     },
     onRegisterError(error) {
-        console.log('SW registration error', error)
+      console.log('SW registration error', error)
     },
   })
 
@@ -67,10 +66,10 @@ const ReloadPrompt: Component = () => {
   }
 
   return (
-    <div class={styles.Container}>
+    <div className={styles.Container}>
       <Show when={offlineReady() || needRefresh()}>
-        <div class={styles.Toast}>
-          <div class={styles.Message}>
+        <div className={styles.Toast}>
+          <div className={styles.Message}>
             <Show
               fallback={<span>New content available, click on reload button to update.</span>}
               when={offlineReady()}
@@ -79,9 +78,9 @@ const ReloadPrompt: Component = () => {
             </Show>
           </div>
           <Show when={needRefresh()}>
-            <button class={styles.ToastButton} onClick={() => updateServiceWorker(true)}>Reload</button>
+            <button className={styles.ToastButton} onClick={() => updateServiceWorker(true)}>Reload</button>
           </Show>
-          <button class={styles.ToastButton} onClick={() => close()}>Close</button>
+          <button className={styles.ToastButton} onClick={() => close()}>Close</button>
         </div>
       </Show>
     </div>
@@ -136,7 +135,7 @@ As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.htm
 behavior on your application with the virtual module `virtual:pwa-register/solid`:
 
 ```ts
-import { useRegisterSW } from 'virtual:pwa-register/solid';
+import { useRegisterSW } from 'virtual:pwa-register/solid'
 
 const intervalMS = 60 * 60 * 1000
 

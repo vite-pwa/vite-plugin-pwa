@@ -13,9 +13,9 @@ export default defineConfig({
   plugins: [
     VitePWA({
       workbox: {
-        sourcemap: true  
-      }  
+        sourcemap: true
+      }
     })
-  ]    
+  ]
 })
 ```

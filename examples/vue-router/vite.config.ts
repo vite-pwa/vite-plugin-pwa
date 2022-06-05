@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
-import { ManifestOptions, VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
+import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
 
 const pwaOptions: Partial<VitePWAOptions> = {
@@ -54,7 +55,7 @@ if (claims)
   pwaOptions.registerType = 'autoUpdate'
 
 if (reload) {
-  // @ts-ignore
+  // @ts-expect-error overrides
   replaceOptions.__RELOAD_SW__ = 'true'
 }
 

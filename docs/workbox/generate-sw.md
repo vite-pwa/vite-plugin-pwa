@@ -77,7 +77,7 @@ VitePWA({
       }
     ]
   }
-})  
+})
 ```
 </details>
 

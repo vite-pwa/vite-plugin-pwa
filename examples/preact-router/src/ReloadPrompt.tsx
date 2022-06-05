@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-use-before-define
 import './ReloadPrompt.css'
 
 import { useRegisterSW } from 'virtual:pwa-register/preact'

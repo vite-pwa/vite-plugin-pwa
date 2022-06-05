@@ -1,4 +1,4 @@
-import { msg, mode } from './workerImport'
+import { mode, msg } from './workerImport'
 
 let counter = 1
 

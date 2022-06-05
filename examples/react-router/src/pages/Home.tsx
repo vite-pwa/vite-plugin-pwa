@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-use-before-define
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import './Home.css'

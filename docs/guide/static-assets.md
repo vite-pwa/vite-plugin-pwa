@@ -42,7 +42,7 @@ If you use `generateSW` strategy, then you need to configure `globPatterns` insi
 VitePWA({
   workbox: {
     globPatterns: [],
-  } 
+  }
 })
 ```
 
@@ -52,6 +52,6 @@ If you use `injectManifest` strategy, then you need to configure`globPatterns` i
 VitePWA({
   injectManifest: {
     globPatterns: [],
-  }  
+  }
 })
 ```

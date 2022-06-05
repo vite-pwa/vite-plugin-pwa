@@ -1,6 +1,16 @@
 {
-  "extends": "@antfu/eslint-config",
-  "rules": {
-    "@typescript-eslint/no-unused-vars": "off"
-  }
+  "extends": "@antfu",
+  "overrides": [
+    {
+      "files": [
+        "**/*.md/*.*"
+      ],
+      "rules": {
+        "@typescript-eslint/no-this-alias": "off",
+        "n/handle-callback-err": "off",
+        "no-restricted-syntax": "off",
+        "no-labels": "off"
+      }
+    }
+  ]
 }

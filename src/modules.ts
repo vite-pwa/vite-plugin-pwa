@@ -11,7 +11,6 @@ function loadWorkboxBuild() {
   // "workbox-build" is very large and it makes config loading slow.
   // Since it is not always used, load this when it is needed.
 
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   return require('workbox-build')
 }
 

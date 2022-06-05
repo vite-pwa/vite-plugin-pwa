@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-use-before-define
 import { useState } from 'preact/hooks'
 import { route } from 'preact-router'
 import './Home.css'

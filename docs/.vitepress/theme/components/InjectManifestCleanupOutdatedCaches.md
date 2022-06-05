@@ -3,7 +3,7 @@ also the old ones. To delete old assets (from previous versions that are no long
 building your own service worker, you will need to add the following code to your custom service worker:
 
 ```js
-import { precacheAndRoute, cleanupOutdatedCaches } from 'workbox-precaching'
+import { cleanupOutdatedCaches, precacheAndRoute } from 'workbox-precaching'
 
 cleanupOutdatedCaches()
 

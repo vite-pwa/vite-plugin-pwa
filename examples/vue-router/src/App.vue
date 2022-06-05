@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onBeforeMount } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { useTimeAgo } from '@vueuse/core'
 import MyWorker from './my-worker?worker'
 
@@ -13,13 +13,13 @@ const worker = new MyWorker()
 const date = '__DATE__'
 const timeAgo = useTimeAgo(date)
 
-const runWorker = async() => {
+const runWorker = async () => {
   worker.postMessage('ping')
 }
-const resetMessage = async() => {
+const resetMessage = async () => {
   worker.postMessage('clear')
 }
-const messageFromWorker = async({ data: { msg, mode: useMode } }) => {
+const messageFromWorker = async ({ data: { msg, mode: useMode } }) => {
   pong.value = msg
   mode.value = useMode
 }
@@ -35,8 +35,8 @@ onBeforeMount(() => {
   <div>Built at: {{ date }} ({{ timeAgo }})</div>
   <br>
   <router-view />
-  <br />
-  <br />
+  <br>
+  <br>
   <button @click="runWorker">
     Ping web worker
   </button>
@@ -44,8 +44,8 @@ onBeforeMount(() => {
   <button @click="resetMessage">
     Reset message
   </button>
-  <br />
-  <br />
+  <br>
+  <br>
   <template v-if="pong">
     Response from web worker: <span> Message: {{ pong }} </span>&#160;&#160;<span> Using ENV mode: {{ mode }}</span>
   </template>

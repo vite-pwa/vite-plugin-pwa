@@ -6,6 +6,7 @@ const date = '__DATE__'
 const timeAgo = useTimeAgo(date)
 const router = useRouter()
 </script>
+
 <template>
   <div>About route, built at: {{ date }} ({{ timeAgo }})</div>
   <br>

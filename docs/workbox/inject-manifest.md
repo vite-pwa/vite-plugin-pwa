@@ -42,19 +42,17 @@ dependencies:
   <summary><strong>src/sw.ts</strong> code</summary>
 
 ```ts
-/* eslint-disable no-console */
-import { clientsClaim, cacheNames } from 'workbox-core'
+import { cacheNames, clientsClaim } from 'workbox-core'
 import { registerRoute, setCatchHandler, setDefaultHandler } from 'workbox-routing'
+import type { StrategyHandler } from 'workbox-strategies'
 import {
   NetworkFirst,
   NetworkOnly,
-  Strategy,
-  StrategyHandler,
+  Strategy
 } from 'workbox-strategies'
-import { ManifestEntry } from 'workbox-build'
+import type { ManifestEntry } from 'workbox-build'
 
 // Give TypeScript the correct global.
-// @ts-ignore
 declare let self: ServiceWorkerGlobalScope
 declare type ExtendableEvent = any
 
@@ -85,7 +83,6 @@ const buildStrategy = (): Strategy => {
           // Reject if both network and cache error or find no response.
           Promise.allSettled([fetchAndCachePutDone, cacheMatchDone]).then((results) => {
             const [fetchAndCachePutResult, cacheMatchResult] = results
-            // @ts-ignore
             if (fetchAndCachePutResult.status === 'rejected' && !cacheMatchResult.value)
               reject(fetchAndCachePutResult.reason)
           })
@@ -108,7 +105,6 @@ const cacheEntries: RequestInfo[] = []
 
 const manifestURLs = manifest.map(
   (entry) => {
-    // @ts-ignore
     const url = new URL(entry.url, self.location)
     cacheEntries.push(new Request(url.href, {
       credentials: credentials as any
@@ -158,7 +154,6 @@ setDefaultHandler(new NetworkOnly())
 
 // fallback to app-shell for document request
 setCatchHandler(({ event }): Promise<Response> => {
-  // @ts-ignore
   switch (event.request.destination) {
     case 'document':
       return caches.match(fallback).then((r) => {
