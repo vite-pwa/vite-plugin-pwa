@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-pwa",
   "version": "0.12.0",
-  "packageManager": "pnpm@7.1.3",
+  "packageManager": "pnpm@7.1.8",
   "description": "Zero-config PWA for Vite",
   "license": "MIT",
   "repository": {
@@ -55,31 +55,31 @@
     "debug": "^4.3.4",
     "fast-glob": "^3.2.11",
     "pretty-bytes": "^6.0.0",
-    "rollup": "^2.74.1",
+    "rollup": "^2.75.5",
     "workbox-build": "^6.5.3",
     "workbox-window": "^6.5.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.23.1",
+    "@antfu/eslint-config": "^0.25.1",
     "@antfu/ni": "^0.16.2",
     "@types/debug": "^4.1.7",
     "@types/prompts": "^2.4.0",
-    "@types/react": "^18.0.9",
+    "@types/react": "^18.0.12",
     "@types/workbox-build": "^5.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.25.0",
-    "eslint": "^8.16.0",
-    "esno": "^0.14.1",
+    "@typescript-eslint/eslint-plugin": "^5.27.0",
+    "eslint": "^8.17.0",
+    "esno": "^0.16.3",
     "kolorist": "^1.5.1",
-    "pnpm": "^7.1.3",
-    "preact": "^10.7.2",
+    "pnpm": "^7.1.8",
+    "preact": "^10.7.3",
     "prompts": "^2.4.2",
     "react": "^18.1.0",
-    "rollup": "^2.74.1",
-    "solid-js": "^1.4.2",
+    "rollup": "^2.75.5",
+    "solid-js": "^1.4.3",
     "svelte": "^3.48.0",
-    "tsup": "^5.12.8",
-    "typescript": "^4.6.4",
+    "tsup": "^6.1.0",
+    "typescript": "^4.7.3",
     "vite": "^2.9.9",
-    "vue": "^3.2.35"
+    "vue": "^3.2.36"
   }
 }
