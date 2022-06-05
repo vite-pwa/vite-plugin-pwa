@@ -2,7 +2,7 @@ import { resolve } from 'path'
 import { existsSync } from 'fs'
 import type { OutputBundle } from 'rollup'
 import type { Plugin, ResolvedConfig } from 'vite'
-import { generateSimpleSWRegister, injectServiceWorker } from './html'
+import { generateSimpleSWRegister, injectDevManifest, injectServiceWorker } from './html'
 import { generateInjectManifest, generateRegisterSW, generateServiceWorker } from './modules'
 import type { ExtendManifestEntriesHook, ResolvedVitePWAOptions, VitePWAOptions, VitePluginPWAAPI } from './types'
 import { resolveOptions } from './options'
@@ -140,6 +140,31 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       async configResolved(config) {
         viteConfig = config
         options = await resolveOptions(userOptions, viteConfig)
+      },
+      transformIndexHtml: {
+        enforce: 'post',
+        transform(html) {
+          if (options.disable || !options.manifest || !options.devOptions.enabled)
+            return html
+
+          return injectDevManifest(html, options)
+        },
+      },
+      configureServer(server) {
+        if (!options.disable && options.manifest && options.devOptions.enabled) {
+          const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
+          server.middlewares.use((req, res, next) => {
+            const url = req.url
+            if (url === name) {
+              res.statusCode = 200
+              res.write(generateWebManifestFile(options), 'utf-8')
+              res.end()
+            }
+            else {
+              next()
+            }
+          })
+        }
       },
       resolveId(id) {
         return resolveDevId(id, options)

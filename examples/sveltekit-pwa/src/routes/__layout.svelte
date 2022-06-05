@@ -4,15 +4,18 @@
 
 	// replaced dynamically
 	const date = '__DATE__'
+	const enableSwDev = '__SW_DEV__'
+
+	const enableManifest = (!dev && browser) || (dev && browser && enableSwDev === 'true')
 
 	let ReloadPrompt
 	onMount(async () => {
-		!dev && browser && (ReloadPrompt = (await import('$lib/components/ReloadPrompt.svelte')).default)
+		enableManifest && (ReloadPrompt = (await import('$lib/components/ReloadPrompt.svelte')).default)
 	})
 </script>
 
 <svelte:head>
-	{#if (!dev && browser)}
+	{#if enableManifest}
 		<link rel="manifest" href="/_app/manifest.webmanifest">
 	{/if}
 </svelte:head>

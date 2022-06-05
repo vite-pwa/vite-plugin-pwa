@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import solidPlugin from 'vite-plugin-solid'
-import { ManifestOptions, VitePWA, VitePWAOptions } from 'vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa'
+import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
 
 const pwaOptions: Partial<VitePWAOptions> = {
@@ -30,6 +31,12 @@ const pwaOptions: Partial<VitePWAOptions> = {
       },
     ],
   },
+  devOptions: {
+    enabled: process.env.SW_DEV === 'true',
+    /* when using generateSW the PWA plugin will switch to classic */
+    type: 'module',
+    navigateFallback: 'index.html',
+  },
 }
 
 const replaceOptions = { __DATE__: new Date().toISOString() }
@@ -48,7 +55,7 @@ if (claims)
   pwaOptions.registerType = 'autoUpdate'
 
 if (reload) {
-  // @ts-ignore
+  // @ts-expect-error just ignore
   replaceOptions.__RELOAD_SW__ = 'true'
 }
 
