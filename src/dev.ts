@@ -58,6 +58,8 @@ export async function loadDev(id: string, options: ResolvedVitePWAOptions, viteC
         // the sw precache (self.__SW_MANIFEST) will be empty since we're using `dev-dist` folder
         // we only need to add the navigateFallback if configured
         const navigateFallback = options.workbox.navigateFallback
+        // we need to exclude the manifest.webmanifest from the sw precache: avoid writing it to the dev-dist folder
+        const webManifestUrl = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
         const { filePaths } = await generateServiceWorker(
           Object.assign(
             {},
@@ -65,6 +67,7 @@ export async function loadDev(id: string, options: ResolvedVitePWAOptions, viteC
             {
               workbox: {
                 ...options.workbox,
+                navigateFallbackDenylist: [new RegExp(`^${webManifestUrl}$`)],
                 runtimeCaching: options.devOptions.disableRuntimeConfig ? undefined : options.workbox.runtimeCaching,
                 // we only include navigateFallback
                 additionalManifestEntries: navigateFallback ? [navigateFallback] : undefined,
