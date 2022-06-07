@@ -164,6 +164,6 @@ To run the example, you must build the PWA plugin (`pnpm run build` from root fo
 - `generateSW` strategy: `pnpm run dev`
 - `injectManifest` strategy: `pnpm run dev-claims`
 
-Since version `0.12.1`, you can also have the development scripts for all other frameworks as well.
+Since version `0.12.1`, you also have the development scripts for all other frameworks as well.
 
 The instructions for running the `dev` or `dev-claims` scripts are the same as for `vue-router` but running them in the corresponding framework directory.
