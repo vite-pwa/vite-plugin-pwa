@@ -154,9 +154,9 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
         if (!options.disable && options.manifest && options.devOptions.enabled) {
           const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
           server.middlewares.use((req, res, next) => {
-            const url = req.url
-            if (url === name) {
+            if (req.url === name) {
               res.statusCode = 200
+              res.setHeader('Content-Type', 'application/manifest+json')
               res.write(generateWebManifestFile(options), 'utf-8')
               res.end()
             }

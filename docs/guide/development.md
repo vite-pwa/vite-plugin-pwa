@@ -68,8 +68,20 @@ export interface DevOptions {
    * **WARNING**: this option will only be used when using `injectManifest` strategy.
    */
   navigateFallback?: string
+  /**
+   * On dev mode the `manifest.webmanifest` file can be on other path.
+   *
+   * For example, **SvelteKit** will request `/_app/manifest.webmanifest`.
+   *
+   * @default `${vite.base}${pwaOptions.manifestFilename}`
+   */
+  webManifestUrl?: string
 }
 ```
+
+## manifest.webmanifest
+
+Since version `0.12.1` the `manifest.webmanifest` is also served on development mode: you can now check it on `dev tools`.
 
 ## generateSW strategy
 
@@ -97,6 +109,19 @@ devOptions: {
 ```
 
 > **Warning**: when building the application, the PWA Plugin will always register your service worker with `type: 'classic'` for compatibility with all browsers.
+
+> **Warning**: if using version `0.12.1+`, you will need to exclude the `manifest.webmanifest` from the service worker precache manifest if you want to check it using the browser (on `dev tools` it will be ok):
+> ```ts
+> let denylist: undefined | RegExp[]
+> if (import.meta.env.DEV)
+>   denylist = [/^\/manifest.webmanifest$/]
+>
+> // to allow work offline
+> registerRoute(new NavigationRoute(
+>   createHandlerBoundToURL('index.html'),
+>   { denylist }
+> ))
+> ```
 
 When using this strategy, the plugin will delegate the service worker compilation to `Vite`, so if you're using `import` statements 
 instead `importScripts` in your custom service worker, you should configure `type: 'module'` on development options.
@@ -138,3 +163,7 @@ To run the example, you must build the PWA plugin (`pnpm run build` from root fo
 (`cd examples/vue-router`) and run it:
 - `generateSW` strategy: `pnpm run dev`
 - `injectManifest` strategy: `pnpm run dev-claims`
+
+Since version `0.12.1`, you also have the development scripts for all other frameworks as well.
+
+The instructions for running the `dev` or `dev-claims` scripts are the same as for `vue-router` but running them in the corresponding framework directory.
