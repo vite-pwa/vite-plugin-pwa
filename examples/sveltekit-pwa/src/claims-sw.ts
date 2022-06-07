@@ -10,8 +10,16 @@ precacheAndRoute(self.__WB_MANIFEST)
 // clean old assets
 cleanupOutdatedCaches()
 
+
+let denylist: undefined | RegExp[]
+if (import.meta.env.DEV)
+  denylist = [/^\/_app\/manifest.webmanifest$/]
+
 // to allow work offline
-registerRoute(new NavigationRoute(createHandlerBoundToURL('/')))
+registerRoute(new NavigationRoute(
+  createHandlerBoundToURL('/'),
+  { denylist },
+))
 
 self.skipWaiting()
 clientsClaim()
