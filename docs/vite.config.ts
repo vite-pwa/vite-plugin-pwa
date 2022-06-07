@@ -1,9 +1,10 @@
 import { defineConfig } from 'vite'
 import Components from 'unplugin-vue-components/vite'
-import WindiCSS from 'vite-plugin-windicss'
-import Icons from 'unplugin-icons/vite'
+// import WindiCSS from 'vite-plugin-windicss'
+// import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import replace from '@rollup/plugin-replace'
+import Unocss from 'unocss/vite'
 import { VitePWA } from '../dist'
 import { version } from '../package.json'
 
@@ -41,7 +42,7 @@ export default defineConfig({
       include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
 
       // generate `components.d.ts` for ts support with Volar
-      dts: false,
+      dts: '.vitepress/components.d.ts',
       // auto import icons
       resolvers: [
         // https://github.com/antfu/vite-plugin-icons
@@ -52,11 +53,8 @@ export default defineConfig({
       ],
     }),
 
-    // https://github.com/antfu/vite-plugin-icons
-    Icons(),
-
-    // https://github.com/antfu/vite-plugin-windicss
-    WindiCSS(),
+    // https://github.com/unocss/unocss
+    Unocss(),
 
     // https://github.com/antfu/vite-plugin-pwa
     VitePWA({

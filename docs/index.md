@@ -1,8 +1,21 @@
 ---
-home: true
+layout: home
+sidebar: false
 
-actionText: Get Started
-actionLink: /guide/
+hero:
+  name: Vite Plugin PWA
+  text: ''
+  tagline: Zero-config PWA Framework-agnostic Plugin for Vite
+  image:
+    src: /icon_light.svg
+    alt: Vite Plugin PWA
+  actions:
+    - theme: brand
+      text: Get Started
+      link: /guide/
+    - theme: alt
+      text: View on GitHub
+      link: https://github.com/vite-plugin-pwa
 
 features:
   - title: 👌 Zero-Config
@@ -22,5 +35,4 @@ features:
   - title: 🐞 Development Support
     details: Debug your custom service worker logic as you develop your application
 
-footer: MIT Licensed | Copyright © 2021-PRESENT Anthony Fu
 ---

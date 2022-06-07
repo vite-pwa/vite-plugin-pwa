@@ -1,18 +1,15 @@
-import 'vue-global-api'
-
-import Layout from './Layout.vue'
-import NotFound from './NotFound.vue'
-
+// import { h } from 'vue'
+import Theme from 'vitepress/theme'
+import './styles/main.css'
 import './styles/vars.css'
-import './styles/layout.css'
-import './styles/code.css'
-import './styles/sidebar-links.css'
+import 'uno.css'
+// import PwaHero from './components/PwaHero.vue'
 
-import 'virtual:windi.css'
-
-const theme = {
-  Layout,
-  NotFound,
-}
-
-export default theme
+export default Theme/* {
+  ...Theme,
+  Layout() {
+    return h(Theme.Layout, null, {
+      'home-hero-before': () => h(PwaHero),
+    })
+  },
+} */

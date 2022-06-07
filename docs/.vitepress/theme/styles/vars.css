@@ -1,3 +1,94 @@
+/**
+ * Colors
+ * -------------------------------------------------------------------------- */
+
+:root {
+    --vp-c-accent: #2c7f95;
+    --vp-c-brand: #2c7f95;
+    --vp-c-brand-light: #2e859c;
+    --vp-c-brand-lighter: #3392ac;
+    --vp-c-brand-dark: #00586e;
+    --vp-c-brand-darker: #00586e;
+    --vp-c-text-code: #5d6f5d;
+    --vp-code-block-bg: rgba(125,125,125,0.04);
+    --vp-custom-block-tip-text: rgb(18, 181, 157);
+    --vp-custom-block-tip-border: rgba(18, 181, 157, 0.5);
+    --vp-custom-block-tip-bg: rgba(18, 181, 157, 0.1);
+}
+
+.dark {
+    --vp-c-accent: #4AA6C0;
+    --vp-c-brand: #4AA6C0;
+    --vp-c-brand-light: #52b1cc;
+    --vp-c-brand-lighter: #52b1cc;
+    --vp-c-brand-dark: #52b1cc;
+    --vp-c-brand-darker: #52b1cc;
+    --vp-code-block-bg: rgba(0,0,0,0.2);
+    --vp-c-text-code: #c0cec0;
+}
+
+/**
+ * Component: Button
+ * -------------------------------------------------------------------------- */
+
+:root {
+    --vp-button-brand-border: var(--vp-c-brand-light);
+    --vp-button-brand-text: var(--vp-c-text-dark-1);
+    --vp-button-brand-bg: var(--vp-c-brand);
+    --vp-button-brand-hover-border: var(--vp-c-brand-light);
+    --vp-button-brand-hover-text: var(--vp-c-text-dark-1);
+    --vp-button-brand-hover-bg: var(--vp-c-brand-light);
+    --vp-button-brand-active-border: var(--vp-c-brand-light);
+    --vp-button-brand-active-text: var(--vp-c-text-dark-1);
+    --vp-button-brand-active-bg: var(--vp-button-brand-bg);
+}
+
+/**
+ * Component: Home
+ * -------------------------------------------------------------------------- */
+
+:root {
+    --vp-home-hero-name-color: transparent;
+    --vp-home-hero-name-background: -webkit-linear-gradient(
+            120deg,
+            #00586e 30%,
+            #52b1cc
+    );
+    --vp-home-hero-image-background-image: linear-gradient(
+            -45deg,
+            #00586e60 30%,
+            #52b1cc60
+    );
+    --vp-home-hero-image-filter: blur(30px);
+}
+
+@media (min-width: 640px) {
+    :root {
+        --vp-home-hero-image-filter: blur(56px);
+    }
+}
+
+@media (min-width: 960px) {
+    :root {
+        --vp-home-hero-image-filter: blur(72px);
+    }
+}
+
+
+/**
+ * Component: Algolia
+ * -------------------------------------------------------------------------- */
+
+.DocSearch {
+    --docsearch-primary-color: var(--vp-c-brand) !important;
+}
+
+
+
+
+
+
+
 /** Base Styles */
 :root {
 

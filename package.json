@@ -69,7 +69,7 @@
     "@types/workbox-build": "^5.0.1",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "eslint": "^8.17.0",
-    "esno": "^0.16.3",
+    "esno": "^0.14.1",
     "kolorist": "^1.5.1",
     "pnpm": "^7.1.8",
     "preact": "^10.7.3",

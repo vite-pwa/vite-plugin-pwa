@@ -25,11 +25,13 @@
     "https-localhost": "^4.7.1",
     "prism-theme-vars": "^0.2.3",
     "typescript": "^4.6.4",
+    "unocss": "^0.38.1",
     "unplugin-icons": "^0.14.3",
     "unplugin-vue-components": "^0.19.5",
     "vite": "^2.9.9",
     "vite-plugin-pwa": "workspace:*",
     "vite-plugin-windicss": "^1.8.4",
-    "vitepress": "^0.22.4"
+    "vitepress": "^1.0.0-alpha.1",
+    "workbox-window": "^6.5.3"
   }
 }

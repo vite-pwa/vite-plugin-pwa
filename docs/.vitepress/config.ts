@@ -1,4 +1,4 @@
-import type { UserConfig } from 'vitepress'
+import { defineConfig } from 'vitepress'
 
 const Guide = [
   {
@@ -158,45 +158,45 @@ const Workbox = [
 const slidebars = [
   {
     text: 'Guide',
-    children: Guide.map((e) => {
+    items: Guide.map((e) => {
       (e as any).useLinkText = `${e.text} | Guide`
       return e
     }),
   },
   {
     text: 'Frameworks',
-    children: Frameworks.map((e) => {
+    items: Frameworks.map((e) => {
       (e as any).useLinkText = `${e.text} | Frameworks`
       return e
     }),
   },
   {
     text: 'Examples',
-    children: Examples.map((e) => {
+    items: Examples.map((e) => {
       (e as any).useLinkText = `${e.text} | Examples`
       return e
     }),
   },
   {
     text: 'Deployment',
-    children: Deployment.map((e) => {
+    items: Deployment.map((e) => {
       (e as any).useLinkText = `${e.text} | Deployment`
       return e
     }),
   },
   {
     text: 'Workbox',
-    children: Workbox.map((e) => {
+    items: Workbox.map((e) => {
       (e as any).useLinkText = `${e.text} | Workbox`
       return e
     }),
   },
 ]
 
-const config: UserConfig = {
+export default defineConfig({
+  lang: 'en-US',
   title: 'Vite Plugin PWA',
   description: 'Zero-config PWA Framework-agnostic Plugin for Vite',
-  lang: 'en-US',
   head: [
     ['meta', { name: 'theme-color', content: '#ffffff' }],
     ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
@@ -210,13 +210,21 @@ const config: UserConfig = {
     ['meta', { name: 'twitter:creator', content: '@antfu7' }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' }],
   ],
+  lastUpdated: true,
+  markdown: {
+    theme: {
+      light: 'vitesse-light',
+      dark: 'vitesse-dark',
+    },
+  },
   themeConfig: {
     logo: '/favicon.svg',
-    repo: 'antfu/vite-plugin-pwa',
-    docsDir: 'docs',
-    editLinks: true,
-    editLinkText: 'Edit this page',
-    lastUpdated: 'Last Updated',
+    editLink: {
+      repo: 'antfu/vite-plugin-pwa',
+      branch: 'main',
+      dir: 'docs',
+      text: 'Suggest changes to this page',
+    },
     /*
       algolia: {
         apiKey: 'todo@antfu: replace this',
@@ -227,6 +235,14 @@ const config: UserConfig = {
         }
       },
     */
+    socialLinks: [
+      { icon: 'discord', link: 'https://discord.com/channels/937808017016119440/937973377883336704' },
+      { icon: 'github', link: 'https://github.com/antfu/vite-plugin-pwa' },
+    ],
+    footer: {
+      message: 'Released under the MIT License.',
+      copyright: 'Copyright © 2021-PRESENT Anthony Fu',
+    },
     nav: [
       {
         text: 'Guide',
@@ -258,6 +274,4 @@ const config: UserConfig = {
       '/': slidebars,
     },
   },
-}
-
-export default config
+})
