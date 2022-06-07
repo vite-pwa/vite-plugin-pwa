@@ -218,7 +218,7 @@ export default defineConfig({
     },
   },
   themeConfig: {
-    logo: '/favicon.svg',
+    // logo: '/favicon.svg',
     editLink: {
       repo: 'antfu/vite-plugin-pwa',
       branch: 'main',

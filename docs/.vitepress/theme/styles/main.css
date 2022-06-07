@@ -1,37 +1,40 @@
 .dark [img-light] {
-    display: none;
+  display: none;
 }
 
 html:not(.dark) [img-dark] {
-    display: none;
+  display: none;
 }
 
 /* Overrides */
 
 .VPSocialLink {
-    transform: scale(0.9);
+  transform: scale(0.9);
 }
 
-.vp-doc th, .vp-doc td {
-    padding: 6px 10px;
-    border: 1px solid #8882;
+.vp-doc th,
+.vp-doc td {
+  padding: 6px 10px;
+  border: 1px solid #8882;
 }
 
 /* h3 breaks SEO => replaced with h2 with the same size */
 .home-content h2 {
-    margin-top: 2rem;
-    font-size: 1.35rem;
-    border-bottom: none;
-    margin-bottom: 0;
+  margin-top: 2rem;
+  font-size: 1.35rem;
+  border-bottom: none;
+  margin-bottom: 0;
 }
 
 img.resizable-img {
-    width: unset;
-    height: unset;
+  width: unset;
+  height: unset;
 }
 
 .dark .prompt-img {
-    filter: invert(86%);
+  filter: invert(86%);
 }
 
-
+.tagline {
+  white-space: pre-wrap;
+}

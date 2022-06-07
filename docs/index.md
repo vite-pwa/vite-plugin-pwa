@@ -3,11 +3,13 @@ layout: home
 sidebar: false
 
 hero:
-  name: Vite Plugin PWA
-  text: ''
-  tagline: Zero-config PWA Framework-agnostic Plugin for Vite
+  name: PWA
+  text: Vite Plugin
+  tagline: |
+    Zero-config and framework-agnostic
+    PWA Plugin for Vite
   image:
-    src: /icon_light.svg
+    src: /icon_gray.svg
     alt: Vite Plugin PWA
   actions:
     - theme: brand
@@ -15,7 +17,7 @@ hero:
       link: /guide/
     - theme: alt
       text: View on GitHub
-      link: https://github.com/vite-plugin-pwa
+      link: https://github.com/antfu/vite-plugin-pwa
 
 features:
   - title: 👌 Zero-Config
