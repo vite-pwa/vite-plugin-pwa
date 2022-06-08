@@ -27,7 +27,7 @@ We focus on 2 methods of this module:
 </md-list-anchor>
 </ul>
 
-You should read [Which Mode to Use](https://developers.google.com/web/tools/workbox/modules/workbox-build#which_mode_to_use) <outbound-link /> before deciding which strategy to use.
+You should read [Which Mode to Use](https://developer.chrome.com/docs/workbox/modules/workbox-build/#which-mode-to-use) <outbound-link /> before deciding which strategy to use.
 
 In short, the `generateSW` function abstracts away the need to work directly with the service worker API when building the service worker. This method can be configured using plugins instead of writing your own service worker code (`generateSW` will generate 
 the code for you).
