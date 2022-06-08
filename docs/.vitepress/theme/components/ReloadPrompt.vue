@@ -27,7 +27,6 @@ onBeforeMount(async () => {
     class="pwa-toast z-100 bg-$vp-c-bg border border-$pwa-divider fixed right-0 bottom-0 m-6 px-6 py-4 rounded shadow-xl"
     role="alertdialog"
     aria-labelledby="pwa-message"
-    :aria-hidden="needRefresh ? 'false' : 'true'"
   >
     <div id="pwa-message" class="mb-3">
       New content available, click the reload button to update.
