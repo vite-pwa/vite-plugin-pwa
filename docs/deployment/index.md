@@ -4,9 +4,10 @@ title: Getting Started | Deployment
 
 # Getting Started
 
-Since you need to install your application as a [Progressive Web App](https://web.dev/progressive-web-apps/) you must configure your server to meet PWA requirements, that is, your server must:
+Since you need to install your application as a [Progressive Web App](https://web.dev/progressive-web-apps/), you must configure your server to meet PWA requirements, that is, your server must:
 - serve `manifest.webmanifest` with mime type `application/manifest+json`
-- you must serve your application over `https`: you must also redirect from `http` to `https`
+- you must serve your application over `https`
+- you must redirect from `http` to `https`
 
 ## Servers
 
@@ -20,6 +21,7 @@ Since you need to install your application as a [Progressive Web App](https://we
 ## Testing your application on production
 
 Once you deploy your application to your server, you can test it using [WebPageTest](https://www.webpagetest.org/).
+
 There are many test sites, but we suggest you use `WebPageTest` as this is the most comprehensive in terms of test: 
 - Security.
 - First byte time.
