@@ -6,8 +6,7 @@ title: Vue | Frameworks
 
 ## Vue 3
 
-You can use the built-in `Vite` virtual module `virtual:pwa-register/vue` for `Vue 3` which will return
-`composition api` references (`ref<boolean>`) for `offlineReady` and `needRefresh`.
+You can use the built-in `Vite` virtual module `virtual:pwa-register/vue` for `Vue 3` which will return `composition api` references (`ref<boolean>`) for `offlineReady` and `needRefresh`.
 
 ### Type declarations
 
@@ -36,9 +35,7 @@ declare module 'virtual:pwa-register/vue' {
 
 You can use this `ReloadPrompt.vue` component:
 
-<details>
-  <summary><strong>ReloadPrompt.vue</strong> code</summary>
-
+::: details ReloadPrompt.vue
 ```vue
 <script setup lang="ts">
 import { useRegisterSW } from 'virtual:pwa-register/vue'
@@ -104,12 +101,11 @@ const close = async () => {
 }
 </style>
 ```
-</details>
+:::
 
 ### Periodic SW Updates
 
-As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.html), you can use this code to configure this 
-behavior on your application with the virtual module `virtual:pwa-register/vue`:
+As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates), you can use this code to configure this  behavior on your application with the virtual module `virtual:pwa-register/vue`:
 
 ```ts
 import { useRegisterSW } from 'virtual:pwa-register/vue'
@@ -135,9 +131,7 @@ Since this plugin only supports `Vue 3`, you cannot use the virtual module `virt
 
 You can copy `useRegisterSW.js` `mixin` to your `@/mixins/` directory in your application to make it working:
 
-<details>
-  <summary><strong>useRegisterSW.js</strong> code</summary>
-
+::: details useRegisterSW.js
 ```js
 export default {
   name: 'useRegisterSW',
@@ -194,15 +188,13 @@ export default {
   }
 }
 ```
-</details>
+:::
 
 ### Prompt for update
 
 You can use this `ReloadPrompt.vue` component:
 
-<details>
-  <summary><strong>ReloadPrompt.vue</strong> code</summary>
-
+::: details ReloadPrompt.vue
 ```vue
 <script>
 import useRegisterSW from '@/mixins/useRegisterSW'
@@ -261,12 +253,11 @@ export default {
 }
 </style>
 ```
-</details>
+:::
 
 ### Periodic SW Updates
 
-As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.html), you can use this code to configure this
-behavior on your application with the `useRegisterSW.js` `mixin`:
+As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates), you can use this code to configure this behavior on your application with the `useRegisterSW.js` `mixin`:
 
 ```vue
 <script>

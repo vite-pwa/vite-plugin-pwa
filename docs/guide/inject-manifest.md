@@ -8,12 +8,11 @@ With this option you can build your own service worker.
 
 ## Custom Service worker
 
-We recommend use [Workbox](https://developers.google.com/web/tools/workbox) <outbound-link /> to build your service worker,
-you will need to include `workbox-*` dependencies as `dev dependencies` to your project.
+We recommend use [Workbox](https://developers.google.com/web/tools/workbox) to build your service worker, you will need to include `workbox-*` dependencies as `dev dependencies` to your project.
 
 ### Setup
 
-Go to [Generate Service Worker](/guide/generate.html) section for basic configuration options.
+Go to [Generate Service Worker](/guide/generate) section for basic configuration options.
 
 You must add `strategies: 'injectManifest'` to `Vite PWA` options in your `vite.config.ts` file:
 
@@ -44,8 +43,7 @@ precacheAndRoute(self.__WB_MANIFEST)
 
 ## Prompt for new content
 
-If you need your custom service worker works with `Prompt for new content` behavior, you need to change
-your service worker code.
+If you need your custom service worker works with `Prompt for new content` behavior, you need to change your service worker code.
 
 ### Runtime
 
@@ -58,12 +56,13 @@ self.addEventListener('message', (event) => {
 })
 ```
 
-> You also need to add the code to your application described on [Prompt for new content refreshing](/guide/prompt-for-update.html#runtime)
+::: info
+You also need to add the code to your application described on [Prompt for new content refreshing](/guide/prompt-for-update#runtime)
+:::
 
 ## Auto update for new content
 
-If you need your custom service worker works with `Auto update for new content` behavior, you need to change
-your service worker code and the plugin configuration options.
+If you need your custom service worker works with `Auto update for new content` behavior, you need to change your service worker code and the plugin configuration options.
 
 ### Setup
 
@@ -77,8 +76,7 @@ VitePWA({
 
 ### Runtime
 
-Include on your service worker at least this code (you also need to install `workbox-core` as `dev dependency`
-to your project):
+Include on your service worker at least this code (you also need to install `workbox-core` as `dev dependency` to your project):
 
 ```js
 import { clientsClaim } from 'workbox-core'
@@ -87,13 +85,13 @@ self.skipWaiting()
 clientsClaim()
 ```
 
-> You also need to add the code to your application described on [Automatic reload](/guide/auto-update.html#runtime)
-
+::: info
+You also need to add the code to your application described on [Automatic reload](/guide/auto-update#runtime)
+:::
 
 ## TypeScript support 
 
-You can use TypeScript to write your custom service worker. To resolve service worker types, just add `WebWorker` to `lib` 
-entry on your `tsconfig.json` file:
+You can use TypeScript to write your custom service worker. To resolve service worker types, just add `WebWorker` to `lib` entry on your `tsconfig.json` file:
 
 ```json
 {
@@ -107,8 +105,7 @@ entry on your `tsconfig.json` file:
 
 We recommend you to put your custom service worker on `src` directory. 
 
-You need to add `srcDir: 'src'` and `filename: 'sw.ts'` options to `Vite PWA`  in your `vite.config.ts` file, 
-configure both options with the directory and the name of your custom service worker properly:
+You need to add `srcDir: 'src'` and `filename: 'sw.ts'` options to `Vite PWA`  in your `vite.config.ts` file,  configure both options with the directory and the name of your custom service worker properly:
 
 ```ts
 VitePWA({

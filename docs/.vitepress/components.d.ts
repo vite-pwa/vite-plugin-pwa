@@ -5,8 +5,6 @@ import '@vue/runtime-core'
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    ArrowLeft: typeof import('./theme/components/icons/ArrowLeft.vue')['default']
-    ArrowRight: typeof import('./theme/components/icons/ArrowRight.vue')['default']
     CleanupOutdatedCaches: typeof import('./theme/components/CleanupOutdatedCaches.md')['default']
     ExamplesBehaviors: typeof import('./theme/components/ExamplesBehaviors.md')['default']
     ExamplesGenerateSW: typeof import('./theme/components/ExamplesGenerateSW.md')['default']
@@ -16,19 +14,12 @@ declare module '@vue/runtime-core' {
     HeuristicWorkboxWindow: typeof import('./theme/components/HeuristicWorkboxWindow.md')['default']
     InjectManifestCleanupOutdatedCaches: typeof import('./theme/components/InjectManifestCleanupOutdatedCaches.md')['default']
     InjectManifestSourceMap: typeof import('./theme/components/InjectManifestSourceMap.md')['default']
-    Note: typeof import('./theme/components/Note.vue')['default']
-    OutboundLink: typeof import('./theme/components/icons/OutboundLink.vue')['default']
-    Page: typeof import('./theme/components/Page.vue')['default']
-    PluginVersion: typeof import('./theme/components/PluginVersion.vue')['default']
     PromptForUpdateImg: typeof import('./theme/components/PromptForUpdateImg.vue')['default']
-    PwaHero: typeof import('./theme/components/PwaHero.vue')['default']
-    PwaLogo: typeof import('./theme/components/PwaLogo.vue')['default']
     ReloadPrompt: typeof import('./theme/components/ReloadPrompt.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     RunExamples: typeof import('./theme/components/RunExamples.md')['default']
     SsrSsg: typeof import('./theme/components/SsrSsg.md')['default']
-    ToggleSideBarButton: typeof import('./theme/components/ToggleSideBarButton.vue')['default']
   }
 }
 

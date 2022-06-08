@@ -1,12 +1,8 @@
 import { defineConfig } from 'vite'
 import Components from 'unplugin-vue-components/vite'
-// import WindiCSS from 'vite-plugin-windicss'
-// import Icons from 'unplugin-icons/vite'
-import IconsResolver from 'unplugin-icons/resolver'
-import replace from '@rollup/plugin-replace'
+import { presetUno } from 'unocss'
 import Unocss from 'unocss/vite'
 import { VitePWA } from '../dist'
-import { version } from '../package.json'
 
 export default defineConfig({
   build: {
@@ -25,11 +21,6 @@ export default defineConfig({
     },
   },
   plugins: [
-    replace({
-      preventAssignment: true,
-      __PWA_VERSION__: version,
-    }),
-
     // https://github.com/antfu/vite-plugin-components
     Components({
       dirs: [
@@ -43,18 +34,12 @@ export default defineConfig({
 
       // generate `components.d.ts` for ts support with Volar
       dts: '.vitepress/components.d.ts',
-      // auto import icons
-      resolvers: [
-        // https://github.com/antfu/vite-plugin-icons
-        IconsResolver({
-          componentPrefix: '',
-          // enabledCollections: ['carbon'],
-        }),
-      ],
     }),
 
     // https://github.com/unocss/unocss
-    Unocss(),
+    Unocss({
+      presets: [presetUno()],
+    }),
 
     // https://github.com/antfu/vite-plugin-pwa
     VitePWA({
@@ -69,6 +54,7 @@ export default defineConfig({
         'banner_dark.svg',
         'icon_light.svg',
         'icon_dark.svg',
+        'icon_gray.svg',
         'prompt-update.png',
       ],
       manifest: {

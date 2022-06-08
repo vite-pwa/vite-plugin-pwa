@@ -9,11 +9,12 @@
   --vp-c-brand-lighter: #3392ac;
   --vp-c-brand-dark: #00586e;
   --vp-c-brand-darker: #00586e;
-  --vp-c-text-code: #5d6f5d;
+  --vp-c-text-code: #2c3e50;
   --vp-code-block-bg: rgba(125, 125, 125, 0.04);
   --vp-custom-block-tip-text: rgb(18, 181, 157);
   --vp-custom-block-tip-border: rgba(18, 181, 157, 0.5);
   --vp-custom-block-tip-bg: rgba(18, 181, 157, 0.1);
+  --vp-c-bg-mute: #f5f5f5;
 }
 
 .dark {
@@ -24,7 +25,8 @@
   --vp-c-brand-dark: #52b1cc;
   --vp-c-brand-darker: #52b1cc;
   --vp-code-block-bg: rgba(0, 0, 0, 0.2);
-  --vp-c-text-code: #c0cec0;
+  --vp-c-text-code: #f5f7fa;
+  --vp-c-bg-mute: #2d2d2d;
 }
 
 /**

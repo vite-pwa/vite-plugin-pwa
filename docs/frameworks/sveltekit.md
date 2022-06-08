@@ -4,17 +4,17 @@ title: SvelteKit | Frameworks
 
 # SvelteKit
 
-> For `Type declarations`, `Prompt for update` and `Periodic SW Updates` go to [Svelte](/frameworks/svelte.html) entry.
+::: info
+For `Type declarations`, `Prompt for update` and `Periodic SW Updates` go to [Svelte](/frameworks/svelte) entry.
+:::
 
-You should remove all references to [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker) <outbound-link /> to disable it on your application.
+You should remove all references to [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker) to disable it on your application.
 
-Since `SvelteKit` uses `SSR / SSG`, we need to add the `ReloadPrompt` component using `dynamic import`. `Vite Plugin PWA` will only register the service worker on build, it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker) <outbound-link />.
+Since `SvelteKit` uses `SSR / SSG`, we need to add the `ReloadPrompt` component using `dynamic import`. `Vite Plugin PWA` will only register the service worker on build, it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker).
 
 The best place to include the `ReloadPrompt` is on the main layout of the application:
 
-<details>
-  <summary><strong>src/routes/__layout.svelte</strong> code</summary>
-
+::: details src/routes/__layout.svelte
 ```html
 <script>
   import { onMount } from 'svelte'
@@ -40,7 +40,7 @@ The best place to include the `ReloadPrompt` is on the main layout of the applic
   <svelte:component this={ReloadPrompt} />
 {/if}
 ```
-</details>
+:::
 
 ## SvelteKit Adapters
 
@@ -48,7 +48,7 @@ The main problem with the current implementation of the service worker module of
 
 When using `Vite PWA Plugin` with any `SvelteKit Adapter` you need to provide an additional script to rebuild your `pwa` once `SvelteKit` finish building your application, that is, when the adapter configured finish its job.
 
-The biggest difference between this plugin and the SvelteKit service worker module is that this plugin does not require integration into the application logic - just configuration. You can take a look at [SvelteKit example](https://github.com/antfu/vite-plugin-pwa/tree/main/examples/sveltekit-pwa) <outbound-link /> to configure the additional scripts on your application, it is quite complex since we use it for multiple behaviors with the same codebase.
+The biggest difference between this plugin and the SvelteKit service worker module is that this plugin does not require integration into the application logic - just configuration. You can take a look at [SvelteKit example](https://github.com/antfu/vite-plugin-pwa/tree/main/examples/sveltekit-pwa) to configure the additional scripts on your application, it is quite complex since we use it for multiple behaviors with the same codebase.
 
 ### Workbox manifestTransforms
 
@@ -60,11 +60,9 @@ Pages which are not prerendered or are generated with a unique adapter will need
 
 ### Static Adapter example
 
-As an example, when using [@sveltejs/adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) <outbound-link /> with `generateSW` strategy and `Prompt for update` behavior, you will need:
+As an example, when using [@sveltejs/adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) with `generateSW` strategy and `Prompt for update` behavior, you will need:
 
-<details>
-<summary>1) add <strong>pwa.js</strong> script</summary>
-
+::: details 1) add pwa.js script
 ```js
 import { copyFileSync } from 'fs'
 import { resolveConfig } from 'vite'
@@ -100,11 +98,9 @@ const buildPwa = async () => {
 
 buildPwa()
 ```
-</details>
+:::
 
-
-<details>
-<summary>2) add <strong>pwa-configuration.js</strong> script</summary>
+::: details 2) add pwa-configuration.js script
 
 ```js
 const pwaConfiguration = {
@@ -178,11 +174,9 @@ const pwaConfiguration = {
 
 export { pwaConfiguration }
 ```
-</details>
+:::
 
-<details>
-<summary>3) modify your <strong>build</strong> script</summary>
-
+::: details 3) modify your build script
 ```json
 {
   "scripts": {
@@ -190,12 +184,9 @@ export { pwaConfiguration }
   }
 }
 ```
-</details>
+:::
 
-
-<details>
-<summary>4) add <strong>Vite Plugin PWA</strong> to <strong>svelte.config.js</strong></summary>
-
+::: details 4) add Vite Plugin PWA to svelte.config.js
 ```js
 import adapter from '@sveltejs/adapter-static'
 import preprocess from 'svelte-preprocess'
@@ -221,4 +212,4 @@ const config = {
 
 export default config
 ```
-</details>
+:::

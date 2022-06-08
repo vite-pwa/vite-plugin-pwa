@@ -4,21 +4,19 @@ title: Automatic reload | Guide
 
 # Automatic reload
 
-> In order for the service worker to be registered, you must invoke the` registerSW`
-method from the `virtual:pwa-register` module.
+::: warning
+In order for the service worker to be registered, you must invoke the` registerSW` method from the `virtual:pwa-register` module.
+:::
 
-With this option, once the service worker detects new content available, then it will update caches and
-will reload all browser windows/tabs with the application opened automatically to take the control.
+With this option, once the service worker detects new content available, then it will update caches and will reload all browser windows/tabs with the application opened automatically to take the control.
 
-The disadvantage of using this option is that the user can lose data in other browser windows / tabs in which the
-application is open and is filling in a form.
+The disadvantage of using this option is that the user can lose data in other browser windows / tabs in which the application is open and is filling in a form.
 
-If your application has forms, we recommend you to change the behavior to use default `prompt` option to allow
-the user decide when to update the content of the application.
+If your application has forms, we recommend you to change the behavior to use default `prompt` option to allow the user decide when to update the content of the application.
 
 ## Setup
 
-Go to [Generate Service Worker](/guide/generate.html) section for basic configuration options.
+Go to [Generate Service Worker](/guide/generate) section for basic configuration options.
 
 With this option, the plugin will force `workbox.clientsClaim` and `workbox.skipWaiting` to `true`.
 

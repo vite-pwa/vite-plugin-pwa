@@ -4,22 +4,17 @@ title: injectManifest | Workbox
 
 # injectManifest
 
-You must read [Which Mode to Use](https://developers.google.com/web/tools/workbox/modules/workbox-build#which_mode_to_use) <outbound-link />
-before decide using this strategy on `vite-plugin-pwa` plugin.
+You must read [Which Mode to Use](https://developer.chrome.com/docs/workbox/modules/workbox-build/#which-mode-to-use) before decide using this strategy on `vite-plugin-pwa` plugin.
 
-Before writing your custom service worker, check if `workbox` can generate the code for you using `generateSW` strategy,
-looking for some plugin on `workbox` site on [Runtime Caching Entry](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.RuntimeCachingEntry) <outbound-link />.
+Before writing your custom service worker, check if `workbox` can generate the code for you using `generateSW` strategy, looking for some plugin on `workbox` site on [Runtime Caching Entry](https://developer.chrome.com/docs/workbox/reference/workbox-build/#type-RuntimeCaching).
 
-You can find the documentation for this method on `workbox` site: [injectManifest](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.injectManifest) <outbound-link />
+You can find the documentation for this method on `workbox` site: [injectManifest](https://developer.chrome.com/docs/workbox/reference/workbox-build/#method-injectManifest)
 
 ## Network First Strategy
 
-You can use the following code to create your custom service worker to be used with network first strategy. We also include
-how to configure [Custom Cache Network Race Strategy](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race) <outbound-link />.
+You can use the following code to create your custom service worker to be used with network first strategy. We also include how to configure [Custom Cache Network Race Strategy](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race).
 
-<details>
-  <summary><strong>VitePWA options</strong> code</summary>
-
+::: details VitePWA options
 ```ts
 VitePWA({
   strategies: 'injectManifest',
@@ -27,20 +22,19 @@ VitePWA({
   filename: 'sw.ts'
 })
 ```
-</details>
+:::
 
-> You also need to add the logic to interact from the client logic: [Advanced (injectManifest)](/guide/inject-manifest.html).
+::: warning
+You also need to add the logic to interact from the client logic: [Advanced (injectManifest)](/guide/inject-manifest).
+:::
 
-Then in your `src/sw.ts` file, remember you will also need to add following `workbox` dependencies as `dev`
-dependencies:
+Then in your `src/sw.ts` file, remember you will also need to add following `workbox` dependencies as `dev` dependencies:
 - `workbox-core`
 - `workbox-routing`
 - `workbox-strategies`
 - `workbox-build`
 
-<details>
-  <summary><strong>src/sw.ts</strong> code</summary>
-
+::: details src/sw.ts
 ```ts
 import { cacheNames, clientsClaim } from 'workbox-core'
 import { registerRoute, setCatchHandler, setDefaultHandler } from 'workbox-routing'
@@ -169,7 +163,7 @@ setCatchHandler(({ event }): Promise<Response> => {
 self.skipWaiting()
 clientsClaim()
 ```
-</details>
+:::
 
 ## Server Push Notifications
 

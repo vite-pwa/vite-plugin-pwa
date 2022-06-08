@@ -79,9 +79,7 @@ If you want to test your service worker using `https`, follow these steps:
     pnpm run build && pnpm run https-preview
     ```
 
-First time you run the script, `https-localhost`  will ask you about installing `localhost` certificate 
-(that will be generated for you), confirm installation on OS (keychain on MACOSX and certificate manager on WINDOWS)
-and open `https://localhost` on browser.
+First time you run the script, `https-localhost`  will ask you about installing `localhost` certificate (that will be generated for you), confirm installation on OS (keychain on MACOSX and certificate manager on WINDOWS) and open `https://localhost` on browser.
 
-If you would like to know more, go to [https-localhost](https://www.npmjs.com/package/https-localhost) <outbound-link />.
+If you would like to know more, go to [https-localhost](https://www.npmjs.com/package/https-localhost).
 

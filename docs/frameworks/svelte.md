@@ -4,11 +4,12 @@ title: Svelte | Frameworks
 
 # Svelte
 
-You can use the built-in `Vite` virtual module `virtual:pwa-register/svelte` for `Svelte` which will return
-`writable` stores (`Writable<boolean>`) for `offlineReady` and `needRefresh`.
+You can use the built-in `Vite` virtual module `virtual:pwa-register/svelte` for `Svelte` which will return `writable` stores (`Writable<boolean>`) for `offlineReady` and `needRefresh`.
 
-> You will need to add `workbox-window` as a `dev` dependency to your `Vite` project.
-> 
+::: warning
+You will need to add `workbox-window` as a `dev` dependency to your `Vite` project.
+:::
+
 ## Type declarations
 
 ```ts
@@ -36,9 +37,7 @@ declare module 'virtual:pwa-register/svelte' {
 
 You can use this `ReloadPrompt.svelte` component:
 
-<details>
-  <summary><strong>components/ReloadPrompt.svelte</strong> code</summary>
-
+::: details ReloadPrompt.svelte
 ```html
 <script lang="ts">
   import { useRegisterSW } from 'virtual:pwa-register/svelte';
@@ -113,12 +112,11 @@ You can use this `ReloadPrompt.svelte` component:
     }
 </style>
 ```
-</details>
+:::
 
 ## Periodic SW Updates
 
-As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.html), you can use this code to configure this
-behavior on your application with the virtual module `virtual:pwa-register/svelte`:
+As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates), you can use this code to configure this behavior on your application with the virtual module `virtual:pwa-register/svelte`:
 
 ```ts
 import { useRegisterSW } from 'virtual:pwa-register/svelte'

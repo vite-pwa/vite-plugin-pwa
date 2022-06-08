@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import { version } from '../../package.json'
 
 const Guide = [
   {
@@ -103,6 +104,14 @@ const Frameworks = [
     text: 'VitePress',
     link: '/frameworks/vitepress',
   },
+  {
+    text: 'îles',
+    link: '/frameworks/iles',
+  },
+  {
+    text: 'Astro (WIP)',
+    link: '/frameworks/astro',
+  },
 ]
 
 const Examples = [
@@ -138,6 +147,14 @@ const Examples = [
     text: 'VitePress',
     link: '/examples/vitepress',
   },
+  {
+    text: 'îles',
+    link: '/examples/iles',
+  },
+  {
+    text: 'Astro (WIP)',
+    link: '/examples/astro',
+  },
 ]
 
 const Workbox = [
@@ -158,38 +175,23 @@ const Workbox = [
 const slidebars = [
   {
     text: 'Guide',
-    items: Guide.map((e) => {
-      (e as any).useLinkText = `${e.text} | Guide`
-      return e
-    }),
+    items: Guide,
   },
   {
     text: 'Frameworks',
-    items: Frameworks.map((e) => {
-      (e as any).useLinkText = `${e.text} | Frameworks`
-      return e
-    }),
+    items: Frameworks,
   },
   {
     text: 'Examples',
-    items: Examples.map((e) => {
-      (e as any).useLinkText = `${e.text} | Examples`
-      return e
-    }),
+    items: Examples,
   },
   {
     text: 'Deployment',
-    items: Deployment.map((e) => {
-      (e as any).useLinkText = `${e.text} | Deployment`
-      return e
-    }),
+    items: Deployment,
   },
   {
     text: 'Workbox',
-    items: Workbox.map((e) => {
-      (e as any).useLinkText = `${e.text} | Workbox`
-      return e
-    }),
+    items: Workbox,
   },
 ]
 
@@ -263,6 +265,15 @@ export default defineConfig({
       {
         text: 'Workbox',
         items: Workbox,
+      },
+      {
+        text: `v${version}`,
+        items: [
+          {
+            text: 'Contributing',
+            link: 'https://github.com/antfu/vite-plugin-pwa/blob/main/CONTRIBUTING.md',
+          },
+        ],
       },
     ],
     sidebar: {

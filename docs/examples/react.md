@@ -6,12 +6,11 @@ title: React | Examples
 
 The `React` example project can be found on `examples/react-router` package/directory.
 
-The router used on this example project is [react-router](https://reactrouter.com/) <outbound-link />.
+The router used on this example project is [react-router](https://reactrouter.com/).
 
 The `React` example has been created using `create-vite` template with `pnpx`:
 
-<details>
-    <summary><strong>pnpx create-vite</strong></summary>
+::: details pnpx create-vite
 
 ```shell
 pnpx create-vite
@@ -28,7 +27,7 @@ Done. Now run:
   npm install
   npm run dev
 ```
-</details>
+:::
 
 To test `new content available`, you should rerun the corresponding script, and then refresh the page.
 

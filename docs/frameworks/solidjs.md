@@ -4,10 +4,11 @@ title: SolidJS | Frameworks
 
 # SolidJS
 
-You can use the built-in `Vite` virtual module `virtual:pwa-register/solid` for `SolidJS` which will return
-`createSignal` stateful values (`createSignal<boolean>`) for `offlineReady` and `needRefresh`.
+You can use the built-in `Vite` virtual module `virtual:pwa-register/solid` for `SolidJS` which will return `createSignal` stateful values (`createSignal<boolean>`) for `offlineReady` and `needRefresh`.
 
-> You will need to add `workbox-window` as a `dev` dependency to your `Vite` project.
+::: warning
+You will need to add `workbox-window` as a `dev` dependency to your `Vite` project.
+:::
 
 ## Type declarations
 
@@ -36,9 +37,7 @@ declare module 'virtual:pwa-register/solid' {
 
 You can use this `ReloadPrompt.tsx` component:
 
-<details>
-  <summary><strong>ReloadPrompt.tsx</strong> code</summary>
-
+::: details ReloadPrompt.tsx
 ```tsx
 import type { Component } from 'solid-js'
 import { Show } from 'solid-js'
@@ -89,13 +88,11 @@ const ReloadPrompt: Component = () => {
 
 export default ReloadPrompt
 ```
-</details>
+:::
 
 and its corresponding `ReloadPrompt.module.css` styles module:
 
-<details>
-  <summary><strong>ReloadPrompt.module.css</strong> code</summary>
-
+::: details ReloadPrompt.module.css
 ```css
 .Container {
   padding: 0;
@@ -127,12 +124,11 @@ and its corresponding `ReloadPrompt.module.css` styles module:
   padding: 3px 10px;
 }
 ```
-</details>
+:::
 
 ## Periodic SW Updates
 
-As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates.html), you can use this code to configure this
-behavior on your application with the virtual module `virtual:pwa-register/solid`:
+As explained in [Periodic Service Worker Updates](/guide/periodic-sw-updates), you can use this code to configure this behavior on your application with the virtual module `virtual:pwa-register/solid`:
 
 ```ts
 import { useRegisterSW } from 'virtual:pwa-register/solid'

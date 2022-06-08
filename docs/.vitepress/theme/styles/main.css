@@ -38,3 +38,18 @@ img.resizable-img {
 .tagline {
   white-space: pre-wrap;
 }
+
+details > summary:hover {
+  cursor: pointer;
+}
+/* remove the gray color from code block inside details > summary */
+.vp-doc details > summary + div[class*='language-'] > pre > code {
+  --vp-code-block-bg: transparent;
+}
+
+.pwa-toast {
+  --c-divider: var(--vp-c-divider-light);
+}
+.dark .pwa-toast {
+  --pwa-divider: var(--vp-c-divider-dark-1);
+}

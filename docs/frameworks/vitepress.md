@@ -4,8 +4,8 @@ title: VitePress | Frameworks
 
 # VitePress
 
-Since [VitePress](https://vitepress.vuejs.org/) <outbound-link /> is built using [Vuejs 3](https://v3.vuejs.org/) <outbound-link /> and 
-on top of [Vite](https://vitejs.dev/) <outbound-link />, the integration with this plugin is graceful.
+Since [VitePress](https://vitepress.vuejs.org/) is built using [Vuejs 3](https://v3.vuejs.org/) and 
+on top of [Vite](https://vitejs.dev/), the integration with this plugin is graceful.
 
 ## Setup
 
@@ -22,16 +22,16 @@ when using `prompt for new content available`, see [Vue 3](/frameworks/vue.html#
 
 You should include the `ReloadPrompt.vue` on `.vitepress/theme/components/` directory.
 
-You can also integrate [Periodic SW updates](/guide/periodic-sw-updates.html).
+You can also integrate [Periodic SW updates](/guide/periodic-sw-updates).
 
 ## Build
 
 Since `VitePress` will generate the pages at the end of the build process, you will need to regenerate the Service 
 Worker of your application when the build process finish (the Service Worker will not have the pages on its precache).
 
-Take a look at build `VitePress` site [docs:build script](https://github.com/antfu/vite-plugin-pwa/blob/main/docs/package.json#L7) <outbound-link />.
+Take a look at build `VitePress` site [docs:build script](https://github.com/antfu/vite-plugin-pwa/blob/main/docs/package.json#L7).
 
 ## Vite Plugin PWA Docs Site
 
-You can go to [Vite Plugin PWA](https://github.com/antfu/vite-plugin-pwa/tree/main/docs) <outbound-link /> to see the 
+You can go to [Vite Plugin PWA](https://github.com/antfu/vite-plugin-pwa/tree/main/docs) to see the 
 source code for this site and how it is configured using `VitePress`.
