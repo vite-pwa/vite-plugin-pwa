@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build && esno scripts/build.ts",
+    "preview": "npm run build && vitepress serve",
     "serve": "npm run build && serve .vitepress/dist"
   },
   "dependencies": {
