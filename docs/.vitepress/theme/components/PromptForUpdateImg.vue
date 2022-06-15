@@ -4,11 +4,11 @@
   </p>
 </template>
 
-<style scoped lang="postcss">
+<style scoped>
 .prompt-img {
   text-align: center;
-  img {
-    object-fit: scale-down;
-  }
+}
+.prompt-img img {
+  object-fit: scale-down;
 }
 </style>
