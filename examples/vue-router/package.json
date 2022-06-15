@@ -25,13 +25,12 @@
     "serve": "serve dist"
   },
   "dependencies": {
-    "vue": "^3.2.35",
+    "vue": "^3.2.37",
     "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^4.0.0",
     "@vitejs/plugin-vue": "^2.3.3",
-    "@vue/compiler-sfc": "^3.2.35",
     "@vueuse/core": "^8.5.0",
     "cross-env": "^7.0.3",
     "https-localhost": "^4.7.1",

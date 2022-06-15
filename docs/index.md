@@ -2,6 +2,8 @@
 layout: home
 sidebar: false
 
+title: Vite Plugin PWA
+
 hero:
   name: PWA
   text: Vite Plugin
@@ -20,21 +22,29 @@ hero:
       link: https://github.com/antfu/vite-plugin-pwa
 
 features:
-  - title: 👌 Zero-Config
+  - icon: 👌
+    title: Zero-Config
     details: Sensible built-in default configs for common use cases
-  - title: 🔩 Extensible
+  - icon: 🔩
+    title: Extensible
     details: Expose the full ability to customize the behavior of the plugin
-  - title: 🔌 Offline Support
+  - icon: 🔌
+    title: Offline Support
     details: Generate Service Worker with Offline support (via Workbox)
-  - title: ⚡ Fully tree shakable
+  - icon: ⚡
+    title: Fully tree shakable
     details: Auto inject Web App Manifest
-  - title: 💬 Prompt for new content
+  - icon: 💬
+    title: Prompt for new content
     details: Built-in support for Vanilla JavaScript, Vue 3, React, Svelte, SolidJS and Preact
-  - title: ⚙️ Stale-while-revalidate
+  - icon: ⚙️
+    title: Stale-while-revalidate
     details: Automatic reload when new content is available
-  - title: ✨ Static assets handling
+  - icon: ✨
+    title: Static assets handling
     details: Configure static assets for offline support
-  - title: 🐞 Development Support
+  - icon: 🐞
+    title: Development Support
     details: Debug your custom service worker logic as you develop your application
 
 ---

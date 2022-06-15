@@ -172,45 +172,38 @@ const Workbox = [
   },
 ]
 
-const slidebars = [
-  {
-    text: 'Guide',
-    items: Guide,
-  },
-  {
-    text: 'Frameworks',
-    items: Frameworks,
-  },
-  {
-    text: 'Examples',
-    items: Examples,
-  },
-  {
-    text: 'Deployment',
-    items: Deployment,
-  },
-  {
-    text: 'Workbox',
-    items: Workbox,
-  },
-]
+const firaFont = 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap'
+
+const googleapis = 'https://fonts.googleapis.com'
+const gstatic = 'https://fonts.gstatic.com'
 
 export default defineConfig({
   lang: 'en-US',
   title: 'Vite Plugin PWA',
   description: 'Zero-config PWA Framework-agnostic Plugin for Vite',
   head: [
+    ['link', { rel: 'dns-prefetch', href: googleapis }],
+    ['link', { rel: 'dns-prefetch', href: gstatic }],
+    ['link', { rel: 'preconnect', crossorigin: 'anonymous', href: googleapis }],
+    ['link', { rel: 'preconnect', crossorigin: 'anonymous', href: gstatic }],
+    ['link', { rel: 'stylesheet', crossorigin: 'anonymous', href: firaFont }],
     ['meta', { name: 'theme-color', content: '#ffffff' }],
     ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
     ['link', { rel: 'alternate icon', href: '/favicon.ico', type: 'image/png', sizes: '16x16' }],
     ['link', { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#ffffff' }],
     ['meta', { name: 'author', content: 'Anthony Fu' }],
-    ['meta', { name: 'keywords', content: 'react, pwa, vue, vitepress, preact, svelte, sveltekit, workbox, solidjs, vite, vite-plugin' }],
+    ['meta', {
+      name: 'keywords',
+      content: 'react, pwa, vue, vitepress, preact, svelte, sveltekit, workbox, solidjs, vite, vite-plugin',
+    }],
     ['meta', { property: 'og:title', content: 'Vite Plugin PWA' }],
     ['meta', { property: 'og:description', content: 'Zero-config PWA Framework-agnostic Plugin for Vite' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:creator', content: '@antfu7' }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' }],
+    ['link', { rel: 'manifest', href: '/manifest.webmanifest' }],
+    ['link', { rel: 'prefetch', href: '/icon_light.svg' }],
+    ['link', { rel: 'prefetch', href: '/icon_dark.svg' }],
   ],
   lastUpdated: true,
   markdown: {
@@ -222,9 +215,7 @@ export default defineConfig({
   themeConfig: {
     // logo: '/favicon.svg',
     editLink: {
-      repo: 'antfu/vite-plugin-pwa',
-      branch: 'main',
-      dir: 'docs',
+      pattern: 'https://github.com/antfu/vite-plugin-pwa/edit/main/docs/:path',
       text: 'Suggest changes to this page',
     },
     /*
@@ -276,13 +267,69 @@ export default defineConfig({
         ],
       },
     ],
-    sidebar: {
-      '/guide/': slidebars,
-      '/frameworks/': slidebars,
-      '/examples/': slidebars,
-      '/deployment/': slidebars,
-      '/workbox/': slidebars,
-      '/': slidebars,
-    },
+    sidebar: [
+      {
+        text: 'Guide',
+        collapsible: true,
+        items: Guide,
+      },
+      {
+        text: 'Frameworks',
+        collapsible: true,
+        items: Frameworks,
+      },
+      {
+        text: 'Examples',
+        collapsible: true,
+        items: Examples,
+      },
+      {
+        text: 'Deployment',
+        collapsible: true,
+        items: Deployment,
+      },
+      {
+        text: 'Workbox',
+        collapsible: true,
+        items: Workbox,
+      },
+    ],
+    // sidebar: {
+    //   '/guide/': [
+    //     {
+    //       text: 'Guide',
+    //       collapsible: true,
+    //       items: Guide,
+    //     },
+    //   ],
+    //   '/frameworks/': [
+    //     {
+    //       text: 'Frameworks',
+    //       collapsible: true,
+    //       items: Frameworks,
+    //     },
+    //   ],
+    //   '/examples/': [
+    //     {
+    //       text: 'Examples',
+    //       collapsible: true,
+    //       items: Examples,
+    //     },
+    //   ],
+    //   '/deployment/': [
+    //     {
+    //       text: 'Deployment',
+    //       collapsible: true,
+    //       items: Deployment,
+    //     },
+    //   ],
+    //   '/workbox/': [
+    //     {
+    //       text: 'Workbox',
+    //       collapsible: true,
+    //       items: Workbox,
+    //     },
+    //   ],
+    // },
   },
 })

@@ -10,11 +10,11 @@
   "dependencies": {
     "@vueuse/core": "^8.5.0",
     "@vueuse/shared": "^8.5.0",
-    "vue": "^3.2.35",
-    "vue-global-api": "^0.4.1"
+    "vue": "^3.2.37"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
+    "@vitejs/plugin-vue": "^2.3.3",
     "@vueuse/core": "^8.5.0",
     "esbuild-register": "^3.3.2",
     "eslint": "^8.16.0",
@@ -26,7 +26,7 @@
     "unplugin-vue-components": "^0.19.5",
     "vite": "^2.9.9",
     "vite-plugin-pwa": "workspace:*",
-    "vitepress": "^1.0.0-alpha.1",
+    "vitepress": "^1.0.0-alpha.2",
     "workbox-window": "^6.5.3"
   }
 }

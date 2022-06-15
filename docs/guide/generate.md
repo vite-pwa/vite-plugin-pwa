@@ -51,6 +51,8 @@ User-agent: *
 Allow: /
 ```
 
+## Web Manifest Icons
+
 For `manifest` icons entry, you will need to create `pwa-192x192.png`, and `pwa-512x512.png`. The icons specified above are the minimum required to meet PWA, that is, icons with `192x192` and `512x512` resolutions (last one duplicate for `purpose: 'any maskable'`).
 
 We suggest that you create an SVG or PNG icon (if it is a PNG icon, with the maximum resolution possible)  icon for your application and use it to generate a favicon package on [Favicon Generator](https://realfavicongenerator.net/). 
@@ -61,7 +63,9 @@ Once generated, download the ZIP and use `android-*` icons for `pwa-*`:
 - `apple-touch-icon.png` is `apple-touch-icon.png`
 - `favicon.ico` is `favicon.ico`
 
-You will also need to change your `index.html` file to include at least the following content to meet PWA requirements, you must change the `title` and the `description`, `favicon.svg` is the svg you have created:
+## Configure entry point
+
+You will also need to change your entry point (`index.html`) file to include at least the following content to meet PWA requirements, you must change the `title` and the `description`, `favicon.svg` is the svg you have created:
 
 ::: details index.html
 ```html

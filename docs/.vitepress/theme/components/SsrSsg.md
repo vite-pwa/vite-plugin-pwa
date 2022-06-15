@@ -15,4 +15,4 @@ if (typeof window !== 'undefined')
   import('./pwa')
 ```
 
-You can see the [FAQ](/guide/faq.md#navigator-window-is-undefined) entry for more info.
+You can see the [FAQ](/guide/faq#navigator-window-is-undefined) entry for more info.
