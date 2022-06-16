@@ -9,8 +9,7 @@ export default {
   ...Theme,
   Layout() {
     return h(Theme.Layout, null, {
-      'home-hero-before': () => h(ReloadPrompt),
-      'aside-top': () => h(ReloadPrompt),
+      'layout-bottom': () => h(ReloadPrompt),
     })
   },
 }

@@ -34,14 +34,14 @@ onBeforeMount(async () => {
       </div>
       <button
         type="button"
-        class="border border-$pwa-divider bg-$vp-c-brand text-black mr-2 px-3 py-1 rounded hover:bg-$c-brand-light"
+        class="pwa-refresh mr-2 px-3 py-1 rounded"
         @click="updateServiceWorker?.()"
       >
         Reload
       </button>
       <button
         type="button"
-        class="border border-$pwa-divider text-black mr-2 px-3 py-1 rounded hover:bg-$c-brand-light"
+        class="pwa-cancel border border-$pwa-divider mr-2 px-3 py-1 rounded"
         @click="close"
       >
         Close

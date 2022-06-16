@@ -46,18 +46,6 @@ export default defineConfig({
     VitePWA({
       outDir: '.vitepress/dist',
       registerType: 'prompt',
-      // includeAssets: [
-      //   'favicon.svg',
-      //   'favicon.ico',
-      //   'robots.txt',
-      //   'safari-pinned-tab.svg',
-      //   'banner_light.svg',
-      //   'banner_dark.svg',
-      //   'icon_light.svg',
-      //   'icon_dark.svg',
-      //   'icon_gray.svg',
-      //   'prompt-update.png',
-      // ],
       includeManifestIcons: false,
       manifest: {
         id: '/',
@@ -86,22 +74,7 @@ export default defineConfig({
       },
       workbox: {
         mode: 'development',
-        // navigateFallback: '/',
         globPatterns: ['**/*.{css,js,html,svg,png,ico,txt,json,woff2}'],
-        // manifestTransforms: [(manifestEntries) => {
-        //   const matcher = /(deployment|examples|frameworks|guide|workbox)\/index.html$/
-        //   const htmlEntries = manifestEntries.filter(me => me.url === 'index.html' || me.url.match(matcher))
-        //   if (htmlEntries) {
-        //     htmlEntries.forEach(({ url, ...rest }) => {
-        //       if (url === 'index.html')
-        //         manifestEntries.push({ ...rest, url: '/' })
-        //       else
-        //         manifestEntries.push({ ...rest, url: `/${url.substring(0, url.lastIndexOf('/') + 1)}` })
-        //     })
-        //   }
-        //
-        //   return { manifest: manifestEntries }
-        // }],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
@@ -134,5 +107,13 @@ export default defineConfig({
         ],
       },
     }),
+    {
+      name: 'vitepress-layout-slots-fix',
+      enforce: 'pre',
+      transform(code, id) {
+        if (id.includes('Layout.vue') && !id.endsWith('.css'))
+          return code.replace('<VPFooter />', '<VPFooter />\n<slot name="layout-bottom" />')
+      },
+    },
   ],
 })
