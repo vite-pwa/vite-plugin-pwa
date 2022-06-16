@@ -9,6 +9,7 @@ export default {
   ...Theme,
   Layout() {
     return h(Theme.Layout, null, {
+      // TODO: review this when https://github.com/vuejs/vitepress/issues/760 included
       'layout-bottom': () => h(ReloadPrompt),
     })
   },

@@ -107,6 +107,7 @@ export default defineConfig({
         ],
       },
     }),
+    // TODO: remove this when https://github.com/vuejs/vitepress/issues/760 included
     {
       name: 'vitepress-layout-slots-fix',
       enforce: 'pre',

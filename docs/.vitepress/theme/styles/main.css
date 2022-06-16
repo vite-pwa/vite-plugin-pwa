@@ -43,9 +43,11 @@ details > summary:hover {
   cursor: pointer;
 }
 /* remove the gray color from code block inside details > summary */
+.vp-doc .custom-block div[class*=language-] code,
 .vp-doc details > summary + div[class*='language-'] > pre > code {
   --vp-code-block-bg: transparent;
 }
+
 
 .pwa-toast {
   --c-divider: var(--vp-c-divider-light);
