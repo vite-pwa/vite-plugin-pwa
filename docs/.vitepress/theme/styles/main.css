@@ -1,8 +1,8 @@
-.dark [img-light] {
+.dark [img-light], .dark .logo[light-logo] {
   display: none;
 }
 
-html:not(.dark) [img-dark] {
+html:not(.dark) [img-dark], html:not(.dark) .logo[dark-logo] {
   display: none;
 }
 

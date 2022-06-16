@@ -3,6 +3,8 @@ import Components from 'unplugin-vue-components/vite'
 import { presetUno } from 'unocss'
 import Unocss from 'unocss/vite'
 import { VitePWA } from '../dist'
+import LayoutSlotFix from './plugins/layout'
+import NavbarFix from './plugins/navbar'
 
 export default defineConfig({
   build: {
@@ -107,13 +109,7 @@ export default defineConfig({
       },
     }),
     // TODO: remove this when https://github.com/vuejs/vitepress/issues/760 included
-    {
-      name: 'vitepress-layout-slots-fix',
-      enforce: 'pre',
-      transform(code, id) {
-        if (id.includes('Layout.vue') && !id.endsWith('.css'))
-          return code.replace('<VPFooter />', '<VPFooter />\n<slot name="layout-bottom" />')
-      },
-    },
+    LayoutSlotFix(),
+    NavbarFix(),
   ],
 })

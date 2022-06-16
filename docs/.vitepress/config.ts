@@ -172,21 +172,11 @@ const Workbox = [
   },
 ]
 
-const firaFont = 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap'
-
-const googleapis = 'https://fonts.googleapis.com'
-const gstatic = 'https://fonts.gstatic.com'
-
 export default defineConfig({
   lang: 'en-US',
   title: 'Vite Plugin PWA',
   description: 'Zero-config PWA Framework-agnostic Plugin for Vite',
   head: [
-    ['link', { rel: 'dns-prefetch', href: googleapis }],
-    ['link', { rel: 'dns-prefetch', href: gstatic }],
-    ['link', { rel: 'preconnect', crossorigin: 'anonymous', href: googleapis }],
-    ['link', { rel: 'preconnect', crossorigin: 'anonymous', href: gstatic }],
-    ['link', { rel: 'stylesheet', crossorigin: 'anonymous', href: firaFont }],
     ['meta', { name: 'theme-color', content: '#ffffff' }],
     ['link', { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' }],
     ['link', { rel: 'alternate icon', href: '/favicon.ico', type: 'image/png', sizes: '16x16' }],
@@ -194,16 +184,13 @@ export default defineConfig({
     ['meta', { name: 'author', content: 'Anthony Fu' }],
     ['meta', {
       name: 'keywords',
-      content: 'react, pwa, vue, vitepress, preact, svelte, sveltekit, workbox, solidjs, vite, vite-plugin',
+      content: 'PWA, React, Vue, VitePress, Preact, Svelte, SvelteKit, workbox, SolidJS, Vite, vite-plugin, îles, Astro',
     }],
     ['meta', { property: 'og:title', content: 'Vite Plugin PWA' }],
     ['meta', { property: 'og:description', content: 'Zero-config PWA Framework-agnostic Plugin for Vite' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:creator', content: '@antfu7' }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' }],
-    ['link', { rel: 'manifest', href: '/manifest.webmanifest' }],
-    ['link', { rel: 'prefetch', href: '/icon_light.svg' }],
-    ['link', { rel: 'prefetch', href: '/icon_dark.svg' }],
   ],
   lastUpdated: true,
   markdown: {
@@ -294,42 +281,5 @@ export default defineConfig({
         items: Workbox,
       },
     ],
-    // sidebar: {
-    //   '/guide/': [
-    //     {
-    //       text: 'Guide',
-    //       collapsible: true,
-    //       items: Guide,
-    //     },
-    //   ],
-    //   '/frameworks/': [
-    //     {
-    //       text: 'Frameworks',
-    //       collapsible: true,
-    //       items: Frameworks,
-    //     },
-    //   ],
-    //   '/examples/': [
-    //     {
-    //       text: 'Examples',
-    //       collapsible: true,
-    //       items: Examples,
-    //     },
-    //   ],
-    //   '/deployment/': [
-    //     {
-    //       text: 'Deployment',
-    //       collapsible: true,
-    //       items: Deployment,
-    //     },
-    //   ],
-    //   '/workbox/': [
-    //     {
-    //       text: 'Workbox',
-    //       collapsible: true,
-    //       items: Workbox,
-    //     },
-    //   ],
-    // },
   },
 })
