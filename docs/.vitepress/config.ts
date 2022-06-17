@@ -205,12 +205,12 @@ export default defineConfig({
       pattern: 'https://github.com/antfu/vite-plugin-pwa/edit/main/docs/:path',
       text: 'Suggest changes to this page',
     },
-    /* TODO: replace it with the requested PWA repo (rn with Vitests ones)
-      algolia: {
-        appId: 'ZTF29HGJ69',
-        apiKey: '9c3ced6fed60d2670bb36ab7e8bed8bc',
-        indexName: 'vite-plugin-pwa',
-      },
+    /* TODO: replace it with the requested PWA repo (rn with Vitest ones for testing)
+    algolia: {
+      appId: 'ZTF29HGJ69',
+      apiKey: '9c3ced6fed60d2670bb36ab7e8bed8bc',
+      indexName: 'vitest',
+    },
     */
     socialLinks: [
       { icon: 'discord', link: 'https://chat.antfu.me' },
@@ -223,24 +223,45 @@ export default defineConfig({
     nav: [
       {
         text: 'Guide',
-        items: Guide,
+        items: [
+          {
+            text: 'Getting Started',
+            link: '/guide/',
+          },
+          {
+            text: 'Frameworks',
+            link: '/frameworks/',
+          },
+          {
+            text: 'Examples',
+            link: '/examples/',
+          },
+        ],
       },
       {
-        text: 'Frameworks',
-        items: Frameworks,
-      },
-      {
-        text: 'Examples',
-        items: Examples,
-      },
-      {
-        text: 'Deployment',
-        items: Deployment,
+        text: 'Deploy',
+        link: '/deployment/',
       },
       {
         text: 'Workbox',
-        items: Workbox,
+        link: '/workbox/',
       },
+      // {
+      //   text: 'Frameworks',
+      //   items: Frameworks,
+      // },
+      // {
+      //   text: 'Examples',
+      //   items: Examples,
+      // },
+      // {
+      //   text: 'Deployment',
+      //   items: Deployment,
+      // },
+      // {
+      //   text: 'Workbox',
+      //   items: Workbox,
+      // },
       {
         text: `v${version}`,
         items: [
@@ -272,7 +293,7 @@ export default defineConfig({
         items: Examples,
       },
       {
-        text: 'Deployment',
+        text: 'Deploy',
         collapsible: true,
         items: Deployment,
       },
