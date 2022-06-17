@@ -39,6 +39,10 @@ export default defineConfig({
       dts: '.vitepress/components.d.ts',
     }),
 
+    // TODO: remove LayoutSlotFix when https://github.com/vuejs/vitepress/issues/760 included
+    LayoutSlotFix(),
+    NavbarFix(),
+
     // https://github.com/unocss/unocss
     Unocss({
       presets: [presetUno()],
@@ -108,8 +112,5 @@ export default defineConfig({
         ],
       },
     }),
-    // TODO: remove this when https://github.com/vuejs/vitepress/issues/760 included
-    LayoutSlotFix(),
-    NavbarFix(),
   ],
 })
