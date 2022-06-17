@@ -61,6 +61,12 @@ injectManifest: {
 }
 ```
 
+## Exclude routes
+
+If you need to exclude some routes from service worker interception:
+- [for `generateSW` strategy](/workbox/generate-sw#exclude-routes)
+- [for `injectManifest` strategy](/workbox/inject-manifest#exclude-routes)
+
 ## `navigator / window` is `undefined`
 
 If you are getting `navigator is undefined` or `window is undefined` errors when building your application, you have configured your application in an `SSR / SSG` environment.
