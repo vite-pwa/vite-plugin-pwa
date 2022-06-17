@@ -248,6 +248,10 @@ export default defineConfig({
         text: `v${version}`,
         items: [
           {
+            text: 'Release Notes',
+            link: 'https://github.com/antfu/vite-plugin-pwa/releases',
+          },
+          {
             text: 'Contributing',
             link: 'https://github.com/antfu/vite-plugin-pwa/blob/main/CONTRIBUTING.md',
           },
