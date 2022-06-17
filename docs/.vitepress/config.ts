@@ -216,7 +216,7 @@ export default defineConfig({
       },
     */
     socialLinks: [
-      { icon: 'discord', link: 'https://discord.com/channels/937808017016119440/937973377883336704' },
+      { icon: 'discord', link: 'https://chat.antfu.me' },
       { icon: 'github', link: 'https://github.com/antfu/vite-plugin-pwa' },
     ],
     footer: {
