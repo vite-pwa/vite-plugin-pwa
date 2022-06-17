@@ -75,6 +75,22 @@ VitePWA({
 ```
 :::
 
+## Exclude routes
+
+To exclude some routes from being intercepted by the service worker, you just need to add those routes using a `regex` list to the `navigateFallbackDenylist` option of `workbox`:
+
+```ts
+VitePWA({
+  workbox: {
+    navigateFallbackDenylist: [/^\/backoffice/]
+  }
+})
+```
+
+::: warning
+You must deal with offline support for excluded routes: if requesting a page excluded on `navigateFallbackDenylist` you will get `No internet connection`.
+:::
+
 ## Background Sync
 
 You can add this code to the plugin on your `vite.config.ts` file to add a `Background Sync` manager to your service worker:

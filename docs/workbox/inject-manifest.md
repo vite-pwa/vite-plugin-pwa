@@ -10,6 +10,31 @@ Before writing your custom service worker, check if `workbox` can generate the c
 
 You can find the documentation for this method on `workbox` site: [injectManifest](https://developer.chrome.com/docs/workbox/reference/workbox-build/#method-injectManifest)
 
+
+## Exclude routes
+
+To exclude some routes from being intercepted by the service worker, you just need to add those routes using a `regex` array to the `denylist` option of `NavigationRoute`:
+
+```ts
+import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching'
+import { NavigationRoute, registerRoute } from 'workbox-routing'
+
+declare let self: ServiceWorkerGlobalScope
+
+// self.__WB_MANIFEST is default injection point
+precacheAndRoute(self.__WB_MANIFEST)
+
+// to allow work offline
+registerRoute(new NavigationRoute(
+  createHandlerBoundToURL('index.html'),
+  { denylist: [/^\/backoffice/] },
+))
+```
+
+::: warning
+You must deal with offline support for excluded routes: if requesting a page included on `denylist` you will get `No internet connection`.
+:::
+
 ## Network First Strategy
 
 You can use the following code to create your custom service worker to be used with network first strategy. We also include how to configure [Custom Cache Network Race Strategy](https://jakearchibald.com/2014/offline-cookbook/#cache--network-race).
