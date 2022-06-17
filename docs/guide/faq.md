@@ -151,3 +151,31 @@ You can check your `SSR / SSG` environment to see if it provides some way to reg
   </ClientOnly>
 </template>
 ```
+
+### VitePress
+
+You can check the [ReloadPrompt](https://github.com/antfu/vite-plugin-pwa/blob/main/docs/.vitepress/theme/components/ReloadPrompt.vue) component of this site to call the PWA virtual module:
+```vue
+<script setup lang="ts">
+import { onBeforeMount, ref } from 'vue'
+
+const needRefresh = ref(false)
+
+let updateServiceWorker: (() => Promise<void>) | undefined
+
+const onNeedRefresh = () => {
+  needRefresh.value = true
+}
+const close = async () => {
+  needRefresh.value = false
+}
+
+onBeforeMount(async () => {
+  const { registerSW } = await import('virtual:pwa-register')
+  updateServiceWorker = registerSW({
+    immediate: true,
+    onNeedRefresh,
+  })
+})
+</script>
+```
