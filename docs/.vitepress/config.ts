@@ -205,14 +205,11 @@ export default defineConfig({
       pattern: 'https://github.com/antfu/vite-plugin-pwa/edit/main/docs/:path',
       text: 'Suggest changes to this page',
     },
-    /*
+    /* TODO: replace it with the requested PWA repo (rn with Vitests ones)
       algolia: {
-        apiKey: 'todo@antfu: replace this',
+        appId: 'ZTF29HGJ69',
+        apiKey: '9c3ced6fed60d2670bb36ab7e8bed8bc',
         indexName: 'vite-plugin-pwa',
-        searchParameters: {
-          // for translations maintainers: change the filter to your locale code (subdomain name)
-          facetFilters: ['language:en']
-        }
       },
     */
     socialLinks: [
