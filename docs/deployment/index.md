@@ -1,5 +1,5 @@
 ---
-title: Getting Started | Deployment
+title: Getting Started | Deploy
 ---
 
 # Getting Started
