@@ -138,7 +138,7 @@ export default defineConfig({
 ### Server Configuration
 
 You can use the server you want, but your server **must**:
-- serve `manifest.webmanifest` with mime type `application/manifest+json`
+- serve `manifest.webmanifest` with `application/manifest+json` mime type
 - serve your application over `https`
 - redirect from `http` to `https`
 
