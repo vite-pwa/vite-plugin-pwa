@@ -111,7 +111,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   plugins: [
     VitePWA({
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.png'],
+      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
       manifest: {
         name: 'My Awesome App',
         short_name: 'MyApp',
