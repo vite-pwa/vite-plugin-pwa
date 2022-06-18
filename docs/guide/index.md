@@ -10,7 +10,7 @@ Progressive Web Apps (PWAs) are web application built and enhanced with modern A
 If you want to build a Progressive Web App, you may be wondering where to start, if it's possible to upgrade a website to a PWA without starting from scratch, or how to move from a platform-specific app to a PWA.
 :::
 
-A PWA mainly consists of a [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest), a service worker and a script/module to register it in the browser.
+A PWA mainly consists of a [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest), a service worker and a script/module to register/configure the service worker in the browser.
 
 `vite-plugin-pwa` will help you to add PWA capabilities, with almost zero configuration, to your existing applications.
 
@@ -79,7 +79,7 @@ Your application entry point (usually `index.html`) **must** have the following 
 - a link for `mask-icon`
 - a meta entry for `theme-color`
 
-For example, here a minimal configuration:
+For example, here a minimal configuration (you must provide all the icons and images):
 ```html
 <head>
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -142,7 +142,7 @@ You can use the server you want, but your server **must**:
 - serve your application over `https`
 - redirect from `http` to `https`
 
-You can find mor information in the [Deploy](/deployment/) section.
+You can find more information in the [Deploy](/deployment/) section.
 
 ## Features
 

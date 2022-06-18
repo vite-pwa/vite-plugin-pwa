@@ -4,7 +4,7 @@ title: Getting Started | Examples
 
 # Getting Started
 
-You can find a set of example projects on [Vite Plugin PWA GitHub repo](https://github.com/antfu/vite-plugin-pwa/tree/main/examples).
+You can find a set of examples projects on [Vite Plugin PWA GitHub repo](https://github.com/antfu/vite-plugin-pwa/tree/main/examples).
 
 All the examples projects are under `examples` package/directory of the repo root directory.
 
@@ -25,19 +25,19 @@ If you want to run any of the examples projects you will need to download/clone 
 You will need `node 14` (or newer) to be able to build the `Vite Plugin PWA`.
 
 ::: warning
-We're using `corepack` with `Node 16+`, please refer to https://github.com/antfu/contribute for more information.
+Before following the instructions below, read the [Contribution Guide](https://github.com/antfu/vite-plugin-pwa/blob/main/CONTRIBUTING.md).
 :::
-
-Once the repo is on your local machine, you must install project dependencies and build the `vite-plugin-pwa`, just run (from `vite-plugin-pwa` directory cloned locally):
-
-```shell
-pnpm install
-pnpm run build
-```
 
 If you don't have installed `PNPM`, you must install it globally via `npm`:
 ```shell
 npm install -g pnpm
+```
+
+Once the repo is on your local machine, you must install project dependencies and build the `vite-plugin-pwa` plugin, just run (from `vite-plugin-pwa` directory cloned locally):
+
+```shell
+pnpm install
+pnpm run build
 ```
 
 We use `PNPM` but should work with any `package manager`, for example, with `YARN`:
@@ -50,10 +50,10 @@ From here on, we will only show the commands to run the examples projects using 
 :::
 
 Before we start running the examples projects, you should consider the following:
-- Use `Chromium based` browser: `Chrome`, `Chromium` or `Edge`.
+- Use `Chromium based` browser: `Chrome`, `Chromium` or `Edge`
 - All the examples that are executed in this guide will be done over https, that is, all the projects will respond at address `https://localhost`
-- When testing an example project, the `service worker` will be installed in `https://localhost`, and so, subsequent tests in another examples projects may interfere with the previous test, because the `service worker` of the previous project will keep installed on the browser.
-- Tests should be done on a private window, and so, browser addons/plugins will not interfere with the test.
+- When testing an example project, the `service worker` will be installed in `https://localhost`, and so, subsequent tests in another examples projects may interfere with the previous test, because the `service worker` of the previous project will keep installed on the browser
+- Tests should be done on a private window, and so, browser addons/plugins will not interfere with the test
 
 To avoid `service worker` interference, you should do the following tasks when switching between examples projects:
 - Open `dev tools` (`Option + ⌘ + J` on `macOS`, `Shift + CTRL + J` on `Windows/Linux`)
@@ -62,7 +62,7 @@ To avoid `service worker` interference, you should do the following tasks when s
   - Storage: [x] Local and session storage
   - Cache: [x] Cache storage and [x] Application cache
 - Click on `Clear site data` button
-- Go to `Application > Service Workers` and check the current `service worker` is missing or has the state `deleted`.
+- Go to `Application > Service Workers` and check the current `service worker` is missing or has the state `deleted`
 
 Once we remove the `service worker`, run the corresponding script and just press browser `Refresh` button (or enter `https://localhost` on browser address).
 
