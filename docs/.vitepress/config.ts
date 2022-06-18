@@ -276,194 +276,195 @@ export default defineConfig({
         ],
       },
     ],
-    sidebar: {
-      '/guide/': [
-        {
-          text: 'Guide',
-          collapsible: true,
-          collapsed: false,
-          items: Guide,
-        },
-        {
-          text: 'Frameworks',
-          collapsible: true,
-          collapsed: true,
-          items: Frameworks,
-        },
-        {
-          text: 'Examples',
-          collapsible: true,
-          collapsed: true,
-          items: Examples,
-        },
-        {
-          text: 'Deploy',
-          collapsible: true,
-          collapsed: true,
-          items: Deployment,
-        },
-        {
-          text: 'Workbox',
-          collapsible: true,
-          collapsed: true,
-          items: Workbox,
-        },
-      ],
-      '/frameworks/': [
-        {
-          text: 'Guide',
-          collapsible: true,
-          collapsed: true,
-          items: Guide,
-        },
-        {
-          text: 'Frameworks',
-          collapsible: true,
-          collapsed: false,
-          items: Frameworks,
-        },
-        {
-          text: 'Examples',
-          collapsible: true,
-          collapsed: true,
-          items: Examples,
-        },
-        {
-          text: 'Deploy',
-          collapsible: true,
-          collapsed: true,
-          items: Deployment,
-        },
-        {
-          text: 'Workbox',
-          collapsible: true,
-          collapsed: true,
-          items: Workbox,
-        },
-      ],
-      '/examples/': [
-        {
-          text: 'Guide',
-          collapsible: true,
-          collapsed: true,
-          items: Guide,
-        },
-        {
-          text: 'Frameworks',
-          collapsible: true,
-          collapsed: true,
-          items: Frameworks,
-        },
-        {
-          text: 'Examples',
-          collapsible: true,
-          collapsed: false,
-          items: Examples,
-        },
-        {
-          text: 'Deploy',
-          collapsible: true,
-          collapsed: true,
-          items: Deployment,
-        },
-        {
-          text: 'Workbox',
-          collapsible: true,
-          collapsed: true,
-          items: Workbox,
-        },
-      ],
-      '/deploy/': [
-        {
-          text: 'Guide',
-          collapsible: true,
-          collapsed: true,
-          items: Guide,
-        },
-        {
-          text: 'Frameworks',
-          collapsible: true,
-          collapsed: true,
-          items: Frameworks,
-        },
-        {
-          text: 'Examples',
-          collapsible: true,
-          collapsed: true,
-          items: Examples,
-        },
-        {
-          text: 'Deploy',
-          collapsible: true,
-          collapsed: false,
-          items: Deployment,
-        },
-        {
-          text: 'Workbox',
-          collapsible: true,
-          collapsed: true,
-          items: Workbox,
-        },
-      ],
-      '/workbox/': [
-        {
-          text: 'Guide',
-          collapsible: true,
-          collapsed: true,
-          items: Guide,
-        },
-        {
-          text: 'Frameworks',
-          collapsible: true,
-          collapsed: true,
-          items: Frameworks,
-        },
-        {
-          text: 'Examples',
-          collapsible: true,
-          collapsed: true,
-          items: Examples,
-        },
-        {
-          text: 'Deploy',
-          collapsible: true,
-          collapsed: true,
-          items: Deployment,
-        },
-        {
-          text: 'Workbox',
-          collapsible: true,
-          collapsed: false,
-          items: Workbox,
-        },
-      ],
-    },
-    // sidebar: [
-    //   {
-    //     text: 'Guide',
-    //     collapsible: true,
-    //     items: Guide,
-    //   },
-    //   {
-    //     text: 'Frameworks',
-    //     collapsible: true,
-    //     items: Frameworks,
-    //   },
-    //   {
-    //     text: 'Examples',
-    //     collapsible: true,
-    //     items: Examples,
-    //   },
-    //   {
-    //     text: 'Deploy',
-    //     collapsible: true,
-    //     items: Deployment,
-    //   },
-    //   {
-    //     text: 'Workbox',
-    //     collapsible: true,
-    //     items: Workbox,
-    //   },
-    // ],
+    // TODO: switch this when VitePress alpha-3 released (maybe next week?)
+    // sidebar: {
+    //   '/guide/': [
+    //     {
+    //       text: 'Guide',
+    //       collapsible: true,
+    //       collapsed: false,
+    //       items: Guide,
+    //     },
+    //     {
+    //       text: 'Frameworks',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Frameworks,
+    //     },
+    //     {
+    //       text: 'Examples',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Examples,
+    //     },
+    //     {
+    //       text: 'Deploy',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Deployment,
+    //     },
+    //     {
+    //       text: 'Workbox',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Workbox,
+    //     },
+    //   ],
+    //   '/frameworks/': [
+    //     {
+    //       text: 'Guide',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Guide,
+    //     },
+    //     {
+    //       text: 'Frameworks',
+    //       collapsible: true,
+    //       collapsed: false,
+    //       items: Frameworks,
+    //     },
+    //     {
+    //       text: 'Examples',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Examples,
+    //     },
+    //     {
+    //       text: 'Deploy',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Deployment,
+    //     },
+    //     {
+    //       text: 'Workbox',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Workbox,
+    //     },
+    //   ],
+    //   '/examples/': [
+    //     {
+    //       text: 'Guide',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Guide,
+    //     },
+    //     {
+    //       text: 'Frameworks',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Frameworks,
+    //     },
+    //     {
+    //       text: 'Examples',
+    //       collapsible: true,
+    //       collapsed: false,
+    //       items: Examples,
+    //     },
+    //     {
+    //       text: 'Deploy',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Deployment,
+    //     },
+    //     {
+    //       text: 'Workbox',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Workbox,
+    //     },
+    //   ],
+    //   '/deployment/': [
+    //     {
+    //       text: 'Guide',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Guide,
+    //     },
+    //     {
+    //       text: 'Frameworks',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Frameworks,
+    //     },
+    //     {
+    //       text: 'Examples',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Examples,
+    //     },
+    //     {
+    //       text: 'Deploy',
+    //       collapsible: true,
+    //       collapsed: false,
+    //       items: Deployment,
+    //     },
+    //     {
+    //       text: 'Workbox',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Workbox,
+    //     },
+    //   ],
+    //   '/workbox/': [
+    //     {
+    //       text: 'Guide',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Guide,
+    //     },
+    //     {
+    //       text: 'Frameworks',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Frameworks,
+    //     },
+    //     {
+    //       text: 'Examples',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Examples,
+    //     },
+    //     {
+    //       text: 'Deploy',
+    //       collapsible: true,
+    //       collapsed: true,
+    //       items: Deployment,
+    //     },
+    //     {
+    //       text: 'Workbox',
+    //       collapsible: true,
+    //       collapsed: false,
+    //       items: Workbox,
+    //     },
+    //   ],
+    // },
+    sidebar: [
+      {
+        text: 'Guide',
+        collapsible: true,
+        items: Guide,
+      },
+      {
+        text: 'Frameworks',
+        collapsible: true,
+        items: Frameworks,
+      },
+      {
+        text: 'Examples',
+        collapsible: true,
+        items: Examples,
+      },
+      {
+        text: 'Deploy',
+        collapsible: true,
+        items: Deployment,
+      },
+      {
+        text: 'Workbox',
+        collapsible: true,
+        items: Workbox,
+      },
+    ],
   },
 })
