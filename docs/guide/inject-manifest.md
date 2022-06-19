@@ -10,7 +10,7 @@ The `vite-plugin-pwa` plugin will compile your custom service worker and inject 
 
 ## Custom Service worker
 
-We recommend use [Workbox](https://developers.google.com/web/tools/workbox) to build your service worker, you will need to include `workbox-*` dependencies as `dev dependencies` to your project.
+We recommend you to use [Workbox](https://developers.google.com/web/tools/workbox) to build your service worker instead using `importScripts`, you will need to include `workbox-*` dependencies as `dev dependencies` to your project.
 
 ### Plugin Configuration
 
