@@ -14,10 +14,6 @@ You can find a guide for plugins on `workbox` site: [Using Plugins](https://deve
 
 If you use some `CDN` to download some resources like `fonts` and `css`, you must include them into the service worker precache, and so your application will work when offline.
 
-::: warning
-You also need to add the logic to interact from the client logic: [Generate Service Worker](/guide/generate).
-:::
-
 The following example will use `css` from `https://fonts.googleapis.com` and `fonts` from `https://fonts.gstatic.com`.
 
 On `index.html` file you must configure the `css` `link`, you **MUST** also include `crossorigin="anonymous"` attribute for the external resources  (see [Handle Third Party Requests](https://developers.google.com/web/tools/workbox/guides/handle-third-party-requests)):
@@ -94,10 +90,6 @@ You must deal with offline support for excluded routes: if requesting a page exc
 ## Background Sync
 
 You can add this code to the plugin on your `vite.config.ts` file to add a `Background Sync` manager to your service worker:
-
-::: warning
-You also need to add the logic to interact from the client logic: [Generate Service Worker](/guide/generate).
-:::
 
 ::: details VitePWA options
 ```ts
