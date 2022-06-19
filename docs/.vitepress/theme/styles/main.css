@@ -84,3 +84,7 @@ details > summary:hover {
 .dark .pwa-toast {
   --pwa-divider: var(--vp-c-divider-dark-1);
 }
+
+.vp-doc :not(pre) > code {
+  padding: 1px 6px;
+}
