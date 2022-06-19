@@ -6,13 +6,9 @@ title: Prompt for new content refreshing | Guide
 
 <prompt-for-update-img />
 
-::: info
-This is the default option when `strategies` and `registerType` are not configured. In order for the service worker to be registered, you must invoke the `registerSW` method from the `virtual:pwa-register` module.
-:::
+## Plugin Configuration
 
-## Setup
-
-Go to [Generate Service Worker](/guide/generate) section for basic configuration options.
+Since this is the default behavior for the `registerType` plugin option, you don't need to configure it.
 
 ### Cleanup Outdated Caches
 
@@ -24,7 +20,7 @@ Go to [Generate Service Worker](/guide/generate) section for basic configuration
 
 <GenerateSWSourceMap />
 
-## Runtime
+## Importing Virtual Modules
 
 You must include the following code on your `main.ts` or `main.js` file:
 ```ts

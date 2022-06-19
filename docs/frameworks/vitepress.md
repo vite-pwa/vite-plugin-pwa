@@ -7,18 +7,18 @@ title: VitePress | Frameworks
 Since [VitePress](https://vitepress.vuejs.org/) is built using [Vuejs 3](https://v3.vuejs.org/) and 
 on top of [Vite](https://vitejs.dev/), the integration with this plugin is graceful.
 
-## Setup
+## Plugin Configuration
 
-Just follow the [Generate Service Worker](/guide/generate.html) section and use one of the `registerType` option to configure
+Just follow the [Getting Started](/guide/) section and use one of the `registerType` option to configure
 the behavior:
 
-- [Prompt for update](/guide/prompt-for-update.html): prompt for new content refreshing
-- [Automatic reload](/guide/auto-update.html) when new content available
+- [Prompt for update](/guide/prompt-for-update): prompt for new content refreshing
+- [Automatic reload](/guide/auto-update) when new content available
 
-## Runtime
+## Import Virtual Modules
 
 You need to configure a `custom theme` and use the `Layout` component to register the `ReloadPrompt.vue` component
-when using `prompt for new content available`, see [Vue 3](/frameworks/vue.html#vue-3).
+when using `prompt for new content available`, see [Vue 3](/frameworks/vue#vue-3).
 
 You should include the `ReloadPrompt.vue` on `.vitepress/theme/components/` directory.
 

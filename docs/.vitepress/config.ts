@@ -7,16 +7,28 @@ const Guide = [
     link: '/guide/',
   },
   {
-    text: 'Generate Service Worker',
-    link: '/guide/generate',
+    text: 'Register Service Worker',
+    link: '/guide/register-service-worker',
   },
   {
-    text: 'Prompt for update',
-    link: '/guide/prompt-for-update',
+    text: 'Service Worker Precache',
+    link: '/guide/service-worker-precache',
+  },
+  {
+    text: 'PWA Minimal Requirements',
+    link: '/guide/pwa-minimal-requirements',
+  },
+  {
+    text: 'Service Worker Strategies And Behaviors',
+    link: '/guide/service-worker-strategies-and-behaviors',
   },
   {
     text: 'Automatic reload',
     link: '/guide/auto-update',
+  },
+  {
+    text: 'Prompt for update',
+    link: '/guide/prompt-for-update',
   },
   {
     text: 'Advanced (injectManifest)',
@@ -33,10 +45,6 @@ const Guide = [
   {
     text: 'Development',
     link: '/guide/development',
-  },
-  {
-    text: 'Testing Service Worker',
-    link: '/guide/testing',
   },
   {
     text: 'FAQ',

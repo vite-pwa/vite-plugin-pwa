@@ -10,17 +10,27 @@ Progressive Web Apps (PWAs) are web application built and enhanced with modern A
 If you want to build a Progressive Web App, you may be wondering where to start, if it's possible to upgrade a website to a PWA without starting from scratch, or how to move from a platform-specific app to a PWA.
 :::
 
-A PWA mainly consists of a [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest), a service worker and a script/module to register/configure the service worker in the browser.
+A PWA mainly consists of a [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest), a service worker and a script/module to register the service worker in the browser.
 
-`vite-plugin-pwa` will help you to add PWA capabilities, with almost zero configuration, to your existing applications.
+If you are new to **Progressive Web Apps (PWA)**, we suggest read this guide before starting writing code: [Learn PWA](https://web.dev/learn/pwa/).
 
-Using the `vite-plugin-pwa` configuration, it will add sensible built-in default configuration for common use cases, the plugin will:
+## Service Worker
+
+Service workers essentially act as proxy servers that sit between web applications, the browser, and the network (when available). They are intended, among other things, to enable the creation of effective offline experiences, intercept network requests and take appropriate action based on whether the network is available, and update assets residing on the server. They will also allow access to push notifications and background sync APIs.
+
+A service worker is an event-driven [worker](https://developer.mozilla.org/en-US/docs/Web/API/Worker) registered against an origin and a path. It takes the form of a JavaScript file that can control the web-page/site that it is associated with, intercepting and modifying navigation and resource requests, and caching resources in a very granular fashion to give you complete control over how your app behaves in certain situations (the most obvious one being when the network is not available).
+
+You can find more information about service workers in [Service Worker API](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
+
+## vite-plugin-pwa
+
+`vite-plugin-pwa` will help you to add PWA, with almost zero configuration, to your existing applications. The plugin will add sensible built-in default configuration for common use cases.
+
+The `vite-plugin-pwa` plugin will:
 - generate the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - configure the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) on your application entry point
 - generate the service worker
 - generate the script to register the service worker in the browser
-
-If you are new to **Progressive Web Apps (PWA)**, we suggest read this guide before starting writing code: [Learn PWA](https://web.dev/learn/pwa/).
 
 ## Installing vite-plugin-pwa
 
@@ -54,106 +64,25 @@ export default defineConfig({
 })
 ```
 
-At this point, if you build your application, the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) will be generated and configured on the application entry point, the service worker will be also generated and the script/module to register it in the browser added.
+With this minimal configuration of the `vite-plugin-pwa` plugin, your application is now able to generate the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) and inject it at the entry point, generate the service worker and register it in the browser.
 
-::: info
-`vite-plugin-pwa` uses [Workbox](https://developers.google.com/web/tools/workbox) library to build the service worker, you can find more information in the [Workbox](/workbox/) section.
-:::
-
-## PWA Minimal Requirements
-
-::: warning
-Previous steps are the minimal requirements and configuration to create the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) and the service worker when you build your application, but you'll need to include a few more things to meet PWA Minimal Requirements.
-
-You **must** meet the PWA Minimal Requirements only when testing your build on local or before deploying to production: for example, when testing your PWA on local using `LightHouse`.
-:::
-
-### Entry Point
-
-Your application entry point (usually `index.html`) **must** have the following entries in the `<head>` section:
-- mobile viewport configuration
-- a title
-- a description
-- a favicon
-- a link for `apple-touch-icon`
-- a link for `mask-icon`
-- a meta entry for `theme-color`
-
-For example, here a minimal configuration (you must provide all the icons and images):
-```html
-<head>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>My Awesome App</title>
-  <meta name="description" content="My Awaesome App description">
-  <link rel="icon" href="/favicon.ico">
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-  <link rel="mask-icon" href="/mask-icon.svg" color="#FFFFFF">
-  <meta name="theme-color" content="#ffffff">
-</head>
-```
-
-### Web App Manifest
-
-Your application [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) **must** have the following entries:
-- a scope: omitted here for simplicity, the `vite-plugin-pwa` will use the `Vite` base option to configure it
-- a name
-- a short description
-- a description
-- a `theme_color`: **must match** the configured one on `Entry Point theme-color`
-- an icon with `192x192` size
-- an icon with `512x512` size
-
-To configure the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest), add the `manifest` entry to the `vite-plugin-pwa` plugin options. 
-
-Following with the example, here a minimal configuration (you must provide all the icons and images):
+If you want to check it in `dev`, add the `devOptions` option to the plugin configuration (you will have the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) and the generated service worker):
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   plugins: [
-    VitePWA({
-      includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'masked-icon.svg'],
-      manifest: {
-        name: 'My Awesome App',
-        short_name: 'MyApp',
-        description: 'My Awaesome App description',
-        theme_color: '#ffffff',
-        icons: [
-          {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          }
-        ]
+    VitePWA({ 
+      registerType: 'autoUpdate',
+      devOptions: {
+        enabled: true
       }
     })
   ]
 })
 ```
 
-### Server Configuration
+If you build your application, the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) will be generated and configured on the application entry point, the service worker will be also generated and the script/module to register it in the browser added.
 
-You can use the server you want, but your server **must**:
-- serve `manifest.webmanifest` with `application/manifest+json` mime type
-- serve your application over `https`
-- redirect from `http` to `https`
-
-You can find more information in the [Deploy](/deployment/) section.
-
-## Features
-
-- [Web App Manifests](https://developer.mozilla.org/en-US/docs/Web/Manifest)
-- [Generate Service Worker](/guide/generate) with Offline support
-- [Prompt for update](/guide/prompt-for-update): prompt for new content refreshing
-- [Automatic reload](/guide/auto-update) when new content available
-- [Advanced (injectManifest)](/guide/auto-update) with Offline support
-- [Static assets handling](/guide/static-assets)
-- [Periodic SW updates](/guide/periodic-sw-updates)
-- [FAQ](/guide/faq)
-
-
-
+::: info
+`vite-plugin-pwa` plugin uses [workbox-build](https://developer.chrome.com/docs/workbox/reference/workbox-build/) node library to build the service worker, you can find more information in the [Service Worker Strategies And Behaviors](/guide/service-worker-strategies-and-behaviors) and [Workbox](/workbox/) sections.
+:::

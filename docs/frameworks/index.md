@@ -22,9 +22,9 @@ declare module 'virtual:pwa-register' {
 }
 ```
 
-## Usage
+## Import Virtual Modules
 
-This plugin exposes a `Vite` virtual module to interact with the service worker, you must import this virtual module when you need to work with [Prompt for update](/guide/prompt-for-update.html) on new content available:
+This plugin exposes a `Vite` virtual module to interact with the service worker, you must import this virtual module when you need to work with [Prompt for update](/guide/prompt-for-update) on new content available:
 
 ```ts
 import { registerSW } from 'virtual:pwa-register'
@@ -43,7 +43,7 @@ When the user clicks the "refresh" button when `onNeedRefresh` called, then call
 
 In any case, when the user clicks the `Cancel` or `OK` buttons in case `onNeedRefresh` or `onOfflineReady` respectively, close the corresponding showed prompt.
 
-You must also import the virtual module when you need to work with [Automatic reload](/guide/auto-update.html) when new content available, and you need to notify the user the application is ready to work `offline`:
+You must also import the virtual module when you need to work with [Automatic reload](/guide/auto-update) when new content available, and you need to notify the user the application is ready to work `offline`:
 
 ```ts
 import { registerSW } from 'virtual:pwa-register'
@@ -68,7 +68,7 @@ These custom virtual modules will expose a wrapper for  <code>virtual:pwa-regist
 - <code>virtual:pwa-register/solid</code>: [createSignal](https://www.solidjs.com/docs/latest/api#createsignal) for <code>SolidJS</code>
 - <code>virtual:pwa-register/preact</code>: [useState](https://preactjs.com/guide/v10/hooks#usestate) for <code>Preact</code>
 
-**Note**: for [Vue 2](https://vuejs.org/) you need to use a custom `mixin` provided on [Vue 2](/frameworks/vue.html#vue-2) section.
+**Note**: for [Vue 2](https://vuejs.org/) you need to use a custom `mixin` provided on [Vue 2](/frameworks/vue#vue-2) section.
 
 ## Frameworks
 

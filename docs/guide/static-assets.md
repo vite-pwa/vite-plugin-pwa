@@ -4,7 +4,7 @@ title: Static assets handling | Guide
 
 # Static assets handling
 
-By default, all icons on `PWA Manifest` option found under Vite's `publicDir` option directory, will be included in the service worker *precache*. You can disable this option using `includeManifestIcons: false`.
+By default, all icons on `PWA Web App Manifest` option found under `Vite's publicDir` option directory, will be included in the service worker *precache*. You can disable this option using `includeManifestIcons: false`.
 
 You can also add another static assets such as `favicon`, `svg` and `font` files using `includeAssets` option. The `includeAssets` option will be resolved using `fast-glob` found under Vite's `publicDir` option directory, and so you can use regular expressions to include those assets, for example: `includeAssets: ['fonts/*.ttf', 'images/*.png']`. You don't need to configure `PWA Manifest icons` on `includeAssets` option.
 
