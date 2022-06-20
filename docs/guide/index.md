@@ -69,7 +69,7 @@ With this minimal configuration of the `vite-plugin-pwa` plugin, your applicatio
 ::: warning
 If you are **NOT** using `vite-plugin-pwa` version `0.12.1+`, there is a bug handling `injectRegister` (the service worker generated will not include the code required to allow work with `autoUpdate` behavior).
 
-To fix the bug you will need to use this plugin configuration instead:
+If you're using a `vite-plugin-pwa` plugin version prior to `0.12.1`, you can fix the bug using this plugin configuration:
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
