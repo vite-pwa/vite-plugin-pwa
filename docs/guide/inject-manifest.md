@@ -8,6 +8,25 @@ With this service worker `strategy` you can build your own service worker.
 
 The `vite-plugin-pwa` plugin will compile your custom service worker and inject its service worker's precache manifest.
 
+By default, the plugin will assume the `service worker` source code is located at the `Vite's public` folder with the name `sw.js`, that's, it will search in this location `/public/sw.js`. 
+
+If you want to change the location and/or the service worker name, you need to change the following plugin options:
+- `srcDir`: **must** be relative to the project root folder 
+- `filename`: including the file extension and **must** be relative to the `srcDir` folder
+
+```ts
+import { VitePWA } from 'vite-plugin-pwa'
+export default defineConfig({
+  plugins: [
+    VitePWA({
+      strategies: 'injectManifest',
+      srcDir: 'src',
+      filename: 'my-sw.js'
+    })
+  ]
+})
+```
+
 ## Custom Service worker
 
 We recommend you to use [Workbox](https://developers.google.com/web/tools/workbox) to build your service worker instead using `importScripts`, you will need to include `workbox-*` dependencies as `dev dependencies` to your project.
@@ -97,7 +116,7 @@ You can use TypeScript to write your custom service worker. To resolve service w
 
 We recommend you to put your custom service worker inside `src` directory. 
 
-You need to add `srcDir: 'src'` and `filename: 'sw.ts'` options to `vite-plugin-pwa` in your `vite.config.ts` file,  configure both options with the directory and the name of your custom service worker properly:
+You need to configure `srcDir: 'src'` and `filename: 'sw.ts'` plugin options in your `vite.config.ts` file, configure both options with the directory and the name of your custom service worker properly:
 
 ```ts
 VitePWA({
