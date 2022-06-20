@@ -4,13 +4,26 @@ title: Register Service Worker | Guide
 
 # Register Service Worker
 
-`vite-plugin-pwa` plugin will register the service worker automatically for you, using the `injectRegister` configuration option.
+`vite-plugin-pwa` plugin will register the service worker automatically for you, using the `injectRegister` configuration option (**optional**).
+
+If you want to configure the `injectRegister` plugin option:
+```ts
+import { VitePWA } from 'vite-plugin-pwa'
+export default defineConfig({
+  plugins: [
+    VitePWA({
+      injectRegister: 'auto'
+    })
+  ]
+})
+```
 
 The `injectRegister` plugin configuration option, will control how to register the service worker in your application:
 - `inline`: injects a simple register script, inlined in the application entry point
 - `script`: injects a `script` tag in the `head` with the `service worker` to a generated simple register
 - `null` (manual): do nothing, you will need to register the service worker yourself, or import any of the virtual modules exposed by the plugin
 - **`auto` (default value)**: depends on whether you use any of the virtual modules exposed by the plugin, it will do nothing or switch to `script` mode
+
 
 You can find more information about the virtual modules exposed by the plugin in the [Frameworks](/frameworks/) section.
 
