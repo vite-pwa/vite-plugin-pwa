@@ -66,6 +66,26 @@ export default defineConfig({
 
 With this minimal configuration of the `vite-plugin-pwa` plugin, your application is now able to generate the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) and inject it at the entry point, generate the service worker and register it in the browser.
 
+::: warning
+If you are **NOT** using `vite-plugin-pwa` version `0.12.1+`, there is a bug handling `injectRegister` (the service worker generated will not include the code required to allow work with `autoUpdate` behavior).
+
+To fix the bug you will need to use this plugin configuration instead:
+```ts
+import { VitePWA } from 'vite-plugin-pwa'
+export default defineConfig({
+  plugins: [
+    VitePWA({
+      registerType: 'autoUpdate',
+      workbox: {
+        clientsClaim: true,
+        skipWaiting: true
+      }
+    })
+  ]
+})
+```
+:::
+
 If you want to check it in `dev`, add the `devOptions` option to the plugin configuration (you will have the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) and the generated service worker):
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
