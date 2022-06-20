@@ -24,7 +24,31 @@ declare module 'virtual:pwa-register' {
 
 ## Import Virtual Modules
 
-This plugin exposes a `Vite` virtual module to interact with the service worker, you must import this virtual module when you need to work with [Prompt for update](/guide/prompt-for-update) on new content available:
+`vite-plugin-pwa` plugin exposes a `Vite` virtual module to interact with the service worker.
+
+::: tip
+You only need to import the virtual modules exposed by `vite-plugin-pwa` plugin when you need to interact with the user, otherwise you don't need to import any of them, that is, when using `registerType: 'prompt'` or when using `registerType: 'autoUpdate'` and you want to inform the user that the application is ready to work offline.
+:::
+
+### Auto Update
+
+You must import the virtual module when you configure `registerType: 'autoUpdate'` and you want your application inform the user when the application is ready to work `offline`:
+
+```ts
+import { registerSW } from 'virtual:pwa-register'
+
+const updateSW = registerSW({
+  onOfflineReady() {}
+})
+```
+
+You need to show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
+
+When the user clicks the `OK` button, just hide the prompt shown on `onOfflineReady` method.
+
+### Prompt For Update
+
+When using `registerType: 'prompt'`, you **must** import the virtual module:
 
 ```ts
 import { registerSW } from 'virtual:pwa-register'
@@ -43,23 +67,9 @@ When the user clicks the "refresh" button when `onNeedRefresh` called, then call
 
 In any case, when the user clicks the `Cancel` or `OK` buttons in case `onNeedRefresh` or `onOfflineReady` respectively, close the corresponding showed prompt.
 
-You must also import the virtual module when you need to work with [Automatic reload](/guide/auto-update) when new content available, and you need to notify the user the application is ready to work `offline`:
-
-```ts
-import { registerSW } from 'virtual:pwa-register'
-
-const updateSW = registerSW({
-  onOfflineReady() {}
-})
-```
-
-You will need to show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
-
-When the user clicks the `OK` button, just hide the prompt shown on `onOfflineReady` method.
-
 ## Custom Vite Virtual Modules
 
-This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.org/), [React](https://reactjs.org/), [Svelte](https://svelte.dev/docs), [SolidJS](https://www.solidjs.com/) and [Preact](https://preactjs.com/).  
+`vite-plugin-pwa` plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.org/), [React](https://reactjs.org/), [Svelte](https://svelte.dev/docs), [SolidJS](https://www.solidjs.com/) and [Preact](https://preactjs.com/).  
 
 These custom virtual modules will expose a wrapper for  <code>virtual:pwa-register</code> using framework <code>reactivity system</code>, that is:
 - <code>virtual:pwa-register/vue</code>: [ref](https://v3.vuejs.org/api/refs-api.html#ref) for <code>Vue 3</code>
