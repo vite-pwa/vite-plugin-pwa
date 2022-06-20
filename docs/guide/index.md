@@ -27,10 +27,10 @@ You can find more information about service workers in [Service Worker API](http
 `vite-plugin-pwa` will help you to add PWA, with almost zero configuration, to your existing applications. The plugin will add sensible built-in default configuration for common use cases.
 
 The `vite-plugin-pwa` plugin will:
-- generate the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest)
-- configure the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) on your application entry point
-- generate the service worker
-- generate the script to register the service worker in the browser
+- generate the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest): using the `manifest` plugin option
+- configure the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) on your application entry point: adding a link on the `head` on your entry point
+- generate the service worker: using the `strategies` plugin option (for more information read [Service Worker Strategies](/guide/service-worker-strategies-and-behaviors#service-worker-strategies) section)
+- generate the script to register the service worker in the browser: using `injectRegister` plugin option (for more information read [Register Service Worker](/guide/#register-worker-strategies) section)
 
 ## Installing vite-plugin-pwa
 
