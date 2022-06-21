@@ -213,13 +213,11 @@ export default defineConfig({
       pattern: 'https://github.com/antfu/vite-plugin-pwa/edit/main/docs/:path',
       text: 'Suggest changes to this page',
     },
-    /* TODO: replace it with the requested PWA repo (rn with Vitest ones for testing)
     algolia: {
-      appId: 'ZTF29HGJ69',
-      apiKey: '9c3ced6fed60d2670bb36ab7e8bed8bc',
-      indexName: 'vitest',
+      appId: 'PLTOP8CJ9E',
+      apiKey: '19222f0fee4df5d951242e05ae60a0d9',
+      indexName: 'vite-plugin-pwa',
     },
-    */
     socialLinks: [
       { icon: 'discord', link: 'https://chat.antfu.me' },
       { icon: 'github', link: 'https://github.com/antfu/vite-plugin-pwa' },
