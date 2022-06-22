@@ -3,7 +3,6 @@ import Components from 'unplugin-vue-components/vite'
 import { presetUno } from 'unocss'
 import Unocss from 'unocss/vite'
 import { VitePWA } from '../dist'
-import LayoutSlotFix from './plugins/layout'
 import NavbarFix from './plugins/navbar'
 
 export default defineConfig({
@@ -39,8 +38,6 @@ export default defineConfig({
       dts: '.vitepress/components.d.ts',
     }),
 
-    // TODO: remove LayoutSlotFix when https://github.com/vuejs/vitepress/issues/760 included
-    LayoutSlotFix(),
     NavbarFix(),
 
     // https://github.com/unocss/unocss

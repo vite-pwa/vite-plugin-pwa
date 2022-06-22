@@ -27,7 +27,7 @@
     "unplugin-vue-components": "^0.19.5",
     "vite": "^2.9.9",
     "vite-plugin-pwa": "workspace:*",
-    "vitepress": "^1.0.0-alpha.2",
+    "vitepress": "^1.0.0-alpha.4",
     "workbox-window": "^6.5.3"
   }
 }
