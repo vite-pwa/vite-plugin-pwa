@@ -2,7 +2,18 @@
 title: Getting Started | Frameworks
 ---
 
-# Getting Started 
+# Getting Started
+
+::: tip
+If you use the default `registerType` which is `prompt`, and you want to prompt the users to reload, then you could use our framework modules.
+
+But if you:
+1. use `autoUpdate`
+2. don't like `autoUpdate`, but also don't feel it's necessary to prompt
+3. use `injectManifest`
+
+Then, you **don't need** to learn the framework stuff.
+:::
 
 This plugin is Framework-agnostic and so you can use it with Vanilla JavaScript, TypeScript and with any framework.
 
