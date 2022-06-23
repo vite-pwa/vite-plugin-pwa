@@ -5,7 +5,7 @@ export function slash(str: string) {
 export function resolveBathPath(base: string) {
   if (isAbsolute(base))
     return base
-  return !base.startsWith('/') && !base.startsWith('./')
+  return base && !base.startsWith('/') && !base.startsWith('./')
     ? `/${base}`
     : base
 }
