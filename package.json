@@ -48,7 +48,7 @@
     "example:vue:start:cdn": "npm -C examples/vue-basic-cdn run start"
   },
   "peerDependencies": {
-    "vite": "^2.0.0",
+    "vite": "^2.0.0 || ^3.0.0-0",
     "workbox-build": "^6.4.0",
     "workbox-window": "^6.4.0"
   },
