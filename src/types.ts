@@ -178,6 +178,10 @@ export interface ManifestOptions {
    */
   display: string
   /**
+   * @default []
+   */
+  display_override: string[]
+  /**
    * @default `#ffffff`
    */
   background_color: string
