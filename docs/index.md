@@ -5,11 +5,8 @@ sidebar: false
 title: Vite Plugin PWA
 
 hero:
-  name: PWA
-  text: Vite Plugin
-  tagline: |
-    Zero-config and framework-agnostic
-    PWA Plugin for Vite
+  name: Vite Plugin PWA
+  text:  Zero-config and framework-agnostic PWA Plugin for Vite
   image:
     light:
       src: /icon_light.svg
