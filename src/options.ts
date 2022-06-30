@@ -104,7 +104,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
   const { vitePlugins = defaultInjectManifestVitePlugins, ...userInjectManifest } = options.injectManifest || {}
   const injectManifest = Object.assign({}, defaultInjectManifest, userInjectManifest)
 
-  if ((injectRegister === 'auto' || registerType == null) && registerType === 'autoUpdate') {
+  if ((injectRegister === 'auto' || injectRegister == null) && registerType === 'autoUpdate') {
     workbox.skipWaiting = true
     workbox.clientsClaim = true
   }

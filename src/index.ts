@@ -67,7 +67,14 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       transformIndexHtml: {
         enforce: 'post',
         transform(html) {
-          return options.disable ? html : injectServiceWorker(html, options)
+          if (options.disable)
+            return html
+
+          // if virtual register is requested, do not inject.
+          if (options.injectRegister === 'auto')
+            options.injectRegister = useImportRegister ? null : 'script'
+
+          return injectServiceWorker(html, options)
         },
       },
       generateBundle(_, bundle) {
