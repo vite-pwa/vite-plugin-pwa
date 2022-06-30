@@ -220,6 +220,9 @@ function prepareSidebar(idx: number) {
   })
 }
 
+const ogUrl = 'https://deploy-preview-315--vite-plugin-pwa.netlify.app/'
+const ogImage = 'https://deploy-preview-315--vite-plugin-pwa.netlify.app/og-image.png'
+
 export default defineConfig({
   lang: 'en-US',
   title: 'Vite Plugin PWA',
@@ -236,11 +239,13 @@ export default defineConfig({
     }],
     ['meta', { property: 'og:title', content: 'Vite Plugin PWA' }],
     ['meta', { property: 'og:description', content: 'Zero-config PWA Framework-agnostic Plugin for Vite' }],
-    ['meta', { property: 'og:image', content: 'https://vite-plugin-pwa.netlify.app/og-image.png' }],
+    ['meta', { property: 'og:image', content: ogImage }],
+    ['meta', { property: 'og:url', content: ogUrl }],
     ['meta', { name: 'twitter:title', content: 'Vite Plugin PWA' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:image', content: 'https://vite-plugin-pwa.netlify.app/og-image.png' }],
+    ['meta', { name: 'twitter:image', content: ogImage }],
     ['meta', { name: 'twitter:site', content: '@antfu7' }],
+    ['meta', { name: 'twitter:url', content: ogUrl }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' }],
   ],
   lastUpdated: true,
