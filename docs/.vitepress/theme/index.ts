@@ -1,18 +1,16 @@
-import 'vue-global-api'
-
-import Layout from './Layout.vue'
-import NotFound from './NotFound.vue'
-
+import { h } from 'vue'
+import Theme from 'vitepress/theme'
+import './styles/main.css'
 import './styles/vars.css'
-import './styles/layout.css'
-import './styles/code.css'
-import './styles/sidebar-links.css'
+import 'uno.css'
+import ReloadPrompt from './components/ReloadPrompt.vue'
 
-import 'virtual:windi.css'
-
-const theme = {
-  Layout,
-  NotFound,
+export default {
+  ...Theme,
+  Layout() {
+    return h(Theme.Layout, null, {
+      // TODO: review this when https://github.com/vuejs/vitepress/issues/760 included
+      'layout-bottom': () => h(ReloadPrompt),
+    })
+  },
 }
-
-export default theme

@@ -1,8 +1,8 @@
 ---
-title: Vercel | Deployment
+title: Astro | Frameworks
 ---
 
-# Vercel
+# Astro
 
 ::: info WIP
 Will coming soon.

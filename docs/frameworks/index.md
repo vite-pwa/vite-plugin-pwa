@@ -2,7 +2,18 @@
 title: Getting Started | Frameworks
 ---
 
-# Getting Started 
+# Getting Started
+
+::: tip
+If you use the default `registerType` which is `prompt`, and you want to prompt the users to reload, then you could use our framework modules.
+
+But if you:
+1. use `autoUpdate`
+2. don't like `autoUpdate`, but also don't feel it's necessary to prompt
+3. use `injectManifest`
+
+Then, you **don't need** to learn the framework stuff.
+:::
 
 This plugin is Framework-agnostic and so you can use it with Vanilla JavaScript, TypeScript and with any framework.
 
@@ -22,10 +33,33 @@ declare module 'virtual:pwa-register' {
 }
 ```
 
-## Usage
+## Import Virtual Modules
 
-This plugin exposes a `Vite` virtual module to interact with the service worker, you must import this virtual module 
-when you need to work with [Prompt for update](/guide/prompt-for-update.html) on new content available:
+`vite-plugin-pwa` plugin exposes a `Vite` virtual module to interact with the service worker.
+
+::: tip
+You only need to import the virtual modules exposed by `vite-plugin-pwa` plugin when you need to interact with the user, otherwise you don't need to import any of them, that is, when using `registerType: 'prompt'` or when using `registerType: 'autoUpdate'` and you want to inform the user that the application is ready to work offline.
+:::
+
+### Auto Update
+
+You must import the virtual module when you configure `registerType: 'autoUpdate'` and you want your application inform the user when the application is ready to work `offline`:
+
+```ts
+import { registerSW } from 'virtual:pwa-register'
+
+const updateSW = registerSW({
+  onOfflineReady() {}
+})
+```
+
+You need to show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
+
+When the user clicks the `OK` button, just hide the prompt shown on `onOfflineReady` method.
+
+### Prompt For Update
+
+When using `registerType: 'prompt'`, you **must** import the virtual module:
 
 ```ts
 import { registerSW } from 'virtual:pwa-register'
@@ -40,89 +74,32 @@ You will need to:
 - show a prompt to the user with refresh and cancel buttons inside `onNeedRefresh` method.
 - show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
 
-When the user clicks the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will
-reload and the up-to-date content will be served.
+When the user clicks the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will reload and the up-to-date content will be served.
 
-In any case, when the user clicks the `Cancel` or `OK` buttons in case `onNeedRefresh` or `onOfflineReady` respectively,
-close the corresponding showed prompt.
-
-You must also import the virtual module when you need to work with [Automatic reload](/guide/auto-update.html) when new
-content available, and you need to notify the user the application is ready to work `offline`:
-
-```ts
-import { registerSW } from 'virtual:pwa-register'
-
-const updateSW = registerSW({
-  onOfflineReady() {}
-})
-```
-
-You will need to show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
-
-When the user clicks the `OK` button, just hide the prompt shown on `onOfflineReady` method.
+In any case, when the user clicks the `Cancel` or `OK` buttons in case `onNeedRefresh` or `onOfflineReady` respectively, close the corresponding showed prompt.
 
 ## Custom Vite Virtual Modules
 
-This plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.org/) <outbound-link />,
-[React](https://reactjs.org/) <outbound-link />, [Svelte](https://svelte.dev/docs) <outbound-link />, 
-[SolidJS](https://www.solidjs.com/) <outbound-link /> and [Preact](https://preactjs.com/) <outbound-link />.  
+`vite-plugin-pwa` plugin also exposes a set of virtual modules for [Vue 3](https://v3.vuejs.org/), [React](https://reactjs.org/), [Svelte](https://svelte.dev/docs), [SolidJS](https://www.solidjs.com/) and [Preact](https://preactjs.com/).  
 
-<p id="virtual-modules-frameworks">These custom virtual modules will expose a wrapper for 
-<code>virtual:pwa-register</code> using framework <code>reactivity system</code>, that is:</p>
+These custom virtual modules will expose a wrapper for  <code>virtual:pwa-register</code> using framework <code>reactivity system</code>, that is:
+- <code>virtual:pwa-register/vue</code>: [ref](https://v3.vuejs.org/api/refs-api.html#ref) for <code>Vue 3</code>
+- <code>virtual:pwa-register/react</code>: [useState](https://reactjs.org/docs/hooks-reference.html#usestate) for <code>React</code>
+- <code>virtual:pwa-register/svelte</code>: [writable](https://svelte.dev/docs#writable) for <code>Svelte</code>
+- <code>virtual:pwa-register/solid</code>: [createSignal](https://www.solidjs.com/docs/latest/api#createsignal) for <code>SolidJS</code>
+- <code>virtual:pwa-register/preact</code>: [useState](https://preactjs.com/guide/v10/hooks#usestate) for <code>Preact</code>
 
-<ul aria-labelledby="virtual-modules-frameworks">
-<md-list-anchor href="https://v3.vuejs.org/api/refs-api.html#ref" :external="true">
-  <template #heading><code>virtual:pwa-register/vue</code>:&#160;</template>
-  <template #link>ref</template>
-  <template #trailing>&#160;for <code>Vue 3</code>.</template>
-</md-list-anchor>
-<md-list-anchor href="https://reactjs.org/docs/hooks-reference.html#usestate" :external="true">
-  <template #heading><code>virtual:pwa-register/react</code>:&#160;</template>
-  <template #link>useState</template>
-  <template #trailing>&#160;for <code>React</code>.</template>
-</md-list-anchor>
-<md-list-anchor href="https://svelte.dev/docs#writable" :external="true">
-  <template #heading><code>virtual:pwa-register/svelte</code>:&#160;</template>
-  <template #link>writable</template>
-  <template #trailing>&#160;for <code>Svelte</code>.</template>
-</md-list-anchor>
-<md-list-anchor href="https://www.solidjs.com/docs/latest/api#createsignal" :external="true">
-  <template #heading><code>virtual:pwa-register/solid</code>:&#160;</template>
-  <template #link>createSignal</template>
-  <template #trailing>&#160;for <code>SolidJS</code>.</template>
-</md-list-anchor>
-<md-list-anchor href="https://preactjs.com/guide/v10/hooks#usestate" :external="true">
-  <template #heading><code>virtual:pwa-register/preact</code>:&#160;</template>
-  <template #link>useState</template>
-  <template #trailing>&#160;for <code>Preact</code>.</template>
-</md-list-anchor>
-</ul>
-
-**Note**: for [Vue 2](https://vuejs.org/) <outbound-link /> you need to use a custom `mixin` provided on 
-[Vue 2](/frameworks/vue.html#vue-2) section.
+**Note**: for [Vue 2](https://vuejs.org/) you need to use a custom `mixin` provided on [Vue 2](/frameworks/vue#vue-2) section.
 
 ## Frameworks
 
-<ul aria-labelledby="frameworks">
-<md-list-anchor href="/frameworks/vue.html">
-  <template #link>Vue</template>
-</md-list-anchor>
-<md-list-anchor href="/frameworks/react.html">
-  <template #link>React</template>
-</md-list-anchor>
-<md-list-anchor href="/frameworks/svelte.html">
-  <template #link>Svelte</template>
-</md-list-anchor>
-<md-list-anchor href="/frameworks/sveltekit.html">
-  <template #link>SvelteKit</template>
-</md-list-anchor>
-<md-list-anchor href="/frameworks/solidjs.html">
-  <template #link>SolidJS</template>
-</md-list-anchor>
-<md-list-anchor href="/frameworks/preact.html">
-  <template #link>Preact</template>
-</md-list-anchor>
-<md-list-anchor href="/frameworks/vitepress.html">
-  <template #link>VitePress</template>
-</md-list-anchor>
-</ul>
+These custom virtual modules will expose a wrapper for <code>virtual:pwa-register</code> using framework <code>reactivity system</code>, that is:
+- [Vue](/frameworks/vue)
+- [React](/frameworks/react)
+- [Svelte](/frameworks/svelte)
+- [SvelteKit](/frameworks/sveltekit)
+- [SolidJS](/frameworks/solidjs)
+- [Preact](/frameworks/preact)
+- [VitePress](/frameworks/vitepress)
+- [îles](/frameworks/iles)
+- [Astro](/frameworks/astro)

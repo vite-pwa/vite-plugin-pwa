@@ -37,6 +37,7 @@
     "docs": "npm -C docs run dev",
     "docs:build": "npm -C docs run build",
     "docs:serve": "npm -C docs run serve",
+    "docs:preview": "npm -C docs run preview",
     "lint": "eslint .",
     "dev": "esno scripts/dev.ts",
     "build": "esno scripts/build.ts",
@@ -81,6 +82,6 @@
     "tsup": "^6.1.0",
     "typescript": "^4.7.3",
     "vite": "^2.9.9",
-    "vue": "^3.2.36"
+    "vue": "^3.2.37"
   }
 }

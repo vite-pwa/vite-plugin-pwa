@@ -6,12 +6,11 @@ title: Vue | Examples
 
 The `Vue 3` example project can be found on `examples/vue-router` package/directory.
 
-The router used on this example project is [vue-router](https://next.router.vuejs.org/) <outbound-link />.
+The router used on this example project is [vue-router](https://next.router.vuejs.org/).
 
 The `Vue 3` example has been created using `create-vite` template with `pnpx`:
 
-<details>
-    <summary><strong>pnpx create-vite</strong></summary>
+::: details pnpx create-vite
 
 ```shell
 pnpx create-vite
@@ -28,7 +27,7 @@ Done. Now run:
   npm install
   npm run dev
 ```
-</details>
+:::
 
 To test `new content available`, you should rerun the corresponding script, and then refresh the page.
 

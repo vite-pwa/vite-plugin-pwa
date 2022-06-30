@@ -6,13 +6,9 @@ title: Prompt for new content refreshing | Guide
 
 <prompt-for-update-img />
 
-> This is the default option when `strategies` and `registerType` are not configured.
-In order for the service worker to be registered, you must invoke the `registerSW` method
-from the `virtual:pwa-register` module.
+## Plugin Configuration
 
-## Setup
-
-Go to [Generate Service Worker](/guide/generate.html) section for basic configuration options.
+Since this is the default behavior for the `registerType` plugin option, you don't need to configure it.
 
 ### Cleanup Outdated Caches
 
@@ -24,7 +20,7 @@ Go to [Generate Service Worker](/guide/generate.html) section for basic configur
 
 <GenerateSWSourceMap />
 
-## Runtime
+## Importing Virtual Modules
 
 You must include the following code on your `main.ts` or `main.js` file:
 ```ts
@@ -40,12 +36,9 @@ You will need to:
 - show a prompt to the user with refresh and cancel buttons inside `onNeedRefresh` method.
 - show a ready to work offline message to the user with an OK button inside `onOfflineReady` method.
 
-When the user clicks the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will 
-reload and the up-to-date content will be served.
+When the user clicks the "refresh" button when `onNeedRefresh` called, then call `updateSW()` function; the page will reload and the up-to-date content will be served.
 
-In any case, when the user clicks the `Cancel` or `OK` buttons in case `onNeedRefresh` or `onOfflineReady` respectively, 
-close the corresponding showed prompt.
-
+In any case, when the user clicks the `Cancel` or `OK` buttons in case `onNeedRefresh` or `onOfflineReady` respectively, close the corresponding showed prompt.
 
 ### SSR/SSG
 

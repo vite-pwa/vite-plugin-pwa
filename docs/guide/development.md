@@ -8,13 +8,13 @@ From version `v0.11.13` you can use the service worker on development.
 
 The PWA will not be registered, only the service worker logic, check the details for each strategy below.
 
-> **Warning**: there will be only one single registration on the service worker precache manifest (`self.__WB_MANIFEST`) 
-when necessary: `navigateFallback`.
+::: warning
+There will be only one single registration on the service worker precache manifest (`self.__WB_MANIFEST`) when necessary: `navigateFallback`.
+:::
 
-The service worker on development will be only available if `disabled` PWA plugin option is not `true` and the `enable` 
-development option is `true`.
+The service worker on development will be only available if `disabled` plugin option is not `true` and the `enable` development option is `true`.
 
-## Setup
+## Plugin configuration
 
 To enable the service worker on development, you only need to add the following options to the plugin configuration:
 
@@ -85,8 +85,7 @@ Since version `0.12.1` the `manifest.webmanifest` is also served on development 
 
 ## generateSW strategy
 
-When using this strategy, the `navigateFallback` on development options will be ignored. The PWA plugin will check if
-`workbox.navigateFallback` is configured and will only register it on `additionalManifestEntries`.
+When using this strategy, the `navigateFallback` on development options will be ignored. The PWA plugin will check if `workbox.navigateFallback` is configured and will only register it on `additionalManifestEntries`.
 
 The PWA plugin will force `type: 'classic'` on service worker registration to avoid errors on client side (not yet supported):
 
@@ -99,7 +98,6 @@ Uncaught (in promise) TypeError: Failed to execute 'importScripts' on 'WorkerGlo
 You can use `type: 'module'` when registering the service worker (right now only supported on latest versions of `Chromium` based browsers: `Chromium/Chrome/Edge`):
 
 <!--eslint-skip-->
-
 ```ts
 devOptions: {
   enabled: true,
@@ -108,30 +106,32 @@ devOptions: {
 }
 ```
 
-> **Warning**: when building the application, the PWA Plugin will always register your service worker with `type: 'classic'` for compatibility with all browsers.
+::: warning
+When building the application, the `vite-plugin-pwa` plugin will always register your service worker with `type: 'classic'` for compatibility with all browsers.
+:::
 
-> **Warning**: if using version `0.12.1+`, you will need to exclude the `manifest.webmanifest` from the service worker precache manifest if you want to check it using the browser (on `dev tools` it will be ok):
-> ```ts
-> let denylist: undefined | RegExp[]
-> if (import.meta.env.DEV)
->   denylist = [/^\/manifest.webmanifest$/]
->
-> // to allow work offline
-> registerRoute(new NavigationRoute(
->   createHandlerBoundToURL('index.html'),
->   { denylist }
-> ))
-> ```
+::: warning
+If using version `0.12.1+`, you will need to exclude the `manifest.webmanifest` from the service worker's precache manifest if you want to check it using the browser (on `dev tools` it will be ok):
+```ts
+let denylist: undefined | RegExp[]
+if (import.meta.env.DEV)
+  denylist = [/^\/manifest.webmanifest$/]
 
-When using this strategy, the plugin will delegate the service worker compilation to `Vite`, so if you're using `import` statements 
-instead `importScripts` in your custom service worker, you should configure `type: 'module'` on development options.
+// to allow work offline
+registerRoute(new NavigationRoute(
+  createHandlerBoundToURL('index.html'),
+  { denylist }
+))
+```
+:::
 
-If you are using `registerRoute` in your custom service worker you should add `navigateFallback` on development options,
-the PWA plugin will include it on `self.__WB_MANIFEST`.
+When using this strategy, the `vite-plugin-pwa` plugin will delegate the service worker compilation to `Vite`, so if you're using `import` statements instead `importScripts` in your custom service worker, you **must** configure `type: 'module'` on development options.
 
-You should not use `HMR (Hot Module Replacement)` on your custom service worker, since we cannot use yet dynamic imports on service workers: `import.meta.hot`.
+If you are using `registerRoute` in your custom service worker you should add `navigateFallback` on development options, the `vite-plugin-pwa` plugin will include it in the injection point (`self.__WB_MANIFEST`).
 
-If you register your custom service worker (not using PWA virtual module and configuring `injectRegister: false` or `injectRegister: null`), use the following code (remember also to add `scope` option if necessary):
+You **must** not use `HMR (Hot Module Replacement)` in your custom service worker, since we cannot use yet dynamic imports in service workers: `import.meta.hot`.
+
+If you register your custom service worker (not using `vite-plugin-pwa` virtual module and configuring `injectRegister: false` or `injectRegister: null`), use the following code (remember also to add `scope` option if necessary):
 ```js
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register(
@@ -150,8 +150,7 @@ if ('serviceWorker' in navigator) {
 }
 ```
 
-When you change your service worker source code, `Vite` will force a full reload, since we're using `workbox-window` to register it 
-(by default, you can register it manually) you may have some problems with the service worker events:
+When you change your service worker source code, `Vite` will force a full reload, since we're using `workbox-window` to register it (by default, you can register it manually) you may have some problems with the service worker events.
 
 <HeuristicWorkboxWindow />
 

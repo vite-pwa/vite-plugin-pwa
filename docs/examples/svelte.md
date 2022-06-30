@@ -6,13 +6,11 @@ title: Svelte | Examples
 
 The `Svelte` example project can be found on `examples/svelte-routify` package/directory.
 
-The router used on this example project is [@roxi/routify](https://routify.dev/) <outbound-link />.
+The router used on this example project is [@roxi/routify](https://routify.dev/).
 
 The `Svelte` example has been created using `create-vite` template with `pnpx`:
 
-<details>
-    <summary><strong>pnpx create-vite</strong></summary>
-
+::: details pnpx create-vite
 ```shell
 pnpx create-vite
 + create-vite 2.5.4
@@ -28,7 +26,7 @@ Done. Now run:
   npm install
   npm run dev
 ```
-</details>
+:::
 
 To test `new content available`, you should rerun the corresponding script, and then refresh the page.
 

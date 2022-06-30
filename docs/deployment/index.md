@@ -1,38 +1,27 @@
 ---
-title: Getting Started | Deployment
+title: Getting Started | Deploy
 ---
 
 # Getting Started
 
-Since you need to install your application as a [Progressive Web App](https://web.dev/progressive-web-apps/) <outbound-link />
-you must configure your server to meet PWA requirements, that is, your server must:
-
-- serve `manifest.webmanifest` with mime type `application/manifest+json`
-- you must serve your application over `https`: you must also redirect from `http` to `https`
+Since you need to install your application as a [Progressive Web App](https://web.dev/progressive-web-apps/), you must configure your server to meet [PWA Minimal Requirements](/guide/#pwa-minimal-requirements), that is, your server **must**:
+- serve `manifest.webmanifest` with `application/manifest+json` mime type
+- you must serve your application over `https`
+- you must redirect from `http` to `https`
 
 ## Servers
 
-<ul aria-labelledby="servers">
-<md-list-anchor href="/deployment/netlify.html">
-  <template #link>Netlify</template>
-</md-list-anchor>
-<md-list-anchor href="/deployment/aws.html">
-  <template #link>AWS Amplify</template>
-</md-list-anchor>
-<md-list-anchor href="/deployment/vercel.html">
-  <template #link>Vercel</template>
-</md-list-anchor>
-<md-list-anchor href="/deployment/nginx.html">
-  <template #link>NGINX</template>
-</md-list-anchor>
-<md-list-anchor href="/deployment/apache.html">
-  <template #link>Apache Http Server 2.4+</template>
-</md-list-anchor>
-</ul>
+- [Netlify](/deployment/netlify)
+- [AWS Amplify](/deployment/aws)
+- [Vercel](/deployment/aws)
+- [NGINX](/deployment/nginx)
+- [Apache Http Server 2.4+](/deployment/apache)
+
 
 ## Testing your application on production
 
-Once you deploy your application to your server, you can test it using [WebPageTest](https://www.webpagetest.org/) <outbound-link />.
+Once you deploy your application to your server, you can test it using [WebPageTest](https://www.webpagetest.org/).
+
 There are many test sites, but we suggest you use `WebPageTest` as this is the most comprehensive in terms of test: 
 - Security.
 - First byte time.
@@ -43,9 +32,6 @@ There are many test sites, but we suggest you use `WebPageTest` as this is the m
 - Lighthouse: Core Web Vitals, Performance, Images size optimization...
 - And more...
 
-Enter the url of your application, click `Start Test` button, wait for the test to finish, the `WebPageTest` result 
-will hint you what things on your application must be fixed/changed. The `WebPageTest` result will also score your application,
-it will also test your site with `Lighthouse`.
+Enter the url of your application, click `Start Test` button, wait for the test to finish, the `WebPageTest` result will hint you what things on your application must be fixed/changed. The `WebPageTest` result will also score your application, it will also test your site with `Lighthouse`.
 
-For example, go to [WebPageTest](https://www.webpagetest.org/) <outbound-link />, enter `https://vite-plugin-pwa.netlify.app/`,
-click `Start Test` button, wait a few seconds for the test to finish, and see the results for this site.
+For example, go to [WebPageTest](https://www.webpagetest.org/), enter `https://vite-plugin-pwa.netlify.app/`, click `Start Test` button, wait a few seconds for the test to finish, and see the results for this site.

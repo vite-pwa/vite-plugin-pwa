@@ -43,20 +43,21 @@ export const optimizePages = async () => {
     <noscript>
       <link rel="stylesheet" crossorigin="anonymous" href="${firaFont}" />
     </noscript>
-    <link rel="prefetch" href="/manifest.webmanifest">${preloadImg}\n`).trim()
+    <link rel="prefetch" href="/manifest.webmanifest">${preloadImg}
+    <link rel="manifest" href="/manifest.webmanifest">\n`).trim()
 
-    html = html.replace(
-      '</head>',
-      '\t<link rel="manifest" href="/manifest.webmanifest">\n<script>\n'
-        + '    (function() {\n'
-        + '      const prefersDark = window.matchMedia && window.matchMedia(\'(prefers-color-scheme: dark)\').matches\n'
-        + '      const setting = localStorage.getItem(\'vueuse-color-schema\') || \'auto\'\n'
-        + '      if (setting === \'dark\' || (prefersDark && setting !== \'light\'))\n'
-        + '        document.documentElement.classList.toggle(\'dark\', true)\n'
-        + '    })()\n'
-        + '  </script></head>',
-    )
-
+    // html = html.replace(
+    //   '</head>',
+    //   '\t<link rel="manifest" href="/manifest.webmanifest">\n<script>\n'
+    //     + '    (function() {\n'
+    //     + '      const prefersDark = window.matchMedia && window.matchMedia(\'(prefers-color-scheme: dark)\').matches\n'
+    //     + '      const setting = localStorage.getItem(\'vueuse-color-schema\') || \'auto\'\n'
+    //     + '      if (setting === \'dark\' || (prefersDark && setting !== \'light\'))\n'
+    //     + '        document.documentElement.classList.toggle(\'dark\', true)\n'
+    //     + '    })()\n'
+    //     + '  </script></head>',
+    // )
+    //
     html = html.replace(/aria-hidden="true"/gi, 'tabindex="-1" aria-hidden="true"')
 
     await fs.writeFile(i, html, 'utf-8')
