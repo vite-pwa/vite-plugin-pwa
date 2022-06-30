@@ -1,4 +1,5 @@
-import { resolve } from 'path'
+import { dirname, resolve } from 'path'
+import { fileURLToPath } from 'url'
 import { promises as fs } from 'fs'
 import type { BuildResult } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
@@ -6,19 +7,27 @@ import type { ResolvedVitePWAOptions } from './types'
 import { logWorkboxResult } from './log'
 import { defaultInjectManifestVitePlugins } from './constants'
 
-function loadWorkboxBuild() {
-  // Uses require to lazy load.
+const _dirname = typeof __dirname !== 'undefined'
+  ? __dirname
+  : dirname(fileURLToPath(import.meta.url))
+
+async function loadWorkboxBuild() {
+  // Uses require/dynamic import to lazy load.
   // "workbox-build" is very large and it makes config loading slow.
   // Since it is not always used, load this when it is needed.
-
-  return require('workbox-build')
+  try {
+    return await import('workbox-build')
+  }
+  catch (_) {
+    return require('workbox-build')
+  }
 }
 
 export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 'build' | 'dev', source = 'register') {
   const sw = options.base + options.filename
   const scope = options.scope
 
-  const content = await fs.readFile(resolve(__dirname, `client/${mode}/${source}.mjs`), 'utf-8')
+  const content = await fs.readFile(resolve(_dirname, `client/${mode}/${source}.mjs`), 'utf-8')
 
   return content
     .replace('__SW__', sw)
@@ -28,7 +37,7 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
 }
 
 export async function generateServiceWorker(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig): Promise<BuildResult> {
-  const { generateSW } = loadWorkboxBuild()
+  const { generateSW } = await loadWorkboxBuild()
 
   // generate the service worker
   const buildResult = await generateSW(options.workbox)
@@ -85,7 +94,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   // error during build: ValidationError: "mode" is not allowed
   // delete injectManifestOptions.mode
 
-  const { injectManifest } = loadWorkboxBuild()
+  const { injectManifest } = await loadWorkboxBuild()
 
   // inject the manifest
   const buildResult = await injectManifest(injectManifestOptions)

@@ -1,15 +1,47 @@
 import { basename, resolve } from 'path'
-import { existsSync, promises as fs } from 'fs'
+import type { Stats } from 'fs'
+import { promises as fs } from 'fs'
 import type { LoadResult } from 'rollup'
 import type { ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions } from './types'
 import { generateServiceWorker } from './modules'
 import { normalizePath } from './utils'
+import { FILE_SW_REGISTER, devSwName } from './constants'
+import { generateSimpleSWRegister } from './html'
 
 export const swDevOptions = {
-  swUrl: 'dev-sw.js?dev-sw',
+  swUrl: devSwName,
   swDevGenerated: false,
   workboxPaths: new Map<string, string>(),
+}
+
+async function existsFile(path: string) {
+  let stat: Stats
+  try {
+    // noinspection JSVoidFunctionReturnValueUsed
+    stat = await fs.lstat(path)
+    return stat.isFile()
+  }
+  catch (_) {
+    return false
+  }
+}
+
+export async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
+  if (options.injectRegister === 'script') {
+    const devDist = resolve(viteConfig.root, 'dev-dist')
+    const registerSW = resolve(devDist, FILE_SW_REGISTER)
+    if ((await existsFile(registerSW)))
+      return
+
+    // noinspection JSVoidFunctionReturnValueUsed
+    const stat = await fs.lstat(devDist)
+    if (!stat.isDirectory())
+      await fs.mkdir(devDist)
+
+    await fs.writeFile(registerSW, generateSimpleSWRegister(options, true), { encoding: 'utf8' })
+    swDevOptions.workboxPaths.set(normalizePath(`${options.base}${FILE_SW_REGISTER}`), registerSW)
+  }
 }
 
 export function resolveDevId(id: string, options: ResolvedVitePWAOptions): string | undefined {
@@ -53,7 +85,7 @@ export async function loadDev(id: string, options: ResolvedVitePWAOptions, viteC
     if (id.endsWith(swDevOptions.swUrl)) {
       const globDirectory = resolve(viteConfig.root, 'dev-dist')
       const swDest = resolve(globDirectory, 'sw.js')
-      if (!swDevOptions.swDevGenerated || !existsSync(swDest)) {
+      if (!swDevOptions.swDevGenerated || !(await existsFile(swDest))) {
         // we only need to generate sw on dev-dist folder and then read the content
         // the sw precache (self.__SW_MANIFEST) will be empty since we're using `dev-dist` folder
         // we only need to add the navigateFallback if configured

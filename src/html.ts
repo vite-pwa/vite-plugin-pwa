@@ -1,23 +1,31 @@
-import { FILE_SW_REGISTER } from './constants'
+import { FILE_SW_REGISTER, devSwName } from './constants'
 import type { ResolvedVitePWAOptions } from './types'
 
-export function generateSimpleSWRegister(options: ResolvedVitePWAOptions) {
+export function generateSimpleSWRegister(options: ResolvedVitePWAOptions, dev: boolean) {
+  const path = dev ? `${options.base}${devSwName}` : `${options.base}${options.filename}`
   return `
 if('serviceWorker' in navigator) {
 window.addEventListener('load', () => {
-navigator.serviceWorker.register('${options.base + options.filename}', { scope: '${options.scope}' })
+navigator.serviceWorker.register('${path}', { scope: '${options.scope}' })
 })
 }`.replace(/\n/g, '')
 }
 
-export function injectServiceWorker(html: string, options: ResolvedVitePWAOptions) {
+export function injectServiceWorker(html: string, options: ResolvedVitePWAOptions, dev: boolean) {
   const crossorigin = options.useCredentials ? ' crossorigin="use-credentials"' : ''
-  const manifest = options.manifest ? `<link rel="manifest" href="${options.base + options.manifestFilename}"${crossorigin}>` : ''
+  let manifest: string
+  if (dev) {
+    const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
+    manifest = options.manifest ? `<link rel="manifest" href="${name}"${crossorigin}>` : ''
+  }
+  else {
+    manifest = options.manifest ? `<link rel="manifest" href="${options.base + options.manifestFilename}"${crossorigin}>` : ''
+  }
 
   if (options.injectRegister === 'inline') {
     return html.replace(
       '</head>',
-      `${manifest}<script>${generateSimpleSWRegister(options)}</script></head>`,
+      `${manifest}<script>${generateSimpleSWRegister(options, dev)}</script></head>`,
     )
   }
 
@@ -31,16 +39,5 @@ export function injectServiceWorker(html: string, options: ResolvedVitePWAOption
   return html.replace(
     '</head>',
     `${manifest}</head>`,
-  )
-}
-
-export function injectDevManifest(html: string, options: ResolvedVitePWAOptions) {
-  const crossorigin = options.useCredentials ? ' crossorigin="use-credentials"' : ''
-  const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
-  const manifest = options.manifest ? `<link rel="manifest" href="${name}"${crossorigin}>` : ''
-
-  return html.replace(
-    '</head>',
-      `${manifest}</head>`,
   )
 }

@@ -28,10 +28,17 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./*": "./*"
+  },
   "files": [
     "dist",
-    "index.d.ts",
-    "client.d.ts"
+    "*.d.ts"
   ],
   "scripts": {
     "docs": "npm -C docs run dev",

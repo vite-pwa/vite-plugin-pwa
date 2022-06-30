@@ -14,6 +14,23 @@ There will be only one single registration on the service worker precache manife
 
 The service worker on development will be only available if `disabled` plugin option is not `true` and the `enable` development option is `true`.
 
+::: warning
+If you're registering the service worker without importing any of the virtual modules, you will need to configure `injectRegister` explicitly in the plugin configuration. There is a race condition we cannot bypass and so, you will need to configure it, `auto` will not work, the plugin will not generate the corresponding `registerSW.js` script:
+```ts
+import { VitePWA } from 'vite-plugin-pwa'
+export default defineConfig({
+  plugins: [
+    VitePWA({ 
+      injectRegister: 'inline', // or injectRegister: 'script'
+      devOptions: {
+        enabled: true
+      }
+    })
+  ]
+})
+```
+:::
+
 ## Plugin configuration
 
 To enable the service worker on development, you only need to add the following options to the plugin configuration:

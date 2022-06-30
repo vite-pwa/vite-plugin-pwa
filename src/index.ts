@@ -2,13 +2,13 @@ import { resolve } from 'path'
 import { existsSync } from 'fs'
 import type { OutputBundle } from 'rollup'
 import type { Plugin, ResolvedConfig } from 'vite'
-import { generateSimpleSWRegister, injectDevManifest, injectServiceWorker } from './html'
+import { generateSimpleSWRegister, injectServiceWorker } from './html'
 import { generateInjectManifest, generateRegisterSW, generateServiceWorker } from './modules'
 import type { ExtendManifestEntriesHook, ResolvedVitePWAOptions, VitePWAOptions, VitePluginPWAAPI } from './types'
 import { resolveOptions } from './options'
 import { generateWebManifestFile } from './assets'
 import { FILE_SW_REGISTER, VIRTUAL_MODULES, VIRTUAL_MODULES_MAP, VIRTUAL_MODULES_RESOLVE_PREFIX } from './constants'
-import { loadDev, resolveDevId, swDevOptions } from './dev'
+import { createDevRegisterSW, loadDev, resolveDevId, swDevOptions } from './dev'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   let viteConfig: ResolvedConfig
@@ -48,7 +48,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
         isAsset: true,
         type: 'asset',
         name: undefined,
-        source: generateSimpleSWRegister(options),
+        source: generateSimpleSWRegister(options, false),
         fileName: FILE_SW_REGISTER,
       }
     }
@@ -74,7 +74,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
           if (options.injectRegister === 'auto')
             options.injectRegister = useImportRegister ? null : 'script'
 
-          return injectServiceWorker(html, options)
+          return injectServiceWorker(html, options, false)
         },
       },
       generateBundle(_, bundle) {
@@ -150,11 +150,17 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
       },
       transformIndexHtml: {
         enforce: 'post',
-        transform(html) {
+        async transform(html) {
           if (options.disable || !options.manifest || !options.devOptions.enabled)
             return html
 
-          return injectDevManifest(html, options)
+          // - create `registerSW.js`: we have a race condition, so we generate it if explicitly configured
+          // - Vite will call this transform before the virtual module (if imported), and so the registerSW will
+          //   always be generated  in dev
+          // - added warning on the index guide and also on the development entry on docs
+          await createDevRegisterSW(options, viteConfig)
+
+          return injectServiceWorker(html, options, true)
         },
       },
       configureServer(server) {
