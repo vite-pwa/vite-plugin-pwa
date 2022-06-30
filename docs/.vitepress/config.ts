@@ -220,6 +220,9 @@ function prepareSidebar(idx: number) {
   })
 }
 
+const ogUrl = 'https://vite-plugin-pwa.netlify.app/'
+const ogImage = 'https://vite-plugin-pwa.netlify.app/og-image.png'
+
 export default defineConfig({
   lang: 'en-US',
   title: 'Vite Plugin PWA',
@@ -234,10 +237,17 @@ export default defineConfig({
       name: 'keywords',
       content: 'PWA, React, Vue, VitePress, Preact, Svelte, SvelteKit, workbox, SolidJS, Vite, vite-plugin, îles, Astro',
     }],
+    ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:title', content: 'Vite Plugin PWA' }],
+    ['meta', { property: 'og:image', content: ogImage }],
     ['meta', { property: 'og:description', content: 'Zero-config PWA Framework-agnostic Plugin for Vite' }],
+    ['meta', { property: 'og:url', content: ogUrl }],
+    ['meta', { name: 'twitter:description', content: 'Zero-config PWA Framework-agnostic Plugin for Vite' }],
+    ['meta', { name: 'twitter:title', content: 'Vite Plugin PWA' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
-    ['meta', { name: 'twitter:creator', content: '@antfu7' }],
+    ['meta', { name: 'twitter:image', content: ogImage }],
+    ['meta', { name: 'twitter:site', content: '@antfu7' }],
+    ['meta', { name: 'twitter:url', content: ogUrl }],
     ['link', { rel: 'apple-touch-icon', href: '/apple-touch-icon.png', sizes: '180x180' }],
   ],
   lastUpdated: true,

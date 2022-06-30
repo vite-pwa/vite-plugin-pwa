@@ -4,7 +4,7 @@ title: Service Worker Strategies And Behaviors | Guide
 
 # Service Worker Strategies And Behaviors
 
-A service worker strategy is related to how the `vite-plugin-pwa` plugin will generate your service worker, while the behavior of a service worker is related to how the service worker will work in the browser once the browser detect a new version of your application.
+A service worker strategy is related to how the `vite-plugin-pwa` plugin will generate your service worker, while the behavior of a service worker is related to how the service worker will work in the browser once the browser detects a new version of your application.
 
 ## Service Worker Strategies
 
