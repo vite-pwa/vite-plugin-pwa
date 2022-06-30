@@ -220,8 +220,8 @@ function prepareSidebar(idx: number) {
   })
 }
 
-const ogUrl = 'https://deploy-preview-315--vite-plugin-pwa.netlify.app/'
-const ogImage = 'https://deploy-preview-315--vite-plugin-pwa.netlify.app/og-image.png'
+const ogUrl = 'https://vite-plugin-pwa.netlify.app/'
+const ogImage = 'https://vite-plugin-pwa.netlify.app/og-image.png'
 
 export default defineConfig({
   lang: 'en-US',
