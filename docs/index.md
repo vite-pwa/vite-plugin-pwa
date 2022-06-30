@@ -11,8 +11,12 @@ hero:
     Zero-config and framework-agnostic
     PWA Plugin for Vite
   image:
-    src: /icon_gray.svg
-    alt: Vite Plugin PWA
+    light:
+      src: /icon_light.svg
+      alt: Vite Plugin PWA
+    dark:
+      src: /icon_dark.svg
+      alt: Vite Plugin PWA
   actions:
     - theme: brand
       text: Get Started
