@@ -254,8 +254,8 @@ export default defineConfig({
       text: 'Suggest changes to this page',
     },
     algolia: {
-      appId: 'PLTOP8CJ9E',
-      apiKey: '19222f0fee4df5d951242e05ae60a0d9',
+      appId: 'TTO9T0AE3F',
+      apiKey: '71bd3d3c7274205843267bb1ccb6b1a8',
       indexName: 'vite-plugin-pwa',
     },
     socialLinks: [
