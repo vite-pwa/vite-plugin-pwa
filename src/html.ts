@@ -1,8 +1,8 @@
-import { FILE_SW_REGISTER, devSwName } from './constants'
+import { DEV_SW_NAME, FILE_SW_REGISTER } from './constants'
 import type { ResolvedVitePWAOptions } from './types'
 
 export function generateSimpleSWRegister(options: ResolvedVitePWAOptions, dev: boolean) {
-  const path = dev ? `${options.base}${devSwName}` : `${options.base}${options.filename}`
+  const path = dev ? `${options.base}${DEV_SW_NAME}` : `${options.base}${options.filename}`
   return `
 if('serviceWorker' in navigator) {
 window.addEventListener('load', () => {
