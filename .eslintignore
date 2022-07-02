@@ -4,4 +4,4 @@ dev-dist/
 node_modules/
 *.svelte
 *.d.ts
-!.vitepress/
+!.vitepress/dist/
