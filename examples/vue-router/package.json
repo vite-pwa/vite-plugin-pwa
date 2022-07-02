@@ -26,17 +26,17 @@
   },
   "dependencies": {
     "vue": "^3.2.37",
-    "vue-router": "^4.0.15"
+    "vue-router": "^4.0.16"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^4.0.0",
     "@vitejs/plugin-vue": "^2.3.3",
-    "@vueuse/core": "^8.5.0",
+    "@vueuse/core": "^8.7.5",
     "cross-env": "^7.0.3",
     "https-localhost": "^4.7.1",
     "rimraf": "^3.0.2",
-    "typescript": "^4.6.4",
-    "vite": "^2.9.9",
+    "typescript": "^4.7.4",
+    "vite": "^2.9.13",
     "vite-plugin-pwa": "workspace:*",
     "workbox-core": "^6.5.3",
     "workbox-precaching": "^6.5.3",
