@@ -57,7 +57,7 @@ When configuring `injectRegister: 'script'` in the plugin configuration, the plu
 
 ::: details **/registerSW.js**
 ```js
-if('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js', { scope: '/' })
   })

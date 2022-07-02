@@ -86,12 +86,20 @@ export default defineConfig({
 ```
 :::
 
-If you want to check it in `dev`, add the `devOptions` option to the plugin configuration (you will have the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) and the generated service worker):
+If you want to check it in `dev`, add the `devOptions` option to the plugin configuration (you will have the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) and the generated service worker).
+
+::: warning
+In version `0.12.2` the service worker will not be registered in development if not importing one of the virtual modules. There is a bug preventing generating the corresponding script on the entry point.
+
+In version `0.12.3` we have fixed previous bug, but you will need to explicitly configure `injectRegister` with `inline` or `script` and not importing any virtual module: there is a race condition, so we cannot bypass it.
+:::
+
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   plugins: [
-    VitePWA({ 
+    VitePWA({
+      injectRegister: 'inline', // or injectRegister: 'script'
       registerType: 'autoUpdate',
       devOptions: {
         enabled: true
