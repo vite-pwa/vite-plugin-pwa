@@ -1,8 +1,6 @@
 ---
 title: Astro | Examples
-next:
-  text: Getting Started | Deploy
-  link: /deployment/
+next: Getting Started | Deploy
 ---
 
 # Astro

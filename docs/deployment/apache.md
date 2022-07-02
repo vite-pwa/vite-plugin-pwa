@@ -1,8 +1,6 @@
 ---
 title: Apache Http Server 2.4+ | Deployment
-next:
-  text: Getting Started | Workbox
-  link: /workbox/
+next: Getting Started | Workbox
 ---
 
 # Apache Http Server 2.4+

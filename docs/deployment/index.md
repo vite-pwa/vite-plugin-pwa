@@ -1,8 +1,6 @@
 ---
 title: Getting Started | Deploy
-prev:
-  text: Astro | Examples
-  link: /examples/astro
+prev: Astro | Examples
 ---
 
 # Getting Started
