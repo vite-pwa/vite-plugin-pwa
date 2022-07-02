@@ -1,5 +1,8 @@
 ---
 title: Astro | Frameworks
+next:
+  text: Getting Started | Examples
+  link: /examples/
 ---
 
 # Astro

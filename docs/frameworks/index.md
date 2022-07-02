@@ -1,5 +1,8 @@
 ---
 title: Getting Started | Frameworks
+prev:
+  text: FAQ | Guide
+  link: /guide/faq
 ---
 
 # Getting Started

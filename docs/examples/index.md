@@ -1,5 +1,8 @@
 ---
 title: Getting Started | Examples
+prev:
+  text: Astro | Frameworks
+  link: /frameworks/astro
 ---
 
 # Getting Started
