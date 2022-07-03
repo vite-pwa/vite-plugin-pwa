@@ -10,6 +10,10 @@ You can use the built-in `Vite` virtual module `virtual:pwa-register/vue` for `V
 
 ### Type declarations
 
+::: tip
+<TypeScriptError2307 />
+:::
+
 ```ts
 declare module 'virtual:pwa-register/vue' {
   // @ts-expect-error ignore when vue is not installed

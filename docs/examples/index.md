@@ -76,7 +76,7 @@ A common pitfall is to select `Offline` option, then restart the example project
 If you click the browser `Refresh` button, you can inspect `Application > Network` tab on `dev tools` to check that the `Service Worker` is serving all assets instead request them to the server.
 
 ::: danger
-Don't do a `hard refresh` since this will force the browser to go to the server, and then you will get `No internet connection` page on the browser.
+Don't do a `hard refresh` since it will force the browser to go to the server, and then you will get `No internet connection` page.
 :::
 
 ## Available Examples Projects

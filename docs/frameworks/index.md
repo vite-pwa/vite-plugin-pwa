@@ -20,6 +20,10 @@ This plugin is Framework-agnostic and so you can use it with Vanilla JavaScript,
 
 ## Type declarations
 
+::: tip
+<TypeScriptError2307 />
+:::
+
 ```ts
 declare module 'virtual:pwa-register' {
   export interface RegisterSWOptions {
