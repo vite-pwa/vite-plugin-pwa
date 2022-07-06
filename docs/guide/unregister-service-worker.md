@@ -10,7 +10,7 @@ If you want to unregister the service worker from your PWA application, you only
 It is **IMPORTANT TO NOT CHANGE ANYTHING** in the plugin configuration (especially **DO NOT CHANGE THE SERVICE WORKER NAME**), just keep the options and the PWA UI components (if included some toast/dialog for ready to work offline or prompt for update), the plugin will take care of changing the service worker and avoid interacting with the UI if configured.
 :::
 
-In a future, if you want to add the PWA again to your application, you only need to remove the `selfDestroying` option or just disable id: `selfDestroying: false`.
+In a future, if you want to add the PWA again to your application, you only need to remove the `selfDestroying` option or just disable it: `selfDestroying: false`.
 
 ## Development
 
