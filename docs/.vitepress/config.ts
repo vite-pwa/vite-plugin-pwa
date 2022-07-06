@@ -43,12 +43,12 @@ const Guide = [
     link: '/guide/periodic-sw-updates',
   },
   {
-    text: 'Unregister Service Worker',
-    link: '/guide/unregister-service-worker',
-  },
-  {
     text: 'Development',
     link: '/guide/development',
+  },
+  {
+    text: 'Unregister Service Worker',
+    link: '/guide/unregister-service-worker',
   },
   {
     text: 'FAQ',
