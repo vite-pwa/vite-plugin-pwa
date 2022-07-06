@@ -1,18 +1,17 @@
 import type { Plugin } from 'vite'
 import { injectServiceWorker } from '../html'
-import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from '../types'
-import type { PWAPluginContextResolver } from '../context'
 import { _generateBundle, _generateSW } from '../api'
+import type { PWAPluginContext } from '../context'
 
-export function BuildPlugin(contextResolver: PWAPluginContextResolver) {
+export function BuildPlugin(ctx: PWAPluginContext) {
   return <Plugin>{
-    name: 'vite-plugin-pwa',
+    name: 'vite-plugin-pwa:build',
     enforce: 'post',
     apply: 'build',
     transformIndexHtml: {
       enforce: 'post',
       transform(html) {
-        const { options, useImportRegister } = contextResolver()
+        const { options, useImportRegister } = ctx
         if (options.disable)
           return html
 
@@ -24,39 +23,15 @@ export function BuildPlugin(contextResolver: PWAPluginContextResolver) {
       },
     },
     generateBundle(_, bundle) {
-      return _generateBundle(contextResolver(), bundle)
+      return _generateBundle(ctx, bundle)
     },
     async closeBundle() {
-      const ctx = contextResolver()
       if (!ctx.viteConfig.build.ssr && !ctx.options.disable)
         await _generateSW(ctx)
     },
     async buildEnd(error) {
       if (error)
         throw error
-    },
-    api: <VitePluginPWAAPI>{
-      get disabled() {
-        const ctx = contextResolver()
-        return ctx?.options?.disable
-      },
-      generateBundle(bundle) {
-        return _generateBundle(contextResolver(), bundle!)
-      },
-      async generateSW() {
-        return await _generateSW(contextResolver())
-      },
-      extendManifestEntries(fn: ExtendManifestEntriesHook) {
-        const { options } = contextResolver()
-        if (options.disable)
-          return
-
-        const configField = options.strategies === 'generateSW' ? 'workbox' : 'injectManifest'
-        const result = fn(options[configField].additionalManifestEntries || [])
-
-        if (result != null)
-          options[configField].additionalManifestEntries = result
-      },
     },
   }
 }

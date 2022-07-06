@@ -259,7 +259,7 @@ export interface VitePluginPWAAPI {
   /*
    * Explicitly generate the manifests.
    */
-  generateBundle(bundle?: OutputBundle): OutputBundle
+  generateBundle(bundle?: OutputBundle): OutputBundle | undefined
   /*
    * Explicitly generate the PWA services worker.
    */

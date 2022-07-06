@@ -1,15 +1,16 @@
 import type { Plugin } from 'vite'
+import { createContext } from './context'
 import type { VitePWAOptions } from './types'
-import { CreatePlugin } from './plugins'
 import { BuildPlugin } from './plugins/build'
 import { DevPlugin } from './plugins/dev'
+import { MainPlugin } from './plugins/main'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
-  const [contextResolver, VirtualPlugin] = CreatePlugin(userOptions)
+  const ctx = createContext(userOptions)
   return [
-    VirtualPlugin,
-    BuildPlugin(contextResolver),
-    DevPlugin(contextResolver),
+    MainPlugin(ctx),
+    BuildPlugin(ctx),
+    DevPlugin(ctx),
   ]
 }
 

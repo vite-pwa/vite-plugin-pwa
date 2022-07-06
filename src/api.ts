@@ -6,6 +6,7 @@ import { generateWebManifestFile } from './assets'
 import { FILE_SW_REGISTER } from './constants'
 import { generateSimpleSWRegister } from './html'
 import type { PWAPluginContext } from './context'
+import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
 
 export async function _generateSW({ options, viteConfig }: PWAPluginContext) {
   if (options.disable)
@@ -45,4 +46,29 @@ export function _generateBundle({ options, viteConfig, useImportRegister }: PWAP
     }
   }
   return bundle
+}
+
+export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
+  return {
+    get disabled() {
+      return ctx?.options?.disable
+    },
+    generateBundle(bundle) {
+      return _generateBundle(ctx, bundle!)
+    },
+    async generateSW() {
+      return await _generateSW(ctx)
+    },
+    extendManifestEntries(fn: ExtendManifestEntriesHook) {
+      const { options } = ctx
+      if (options.disable)
+        return
+
+      const configField = options.strategies === 'generateSW' ? 'workbox' : 'injectManifest'
+      const result = fn(options[configField].additionalManifestEntries || [])
+
+      if (result != null)
+        options[configField].additionalManifestEntries = result
+    },
+  }
 }

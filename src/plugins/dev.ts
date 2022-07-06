@@ -1,13 +1,13 @@
 import { basename, resolve } from 'path'
 import { existsSync, promises as fs, mkdirSync } from 'fs'
 import type { Plugin, ResolvedConfig } from 'vite'
-import type { PWAPluginContextResolver } from '../context'
 import { generateSimpleSWRegister, injectServiceWorker } from '../html'
 import { generateWebManifestFile } from '../assets'
 import { DEV_SW_NAME, FILE_SW_REGISTER } from '../constants'
 import type { ResolvedVitePWAOptions } from '../types'
 import { generateServiceWorker } from '../modules'
 import { normalizePath } from '../utils'
+import type { PWAPluginContext } from '../context'
 
 export const swDevOptions = {
   swUrl: DEV_SW_NAME,
@@ -15,14 +15,14 @@ export const swDevOptions = {
   workboxPaths: new Map<string, string>(),
 }
 
-export function DevPlugin(contextResolver: PWAPluginContextResolver) {
+export function DevPlugin(ctx: PWAPluginContext): Plugin {
   return <Plugin>{
     name: 'vite-plugin-pwa:dev-sw',
     apply: 'serve',
     transformIndexHtml: {
       enforce: 'post',
       async transform(html) {
-        const { options, useImportRegister, viteConfig } = contextResolver()
+        const { options, useImportRegister, viteConfig } = ctx
         if (options.disable || !options.manifest || !options.devOptions.enabled)
           return html
 
@@ -36,7 +36,7 @@ export function DevPlugin(contextResolver: PWAPluginContextResolver) {
       },
     },
     configureServer(server) {
-      const { options } = contextResolver()
+      const { options } = ctx
       if (!options.disable && options.manifest && options.devOptions.enabled) {
         const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
         server.middlewares.use((req, res, next) => {
@@ -53,7 +53,7 @@ export function DevPlugin(contextResolver: PWAPluginContextResolver) {
       }
     },
     resolveId(id) {
-      const { options } = contextResolver()
+      const { options } = ctx
       if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest') {
         const name = id.startsWith('/') ? id.slice(1) : id
         // the sw must be registered with .js extension on browser, here we detect that request:
@@ -69,7 +69,7 @@ export function DevPlugin(contextResolver: PWAPluginContextResolver) {
       return undefined
     },
     async load(id) {
-      const { options, viteConfig } = contextResolver()
+      const { options, viteConfig } = ctx
       if (!options.disable && options.devOptions.enabled) {
         if (options.strategies === 'injectManifest') {
           // we need to inject self.__WB_MANIFEST with an empty array: there is no pwa on dev
