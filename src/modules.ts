@@ -24,10 +24,35 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
     .replace('__SW__', sw)
     .replace('__SCOPE__', scope)
     .replace('__SW_AUTO_UPDATE__', `${options.registerType === 'autoUpdate'}`)
+    .replace('__SW_SELF_DESTROYING__', `${options.selfDestroying}`)
     .replace('__TYPE__', `${options.devOptions.enabled ? options.devOptions.type : 'classic'}`)
 }
 
 export async function generateServiceWorker(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig): Promise<BuildResult> {
+  if (options.selfDestroying) {
+    const selfDestroyingSW = `
+self.addEventListener('install', function(e) {
+  self.skipWaiting();
+});
+self.addEventListener('activate', function(e) {
+  self.registration.unregister()
+    .then(function() {
+      return self.clients.matchAll();
+    })
+    .then(function(clients) {
+      clients.forEach(client => client.navigate(client.url))
+    });
+});
+    `
+    await fs.writeFile(options.swDest.replace(/\\/g, '/'), selfDestroyingSW, { encoding: 'utf8' })
+    return {
+      count: 1,
+      size: selfDestroyingSW.length,
+      warnings: [],
+      filePaths: [options.filename],
+    }
+  }
+
   const { generateSW } = loadWorkboxBuild()
 
   // generate the service worker
@@ -39,6 +64,12 @@ export async function generateServiceWorker(options: ResolvedVitePWAOptions, vit
 }
 
 export async function generateInjectManifest(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig) {
+  const { selfDestroying } = options
+  if (selfDestroying) {
+    await generateServiceWorker(options, viteOptions)
+    return
+  }
+
   // we will have something like this from swSrc:
   /*
   // sw.js

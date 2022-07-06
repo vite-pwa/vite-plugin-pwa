@@ -9,6 +9,7 @@ import { swDevOptions } from './dev'
 export function MainPlugin(ctx: PWAPluginContext): Plugin {
   return {
     name: 'vite-plugin-pwa',
+    enforce: 'pre',
     async configResolved(config) {
       ctx.useImportRegister = false
       ctx.viteConfig = config

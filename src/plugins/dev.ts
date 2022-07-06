@@ -54,7 +54,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
     },
     resolveId(id) {
       const { options } = ctx
-      if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest') {
+      if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest' && !options.selfDestroying) {
         const name = id.startsWith('/') ? id.slice(1) : id
         // the sw must be registered with .js extension on browser, here we detect that request:
         // - the .js file and source with .ts, or
@@ -71,7 +71,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
     async load(id) {
       const { options, viteConfig } = ctx
       if (!options.disable && options.devOptions.enabled) {
-        if (options.strategies === 'injectManifest') {
+        if (options.strategies === 'injectManifest' && !options.selfDestroying) {
           // we need to inject self.__WB_MANIFEST with an empty array: there is no pwa on dev
           const swSrc = normalizePath(options.injectManifest.swSrc)
           if (id === swSrc) {
@@ -93,6 +93,9 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
         }
         if (id.endsWith(swDevOptions.swUrl)) {
           const globDirectory = resolve(viteConfig.root, 'dev-dist')
+          if (!existsSync(globDirectory))
+            mkdirSync(globDirectory)
+
           const swDest = resolve(globDirectory, 'sw.js')
           if (!swDevOptions.swDevGenerated || !existsSync(swDest)) {
             // we only need to generate sw on dev-dist folder and then read the content
@@ -106,6 +109,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
                 {},
                 options,
                 {
+                  swDest: options.selfDestroying ? swDest : options.swDest,
                   workbox: {
                     ...options.workbox,
                     navigateFallbackDenylist: [new RegExp(`^${webManifestUrl}$`)],

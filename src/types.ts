@@ -130,6 +130,13 @@ export interface VitePWAOptions {
    * Development options.
    */
   devOptions?: DevOptions
+
+  /**
+   * Unregister the service worker?
+   *
+   * @default false
+   */
+  selfDestroying?: boolean
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {

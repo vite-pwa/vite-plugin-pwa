@@ -94,11 +94,12 @@ interface PromptResult {
   strategy: Strategy
   behavior: Behavior
   reloadSW: boolean
+  selfDestroying: boolean
 }
 
 async function init() {
   try {
-    const { framework, strategy, behavior, reloadSW }: PromptResult = await prompts([
+    const { framework, strategy, behavior, reloadSW, selfDestroying }: PromptResult = await prompts([
       {
         type: 'select',
         name: 'framework',
@@ -149,6 +150,14 @@ async function init() {
         active: 'yes',
         inactive: 'no',
       },
+      {
+        type: 'toggle',
+        name: 'selfDestroying',
+        message: reset('Unregister SW?'),
+        initial: false,
+        active: 'yes',
+        inactive: 'no',
+      },
     ],
     {
       onCancel: () => {
@@ -171,6 +180,9 @@ async function init() {
 
     if (reloadSW)
       script += '-reloadsw'
+
+    if (selfDestroying)
+      script += '-destroy'
 
     execSync(`pnpm run start${script}`, {
       stdio: 'inherit',
