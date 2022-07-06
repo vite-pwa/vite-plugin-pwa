@@ -22,3 +22,6 @@ export const defaultInjectManifestVitePlugins = [
   'vite:json',
   'vite:terser',
 ]
+
+export const DEV_SW_NAME = 'dev-sw.js?dev-sw'
+

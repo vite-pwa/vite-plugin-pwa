@@ -36,7 +36,7 @@ const buildPwa = async() => {
 		console.log('Generating PWA...')
 		await pwaPlugin.generateSW()
 		webmanifestDestinations.forEach(d => {
-			copyFileSync('./.svelte-kit/output/client/_app/manifest.webmanifest', `${d}/manifest.webmanifest`)
+			copyFileSync('./.svelte-kit/output/client/_app/immutable/manifest.webmanifest', `${d}/manifest.webmanifest`)
 		})
 		// don't copy workbox, svelte kit will copy it
 		if (pwaConfiguration.strategies === 'injectManifest') {

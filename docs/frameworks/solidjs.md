@@ -12,6 +12,10 @@ You will need to add `workbox-window` as a `dev` dependency to your `Vite` proje
 
 ## Type declarations
 
+::: tip
+<TypeScriptError2307 />
+:::
+
 ```ts
 declare module 'virtual:pwa-register/solid' {
   // @ts-expect-error ignore when solid-js is not installed

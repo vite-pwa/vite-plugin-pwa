@@ -1,5 +1,6 @@
 ---
 title: Getting Started | Frameworks
+prev: FAQ | Guide
 ---
 
 # Getting Started
@@ -18,6 +19,10 @@ Then, you **don't need** to learn the framework stuff.
 This plugin is Framework-agnostic and so you can use it with Vanilla JavaScript, TypeScript and with any framework.
 
 ## Type declarations
+
+::: tip
+<TypeScriptError2307 />
+:::
 
 ```ts
 declare module 'virtual:pwa-register' {

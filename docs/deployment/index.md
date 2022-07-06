@@ -1,5 +1,6 @@
 ---
 title: Getting Started | Deploy
+prev: Astro | Examples
 ---
 
 # Getting Started
