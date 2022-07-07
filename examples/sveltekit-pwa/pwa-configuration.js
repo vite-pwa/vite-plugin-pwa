@@ -44,6 +44,7 @@ const pwaConfiguration = {
 const claims = process.env.CLAIMS === 'true'
 const reload = process.env.RELOAD_SW === 'true'
 const sw = process.env.SW === 'true'
+const selfDestroying = process.env.SW_DESTROY === 'true'
 const replaceOptions = {
 	__DATE__: new Date().toISOString(),
 	__RELOAD_SW__: reload ? 'true' : 'false',
@@ -93,5 +94,8 @@ if (sw) {
 
 if (claims)
 	pwaConfiguration.registerType = 'autoUpdate'
+
+if (selfDestroying)
+	pwaConfiguration.selfDestroying = selfDestroying
 
 export { pwaConfiguration, replaceOptions }

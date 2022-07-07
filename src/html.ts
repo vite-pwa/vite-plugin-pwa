@@ -3,6 +3,11 @@ import type { ResolvedVitePWAOptions } from './types'
 
 export function generateSimpleSWRegister(options: ResolvedVitePWAOptions, dev: boolean) {
   const path = dev ? `${options.base}${DEV_SW_NAME}` : `${options.base}${options.filename}`
+
+  // we are using HMR to load this script: DO NOT ADD window::load event listener
+  if (dev)
+    return `if('serviceWorker' in navigator) navigator.serviceWorker.register('${path}', { scope: '${options.scope}' })`
+
   return `
 if('serviceWorker' in navigator) {
 window.addEventListener('load', () => {
@@ -22,18 +27,20 @@ export function injectServiceWorker(html: string, options: ResolvedVitePWAOption
     manifest = options.manifest ? `<link rel="manifest" href="${options.base + options.manifestFilename}"${crossorigin}>` : ''
   }
 
-  if (options.injectRegister === 'inline') {
-    return html.replace(
-      '</head>',
-      `${manifest}<script>${generateSimpleSWRegister(options, dev)}</script></head>`,
-    )
-  }
+  if (!dev) {
+    if (options.injectRegister === 'inline') {
+      return html.replace(
+        '</head>',
+          `${manifest}<script>${generateSimpleSWRegister(options, dev)}</script></head>`,
+      )
+    }
 
-  if (options.injectRegister === 'script') {
-    return html.replace(
-      '</head>',
-      `${manifest}<script src="${options.base + FILE_SW_REGISTER}"></script></head>`,
-    )
+    if (options.injectRegister === 'script') {
+      return html.replace(
+        '</head>',
+          `${manifest}<script src="${options.base + FILE_SW_REGISTER}"></script></head>`,
+      )
+    }
   }
 
   return html.replace(

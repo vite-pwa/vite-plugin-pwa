@@ -1,13 +1,20 @@
 import { basename, resolve } from 'path'
 import { existsSync, promises as fs, mkdirSync } from 'fs'
-import type { Plugin, ResolvedConfig } from 'vite'
+import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite'
 import { generateSimpleSWRegister, injectServiceWorker } from '../html'
 import { generateWebManifestFile } from '../assets'
-import { DEV_SW_NAME, FILE_SW_REGISTER } from '../constants'
+import {
+  DEV_SW_NAME,
+  FILE_SW_REGISTER, VIRTUAL_MODULES_RESOLVE_PREFIX,
+} from '../constants'
 import type { ResolvedVitePWAOptions } from '../types'
 import { generateServiceWorker } from '../modules'
 import { normalizePath } from '../utils'
 import type { PWAPluginContext } from '../context'
+
+const DEV_SW_VIRTUAL = `${VIRTUAL_MODULES_RESOLVE_PREFIX}pwa-entry-point-loaded`
+const DEV_READY_NAME = 'vite-pwa-plugin:dev-ready'
+const DEV_REGISTER_SW_NAME = 'vite-plugin-pwa:register-sw'
 
 export const swDevOptions = {
   swUrl: DEV_SW_NAME,
@@ -22,22 +29,22 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
     transformIndexHtml: {
       enforce: 'post',
       async transform(html) {
-        const { options, useImportRegister, viteConfig } = ctx
+        const { options } = ctx
         if (options.disable || !options.manifest || !options.devOptions.enabled)
           return html
 
-        // if virtual register is requested, do not inject.
-        if (options.injectRegister === 'auto')
-          options.injectRegister = useImportRegister ? null : 'script'
+        html = injectServiceWorker(html, options, true)
 
-        await createDevRegisterSW(options, viteConfig)
-
-        return injectServiceWorker(html, options, true)
+        return html.replace(
+          '</body>',
+            `<script type="module" src="${DEV_SW_VIRTUAL}"></script></body>`,
+        )
       },
     },
     configureServer(server) {
       const { options } = ctx
       if (!options.disable && options.manifest && options.devOptions.enabled) {
+        server.ws.on(DEV_READY_NAME, createSWResponseHandler(server, ctx))
         const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
         server.middlewares.use((req, res, next) => {
           if (req.url === name) {
@@ -53,8 +60,11 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
       }
     },
     resolveId(id) {
+      if (id === DEV_SW_VIRTUAL)
+        return id
+
       const { options } = ctx
-      if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest') {
+      if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest' && !options.selfDestroying) {
         const name = id.startsWith('/') ? id.slice(1) : id
         // the sw must be registered with .js extension on browser, here we detect that request:
         // - the .js file and source with .ts, or
@@ -69,9 +79,12 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
       return undefined
     },
     async load(id) {
+      if (id === DEV_SW_VIRTUAL)
+        return generateSWHMR()
+
       const { options, viteConfig } = ctx
       if (!options.disable && options.devOptions.enabled) {
-        if (options.strategies === 'injectManifest') {
+        if (options.strategies === 'injectManifest' && !options.selfDestroying) {
           // we need to inject self.__WB_MANIFEST with an empty array: there is no pwa on dev
           const swSrc = normalizePath(options.injectManifest.swSrc)
           if (id === swSrc) {
@@ -93,6 +106,9 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
         }
         if (id.endsWith(swDevOptions.swUrl)) {
           const globDirectory = resolve(viteConfig.root, 'dev-dist')
+          if (!existsSync(globDirectory))
+            mkdirSync(globDirectory)
+
           const swDest = resolve(globDirectory, 'sw.js')
           if (!swDevOptions.swDevGenerated || !existsSync(swDest)) {
             // we only need to generate sw on dev-dist folder and then read the content
@@ -106,6 +122,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
                 {},
                 options,
                 {
+                  swDest: options.selfDestroying ? swDest : options.swDest,
                   workbox: {
                     ...options.workbox,
                     navigateFallbackDenylist: [new RegExp(`^${webManifestUrl}$`)],
@@ -152,5 +169,51 @@ async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: 
     await fs.writeFile(registerSW, generateSimpleSWRegister(options, true), { encoding: 'utf8' })
     swDevOptions.workboxPaths.set(normalizePath(`${options.base}${FILE_SW_REGISTER}`), registerSW)
   }
+}
+
+function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): () => Promise<void> {
+  return async () => {
+    const { options, useImportRegister } = ctx
+    const { injectRegister, scope, base } = options
+    // don't send the sw registration if virtual imported or disabled
+    if (!useImportRegister && injectRegister) {
+      if (injectRegister === 'auto')
+        options.injectRegister = 'script'
+
+      await createDevRegisterSW(options, ctx.viteConfig)
+
+      server.ws.send({
+        type: 'custom',
+        event: DEV_REGISTER_SW_NAME,
+        data: {
+          inline: options.injectRegister === 'inline',
+          scope,
+          inlinePath: `${base}${DEV_SW_NAME}`,
+          registerPath: `${base}${FILE_SW_REGISTER}`,
+        },
+      })
+    }
+  }
+}
+
+function generateSWHMR() {
+  return `import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ inline, inlinePath, registerPath, scope }) => {
+  if (inline) {
+    if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register(inlinePath, { scope });
+    }
+  }
+  else {
+    const registerSW = document.createElement('script');
+    registerSW.setAttribute('src', registerPath);
+    document.head.appendChild(registerSW);
+  }
+});
+
+try {
+  import.meta.hot.send('${DEV_READY_NAME}');
+} catch (e) {
+  console.error('unable to send ${DEV_READY_NAME} message to register service worker in dev mode!', e);
+}`
 }
 

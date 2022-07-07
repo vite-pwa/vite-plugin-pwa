@@ -3,10 +3,15 @@ import type { RegisterSWOptions } from '../type'
 
 // __SW_AUTO_UPDATE__ will be replaced by virtual module
 const autoUpdateMode = '__SW_AUTO_UPDATE__'
+// __SW_SELF_DESTROYING__ will be replaced by virtual module
+const selfDestroying = '__SW_SELF_DESTROYING__'
 
 // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
 // @ts-ignore replace at build
 const auto = autoUpdateMode === 'true'
+// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+// @ts-ignore replace at build time
+const autoDestroy = selfDestroying === 'true'
 
 export type { RegisterSWOptions }
 
@@ -54,7 +59,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
       // worker was controlling the page when this version was registered.
       if (event.isUpdate)
         auto && window.location.reload()
-      else
+      else if (!autoDestroy)
         onOfflineReady?.()
     })
 
