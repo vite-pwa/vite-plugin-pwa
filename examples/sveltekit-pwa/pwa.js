@@ -3,6 +3,7 @@ import replace from '@rollup/plugin-replace'
 import { VitePWA } from 'vite-plugin-pwa'
 import { copyFileSync } from 'fs'
 import minimist from 'minimist'
+import fg from 'fast-glob'
 
 const args = minimist(process.argv.slice(2))
 
@@ -11,16 +12,18 @@ process.env.RELOAD_SW = `${args['RELOAD_SW'] === 'true'}`
 process.env.SW = `${args['SW'] === 'true'}`
 
 const webmanifestDestinations = [
-	'./.svelte-kit/output/client/',
-	'./build/',
+	'./.svelte-kit/output/client/_app',
+	'./build/_app',
 ]
 
 const swDestinations = [
-	'./build/',
+	'./.svelte-kit/output/client',
 ]
 
 const buildPwa = async() => {
 	const { pwaConfiguration, replaceOptions } = await import('./pwa-configuration.js')
+	// disable manifest generation here
+	pwaConfiguration.manifest = false
 	const config = await resolveConfig({
 			plugins: [
 				VitePWA(pwaConfiguration),
@@ -40,14 +43,22 @@ const buildPwa = async() => {
 		})
 		// don't copy workbox, svelte kit will copy it
 		if (pwaConfiguration.strategies === 'injectManifest') {
-			const destName = pwaConfiguration.registerType === 'autoUpdate' ? 'claims-sw.js' : 'prompt-sw.js'
-			const name = `./.svelte-kit/output/client/${destName}`
+			const name = pwaConfiguration.registerType === 'autoUpdate' ? 'claims-sw.js' : 'prompt-sw.js'
 			swDestinations.forEach(d => {
-				copyFileSync(name, `${d}/${destName}`)
+				copyFileSync(`./build/${name}`, `${d}/${name}`)
 			})
 		} else {
+			const entries = await fg(
+				['sw.js', 'workbox-*.js'], {
+					cwd: './build',
+					onlyFiles: true,
+					unique: true,
+				},
+			)
 			swDestinations.forEach(d => {
-				copyFileSync('./.svelte-kit/output/client/sw.js', `${d}/sw.js`)
+				entries.forEach(s => {
+					copyFileSync(`./build/${s}`, `${d}/${s}`)
+				})
 			})
 		}
 		console.log('Generation of PWA complete')

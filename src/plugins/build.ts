@@ -22,6 +22,30 @@ export function BuildPlugin(ctx: PWAPluginContext) {
         return injectServiceWorker(html, options, false)
       },
     },
+    async writeBundle() {
+      // add support for new SvelteKit Vite Plugin
+      const {
+        options: {
+          disable,
+          svelteKitVitePluginOptions: {
+            prerenderTimeout = 0,
+            disabled = false,
+          },
+        },
+        viteConfig,
+      } = ctx
+
+      const sveltekitPresent = disabled || disable
+        ? undefined
+        : ctx.viteConfig.plugins.find(p => p.name === 'vite-plugin-svelte-kit')
+
+      if (viteConfig.build.ssr && sveltekitPresent) {
+        if (prerenderTimeout > 0)
+          await new Promise(resolve => setTimeout(resolve, prerenderTimeout))
+
+        await _generateSW(ctx)
+      }
+    },
     generateBundle(_, bundle) {
       return _generateBundle(ctx, bundle)
     },

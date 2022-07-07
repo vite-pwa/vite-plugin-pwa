@@ -1,6 +1,6 @@
 const pwaConfiguration = {
 	srcDir: './build',
-	outDir: './.svelte-kit/output/client',
+	outDir: './build',
 	mode: 'development',
 	includeManifestIcons: false,
 	scope: '/',
@@ -62,15 +62,21 @@ const workboxOrInjectManifestEntry = {
 		// manifest.webmanifest is added always by pwa plugin, so we remove it.
 		// EXCLUDE from the sw precache sw and workbox-*
 		const manifest = entries.filter(({ url }) =>
-			url !== 'manifest.webmanifest' && !url.endsWith('sw.js') && !url.startsWith('workbox-')
+			!url.endsWith('sw.js') && !url.startsWith('workbox-')
 		).map((e) => {
 			let url = e.url
-			if (url && url.endsWith('.html')) {
+			if (!url)
+				return e
+
+			if (url.endsWith('.html')) {
 				if (url.startsWith('/'))
 					url = url.slice(1)
 
 				e.url = url === 'index.html' ? '/' : `/${url.substring(0, url.lastIndexOf('.'))}`
 				console.log(`${url} => ${e.url}`)
+			}
+			else if (url === '_app/immutable/manifest.webmanifest') {
+				e.url = '_app/manifest.webmanifest'
 			}
 
 			return e

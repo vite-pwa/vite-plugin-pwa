@@ -28,10 +28,17 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./*": "./*"
+  },
   "files": [
     "dist",
-    "index.d.ts",
-    "client.d.ts"
+    "*.d.ts"
   ],
   "scripts": {
     "docs": "npm -C docs run dev",
@@ -71,6 +78,7 @@
     "@typescript-eslint/eslint-plugin": "^5.30.3",
     "eslint": "^8.19.0",
     "esno": "^0.14.1",
+    "fast-glob": "^3.2.11",
     "kolorist": "^1.5.1",
     "pnpm": "^7.4.1",
     "preact": "^10.8.2",
