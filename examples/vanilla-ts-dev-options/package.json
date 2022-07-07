@@ -9,7 +9,7 @@
     "dev-auto-destroy": "rimraf dev-dist && cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true SW_DESTROY=true SW_INLINE=auto vite --force",
     "dev-inline-destroy": "rimraf dev-dist && cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true SW_DESTROY=true SW_INLINE=inline vite --force",
     "dev-script-destroy": "rimraf dev-dist && cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true SW_DESTROY=true SW_INLINE=script vite --force",
-    "build": "rimraf dev-dist && cross-env DEBUG=vite-plugin-pwa:* vite build",
+    "build": "cross-env DEBUG=vite-plugin-pwa:* vite build",
     "serve": "serve dist"
   },
   "devDependencies": {
