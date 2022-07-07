@@ -174,7 +174,7 @@ async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: 
 function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): () => Promise<void> {
   return async () => {
     const { options, useImportRegister } = ctx
-    const { injectRegister, scope } = options
+    const { injectRegister, scope, base } = options
     // don't send the sw registration if virtual imported or disabled
     if (!useImportRegister && injectRegister) {
       if (injectRegister === 'auto')
@@ -186,10 +186,10 @@ function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): 
         type: 'custom',
         event: DEV_REGISTER_SW_NAME,
         data: {
-          inline: injectRegister === 'inline',
+          inline: options.injectRegister === 'inline',
           scope,
-          inlinePath: `${options.base}${DEV_SW_NAME}`,
-          registerPath: `${options.base}${FILE_SW_REGISTER}`,
+          inlinePath: `${base}${DEV_SW_NAME}`,
+          registerPath: `${base}${FILE_SW_REGISTER}`,
         },
       })
     }
