@@ -35,11 +35,11 @@ export function BuildPlugin(ctx: PWAPluginContext) {
         viteConfig,
       } = ctx
 
-      const sveltekitPresent = disabled || disable
+      const sveltekitPresent = disabled || disable || !viteConfig.build.ssr
         ? undefined
         : ctx.viteConfig.plugins.find(p => p.name === 'vite-plugin-svelte-kit')
 
-      if (viteConfig.build.ssr && sveltekitPresent) {
+      if (sveltekitPresent) {
         if (prerenderTimeout > 0)
           await new Promise(resolve => setTimeout(resolve, prerenderTimeout))
 
