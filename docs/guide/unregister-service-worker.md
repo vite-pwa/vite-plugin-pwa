@@ -6,6 +6,8 @@ title: Unregister Service Worker | Guide
 
 If you want to unregister the service worker from your PWA application, you only need to add `selfDestroying: true` to the plugin configuration.
 
+`vite-plugin-pwa` plugin will create a new special service worker and replace the existing one in your application once deployed in production: it has to be put in the place of the previous broken/unwanted service worker, with the same name.
+
 ::: danger
 It is **IMPORTANT TO NOT CHANGE ANYTHING** in the plugin configuration (especially **DO NOT CHANGE THE SERVICE WORKER NAME**), just keep the options and the PWA UI components (if included some toast/dialog for ready to work offline or prompt for update), the plugin will take care of changing the service worker and avoid interacting with the UI if configured.
 :::
@@ -19,3 +21,8 @@ You can also check the `selfDestroying` plugin option in the dev server with dev
 ## Examples
 
 You have in the examples folder the `**-destroy` scripts in its corresponding `package.json`, you can test it in dev server or from production build.
+
+
+## Credits
+
+The implementation is based on this GitHub repo [Self-destroying ServiceWorker](https://github.com/NekR/self-destroying-sw), for more info read [Medium: Self-destroying ServiceWorker](https://medium.com/@nekrtemplar/self-destroying-serviceworker-73d62921d717).
