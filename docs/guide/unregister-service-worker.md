@@ -20,7 +20,7 @@ You can also check the `selfDestroying` plugin option in the dev server with dev
 
 ## Examples
 
-You have in the examples folder the `**-destroy` scripts in its corresponding `package.json`, you can test it in dev server or from production build.
+You have in the examples folder the `**-destroy` scripts in their corresponding `package.json`, you can try it on the development server or from the production build.
 
 
 ## Credits
