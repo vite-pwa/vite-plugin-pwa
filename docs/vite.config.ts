@@ -108,7 +108,7 @@ export default defineConfig({
           },
           {
             urlPattern: /^https:\/\/cdn\.jsdelivr\.net\/.*/i,
-            handler: 'CacheFirst',
+            handler: 'NetworkFirst',
             options: {
               cacheName: 'jsdelivr-images-cache',
               expiration: {
