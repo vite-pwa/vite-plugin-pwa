@@ -6,7 +6,6 @@ import replace from '@rollup/plugin-replace'
 /** @type {import('vite').UserConfig} */
 const config = {
   plugins: [
-    replace({ __DATE__: new Date().toISOString(), __RELOAD_SW__: 'false' }),
     sveltekit(),
     VitePWA(pwaConfiguration),
     replace(replaceOptions)
