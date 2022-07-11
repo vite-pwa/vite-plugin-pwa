@@ -93,6 +93,28 @@ The PWA plugin will force `type: 'classic'` on service worker registration to av
 Uncaught (in promise) TypeError: Failed to execute 'importScripts' on 'WorkerGlobalScope': Module scripts don't support importScripts().
 ```
 
+::: tip
+If your pages/routes other than the entry point are being served by the service worker, use `navigateFallbackAllowlist` to include only the entry point.
+
+Add the `navigateFallbackAllowlist` option to the `workbox` entry in `vite-plugin-pwa` options:
+
+<strong class="text-1.2rem important-text-$vp-custom-block-danger-text">BE SURE TO ADD IT ONLY IN DEV MODE</strong>
+```ts
+export default defineConfig({
+  plugins: [
+    VitePWA({
+      /* other options */
+      workbox: {
+        navigateFallbackAllowlist: [/^index.html$/] // or navigateFallbackAllowlist: [/^\/$/] for /
+        /* other options */
+      }
+    })
+  ]   
+})
+```
+::::
+
+
 ## injectManifest strategy
 
 You can use `type: 'module'` when registering the service worker (right now only supported on latest versions of `Chromium` based browsers: `Chromium/Chrome/Edge`):
@@ -110,7 +132,7 @@ devOptions: {
 When building the application, the `vite-plugin-pwa` plugin will always register your service worker with `type: 'classic'` for compatibility with all browsers.
 :::
 
-::: warning
+::: tip
 If using version `0.12.1+`, you will need to exclude the `manifest.webmanifest` from the service worker's precache manifest if you want to check it using the browser (on `dev tools` it will be ok):
 ```ts
 let denylist: undefined | RegExp[]
@@ -123,7 +145,20 @@ registerRoute(new NavigationRoute(
   { denylist }
 ))
 ```
-:::
+
+If your pages/routes other than the entry point are being served by the service worker, use `allowlist` instead `denylist` to include only the entry point. Replace previous code with this one:
+```ts
+let allowlist: undefined | RegExp[]
+if (import.meta.env.DEV)
+    allowlist = [/^index.html$/] // or allowlist = [/^\/$/] for /
+
+// to allow work offline
+registerRoute(new NavigationRoute(
+  createHandlerBoundToURL('index.html'), // or createHandlerBoundToURL('/') for /
+  { allowlist }
+))
+```
+::::
 
 When using this strategy, the `vite-plugin-pwa` plugin will delegate the service worker compilation to `Vite`, so if you're using `import` statements instead `importScripts` in your custom service worker, you **must** configure `type: 'module'` on development options.
 
