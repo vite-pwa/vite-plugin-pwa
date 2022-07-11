@@ -42,7 +42,14 @@ export default defineConfig({
 
     // https://github.com/unocss/unocss
     Unocss({
-      presets: [presetUno(), presetAttributify()],
+      shortcuts: [
+        { 'pb-input': 'grid grid-cols-[130px_1fr] gap-x-1rem items-baseline lt-sm:grid-cols-[1fr]' },
+        { 'pb-error': 'animate-shake-x animate-count-1 animate-delay-0.5s animate-duration-1s' },
+      ],
+      presets: [
+        presetUno(),
+        presetAttributify(),
+      ],
     }),
 
     // https://github.com/antfu/vite-plugin-pwa

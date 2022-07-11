@@ -296,15 +296,19 @@ export default defineConfig({
             text: 'Examples',
             link: '/examples/',
           },
+          {
+            text: 'Deploy',
+            link: '/deploy/',
+          },
+          {
+            text: 'Workbox',
+            link: '/workbox/',
+          },
         ],
       },
       {
-        text: 'Deploy',
-        link: '/deployment/',
-      },
-      {
-        text: 'Workbox',
-        link: '/workbox/',
+        text: 'PWA Builder',
+        link: '/pwa-builder',
       },
       {
         text: `v${version}`,
@@ -326,6 +330,7 @@ export default defineConfig({
       '/examples/': prepareSidebar(2),
       '/deployment/': prepareSidebar(3),
       '/workbox/': prepareSidebar(4),
+      '/pwa-builder': prepareSidebar(-1),
     },
   },
 })
