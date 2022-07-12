@@ -20,7 +20,7 @@ export async function _generateSW({ options, viteConfig }: PWAPluginContext) {
 
 export function _generateBundle({ options, viteConfig, useImportRegister }: PWAPluginContext, bundle?: OutputBundle) {
   if (options.disable || !bundle)
-    return undefined
+    return
 
   if (options.manifest) {
     bundle[options.manifestFilename] = {
