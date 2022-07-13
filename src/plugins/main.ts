@@ -17,7 +17,7 @@ export function MainPlugin(ctx: PWAPluginContext): Plugin {
       // SvelteKit Plugin will not be included in SSR build,
       // we need this global to detect the plugin on client build.
       if (!ctx.userOptions.disable && !config.build.ssr) {
-        ctx.lookupSvelteKitPluginPresent()
+        ctx.lookupSvelteKitPlugin()
       }
       else if (!ctx.userOptions.disable && config.build.ssr && ctx.isSvelteKitPluginPresent()) {
         // Vite generates <name>.<hash>.<ext> layout while SvelteKit generates <name>-<hash>.<ext>
