@@ -37,11 +37,23 @@ function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, o
 export function configureSvelteKitOptions(options: Partial<VitePWAOptions>) {
   if (options.strategies === 'injectManifest') {
     options.injectManifest = options.injectManifest ?? {}
+    if (!options.injectManifest.globDirectory)
+      options.injectManifest.globDirectory = '.svelte-kit/output'
+
+    if (!options.injectManifest.modifyURLPrefix)
+      options.injectManifest.modifyURLPrefix = { 'client/': '/', 'prerendered/pages/': '/' }
+
     if (!options.injectManifest.dontCacheBustURLsMatching)
       options.injectManifest.dontCacheBustURLsMatching = /-[a-f0-9]{8}\./
   }
   else {
     options.workbox = options.workbox ?? {}
+    if (!options.workbox.globDirectory)
+      options.workbox.globDirectory = '.svelte-kit/output'
+
+    if (!options.workbox.modifyURLPrefix)
+      options.workbox.modifyURLPrefix = { 'client/': '/', 'prerendered/pages/': '/' }
+
     if (!options.workbox.dontCacheBustURLsMatching)
       options.workbox.dontCacheBustURLsMatching = /-[a-f0-9]{8}\./
   }

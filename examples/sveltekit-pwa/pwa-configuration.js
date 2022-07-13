@@ -55,11 +55,6 @@ const replaceOptions = {
 }
 
 const workboxOrInjectManifestEntry = {
-	modifyURLPrefix: {
-		'client/': '/',
-		'prerendered/pages/': '/'
-	},
-	globDirectory: '.svelte-kit/output',
 	globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
 	// TODO: change this when sequential fixed
 	// globPatterns: ['client/**/.{js,css,ico,png,svg,webmanifest}', 'prerendered/pages/**/*.{html}'],
