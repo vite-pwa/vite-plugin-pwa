@@ -3,7 +3,7 @@ import { injectServiceWorker } from '../html'
 import { _generateBundle, _generateSW } from '../api'
 import type { PWAPluginContext } from '../context'
 
-// SvelteKit Plugin will be removed in SSR build, we need this global to detect the plugin on client build
+// SvelteKit Plugin will not be included in SSR build, we need this global to detect the plugin on client build
 let pwaPluginIsSvelteKitPluginPresent = false
 
 export function BuildPlugin(ctx: PWAPluginContext) {
