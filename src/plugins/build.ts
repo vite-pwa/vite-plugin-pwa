@@ -3,6 +3,9 @@ import { injectServiceWorker } from '../html'
 import { _generateBundle, _generateSW } from '../api'
 import type { PWAPluginContext } from '../context'
 
+// SvelteKit Plugin will be removed in SSR build, we need this global to detect the plugin on client build
+let pwaPluginIsSvelteKitPluginPresent = false
+
 export function BuildPlugin(ctx: PWAPluginContext) {
   return <Plugin>{
     name: 'vite-plugin-pwa:build',
@@ -22,35 +25,20 @@ export function BuildPlugin(ctx: PWAPluginContext) {
         return injectServiceWorker(html, options, false)
       },
     },
-    async writeBundle() {
-      // add support for new SvelteKit Vite Plugin
-      const {
-        options: {
-          disable,
-          svelteKitVitePluginOptions: {
-            prerenderTimeout = 0,
-            disabled = false,
-          },
-        },
-        viteConfig,
-      } = ctx
-
-      const sveltekitPresent = disabled || disable || !viteConfig.build.ssr
-        ? undefined
-        : ctx.viteConfig.plugins.find(p => p.name === 'vite-plugin-svelte-kit')
-
-      if (sveltekitPresent) {
-        if (prerenderTimeout > 0)
-          await new Promise(resolve => setTimeout(resolve, prerenderTimeout))
-
-        await _generateSW(ctx)
-      }
-    },
     generateBundle(_, bundle) {
       return _generateBundle(ctx, bundle)
     },
+    async writeBundle() {
+      // add support for new SvelteKit Vite Plugin
+      if (!ctx.options.disable && !ctx.viteConfig.build.ssr)
+        pwaPluginIsSvelteKitPluginPresent = !!ctx.viteConfig.plugins.find(p => p.name === 'vite-plugin-svelte-kit')
+
+      if (ctx.viteConfig.build.ssr && pwaPluginIsSvelteKitPluginPresent)
+        await _generateSW(ctx)
+    },
     async closeBundle() {
-      if (!ctx.viteConfig.build.ssr && !ctx.options.disable)
+      // we don't build the sw in the client build when SvelteKit plugin present
+      if (!ctx.options.disable && !ctx.viteConfig.build.ssr && !pwaPluginIsSvelteKitPluginPresent)
         await _generateSW(ctx)
     },
     async buildEnd(error) {

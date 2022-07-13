@@ -11,28 +11,6 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
   vitePlugins?: InjectManifestVitePlugins
 }
 
-export interface SvelteKitVitePluginOptions {
-  /**
-   * Timeout in miliseconds after SvelteKit prerender finish.
-   *
-   * When using prerender, SvelteKit Plugin will call `process.exit(0)`, configure a default timeout to allow the prerender to flush the result to disk.
-   *
-   * If not configured, the PWA Plugin will generate the PWA stuff without sleep, the result can be weird (empty service worker precache manifest).
-   *
-   * [Check this issue for more info](https://github.com/sveltejs/kit/issues/5306)
-   */
-  prerenderTimeout?: number
-
-  /**
-   * Use this option when you need to use a script after SvelteKit build.
-   *
-   * Check the `sveltekit-pwa` in the examples folder.
-   *
-   * @default false
-   */
-  disabled?: boolean
-}
-
 /**
  * Plugin options.
  */
@@ -159,11 +137,6 @@ export interface VitePWAOptions {
    * @default false
    */
   selfDestroying?: boolean
-
-  /**
-   * SvelteKit Vite Plugin Options.
-   */
-  svelteKitVitePluginOptions?: SvelteKitVitePluginOptions
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {

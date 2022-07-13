@@ -1,6 +1,6 @@
 const pwaConfiguration = {
-	srcDir: './build',
-	outDir: './build',
+	srcDir: './src',
+	outDir: './.svelte-kit/output/client',
 	mode: 'development',
 	includeManifestIcons: false,
 	scope: '/',
@@ -52,31 +52,31 @@ const replaceOptions = {
 }
 
 const workboxOrInjectManifestEntry = {
-	// vite and SvelteKit are not aligned: pwa plugin will use /\.[a-f0-9]{8}\./ by default: #164 optimize workbox work
+	// Vite and SvelteKit are not aligned: pwa plugin will use /\.[a-f0-9]{8}\./ by default: #164 optimize workbox work
 	dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
-	globDirectory: './build/',
+	modifyURLPrefix: {
+		'client/': '/',
+		'prerendered/pages/': '/'
+	},
+	globDirectory: '.svelte-kit/output',
 	globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
+	// TODO: change this when sequential fixed
+	// globPatterns: ['client/*.{js,css,ico,png,svg,webmanifest}', 'prerendered/pages/**/*.{html}'],
 	globIgnores: sw ? (claims ? ['**/claims-sw*'] : ['**/prompt-sw*']) : ['**/sw*', '**/workbox-*'],
 	// Before generating the service worker, manifestTransforms entry will allow us to transform the resulting precache manifest. See the manifestTransforms docs for mode details.
 	manifestTransforms: [async(entries) => {
-		// manifest.webmanifest is added always by pwa plugin, so we remove it.
-		// EXCLUDE from the sw precache sw and workbox-*
+		// TODO: remove filter when sequential fixed
 		const manifest = entries.filter(({ url }) =>
-			!url.endsWith('sw.js') && !url.startsWith('workbox-')
+			!url.endsWith('sw.js') && !url.startsWith('workbox-') && !url.startsWith('server/') && url !== 'manifest.webmanifest'
 		).map((e) => {
 			let url = e.url
-			if (!url)
-				return e
-
+			console.log(url)
 			if (url.endsWith('.html')) {
 				if (url.startsWith('/'))
 					url = url.slice(1)
 
-				e.url = url === 'index.html' ? '/' : `/${url.substring(0, url.lastIndexOf('.'))}`
+				e.url = url === 'index.html' ? '/' : `/${url.slice(0, url.lastIndexOf('.'))}`
 				console.log(`${url} => ${e.url}`)
-			}
-			else if (url === '_app/immutable/manifest.webmanifest') {
-				e.url = '_app/manifest.webmanifest'
 			}
 
 			return e
@@ -95,6 +95,11 @@ if (sw) {
 } else {
 	workboxOrInjectManifestEntry.mode = 'development'
 	workboxOrInjectManifestEntry.navigateFallback = '/'
+	// In dev, we only need to intercept the entry point.
+	// If not using following regex in allowlist, /about route will not work, since the sw will return / content.
+	workboxOrInjectManifestEntry.workbox = {
+		navigateFallbackAllowlist: [/^\/$/]
+	}
 	pwaConfiguration.workbox = workboxOrInjectManifestEntry
 }
 
