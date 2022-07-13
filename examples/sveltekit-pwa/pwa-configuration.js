@@ -1,8 +1,10 @@
+const mode = process.env.SOURCE_MAP === 'true' ? 'development': undefined
+
 /** @type {import('vite-plugin-pwa').VitePWAOptions} */
 const pwaConfiguration = {
 	srcDir: './src',
 	outDir: './.svelte-kit/output/client',
-	mode: 'development',
+	mode,
 	includeManifestIcons: false,
 	scope: '/',
 	base: '/',
@@ -94,7 +96,7 @@ if (sw) {
 	pwaConfiguration.manifest.short_name = 'PWA Inject'
 	pwaConfiguration.injectManifest = workboxOrInjectManifestEntry
 } else {
-	workboxOrInjectManifestEntry.mode = 'development'
+	workboxOrInjectManifestEntry.mode = mode
 	workboxOrInjectManifestEntry.navigateFallback = '/'
 	if (process.env.SW_DEV === 'true') {
 		// In dev, we only need to intercept the entry point.

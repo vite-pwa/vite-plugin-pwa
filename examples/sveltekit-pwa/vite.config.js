@@ -5,13 +5,13 @@ import replace from '@rollup/plugin-replace'
 
 /** @type {import('vite').UserConfig} */
 const config = {
-  logLevel: 'info',
+  logLevel: pwaConfiguration.mode === 'development' ? 'info' : undefined,
   build: {
-    minify: false,
+    minify: pwaConfiguration.mode === 'development' ? false : undefined,
   },
   plugins: [
     sveltekit(),
-    VitePWA({ pwaConfiguration }),
+    VitePWA(pwaConfiguration),
     replace(replaceOptions)
   ],
 };
