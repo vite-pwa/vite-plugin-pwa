@@ -64,7 +64,7 @@ const workboxOrInjectManifestEntry = {
 	globDirectory: '.svelte-kit/output',
 	globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
 	// TODO: change this when sequential fixed
-	// globPatterns: ['client/*.{js,css,ico,png,svg,webmanifest}', 'prerendered/pages/**/*.{html}'],
+	// globPatterns: ['client/**/.{js,css,ico,png,svg,webmanifest}', 'prerendered/pages/**/*.{html}'],
 	globIgnores: sw ? (claims ? ['**/claims-sw*'] : ['**/prompt-sw*']) : ['**/sw*', '**/workbox-*'],
 	// Before generating the service worker, manifestTransforms entry will allow us to transform the resulting precache manifest. See the manifestTransforms docs for mode details.
 	manifestTransforms: [async(entries) => {
