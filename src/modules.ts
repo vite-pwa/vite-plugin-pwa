@@ -17,7 +17,8 @@ async function loadWorkboxBuild() {
   // Since it is not always used, load this when it is needed.
 
   try {
-    return await import('workbox-build')
+    const workbox = await import('workbox-build')
+    return workbox.default ?? workbox
   }
   catch (_) {
     return require('workbox-build')
