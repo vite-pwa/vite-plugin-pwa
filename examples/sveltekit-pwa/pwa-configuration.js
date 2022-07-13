@@ -55,10 +55,6 @@ const replaceOptions = {
 }
 
 const workboxOrInjectManifestEntry = {
-	// Vite generates <name>.<hash>.<ext> layout while SvelteKit generates <name>-<hash>.<ext>
-	// Vite and SvelteKit are not aligned: pwa plugin will use /\.[a-f0-9]{8}\./ by default: #164 optimize workbox work
-	// All assets will go to the immutable folder, and so, there is no need to calculate its revision for the sw's precache manifest
-	dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
 	modifyURLPrefix: {
 		'client/': '/',
 		'prerendered/pages/': '/'
@@ -75,7 +71,7 @@ const workboxOrInjectManifestEntry = {
 			!url.endsWith('sw.js') && !url.startsWith('workbox-') && !url.startsWith('server/') && url !== 'manifest.webmanifest'
 		).map((e) => {
 			let url = e.url
-			console.log(url)
+			console.log(e)
 			if (url.endsWith('.html')) {
 				if (url.startsWith('/'))
 					url = url.slice(1)
