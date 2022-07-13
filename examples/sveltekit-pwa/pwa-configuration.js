@@ -1,3 +1,4 @@
+/** @type {import('vite-plugin-pwa').VitePWAOptions} */
 const pwaConfiguration = {
 	srcDir: './src',
 	outDir: './.svelte-kit/output/client',
