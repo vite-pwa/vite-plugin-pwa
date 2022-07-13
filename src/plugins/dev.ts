@@ -115,8 +115,6 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
             // the sw precache (self.__SW_MANIFEST) will be empty since we're using `dev-dist` folder
             // we only need to add the navigateFallback if configured
             const navigateFallback = options.workbox.navigateFallback
-            // we need to exclude the manifest.webmanifest from the sw precache: avoid writing it to the dev-dist folder
-            const webManifestUrl = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
             const { filePaths } = await generateServiceWorker(
               Object.assign(
                 {},
@@ -125,7 +123,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
                   swDest: options.selfDestroying ? swDest : options.swDest,
                   workbox: {
                     ...options.workbox,
-                    navigateFallbackDenylist: [new RegExp(`^${webManifestUrl}$`)],
+                    navigateFallbackAllowlist: options.devOptions.navigateFallbackAllowlist ?? [/^\/$/],
                     runtimeCaching: options.devOptions.disableRuntimeConfig ? undefined : options.workbox.runtimeCaching,
                     // we only include navigateFallback
                     additionalManifestEntries: navigateFallback ? [navigateFallback] : undefined,
