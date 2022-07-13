@@ -96,10 +96,12 @@ if (sw) {
 } else {
 	workboxOrInjectManifestEntry.mode = 'development'
 	workboxOrInjectManifestEntry.navigateFallback = '/'
-	// In dev, we only need to intercept the entry point.
-	// If not using following regex in allowlist, /about route will not work, since the sw will return / content.
-	workboxOrInjectManifestEntry.workbox = {
-		navigateFallbackAllowlist: [/^\/$/]
+	if (process.env.SW_DEV === 'true') {
+		// In dev, we only need to intercept the entry point.
+		// If not using following regex in allowlist, /about route will not work, since the sw will return / content.
+		workboxOrInjectManifestEntry.workbox = {
+			navigateFallbackAllowlist: [/^\/$/]
+		}
 	}
 	pwaConfiguration.workbox = workboxOrInjectManifestEntry
 }
