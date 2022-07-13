@@ -12,6 +12,7 @@ declare module '@vue/runtime-core' {
     GenerateSWCleanupOutdatedCaches: typeof import('./theme/components/GenerateSWCleanupOutdatedCaches.md')['default']
     GenerateSWSourceMap: typeof import('./theme/components/GenerateSWSourceMap.md')['default']
     HeuristicWorkboxWindow: typeof import('./theme/components/HeuristicWorkboxWindow.md')['default']
+    HomePage: typeof import('./theme/components/HomePage.vue')['default']
     InjectManifestCleanupOutdatedCaches: typeof import('./theme/components/InjectManifestCleanupOutdatedCaches.md')['default']
     InjectManifestSourceMap: typeof import('./theme/components/InjectManifestSourceMap.md')['default']
     PromptForUpdateImg: typeof import('./theme/components/PromptForUpdateImg.vue')['default']

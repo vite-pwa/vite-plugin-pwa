@@ -18,8 +18,8 @@ export async function _generateSW({ options, viteConfig }: PWAPluginContext) {
     await generateServiceWorker(options, viteConfig)
 }
 
-export function _generateBundle({ options, viteConfig, useImportRegister }: PWAPluginContext, bundle: OutputBundle) {
-  if (options.disable)
+export function _generateBundle({ options, viteConfig, useImportRegister }: PWAPluginContext, bundle?: OutputBundle) {
+  if (options.disable || !bundle)
     return
 
   if (options.manifest) {
@@ -54,7 +54,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       return ctx?.options?.disable
     },
     generateBundle(bundle) {
-      return _generateBundle(ctx, bundle!)
+      return _generateBundle(ctx, bundle)
     },
     async generateSW() {
       return await _generateSW(ctx)

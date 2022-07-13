@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import Components from 'unplugin-vue-components/vite'
-import { presetUno } from 'unocss'
+import { presetAttributify, presetUno } from 'unocss'
 import Unocss from 'unocss/vite'
 import { VitePWA } from '../dist'
 import NavbarFix from './plugins/navbar'
@@ -42,7 +42,7 @@ export default defineConfig({
 
     // https://github.com/unocss/unocss
     Unocss({
-      presets: [presetUno()],
+      presets: [presetUno(), presetAttributify()],
     }),
 
     // https://github.com/antfu/vite-plugin-pwa
@@ -100,6 +100,20 @@ export default defineConfig({
               expiration: {
                 maxEntries: 10,
                 maxAgeSeconds: 60 * 60 * 24 * 365, // <== 365 days
+              },
+              cacheableResponse: {
+                statuses: [0, 200],
+              },
+            },
+          },
+          {
+            urlPattern: /^https:\/\/cdn\.jsdelivr\.net\/.*/i,
+            handler: 'NetworkFirst',
+            options: {
+              cacheName: 'jsdelivr-images-cache',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 * 7, // <== 7 days
               },
               cacheableResponse: {
                 statuses: [0, 200],
