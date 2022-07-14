@@ -5,7 +5,9 @@ import { generateSimpleSWRegister, injectServiceWorker } from '../html'
 import { generateWebManifestFile } from '../assets'
 import {
   DEV_SW_NAME,
-  FILE_SW_REGISTER, VIRTUAL_MODULES_RESOLVE_PREFIX,
+  FILE_SW_REGISTER,
+  VIRTUAL_MODULES_RESOLVE_PREFIX,
+  VITE_PWA_PLUGIN_NAMES,
 } from '../constants'
 import type { ResolvedVitePWAOptions } from '../types'
 import { generateServiceWorker } from '../modules'
@@ -24,7 +26,7 @@ export const swDevOptions = {
 
 export function DevPlugin(ctx: PWAPluginContext): Plugin {
   return <Plugin>{
-    name: 'vite-plugin-pwa:dev-sw',
+    name: VITE_PWA_PLUGIN_NAMES.dev,
     apply: 'serve',
     transformIndexHtml: {
       enforce: 'post',

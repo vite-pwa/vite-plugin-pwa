@@ -1,5 +1,10 @@
 import type { Plugin } from 'vite'
-import { VIRTUAL_MODULES, VIRTUAL_MODULES_MAP, VIRTUAL_MODULES_RESOLVE_PREFIX } from '../constants'
+import {
+  VIRTUAL_MODULES,
+  VIRTUAL_MODULES_MAP,
+  VIRTUAL_MODULES_RESOLVE_PREFIX,
+  VITE_PWA_PLUGIN_NAMES,
+} from '../constants'
 import { generateRegisterSW } from '../modules'
 import { configureSvelteKitOptions, resolveOptions } from '../options'
 import { createAPI } from '../api'
@@ -8,17 +13,14 @@ import { swDevOptions } from './dev'
 
 export function MainPlugin(ctx: PWAPluginContext): Plugin {
   return {
-    name: 'vite-plugin-pwa',
+    name: VITE_PWA_PLUGIN_NAMES.main,
     enforce: 'pre',
     async configResolved(config) {
       ctx.useImportRegister = false
       ctx.viteConfig = config
       // add support for new SvelteKit Vite Plugin.
-      // SvelteKit Plugin will not be included in SSR build,
-      // we need this global to detect the plugin on client build.
-      if (!ctx.userOptions.disable && !config.build.ssr)
-        ctx.lookupSvelteKitPlugin()
-      else if (!ctx.userOptions.disable && config.build.ssr && ctx.isSvelteKitPluginPresent())
+      // we need to detect the sveltekit plugin on client build
+      if (!ctx.userOptions.disable && !ctx.viteConfig.build.ssr && ctx.lookupSvelteKitPlugin())
         configureSvelteKitOptions(ctx.userOptions)
 
       ctx.options = await resolveOptions(ctx.userOptions, config)

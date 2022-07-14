@@ -2,10 +2,11 @@ import type { Plugin } from 'vite'
 import { injectServiceWorker } from '../html'
 import { _generateBundle, _generateSW } from '../api'
 import type { PWAPluginContext } from '../context'
+import { VITE_PWA_PLUGIN_NAMES } from '../constants'
 
 export function BuildPlugin(ctx: PWAPluginContext) {
   return <Plugin>{
-    name: 'vite-plugin-pwa:build',
+    name: VITE_PWA_PLUGIN_NAMES.build,
     enforce: 'post',
     apply: 'build',
     transformIndexHtml: {
@@ -25,13 +26,8 @@ export function BuildPlugin(ctx: PWAPluginContext) {
     generateBundle(_, bundle) {
       return _generateBundle(ctx, bundle)
     },
-    async writeBundle() {
-      if (!ctx.options.disable && ctx.viteConfig.build.ssr && ctx.isSvelteKitPluginPresent())
-        await _generateSW(ctx)
-    },
     async closeBundle() {
-      // we don't build the sw in the client build when SvelteKit plugin present
-      if (!ctx.options.disable && !ctx.viteConfig.build.ssr && !ctx.isSvelteKitPluginPresent())
+      if (!ctx.options.disable && !ctx.viteConfig.build.ssr)
         await _generateSW(ctx)
     },
     async buildEnd(error) {

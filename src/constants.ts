@@ -24,4 +24,10 @@ export const defaultInjectManifestVitePlugins = [
 ]
 
 export const DEV_SW_NAME = 'dev-sw.js?dev-sw'
+export const VITE_PWA_PLUGIN_NAMES = {
+  build: 'vite-plugin-pwa:build',
+  dev: 'vite-plugin-pwa:dev-sw',
+  main: 'vite-plugin-pwa',
+}
+export const VITE_PLUGIN_SVELTE_KIT_NAME = 'vite-plugin-svelte-kit'
 

@@ -8,6 +8,7 @@ const pwaConfiguration = {
 	includeManifestIcons: false,
 	scope: '/',
 	base: '/',
+	// manifestFilename: '/_app/manifest.webmanifest',
 	manifest: {
 		short_name: "PWA Router",
 		name: "PWA Router",
@@ -40,7 +41,6 @@ const pwaConfiguration = {
 		/* when using generateSW the PWA plugin will switch to classic */
 		type: 'module',
 		navigateFallback: '/',
-		webManifestUrl: '/_app/manifest.webmanifest'
 	},
 }
 
@@ -55,16 +55,11 @@ const replaceOptions = {
 }
 
 const workboxOrInjectManifestEntry = {
-	globPatterns: ['**/*.{js,css,html,ico,png,svg,webmanifest}'],
-	// TODO: change this when sequential fixed
-	// globPatterns: ['client/**/.{js,css,ico,png,svg,webmanifest}', 'prerendered/pages/**/*.{html}'],
-	globIgnores: sw ? (claims ? ['**/claims-sw*'] : ['**/prompt-sw*']) : ['**/sw*', '**/workbox-*'],
+	globPatterns: ['client/**/*.{js,css,ico,png,svg,webmanifest}', 'prerendered/pages/**/*.html'],
 	// Before generating the service worker, manifestTransforms entry will allow us to transform the resulting precache manifest. See the manifestTransforms docs for mode details.
 	manifestTransforms: [async(entries) => {
 		// TODO: remove filter when sequential fixed
-		const manifest = entries.filter(({ url }) =>
-			!url.endsWith('sw.js') && !url.startsWith('workbox-') && !url.startsWith('server/') && url !== 'manifest.webmanifest'
-		).map((e) => {
+		const manifest = entries.map((e) => {
 			let url = e.url
 			console.log(e)
 			if (url.endsWith('.html')) {
