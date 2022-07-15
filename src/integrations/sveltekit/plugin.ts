@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite'
-import { VITE_PLUGIN_SVELTE_KIT_NAME, VITE_PWA_PLUGIN_NAMES } from '../constants'
-import type { PWAPluginContext } from '../context'
+import { VITE_PLUGIN_SVELTE_KIT_NAME, VITE_PWA_PLUGIN_NAMES } from '../../constants'
+import type { PWAPluginContext } from '../../context'
 
 export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
   let activeWriteBundle = false
@@ -42,6 +42,7 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
     }
     plugins.push(plugin)
   }
+
   return {
     name: 'vite-plugin-pwa:svelte-kit-adapter',
     enforce: 'post',

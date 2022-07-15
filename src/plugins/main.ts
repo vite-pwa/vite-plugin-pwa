@@ -6,9 +6,10 @@ import {
   VITE_PWA_PLUGIN_NAMES,
 } from '../constants'
 import { generateRegisterSW } from '../modules'
-import { configureSvelteKitOptions, resolveOptions } from '../options'
+import { resolveOptions } from '../options'
 import { createAPI } from '../api'
 import type { PWAPluginContext } from '../context'
+import { configureSvelteKitOptions } from '../integrations/sveltekit/config'
 import { swDevOptions } from './dev'
 
 export function MainPlugin(ctx: PWAPluginContext): Plugin {
@@ -28,7 +29,7 @@ export function MainPlugin(ctx: PWAPluginContext): Plugin {
       ctx.viteConfig = config
       // add support for new SvelteKit Vite Plugin.
       // we need to detect the sveltekit plugin on client build
-      if (!ctx.userOptions.disable && !ctx.viteConfig.build.ssr && ctx.lookupSvelteKitPlugin())
+      if (!ctx.userOptions.disable && !ctx.viteConfig.build.ssr && ctx.hasSvelteKitPlugin())
         configureSvelteKitOptions(ctx.userOptions)
 
       ctx.options = await resolveOptions(ctx.userOptions, config)
