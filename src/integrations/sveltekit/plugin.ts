@@ -42,7 +42,6 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
     }
     plugins.push(plugin)
   }
-
   return {
     name: 'vite-plugin-pwa:svelte-kit-adapter',
     enforce: 'post',
