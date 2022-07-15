@@ -2,8 +2,6 @@ const mode = process.env.SOURCE_MAP === 'true' ? 'development': undefined
 
 /** @type {import('vite-plugin-pwa').VitePWAOptions} */
 const pwaConfiguration = {
-	srcDir: './src',
-	outDir: './.svelte-kit/output/client',
 	mode,
 	includeManifestIcons: false,
 	scope: '/',
@@ -54,10 +52,9 @@ const replaceOptions = {
 	__SW_DEV__: process.env.SW_DEV === 'true' ? 'true' : 'false',
 }
 
-const workboxOrInjectManifestEntry = {
+const svelteKitVitePluginOptions = {
 	// if you don't have the fallback in the adapter use this globPatterns
-	globPatterns: ['client/**/*.{js,css,ico,png,svg,webmanifest}', 'prerendered/pages/**/*.html'],
-	globIgnores: ['manifest.webmanifest'],
+	globClientPatterns: ['client/**/*.{js,css,ico,png,svg}', 'prerendered/**/*.html'],
 }
 
 if (sw) {
@@ -66,11 +63,9 @@ if (sw) {
 	pwaConfiguration.strategies = 'injectManifest'
 	pwaConfiguration.manifest.name = 'PWA Inject Manifest'
 	pwaConfiguration.manifest.short_name = 'PWA Inject'
-	pwaConfiguration.injectManifest = workboxOrInjectManifestEntry
+	pwaConfiguration.svelteKitVitePluginOptions = svelteKitVitePluginOptions
 } else {
-	workboxOrInjectManifestEntry.mode = mode
-	workboxOrInjectManifestEntry.navigateFallback = '/'
-	pwaConfiguration.workbox = workboxOrInjectManifestEntry
+	pwaConfiguration.svelteKitVitePluginOptions = svelteKitVitePluginOptions
 }
 
 if (claims)

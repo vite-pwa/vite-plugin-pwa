@@ -30,6 +30,13 @@ export interface SvelteKitVitePluginOptions {
    * @see https://kit.svelte.dev/docs/configuration#trailingslash
    * */
   trailingSlash?: 'never' | 'always' | 'ignore'
+
+  /**
+   * `globPatterns` for client folder.
+   *
+   * @default ["client/**\/*.{js,css,ico,png,svg}"]
+   */
+  globClientPatterns?: string[]
 }
 
 /**

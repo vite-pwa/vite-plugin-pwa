@@ -10,6 +10,7 @@
     "build": "vite build",
     "package": "svelte-kit package",
     "preview": "vite preview",
+    "https": "serve build",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "eslint --ignore-path .gitignore .",
