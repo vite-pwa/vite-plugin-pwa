@@ -26,7 +26,7 @@ export const swDevOptions = {
 
 export function DevPlugin(ctx: PWAPluginContext): Plugin {
   return <Plugin>{
-    name: VITE_PWA_PLUGIN_NAMES.dev,
+    name: VITE_PWA_PLUGIN_NAMES.DEV,
     apply: 'serve',
     transformIndexHtml: {
       enforce: 'post',

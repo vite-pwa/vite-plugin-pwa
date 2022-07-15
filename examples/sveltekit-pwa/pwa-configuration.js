@@ -55,25 +55,9 @@ const replaceOptions = {
 }
 
 const workboxOrInjectManifestEntry = {
+	// if you don't have the fallback in the adapter use this globPatterns
 	globPatterns: ['client/**/*.{js,css,ico,png,svg,webmanifest}', 'prerendered/pages/**/*.html'],
-	// Before generating the service worker, manifestTransforms entry will allow us to transform the resulting precache manifest. See the manifestTransforms docs for mode details.
-	manifestTransforms: [async(entries) => {
-		// TODO: remove filter when sequential fixed
-		const manifest = entries.map((e) => {
-			let url = e.url
-			console.log(e)
-			if (url.endsWith('.html')) {
-				if (url.startsWith('/'))
-					url = url.slice(1)
-
-				e.url = url === 'index.html' ? '/' : `/${url.slice(0, url.lastIndexOf('.'))}`
-				console.log(`${url} => ${e.url}`)
-			}
-
-			return e
-		})
-		return { manifest }
-	}]
+	globIgnores: ['manifest.webmanifest'],
 }
 
 if (sw) {

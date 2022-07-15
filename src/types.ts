@@ -11,6 +11,27 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
   vitePlugins?: InjectManifestVitePlugins
 }
 
+export interface SvelteKitVitePluginOptions {
+  /**
+   * The base path for your application: by default will use the Vite base.
+   *
+   * @default '/'
+   * @see https://kit.svelte.dev/docs/configuration#paths
+   * */
+  base?: string
+
+  /**
+   * @see https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback
+   */
+  adapterFallback?: string
+
+  /**
+   * @default 'never'
+   * @see https://kit.svelte.dev/docs/configuration#trailingslash
+   * */
+  trailingSlash?: 'never' | 'always' | 'ignore'
+}
+
 /**
  * Plugin options.
  */
@@ -137,6 +158,11 @@ export interface VitePWAOptions {
    * @default false
    */
   selfDestroying?: boolean
+
+  /**
+   * SvelteKit Vite Plugin Options.
+   */
+  svelteKitVitePluginOptions?: SvelteKitVitePluginOptions
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {

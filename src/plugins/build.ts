@@ -6,7 +6,7 @@ import { VITE_PWA_PLUGIN_NAMES } from '../constants'
 
 export function BuildPlugin(ctx: PWAPluginContext) {
   return <Plugin>{
-    name: VITE_PWA_PLUGIN_NAMES.build,
+    name: VITE_PWA_PLUGIN_NAMES.BUILD,
     enforce: 'post',
     apply: 'build',
     transformIndexHtml: {

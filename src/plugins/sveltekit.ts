@@ -3,13 +3,13 @@ import { VITE_PLUGIN_SVELTE_KIT_NAME, VITE_PWA_PLUGIN_NAMES } from '../constants
 import type { PWAPluginContext } from '../context'
 
 export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
-  let activeWriteBundle = false
-  let activeCloseBundle = false
+  let activateWriteBundle = false
+  let activateCloseBundle = false
 
   const plugins: Plugin[] = []
 
   const pluginNames: string[] = [
-    VITE_PWA_PLUGIN_NAMES.build,
+    VITE_PWA_PLUGIN_NAMES.BUILD,
     VITE_PLUGIN_SVELTE_KIT_NAME,
   ]
 
@@ -23,9 +23,9 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
 
     if (_writeBundle) {
       plugin.writeBundle = async (...args) => {
-        if (activeWriteBundle || !ctx.viteConfig.build.ssr) {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
+        // since we are replacing the writeBundle for client build, on SSR just ignore the activation
+        if (activateWriteBundle || !ctx.viteConfig.build.ssr) {
+          // @ts-expect-error ignore the type annotation about any
           await _writeBundle.apply(this, args)
         }
       }
@@ -33,9 +33,9 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
 
     if (_closeBundle) {
       plugin.closeBundle = async () => {
-        if (activeCloseBundle || !ctx.viteConfig.build.ssr) {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-expect-error
+        // since we are replacing the writeBundle for client build, on SSR just ignore the activation
+        if (activateCloseBundle || !ctx.viteConfig.build.ssr) {
+          // @ts-expect-error ignore the type annotation about any
           await _closeBundle.apply(this)
         }
       }
@@ -46,31 +46,32 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
     name: 'vite-plugin-pwa:svelte-kit-adapter',
     enforce: 'post',
     apply: (config, env) => {
+      // this plugin will only work on client build
       return env.command === 'build'
     },
     config(config) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
+      // @ts-expect-error I know what I'm doing
       config.plugins?.flat(Infinity).forEach(changeToSequentialPlugin)
     },
     async writeBundle(options, bundle) {
-      if (ctx.viteConfig.build.ssr || ctx.viteConfig.command === 'serve')
+      // this plugin will only work on client build
+      if (ctx.viteConfig.build.ssr)
         return
 
       const svelteKitPlugin = plugins.find(p => VITE_PLUGIN_SVELTE_KIT_NAME === p.name)
-      const pwaPlugin = plugins.find(p => VITE_PWA_PLUGIN_NAMES.build === p.name)!
+      const pwaPlugin = plugins.find(p => VITE_PWA_PLUGIN_NAMES.BUILD === p.name)!
 
-      // give sometime to finish writeBundle hooks: dummy calls since it is not yet activated
+      // give some time to finish writeBundle hooks: dummy calls since it is not yet activated
       await new Promise(resolve => setTimeout(resolve, 1000))
-      activeWriteBundle = true
+      activateWriteBundle = true
       // @ts-expect-error I know what I'm doing
       await svelteKitPlugin?.writeBundle.apply(this, [options, bundle])
       // activate the closeBundle hooks
-      activeCloseBundle = true
+      activateCloseBundle = true
       // @ts-expect-error I know what I'm doing
       await pwaPlugin.closeBundle.apply(this, [options, bundle])
       // @ts-expect-error I know what I'm doing
-      await svelteKitPlugin.closeBundle.apply(this, [options, bundle])
+      await svelteKitPlugin?.closeBundle.apply(this, [options, bundle])
     },
   }
 }

@@ -13,7 +13,7 @@ import { swDevOptions } from './dev'
 
 export function MainPlugin(ctx: PWAPluginContext): Plugin {
   return {
-    name: VITE_PWA_PLUGIN_NAMES.main,
+    name: VITE_PWA_PLUGIN_NAMES.MAIN,
     enforce: 'pre',
     async configResolved(config) {
       ctx.useImportRegister = false
@@ -21,7 +21,7 @@ export function MainPlugin(ctx: PWAPluginContext): Plugin {
       // add support for new SvelteKit Vite Plugin.
       // we need to detect the sveltekit plugin on client build
       if (!ctx.userOptions.disable && !ctx.viteConfig.build.ssr && ctx.lookupSvelteKitPlugin())
-        configureSvelteKitOptions(ctx.userOptions)
+        configureSvelteKitOptions(ctx.viteConfig, ctx.userOptions)
 
       ctx.options = await resolveOptions(ctx.userOptions, config)
     },
