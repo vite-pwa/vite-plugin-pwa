@@ -2,15 +2,12 @@ import type { ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { VITE_PLUGIN_SVELTE_KIT_NAME } from './constants'
 
-let pwaPluginIsSvelteKitPluginPresent = false
-
 export interface PWAPluginContext {
   viteConfig: ResolvedConfig
   userOptions: Partial<VitePWAOptions>
   options: ResolvedVitePWAOptions
   useImportRegister: boolean
-  isSvelteKitPluginPresent: () => boolean
-  lookupSvelteKitPlugin: () => boolean
+  hasSvelteKitPlugin: () => boolean
 }
 
 export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginContext {
@@ -19,12 +16,8 @@ export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginCo
     options: undefined!,
     viteConfig: undefined!,
     useImportRegister: false,
-    isSvelteKitPluginPresent() {
-      return pwaPluginIsSvelteKitPluginPresent
-    },
-    lookupSvelteKitPlugin() {
-      pwaPluginIsSvelteKitPluginPresent = !!this.viteConfig.plugins.find(p => p.name === VITE_PLUGIN_SVELTE_KIT_NAME)
-      return pwaPluginIsSvelteKitPluginPresent
+    hasSvelteKitPlugin() {
+      return Boolean(this.viteConfig.plugins.find(p => p.name === VITE_PLUGIN_SVELTE_KIT_NAME))
     },
   }
 }

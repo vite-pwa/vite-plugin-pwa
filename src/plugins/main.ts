@@ -1,4 +1,4 @@
-import type { Plugin } from 'vite'
+import type { Plugin, UserConfig } from 'vite'
 import {
   VIRTUAL_MODULES,
   VIRTUAL_MODULES_MAP,
@@ -6,21 +6,30 @@ import {
   VITE_PWA_PLUGIN_NAMES,
 } from '../constants'
 import { generateRegisterSW } from '../modules'
-import { configureSvelteKitOptions, resolveOptions } from '../options'
+import { resolveOptions } from '../options'
 import { createAPI } from '../api'
 import type { PWAPluginContext } from '../context'
+import { configureSvelteKitOptions } from '../integrations/sveltekit/config'
 import { swDevOptions } from './dev'
 
 export function MainPlugin(ctx: PWAPluginContext): Plugin {
   return {
     name: VITE_PWA_PLUGIN_NAMES.MAIN,
     enforce: 'pre',
+    config() {
+      return <UserConfig>{
+        ssr: {
+          // TODO: remove until workbox-window support native ESM
+          noExternal: ['workbox-window'],
+        },
+      }
+    },
     async configResolved(config) {
       ctx.useImportRegister = false
       ctx.viteConfig = config
       // add support for new SvelteKit Vite Plugin.
       // we need to detect the sveltekit plugin on client build
-      if (!ctx.userOptions.disable && !ctx.viteConfig.build.ssr && ctx.lookupSvelteKitPlugin())
+      if (!ctx.userOptions.disable && !ctx.viteConfig.build.ssr && ctx.hasSvelteKitPlugin())
         configureSvelteKitOptions(ctx.viteConfig, ctx.userOptions)
 
       ctx.options = await resolveOptions(ctx.userOptions, config)
