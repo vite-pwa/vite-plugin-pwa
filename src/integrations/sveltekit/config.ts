@@ -55,7 +55,6 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
 function createManifestTransform(base: string, options?: SvelteKitVitePluginOptions): ManifestTransform {
   const suffix = options?.trailingSlash === 'always' ? '/' : ''
   return async (entries) => {
-    console.log(entries.map(e => e.url))
     const manifest = entries.map((e) => {
       let url = e.url
       if (url.startsWith('client/'))
