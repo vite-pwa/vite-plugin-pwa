@@ -9,6 +9,12 @@ next: Getting Started | Frameworks
 
 <TypeScriptError2307 />
 
+## Type declarations
+
+You can find the full list of the `vite-plugin-pwa` plugin configuration options in the following [types.ts module](https://github.com/antfu/vite-plugin-pwa/blob/main/src/types.ts).
+
+You can find all the `vite-plugin-pwa` virtual modules declarations in the following [client.d.ts](https://github.com/antfu/vite-plugin-pwa/blob/main/client.d.ts).
+
 ## Web app manifest and 401 status code (Unauthorized)
 
 [Browsers send requests for the web manifest without credentials](https://web.dev/add-manifest/#link-manifest), so if your site sits behind auth, the request will fail with a 401 Unauthorized error – even if the user is logged in.
