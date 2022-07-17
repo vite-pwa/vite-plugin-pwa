@@ -10,7 +10,7 @@ A service worker strategy is related to how the `vite-plugin-pwa` plugin will ge
 
 As we mention in [Configuring vite-plugin-pwa](/guide/#configuring-vite-plugin-pwa) section, `vite-plugin-pwa` plugin will use `workbox-build` node library to generate your service worker. There are 2 available strategies, `generateSW` and `injectManifest`:
 - `generateSW`: the `vite-plugin-pwa` will generate the service worker for you, you don't need to write the code for the service worker
-- `injectManifest`: the `vite-plugin-pwa` plugin will compile your custom service worker and inject its service worker's precache manifest
+- `injectManifest`: the `vite-plugin-pwa` plugin will compile your custom service worker and inject its precache manifest
 
 To configure the service worker strategy, use the `strategies`' plugin option with `generateSW` (**default strategy**) or `injectManifest` value.
 
@@ -22,7 +22,7 @@ The behavior of the service worker will help you to update the application in th
 
 You may want to not bother users and just have the browser update the application when there is a new version: the user will only see a reload of the page they are on.
 
-Or you may want to inform the user that there is a new version of the application, and let the user decide when to update it: simply because you want it to behave that way or because your application requires it (for example, to avoid data loss if the user is filling out a form).
+Or you may want to inform the user that there is a new version of the application, and let the user decide when to update it: simply because you want it to behave that way or because your application requires it (for example, to prevent data loss if the user is filling out a form).
 
 To configure the service worker behavior, use the `registerType` plugin option with `autoUpdate` or `prompt` (**default strategy**) value.
 
