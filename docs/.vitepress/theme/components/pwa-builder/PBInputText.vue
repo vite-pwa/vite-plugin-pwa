@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useState } from '../../composables/useState'
+import PBRequiredField from './PBRequiredField.vue'
 
 const props = defineProps<{
   id: string
@@ -34,12 +35,17 @@ const errorClass = computed(() => {
 
 <template>
   <label pb-input>
+
     <span
       fw-500
       text-lg
       block
       :class="error ? 'text-$vp-custom-block-danger-text' : undefined"
-    >{{ title }}</span>
+    >
+      <PBRequiredField :optional="noValidate === true">
+        {{ title }}
+      </PBRequiredField>
+    </span>
     <input
       :id="id"
       ref="input"

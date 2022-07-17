@@ -53,7 +53,7 @@ export default defineConfig({
         },
       },
       shortcuts: [
-        { 'pb-input': 'grid grid-cols-[130px_1fr] gap-x-1rem items-baseline lt-sm:grid-cols-[1fr]' },
+        { 'pb-input': 'grid grid-cols-[150px_1fr] gap-x-1rem items-baseline lt-sm:grid-cols-[1fr]' },
         { 'pb-error': 'animate-shake-x animate-count-1 animate-delay-0.5s animate-duration-1s' },
         { 'pb-input-enter': 'animate-zoom-in animate-count-1 animate-duration-0.5s' },
         { 'pb-input-leave': 'animate-zoom-out animate-count-1 animate-duration-0.3s' },

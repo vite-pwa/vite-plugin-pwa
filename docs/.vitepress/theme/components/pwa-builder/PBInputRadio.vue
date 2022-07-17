@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import type { RadioData } from '../../types'
 import { useState } from '../../composables/useState'
+import PBRequiredField from './PBRequiredField.vue'
 
 const props = defineProps<{
   id: string
@@ -39,7 +40,9 @@ const errorClass = computed(() => {
     tabindex="-1"
   >
     <div :id="`${id}-label`" fw-500 text-lg>
-      {{ title }}
+      <PBRequiredField>
+        {{ title }}
+      </PBRequiredField>
     </div>
     <div grid="~ cols-1fr gap-y-0.5rem" items-center :class="errorClass">
       <label v-for="option of options" :key="option.value" grid="~ cols-[min-content_1fr] gap-x-0.8rem" items-center>
