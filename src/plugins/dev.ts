@@ -105,7 +105,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
           return undefined
         }
         if (id.endsWith(swDevOptions.swUrl)) {
-          const globDirectory = resolve(viteConfig.root, viteConfig.outDir, '..',  'dev-dist')
+          const globDirectory = resolve(viteConfig.root, viteConfig.build.outDir, '..',  'dev-dist')
           if (!existsSync(globDirectory))
             mkdirSync(globDirectory)
 
@@ -158,7 +158,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
 
 async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
   if (options.injectRegister === 'script') {
-    const devDist = resolve(viteConfig.root, viteConfig.outDir, '..', 'dev-dist')
+    const devDist = resolve(viteConfig.root, viteConfig.build.outDir, '..', 'dev-dist')
     if (!existsSync(devDist))
       mkdirSync(devDist)
 
