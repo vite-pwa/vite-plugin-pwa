@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import type { BuilderElement } from '../../composables/pwaBuilder'
 import { usePWABuilder } from '../../composables/pwaBuilder'
+import PBButton from './PBButton.vue'
 
 const {
   state,
@@ -90,8 +91,8 @@ const vFocus = {
             error="Warn user when app is ready to work offline: required field."
           />
           <transition
-            enter-active-class="animate-zoom-in animate-count-1 animate-duration-0.5s"
-            leave-active-class="animate-zoom-out animate-count-1 animate-duration-0.5s"
+            enter-active-class="pb-input-enter"
+            leave-active-class="pb-input-leave"
           >
             <PBInputRadio
               v-if="showInjectRegister"
@@ -104,8 +105,8 @@ const vFocus = {
           </transition>
         </PBArticle>
         <transition
-          enter-active-class="animate-zoom-in animate-count-1 animate-duration-0.5s"
-          leave-active-class="animate-zoom-out animate-count-1 animate-duration-0.5s"
+          enter-active-class="pb-input-enter"
+          leave-active-class="pb-input-leave"
         >
           <PBArticle
             v-if="showFrameworks"
@@ -120,8 +121,8 @@ const vFocus = {
               error="Framework: required field."
             />
             <transition
-              enter-active-class="animate-zoom-in animate-count-1 animate-duration-0.5s"
-              leave-active-class="animate-zoom-out animate-count-1 animate-duration-0.5s"
+              enter-active-class="pb-input-enter"
+              leave-active-class="pb-input-leave"
             >
               <PBInputRadio
                 v-if="showTS"
@@ -136,12 +137,18 @@ const vFocus = {
         </transition>
       </template>
       <template #buttons>
-        <button :disabled="generating" type="submit">
+        <PBButton :disabled="generating" type="submit">
           Generate
-        </button>
-        <button :disabled="generating" type="button" @click="reset(titleRef?.focus)">
+        </PBButton>
+        <PBButton :disabled="generating" type="button" theme="alt" @click="reset(titleRef?.focus)">
           Reset
-        </button>
+        </PBButton>
+        <!--        <button :disabled="generating" type="submit"> -->
+        <!--          Generate -->
+        <!--        </button> -->
+        <!--        <button :disabled="generating" type="button" @click="reset(titleRef?.focus)"> -->
+        <!--          Reset -->
+        <!--        </button> -->
       </template>
     </PBForm>
   </div>

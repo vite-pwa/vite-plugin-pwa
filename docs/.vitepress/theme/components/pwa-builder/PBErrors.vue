@@ -15,12 +15,12 @@ const focusFirstError = () => {
 
 <template>
   <transition
-    enter-active-class="animate-zoom-in animate-count-1 animate-duration-0.5s"
-    leave-active-class="animate-zoom-out animate-count-1 animate-duration-0.5s"
+    enter-active-class="pb-errors-enter"
+    leave-active-class="pb-errors-leave"
   >
     <div v-if="hasErrors" role="alert" aria-labelledby="errors" class="custom-block danger important-m-0">
       <a id="errors" fw-bold href="#" @click.prevent="focusFirstError">
-        You must fill all the fields in the form:
+        You must fill in all the fields of the form:
       </a>
       <ul ref="ulRef">
         <li v-for="error of errors" :key="error.key">
