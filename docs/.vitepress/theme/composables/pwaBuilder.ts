@@ -1,49 +1,17 @@
 import { computed, nextTick, onUnmounted, ref } from 'vue'
 import { useThrottleFn } from '@vueuse/shared'
+import type {
+  BehaviorType,
+  BuilderElement,
+  BuilderError,
+  FrameworkType,
+  InjectRegisterType, RadioData,
+  State,
+  StrategyType,
+  YesNoType,
+} from '../types'
 
-export type State = 'initial' | 'result'
-export type FrameworkType =
-    | 'vitepress'
-    | 'iles'
-    | 'astro'
-    | 'vue'
-    | 'react'
-    | 'preact'
-    | 'solid'
-    | 'svelte'
-    | 'svelteKit'
-    | 'javascript'
-    | 'typescript'
-    | undefined
-export type StrategyType = 'generateSW' | 'injectManifest' | undefined
-export type BehaviorType = 'prompt' | 'autoUpdate' | undefined
-export type InjectRegisterType = 'inline' | 'script' | undefined
-export type YesNoType = 'true' | 'false' | undefined
-
-export interface BuilderError {
-  key: string
-  text: string
-  focus: () => void
-}
-
-export interface RadioData<T> {
-  value: T
-  text: string
-  disabled?: boolean
-}
-
-export interface ValidationResult {
-  isValid: boolean
-  message?: string
-}
-
-export interface BuilderElement {
-  key: string
-  focus: () => void
-  validate: () => Promise<BuilderError[]>
-  isValid: () => boolean
-  withState: (withError: boolean, focusInput: boolean) => void
-}
+import { DEFAULT_TIMEOUT, generatePWACode, resetPWACode } from '../modules/generatePWACode'
 
 export const focusInput = (element?: HTMLElement, to: ScrollLogicalPosition = 'nearest') => {
   setTimeout(() => element?.focus(), 0)
@@ -68,6 +36,9 @@ export function usePWABuilder() {
   const injectRegister = ref<InjectRegisterType | undefined>(undefined)
   const framework = ref<FrameworkType | undefined>(undefined)
   const ts = ref<YesNoType | undefined>(undefined)
+  const scope = ref<string | undefined>('/')
+  const startUrl = ref<string | undefined>(undefined)
+  const maskedIcon = ref<YesNoType | undefined>('true')
 
   const generating = ref(false)
 
@@ -76,7 +47,7 @@ export function usePWABuilder() {
   const warns = createWarnReady()
   const injectRegisters = createInjectRegisters()
   const frameworks = createFrameworks()
-  const tss = createTS()
+  const yesNoList = createYesNo()
 
   const showFrameworks = computed(() => {
     return behavior.value === 'prompt' || warnUser.value === 'true'
@@ -96,9 +67,12 @@ export function usePWABuilder() {
 
   const reset = async () => {
     title.value = undefined
+    scope.value = '/'
+    startUrl.value = undefined
     description.value = undefined
     shortName.value = undefined
     themeColor.value = '#FFFFFF'
+    maskedIcon.value = 'true'
     strategy.value = 'generateSW'
     behavior.value = 'prompt'
     warnUser.value = 'false'
@@ -125,9 +99,10 @@ export function usePWABuilder() {
       const result = await Promise.all(inputs.value.filter((i) => {
         switch (i.key) {
           case 'title':
-          case 'shortName':
+          case 'scope':
           case 'description':
           case 'themeColor':
+          case 'maskedIcon':
           case 'strategy':
           case 'behavior':
           case 'warn':
@@ -138,39 +113,60 @@ export function usePWABuilder() {
       }).map((i) => {
         return i.validate()
       }))
-      const validationResult = result.filter(r => r.length > 0).map(r => r[0])
+      const validationResult = result.filter(r => r && r.length > 0).map(r => r[0])
       let customErrors: BuilderError[] | undefined
       if (showInjectRegister.value) {
         customErrors = await inputs.value.find(i => i.key === 'injectRegister')?.validate()
-        if (customErrors)
+        if (customErrors && customErrors.length > 0)
           validationResult.push(customErrors[0])
       }
 
       if (showFrameworks.value) {
         customErrors = await inputs.value.find(i => i.key === 'frameworks')?.validate()
-        if (customErrors)
+        if (customErrors && customErrors.length > 0)
           validationResult.push(customErrors[0])
       }
 
       if (showTS.value) {
         customErrors = await inputs.value.find(i => i.key === 'typescript')?.validate()
-        if (customErrors)
+        if (customErrors && customErrors.length > 0)
           validationResult.push(customErrors[0])
       }
 
-      if (validationResult) {
+      if (validationResult && validationResult.length > 0) {
         errors.value.splice(0, errors.value.length, ...validationResult)
         await nextTick()
         validationResult[0].focus()
         return
       }
-      // state.value = 'result'
-      // await new Promise(resolve => setTimeout(resolve, 2000))
+      resetPWACode()
+      await nextTick()
+      state.value = 'result'
+      await new Promise(resolve => setTimeout(resolve, DEFAULT_TIMEOUT))
+      await generatePWACode({
+        title: title.value!,
+        shortName: shortName.value,
+        description: description.value!,
+        themeColor: themeColor.value!,
+        strategy: strategy.value!,
+        behavior: behavior.value!,
+        registerType: injectRegister.value!,
+        framework: framework.value,
+        scope: scope.value!,
+        startUrl: startUrl.value,
+        addManifestMaskedIcon: maskedIcon.value === 'true',
+      })
     }
     finally {
       generating.value = false
     }
   }, 256, false, true)
+
+  const back = async () => {
+    state.value = 'initial'
+    await nextTick()
+    generating.value = false
+  }
 
   onUnmounted(() => {
     inputs.value.splice(0)
@@ -188,6 +184,9 @@ export function usePWABuilder() {
     injectRegister,
     framework,
     ts,
+    scope,
+    startUrl,
+    maskedIcon,
     showInjectRegister,
     showFrameworks,
     showTS,
@@ -196,10 +195,11 @@ export function usePWABuilder() {
     warns,
     injectRegisters,
     frameworks,
-    tss,
+    yesNoList,
     generate,
     reset,
     generating,
+    back,
   }
 }
 
@@ -272,7 +272,7 @@ function createWarnReady() {
   }]
 }
 
-function createTS() {
+function createYesNo() {
   return <RadioData<YesNoType>[]>[{
     value: 'true',
     text: 'Yes',

@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import Components from 'unplugin-vue-components/vite'
-import { presetAttributify, presetUno } from 'unocss'
+import { presetAttributify, presetIcons, presetUno } from 'unocss'
 import Unocss from 'unocss/vite'
 import { VitePWA } from '../dist'
 import NavbarFix from './plugins/navbar'
@@ -61,6 +61,7 @@ export default defineConfig({
         { 'pb-errors-leave': 'animate-zoom-out animate-count-1 animate-duration-0.3s' },
       ],
       presets: [
+        presetIcons(),
         presetUno(),
         presetAttributify(),
       ],

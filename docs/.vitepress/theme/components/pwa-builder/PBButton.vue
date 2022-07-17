@@ -103,4 +103,8 @@ const classes = computed(() => [
   color: var(--vp-button-sponsor-active-text);
   background-color: var(--vp-button-sponsor-active-bg);
 }
+
+.PBButton[disabled] {
+  cursor: unset !important;
+}
 </style>

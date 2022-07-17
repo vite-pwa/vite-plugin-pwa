@@ -22,6 +22,8 @@ declare module '@vue/runtime-core' {
     PBInputColor: typeof import('./theme/components/pwa-builder/PBInputColor.vue')['default']
     PBInputRadio: typeof import('./theme/components/pwa-builder/PBInputRadio.vue')['default']
     PBInputText: typeof import('./theme/components/pwa-builder/PBInputText.vue')['default']
+    PBResult: typeof import('./theme/components/pwa-builder/PBResult.vue')['default']
+    PBResultEntry: typeof import('./theme/components/pwa-builder/PBResultEntry.vue')['default']
     PromptForUpdateImg: typeof import('./theme/components/PromptForUpdateImg.vue')['default']
     PWABuilder: typeof import('./theme/components/pwa-builder/PWABuilder.vue')['default']
     ReloadPrompt: typeof import('./theme/components/ReloadPrompt.vue')['default']

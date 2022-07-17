@@ -1,13 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { useDebounceFn } from '@vueuse/shared'
 import { useState } from '../../composables/useState'
-import type { BuilderError } from '../../composables/pwaBuilder'
 
 const props = defineProps<{
   id: string
   title: string
   error: string
+  noValidate?: boolean
   modelValue?: string
 }>()
 
@@ -16,6 +15,9 @@ defineEmits<{
 }>()
 
 const validate = () => {
+  if (props.noValidate === true)
+    return { isValid: true }
+
   const value = props.modelValue
   if (!value || value.trim().length === 0)
     return { isValid: false, message: props.error }

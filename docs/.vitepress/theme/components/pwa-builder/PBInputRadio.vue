@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { RadioData } from '../../composables/pwaBuilder'
+import type { RadioData } from '../../types'
 import { useState } from '../../composables/useState'
 
 const props = defineProps<{

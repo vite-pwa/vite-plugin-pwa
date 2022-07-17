@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 import { nextTick, onBeforeMount, ref } from 'vue'
-import type { BuilderElement, BuilderError, ValidationResult } from './pwaBuilder'
+import type { BuilderElement, BuilderError, ValidationResult } from '../types'
 import { focusInput, inputs } from './pwaBuilder'
 
 export function useState(key: string, input: Ref, internalValidation: () => ValidationResult) {
@@ -22,15 +22,18 @@ export function useState(key: string, input: Ref, internalValidation: () => Vali
 
   const validate = async () => {
     const { isValid, message } = internalValidation()
+    let internalError: BuilderError | undefined
     if (isValid)
       errors.value.splice(0)
     else
-      errors.value.splice(0, errors.value.length, <BuilderError>{ key, focus, text: message })
+      internalError = { key, text: message!, focus }
+
+    if (internalError)
+      errors.value.splice(0, errors.value.length, internalError)
 
     await nextTick()
     error.value = !isValid
-    await nextTick()
-    return errors.value
+    return internalError ? [internalError] : undefined
   }
 
   onBeforeMount(() => {
