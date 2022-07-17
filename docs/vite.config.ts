@@ -42,6 +42,16 @@ export default defineConfig({
 
     // https://github.com/unocss/unocss
     Unocss({
+      theme: {
+        breakpoints: {
+          'xs': '468px',
+          'sm': '640px',
+          'md': '768px',
+          'lg': '1024px',
+          'xl': '1280px',
+          '2xl': '1536px',
+        },
+      },
       shortcuts: [
         { 'pb-input': 'grid grid-cols-[130px_1fr] gap-x-1rem items-baseline lt-sm:grid-cols-[1fr]' },
         { 'pb-error': 'animate-shake-x animate-count-1 animate-delay-0.5s animate-duration-1s' },

@@ -206,7 +206,7 @@ export function usePWABuilder() {
 function createFrameworks() {
   return <RadioData<FrameworkType>[]>[{
     value: 'javascript',
-    text: 'Vanilla JS',
+    text: 'Vanilla JavaScript',
   }, {
     value: 'typescript',
     text: 'TypeScript',
