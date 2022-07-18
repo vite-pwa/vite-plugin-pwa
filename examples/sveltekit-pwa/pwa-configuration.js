@@ -8,13 +8,13 @@ const pwaConfiguration = {
 	base: '/',
 	// manifestFilename: '/_app/manifest.webmanifest',
 	manifest: {
-		short_name: "PWA Router",
-		name: "PWA Router",
-		start_url: "/",
-		scope: "/",
-		display: "standalone",
-		theme_color: "#ffffff",
-		background_color: "#ffffff",
+		short_name: 'PWA Router',
+		name: 'PWA Router',
+		start_url: '/',
+		scope: '/',
+		display: 'standalone',
+		theme_color: '#ffffff',
+		background_color:' "#ffffff"',
 		icons: [
 			{
 				src: '/pwa-192x192.png',
@@ -33,6 +33,9 @@ const pwaConfiguration = {
 				purpose: 'any maskable',
 			},
 		]
+	},
+	svelteKitVitePluginOptions: {
+		globClientPatterns: ['client/**/*.{js,css,ico,png,svg}', 'prerendered/**/*.html'],
 	},
 	devOptions: {
 		enabled: process.env.SW_DEV === 'true',
@@ -63,9 +66,6 @@ if (sw) {
 	pwaConfiguration.strategies = 'injectManifest'
 	pwaConfiguration.manifest.name = 'PWA Inject Manifest'
 	pwaConfiguration.manifest.short_name = 'PWA Inject'
-	pwaConfiguration.svelteKitVitePluginOptions = svelteKitVitePluginOptions
-} else {
-	pwaConfiguration.svelteKitVitePluginOptions = svelteKitVitePluginOptions
 }
 
 if (claims)
