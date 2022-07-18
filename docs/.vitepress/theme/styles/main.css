@@ -1,8 +1,10 @@
-.dark [img-light], .dark .logo[light-logo] {
+.dark [img-light],
+.dark .logo[light-logo] {
   display: none;
 }
 
-html:not(.dark) [img-dark], html:not(.dark) .logo[dark-logo] {
+html:not(.dark) [img-dark],
+html:not(.dark) .logo[dark-logo] {
   display: none;
 }
 
@@ -16,6 +18,33 @@ html:not(.dark) [img-dark], html:not(.dark) .logo[dark-logo] {
 .vp-doc td {
   padding: 6px 10px;
   border: 1px solid #8882;
+}
+
+html:not(.dark) .vp-doc [class*=language-]:before {
+  color: var(--vp-custom-block-details-text);
+}
+
+html:not(.dark) .vp-doc [class*='language-']:not(:hover) > span.copy,
+html:not(.dark) .vp-doc [class*='language-']:not(:hover) > span.copy.copied:before {
+  background-color: var(--vp-code-block-hover-bg);
+  opacity: 0;
+}
+
+html:not(.dark) .vp-doc [class*='language-']:hover > span.copy:hover {
+  opacity: 1;
+  background-color: var(--vp-code-block-hover-bg);
+}
+
+html:not(.dark) .vp-doc [class*='language-']:hover > span.copy.copied,
+html:not(.dark) .vp-doc [class*='language-']:hover > span.copy.copied:hover {
+  opacity: 1;
+  background-color: var(--vp-code-block-hover-bg);
+}
+
+html:not(.dark) .vp-doc [class*='language-']:hover > span.copy.copied:before,
+html:not(.dark) .vp-doc [class*='language-']:hover > span.copy.copied:hover:before {
+  color: var(--vp-custom-block-details-text);
+  background-color: var(--vp-code-block-hover-bg);
 }
 
 /* h3 breaks SEO => replaced with h2 with the same size */
