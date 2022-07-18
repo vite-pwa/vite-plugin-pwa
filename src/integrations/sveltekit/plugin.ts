@@ -20,8 +20,8 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
 
     if (_closeBundle) {
       plugin.closeBundle = async () => {
-        // since we are replacing the writeBundle for client build, on SSR just ignore the activation
-        if (ctx.options.disable || activateCloseBundle || !ctx.viteConfig.build.ssr) {
+        // since we are replacing the closeBundle for client build, on SSR just ignore the activation
+        if (ctx.options.disable || activateCloseBundle || ctx.viteConfig.build.ssr) {
           // @ts-expect-error ignore the type annotation about any
           await _closeBundle.apply(this)
         }
@@ -31,7 +31,7 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
   }
   return {
     name: 'vite-plugin-pwa:svelte-kit-adapter',
-    enforce: 'pre',
+    enforce: 'post',
     apply: (config, env) => {
       // this plugin will only work on client build
       return env.command === 'build'
@@ -40,7 +40,7 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
       // @ts-expect-error TypeScript doesn't handle flattening Vite's plugin type properly
       config.plugins?.flat(Infinity).forEach(changeToSequentialPlugin)
     },
-    async writeBundle(options, bundle) {
+    async closeBundle() {
       // this plugin will only work on client build
       if (ctx.options.disable || ctx.viteConfig.build.ssr)
         return
@@ -52,10 +52,8 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
       await new Promise(resolve => setTimeout(resolve, 1000))
       // activate the closeBundle hooks
       activateCloseBundle = true
-      // @ts-expect-error ignore the array type
-      await pwaPlugin!.closeBundle!.apply(this, [options, bundle])
-      // @ts-expect-error ignore the array type
-      await svelteKitPlugin?.closeBundle?.apply(this, [options, bundle])
+      await pwaPlugin!.closeBundle!.apply(this)
+      await svelteKitPlugin?.closeBundle?.apply(this)
     },
   }
 }

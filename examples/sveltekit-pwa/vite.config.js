@@ -11,8 +11,8 @@ const config = {
   },
   plugins: [
     replace(replaceOptions),
-    ViteSvelteKitPWA(pwaConfiguration),
-    sveltekit()
+    sveltekit(),
+    ViteSvelteKitPWA(pwaConfiguration)
   ],
 };
 
