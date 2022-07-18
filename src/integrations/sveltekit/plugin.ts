@@ -3,7 +3,6 @@ import { VITE_PLUGIN_SVELTE_KIT_NAME, VITE_PWA_PLUGIN_NAMES } from '../../consta
 import type { PWAPluginContext } from '../../context'
 
 export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
-  let activateWriteBundle = false
   let activateCloseBundle = false
 
   const plugins: Plugin[] = []
@@ -17,17 +16,7 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
     if (!plugin.name || !pluginNames.includes(plugin.name))
       return
 
-    const { writeBundle: _writeBundle, closeBundle: _closeBundle } = plugin
-
-    if (_writeBundle) {
-      plugin.writeBundle = async (...args) => {
-        // since we are replacing the writeBundle for client build, on SSR just ignore the activation
-        if (ctx.options.disable || activateWriteBundle || !ctx.viteConfig.build.ssr) {
-          // @ts-expect-error ignore the array type
-          await _writeBundle.apply(this, args)
-        }
-      }
-    }
+    const { closeBundle: _closeBundle } = plugin
 
     if (_closeBundle) {
       plugin.closeBundle = async () => {
@@ -42,7 +31,7 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
   }
   return {
     name: 'vite-plugin-pwa:svelte-kit-adapter',
-    enforce: 'post',
+    enforce: 'pre',
     apply: (config, env) => {
       // this plugin will only work on client build
       return env.command === 'build'
@@ -61,8 +50,6 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
 
       // give some time to finish writeBundle hooks: dummy calls, not yet activated
       await new Promise(resolve => setTimeout(resolve, 1000))
-      activateWriteBundle = true
-      await svelteKitPlugin?.writeBundle?.apply(this, [options, bundle])
       // activate the closeBundle hooks
       activateCloseBundle = true
       // @ts-expect-error ignore the array type

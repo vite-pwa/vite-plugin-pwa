@@ -10,9 +10,9 @@ const config = {
     minify: pwaConfiguration.mode === 'development' ? false : undefined,
   },
   plugins: [
-    sveltekit(),
+    replace(replaceOptions),
     ViteSvelteKitPWA(pwaConfiguration),
-    replace(replaceOptions)
+    sveltekit()
   ],
 };
 
