@@ -15,6 +15,9 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
   if (!options.outDir)
     options.outDir = './.svelte-kit/output/client'
 
+  if (typeof options.includeManifest === 'undefined')
+    options.includeManifest = 'client-build'
+
   if (options.strategies === 'injectManifest') {
     options.injectManifest = options.injectManifest ?? {}
     if (!options.injectManifest.globDirectory)
@@ -53,9 +56,16 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
 }
 
 function createManifestTransform(base: string, options?: SvelteKitVitePluginOptions): ManifestTransform {
-  const suffix = options?.trailingSlash === 'always' ? '/' : ''
   return async (entries) => {
-    const manifest = entries.map((e) => {
+    const suffix = options?.trailingSlash === 'always' ? '/' : ''
+    let adapterFallback = options?.adapterFallback
+    let excludeFallback = false
+    if (!adapterFallback) {
+      adapterFallback = 'prerendered/fallback.html'
+      excludeFallback = true
+    }
+
+    const manifest = entries.filter(({ url }) => !(excludeFallback && url === adapterFallback)).map((e) => {
       let url = e.url
       if (url.startsWith('client/'))
         url = url.slice(7)
@@ -86,7 +96,7 @@ function buildGlobPatterns(globPatterns?: string[]): string[] {
       globPatterns.push('prerendered/**/*.html')
 
     if (!globPatterns.some(g => g.startsWith('client/')))
-      globPatterns.push('client/**/*.{js,css,ico,png,svg}')
+      globPatterns.push('client/**/*.{js,css,ico,png,svg,webp}')
 
     return globPatterns.filter(g => g.startsWith('server/'))
   }

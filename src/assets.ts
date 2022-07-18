@@ -112,12 +112,12 @@ export async function configureStaticAssets(
     }))
     manifestEntries.push(...assetsEntries)
   }
-  if (manifest) {
+  if (manifest && includeManifestInBuild(resolvedVitePWAOptions, viteConfig)) {
     const cHash = crypto.createHash('MD5')
     cHash.update(generateWebManifestFile(resolvedVitePWAOptions))
     manifestEntries.push({
       url: manifestFilename,
-      revision: `${cHash.digest('hex')}`,
+      revision: `${await cHash.digest('hex')}`,
     })
   }
   if (manifestEntries.length > 0) {
@@ -131,4 +131,10 @@ export async function configureStaticAssets(
 
 export function generateWebManifestFile(options: ResolvedVitePWAOptions): string {
   return `${JSON.stringify(options.manifest, null, options.minify ? 0 : 2)}\n`
+}
+
+export function includeManifestInBuild(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
+  return options.includeManifest === true
+      || (options.includeManifest === 'client-build' && !viteConfig.build.ssr)
+      || (options.includeManifest === 'ssr-build' && viteConfig.build.ssr)
 }

@@ -149,6 +149,12 @@ export interface VitePWAOptions {
    */
   includeManifestIcons: boolean
   /**
+   * By default, the `manifest` will be included on the service worker's *precache*.
+   *
+   * @default true
+   */
+  includeManifest?: boolean | 'ssr-build' | 'client-build'
+  /**
    * Disable service worker registration and generation on `build`?
    *
    * @default false

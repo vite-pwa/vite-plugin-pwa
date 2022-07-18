@@ -2,7 +2,7 @@ import { resolve } from 'path'
 import { existsSync } from 'fs'
 import type { OutputBundle } from 'rollup'
 import { generateInjectManifest, generateServiceWorker } from './modules'
-import { generateWebManifestFile } from './assets'
+import { generateWebManifestFile, includeManifestInBuild } from './assets'
 import { FILE_SW_REGISTER } from './constants'
 import { generateSimpleSWRegister } from './html'
 import type { PWAPluginContext } from './context'
@@ -22,7 +22,7 @@ export function _generateBundle({ options, viteConfig, useImportRegister }: PWAP
   if (options.disable || !bundle)
     return
 
-  if (options.manifest) {
+  if (options.manifest && includeManifestInBuild(options, viteConfig)) {
     bundle[options.manifestFilename] = {
       isAsset: true,
       type: 'asset',
