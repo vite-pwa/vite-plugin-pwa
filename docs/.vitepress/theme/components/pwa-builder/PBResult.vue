@@ -27,7 +27,7 @@ async function copyToClipboard(code?: string) {
         {{ entrypointData.code ?? '' }}
       </template>
     </PBResultEntry>
-    <PBResultEntry lang="json" :loading="pluginData.loading" @copy="copyToClipboard(pluginData.code)">
+    <PBResultEntry lang="js" :loading="pluginData.loading" @copy="copyToClipboard(pluginData.code)">
       <template #summary>
         Vite Plugin PWA Configuration
       </template>

@@ -4,8 +4,9 @@ import type {
   BehaviorType,
   BuilderElement,
   BuilderError,
-  FrameworkType,
-  InjectRegisterType, RadioData,
+  FaviconType,
+  FrameworkType, InjectRegisterType,
+  RadioData,
   State,
   StrategyType,
   YesNoType,
@@ -39,6 +40,7 @@ export function usePWABuilder() {
   const scope = ref<string | undefined>('/')
   const startUrl = ref<string | undefined>(undefined)
   const maskedIcon = ref<YesNoType | undefined>('true')
+  const favicon = ref<FaviconType | undefined>('ico')
 
   const generating = ref(false)
 
@@ -48,6 +50,7 @@ export function usePWABuilder() {
   const injectRegisters = createInjectRegisters()
   const frameworks = createFrameworks()
   const yesNoList = createYesNo()
+  const faviconList = createFavicons()
 
   const showFrameworks = computed(() => {
     return behavior.value === 'prompt' || warnUser.value === 'true'
@@ -155,6 +158,7 @@ export function usePWABuilder() {
         scope: scope.value!,
         startUrl: startUrl.value,
         addManifestMaskedIcon: maskedIcon.value === 'true',
+        favicon: favicon.value!,
       })
     }
     finally {
@@ -187,6 +191,7 @@ export function usePWABuilder() {
     scope,
     startUrl,
     maskedIcon,
+    favicon,
     showInjectRegister,
     showFrameworks,
     showTS,
@@ -196,6 +201,7 @@ export function usePWABuilder() {
     injectRegisters,
     frameworks,
     yesNoList,
+    faviconList,
     generate,
     reset,
     generating,
@@ -289,5 +295,18 @@ function createInjectRegisters() {
   }, {
     value: 'script',
     text: 'Generate registerSW.js script',
+  }]
+}
+
+function createFavicons() {
+  return <RadioData<FaviconType>[]>[{
+    value: 'ico',
+    text: 'Only favicon.ico',
+  }, {
+    value: 'svg',
+    text: 'Only favicon.svg',
+  }, {
+    value: 'both',
+    text: 'Both, favicon.ico and favicon.svg',
   }]
 }

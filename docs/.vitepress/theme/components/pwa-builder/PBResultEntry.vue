@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { nextTick, ref } from 'vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps<{
   loading: boolean
@@ -15,8 +15,8 @@ const copied = ref<boolean>(false)
 async function copyToClipboard() {
   emit('copy')
   copied.value = true
-  await nextTick()
-  await new Promise(resolve => setTimeout(resolve, 2000))
+  // use the same timeout on VitePress copy-code module
+  await new Promise(resolve => setTimeout(resolve, 3000))
   copied.value = false
 }
 </script>
@@ -27,15 +27,12 @@ async function copyToClipboard() {
       <span>
         <slot name="summary" />
       </span>
-      <span
-        class="i-line-md:loading-twotone-loop w-28px h-28px"
-      ><span />
-      </span>
+      <span class="i-line-md:loading-twotone-loop w-24px h-24px" />
     </summary>
     <summary v-else>
       <slot name="summary" />
     </summary>
-    <div v-if="!loading" :class="`language-${lang}`">
+    <div v-if="!loading" class="entry-lang" :class="`language-${lang}`">
       <span :class="{ copied }" role="button" tabindex="0" aria-label="Copy code" class="copy" @click="copyToClipboard()" />
       <pre important="px-1rem py-0">
         <slot name="code" />
@@ -43,4 +40,3 @@ async function copyToClipboard() {
     </div>
   </details>
 </template>
-

@@ -20,6 +20,7 @@ const {
   scope,
   startUrl,
   maskedIcon,
+  favicon,
   showInjectRegister,
   showFrameworks,
   showTS,
@@ -29,6 +30,7 @@ const {
   injectRegisters,
   frameworks,
   yesNoList,
+  faviconList,
   generate,
   reset,
   generating,
@@ -95,6 +97,13 @@ const vFocus = {
               :options="yesNoList"
               title="Add masked icon to the PWA manifest?"
               error="Masked Icon: required field."
+            />
+            <PBInputRadio
+              id="favicon"
+              v-model="favicon"
+              :options="faviconList"
+              title="Favicon Type"
+              error="Favicon: required field."
             />
           </PBArticle>
           <PBArticle id="sw" title="Service Worker">

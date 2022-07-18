@@ -15,6 +15,7 @@ export type FrameworkType =
 export type StrategyType = 'generateSW' | 'injectManifest' | undefined
 export type BehaviorType = 'prompt' | 'autoUpdate' | undefined
 export type InjectRegisterType = 'inline' | 'script' | undefined
+export type FaviconType = 'ico' | 'svg' | 'both'
 export type YesNoType = 'true' | 'false' | undefined
 
 export interface BuilderError {
@@ -60,4 +61,5 @@ export interface PWABuilderData {
   scope: string
   startUrl?: string
   addManifestMaskedIcon: boolean
+  favicon: FaviconType
 }
