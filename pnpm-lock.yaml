@@ -256,11 +256,13 @@ importers:
       '@rollup/plugin-replace': ^4.0.0
       '@sveltejs/adapter-static': next
       '@sveltejs/kit': 1.0.0-next.370
+      '@types/node': ^18.0.6
       '@typescript-eslint/eslint-plugin': ^5.30.3
       '@typescript-eslint/parser': ^5.30.3
       cross-env: ^7.0.3
       eslint: ^8.19.0
       eslint-plugin-svelte3: ^4.0.0
+      fast-glob: ^3.2.11
       https-localhost: ^4.7.1
       minimist: ^1.2.6
       rimraf: ^3.0.2
@@ -276,13 +278,15 @@ importers:
       workbox-routing: ^6.5.3
     devDependencies:
       '@rollup/plugin-replace': 4.0.0
-      '@sveltejs/adapter-static': 1.0.0-next.35
+      '@sveltejs/adapter-static': 1.0.0-next.37
       '@sveltejs/kit': 1.0.0-next.370_svelte@3.48.0+vite@2.9.13
+      '@types/node': 18.0.6
       '@typescript-eslint/eslint-plugin': 5.30.3_xuuykav7urhdozug7htlfgar3u
       '@typescript-eslint/parser': 5.30.3_4x5o4skxv6sl53vpwefgt23khm
       cross-env: 7.0.3
       eslint: 8.19.0
       eslint-plugin-svelte3: 4.0.0_m4jpobot6gi3xtcba7bv5cflma
+      fast-glob: 3.2.11
       https-localhost: 4.7.1
       minimist: 1.2.6
       rimraf: 3.0.2
@@ -2566,8 +2570,8 @@ packages:
       string.prototype.matchall: 4.0.7
     dev: false
 
-  /@sveltejs/adapter-static/1.0.0-next.35:
-    resolution: {integrity: sha512-iIg5nCMJF2/s/Y7zmy9pzp+U3YDBL6OQKmwfJm2H3Afde/XlhOuNlSO6K//hxmLmvrd7Oh6Kb0MLhwVKp0cuUA==}
+  /@sveltejs/adapter-static/1.0.0-next.37:
+    resolution: {integrity: sha512-BDFkx4CGAd6pG4e3+zYjy/eM9UDbhkRgXqavUzCO5oT8xXao5TeprY1AIbdzjMTmFjsWdeSXE9TbIsT0iikpyQ==}
     dependencies:
       tiny-glob: 0.2.9
     dev: true
@@ -2666,6 +2670,10 @@ packages:
   /@types/node/16.4.13:
     resolution: {integrity: sha512-bLL69sKtd25w7p1nvg9pigE4gtKVpGTPojBFLMkGHXuUgap2sLqQt2qUnqmVCDfzGUL0DRNZP+1prIZJbMeAXg==}
 
+  /@types/node/18.0.6:
+    resolution: {integrity: sha512-/xUq6H2aQm261exT6iZTMifUySEt4GR5KX8eYyY+C4MSNPqSh9oNIP7tz2GLKTlFaiBbgZNxffoR3CVRG+cljw==}
+    dev: true
+
   /@types/normalize-package-data/2.4.0:
     resolution: {integrity: sha512-f5j5b/Gf71L+dbqxIpQ4Z2WlmI/mPJ0fOkGGmFgtb6sAu97EPczzbS3/tJKxmcYDj55OX6ssqwDAWOHIYDRDGA==}
     dev: true
@@ -2732,7 +2740,7 @@ packages:
   /@types/sass/1.16.1:
     resolution: {integrity: sha512-iZUcRrGuz/Tbg3loODpW7vrQJkUtpY2fFSf4ELqqkApcS2TkZ1msk7ie8iZPB86lDOP8QOTTmuvWjc5S0R9OjQ==}
     dependencies:
-      '@types/node': 16.4.13
+      '@types/node': 18.0.6
     dev: true
 
   /@types/scheduler/0.16.2:

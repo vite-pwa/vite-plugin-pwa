@@ -163,6 +163,12 @@ export interface VitePWAOptions {
    */
   manifestNameInPrecache?: string
   /**
+   * The folder where locate the static icons.
+   *
+   * By default will use Vite's `publicDir` option directory.
+   */
+  iconsFolder?: string
+  /**
    * Disable service worker registration and generation on `build`?
    *
    * @default false

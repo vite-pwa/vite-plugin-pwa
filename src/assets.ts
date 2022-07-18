@@ -65,10 +65,10 @@ export async function configureStaticAssets(
     includeAssets,
     includeManifestIcons,
     manifestNameInPrecache,
+    iconsFolder: publicDir,
   } = resolvedVitePWAOptions
 
   const useInjectManifest = strategies === 'injectManifest'
-  const { publicDir } = viteConfig
   const globs: string[] = []
   const manifestEntries: (string | ManifestEntry)[] = lookupAdditionalManifestEntries(
     useInjectManifest,

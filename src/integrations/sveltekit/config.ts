@@ -18,6 +18,9 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
   if (typeof options.includeManifest === 'undefined')
     options.includeManifest = 'client-build'
 
+  if (typeof options.iconsFolder === 'undefined')
+    options.iconsFolder = 'static'
+
   if (typeof options.manifestNameInPrecache === 'undefined')
     options.manifestNameInPrecache = `/_app/${options.manifestFilename ?? 'manifest.webmanifest'}`
 
@@ -89,6 +92,7 @@ function createManifestTransform(base: string, options?: SvelteKitVitePluginOpti
 
       return e
     })
+
     return { manifest }
   }
 }
