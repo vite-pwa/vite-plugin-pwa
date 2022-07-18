@@ -12,7 +12,7 @@ const pwaConfiguration = {
 	scope: '/',
 	base: '/',
 	selfDestroying: process.env.SW_DESTROY === 'true',
-	includeAssets: fg.sync('**/*.{png,svg}', { cwd: resolve(dirname, 'static') }),
+	includeAssets: fg.sync('**/*.{png,svg,txt}', { cwd: resolve(dirname, 'static') }),
 	// manifestFilename: '/_app/manifest.webmanifest',
 	manifest: {
 		short_name: 'PWA Router',
