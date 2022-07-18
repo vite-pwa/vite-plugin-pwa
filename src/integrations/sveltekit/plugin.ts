@@ -48,7 +48,7 @@ export function SvelteKitAdapterPlugin(ctx: PWAPluginContext): Plugin {
       const svelteKitPlugin = plugins.find(p => VITE_PLUGIN_SVELTE_KIT_NAME === p.name)
       const pwaPlugin = plugins.find(p => VITE_PWA_PLUGIN_NAMES.BUILD === p.name)
 
-      // give some time to finish writeBundle hooks: dummy calls, not yet activated
+      // give some time to finish closeBundle hooks: dummy calls, not yet activated
       await new Promise(resolve => setTimeout(resolve, 1000))
       // activate the closeBundle hooks
       activateCloseBundle = true
