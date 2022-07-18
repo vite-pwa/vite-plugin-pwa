@@ -18,6 +18,9 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
   if (typeof options.includeManifest === 'undefined')
     options.includeManifest = 'client-build'
 
+  if (typeof options.manifestNameInPrecache === 'undefined')
+    options.manifestNameInPrecache = `/_app/${options.manifestFilename ?? 'manifest.webmanifest'}`
+
   if (options.strategies === 'injectManifest') {
     options.injectManifest = options.injectManifest ?? {}
     if (!options.injectManifest.globDirectory)

@@ -155,6 +155,14 @@ export interface VitePWAOptions {
    */
   includeManifest?: boolean | 'ssr-build' | 'client-build'
   /**
+   * The `manifest` will be included on the service worker's *precache* with this name.
+   *
+   * By default, the plugin will use the `manifestFilename`.
+   *
+   * @default {@manifestFilename}
+   */
+  manifestNameInPrecache?: string
+  /**
    * Disable service worker registration and generation on `build`?
    *
    * @default false
