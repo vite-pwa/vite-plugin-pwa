@@ -9,7 +9,6 @@ const dirname = fileURLToPath(new URL('.', import.meta.url))
 /** @type {import('vite-plugin-pwa').VitePWAOptions} */
 const pwaConfiguration = {
 	mode,
-	includeManifestIcons: false,
 	scope: '/',
 	base: '/',
 	selfDestroying: process.env.SW_DESTROY === 'true',
@@ -41,9 +40,6 @@ const pwaConfiguration = {
 				purpose: 'any maskable',
 			},
 		]
-	},
-	svelteKitVitePluginOptions: {
-		globClientPatterns: ['client/**/*.{js,css,ico,png,svg}', 'prerendered/**/*.html'],
 	},
 	devOptions: {
 		enabled: process.env.SW_DEV === 'true',

@@ -165,7 +165,7 @@ export interface VitePWAOptions {
   /**
    * The folder where locate the static icons.
    *
-   * By default will use Vite's `publicDir` option directory.
+   * By default, the plugin will use Vite's `publicDir` option directory.
    */
   iconsFolder?: string
   /**
