@@ -6,6 +6,7 @@ const pwaConfiguration = {
 	includeManifestIcons: false,
 	scope: '/',
 	base: '/',
+	selfDestroying: process.env.SW_DESTROY === 'true',
 	// manifestFilename: '/_app/manifest.webmanifest',
 	manifest: {
 		short_name: 'PWA Router',
@@ -48,16 +49,10 @@ const pwaConfiguration = {
 const claims = process.env.CLAIMS === 'true'
 const reload = process.env.RELOAD_SW === 'true'
 const sw = process.env.SW === 'true'
-const selfDestroying = process.env.SW_DESTROY === 'true'
 const replaceOptions = {
 	__DATE__: new Date().toISOString(),
 	__RELOAD_SW__: reload ? 'true' : 'false',
 	__SW_DEV__: process.env.SW_DEV === 'true' ? 'true' : 'false',
-}
-
-const svelteKitVitePluginOptions = {
-	// if you don't have the fallback in the adapter use this globPatterns
-	globClientPatterns: ['client/**/*.{js,css,ico,png,svg}', 'prerendered/**/*.html'],
 }
 
 if (sw) {
@@ -70,8 +65,5 @@ if (sw) {
 
 if (claims)
 	pwaConfiguration.registerType = 'autoUpdate'
-
-if (selfDestroying)
-	pwaConfiguration.selfDestroying = selfDestroying
 
 export { pwaConfiguration, replaceOptions }
