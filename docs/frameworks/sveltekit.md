@@ -70,12 +70,12 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { pwaConfiguration } from './pwa-configuration.js'
 
 const webmanifestDestinations = [
-  './.svelte-kit/output/client/',
-  './build/',
+  './.svelte-kit/output/client',
+  './.svelte-kit/build',
 ]
 
 const swDestinations = [
-  './build/',
+  './.svelte-kit/build',
 ]
 
 const buildPwa = async () => {
