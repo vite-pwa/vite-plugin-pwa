@@ -15,17 +15,11 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
     adapterFallback,
   } = options.svelteKitVitePluginOptions ?? {}
 
-  // if (!options.outDir)
-  //   options.outDir = './.svelte-kit/output/client'
-
   if (typeof options.includeManifest === 'undefined')
     options.includeManifest = 'client-build'
 
   if (typeof options.iconsFolder === 'undefined')
     options.iconsFolder = 'static'
-
-  // if (typeof options.manifestNameInPrecache === 'undefined')
-  //   options.manifestNameInPrecache = `/_app/${options.manifestFilename ?? 'manifest.webmanifest'}`
 
   let config: WorkboxConfig
 
@@ -100,10 +94,10 @@ function buildGlobPatterns(globPatterns?: string[]): string[] {
     if (!globPatterns.some(g => g.startsWith('client/')))
       globPatterns.push('client/**/*.{js,css,ico,png,svg,webp}')
 
-    return globPatterns.filter(g => g.startsWith('server/'))
+    return globPatterns
   }
 
-  return ['client/**/*.{js,css,ico,png,svg}', 'prerendered/**/*.html']
+  return ['client/**/*.{js,css,ico,png,svg,webp}', 'prerendered/**/*.html']
 }
 
 function buildGlobIgnores(globIgnores?: string[]): string[] {
@@ -114,5 +108,5 @@ function buildGlobIgnores(globIgnores?: string[]): string[] {
     return globIgnores
   }
 
-  return ['server/**/*.*']
+  return ['server/**']
 }
