@@ -1,5 +1,5 @@
 ---
-title: PWA Builder | Guide
+title: PWA Builder
 editLink: false
 ---
 
