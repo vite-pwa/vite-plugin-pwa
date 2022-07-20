@@ -1,9 +1,12 @@
 import type { ResolvedConfig } from 'vite'
 import type { ManifestTransform } from 'workbox-build'
+import type { BasePartial, GlobPartial, RequiredGlobDirectoryPartial } from 'workbox-build/src/types'
 import type { SvelteKitVitePluginOptions, VitePWAOptions } from '../../types'
 
 // Vite generates <name>.<hash>.<ext> layout while SvelteKit generates <name>-<hash>.<ext>
 // Vite and SvelteKit are not aligned: pwa plugin will use /\.[a-f0-9]{8}\./ by default: #164 optimize workbox work
+
+interface WorkboxConfig extends BasePartial, GlobPartial, RequiredGlobDirectoryPartial {}
 
 // All assets will go to the immutable folder, and so, there is no need to calculate its revision for the sw's precache manifest
 export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: Partial<VitePWAOptions>) {
@@ -12,8 +15,8 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
     adapterFallback,
   } = options.svelteKitVitePluginOptions ?? {}
 
-  if (!options.outDir)
-    options.outDir = './.svelte-kit/output/client'
+  // if (!options.outDir)
+  //   options.outDir = './.svelte-kit/output/client'
 
   if (typeof options.includeManifest === 'undefined')
     options.includeManifest = 'client-build'
@@ -21,44 +24,36 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
   if (typeof options.iconsFolder === 'undefined')
     options.iconsFolder = 'static'
 
-  if (typeof options.manifestNameInPrecache === 'undefined')
-    options.manifestNameInPrecache = `/_app/${options.manifestFilename ?? 'manifest.webmanifest'}`
+  // if (typeof options.manifestNameInPrecache === 'undefined')
+  //   options.manifestNameInPrecache = `/_app/${options.manifestFilename ?? 'manifest.webmanifest'}`
+
+  let config: WorkboxConfig
 
   if (options.strategies === 'injectManifest') {
     options.injectManifest = options.injectManifest ?? {}
-    if (!options.injectManifest.globDirectory)
-      options.injectManifest.globDirectory = '.svelte-kit/output'
-
-    if (!options.injectManifest.modifyURLPrefix) {
-      options.injectManifest.globPatterns = buildGlobPatterns(options.injectManifest.globPatterns)
-      options.injectManifest.globIgnores = buildGlobIgnores(options.injectManifest.globIgnores)
-    }
-
-    if (!options.injectManifest.dontCacheBustURLsMatching)
-      options.injectManifest.dontCacheBustURLsMatching = /-[a-f0-9]{8}\./
-
-    if (!options.injectManifest.manifestTransforms)
-      options.injectManifest.manifestTransforms = [createManifestTransform(base, options.svelteKitVitePluginOptions)]
+    config = options.injectManifest as WorkboxConfig
   }
   else {
     options.workbox = options.workbox ?? {}
-    if (!options.workbox.globDirectory)
-      options.workbox.globDirectory = '.svelte-kit/output'
-
-    if (!options.workbox.modifyURLPrefix) {
-      options.workbox.globPatterns = buildGlobPatterns(options.workbox.globPatterns)
-      options.workbox.globIgnores = buildGlobIgnores(options.workbox.globIgnores)
-    }
-
-    if (!options.workbox.dontCacheBustURLsMatching)
-      options.workbox.dontCacheBustURLsMatching = /-[a-f0-9]{8}\./
-
     if (!options.workbox.navigateFallback)
       options.workbox.navigateFallback = adapterFallback ?? base
 
-    if (!options.workbox.manifestTransforms)
-      options.workbox.manifestTransforms = [createManifestTransform(base, options.svelteKitVitePluginOptions)]
+    config = options.workbox as WorkboxConfig
   }
+
+  if (!config.globDirectory)
+    config.globDirectory = '.svelte-kit/output'
+
+  if (!config.modifyURLPrefix) {
+    config.globPatterns = buildGlobPatterns(config.globPatterns)
+    config.globIgnores = buildGlobIgnores(config.globIgnores)
+  }
+
+  if (!config.dontCacheBustURLsMatching)
+    config.dontCacheBustURLsMatching = /-[a-f0-9]{8}\./
+
+  if (!config.manifestTransforms)
+    config.manifestTransforms = [createManifestTransform(base, options.svelteKitVitePluginOptions)]
 }
 
 function createManifestTransform(base: string, options?: SvelteKitVitePluginOptions): ManifestTransform {
