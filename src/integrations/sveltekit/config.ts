@@ -38,10 +38,8 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
   if (!config.globDirectory)
     config.globDirectory = '.svelte-kit/output'
 
-  if (!config.modifyURLPrefix) {
+  if (!config.modifyURLPrefix)
     config.globPatterns = buildGlobPatterns(config.globPatterns)
-    config.globIgnores = buildGlobIgnores(config.globIgnores)
-  }
 
   if (!config.dontCacheBustURLsMatching)
     config.dontCacheBustURLsMatching = /-[a-f0-9]{8}\./
@@ -98,15 +96,4 @@ function buildGlobPatterns(globPatterns?: string[]): string[] {
   }
 
   return ['client/**/*.{js,css,ico,png,svg,webp}', 'prerendered/**/*.html']
-}
-
-function buildGlobIgnores(globIgnores?: string[]): string[] {
-  if (globIgnores) {
-    if (!globIgnores.some(g => g.startsWith('server/')))
-      globIgnores.push('server/**')
-
-    return globIgnores
-  }
-
-  return ['server/**']
 }
