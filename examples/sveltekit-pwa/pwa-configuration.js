@@ -1,10 +1,4 @@
-import fg from 'fast-glob'
-import { resolve } from 'path'
-import { fileURLToPath } from 'url'
-
 const mode = process.env.SOURCE_MAP === 'true' ? 'development': undefined
-
-const dirname = fileURLToPath(new URL('.', import.meta.url))
 
 /** @type {import('vite-plugin-pwa').VitePWAOptions} */
 const pwaConfiguration = {
@@ -12,7 +6,6 @@ const pwaConfiguration = {
 	scope: '/',
 	base: '/',
 	selfDestroying: process.env.SW_DESTROY === 'true',
-	includeAssets: fg.sync('**/*.{png,svg,txt}', { cwd: resolve(dirname, 'static') }),
 	// manifestFilename: '/_app/manifest.webmanifest',
 	manifest: {
 		short_name: 'PWA Router',

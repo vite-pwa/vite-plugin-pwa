@@ -18,8 +18,11 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
   if (typeof options.includeManifest === 'undefined')
     options.includeManifest = 'client-build'
 
-  if (typeof options.iconsFolder === 'undefined')
-    options.iconsFolder = 'static'
+  // SvelteKit will copy static folder content to `.svelte-kit/output/client`.
+  // We need to disable includeManifestIcons, any icon in the static folder
+  // will be twice in the sw's precache manifest.
+  if (typeof options.includeManifestIcons === 'undefined')
+    options.includeManifestIcons = false
 
   let config: WorkboxConfig
 
