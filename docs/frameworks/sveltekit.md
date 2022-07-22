@@ -22,7 +22,7 @@ You should remove all references to [SvelteKit service worker module](https://ki
 - `SvelteKit` exposes `publicDir` to allow `Vite` plugins using it: `publicDir` is configured with `config.kit.files.assets` (defaults to `static` folder).
 - `SvelteKit` exposes `outDir` to allow `Vite` plugins using it: `outDir` configured with `${svelteKitOutDir}/output/client` (defaults to `.svelte-kit/output/client` folder).
 
-`vite-plugin-pwa` exposes a new `Vite` plugin to configure the plugin with `SvelteKit` defaults (you can still use the original `vite-plugin-pwa`, but you will need to configure it properly: check [SvelteKit Support](/frameworks/sveltekit#sveltekit-support).
+`vite-plugin-pwa` exposes a new `Vite` plugin to configure the plugin with `SvelteKit` defaults (you can still use the original `vite-plugin-pwa`, but you will need to configure it properly: check [SvelteKit Support](/frameworks/sveltekit#sveltekit-support)).
 
 You can check the default configuration options included by the `vite-plugin-pwa` plugin in the [SvelteKit PWA configuration module](https://github.com/antfu/vite-plugin-pwa/tree/main/src/integrations/sveltekit/config.ts).
 
