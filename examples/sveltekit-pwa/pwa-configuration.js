@@ -6,7 +6,6 @@ const pwaConfiguration = {
 	scope: '/',
 	base: '/',
 	selfDestroying: process.env.SW_DESTROY === 'true',
-	// manifestFilename: '/_app/manifest.webmanifest',
 	manifest: {
 		short_name: 'PWA Router',
 		name: 'PWA Router',
