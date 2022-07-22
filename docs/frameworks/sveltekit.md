@@ -18,48 +18,27 @@ You should remove all references to [SvelteKit service worker module](https://ki
 
 ## SvelteKit Vite Plugin
 
-`Sveltkit` maintainers have been working hard to align `Vite` and `SvelteKit`, right now almost **99%** aligned:
-- `SvelteKit` exposes `publicDir` to allow `Vite` plugins using it: `publicDir` is configured with `config.kit.files.assets` (defaults to `static` folder).
-- `SvelteKit` exposes `outDir` to allow `Vite` plugins using it: `outDir` configured with `${svelteKitOutDir}/output/client` (defaults to `.svelte-kit/output/client` folder).
-
-`vite-plugin-pwa` exposes a new `Vite` plugin to configure the plugin with `SvelteKit` defaults (you can still use the original `vite-plugin-pwa`, but you will need to configure it properly: check [SvelteKit Support](/frameworks/sveltekit#sveltekit-support)).
-
-You can check the default configuration options included by the `vite-plugin-pwa` plugin in the [SvelteKit PWA configuration module](https://github.com/antfu/vite-plugin-pwa/tree/main/src/integrations/sveltekit/config.ts).
+`Sveltkit` maintainers have been working hard to align `Vite` and `SvelteKit`. The main changes done in `SvelteKit` plugin are:
+- exposes and configures `publicDir` properly  to allow `Vite` plugins using it: `publicDir` is configured with `config.kit.files.assets` (defaults to `static` folder).
+- exposes and configures `outDir` to allow `Vite` plugins using it: `outDir` is configured with `${svelteKitOutDir}/output/client` (defaults to `.svelte-kit/output/client` folder).
+- don't call `process.exit` in the `closeBundle` hook: which means that any `Vite` plugin that is configured after the `SvelteKit` plugin (or has `enforce: 'post'`) will be called by `Vite`.
 
 To update your project to use the new `vite-plugin-pwa` for `SvelteKit`, you only need to change the `Vite` config file (you don't need oldest `pwa` and `pwa-configuration` modules):
 ```ts
 // vite.config.js
-// import { VitePWA } from 'vite-plugin-pwa';          <== replace this import
-import { ViteSvelteKitPWA } from 'vite-plugin-pwa'; // <== with this one
+import { VitePWA } from 'vite-plugin-pwa';
 import { sveltekit } from '@sveltejs/kit/vite';
 
 /** @type {import('vite').UserConfig} */
 const config = {
   plugins: [
     sveltekit(),
-    ViteSvelteKitPWA({/* options */})
+    VitePWA({/* options */})
   ],
 };
 
 export default config;
 ```
-
-## SvelteKit Support
-
-Although the `SvelteKit` maintainers have been working hard, there is still one last problem that needs to be resolved: `SvelteKit` uses `process.exit` in the `closeBundle` hook, which means that any `Vite` plugin that is configured after the `SvelteKit` plugin will not be called.
-
-You can check the original issue at `SvelteKit` repo: [Prerender in subprocess](https://github.com/sveltejs/kit/issues/5306).
-
-Since the `vite-plugin-pwa` `BuildPlugin` has `enforce: 'post'`, `Vite` will set it after the `SvelteKit` plugin (it doesn't matter if you set it before or after the ` SvelteKit` in `Vite` plugins array).
-
-To solve this problem, `vite-plugin-pwa` has created a new internal `SvelteKitAdapterPlugin` plugin, basically to make the execution of the `closeBundle` hook of the `vite-plugin-pwa` `BuildPlugin` and the `SvelteKit` plugin sequential.
-
-`SvelteKitAdapterPlugin` will intercept the `closeBundle` hook on both plugins, sleep for 1 second, call `closeBundle` on `BuildPlugin`, and finally call `closeBundle` on `SvelteKit`.
-::: danger
-That's why you will need to use `ViteSvelteKitPWA` instead `VitePWA`.
-
-When `SvelteKit` fix the issue, we'll remove the internal `SvelteKitAdapterPlugin` plugin and the `ViteSvelteKitPWA` export, and so you will need to update your `Vite` configuration file to use `VitePWA` export.
-:::
 
 ## SvelteKit PWA Configuration
 
@@ -74,9 +53,58 @@ When `SvelteKit` fix the issue, we'll remove the internal `SvelteKitAdapterPlugi
 
 Some of the above options will be excluded if you already provide them or if you provide options where there may be a conflict between them: you can view the source code of the [SvelteKit PWA configuration module](https://github.com/antfu/vite-plugin-pwa/tree/main/src/integrations/sveltekit/config.ts) to verify that there are no conflicts.
 
-## Prompt for update
+## SvelteKit Pages
 
-Since `SvelteKit` uses `SSR / SSG`, we need to add the `ReloadPrompt` component using `dynamic import`. `vite-plugin-pwa` plugin will only register the service worker on build, it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker).
+If you want your application can work in offline, you should remove `hydrate: false` from all your pages, this will prevent to inject the layout and so will not work in offline.
+
+### Auto Update
+
+Since `SvelteKit` uses `SSR / SSG`, we need to call the `vite-plugin-pwa` virtual module using `dynamic import`.
+
+The best place to include the virtual call will be in main layout of the application (you should register it in any layout):
+
+::: details src/routes/__layout.svelte
+```html
+<script>
+  import { onMount } from 'svelte'
+  import { browser, dev } from '$app/env'
+
+  onMount(async () => {
+    if (!dev && browser) {
+      const { registerSW } = await import('virtual:pwa-register')
+      registerSW({
+        immediate: true,
+        onRegistered(r) {
+          // uncomment following code if you want check for updates
+          // r && setInterval(() => {
+          //    console.log('Checking for sw update')
+          //    r.update()
+          // }, 20000 /* 20s for testing purposes */)
+          console.log(`SW Registered: ${r}`)
+        },
+        onRegisterError(error) {
+          console.log('SW registration error', error)
+        }
+      })
+    }
+  })
+</script>
+
+<svelte:head>
+  {#if (!dev && browser)}
+    <link rel="manifest" href="/manifest.webmanifest">
+  {/if}
+</svelte:head>
+
+<main>
+  <slot />
+</main>
+```
+:::
+
+### Prompt for update
+
+Since `SvelteKit` uses `SSR / SSG`, we need to add the `ReloadPrompt` component using `dynamic import`. `vite-plugin-pwa` plugin will only register the service worker on build (check the [Development section](/guide/development)), it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker).
 
 The best place to include the `ReloadPrompt` component will be in main layout of the application (you should register it in any layout):
 
@@ -88,7 +116,7 @@ The best place to include the `ReloadPrompt` component will be in main layout of
 
   let ReloadPrompt
   onMount(async () => {
-    !dev && browser && (ReloadPrompt = (await import('$lib/components/ReloadPrompt.svelte')).default)
+    !dev && browser && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default)
   })
 </script>
 
@@ -105,6 +133,85 @@ The best place to include the `ReloadPrompt` component will be in main layout of
 {#if ReloadPrompt}
   <svelte:component this={ReloadPrompt} />
 {/if}
+```
+:::
+
+::: details $lib/ReloadPrompt.svelte
+```html
+<script lang="ts">
+	import { useRegisterSW } from 'virtual:pwa-register/svelte'
+	const {
+		needRefresh,
+		updateServiceWorker
+	} = useRegisterSW({
+		onRegistered(r) {
+		    // uncomment following code if you want check for updates
+			// r && setInterval(() => {
+            //    console.log('Checking for sw update')
+            //    r.update()
+            // }, 20000 /* 20s for testing purposes */)
+			console.log(`SW Registered: ${r}`)
+		},
+		onRegisterError(error) {
+			console.log('SW registration error', error)
+		},
+	})
+	const close = () => {
+		offlineReady.set(false)
+		needRefresh.set(false)
+	}
+	$: toast = $offlineReady || $needRefresh
+</script>
+
+{#if toast}
+	<div class="pwa-toast" role="alert">
+		<div class="message">
+			{#if $offlineReady}
+				<span>
+					App ready to work offline
+				</span>
+			{:else}
+				<span>
+					New content available, click on reload button to update.
+				</span>
+			{/if}
+		</div>
+		{#if $needRefresh}
+			<button on:click={() => updateServiceWorker(true)}>
+				Reload
+			</button>
+		{/if}
+		<button on:click={close}>
+			Close
+		</button>
+	</div>
+{/if}
+
+<style>
+	.pwa-toast {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		margin: 16px;
+		padding: 12px;
+		border: 1px solid #8885;
+		border-radius: 4px;
+		z-index: 2;
+		text-align: left;
+		box-shadow: 3px 4px 5px 0 #8885;
+		background-color: white;
+	}
+	.pwa-toast .message {
+		margin-bottom: 8px;
+	}
+	.pwa-toast button {
+		border: 1px solid #8885;
+		outline: none;
+		margin-right: 5px;
+		border-radius: 2px;
+		padding: 3px 10px;
+	}
+</style>
 ```
 :::
 
