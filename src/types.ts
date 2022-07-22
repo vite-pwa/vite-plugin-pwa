@@ -34,7 +34,7 @@ export interface SvelteKitVitePluginOptions {
   /**
    * `globPatterns` for client folder.
    *
-   * @default ["client/**\/*.{js,css,ico,png,svg}"]
+   * @default ["client/**\/*.{js,css,ico,png,svg,webp}"]
    */
   globClientPatterns?: string[]
 }
