@@ -18,11 +18,6 @@ You should remove all references to [SvelteKit service worker module](https://ki
 
 ## SvelteKit Vite Plugin
 
-`Sveltkit` maintainers have been working hard to align `Vite` and `SvelteKit`. The main changes done in `SvelteKit` plugin are:
-- exposes and configures `publicDir` properly  to allow `Vite` plugins using it: `publicDir` is configured with `config.kit.files.assets` (defaults to `static` folder).
-- exposes and configures `outDir` to allow `Vite` plugins using it: `outDir` is configured with `${svelteKitOutDir}/output/client` (defaults to `.svelte-kit/output/client` folder).
-- don't call `process.exit` in the `closeBundle` hook: which means that any `Vite` plugin that is configured after the `SvelteKit` plugin (or has `enforce: 'post'`) will be called by `Vite`.
-
 To update your project to use the new `vite-plugin-pwa` for `SvelteKit`, you only need to change the `Vite` config file (you don't need oldest `pwa` and `pwa-configuration` modules):
 ```ts
 // vite.config.js
