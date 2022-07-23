@@ -5,7 +5,7 @@ title: SvelteKit | Frameworks
 # SvelteKit
 
 ::: warning
-From `SvelteKit` version `1.0.0-next.358+`, `SvelteKit` is just another `Vite` plugin, and latest versions will also require you to update your application to use `Vite 3`.
+From SvelteKit version `1.0.0-next.358+`, SvelteKit is just another Vite plugin, and latest versions will also require you to update your application to use Vite 3.
 :::
 
 ::: info
@@ -35,26 +35,26 @@ const config = {
 export default config
 ```
 
-## SvelteKit PWA Configuration
+## Plugin Configuration
 
-`vite-plugin-pwa` has been modified to automatically detect `SvelteKit` plugin: once detected, it will add a set of default configuration options to your `vite-plugin-pwa` options:
-- configure the `globDirectory` with `SvelteKit` output folder: `globDirectory: '.svelte-kit/output'`.
-- add `.svelte-kit/output/client` and `.svelte-kit/output/prerendered` to the `globPatterns`: `globPatterns: ['prerendered/**/*.html', 'client/**/*.{js,css,ico,png,svg,webp}']`.
-- configure default `Rollup` assets naming convention: `dontCacheBustURLsMatching: /-[a-f0-9]{8}\./` (by default, `vite-plugin-pwa` will use `Vite` assets naming convention: `/\.[a-f0-9]{8}\./`).
-- generate the service worker only on client build: `includeManifest: 'client-build'`.
-- exclude adding manifest icons: `includeManifestIcons: false` (`Vite` will copy all `publicDir` content to the `SvelteKit` output folder before `vite-plugin-pwa` runs and so you will end up with duplicated entries in the service worker's precache manifest).
-- allow you to configure `SvelteKit trailingSlash` option: `vite-plugin-pwa` will use it in its internal `Workbox manifestTransform` callback ([SvelteKit trailingslash](https://kit.svelte.dev/docs/configuration#trailingslash)).
-- allow you to configure `SvelteKit fallback` adapter option: `vite-plugin-pwa` will configure it in the `workbox.navigateFallback` options, only when using `generateSW` strategy ([adapter-static fallback](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback)).
+`vite-plugin-pwa` has been modified to automatically detect SvelteKit plugin: once detected, it will add a set of default configuration options to your `vite-plugin-pwa` options:
+- configures the `globDirectory` with SvelteKit output folder: `globDirectory: '.svelte-kit/output'`.
+- adds `.svelte-kit/output/client` and `.svelte-kit/output/prerendered` to the `globPatterns`: `globPatterns: ['prerendered/**/*.html', 'client/**/*.{js,css,ico,png,svg,webp}']`: you can use ``
+- configures default Rollup assets naming convention: `dontCacheBustURLsMatching: /-[a-f0-9]{8}\./` (by default, `vite-plugin-pwa` will use Vite assets naming convention: `/\.[a-f0-9]{8}\./`).
+- generates the service worker only on client build: `includeManifest: 'client-build'`.
+- excludes adding manifest icons: `includeManifestIcons: false` (Vite will copy all `publicDir` content to the SvelteKit output folder before `vite-plugin-pwa` runs, and so, you will end up with duplicated entries in the service worker's precache manifest).
+- allows you to configure `trailingSlash` option: `vite-plugin-pwa` will use it in its internal Workbox `manifestTransform` callback ([SvelteKit trailingslash](https://kit.svelte.dev/docs/configuration#trailingslash)).
+- allows you to configure `fallback` adapter option: `vite-plugin-pwa` will configure it in the `workbox.navigateFallback` options, only when using `generateSW` strategy ([adapter-static fallback](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback)).
 
 Some of the above options will be excluded if you already provide them or if you provide options where there may be a conflict between them: you can view the source code of the [SvelteKit PWA configuration module](https://github.com/antfu/vite-plugin-pwa/tree/main/src/integrations/sveltekit/config.ts) to verify that there are no conflicts.
 
 ## SvelteKit Pages
 
-If you want your application can work in offline, you should remove `hydrate: false` from all your pages, this will prevent to inject the layout and so will not work in offline.
+If you want your application can work offline, you should remove `hydrate: false` from all your pages, it will prevent to inject the layout and so will not work offline.
 
 ### Auto Update
 
-Since `SvelteKit` uses SSR / SSG, we need to call the `vite-plugin-pwa` virtual module using a dynamic `import`.
+Since SvelteKit uses SSR/SSG, we need to call the `vite-plugin-pwa` virtual module using a dynamic `import`.
 
 The best place to include the virtual call will be in main layout of the application (you should register it in any layout):
 
@@ -99,7 +99,7 @@ The best place to include the virtual call will be in main layout of the applica
 
 ### Prompt for update
 
-Since `SvelteKit` uses SSR / SSG, we need to add the `ReloadPrompt` component using a dynamic `import`. `vite-plugin-pwa` plugin will only register the service worker on build (check the [Development section](/guide/development)), it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker).
+Since SvelteKit uses SSR/SSG, we need to add the `ReloadPrompt` component using a dynamic `import`. `vite-plugin-pwa` plugin will only register the service worker on build (check the [Development section](/guide/development)), it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker).
 
 The best place to include the `ReloadPrompt` component will be in main layout of the application (you should register it in any layout):
 
