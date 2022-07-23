@@ -28,10 +28,11 @@ export function BuildPlugin(enforce: 'pre' | 'post', ctx: PWAPluginContext) {
     },
     async closeBundle() {
       if (!ctx.options.disable && !ctx.viteConfig.build.ssr) {
-        if (ctx.hasSvelteKitPlugin() && enforce === 'post')
+        const svelteKitPresent = ctx.hasSvelteKitPlugin()
+        if (svelteKitPresent && enforce === 'post')
           throw new Error('Use ViteSvelteKitPWA instead VitePWA in your Vite config file: import { ViteSvelteKitPWA } from \'vite-plugin-pwa\'')
 
-        if (!ctx.hasSvelteKitPlugin() && enforce === 'pre')
+        if (!svelteKitPresent && enforce === 'pre')
           throw new Error('Use VitePWA instead ViteSvelteKitPWA in your Vite config file: import { VitePWA } from \'vite-plugin-pwa\'')
 
         await _generateSW(ctx)
