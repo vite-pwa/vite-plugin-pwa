@@ -64,11 +64,11 @@ export async function configureStaticAssets(
     workbox,
     includeAssets,
     includeManifestIcons,
-    manifestNameInPrecache,
-    iconsFolder: publicDir,
+    manifestFilename,
   } = resolvedVitePWAOptions
 
   const useInjectManifest = strategies === 'injectManifest'
+  const { publicDir } = viteConfig
   const globs: string[] = []
   const manifestEntries: (string | ManifestEntry)[] = lookupAdditionalManifestEntries(
     useInjectManifest,
@@ -83,12 +83,14 @@ export async function configureStaticAssets(
     else
       globs.push(normalizeIconPath(includeAssets))
   }
+
   if (includeManifestIcons && manifest) {
     manifest.icons && includeIcons(manifest.icons, globs)
     manifest.shortcuts && manifest.shortcuts.forEach((s) => {
       s.icons && includeIcons(s.icons, globs)
     })
   }
+
   if (globs.length > 0) {
     let assets = await fg(
       globs, {
@@ -107,23 +109,25 @@ export async function configureStaticAssets(
       })
       assets = assets.filter(a => !included.includes(a))
     }
+
     const assetsEntries = await Promise.all(assets.map((a) => {
       return buildManifestEntry(publicDir, a)
     }))
     manifestEntries.push(...assetsEntries)
   }
-  if (manifest && includeManifestInBuild(resolvedVitePWAOptions, viteConfig)) {
+
+  if (manifest && !viteConfig.build.ssr) {
     const cHash = crypto.createHash('MD5')
     cHash.update(generateWebManifestFile(resolvedVitePWAOptions))
     manifestEntries.push({
-      url: manifestNameInPrecache,
+      url: manifestFilename,
       revision: `${await cHash.digest('hex')}`,
     })
   }
+
   if (manifestEntries.length > 0) {
     if (useInjectManifest)
       injectManifest.additionalManifestEntries = manifestEntries
-
     else
       workbox.additionalManifestEntries = manifestEntries
   }
@@ -131,10 +135,4 @@ export async function configureStaticAssets(
 
 export function generateWebManifestFile(options: ResolvedVitePWAOptions): string {
   return `${JSON.stringify(options.manifest, null, options.minify ? 0 : 2)}\n`
-}
-
-export function includeManifestInBuild(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
-  return options.includeManifest === true
-      || (options.includeManifest === 'client-build' && !viteConfig.build.ssr)
-      || (options.includeManifest === 'ssr-build' && viteConfig.build.ssr)
 }

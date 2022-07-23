@@ -149,26 +149,6 @@ export interface VitePWAOptions {
    */
   includeManifestIcons: boolean
   /**
-   * By default, the `manifest` will be included on the service worker's *precache*.
-   *
-   * @default true
-   */
-  includeManifest?: boolean | 'ssr-build' | 'client-build'
-  /**
-   * The `manifest` will be included on the service worker's *precache* with this name.
-   *
-   * By default, the plugin will use the `manifestFilename`.
-   *
-   * @default {@manifestFilename}
-   */
-  manifestNameInPrecache?: string
-  /**
-   * The folder where locate the static icons.
-   *
-   * By default, the plugin will use Vite's `publicDir` option directory.
-   */
-  iconsFolder?: string
-  /**
    * Disable service worker registration and generation on `build`?
    *
    * @default false
