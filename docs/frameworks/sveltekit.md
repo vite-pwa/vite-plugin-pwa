@@ -63,6 +63,7 @@ The best place to include the virtual call will be in main layout of the applica
 <script>
   import { onMount } from 'svelte'
   import { browser, dev } from '$app/env'
+  import { assets } from '$app/paths'
 
   onMount(async () => {
     if (!dev && browser) {
@@ -87,7 +88,7 @@ The best place to include the virtual call will be in main layout of the applica
 
 <svelte:head>
   {#if (!dev && browser)}
-    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="manifest" href="{assets}/manifest.webmanifest">
   {/if}
 </svelte:head>
 
@@ -108,6 +109,7 @@ The best place to include the `ReloadPrompt` component will be in main layout of
 <script>
   import { onMount } from 'svelte'
   import { browser, dev } from '$app/env'
+  import { assets } from '$app/paths'
 
   let ReloadPrompt
   onMount(async () => {
@@ -117,7 +119,7 @@ The best place to include the `ReloadPrompt` component will be in main layout of
 
 <svelte:head>
   {#if (!dev && browser)}
-    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="manifest" href="{assets}/manifest.webmanifest">
   {/if}
 </svelte:head>
 
