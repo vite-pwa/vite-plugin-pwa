@@ -99,7 +99,7 @@ The best place to include the virtual call will be in main layout of the applica
 
 ### Prompt for update
 
-Since `SvelteKit` uses `SSR / SSG`, we need to add the `ReloadPrompt` component using `dynamic import`. `vite-plugin-pwa` plugin will only register the service worker on build (check the [Development section](/guide/development)), it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker).
+Since `SvelteKit` uses SSR / SSG, we need to add the `ReloadPrompt` component using a dynamic `import`. `vite-plugin-pwa` plugin will only register the service worker on build (check the [Development section](/guide/development)), it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker).
 
 The best place to include the `ReloadPrompt` component will be in main layout of the application (you should register it in any layout):
 
