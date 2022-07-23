@@ -38,8 +38,9 @@ export default config
 ## Plugin Configuration
 
 `vite-plugin-pwa` has been modified to automatically detect SvelteKit plugin: once detected, it will add a set of default configuration options to your `vite-plugin-pwa` options:
-- configures the `globDirectory` with SvelteKit output folder: `globDirectory: '.svelte-kit/output'`.
-- adds `.svelte-kit/output/client` and `.svelte-kit/output/prerendered` to the `globPatterns`: `globPatterns: ['prerendered/**/*.html', 'client/**/*.{js,css,ico,png,svg,webp}']`: you can use ``
+- allows you to configure the SvelteKit build output folder: defaults to `.svelte-kit` but you can change it with `svelteKitOptions.outDir` (([SvelteKit outDir](https://kit.svelte.dev/docs/configuration#outdir))).
+- configures the `globDirectory` with SvelteKit build output folder: `globDirectory: '.svelte-kit/output'` ().
+- adds `.svelte-kit/output/client` and `.svelte-kit/output/prerendered` to the `globPatterns`: `globPatterns: ['prerendered/**/*.html', 'client/**/*.{js,css,ico,png,svg,webp}']`.
 - configures default Rollup assets naming convention: `dontCacheBustURLsMatching: /-[a-f0-9]{8}\./` (by default, `vite-plugin-pwa` will use Vite assets naming convention: `/\.[a-f0-9]{8}\./`).
 - generates the service worker only on client build: `includeManifest: 'client-build'`.
 - excludes adding manifest icons: `includeManifestIcons: false` (Vite will copy all `publicDir` content to the SvelteKit output folder before `vite-plugin-pwa` runs, and so, you will end up with duplicated entries in the service worker's precache manifest).

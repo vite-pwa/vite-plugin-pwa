@@ -21,6 +21,12 @@ export interface SvelteKitVitePluginOptions {
   base?: string
 
   /**
+   * @default '.svelte-kit'
+   * @see https://kit.svelte.dev/docs/configuration#outdir
+   */
+  outDir?: string
+
+  /**
    * @see https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback
    */
   adapterFallback?: string

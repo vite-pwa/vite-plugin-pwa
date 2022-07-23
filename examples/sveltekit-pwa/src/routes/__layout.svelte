@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from 'svelte'
 	import { browser, dev } from '$app/env'
+	import { assets } from '$app/paths'
 
 	// replaced dynamically
 	const date = '__DATE__'
@@ -16,12 +17,12 @@
 
 <svelte:head>
 	{#if enableManifest}
-		<link rel="manifest" href="/manifest.webmanifest">
+		<link rel="manifest" href="{assets}/manifest.webmanifest">
 	{/if}
 </svelte:head>
 
 <main>
-	<img src="/favicon.svg" alt="PWA Logo" width="60" height="60"/>
+	<img src="{assets}/favicon.svg" alt="PWA Logo" width="60" height="60"/>
 	<h1>SvelteKit PWA!</h1>
 
 	<div class="built">Built at: { date }</div>

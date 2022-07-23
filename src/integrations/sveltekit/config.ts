@@ -9,6 +9,7 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
   const {
     base = viteOptions.build.base ?? '/',
     adapterFallback,
+    outDir = '.svelte-kit',
   } = options.svelteKitOptions ?? {}
 
   // Vite will copy public folder to the globDirectory after pwa plugin runs:
@@ -36,7 +37,7 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
   // SvelteKit outDir is `.svelte-kit/output/client`.
   // We need to include the parent folder since SvelteKit will generate SSG in `.svelte-kit/output/prerendered` folder.
   if (!config.globDirectory)
-    config.globDirectory = '.svelte-kit/output'
+    config.globDirectory = `${outDir}/output`
 
   if (!config.modifyURLPrefix)
     config.globPatterns = buildGlobPatterns(config.globPatterns)
