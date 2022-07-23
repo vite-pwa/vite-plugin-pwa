@@ -44,7 +44,7 @@ export default config
 - configures default Rollup assets naming convention: `dontCacheBustURLsMatching: /-[a-f0-9]{8}\./` (by default, `vite-plugin-pwa` will use Vite assets naming convention: `/\.[a-f0-9]{8}\./`).
 - excludes adding manifest icons: `includeManifestIcons: false` (Vite will copy all `publicDir` content to the SvelteKit output folder before `vite-plugin-pwa` runs, and so, you will end up with duplicated entries in the service worker's precache manifest).
 - allows you to configure `trailingSlash` option: `vite-plugin-pwa` will use it in its internal Workbox `manifestTransform` callback ([SvelteKit trailingslash](https://kit.svelte.dev/docs/configuration#trailingslash)).
-- allows you to configure `fallback` adapter option: `vite-plugin-pwa` will configure it in the `workbox.navigateFallback` options, only when using `generateSW` strategy ([adapter-static fallback](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback)).
+- allows you to configure `fallback` adapter option: `vite-plugin-pwa` will configure it in the `workbox.navigateFallback` option, only when using `generateSW` strategy ([adapter-static fallback](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback)).
 
 Some of the above options will be excluded if you already provide them or if you provide options where there may be a conflict between them: you can view the source code of the [SvelteKit PWA configuration module](https://github.com/antfu/vite-plugin-pwa/tree/main/src/integrations/sveltekit/config.ts) to verify that there are no conflicts.
 
