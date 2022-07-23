@@ -23,7 +23,7 @@ export function ViteSvelteKitPWA(userOptions: Partial<VitePWAOptions> = {}): Plu
     //   it will copy the kit build output folder, and so,
     //   we need the sw generated before the adapter call.
     // - If the build plugin runs after the kit plugin, the sw will
-    //   be not copied to the adapter output)
+    //   be not copied to the adapter output
     BuildPlugin('pre', ctx),
     DevPlugin(ctx),
   ]
