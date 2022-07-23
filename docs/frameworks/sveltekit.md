@@ -42,7 +42,6 @@ export default config
 - configures the `globDirectory` with SvelteKit build output folder: `globDirectory: '.svelte-kit/output'` (using previous `svelteKitOptions.outDir` option).
 - adds `.svelte-kit/output/client` and `.svelte-kit/output/prerendered` folders to the `globPatterns`: `globPatterns: ['prerendered/**/*.html', 'client/**/*.{js,css,ico,png,svg,webp}']`.
 - configures default Rollup assets naming convention: `dontCacheBustURLsMatching: /-[a-f0-9]{8}\./` (by default, `vite-plugin-pwa` will use Vite assets naming convention: `/\.[a-f0-9]{8}\./`).
-- generates the service worker only on client build: `includeManifest: 'client-build'`.
 - excludes adding manifest icons: `includeManifestIcons: false` (Vite will copy all `publicDir` content to the SvelteKit output folder before `vite-plugin-pwa` runs, and so, you will end up with duplicated entries in the service worker's precache manifest).
 - allows you to configure `trailingSlash` option: `vite-plugin-pwa` will use it in its internal Workbox `manifestTransform` callback ([SvelteKit trailingslash](https://kit.svelte.dev/docs/configuration#trailingslash)).
 - allows you to configure `fallback` adapter option: `vite-plugin-pwa` will configure it in the `workbox.navigateFallback` options, only when using `generateSW` strategy ([adapter-static fallback](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback)).
