@@ -54,7 +54,7 @@ If you want your application can work in offline, you should remove `hydrate: fa
 
 ### Auto Update
 
-Since `SvelteKit` uses `SSR / SSG`, we need to call the `vite-plugin-pwa` virtual module using `dynamic import`.
+Since `SvelteKit` uses SSR / SSG, we need to call the `vite-plugin-pwa` virtual module using a dynamic `import`.
 
 The best place to include the virtual call will be in main layout of the application (you should register it in any layout):
 
