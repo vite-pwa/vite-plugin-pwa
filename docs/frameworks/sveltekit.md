@@ -18,7 +18,7 @@ You should remove all references to [SvelteKit service worker module](https://ki
 
 ## SvelteKit Vite Plugin
 
-To update your project to use the new `vite-plugin-pwa` for `SvelteKit`, you only need to change the `Vite` config file (you don't need oldest `pwa` and `pwa-configuration` modules):
+To update your project to use the new `vite-plugin-pwa` for SvelteKit, you only need to change the Vite config file (you don't need oldest `pwa` and `pwa-configuration` modules):
 ```ts
 // vite.config.js
 import { VitePWA } from 'vite-plugin-pwa';
