@@ -9,11 +9,7 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
   const {
     base = viteOptions.build.base ?? '/',
     adapterFallback,
-  } = options.svelteKitVitePluginOptions ?? {}
-
-  // exclude pwa plugin from SSR build
-  if (typeof options.includeManifest === 'undefined')
-    options.includeManifest = 'client-build'
+  } = options.svelteKitOptions ?? {}
 
   // Vite will copy public folder to the globDirectory after pwa plugin runs:
   // globDirectory is the build folder.
@@ -51,7 +47,7 @@ export function configureSvelteKitOptions(viteOptions: ResolvedConfig, options: 
     config.dontCacheBustURLsMatching = /-[a-f0-9]{8}\./
 
   if (!config.manifestTransforms)
-    config.manifestTransforms = [createManifestTransform(base, options.svelteKitVitePluginOptions)]
+    config.manifestTransforms = [createManifestTransform(base, options.svelteKitOptions)]
 }
 
 function createManifestTransform(base: string, options?: SvelteKitVitePluginOptions): ManifestTransform {

@@ -30,13 +30,6 @@ export interface SvelteKitVitePluginOptions {
    * @see https://kit.svelte.dev/docs/configuration#trailingslash
    * */
   trailingSlash?: 'never' | 'always' | 'ignore'
-
-  /**
-   * `globPatterns` for client folder.
-   *
-   * @default ["client/**\/*.{js,css,ico,png,svg,webp}"]
-   */
-  globClientPatterns?: string[]
 }
 
 /**
@@ -158,18 +151,16 @@ export interface VitePWAOptions {
    * Development options.
    */
   devOptions?: DevOptions
-
   /**
-   * Unregister the service worker?
+   * Unregister the service worker?.
    *
    * @default false
    */
   selfDestroying?: boolean
-
   /**
    * SvelteKit Vite Plugin Options.
    */
-  svelteKitVitePluginOptions?: SvelteKitVitePluginOptions
+  svelteKitOptions?: SvelteKitVitePluginOptions
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
