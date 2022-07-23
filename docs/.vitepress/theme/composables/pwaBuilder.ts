@@ -6,13 +6,14 @@ import type {
   BuilderError,
   FaviconType,
   FrameworkType, InjectRegisterType,
+  PWABuilderData,
   RadioData,
   State,
   StrategyType,
   YesNoType,
 } from '../types'
 
-import { DEFAULT_TIMEOUT, generatePWACode, resetPWACode } from '../modules/generatePWACode'
+import { DEFAULT_TIMEOUT, generatePWACode, prepareBuilder, resetPWACode } from '../modules/generatePWACode'
 
 export const focusInput = (element?: HTMLElement, to: ScrollLogicalPosition = 'nearest') => {
   setTimeout(() => element?.focus(), 0)
@@ -35,6 +36,7 @@ export function usePWABuilder() {
   const behavior = ref<BehaviorType | undefined>('prompt')
   const warnUser = ref<YesNoType | undefined>('false')
   const injectRegister = ref<InjectRegisterType | undefined>(undefined)
+  const periodicUpdates = ref<YesNoType | undefined>('false')
   const framework = ref<FrameworkType | undefined>(undefined)
   const ts = ref<YesNoType | undefined>(undefined)
   const scope = ref<string | undefined>('/')
@@ -52,20 +54,16 @@ export function usePWABuilder() {
   const yesNoList = createYesNo()
   const faviconList = createFavicons()
 
-  const showFrameworks = computed(() => {
-    return behavior.value === 'prompt' || warnUser.value === 'true'
-  })
-
   const showInjectRegister = computed(() => {
     return behavior.value === 'autoUpdate' && warnUser.value === 'false'
   })
 
   const showTS = computed(() => {
-    return showFrameworks.value && !(framework.value === 'javascript' || framework.value === 'typescript')
+    return !(!framework.value || framework.value === 'javascript' || framework.value === 'typescript')
   })
 
   const generateTypeScript = computed(() => {
-    return showTS.value || framework.value === 'typescript'
+    return framework.value === 'typescript' || ts.value === 'true'
   })
 
   const reset = async () => {
@@ -106,7 +104,9 @@ export function usePWABuilder() {
           case 'description':
           case 'themeColor':
           case 'maskedIcon':
+          case 'framework':
           case 'strategy':
+          case 'periodicUpdates':
           case 'behavior':
           case 'warn':
             return true
@@ -124,12 +124,6 @@ export function usePWABuilder() {
           validationResult.push(customErrors[0])
       }
 
-      if (showFrameworks.value) {
-        customErrors = await inputs.value.find(i => i.key === 'frameworks')?.validate()
-        if (customErrors && customErrors.length > 0)
-          validationResult.push(customErrors[0])
-      }
-
       if (showTS.value) {
         customErrors = await inputs.value.find(i => i.key === 'typescript')?.validate()
         if (customErrors && customErrors.length > 0)
@@ -142,11 +136,10 @@ export function usePWABuilder() {
         validationResult[0].focus()
         return
       }
+
+      // reset previous pwa result
       resetPWACode()
-      await nextTick()
-      state.value = 'result'
-      await new Promise(resolve => setTimeout(resolve, DEFAULT_TIMEOUT))
-      await generatePWACode({
+      const data: PWABuilderData = {
         title: title.value!,
         shortName: shortName.value,
         description: description.value!,
@@ -154,12 +147,19 @@ export function usePWABuilder() {
         strategy: strategy.value!,
         behavior: behavior.value!,
         registerType: injectRegister.value!,
-        framework: framework.value,
+        framework: framework.value!,
+        typescript: generateTypeScript.value,
         scope: scope.value!,
         startUrl: startUrl.value,
         addManifestMaskedIcon: maskedIcon.value === 'true',
         favicon: favicon.value!,
-      })
+      }
+      // prepare the result: enable entries for target fw
+      const builder = await prepareBuilder(data)
+      state.value = 'result'
+      await new Promise(resolve => setTimeout(resolve, DEFAULT_TIMEOUT))
+      // generate pwa result
+      await generatePWACode(builder, data)
     }
     finally {
       generating.value = false
@@ -193,7 +193,7 @@ export function usePWABuilder() {
     maskedIcon,
     favicon,
     showInjectRegister,
-    showFrameworks,
+    periodicUpdates,
     showTS,
     strategies,
     behaviors,
@@ -233,8 +233,7 @@ function createFrameworks() {
     text: 'Solid JS',
   }, {
     value: 'sveltekit',
-    text: 'Svelte Kit (WIP: coming soon)',
-    disabled: true,
+    text: 'SvelteKit',
   }, {
     value: 'vitepress',
     text: 'VitePress',

@@ -12,11 +12,14 @@ export function generatePluginConfiguration(
     behavior,
     startUrl,
     addManifestMaskedIcon,
+    typescript,
   }: PWABuilderData,
   pwaBuilderResult: PWABuilderResult,
 ) {
+  const extension = typescript ? 'ts' : 'js'
+  pwaBuilderResult.codeType = extension
   pwaBuilderResult.code = `
-// vite.config.[tj]s  
+// vite.config.${extension}  
 import { VitePWA } from 'vite-plugin-pwa'
 
 VitePWA({

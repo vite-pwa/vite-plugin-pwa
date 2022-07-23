@@ -8,10 +8,9 @@ export type FrameworkType =
     | 'preact'
     | 'solid'
     | 'svelte'
-    | 'svelteKit'
+    | 'sveltekit'
     | 'javascript'
     | 'typescript'
-    | undefined
 export type StrategyType = 'generateSW' | 'injectManifest' | undefined
 export type BehaviorType = 'prompt' | 'autoUpdate' | undefined
 export type InjectRegisterType = 'inline' | 'script' | undefined
@@ -47,6 +46,7 @@ export interface PWABuilderResult {
   loading: boolean
   enabled: boolean
   code?: string
+  codeType: 'html' | 'js' | 'ts' | 'css' | 'vue' | 'jsx' | 'tsx' | 'svelte' | 'astro'
 }
 
 export interface PWABuilderData {
@@ -58,8 +58,28 @@ export interface PWABuilderData {
   behavior: 'prompt' | 'autoUpdate'
   registerType: 'inline' | 'script'
   framework: FrameworkType
+  typescript: boolean
   scope: string
   startUrl?: string
   addManifestMaskedIcon: boolean
   favicon: FaviconType
 }
+
+export type PWABuilderResultType =
+    | 'entry-point'
+    // | 'layout'
+    // | 'prompt-component'
+    // | 'auto-component'
+    // | 'auto-sw'
+    // | 'prompt-sw'
+    // | 'custom-config'
+    | 'vite-config'
+
+export interface PWABuilderGenerator {
+  configure: () => void
+  generate: (data: PWABuilderData) => Promise<void>
+}
+export type PWABuilderGeneratorModule = {
+  default: PWABuilderGenerator
+} | PWABuilderGenerator
+

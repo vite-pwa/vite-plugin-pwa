@@ -15,6 +15,7 @@ const {
   behavior,
   warnUser,
   injectRegister,
+  periodicUpdates,
   framework,
   ts,
   scope,
@@ -22,7 +23,6 @@ const {
   maskedIcon,
   favicon,
   showInjectRegister,
-  showFrameworks,
   showTS,
   strategies,
   behaviors,
@@ -48,7 +48,7 @@ const vFocus = {
     <transition mode="out-in">
       <PBForm v-if="state === 'initial'" ref="form" @submit.prevent="generate">
         <template #inputs>
-          <PBArticle id="application" title="Application">
+          <PBArticle id="application" title="Application x">
             <PBInputText
               id="title"
               ref="titleRef"
@@ -106,6 +106,31 @@ const vFocus = {
               error="Favicon: required field."
             />
           </PBArticle>
+          <PBArticle
+            id="frameworks"
+            title="Framework"
+          >
+            <PBInputRadio
+              id="framework"
+              v-model="framework"
+              :options="frameworks"
+              title="What framework are you using in your app?"
+              error="Framework: required field."
+            />
+            <transition
+              enter-active-class="pb-input-enter"
+              leave-active-class="pb-input-leave"
+            >
+              <PBInputRadio
+                v-if="showTS"
+                id="typescript"
+                v-model="ts"
+                :options="yesNoList"
+                title="Are you using TypeScript in your app?"
+                error="TypeScript: required field."
+              />
+            </transition>
+          </PBArticle>
           <PBArticle id="sw" title="Service Worker">
             <PBInputRadio
               id="strategy"
@@ -113,6 +138,13 @@ const vFocus = {
               :options="strategies"
               title="How do you want the Service Worker to be generated?"
               error="Service Worker Strategy: required field."
+            />
+            <PBInputRadio
+              id="periodicUpdates"
+              v-model="periodicUpdates"
+              :options="yesNoList"
+              title="Do you want to check for periodic Service Worker updates?"
+              error="Periodic Service Worker Updates: required field."
             />
             <PBInputRadio
               id="behavior"
@@ -142,37 +174,6 @@ const vFocus = {
               />
             </transition>
           </PBArticle>
-          <transition
-            enter-active-class="pb-input-enter"
-            leave-active-class="pb-input-leave"
-          >
-            <PBArticle
-              v-if="showFrameworks"
-              id="frameworks"
-              title="Framework"
-            >
-              <PBInputRadio
-                id="framework"
-                v-model="framework"
-                :options="frameworks"
-                title="What framework are you using in your app?"
-                error="Framework: required field."
-              />
-              <transition
-                enter-active-class="pb-input-enter"
-                leave-active-class="pb-input-leave"
-              >
-                <PBInputRadio
-                  v-if="showTS"
-                  id="typescript"
-                  v-model="ts"
-                  :options="yesNoList"
-                  title="Are you using TypeScript in your app?"
-                  error="TypeScript: required field."
-                />
-              </transition>
-            </PBArticle>
-          </transition>
         </template>
         <template #buttons>
           <PBButton :disabled="generating" type="submit">
