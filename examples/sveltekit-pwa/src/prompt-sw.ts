@@ -19,7 +19,6 @@ if (import.meta.env.DEV)
   allowlist = [/^\/$/]
 
 // to allow work offline
-// to allow work offline
 registerRoute(new NavigationRoute(
     createHandlerBoundToURL('/'),
     { allowlist },
