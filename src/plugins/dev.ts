@@ -37,7 +37,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
 
         return html.replace(
           '</body>',
-            `<script type="module" src="${DEV_SW_VIRTUAL}"></script></body>`,
+            `<script type="module" src="${options.base}${DEV_SW_VIRTUAL}"></script></body>`,
         )
       },
     },
