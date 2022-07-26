@@ -165,6 +165,10 @@ export interface ManifestOptions {
    */
   icons: Record<string, any>[]
   /**
+   *
+   */
+  file_handlers: Record<string, any>[]
+  /**
    * @default `routerBase + '?standalone=true'`
    */
   start_url: string
