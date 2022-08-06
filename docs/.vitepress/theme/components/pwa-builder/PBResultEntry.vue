@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 
 const props = defineProps<{
   loading: boolean
@@ -10,11 +10,14 @@ const emit = defineEmits<{
   (e: 'copy'): void
 }>()
 
-const copied = ref<boolean>(false)
+const copied = ref(false)
 
 async function copyToClipboard() {
-  emit('copy')
+  if (copied.value)
+    return
+
   copied.value = true
+  emit('copy')
   // use the same timeout on VitePress copy-code module
   await new Promise(resolve => setTimeout(resolve, 3000))
   copied.value = false

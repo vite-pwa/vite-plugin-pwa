@@ -24,8 +24,8 @@ export function generateEntryPoint(
   <title>${title}</title>
   <meta name="description" content="${description}">
   ${favicons.join('\n  ')}  
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
-  <link rel="mask-icon" href="/mask-icon.svg" color="${themeColor}">
+  <link rel="apple-touch-icon" href="${scope}apple-touch-icon.png" sizes="180x180">
+  <link rel="mask-icon" href="${scope}mask-icon.svg" color="${themeColor}">
   <meta name="theme-color" content="${themeColor}">
 </head>
 `

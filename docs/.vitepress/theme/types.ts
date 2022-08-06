@@ -43,10 +43,11 @@ export interface BuilderElement {
 }
 
 export interface PWABuilderResult {
+  title: string
   loading: boolean
   enabled: boolean
   code?: string
-  codeType: 'html' | 'js' | 'ts' | 'css' | 'vue' | 'jsx' | 'tsx' | 'svelte' | 'astro'
+  codeType: 'html' | 'js' | 'ts' | 'css' | 'vue' | 'jsx' | 'tsx' | 'svelte' | 'astro' | 'json'
 }
 
 export interface PWABuilderData {
@@ -63,21 +64,27 @@ export interface PWABuilderData {
   startUrl?: string
   addManifestMaskedIcon: boolean
   favicon: FaviconType
+  generateFWComponent: boolean
+  warnsUser: boolean
+  periodicSWUpdates: boolean
+  cleanupOldAssets: boolean
 }
 
 export type PWABuilderResultType =
     | 'entry-point'
     // | 'layout'
-    // | 'prompt-component'
-    // | 'auto-component'
-    // | 'auto-sw'
-    // | 'prompt-sw'
+    | 'prompt-component'
+    | 'prompt-css'
+    | 'auto-sw'
+    | 'prompt-sw'
     // | 'custom-config'
     | 'vite-config'
+    | 'ts-config'
+    | 'dts-config'
 
 export interface PWABuilderGenerator {
-  configure: () => void
-  generate: (data: PWABuilderData) => Promise<void>
+  configure: (data: PWABuilderData) => void
+  generate: (data: PWABuilderData) => [PWABuilderResultType, () => void][]
 }
 export type PWABuilderGeneratorModule = {
   default: PWABuilderGenerator

@@ -22,6 +22,7 @@ const {
   startUrl,
   maskedIcon,
   favicon,
+  cleanupOldAssets,
   showInjectRegister,
   showTS,
   strategies,
@@ -48,7 +49,7 @@ const vFocus = {
     <transition mode="out-in">
       <PBForm v-if="state === 'initial'" ref="form" @submit.prevent="generate">
         <template #inputs>
-          <PBArticle id="application" title="Application x">
+          <PBArticle id="application" title="Application">
             <PBInputText
               id="title"
               ref="titleRef"
@@ -145,6 +146,13 @@ const vFocus = {
               :options="yesNoList"
               title="Do you want to check for periodic Service Worker updates?"
               error="Periodic Service Worker Updates: required field."
+            />
+            <PBInputRadio
+              id="cleanupOldAssets"
+              v-model="cleanupOldAssets"
+              :options="yesNoList"
+              title="Do you want to cleanup old assets from the PWA cache?"
+              error="Cleanup old assets: required field."
             />
             <PBInputRadio
               id="behavior"

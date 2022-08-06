@@ -6,7 +6,7 @@ export default <PWABuilderGenerator>{
     entrypointData.enabled = true
     viteConfigData.enabled = true
   },
-  async generate(data: PWABuilderData) {
-    console.log(data)
+  generate(data: PWABuilderData) {
+    return []
   },
 }

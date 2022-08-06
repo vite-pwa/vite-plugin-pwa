@@ -1,10 +1,14 @@
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
-import { nextTick } from 'vue'
-import { entrypointData, viteConfigData } from '../../modules/generatePWACode'
+import { computed, nextTick } from 'vue'
+import { PWABuilderResultData } from '../../modules/generatePWACode'
 import PBResultEntry from './PBResultEntry.vue'
 
 const { copy } = useClipboard()
+
+const entries = computed(() => {
+  return Object.entries(PWABuilderResultData).filter(([, v]) => v.enabled)
+})
 
 async function copyToClipboard(code?: string) {
   if (code) {
@@ -19,20 +23,18 @@ async function copyToClipboard(code?: string) {
     <h2 id="pwa-code">
       PWA Code
     </h2>
-    <PBResultEntry v-if="entrypointData.enabled" :lang="entrypointData.codeType" :loading="entrypointData.loading" @copy="copyToClipboard(entrypointData.code)">
+    <PBResultEntry
+      v-for="[k, v] of entries"
+      :key="k"
+      :lang="v.codeType"
+      :loading="v.loading"
+      @copy="copyToClipboard(v.code)"
+    >
       <template #summary>
-        Entry Point (index.html)
+        {{ v.title }}
       </template>
       <template #code>
-        {{ entrypointData.code ?? '' }}
-      </template>
-    </PBResultEntry>
-    <PBResultEntry v-if="viteConfigData.enabled" :lang="viteConfigData.codeType" :loading="viteConfigData.loading" @copy="copyToClipboard(viteConfigData.code)">
-      <template #summary>
-        Vite Plugin PWA Configuration
-      </template>
-      <template #code>
-        {{ viteConfigData.code ?? '' }}
+        {{ v.code ?? '' }}
       </template>
     </PBResultEntry>
     <slot />

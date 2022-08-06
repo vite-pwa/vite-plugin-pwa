@@ -43,6 +43,7 @@ export function usePWABuilder() {
   const startUrl = ref<string | undefined>(undefined)
   const maskedIcon = ref<YesNoType | undefined>('true')
   const favicon = ref<FaviconType | undefined>('ico')
+  const cleanupOldAssets = ref<YesNoType | undefined>('true')
 
   const generating = ref(false)
 
@@ -80,6 +81,7 @@ export function usePWABuilder() {
     injectRegister.value = undefined
     framework.value = undefined
     ts.value = undefined
+    cleanupOldAssets.value = 'true'
     await nextTick()
     errors.value.splice(0)
     await nextTick()
@@ -109,6 +111,7 @@ export function usePWABuilder() {
           case 'periodicUpdates':
           case 'behavior':
           case 'warn':
+          case 'cleanupOldAssets':
             return true
         }
 
@@ -153,6 +156,10 @@ export function usePWABuilder() {
         startUrl: startUrl.value,
         addManifestMaskedIcon: maskedIcon.value === 'true',
         favicon: favicon.value!,
+        cleanupOldAssets: cleanupOldAssets.value === 'true',
+        periodicSWUpdates: periodicUpdates.value === 'true',
+        warnsUser: warnUser.value === 'true',
+        generateFWComponent: behavior.value === 'prompt' || warnUser.value === 'true',
       }
       // prepare the result: enable entries for target fw
       const builder = await prepareBuilder(data)
@@ -200,6 +207,7 @@ export function usePWABuilder() {
     warns,
     injectRegisters,
     frameworks,
+    cleanupOldAssets,
     yesNoList,
     faviconList,
     generate,
@@ -213,9 +221,11 @@ function createFrameworks() {
   return <RadioData<FrameworkType>[]>[{
     value: 'javascript',
     text: 'Vanilla JavaScript',
+    disabled: true,
   }, {
     value: 'typescript',
     text: 'TypeScript',
+    disabled: true,
   }, {
     value: 'vue',
     text: 'Vue 3',
@@ -228,18 +238,22 @@ function createFrameworks() {
   }, {
     value: 'svelte',
     text: 'Svelte',
+    disabled: true,
   }, {
     value: 'solid',
     text: 'Solid JS',
   }, {
     value: 'sveltekit',
     text: 'SvelteKit',
+    disabled: true,
   }, {
     value: 'vitepress',
     text: 'VitePress',
+    disabled: true,
   }, {
     value: 'iles',
     text: 'Îles',
+    disabled: true,
   }, {
     value: 'astro',
     text: 'Astro (WIP: coming soon)',

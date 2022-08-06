@@ -1,12 +1,13 @@
 import type { PWABuilderData, PWABuilderGenerator } from '../../types'
-import { entrypointData, viteConfigData } from '../generatePWACode'
+import { entrypointData, tsConfigData, viteConfigData } from '../generatePWACode'
 
 export default <PWABuilderGenerator>{
   configure() {
     entrypointData.enabled = true
     viteConfigData.enabled = true
+    tsConfigData.enabled = true
   },
-  async generate(data: PWABuilderData) {
-    console.log(data)
+  generate(data: PWABuilderData) {
+    return []
   },
 }

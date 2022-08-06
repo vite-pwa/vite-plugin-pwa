@@ -1,0 +1,38 @@
+<script setup lang="ts">
+import { useRegisterSW } from 'virtual:pwa-register/vue'
+
+const { needRefresh, updateServiceWorker } = useRegisterSW({
+  onRegistered(r) {
+    // eslint-disable-next-line no-console
+    console.log(`SW Registered: ${r}`)
+  },
+  onRegisterError(error) {
+    // eslint-disable-next-line no-console
+    console.log('SW registration error', error)
+  },
+})
+
+const close = async () => {
+  needRefresh.value = false
+}
+</script>
+
+<template>
+  <div
+    v-if="needRefresh"
+    class="pwa-toast"
+    role="alert"
+  >
+    <div class="message">
+      <span>
+        New content available, click on reload button to update.
+      </span>
+    </div>
+    <button @click="updateServiceWorker()">
+      Reload
+    </button>
+    <button @click="close">
+      Close
+    </button>
+  </div>
+</template>
