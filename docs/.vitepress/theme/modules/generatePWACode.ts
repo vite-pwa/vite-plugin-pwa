@@ -1,8 +1,13 @@
 import { nextTick, reactive } from 'vue'
 import type { UnwrapNestedRefs } from 'vue'
-import type { FrameworkType, PWABuilderData, PWABuilderGenerator, PWABuilderGeneratorModule, PWABuilderResult, PWABuilderResultType } from '../types'
-import { generatePromptSW } from './prompt-sw'
-import { generateClaimsSW } from './claims-sw'
+import type {
+  FrameworkType,
+  PWABuilderData,
+  PWABuilderGenerator,
+  PWABuilderGeneratorModule,
+  PWABuilderResult,
+  PWABuilderResultType,
+} from '../types'
 
 // const builders = import.meta.globEager<PWABuilderGeneratorModule>('./builder/*.ts', { eager: true } )
 const builders = import.meta.globEager<PWABuilderGeneratorModule>('./builder/*.ts')
@@ -82,8 +87,8 @@ export const fwCSSComponentData = PWABuilderResultData['prompt-css']
 export const promptSWData = PWABuilderResultData['prompt-sw']
 export const autoSWData = PWABuilderResultData['auto-sw']
 
-export const DEFAULT_TIMEOUT = 1500
-// export const DEFAULT_TIMEOUT = 600
+// export const DEFAULT_TIMEOUT = 1500
+export const DEFAULT_TIMEOUT = 600
 
 export function resetPWACode() {
   Object.values(PWABuilderResultData).forEach((r) => {
@@ -93,40 +98,31 @@ export function resetPWACode() {
   })
 }
 
-async function lookupBuilder(framework: FrameworkType) {
-  const builder = buildesMap.get(framework)!
+type BuilderType = FrameworkType | 'sw'
+
+function lookupBuilder(builderType: BuilderType) {
+  const builder = buildesMap.get(builderType)!
   return 'default' in builder ? builder.default : builder
 }
 
-export async function prepareBuilder(data: PWABuilderData) {
-  const builder: PWABuilderGenerator = await lookupBuilder(data.framework)
-  builder.configure(data)
+export function prepareBuilder(data: PWABuilderData) {
   configureAddons(data)
+  const builder: PWABuilderGenerator = lookupBuilder(data.framework)
+  builder.configure(data)
   return builder
 }
 
 export function configureAddons(data: PWABuilderData) {
   PWABuilderResultData['prompt-component'].enabled = data.generateFWComponent
-  if (data.strategy === 'injectManifest') {
-    if (data.behavior === 'prompt')
-      promptSWData.enabled = true
-    else
-      autoSWData.enabled = true
-  }
+  lookupBuilder('sw').configure(data)
 }
 
 export async function generatePWACode(builder: PWABuilderGenerator, data: PWABuilderData) {
   await nextTick()
   const fns = builder.generate(data)
-  if (data.strategy === 'injectManifest') {
-    if (data.behavior === 'prompt')
-      fns.push(['prompt-sw', () => generatePromptSW(data, promptSWData)])
-    else
-      fns.push(['auto-sw', () => generateClaimsSW(data, autoSWData)])
-  }
+  fns.push(...lookupBuilder('sw').generate(data))
   await Promise.all(fns.map(async ([key, fn]) => {
     fn()
-    // await new Promise(resolve => setTimeout(resolve, DEFAULT_TIMEOUT))
     PWABuilderResultData[key].loading = false
   }))
 }

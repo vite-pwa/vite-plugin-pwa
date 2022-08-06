@@ -162,7 +162,7 @@ export function usePWABuilder() {
         generateFWComponent: behavior.value === 'prompt' || warnUser.value === 'true',
       }
       // prepare the result: enable entries for target fw
-      const builder = await prepareBuilder(data)
+      const builder = prepareBuilder(data)
       state.value = 'result'
       await new Promise(resolve => setTimeout(resolve, DEFAULT_TIMEOUT))
       // generate pwa result
@@ -238,7 +238,6 @@ function createFrameworks() {
   }, {
     value: 'svelte',
     text: 'Svelte',
-    disabled: true,
   }, {
     value: 'solid',
     text: 'Solid JS',

@@ -1,7 +1,8 @@
 import type { PWABuilderData, PWABuilderGenerator, PWABuilderResultType } from '../../types'
-import { entrypointData, fwComponentData, viteConfigData } from '../generatePWACode'
+import { entrypointData, viteConfigData } from '../generatePWACode'
 import { generateEntryPoint } from '../entry-point'
 import { generatePluginConfiguration } from '../plugin'
+import { createPWAPromptGenerators } from '../createPWAPromptGenerator'
 
 const assets = import.meta.globEager('/src/assets/vue-*.txt', { as: 'raw' })
 const assetsMap = new Map<string, string>()
@@ -21,27 +22,8 @@ export default <PWABuilderGenerator>{
       ['entry-point', () => generateEntryPoint(data, entrypointData)],
       ['vite-config', () => generatePluginConfiguration(data, viteConfigData)],
     ]
-    if (data.generateFWComponent) {
-      const { behavior, warnsUser, periodicSWUpdates } = data
-      generators.push(['prompt-component', () => {
-        fwComponentData.codeType = 'vue'
-        let template: string
-        if (behavior === 'autoUpdate') {
-          template = periodicSWUpdates ? 'sfc-warn-updates' : 'sfc-warn-updates'
-        }
-        else {
-          template = warnsUser
-            ? (periodicSWUpdates ? 'sfc-prompt-warn-updates' : 'sfc-prompt-warn')
-            : (periodicSWUpdates ? 'sfc-prompt-updates' : 'sfc-prompt')
-        }
-
-        fwComponentData.code = `
-${assetsMap.get(template)}
-
-${assetsMap.get('sfc-style')}
-`
-      }])
-    }
+    if (data.generateFWComponent)
+      createPWAPromptGenerators(data, generators, assetsMap, 'PWAPrompt.vue', 'vue', true)
 
     return generators
   },

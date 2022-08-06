@@ -42,12 +42,14 @@ export interface BuilderElement {
   withState: (withError: boolean, focusInput: boolean) => void
 }
 
+export type CodeType = 'html' | 'js' | 'ts' | 'css' | 'vue' | 'jsx' | 'tsx' | 'svelte' | 'astro' | 'json'
+
 export interface PWABuilderResult {
   title: string
   loading: boolean
   enabled: boolean
   code?: string
-  codeType: 'html' | 'js' | 'ts' | 'css' | 'vue' | 'jsx' | 'tsx' | 'svelte' | 'astro' | 'json'
+  codeType: CodeType
 }
 
 export interface PWABuilderData {

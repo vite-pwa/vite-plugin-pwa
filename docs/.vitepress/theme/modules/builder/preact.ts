@@ -9,6 +9,7 @@ import {
 import { generateEntryPoint } from '../entry-point'
 import { generatePluginConfiguration } from '../plugin'
 import { createJsxGenerators } from '../createJsxGenerators'
+import { createTSGenerators } from '../createTSGenerators'
 
 const assets = import.meta.globEager('/src/assets/preact-*.txt', { as: 'raw' })
 const assetsMap = new Map<string, string>()
@@ -22,7 +23,7 @@ export default <PWABuilderGenerator>{
   configure(data) {
     entrypointData.enabled = true
     viteConfigData.enabled = true
-    tsConfigData.enabled = data.typescript
+    tsConfigData.enabled = data.typescript && data.generateFWComponent
     dtsConfigData.enabled = data.generateFWComponent
     fwCSSComponentData.enabled = data.generateFWComponent
   },
@@ -30,26 +31,8 @@ export default <PWABuilderGenerator>{
     const generators: [PWABuilderResultType, () => void][] = [
       ['entry-point', () => generateEntryPoint(data, entrypointData)],
       ['vite-config', () => generatePluginConfiguration(data, viteConfigData)],
-      ['dts-config', () => {
-        dtsConfigData.code = `
-// src/vite-env.d.ts
-/// <reference types="vite-plugin-pwa/client" />    
-        `
-      }],
     ]
-    if (data.typescript) {
-      generators.push(['ts-config', () => {
-        tsConfigData.code = `
-// tsconfig.json
-"compilerOptions": {
-  "types": [
-    "vite-plugin-pwa/client"
-  ]  
-}
-`
-      }])
-    }
-
+    createTSGenerators({ tsConfig: tsConfigData.enabled, dts: dtsConfigData.enabled }, generators)
     createJsxGenerators(data, generators, assetsMap)
 
     return generators
