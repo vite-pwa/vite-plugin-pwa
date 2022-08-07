@@ -16,7 +16,7 @@ export function createPWAPromptGenerators(
       fwComponentData.codeType = codeType ?? (typescript ? 'tsx' : 'jsx')
       let template: string
       if (behavior === 'autoUpdate') {
-        template = periodicSWUpdates ? 'sfc-warn-updates' : 'sfc-warn-updates'
+        template = periodicSWUpdates ? 'sfc-warn-updates' : 'sfc-warn'
       }
       else {
         template = warnsUser
@@ -48,6 +48,9 @@ ${assetsMap.get(template)}
           case 'svelte':
           case 'sveltekit':
             fwComponentData.code = fwComponentData.code!.replace('<script>', '<script lang="ts">')
+            break
+          case 'iles':
+            fwComponentData.code = fwComponentData.code!.replace('<script client:load>', '<script client:load lang="ts">')
             break
         }
       }
