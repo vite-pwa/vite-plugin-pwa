@@ -19,11 +19,14 @@ export default <PWABuilderGenerator>{
         else {
           devDependencies['vite-plugin-pwa'] = `^${version}`
           if (data.generateFWComponent) {
-            if (data.behavior === 'autoUpdate')
-              devDependencies['workbox-core'] = workboxVersion
+            // include workbox-xxx node only for custom sw
+            if (data.strategy === 'injectManifest') {
+              if (data.behavior === 'autoUpdate')
+                devDependencies['workbox-core'] = workboxVersion
 
-            devDependencies['workbox-precaching'] = workboxVersion
-            devDependencies['workbox-routing'] = workboxVersion
+              devDependencies['workbox-precaching'] = workboxVersion
+              devDependencies['workbox-routing'] = workboxVersion
+            }
             devDependencies['workbox-window'] = workboxVersion
           }
         }
