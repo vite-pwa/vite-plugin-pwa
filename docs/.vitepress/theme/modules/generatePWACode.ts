@@ -20,8 +20,22 @@ for (const name in builders) {
 
 // should be in the order that will appear in the PBResult component: the PBResult will use enabled entries
 export const PWABuilderResultData: Record<PWABuilderResultType, UnwrapNestedRefs<PWABuilderResult>> = {
+  'package-json': reactive<PWABuilderResult>({
+    title: 'package.json',
+    enabled: false,
+    loading: true,
+    code: undefined,
+    codeType: 'json',
+  }),
   'vite-config': reactive<PWABuilderResult>({
     title: 'Vite Plugin PWA Configuration',
+    enabled: false,
+    loading: true,
+    code: undefined,
+    codeType: 'js',
+  }),
+  'iles-config': reactive<PWABuilderResult>({
+    title: 'îles Configuration',
     enabled: false,
     loading: true,
     code: undefined,
@@ -78,10 +92,12 @@ export const PWABuilderResultData: Record<PWABuilderResultType, UnwrapNestedRefs
   }),
 }
 
+export const packageData = PWABuilderResultData['package-json']
 export const entrypointData = PWABuilderResultData['entry-point']
 export const tsConfigData = PWABuilderResultData['ts-config']
 export const dtsConfigData = PWABuilderResultData['dts-config']
 export const viteConfigData = PWABuilderResultData['vite-config']
+export const ilesConfigData = PWABuilderResultData['iles-config']
 export const fwComponentData = PWABuilderResultData['prompt-component']
 export const fwCSSComponentData = PWABuilderResultData['prompt-css']
 export const promptSWData = PWABuilderResultData['prompt-sw']
@@ -98,7 +114,7 @@ export function resetPWACode() {
   })
 }
 
-type BuilderType = FrameworkType | 'sw'
+type BuilderType = FrameworkType | 'sw' | 'packageJson'
 
 function lookupBuilder(builderType: BuilderType) {
   const builder = buildesMap.get(builderType)!
@@ -115,14 +131,16 @@ export function prepareBuilder(data: PWABuilderData) {
 export function configureAddons(data: PWABuilderData) {
   PWABuilderResultData['prompt-component'].enabled = data.generateFWComponent
   lookupBuilder('sw').configure(data)
+  lookupBuilder('packageJson').configure(data)
 }
 
 export async function generatePWACode(builder: PWABuilderGenerator, data: PWABuilderData) {
   await nextTick()
-  const fns = builder.generate(data)
-  fns.push(...lookupBuilder('sw').generate(data))
-  await Promise.all(fns.map(async ([key, fn]) => {
-    fn()
+  const generators = builder.generate(data)
+  generators.push(...lookupBuilder('sw').generate(data))
+  generators.push(...lookupBuilder('packageJson').generate(data))
+  await Promise.all(generators.map(async ([key, generate]) => {
+    generate()
     PWABuilderResultData[key].loading = false
   }))
 }

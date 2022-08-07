@@ -1,12 +1,17 @@
-import type { PWABuilderData, PWABuilderGenerator } from '../../types'
-import { entrypointData, viteConfigData } from '../generatePWACode'
+import type { PWABuilderData, PWABuilderGenerator, PWABuilderResultType } from '../../types'
+import { ilesConfigData } from '../generatePWACode'
+
+import { generatePluginConfiguration } from '../plugin'
 
 export default <PWABuilderGenerator>{
-  configure() {
-    entrypointData.enabled = true
-    viteConfigData.enabled = true
+  configure({ framework }) {
+    ilesConfigData.enabled = framework === 'iles'
   },
   generate(data: PWABuilderData) {
-    return []
+    const generators: [PWABuilderResultType, () => void][] = []
+    if (ilesConfigData.enabled)
+      generators.push(['iles-config', () => generatePluginConfiguration(data, ilesConfigData)])
+
+    return generators
   },
 }

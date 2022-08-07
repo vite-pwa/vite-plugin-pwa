@@ -1,5 +1,6 @@
 import type { PWABuilderData, PWABuilderResult } from '../types'
 import type { VitePWAOptions } from '../../../../dist'
+import { stringify } from './utils'
 
 export function generatePluginConfiguration(
   {
@@ -15,6 +16,7 @@ export function generatePluginConfiguration(
     addManifestMaskedIcon,
     typescript,
     cleanupOldAssets,
+    framework,
   }: PWABuilderData,
   pwaBuilderResult: PWABuilderResult,
 ) {
@@ -69,14 +71,25 @@ export function generatePluginConfiguration(
     plugin.workbox = { cleanupOutdatedCaches: true }
 
   pwaBuilderResult.codeType = extension
+
+  if (framework === 'iles') {
+    plugin.manifestFilename = 'pwa-manifest.json'
+    pwaBuilderResult.code = `
+// iles.config.${extension}  
+import pwa from '@islands/pwa'
+
+export default defineConfig({
+  modules: [
+    pwa(${stringify(plugin)}) 
+  ]   
+`
+    return
+  }
+
   pwaBuilderResult.code = `
 // vite.config.${extension}  
 import { VitePWA } from 'vite-plugin-pwa'
 
-VitePWA(${JSON.stringify(plugin, null, 2).replace(
-    /"(\w+)":/g, '$1:',
-  ).replace(
-      /"/g, '\'',
-  )})  
+VitePWA(${stringify(plugin)})  
 `
 }

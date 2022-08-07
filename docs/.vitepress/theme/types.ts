@@ -80,9 +80,11 @@ export type PWABuilderResultType =
     | 'auto-sw'
     | 'prompt-sw'
     // | 'custom-config'
+    | 'iles-config'
     | 'vite-config'
     | 'ts-config'
     | 'dts-config'
+    | 'package-json'
 
 export interface PWABuilderGenerator {
   configure: (data: PWABuilderData) => void
