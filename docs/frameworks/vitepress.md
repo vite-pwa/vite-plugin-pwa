@@ -7,10 +7,10 @@ title: VitePress | Frameworks
 Since [VitePress](https://vitepress.vuejs.org/) is built using [Vuejs 3](https://v3.vuejs.org/) and 
 on top of [Vite](https://vitejs.dev/), the integration with this plugin is graceful.
 
-## VitePress ^1.0.0-alpha.5+
+## VitePress 1.0.0-alpha.5+
 
 ::: warning
-Using `VitePress ^1.0.0-alpha.5+` will require `Vite 3+`.
+Using `VitePress 1.0.0-alpha.5+` will require `Vite 3+`.
 :::
 
 ## Old VitePress
