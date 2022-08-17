@@ -4,6 +4,7 @@ import type { VitePWAOptions } from './types'
 import { BuildPlugin } from './plugins/build'
 import { DevPlugin } from './plugins/dev'
 import { MainPlugin } from './plugins/main'
+import { createBuildEndHook } from './integrations/vitepress'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   const ctx = createContext(userOptions)
@@ -12,6 +13,16 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
     BuildPlugin(ctx),
     DevPlugin(ctx),
   ]
+}
+
+export function VitePressPWA(userOptions: Partial<VitePWAOptions> = {}): {
+  VitePWAPlugin: Plugin[]
+  buildEnd: (siteConfig: any) => Promise<void>
+} {
+  return {
+    VitePWAPlugin: VitePWA(userOptions),
+    buildEnd: createBuildEndHook(userOptions),
+  }
 }
 
 export * from './types'
