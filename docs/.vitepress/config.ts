@@ -7,9 +7,7 @@ const { VitePWAPlugin, buildEnd } = VitePressPWA({
   outDir: '.vitepress/dist',
   registerType: 'prompt',
   includeManifestIcons: false,
-  integrationOptions: {
-    vitepress: optimizePages,
-  },
+  integrationHook: optimizePages,
   manifest: {
     id: '/',
     name: 'Vite Plugin PWA',
