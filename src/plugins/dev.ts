@@ -70,7 +70,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
         // - the .js file and source with .ts, or
         // - the .ts source file
         // in both cases we need to resolve the id to the source file to load it and add empty injection point on loadDev
-        // we need tom always return the path to source file name to resolve imports on the sw
+        // we need to always return the path to source file name to resolve imports on the sw
         return name === swDevOptions.swUrl || name === options.injectManifest.swSrc
           ? options.injectManifest.swSrc
           : undefined
