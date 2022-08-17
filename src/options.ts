@@ -56,6 +56,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     disable = false,
     devOptions = { enabled: false, type: 'classic' },
     selfDestroying = false,
+    integrationHook = () => {},
   } = options
 
   const basePath = resolveBathPath(base)
@@ -150,6 +151,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     devOptions,
     vitePlugins,
     selfDestroying,
+    integrationHook,
   }
 
   await configureStaticAssets(resolvedVitePWAOptions, viteConfig)

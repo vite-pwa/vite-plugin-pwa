@@ -3,9 +3,9 @@ import type { VitePWAOptions, VitePluginPWAAPI } from '../../types'
 import { VitePWA } from '../../index'
 
 export function createBuildEndHook(userOptions: Partial<VitePWAOptions>): (siteConfig: any) => Promise<void> {
-  return async (siteConfig: any) => {
+  return async (...args: any[]) => {
     // run first integration hook
-    await userOptions.integrationHook?.(siteConfig)
+    await userOptions.integrationHook?.(...args)
     const viteConfig = await resolveConfig({
       plugins: [VitePWA(userOptions)],
     },

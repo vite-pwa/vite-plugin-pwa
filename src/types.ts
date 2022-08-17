@@ -144,7 +144,7 @@ export interface VitePWAOptions {
    *
    * @param data The data provided by the integration.
    */
-  integrationHook?: (data?: any) => void | Promise<void>
+  integrationHook?: (...args: any[]) => void | Promise<void>
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
