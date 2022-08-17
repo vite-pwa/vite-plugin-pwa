@@ -93,7 +93,7 @@ If you want to check it in `dev`, add the `devOptions` option to the plugin conf
 import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   plugins: [
-    VitePWA({ 
+    VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
         enabled: true
