@@ -142,7 +142,7 @@ export interface VitePWAOptions {
    * You can register an integration hook to run before the pwa regeneration.
    * For example, you can use it to also generate the sitemap.
    *
-   * @param data The data provided by the integration.
+   * @param args The data provided by the integration.
    */
   integrationHook?: (...args: any[]) => void | Promise<void>
 }
