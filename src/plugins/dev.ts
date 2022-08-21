@@ -60,8 +60,10 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
       }
     },
     resolveId(id) {
-      if (id === DEV_SW_VIRTUAL)
+      if (id === DEV_SW_VIRTUAL || id === `${ctx.options.base}${DEV_SW_VIRTUAL}`){
+	    console.log('resolveId',id)
         return id
+	  }
 
       const { options } = ctx
       if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest' && !options.selfDestroying) {
@@ -79,8 +81,10 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
       return undefined
     },
     async load(id) {
-      if (id === DEV_SW_VIRTUAL)
+      if (id === DEV_SW_VIRTUAL || id === `${ctx.options.base}${DEV_SW_VIRTUAL}`){
+	    console.log('load',id)
         return generateSWHMR()
+	  }
 
       const { options, viteConfig } = ctx
       if (!options.disable && options.devOptions.enabled) {
@@ -190,6 +194,7 @@ function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): 
           scope,
           inlinePath: `${base}${DEV_SW_NAME}`,
           registerPath: `${base}${FILE_SW_REGISTER}`,
+          swType: options.devOptions.type,
         },
       })
     }
@@ -197,10 +202,10 @@ function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): 
 }
 
 function generateSWHMR() {
-  return `import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ inline, inlinePath, registerPath, scope }) => {
+  return `import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ inline, inlinePath, registerPath, scope, swType = 'classic' }) => {
   if (inline) {
     if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register(inlinePath, { scope });
+      navigator.serviceWorker.register(inlinePath, { scope, type: swType });
     }
   }
   else {

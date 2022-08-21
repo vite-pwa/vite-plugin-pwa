@@ -3,10 +3,10 @@ import type { ResolvedVitePWAOptions } from './types'
 
 export function generateSimpleSWRegister(options: ResolvedVitePWAOptions, dev: boolean) {
   const path = dev ? `${options.base}${DEV_SW_NAME}` : `${options.base}${options.filename}`
-
+  const swType = options.devOptions.type ? options.devOptions.type : "classic";
   // we are using HMR to load this script: DO NOT ADD window::load event listener
   if (dev)
-    return `if('serviceWorker' in navigator) navigator.serviceWorker.register('${path}', { scope: '${options.scope}' })`
+    return `if('serviceWorker' in navigator) navigator.serviceWorker.register('${path}', { scope: '${options.scope}', type: swType })`
 
   return `
 if('serviceWorker' in navigator) {
