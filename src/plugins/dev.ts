@@ -60,7 +60,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
       }
     },
     resolveId(id) {
-      if (id === DEV_SW_VIRTUAL || id === `${ctx.options.base}${DEV_SW_VIRTUAL}`){
+      if (id === DEV_SW_VIRTUAL){
 	    console.log('resolveId',id)
         return id
 	  }
@@ -81,7 +81,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
       return undefined
     },
     async load(id) {
-      if (id === DEV_SW_VIRTUAL || id === `${ctx.options.base}${DEV_SW_VIRTUAL}`){
+      if (id === DEV_SW_VIRTUAL){
 	    console.log('load',id)
         return generateSWHMR()
 	  }
