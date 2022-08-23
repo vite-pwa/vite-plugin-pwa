@@ -5,7 +5,8 @@ import { generateSimpleSWRegister, injectServiceWorker } from '../html'
 import { generateWebManifestFile } from '../assets'
 import {
   DEV_SW_NAME,
-  FILE_SW_REGISTER, VIRTUAL_MODULES_RESOLVE_PREFIX,
+  FILE_SW_REGISTER,
+  VIRTUAL_MODULES_RESOLVE_PREFIX,
 } from '../constants'
 import type { ResolvedVitePWAOptions } from '../types'
 import { generateServiceWorker } from '../modules'
@@ -37,7 +38,12 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
 
         return html.replace(
           '</body>',
-            `<script type="module" src="${options.base}${DEV_SW_VIRTUAL}"></script></body>`,
+            `
+<script type="module">
+import registerDevSW from '${DEV_SW_VIRTUAL}';
+registerDevSW();
+</script>
+</body>`,
         )
       },
     },
@@ -198,7 +204,8 @@ function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): 
 }
 
 function generateSWHMR() {
-  return `import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ inline, inlinePath, registerPath, scope, swType = 'classic' }) => {
+  return `
+import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ inline, inlinePath, registerPath, scope, swType = 'classic' }) => {
   if (inline) {
     if('serviceWorker' in navigator) {
       navigator.serviceWorker.register(inlinePath, { scope, type: swType });
@@ -210,11 +217,14 @@ function generateSWHMR() {
     document.head.appendChild(registerSW);
   }
 });
-
-try {
-  import.meta.hot.send('${DEV_READY_NAME}');
-} catch (e) {
-  console.error('unable to send ${DEV_READY_NAME} message to register service worker in dev mode!', e);
-}`
+function registerDevSW() {
+  try {
+    import.meta.hot.send('${DEV_READY_NAME}');
+  } catch (e) {
+    console.error('unable to send ${DEV_READY_NAME} message to register service worker in dev mode!', e);
+  }
+}
+export default registerDevSW;
+`
 }
 
