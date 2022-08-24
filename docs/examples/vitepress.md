@@ -12,3 +12,8 @@ To run this site on your local, execute the following script from your shell (fr
 ```shell
 pnpm run docs:serve
 ```
+
+::: warning
+Vite Plugin PWA docs is using latest version of `VitePress`, it is using `Vite 3+`.
+:::
+

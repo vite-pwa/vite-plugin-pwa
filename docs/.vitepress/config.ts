@@ -308,6 +308,7 @@ function prepareSidebar(idx: number) {
 const ogUrl = 'https://vite-plugin-pwa.netlify.app/'
 const ogImage = 'https://vite-plugin-pwa.netlify.app/og-image.png'
 
+// @ts-expect-error avoid TS2321: Excessive stack depth comparing types
 export default defineConfig({
   lang: 'en-US',
   title: 'Vite Plugin PWA',
@@ -410,7 +411,10 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [VitePWAPlugin],
+    plugins: [
+      // @ts-expect-error Vite 2 types in Vite 3
+      VitePWAPlugin,
+    ],
   },
   buildEnd,
 })
