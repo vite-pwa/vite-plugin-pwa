@@ -36,6 +36,10 @@ export default defineConfig({
 
 ## Type declarations
 
+::: warning
+Since version `0.12.4+`, the `webManifestUrl` has been deprecated, the plugin will use `navigateFallbackAllowlist` instead.
+:::
+
 ```ts
 /**
  * Development options.
@@ -54,7 +58,7 @@ export interface DevOptions {
    */
   type?: WorkerType
   /**
-   * This option will enable you to not register the `runtimeConfig` configured on `workbox.runtimeConfig` option on development.
+   * This option will enable you to not use the `runtimeConfig` configured on `workbox.runtimeConfig` plugin option.
    *
    * **WARNING**: this option will only be used when using `generateSW` strategy.
    *
@@ -62,18 +66,36 @@ export interface DevOptions {
    */
   disableRuntimeConfig?: boolean
   /**
-   * This option will allow you to configure the `navigateFallback` when using `registerRoute` for `offline` support:,
+   * This option will allow you to configure the `navigateFallback` when using `registerRoute` for `offline` support:
    * configure here the corresponding `url`, for example `navigateFallback: 'index.html'`.
    *
    * **WARNING**: this option will only be used when using `injectManifest` strategy.
    */
   navigateFallback?: string
+
+  /**
+   * This option will allow you to configure the `navigateFallbackAllowlist`: new option from version `v0.12.4`.
+   *
+   * Since we need at least the entry point in the service worker's precache manifest, we don't want the rest of the assets to be intercepted by the service worker.
+   *
+   * If you configure this option, the plugin will use it instead the default.
+   *
+   * **WARNING**: this option will only be used when using `generateSW` strategy.
+   *
+   * @default [/^\/$/]
+   */
+  navigateFallbackAllowlist?: RegExp[]
+
   /**
    * On dev mode the `manifest.webmanifest` file can be on other path.
    *
-   * For example, **SvelteKit** will request `/_app/manifest.webmanifest`.
+   * For example, **SvelteKit** will request `/_app/manifest.webmanifest`, when `webmanifest` added to the output bundle, **SvelteKit** will copy it to the `/_app/` folder.
+   *
+   * **WARNING**: this option will only be used when using `generateSW` strategy.
    *
    * @default `${vite.base}${pwaOptions.manifestFilename}`
+   * @deprecated This option has been deprecated from version `v0.12.4`, the plugin will use navigateFallbackAllowlist instead.
+   * @see navigateFallbackAllowlist
    */
   webManifestUrl?: string
 }
@@ -93,6 +115,25 @@ The PWA plugin will force `type: 'classic'` on service worker registration to av
 Uncaught (in promise) TypeError: Failed to execute 'importScripts' on 'WorkerGlobalScope': Module scripts don't support importScripts().
 ```
 
+::: warning
+If your pages/routes other than the entry point are being intercepted by the service worker, use `navigateFallbackAllowlist` to include only the entry point: by default, the plugin will use `[/^\/$/]`.
+
+You **ONLY** need to add the `navigateFallbackAllowlist` option to the `devOptions` entry in `vite-plugin-pwa` configuration if your pages/routes are being intercepting by the service worker and preventing to work as expected:
+```ts
+export default defineConfig({
+  plugins: [
+    VitePWA({
+      /* other options */
+      devOptions: {
+        navigateFallbackAllowlist: [/^index.html$/]
+        /* other options */
+      }
+    })
+  ]   
+})
+```
+:::
+
 ## injectManifest strategy
 
 You can use `type: 'module'` when registering the service worker (right now only supported on latest versions of `Chromium` based browsers: `Chromium/Chrome/Edge`):
@@ -110,17 +151,17 @@ devOptions: {
 When building the application, the `vite-plugin-pwa` plugin will always register your service worker with `type: 'classic'` for compatibility with all browsers.
 :::
 
-::: warning
-If using version `0.12.1+`, you will need to exclude the `manifest.webmanifest` from the service worker's precache manifest if you want to check it using the browser (on `dev tools` it will be ok):
+::: tip
+You should only intercept the entry point of your application, if you don't include the `allowlist` option in the `NavigationRoute`, all your pages/routes might not work as they are being intercepted by the service worker (which will return by default the content of the entry point by not including your pages/routes in its precache manifest):
 ```ts
-let denylist: undefined | RegExp[]
+let allowlist: undefined | RegExp[]
 if (import.meta.env.DEV)
-  denylist = [/^\/manifest.webmanifest$/]
+  allowlist = [/^\/$/]
 
 // to allow work offline
 registerRoute(new NavigationRoute(
   createHandlerBoundToURL('index.html'),
-  { denylist }
+  { allowlist }
 ))
 ```
 :::

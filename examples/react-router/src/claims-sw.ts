@@ -10,14 +10,14 @@ precacheAndRoute(self.__WB_MANIFEST)
 // clean old assets
 cleanupOutdatedCaches()
 
-let denylist: undefined | RegExp[]
+let allowlist: undefined | RegExp[]
 if (import.meta.env.DEV)
-  denylist = [/^\/manifest.webmanifest$/]
+  allowlist = [/^\/$/]
 
 // to allow work offline
 registerRoute(new NavigationRoute(
   createHandlerBoundToURL('index.html'),
-  { denylist },
+  { allowlist },
 ))
 
 self.skipWaiting()
