@@ -108,6 +108,9 @@ registerDevSW();
             return content
           }
 
+          if (swDevOptions.workboxPaths.has(id))
+            return await fs.readFile(swDevOptions.workboxPaths.get(id)!, 'utf-8')
+
           return undefined
         }
         if (id.endsWith(swDevOptions.swUrl)) {
