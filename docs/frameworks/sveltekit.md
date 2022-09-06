@@ -67,7 +67,7 @@ As an example, when using [@sveltejs/adapter-static](https://github.com/sveltejs
 ```js
 import { copyFileSync } from 'fs'
 import { resolveConfig } from 'vite'
-import { VitePWA } from 'packages/vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa'
 import { pwaConfiguration } from './pwa-configuration.js'
 
 const webmanifestDestinations = [
@@ -192,7 +192,7 @@ export { pwaConfiguration }
 ```js
 import adapter from '@sveltejs/adapter-static'
 import preprocess from 'svelte-preprocess'
-import { VitePWA } from 'packages/vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa'
 import { pwaConfiguration } from './pwa-configuration.js'
 
 /** @type {import('@sveltejs/kit').Config} */
