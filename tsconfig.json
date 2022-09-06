@@ -2,17 +2,30 @@
   "compilerOptions": {
     "module": "ESNext",
     "target": "es2017",
-    "lib": ["ESNext", "DOM", "WebWorker"],
+    "lib": [
+      "ESNext",
+      "DOM",
+      "WebWorker"
+    ],
     "esModuleInterop": true,
     "strict": true,
     "strictNullChecks": true,
     "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "noUnusedLocals": true
+    "noUnusedLocals": true,
+    "types": [
+      "node",
+      "vite/client"
+    ],
+    "paths": {
+      "vite-plugin-pwa": [
+        "./packages/vite-plugin-pwa/src/index.ts"
+      ]
+    }
   },
   "exclude": [
-    "dist",
-    "node_modules",
-    "test"
+    "**/dist/**",
+    "**/node_modules/**",
+    "**/test/**"
   ]
 }

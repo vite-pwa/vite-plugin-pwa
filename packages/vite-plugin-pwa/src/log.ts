@@ -3,7 +3,7 @@ import { relative } from 'path'
 import type { BuildResult } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
 import { cyan, dim, green, magenta, yellow } from 'kolorist'
-import { version } from '../package.json'
+import { version } from '../../../package.json'
 
 export function logWorkboxResult(strategy: string, buildResult: BuildResult, viteOptions: ResolvedConfig) {
   const { root, logLevel = 'info' } = viteOptions

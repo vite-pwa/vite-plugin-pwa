@@ -25,9 +25,12 @@ export function BuildPlugin(ctx: PWAPluginContext) {
     generateBundle(_, bundle) {
       return _generateBundle(ctx, bundle)
     },
-    async closeBundle() {
-      if (!ctx.viteConfig.build.ssr && !ctx.options.disable)
-        await _generateSW(ctx)
+    closeBundle: {
+      sequential: true,
+      async handler() {
+        if (!ctx.viteConfig.build.ssr && !ctx.options.disable)
+          await _generateSW(ctx)
+      }
     },
     async buildEnd(error) {
       if (error)

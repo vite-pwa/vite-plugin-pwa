@@ -43,21 +43,21 @@
     "serve": "serve dist"
   },
   "dependencies": {
-    "solid-app-router": "^0.3.3",
-    "solid-js": "^1.4.5"
+    "solid-app-router": "^0.4.2",
+    "solid-js": "^1.5.4"
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^4.0.0",
     "cross-env": "^7.0.3",
     "https-localhost": "^4.7.1",
     "rimraf": "^3.0.2",
-    "typescript": "^4.7.4",
-    "vite": "^2.9.13",
+    "typescript": "^4.8.2",
+    "vite": "^3.1.0",
     "vite-plugin-pwa": "workspace:*",
-    "vite-plugin-solid": "^2.2.6",
-    "workbox-core": "^6.5.3",
-    "workbox-precaching": "^6.5.3",
-    "workbox-routing": "^6.5.3",
-    "workbox-window": "^6.5.3"
+    "vite-plugin-solid": "^2.3.0",
+    "workbox-core": "^6.5.4",
+    "workbox-precaching": "^6.5.4",
+    "workbox-routing": "^6.5.4",
+    "workbox-window": "^6.5.4"
   }
 }

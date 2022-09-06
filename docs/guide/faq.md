@@ -34,7 +34,9 @@ or `main.js`:
 import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
-  onRegisterError(error) {}
+  onRegisterError(error) {
+    console.log('error register sw', error)  
+  }
 })
 ```
 

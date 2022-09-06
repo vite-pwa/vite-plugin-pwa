@@ -1,8 +1,8 @@
 {
-  "name": "vite-pwa",
+  "name": "vite-plugin-pwa",
   "version": "0.12.7",
   "packageManager": "pnpm@7.9.5",
-  "description": "PWA for Vite",
+  "description": "Zero-config PWA for Vite",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
   "funding": "https://github.com/sponsors/antfu",
@@ -25,21 +25,24 @@
     "vite",
     "vite-plugin"
   ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs"
+    },
+    "./*": "./*"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "index.d.ts",
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
   "scripts": {
-    "docs": "pnpm -C docs run dev",
-    "docs:build": "pnpm -C docs run build",
-    "docs:serve": "pnpm -C docs run serve",
-    "docs:preview": "pnpm -C docs run preview",
-    "lint": "eslint .",
-    "lint-fix": "nr lint --fix",
-    "dev": "pnpm -C packages/vite-plugin-pwa run dev",
-    "build": "pnpm -r --filter=./packages/** run build",
-    "prepublishOnly": "nr build",
-    "release": "npx bumpp --push --tag --commit && npm publish",
-    "examples": "esno scripts/run-examples.ts",
-    "example:vue:dev:cdn": "pnpm -C examples/vue-basic-cdn run dev",
-    "example:vue:build:cdn": "pnpm -C examples/vue-basic-cdn run build",
-    "example:vue:start:cdn": "pnpm -C examples/vue-basic-cdn run start"
+    "dev": "esno scripts/dev.ts",
+    "build": "esno scripts/build.ts"
   },
   "peerDependencies": {
     "vite": "^3.1.0",
@@ -63,17 +66,15 @@
     "@types/workbox-build": "^5.0.1",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
     "eslint": "^8.23.0",
-    "esno": "0.16.3",
+    "esno": "^0.16.3",
     "kolorist": "^1.5.1",
     "preact": "^10.10.6",
-    "prompts": "^2.4.2",
     "react": "^18.2.0",
     "rollup": "^2.79.0",
     "solid-js": "^1.5.4",
     "svelte": "^3.50.0",
     "tsup": "^6.2.3",
     "typescript": "^4.8.2",
-    "unbuild": "^0.8.10",
     "vite": "^3.1.0",
     "vue": "^3.2.38"
   }

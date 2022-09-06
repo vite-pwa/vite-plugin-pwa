@@ -63,10 +63,11 @@ Pages which are not prerendered or are generated with a unique adapter will need
 As an example, when using [@sveltejs/adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) with `generateSW` strategy and `Prompt for update` behavior, you will need:
 
 ::: details 1) add pwa.js script
+
 ```js
 import { copyFileSync } from 'fs'
 import { resolveConfig } from 'vite'
-import { VitePWA } from 'vite-plugin-pwa'
+import { VitePWA } from 'packages/vite-plugin-pwa'
 import { pwaConfiguration } from './pwa-configuration.js'
 
 const webmanifestDestinations = [
@@ -187,10 +188,11 @@ export { pwaConfiguration }
 :::
 
 ::: details 4) add Vite Plugin PWA to svelte.config.js
+
 ```js
 import adapter from '@sveltejs/adapter-static'
 import preprocess from 'svelte-preprocess'
-import { VitePWA } from 'vite-plugin-pwa'
+import { VitePWA } from 'packages/vite-plugin-pwa'
 import { pwaConfiguration } from './pwa-configuration.js'
 
 /** @type {import('@sveltejs/kit').Config} */

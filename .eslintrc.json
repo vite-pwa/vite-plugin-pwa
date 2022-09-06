@@ -1,15 +1,16 @@
 {
-  "extends": "@antfu",
+  "extends": ["@antfu"],
   "overrides": [
     {
       "files": [
         "**/*.md/*.*"
       ],
       "rules": {
-        "@typescript-eslint/no-this-alias": "off",
-        "n/handle-callback-err": "off",
+        "no-restricted-imports": "off",
         "no-restricted-syntax": "off",
-        "no-labels": "off"
+        "no-labels": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-var-requires": "off"
       }
     }
   ]
