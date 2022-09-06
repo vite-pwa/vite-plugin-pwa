@@ -25,9 +25,11 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   let wb: import('workbox-window').Workbox | undefined
   let registration: ServiceWorkerRegistration | undefined
+  let registerPromise: Promise<void>
   let sendSkipWaitingMessage: () => Promise<void> | undefined
 
   const updateServiceWorker = async (reloadPage = true) => {
+    await registerPromise
     if (!auto) {
       // Assuming the user accepted the update, set up a listener
       // that will reload the page as soon as the previously waiting
@@ -43,9 +45,9 @@ export function registerSW(options: RegisterSWOptions = {}) {
     }
   }
 
-  ;(async () => {
+  async function register() {
+    const { Workbox, messageSW } = await import('workbox-window')
     if ('serviceWorker' in navigator) {
-      const { Workbox, messageSW } = await import('workbox-window')
       sendSkipWaitingMessage = async () => {
         if (registration && registration.waiting) {
           // Send a message to the waiting service worker,
@@ -96,7 +98,9 @@ export function registerSW(options: RegisterSWOptions = {}) {
         onRegisterError?.(e)
       })
     }
-  })()
+  }
+
+  registerPromise = register()
 
   return updateServiceWorker
 }
