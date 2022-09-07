@@ -1,3 +1,4 @@
+import { configureIntegrationOptions } from "@vite-pwa/core";
 import type { Plugin, UserConfig } from 'vite'
 import { VIRTUAL_MODULES, VIRTUAL_MODULES_MAP, VIRTUAL_MODULES_RESOLVE_PREFIX } from '../constants'
 import { generateRegisterSW } from '../modules'
@@ -21,6 +22,7 @@ export function MainPlugin(ctx: PWAPluginContext): Plugin {
     async configResolved(config) {
       ctx.useImportRegister = false
       ctx.viteConfig = config
+      await configureIntegrationOptions(config, ctx.userOptions)
       ctx.options = await resolveOptions(ctx.userOptions, config)
     },
     resolveId(id) {

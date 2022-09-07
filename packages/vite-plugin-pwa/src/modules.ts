@@ -102,6 +102,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   const { rollup } = await import('rollup')
   const bundle = await rollup({
     input: options.swSrc,
+    // @ts-ignore
     plugins,
   })
   try {

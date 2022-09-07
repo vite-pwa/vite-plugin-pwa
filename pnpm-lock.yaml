@@ -7,6 +7,7 @@ importers:
       '@antfu/eslint-config': ^0.26.3
       '@antfu/ni': ^0.18.0
       '@types/debug': ^4.1.7
+      '@types/node': ^18.7.15
       '@types/prompts': ^2.4.0
       '@types/react': ^18.0.18
       '@types/workbox-build': ^5.0.1
@@ -41,6 +42,7 @@ importers:
       '@antfu/eslint-config': 0.26.3_yqf6kl63nyoq5megxukfnom5rm
       '@antfu/ni': 0.18.0
       '@types/debug': 4.1.7
+      '@types/node': 18.7.15
       '@types/prompts': 2.4.0
       '@types/react': 18.0.18
       '@types/workbox-build': 5.0.1
@@ -276,7 +278,7 @@ importers:
     devDependencies:
       '@rollup/plugin-replace': 4.0.0_rollup@2.79.0
       '@sveltejs/adapter-static': 1.0.0-next.42
-      '@sveltejs/kit': 1.0.0-next.473_svelte@3.50.0+vite@3.1.0
+      '@sveltejs/kit': 1.0.0-next.474_svelte@3.50.0+vite@3.1.0
       '@typescript-eslint/eslint-plugin': 5.36.2_iurrlxgqcgk5svigzxakafpeuu
       '@typescript-eslint/parser': 5.36.2_yqf6kl63nyoq5megxukfnom5rm
       cross-env: 7.0.3
@@ -369,8 +371,15 @@ importers:
 
   packages/core:
     specifiers:
+      '@types/node': ^18.7.15
+      '@types/workbox-build': ^5.0.1
       vite: ^3.1.0
+      workbox-build: ^6.5.4
+    dependencies:
+      workbox-build: 6.5.4
     devDependencies:
+      '@types/node': 18.7.15
+      '@types/workbox-build': 5.0.1
       vite: 3.1.0
 
   packages/vite-plugin-pwa:
@@ -382,6 +391,7 @@ importers:
       '@types/react': ^18.0.18
       '@types/workbox-build': ^5.0.1
       '@typescript-eslint/eslint-plugin': ^5.36.2
+      '@vite-pwa/core': workspace:*
       debug: ^4.3.4
       eslint: ^8.23.0
       esno: ^0.16.3
@@ -414,6 +424,7 @@ importers:
       '@types/react': 18.0.18
       '@types/workbox-build': 5.0.1
       '@typescript-eslint/eslint-plugin': 5.36.2_iurrlxgqcgk5svigzxakafpeuu
+      '@vite-pwa/core': link:../core
       eslint: 8.23.0
       esno: 0.16.3
       kolorist: 1.5.1
@@ -2310,8 +2321,8 @@ packages:
     resolution: {integrity: sha512-BLMQY8zfUibex5FE3zkMXdkW4l/n+1tecUrCxmmO5jc8vEuZc41VQdmQtDifX80Bf1pCG3RH7151tJ+jqte2lg==}
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.473_svelte@3.50.0+vite@3.1.0:
-    resolution: {integrity: sha512-/PVk8zwUbwGlPfnmvcN71RyoSVrLO9hXMCHJ6BPqrZgBHubB0NPYS4mETE7RGHdxAk1LU2W9WStAdoE0kt6qng==}
+  /@sveltejs/kit/1.0.0-next.474_svelte@3.50.0+vite@3.1.0:
+    resolution: {integrity: sha512-RhyWczm95S4VIlnjCAc5TPRGl2OoVWZ4cQRBKmzdF7MUScTduNzo6WB2JWkImgwE3nqdvepgnem56GbEUj3e5Q==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true

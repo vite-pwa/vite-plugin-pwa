@@ -59,6 +59,7 @@
     "@antfu/ni": "^0.18.0",
     "@types/debug": "^4.1.7",
     "@types/prompts": "^2.4.0",
+    "@types/node": "^18.7.15",
     "@types/react": "^18.0.18",
     "@types/workbox-build": "^5.0.1",
     "@typescript-eslint/eslint-plugin": "^5.36.2",

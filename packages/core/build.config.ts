@@ -6,8 +6,19 @@ export default defineBuildConfig({
   ],
   clean: true,
   declaration: true,
+  externals: [
+    'vite',
+    'workbox-build',
+  ],
   rollup: {
     emitCJS: true,
-    inlineDependencies: true,
+    alias: {
+      entries: {
+        'workbox-build': './node_modules/@types/workbox-build/index.d.ts'
+      }
+    },
+    dts: {
+      respectExternal: true,
+    }
   },
 })

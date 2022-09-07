@@ -27,6 +27,7 @@ export function BuildPlugin(ctx: PWAPluginContext) {
     },
     closeBundle: {
       sequential: true,
+      order: ctx.userOptions?.integration?.closeBundleOrder,
       async handler() {
         if (!ctx.viteConfig.build.ssr && !ctx.options.disable)
           await _generateSW(ctx)

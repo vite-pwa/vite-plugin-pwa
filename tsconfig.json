@@ -20,6 +20,9 @@
     "paths": {
       "vite-plugin-pwa": [
         "./packages/vite-plugin-pwa/src/index.ts"
+      ],
+      "@vite-pwa/core": [
+        "./packages/core/src/index.ts"
       ]
     }
   },

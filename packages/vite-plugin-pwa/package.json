@@ -25,6 +25,7 @@
     "vite",
     "vite-plugin"
   ],
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -65,6 +66,7 @@
     "@types/react": "^18.0.18",
     "@types/workbox-build": "^5.0.1",
     "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@vite-pwa/core": "workspace:*",
     "eslint": "^8.23.0",
     "esno": "^0.16.3",
     "kolorist": "^1.5.1",
