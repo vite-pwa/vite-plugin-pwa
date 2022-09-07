@@ -46,6 +46,7 @@
     "docs:serve": "npm -C docs run serve",
     "docs:preview": "npm -C docs run preview",
     "lint": "eslint .",
+    "lint-fix": "nr lint --fix",
     "dev": "esno scripts/dev.ts",
     "build": "esno scripts/build.ts",
     "prepublishOnly": "npm run build",
