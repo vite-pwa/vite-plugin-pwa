@@ -21,6 +21,7 @@ export function MainPlugin(ctx: PWAPluginContext): Plugin {
     async configResolved(config) {
       ctx.useImportRegister = false
       ctx.viteConfig = config
+      ctx.userOptions?.integration?.configureOptions?.(config, ctx.userOptions)
       ctx.options = await resolveOptions(ctx.userOptions, config)
     },
     resolveId(id) {

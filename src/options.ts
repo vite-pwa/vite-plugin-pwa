@@ -56,6 +56,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     disable = false,
     devOptions = { enabled: false, type: 'classic' },
     selfDestroying = false,
+    integration = {},
   } = options
 
   const basePath = resolveBathPath(base)
@@ -147,6 +148,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     includeAssets,
     includeManifestIcons,
     disable,
+    integration,
     devOptions,
     vitePlugins,
     selfDestroying,

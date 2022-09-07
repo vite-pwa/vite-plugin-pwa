@@ -5,7 +5,7 @@ export default function NavbarFix(): Plugin {
     name: 'vitepress-sidebar-logo-fix',
     enforce: 'pre',
     transform(code, id) {
-      if (id.includes('VPNavBarTitle.vue') && !id.endsWith('.css')) {
+      if (id.includes('VPNavBarTitle.vue') && !id.endsWith('.css') && !id.includes('&setup=')) {
         return `
 <script setup lang="ts">
 import { useData } from 'vitepress'
