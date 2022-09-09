@@ -102,7 +102,11 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
   const manifest = typeof options.manifest === 'boolean' && !options.manifest
     ? false
     : Object.assign({}, defaultManifest, options.manifest || {})
-  const { vitePlugins = defaultInjectManifestVitePlugins, ...userInjectManifest } = options.injectManifest || {}
+  const {
+    vitePlugins = defaultInjectManifestVitePlugins,
+    rollupFormat = 'es',
+    ...userInjectManifest
+  } = options.injectManifest || {}
   const injectManifest = Object.assign({}, defaultInjectManifest, userInjectManifest)
 
   if ((injectRegister === 'auto' || injectRegister == null) && registerType === 'autoUpdate') {
@@ -148,6 +152,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     includeManifestIcons,
     disable,
     devOptions,
+    rollupFormat,
     vitePlugins,
     selfDestroying,
   }

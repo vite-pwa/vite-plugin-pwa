@@ -4,6 +4,12 @@ import type { OutputBundle } from 'rollup'
 export type InjectManifestVitePlugins = string[] | ((vitePluginIds: string[]) => string[])
 export type CustomInjectManifestOptions = InjectManifestOptions & {
   /**
+   * Configure the format to use in the Rollup build.
+   *
+   * @default 'es'
+   */
+  rollupFormat?: 'es' | 'iife'
+  /**
    * `Vite` plugin ids to use on `Rollup` build.
    *
    * **WARN**: this option is for advanced usage, beware, you can break the service worker build.
@@ -144,6 +150,7 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   swDest: string
   workbox: GenerateSWOptions
   injectManifest: InjectManifestOptions
+  rollupFormat: 'es' | 'iife'
   vitePlugins: InjectManifestVitePlugins
 }
 
