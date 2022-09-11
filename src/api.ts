@@ -3,10 +3,10 @@ import { existsSync } from 'fs'
 import type { OutputBundle } from 'rollup'
 import { generateInjectManifest, generateServiceWorker } from './modules'
 import { generateWebManifestFile } from './assets'
-import { FILE_SW_REGISTER } from './constants'
+import { DEV_SW_NAME, FILE_SW_REGISTER } from './constants'
 import { generateSimpleSWRegister } from './html'
 import type { PWAPluginContext } from './context'
-import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
+import type { ExtendManifestEntriesHook, RegisterSWData, VitePluginPWAAPI } from './types'
 
 export async function _generateSW({ options, viteConfig }: PWAPluginContext) {
   if (options.disable)
@@ -52,6 +52,29 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
   return {
     get disabled() {
       return ctx?.options?.disable
+    },
+    get webManifestUrl() {
+      const options = ctx?.options
+      if (!options)
+        return undefined
+
+      return `${options.base}/${options.manifestFilename}`
+    },
+    registerSWData() {
+      const options = ctx?.options
+      if (!options)
+        return undefined
+
+      const mode = options.injectRegister
+      if (mode === false || !mode)
+        return undefined
+
+      return <RegisterSWData>{
+        inline: options.injectRegister === 'inline',
+        scope: options.scope,
+        inlinePath: `${options.base}${DEV_SW_NAME}`,
+        registerPath: `${options.base}${FILE_SW_REGISTER}`,
+      }
     },
     generateBundle(bundle) {
       return _generateBundle(ctx, bundle)

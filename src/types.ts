@@ -273,11 +273,43 @@ export interface ManifestOptions {
   iarc_rating_id: string
 }
 
+export interface RegisterSWData {
+  /**
+   * When this flag is `true` the service worker must be registered via inline script otherwise registered via script with src attribute `registerSW.js` .
+   */
+  inline: boolean
+  /**
+   * The path for the inline script.
+   */
+  inlinePath: string
+  /**
+   * The path for the src script for `registerSW.js`.
+   */
+  registerPath: string
+  /**
+   * The scope for the service worker: only required for `inline: true`.
+   */
+  scope: string
+}
+
 export interface VitePluginPWAAPI {
   /**
    * Is the plugin disabled?
    */
   disabled: boolean
+  /**
+   * Returns the PWA webmanifest url for the manifest link:
+   * <link rel="manifest" href="<webManifestUrl>" />
+   *
+   * This option will help some integrations to inject the corresponding script in the head.
+   */
+  webManifestUrl: string | undefined
+  /**
+   * How the service worker is being registered in the application.
+   *
+   * This option will help some integrations to inject the corresponding script in the head.
+   */
+  registerSWData(): RegisterSWData | undefined
   extendManifestEntries(fn: ExtendManifestEntriesHook): void
   /*
    * Explicitly generate the manifests.
