@@ -3,7 +3,7 @@ import { existsSync } from 'fs'
 import type { OutputBundle } from 'rollup'
 import { generateInjectManifest, generateServiceWorker } from './modules'
 import { generateWebManifestFile } from './assets'
-import { DEV_SW_NAME, FILE_SW_REGISTER } from './constants'
+import { FILE_SW_REGISTER } from './constants'
 import { generateSimpleSWRegister } from './html'
 import type { PWAPluginContext } from './context'
 import type { ExtendManifestEntriesHook, RegisterSWData, VitePluginPWAAPI } from './types'
@@ -72,7 +72,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       return <RegisterSWData>{
         inline: options.injectRegister === 'inline',
         scope: options.scope,
-        inlinePath: `${options.base}${DEV_SW_NAME}`,
+        inlinePath: `${options.base}${options.filename}`,
         registerPath: `${options.base}${FILE_SW_REGISTER}`,
       }
     },
