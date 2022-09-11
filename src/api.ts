@@ -66,7 +66,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
         return undefined
 
       const mode = options.injectRegister
-      if (mode === false || !mode)
+      if (!mode || ctx.useImportRegister)
         return undefined
 
       return <RegisterSWData>{
