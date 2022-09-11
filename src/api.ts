@@ -55,14 +55,14 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
     },
     get webManifestUrl() {
       const options = ctx?.options
-      if (!options)
+      if (!options || options.disable)
         return undefined
 
       return `${options.base}/${options.manifestFilename}`
     },
     registerSWData() {
       const options = ctx?.options
-      if (!options)
+      if (!options || options.disable)
         return undefined
 
       const mode = options.injectRegister
