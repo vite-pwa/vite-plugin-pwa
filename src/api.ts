@@ -58,7 +58,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       if (!options || options.disable)
         return undefined
 
-      return `${options.base}/${options.manifestFilename}`
+      return `${options.base}${options.manifestFilename}`
     },
     registerSWData() {
       const options = ctx?.options
