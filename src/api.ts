@@ -6,7 +6,7 @@ import { generateWebManifestFile } from './assets'
 import { FILE_SW_REGISTER } from './constants'
 import { generateSimpleSWRegister } from './html'
 import type { PWAPluginContext } from './context'
-import type { ExtendManifestEntriesHook, RegisterSWData, VitePluginPWAAPI } from './types'
+import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
 
 export async function _generateSW({ options, viteConfig }: PWAPluginContext) {
   if (options.disable)
@@ -53,12 +53,15 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
     get disabled() {
       return ctx?.options?.disable
     },
-    get webManifestUrl() {
+    webManifestData() {
       const options = ctx?.options
       if (!options || options.disable)
         return undefined
 
-      return `${options.base}${options.manifestFilename}`
+      return {
+        href: `${options.base}${options.manifestFilename}`,
+        useCredentials: ctx.options.useCredentials,
+      }
     },
     registerSWData() {
       const options = ctx?.options
@@ -69,7 +72,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       if (!mode || ctx.useImportRegister)
         return undefined
 
-      return <RegisterSWData>{
+      return {
         inline: options.injectRegister === 'inline',
         scope: options.scope,
         inlinePath: `${options.base}${options.filename}`,

@@ -273,6 +273,11 @@ export interface ManifestOptions {
   iarc_rating_id: string
 }
 
+export interface WebManifestData {
+  href: string
+  useCredentials: boolean
+}
+
 export interface RegisterSWData {
   /**
    * When this flag is `true` the service worker must be registered via inline script otherwise registered via script with src attribute `registerSW.js` .
@@ -301,9 +306,10 @@ export interface VitePluginPWAAPI {
    * Returns the PWA webmanifest url for the manifest link:
    * <link rel="manifest" href="<webManifestUrl>" />
    *
-   * This option will help some integrations to inject the corresponding script in the head.
+   * Will also return if the manifest will require credentials:
+   * <link rel="manifest" href="<webManifestUrl>" crossorigin="use-credentials" />
    */
-  webManifestUrl: string | undefined
+  webManifestData(): WebManifestData | undefined
   /**
    * How the service worker is being registered in the application.
    *
