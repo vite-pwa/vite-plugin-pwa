@@ -3,7 +3,7 @@ import { existsSync } from 'fs'
 import type { OutputBundle } from 'rollup'
 import { generateInjectManifest, generateServiceWorker } from './modules'
 import { generateWebManifestFile } from './assets'
-import { FILE_SW_REGISTER } from './constants'
+import { DEV_SW_NAME, FILE_SW_REGISTER } from './constants'
 import { generateSimpleSWRegister } from './html'
 import type { PWAPluginContext } from './context'
 import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
@@ -52,6 +52,40 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
   return {
     get disabled() {
       return ctx?.options?.disable
+    },
+    get pwaInDevEnvironment() {
+      return ctx?.devEnvironment === true
+    },
+    webManifestData() {
+      const options = ctx?.options
+      if (!options || options.disable)
+        return undefined
+
+      return {
+        href: `${options.base}${options.manifestFilename}`,
+        useCredentials: ctx.options.useCredentials,
+      }
+    },
+    registerSWData() {
+      const options = ctx?.options
+      if (!options || options.disable)
+        return undefined
+
+      const mode = options.injectRegister
+      if (!mode || ctx.useImportRegister)
+        return undefined
+
+      let type: WorkerType = 'classic'
+      if (ctx.devEnvironment && ctx.options.devOptions.enabled === true)
+        type = ctx.options.devOptions.type ?? 'classic'
+
+      return {
+        inline: options.injectRegister === 'inline',
+        scope: options.scope,
+        inlinePath: `${options.base}${ctx.devEnvironment ? DEV_SW_NAME : options.filename}`,
+        registerPath: `${options.base}${FILE_SW_REGISTER}`,
+        type,
+      }
     },
     generateBundle(bundle) {
       return _generateBundle(ctx, bundle)

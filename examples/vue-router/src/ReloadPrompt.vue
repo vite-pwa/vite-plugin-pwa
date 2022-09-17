@@ -10,7 +10,9 @@ const {
   updateServiceWorker,
 } = useRegisterSW({
   immediate: true,
-  onRegistered(r) {
+  onRegisteredSW(swUrl, r) {
+    // eslint-disable-next-line no-console
+    console.log(`Service Worker at: ${swUrl}`)
     if (reloadSW === 'true') {
       r && setInterval(async () => {
         // eslint-disable-next-line no-console

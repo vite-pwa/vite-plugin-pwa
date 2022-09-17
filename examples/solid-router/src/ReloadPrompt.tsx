@@ -13,7 +13,9 @@ const ReloadPrompt: Component = () => {
     updateServiceWorker,
   } = useRegisterSW({
     immediate: true,
-    onRegistered(r) {
+    onRegisteredSW(swUrl, r) {
+      // eslint-disable-next-line no-console
+      console.log(`Service Worker at: ${swUrl}`)
       // @ts-expect-error just ignore
       if (reloadSW === 'true') {
         r && setInterval(() => {

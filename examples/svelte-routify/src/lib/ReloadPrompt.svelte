@@ -11,7 +11,9 @@
       needRefresh,
       updateServiceWorker,
   } = useRegisterSW({
-    onRegistered(r) {
+    onRegisteredSW(swUrl, r) {
+        // eslint-disable-next-line no-console
+        console.log(`Service Worker at: ${swUrl}`)
         if (reloadSW === 'true') {
             r && setInterval(() => {
                 console.log('Checking for sw update')

@@ -48,6 +48,7 @@ registerDevSW();
       },
     },
     configureServer(server) {
+      ctx.devEnvironment = true
       const { options } = ctx
       if (!options.disable && options.manifest && options.devOptions.enabled) {
         server.ws.on(DEV_READY_NAME, createSWResponseHandler(server, ctx))
