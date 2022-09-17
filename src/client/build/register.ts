@@ -46,8 +46,8 @@ export function registerSW(options: RegisterSWOptions = {}) {
   }
 
   async function register() {
-    const { Workbox, messageSW } = await import('workbox-window')
     if ('serviceWorker' in navigator) {
+      const { Workbox, messageSW } = await import('workbox-window')
       sendSkipWaitingMessage = async () => {
         if (registration && registration.waiting) {
           // Send a message to the waiting service worker,
