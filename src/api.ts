@@ -4,7 +4,12 @@ import type { OutputBundle } from 'rollup'
 import { generateInjectManifest, generateServiceWorker } from './modules'
 import { generateWebManifestFile } from './assets'
 import { DEV_SW_NAME, FILE_SW_REGISTER } from './constants'
-import { generateSimpleSWRegister } from './html'
+import {
+  generateRegisterDevSW,
+  generateRegisterSW,
+  generateSimpleSWRegister,
+  generateWebManifest,
+} from './html'
 import type { PWAPluginContext } from './context'
 import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
 
@@ -61,9 +66,22 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       if (!options || options.disable)
         return undefined
 
+      let url = options.manifestFilename
+      let manifest: string
+      if (ctx.devEnvironment && ctx.options.devOptions.enabled === true) {
+        url = ctx.options.devOptions.webManifestUrl ?? options.manifestFilename
+        manifest = generateWebManifest(options, true)
+      }
+      else {
+        manifest = generateWebManifest(options, false)
+      }
+
       return {
-        href: `${options.base}${options.manifestFilename}`,
+        href: `${options.base}${url}`,
         useCredentials: ctx.options.useCredentials,
+        toLinkTag() {
+          return manifest
+        },
       }
     },
     registerSWData() {
@@ -76,15 +94,27 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
         return undefined
 
       let type: WorkerType = 'classic'
-      if (ctx.devEnvironment && ctx.options.devOptions.enabled === true)
+      let script: string | undefined
+      let shouldRegisterSW = options.injectRegister === 'inline' || options.injectRegister === 'script'
+      if (ctx.devEnvironment && ctx.options.devOptions.enabled === true) {
         type = ctx.options.devOptions.type ?? 'classic'
+        script = generateRegisterDevSW()
+        shouldRegisterSW = true
+      }
+      else if (shouldRegisterSW) {
+        script = generateRegisterSW(options, false)
+      }
 
       return {
+        shouldRegisterSW,
         inline: options.injectRegister === 'inline',
         scope: options.scope,
         inlinePath: `${options.base}${ctx.devEnvironment ? DEV_SW_NAME : options.filename}`,
         registerPath: `${options.base}${FILE_SW_REGISTER}`,
         type,
+        toScriptTag() {
+          return script
+        },
       }
     },
     generateBundle(bundle) {

@@ -1,21 +1,24 @@
 import { basename, resolve } from 'path'
 import { existsSync, promises as fs, mkdirSync } from 'fs'
 import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite'
-import { generateSimpleSWRegister, injectServiceWorker } from '../html'
+import {
+  generateRegisterDevSW,
+  generateSWHMR,
+  generateSimpleSWRegister,
+  injectServiceWorker,
+} from '../html'
 import { generateWebManifestFile } from '../assets'
 import {
+  DEV_READY_NAME,
+  DEV_REGISTER_SW_NAME,
   DEV_SW_NAME,
-  FILE_SW_REGISTER,
-  VIRTUAL_MODULES_RESOLVE_PREFIX,
+  DEV_SW_VIRTUAL,
+  FILE_SW_REGISTER, RESOLVED_DEV_SW_VIRTUAL,
 } from '../constants'
 import type { ResolvedVitePWAOptions } from '../types'
 import { generateServiceWorker } from '../modules'
 import { normalizePath } from '../utils'
 import type { PWAPluginContext } from '../context'
-
-const DEV_SW_VIRTUAL = `${VIRTUAL_MODULES_RESOLVE_PREFIX}pwa-entry-point-loaded`
-const DEV_READY_NAME = 'vite-pwa-plugin:dev-ready'
-const DEV_REGISTER_SW_NAME = 'vite-plugin-pwa:register-sw'
 
 export const swDevOptions = {
   swUrl: DEV_SW_NAME,
@@ -38,11 +41,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
 
         return html.replace(
           '</body>',
-            `
-<script type="module">
-import registerDevSW from '${DEV_SW_VIRTUAL}';
-registerDevSW();
-</script>
+            `${generateRegisterDevSW()}
 </body>`,
         )
       },
@@ -68,7 +67,7 @@ registerDevSW();
     },
     resolveId(id) {
       if (id === DEV_SW_VIRTUAL)
-        return id
+        return RESOLVED_DEV_SW_VIRTUAL
 
       const { options } = ctx
       if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest' && !options.selfDestroying) {
@@ -86,7 +85,7 @@ registerDevSW();
       return undefined
     },
     async load(id) {
-      if (id === DEV_SW_VIRTUAL)
+      if (id === RESOLVED_DEV_SW_VIRTUAL)
         return generateSWHMR()
 
       const { options, viteConfig } = ctx
@@ -208,30 +207,5 @@ function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): 
       })
     }
   }
-}
-
-function generateSWHMR() {
-  return `
-import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ inline, inlinePath, registerPath, scope, swType = 'classic' }) => {
-  if (inline) {
-    if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register(inlinePath, { scope, type: swType });
-    }
-  }
-  else {
-    const registerSW = document.createElement('script');
-    registerSW.setAttribute('src', registerPath);
-    document.head.appendChild(registerSW);
-  }
-});
-function registerDevSW() {
-  try {
-    import.meta.hot.send('${DEV_READY_NAME}');
-  } catch (e) {
-    console.error('unable to send ${DEV_READY_NAME} message to register service worker in dev mode!', e);
-  }
-}
-export default registerDevSW;
-`
 }
 

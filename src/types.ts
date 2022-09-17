@@ -264,9 +264,14 @@ export interface ManifestOptions {
 export interface WebManifestData {
   href: string
   useCredentials: boolean
+  /**
+   * Returns the corresponding link tag: `<link rel="manifest" href="<webManifestUrl>" />`.
+   */
+  toLinkTag: () => string
 }
 
 export interface RegisterSWData {
+  shouldRegisterSW: boolean
   /**
    * When this flag is `true` the service worker must be registered via inline script otherwise registered via script with src attribute `registerSW.js` .
    */
@@ -287,6 +292,10 @@ export interface RegisterSWData {
    * The type for the service worker: only required for `inline: true`.
    */
   type: WorkerType
+  /**
+   * Returns the corresponding script tag if `shouldRegisterSW` returns `true`.
+   */
+  toScriptTag: () => string | undefined
 }
 
 export interface VitePluginPWAAPI {
