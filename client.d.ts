@@ -11,7 +11,7 @@ declare module 'virtual:pwa-register' {
      */
     onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
     /**
-     * Called once the service worker is registered.
+     * Called once the service worker is registered (requires version `0.12.8+`).
      *
      * @param swScriptUrl The service worker script url.
      * @param registration The service worker registration if available.
@@ -40,7 +40,7 @@ declare module 'virtual:pwa-register/vue' {
      */
     onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
     /**
-     * Called once the service worker is registered.
+     * Called once the service worker is registered (requires version `0.12.8+`).
      *
      * @param swScriptUrl The service worker script url.
      * @param registration The service worker registration if available.
@@ -73,7 +73,7 @@ declare module 'virtual:pwa-register/svelte' {
      */
     onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
     /**
-     * Called once the service worker is registered.
+     * Called once the service worker is registered (requires version `0.12.8+`).
      *
      * @param swScriptUrl The service worker script url.
      * @param registration The service worker registration if available.
@@ -106,7 +106,7 @@ declare module 'virtual:pwa-register/react' {
      */
     onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
     /**
-     * Called once the service worker is registered.
+     * Called once the service worker is registered (requires version `0.12.8+`).
      *
      * @param swScriptUrl The service worker script url.
      * @param registration The service worker registration if available.
@@ -131,7 +131,19 @@ declare module 'virtual:pwa-register/solid' {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
+    /**
+     * Called only if `onRegisteredSW` is not provided.
+     *
+     * @deprecated Use `onRegisteredSW` instead.
+     * @param registration The service worker registration if available.
+     */
     onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
+    /**
+     * Called once the service worker is registered (requires version `0.12.8+`).
+     *
+     * @param swScriptUrl The service worker script url.
+     * @param registration The service worker registration if available.
+     */
     onRegisteredSW?: (swScriptUrl: string, registration: ServiceWorkerRegistration | undefined) => void
     onRegisterError?: (error: any) => void
   }
@@ -152,7 +164,19 @@ declare module 'virtual:pwa-register/preact' {
     immediate?: boolean
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
+    /**
+     * Called only if `onRegisteredSW` is not provided.
+     *
+     * @deprecated Use `onRegisteredSW` instead.
+     * @param registration The service worker registration if available.
+     */
     onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
+    /**
+     * Called once the service worker is registered (requires version `0.12.8+`).
+     *
+     * @param swScriptUrl The service worker script url.
+     * @param registration The service worker registration if available.
+     */
     onRegisteredSW?: (swScriptUrl: string, registration: ServiceWorkerRegistration | undefined) => void
     onRegisterError?: (error: any) => void
   }
