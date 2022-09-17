@@ -284,7 +284,7 @@ export interface RegisterSWData {
    */
   scope: string
   /**
-   * The scope for the service worker: only required for `inline: true`.
+   * The type for the service worker: only required for `inline: true`.
    */
   type: WorkerType
 }
