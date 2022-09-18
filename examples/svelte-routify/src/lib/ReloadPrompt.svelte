@@ -1,6 +1,10 @@
 <script lang="ts">
   import { useRegisterSW } from 'virtual:pwa-register/svelte'
 
+  import { pwaInfo } from 'virtual:pwa-info'
+
+  console.log(pwaInfo)
+
   // replaced dynamically
   const buildDate = '__DATE__'
   // replaced dyanmicaly

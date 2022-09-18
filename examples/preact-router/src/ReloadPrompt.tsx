@@ -1,6 +1,9 @@
 import './ReloadPrompt.css'
 
 import { useRegisterSW } from 'virtual:pwa-register/preact'
+import { pwaInfo } from 'virtual:pwa-info'
+
+console.log(pwaInfo)
 
 function ReloadPrompt() {
   // replaced dynamically

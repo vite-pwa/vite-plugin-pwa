@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { useRegisterSW } from 'virtual:pwa-register/vue'
+import { pwaInfo } from 'virtual:pwa-info'
+
+console.log(pwaInfo)
 
 // replaced dyanmicaly
 const reloadSW: any = '__RELOAD_SW__'

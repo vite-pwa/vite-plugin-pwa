@@ -23,6 +23,9 @@ export const defaultInjectManifestVitePlugins = [
   'vite:terser',
 ]
 
+export const PWA_INFO_VIRTUAL = 'virtual:pwa-info'
+export const RESOLVED_PWA_INFO_VIRTUAL = `\0${PWA_INFO_VIRTUAL}`
+
 export const DEV_SW_NAME = 'dev-sw.js?dev-sw'
 export const DEV_SW_VIRTUAL = `${VIRTUAL_MODULES_RESOLVE_PREFIX}pwa-entry-point-loaded`
 export const RESOLVED_DEV_SW_VIRTUAL = `\0${DEV_SW_VIRTUAL}`
