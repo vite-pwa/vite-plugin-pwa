@@ -26,7 +26,7 @@ declare module 'virtual:pwa-register/preact' {
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
     onRegistered?: (registration: ServiceWorkerRegistration | undefined) => void
-    onRegisterError?: (error: any) => void
+    onRegisterError?: (error: unknown) => void
   }
 
   export function useRegisterSW(options?: RegisterSWOptions): {
