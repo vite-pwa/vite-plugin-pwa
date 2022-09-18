@@ -106,7 +106,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   })
   try {
     await bundle.write({
-      format: 'es',
+      format: options.rollupFormat,
       exports: 'none',
       inlineDynamicImports: true,
       file: options.injectManifest.swDest,
