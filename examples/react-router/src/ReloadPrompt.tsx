@@ -2,6 +2,9 @@ import React from 'react'
 import './ReloadPrompt.css'
 
 import { useRegisterSW } from 'virtual:pwa-register/react'
+import { pwaInfo } from 'virtual:pwa-info'
+
+console.log(pwaInfo)
 
 function ReloadPrompt() {
   // replaced dynamically
@@ -14,7 +17,9 @@ function ReloadPrompt() {
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
   } = useRegisterSW({
-    onRegistered(r) {
+    onRegisteredSW(swUrl, r) {
+      // eslint-disable-next-line no-console
+      console.log(`Service Worker at: ${swUrl}`)
       // @ts-expect-error just ignore
       if (reloadSW === 'true') {
         r && setInterval(() => {

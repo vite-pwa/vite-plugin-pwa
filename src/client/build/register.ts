@@ -20,6 +20,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
     onNeedRefresh,
     onOfflineReady,
     onRegistered,
+    onRegisteredSW,
     onRegisterError,
   } = options
 
@@ -93,7 +94,10 @@ export function registerSW(options: RegisterSWOptions = {}) {
       // register the service worker
       wb.register({ immediate }).then((r) => {
         registration = r
-        onRegistered?.(r)
+        if (onRegisteredSW)
+          onRegisteredSW('__SW__', r)
+        else
+          onRegistered?.(r)
       }).catch((e) => {
         onRegisterError?.(e)
       })

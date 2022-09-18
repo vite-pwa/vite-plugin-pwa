@@ -2,7 +2,10 @@
 import type { Component } from 'solid-js'
 import { Show } from 'solid-js'
 import { useRegisterSW } from 'virtual:pwa-register/solid'
+import { pwaInfo } from 'virtual:pwa-info'
 import styles from './ReloadPrompt.module.css'
+
+console.log(pwaInfo)
 
 const ReloadPrompt: Component = () => {
   // replaced dynamically
@@ -13,7 +16,9 @@ const ReloadPrompt: Component = () => {
     updateServiceWorker,
   } = useRegisterSW({
     immediate: true,
-    onRegistered(r) {
+    onRegisteredSW(swUrl, r) {
+      // eslint-disable-next-line no-console
+      console.log(`Service Worker at: ${swUrl}`)
       // @ts-expect-error just ignore
       if (reloadSW === 'true') {
         r && setInterval(() => {
