@@ -19,7 +19,7 @@ declare module 'virtual:pwa-info' {
          * - not using `pwaPluginOptions.injectRegister` with `script` or `inline` values
          * - if using `pwaPluginOptions.injectRegister` with `auto` (default) and importing any of the virtual modules
          */
-        registerSWData?: {
+        registerSW?: {
             /**
              * When this flag is `true` the service worker must be registered via inline script otherwise registered via script with src attribute `registerSW.js` .
              */

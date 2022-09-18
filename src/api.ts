@@ -63,7 +63,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
     },
     webManifestData() {
       const options = ctx?.options
-      if (!options || options.disable)
+      if (!options || options.disable || ctx.viteConfig.build.ssr || (ctx.devEnvironment && !ctx.options.devOptions.enabled))
         return undefined
 
       let url = options.manifestFilename
@@ -86,7 +86,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
     },
     registerSWData() {
       const options = ctx?.options
-      if (!options || options.disable)
+      if (!options || options.disable || ctx.viteConfig.build.ssr || (ctx.devEnvironment && !ctx.options.devOptions.enabled))
         return undefined
 
       const mode = options.injectRegister

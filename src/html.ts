@@ -56,15 +56,15 @@ export function generateWebManifest(options: ResolvedVitePWAOptions, dev: boolea
 
 export function generateRegisterSW(options: ResolvedVitePWAOptions, dev: boolean) {
   if (options.injectRegister === 'inline')
-    return `<script>${generateSimpleSWRegister(options, dev)}</script>`
+    return `<script id="vite-plugin-pwa:inline-sw">${generateSimpleSWRegister(options, dev)}</script>`
   else if (options.injectRegister === 'script')
-    return `<script src="${options.base}${FILE_SW_REGISTER}"></script>`
+    return `<script id="vite-plugin-pwa:register-sw" src="${options.base}${FILE_SW_REGISTER}"></script>`
 
   return undefined
 }
 
 export function generateRegisterDevSW() {
-  return `<script type="module">
+  return `<script id="vite-plugin-pwa:register-dev-sw" type="module">
 import registerDevSW from '${DEV_SW_VIRTUAL}';
 registerDevSW();
 </script>`
@@ -80,6 +80,7 @@ import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ inline, inlinePath, registerPat
   }
   else {
     const registerSW = document.createElement('script');
+    registerSW.setAttribute('id', 'vite-plugin-pwa:register-sw');
     registerSW.setAttribute('src', registerPath);
     document.head.appendChild(registerSW);
   }
