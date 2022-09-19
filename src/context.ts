@@ -6,6 +6,7 @@ export interface PWAPluginContext {
   userOptions: Partial<VitePWAOptions>
   options: ResolvedVitePWAOptions
   useImportRegister: boolean
+  devEnvironment: boolean
 }
 
 export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginContext {
@@ -14,5 +15,6 @@ export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginCo
     options: undefined!,
     viteConfig: undefined!,
     useImportRegister: false,
+    devEnvironment: false,
   }
 }

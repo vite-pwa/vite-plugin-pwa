@@ -3,8 +3,13 @@ import { existsSync } from 'fs'
 import type { OutputBundle } from 'rollup'
 import { generateInjectManifest, generateServiceWorker } from './modules'
 import { generateWebManifestFile } from './assets'
-import { FILE_SW_REGISTER } from './constants'
-import { generateSimpleSWRegister } from './html'
+import { DEV_SW_NAME, FILE_SW_REGISTER } from './constants'
+import {
+  generateRegisterDevSW,
+  generateRegisterSW,
+  generateSimpleSWRegister,
+  generateWebManifest,
+} from './html'
 import type { PWAPluginContext } from './context'
 import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
 
@@ -53,30 +58,63 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
     get disabled() {
       return ctx?.options?.disable
     },
+    get pwaInDevEnvironment() {
+      return ctx?.devEnvironment === true
+    },
     webManifestData() {
       const options = ctx?.options
-      if (!options || options.disable)
+      if (!options || options.disable || ctx.viteConfig.build.ssr || (ctx.devEnvironment && !ctx.options.devOptions.enabled))
         return undefined
 
+      let url = options.manifestFilename
+      let manifest: string
+      if (ctx.devEnvironment && ctx.options.devOptions.enabled === true) {
+        url = ctx.options.devOptions.webManifestUrl ?? options.manifestFilename
+        manifest = generateWebManifest(options, true)
+      }
+      else {
+        manifest = generateWebManifest(options, false)
+      }
+
       return {
-        href: `${options.base}${options.manifestFilename}`,
+        href: `${options.base}${url}`,
         useCredentials: ctx.options.useCredentials,
+        toLinkTag() {
+          return manifest
+        },
       }
     },
     registerSWData() {
       const options = ctx?.options
-      if (!options || options.disable)
+      if (!options || options.disable || ctx.viteConfig.build.ssr || (ctx.devEnvironment && !ctx.options.devOptions.enabled))
         return undefined
 
       const mode = options.injectRegister
       if (!mode || ctx.useImportRegister)
         return undefined
 
+      let type: WorkerType = 'classic'
+      let script: string | undefined
+      let shouldRegisterSW = options.injectRegister === 'inline' || options.injectRegister === 'script'
+      if (ctx.devEnvironment && ctx.options.devOptions.enabled === true) {
+        type = ctx.options.devOptions.type ?? 'classic'
+        script = generateRegisterDevSW()
+        shouldRegisterSW = true
+      }
+      else if (shouldRegisterSW) {
+        script = generateRegisterSW(options, false)
+      }
+
       return {
+        shouldRegisterSW,
         inline: options.injectRegister === 'inline',
         scope: options.scope,
-        inlinePath: `${options.base}${options.filename}`,
+        inlinePath: `${options.base}${ctx.devEnvironment ? DEV_SW_NAME : options.filename}`,
         registerPath: `${options.base}${FILE_SW_REGISTER}`,
+        type,
+        toScriptTag() {
+          return script
+        },
       }
     },
     generateBundle(bundle) {

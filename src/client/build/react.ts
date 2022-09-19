@@ -10,6 +10,7 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
     onNeedRefresh,
     onOfflineReady,
     onRegistered,
+    onRegisteredSW,
     onRegisterError,
   } = options
 
@@ -28,6 +29,7 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
         onNeedRefresh?.()
       },
       onRegistered,
+      onRegisteredSW,
       onRegisterError,
     })
   })

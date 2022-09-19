@@ -4,11 +4,15 @@ import type { VitePWAOptions } from './types'
 import { BuildPlugin } from './plugins/build'
 import { DevPlugin } from './plugins/dev'
 import { MainPlugin } from './plugins/main'
+import { InfoPlugin } from './plugins/info'
+import { createAPI } from './api'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   const ctx = createContext(userOptions)
+  const api = createAPI(ctx)
   return [
-    MainPlugin(ctx),
+    MainPlugin(ctx, api),
+    InfoPlugin(ctx, api),
     BuildPlugin(ctx),
     DevPlugin(ctx),
   ]

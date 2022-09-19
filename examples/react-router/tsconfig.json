@@ -15,6 +15,7 @@
     "noEmit": true,
     "jsx": "react",
     "types": [
+      "vite-plugin-pwa",
       "vite-plugin-pwa/client"
     ]
   },

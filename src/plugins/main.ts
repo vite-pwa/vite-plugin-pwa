@@ -1,12 +1,16 @@
 import type { Plugin, UserConfig } from 'vite'
-import { VIRTUAL_MODULES, VIRTUAL_MODULES_MAP, VIRTUAL_MODULES_RESOLVE_PREFIX } from '../constants'
+import {
+  VIRTUAL_MODULES,
+  VIRTUAL_MODULES_MAP,
+  VIRTUAL_MODULES_RESOLVE_PREFIX,
+} from '../constants'
 import { generateRegisterSW } from '../modules'
 import { resolveOptions } from '../options'
-import { createAPI } from '../api'
 import type { PWAPluginContext } from '../context'
+import type { VitePluginPWAAPI } from '../types'
 import { swDevOptions } from './dev'
 
-export function MainPlugin(ctx: PWAPluginContext): Plugin {
+export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI): Plugin {
   return {
     name: 'vite-plugin-pwa',
     enforce: 'pre',
@@ -51,6 +55,7 @@ export function MainPlugin(ctx: PWAPluginContext): Plugin {
         }
       }
     },
-    api: createAPI(ctx),
+    api,
   }
 }
+

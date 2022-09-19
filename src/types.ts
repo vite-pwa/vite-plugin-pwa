@@ -5,6 +5,12 @@ import type { OutputBundle } from 'rollup'
 export type InjectManifestVitePlugins = string[] | ((vitePluginIds: string[]) => string[])
 export type CustomInjectManifestOptions = InjectManifestOptions & {
   /**
+   * Configure the format to use in the Rollup build.
+   *
+   * @default 'es'
+   */
+  rollupFormat?: 'es' | 'iife'
+  /**
    * `Vite` plugin ids to use on `Rollup` build.
    *
    * **WARN**: this option is for advanced usage, beware, you can break the service worker build.
@@ -156,6 +162,7 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   swDest: string
   workbox: GenerateSWOptions
   injectManifest: InjectManifestOptions
+  rollupFormat: 'es' | 'iife'
   vitePlugins: InjectManifestVitePlugins
 }
 
@@ -276,15 +283,20 @@ export interface ManifestOptions {
 export interface WebManifestData {
   href: string
   useCredentials: boolean
+  /**
+   * Returns the corresponding link tag: `<link rel="manifest" href="<webManifestUrl>" />`.
+   */
+  toLinkTag: () => string
 }
 
 export interface RegisterSWData {
+  shouldRegisterSW: boolean
   /**
    * When this flag is `true` the service worker must be registered via inline script otherwise registered via script with src attribute `registerSW.js` .
    */
   inline: boolean
   /**
-   * The path for the inline script.
+   * The path for the inline script: will contain the service worker url.
    */
   inlinePath: string
   /**
@@ -295,6 +307,14 @@ export interface RegisterSWData {
    * The scope for the service worker: only required for `inline: true`.
    */
   scope: string
+  /**
+   * The type for the service worker: only required for `inline: true`.
+   */
+  type: WorkerType
+  /**
+   * Returns the corresponding script tag if `shouldRegisterSW` returns `true`.
+   */
+  toScriptTag: () => string | undefined
 }
 
 export interface VitePluginPWAAPI {
@@ -302,6 +322,10 @@ export interface VitePluginPWAAPI {
    * Is the plugin disabled?
    */
   disabled: boolean
+  /**
+   * Running on dev server?
+   */
+  pwaInDevEnvironment: boolean
   /**
    * Returns the PWA webmanifest url for the manifest link:
    * <link rel="manifest" href="<webManifestUrl>" />

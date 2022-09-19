@@ -5,7 +5,12 @@ const {
   offlineReady,
   needRefresh,
   updateServiceWorker,
-} = useRegisterSW()
+} = useRegisterSW({
+  onRegisteredSW(swUrl) {
+    // eslint-disable-next-line no-console
+    console.log(`Service Worker at: ${swUrl}`)
+  },
+})
 
 const close = async () => {
   offlineReady.value = false

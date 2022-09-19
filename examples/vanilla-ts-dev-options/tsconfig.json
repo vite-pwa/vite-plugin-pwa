@@ -14,7 +14,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": ["vite-plugin-pwa"]
   },
   "include": ["src"]
 }

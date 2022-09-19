@@ -32,7 +32,7 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
   const content = await fs.readFile(resolve(_dirname, `client/${mode}/${source}.mjs`), 'utf-8')
 
   return content
-    .replace('__SW__', sw)
+    .replace(/__SW__/g, sw)
     .replace('__SCOPE__', scope)
     .replace('__SW_AUTO_UPDATE__', `${options.registerType === 'autoUpdate'}`)
     .replace('__SW_SELF_DESTROYING__', `${options.selfDestroying}`)
@@ -107,7 +107,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   })
   try {
     await bundle.write({
-      format: 'es',
+      format: options.rollupFormat,
       exports: 'none',
       inlineDynamicImports: true,
       file: options.injectManifest.swDest,
