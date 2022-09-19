@@ -3,6 +3,7 @@ import './ReloadPrompt.css'
 import { useRegisterSW } from 'virtual:pwa-register/preact'
 import { pwaInfo } from 'virtual:pwa-info'
 
+// eslint-disable-next-line no-console
 console.log(pwaInfo)
 
 function ReloadPrompt() {

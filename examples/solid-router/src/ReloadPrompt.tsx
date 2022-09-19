@@ -5,6 +5,7 @@ import { useRegisterSW } from 'virtual:pwa-register/solid'
 import { pwaInfo } from 'virtual:pwa-info'
 import styles from './ReloadPrompt.module.css'
 
+// eslint-disable-next-line no-console
 console.log(pwaInfo)
 
 const ReloadPrompt: Component = () => {
