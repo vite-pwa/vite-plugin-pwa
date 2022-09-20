@@ -43,6 +43,8 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 
 ## 📦 Install
 
+> From v0.13, `vite-plugin-pwa` requires **Vite 3.1 or above**.
+
 ```bash
 npm i vite-plugin-pwa -D 
 
