@@ -23,6 +23,24 @@ export function InfoPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
   }
 }
 
+// see info.d.ts on root
+interface VirtualPwaInfo {
+  pwaInDevEnvironment: boolean
+  webManifest: {
+    href: string
+    useCredentials: boolean
+    linkTag: string
+  }
+  registerSW?: {
+    inline: boolean
+    inlinePath: string
+    registerPath: string
+    scope: string
+    type: 'classic' | 'module'
+    scriptTag?: string
+  }
+}
+
 function generatePwaInfo(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
   const webManifestData = api.webManifestData()
   if (!webManifestData)
@@ -31,19 +49,18 @@ function generatePwaInfo(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
   const { href, useCredentials, toLinkTag } = webManifestData
   const registerSWData = api.registerSWData()
 
-  const entry = {
+  const entry: VirtualPwaInfo = {
     pwaInDevEnvironment: api.pwaInDevEnvironment,
     webManifest: {
       href,
       useCredentials,
       linkTag: toLinkTag(),
     },
-    registerSW: undefined,
   }
 
   if (registerSWData) {
-    const script = registerSWData.toScriptTag()
-    if (script) {
+    const scriptTag = registerSWData.toScriptTag()
+    if (scriptTag) {
       const { inline, inlinePath, registerPath, type, scope } = registerSWData
       entry.registerSW = {
         inline,
@@ -51,8 +68,8 @@ function generatePwaInfo(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
         registerPath,
         type,
         scope,
-        script,
-      } as any
+        scriptTag,
+      }
     }
   }
 

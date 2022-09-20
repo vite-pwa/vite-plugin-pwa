@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress'
 import { version } from '../../package.json'
+import { pwa } from '../scripts/pwa'
+import { buildEnd } from '../scripts/build'
 
 const Guide = [
   {
@@ -328,4 +330,10 @@ export default defineConfig({
       '/workbox/': prepareSidebar(4),
     },
   },
+  vite: {
+    plugins: [
+      pwa(),
+    ],
+  },
+  buildEnd,
 })

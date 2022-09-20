@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-pwa",
   "version": "0.12.8",
-  "packageManager": "pnpm@7.1.8",
+  "packageManager": "pnpm@7.12.0",
   "description": "Zero-config PWA for Vite",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -36,6 +36,14 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
   "files": [
     "dist",
     "*.d.ts"
@@ -46,6 +54,7 @@
     "docs:serve": "npm -C docs run serve",
     "docs:preview": "npm -C docs run preview",
     "lint": "eslint .",
+    "lint-fix": "nr lint --fix",
     "dev": "esno scripts/dev.ts",
     "build": "esno scripts/build.ts",
     "prepublishOnly": "npm run build",
@@ -56,39 +65,39 @@
     "example:vue:start:cdn": "npm -C examples/vue-basic-cdn run start"
   },
   "peerDependencies": {
-    "vite": "^2.0.0 || ^3.0.0-0",
-    "workbox-build": "^6.4.0",
-    "workbox-window": "^6.4.0"
+    "vite": "^3.1.0",
+    "workbox-build": "^6.5.4",
+    "workbox-window": "^6.5.4"
   },
   "dependencies": {
     "debug": "^4.3.4",
     "fast-glob": "^3.2.11",
     "pretty-bytes": "^6.0.0",
-    "rollup": "^2.75.7",
-    "workbox-build": "^6.5.3",
-    "workbox-window": "^6.5.3"
+    "rollup": "^2.79.0",
+    "workbox-build": "^6.5.4",
+    "workbox-window": "^6.5.4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.25.2",
-    "@antfu/ni": "^0.16.3",
+    "@antfu/eslint-config": "^0.26.3",
+    "@antfu/ni": "^0.18.0",
     "@types/debug": "^4.1.7",
+    "@types/node": "^18.7.15",
     "@types/prompts": "^2.4.0",
-    "@types/react": "^18.0.14",
+    "@types/react": "^18.0.18",
     "@types/workbox-build": "^5.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.30.3",
-    "eslint": "^8.19.0",
-    "esno": "^0.14.1",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "eslint": "^8.23.0",
+    "esno": "0.16.3",
     "kolorist": "^1.5.1",
-    "pnpm": "^7.4.1",
-    "preact": "^10.8.2",
+    "preact": "^10.10.6",
     "prompts": "^2.4.2",
     "react": "^18.2.0",
-    "rollup": "^2.75.7",
-    "solid-js": "^1.4.5",
-    "svelte": "^3.48.0",
-    "tsup": "^6.1.3",
-    "typescript": "^4.7.4",
-    "vite": "^2.9.13",
-    "vue": "^3.2.37"
+    "rollup": "^2.79.0",
+    "solid-js": "^1.5.4",
+    "svelte": "^3.50.0",
+    "tsup": "^6.2.3",
+    "typescript": "^4.8.2",
+    "vite": "^3.1.0",
+    "vue": "^3.2.38"
   }
 }

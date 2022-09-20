@@ -3,6 +3,8 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 import '@vue/runtime-core'
 
+export {}
+
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     CleanupOutdatedCaches: typeof import('./theme/components/CleanupOutdatedCaches.md')['default']
@@ -24,5 +26,3 @@ declare module '@vue/runtime-core' {
     TypeScriptError2307: typeof import('./theme/components/TypeScriptError2307.md')['default']
   }
 }
-
-export {}

@@ -1,3 +1,4 @@
+import type { ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle } from 'rollup'
 
@@ -15,6 +16,14 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    * **WARN**: this option is for advanced usage, beware, you can break the service worker build.
    */
   vitePlugins?: InjectManifestVitePlugins
+}
+
+export interface PWAIntegration {
+  closeBundleOrder?: 'pre' | 'post' | null
+  configureOptions?: (
+    viteOptions: ResolvedConfig,
+    options: Partial<VitePWAOptions>,
+  ) => void | Promise<void>
 }
 
 /**
@@ -133,10 +142,13 @@ export interface VitePWAOptions {
    */
   disable: boolean
   /**
+   * Vite PWA Integration.
+   */
+  integration?: PWAIntegration
+  /**
    * Development options.
    */
   devOptions?: DevOptions
-
   /**
    * Unregister the service worker?
    *
