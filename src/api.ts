@@ -63,7 +63,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
     },
     webManifestData() {
       const options = ctx?.options
-      if (!options || options.disable || (ctx.devEnvironment && !ctx.options.devOptions.enabled))
+      if (!options || options.disable || !options.manifest || (ctx.devEnvironment && !ctx.options.devOptions.enabled))
         return undefined
 
       let url = options.manifestFilename
