@@ -85,14 +85,18 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       }
     },
     registerSWData() {
+      // we'll return the info only when it is required
+      // 1: exclude if not enabled
       const options = ctx?.options
-      if (!options || options.disable || ctx.viteConfig.build.ssr || (ctx.devEnvironment && !ctx.options.devOptions.enabled))
+      if (!options || options.disable || (ctx.devEnvironment && !ctx.options.devOptions.enabled))
         return undefined
 
+      // 2: if manual registration or using virtual
       const mode = options.injectRegister
       if (!mode || ctx.useImportRegister)
         return undefined
 
+      // 3: otherwise we always return the info
       let type: WorkerType = 'classic'
       let script: string | undefined
       let shouldRegisterSW = options.injectRegister === 'inline' || options.injectRegister === 'script'
@@ -106,6 +110,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       }
 
       return {
+        // hint when required
         shouldRegisterSW,
         inline: options.injectRegister === 'inline',
         scope: options.scope,
