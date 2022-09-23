@@ -1,33 +1,6 @@
 <script setup lang="ts">
 import { VPTeamMembers } from 'vitepress/theme'
-const teamMembers = [
-  {
-    avatar: '/team-avatars/antfu.png',
-    name: 'Anthony Fu',
-    github: 'antfu',
-    twitter: 'antfu7',
-    sponsor: 'https://github.com/sponsors/antfu',
-    title: 'A fanatical open sourceror, working',
-    org: 'NuxtLabs',
-    desc: 'Core team member of Vite & Vue',
-  },
-  {
-    avatar: '/team-avatars/userquin.png',
-    name: 'Joaquín Sánchez',
-    github: 'userquin',
-    twitter: 'userquin',
-    title: 'A fullstack and android developer',
-    desc: 'Vite\'s fanatical follower',
-  },
-  {
-    avatar: '/team-avatars/hannoeru.png',
-    name: 'ハン / Han',
-    github: 'hannoeru',
-    twitter: 'hannoeru',
-    title: 'Student / Front-End Engineer',
-    desc: '@windi_css member',
-  },
-]
+import { teamMembers } from '../../contributors'
 </script>
 
 <template>
