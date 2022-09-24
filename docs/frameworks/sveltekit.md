@@ -5,7 +5,7 @@ title: SvelteKit | Frameworks
 # SvelteKit
 
 ::: warning
-From SvelteKit version `1.0.0-next.358+`, SvelteKit is just another Vite plugin, and latest versions will also require you to update your application to use Vite ^3.1.0 and Node 16.14+.
+From SvelteKit version `1.0.0-next.359+`, SvelteKit is just another Vite plugin, and latest versions will also require you to update your application to use Vite ^3.1.0 and Node 16.14+.
 :::
 
 ::: info
