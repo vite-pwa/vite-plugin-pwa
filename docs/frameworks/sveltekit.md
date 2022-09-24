@@ -242,7 +242,7 @@ The best place to include the `ReloadPrompt` component will be in main layout of
 ```
 :::
 
-## SvelteKit Adapters
+## SvelteKit and Adapters
 
 If you set certain SvelteKit options, you should also configure the PWA plugin properly using the `kit` option:
 - [base](https://kit.svelte.dev/docs/configuration#paths)
