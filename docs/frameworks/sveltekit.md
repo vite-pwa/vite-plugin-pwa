@@ -84,6 +84,8 @@ export interface SvelteKitPWAOptions extends Partial<VitePWAOptions> {
 
 If you want your application to work offline, you should ensure you have not set `hydrate: false` on any of your pages since it will prevent injecting JavaScript into the layout for offline support.
 
+Unlike the [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker), the `vite-plugin-pwa` plugin will allow you to test your webmanifest and custom service worker in dev, check the [Development section](/guide/development) for more details.
+
 ### Auto Update
 
 Since SvelteKit uses SSR/SSG, we need to call the `vite-plugin-pwa` virtual module using a dynamic `import`.
@@ -131,7 +133,7 @@ The best place to include the virtual call will be in main layout of the applica
 
 ### Prompt for update
 
-Since SvelteKit uses SSR/SSG, we need to add the `ReloadPrompt` component using a dynamic `import`. `vite-plugin-pwa` plugin will only register the service worker on build (check the [Development section](/guide/development)), it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker).
+Since SvelteKit uses SSR/SSG, we need to add the `ReloadPrompt` component using a dynamic `import`.
 
 The best place to include the `ReloadPrompt` component will be in main layout of the application (you should register it in any layout):
 
