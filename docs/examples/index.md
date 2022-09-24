@@ -94,15 +94,13 @@ We provide the following examples projects:
   - [Svelte generateSW Router Examples](/examples/svelte#generatesw): set of examples with disparate behaviors.
   - [Svelte injectManifest Router Examples](/examples/svelte#generatesw): set of examples with disparate behaviors.
 - [SvelteKit](/examples/sveltekit)
-  - [SvelteKit generateSW Examples](/examples/sveltekit#generatesw): set of examples with disparate behaviors.
-  - [SvelteKit injectManifest Examples](/examples/sveltekit#generatesw): set of examples with disparate behaviors.
 - [SolidJS](/examples/solidjs)
   - [SolidJS generateSW Router Examples](/examples/solidjs#generatesw): set of examples with disparate behaviors.
   - [SolidJS injectManifest Router Examples](/examples/solidjs#generatesw): set of examples with disparate behaviors.
 - [Preact](/examples/preact)
   - [Preact generateSW Router Examples](/examples/preact#generatesw): set of examples with disparate behaviors.
   - [Preact injectManifest Router Examples](/examples/preact#generatesw): set of examples with disparate behaviors.
-- [VitePress](/examples/vitepress): prompt for update.
+- [VitePress](/examples/vitepress)
 - [îles](/examples/iles): prompt for update.
 - [Astro](/examples/astro): coming soon (WIP).
 

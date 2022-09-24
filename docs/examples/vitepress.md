@@ -4,7 +4,9 @@ title: VitePress | Examples
 
 # VitePress
 
-You can test `VitePress` using the source code of this documentation website, you can find it under [docs](https://github.com/antfu/vite-plugin-pwa/tree/main/docs) package/directory.
+You have a set of examples in the [@vite-pwa/vitepress integration repo](https://github.com/vite-pwa/vite-pwa-vitepress-integration/tree/main/examples).
+
+You can also test `VitePress` using the source code of this documentation website, you can find it under [docs](https://github.com/antfu/vite-plugin-pwa/tree/main/docs) package/directory.
 
 The behavior used in this website is [Prompt for update](/guide/prompt-for-update).
 
