@@ -36,16 +36,12 @@ export default withPwa(defineConfig({
 
 ## Import Virtual Modules
 
-Since VitePress uses SSR/SSG, we need to call the `vite-plugin-pwa` virtual module using a dynamic `import`.
+Since VitePress uses SSR/SSG, we need to call the `vite-plugin-pwa` virtual module using a dynamic `import`. This can be done in the [theme](https://vitepress.vuejs.org/guide/theme-introduction). You can either configure the plugin to auto update or prompt for update. Refer below for examples.
 
 ### Auto Update
 
-Since VitePress uses SSR/SSG, we need to call the `vite-plugin-pwa` virtual module using a dynamic `import`.
-
-The best place to include the virtual call will be in theme layout of the application:
-
 ::: details .vitepress/theme/index.ts
-```vue
+```ts
 import { h } from 'vue'
 import Theme from 'vitepress/theme'
 
@@ -63,7 +59,7 @@ export default {
 :::
 
 ::: details  .vitepress/theme/components/RegisterSW.vue
-```html
+```vue
 <script setup lang="ts">
     import { onBeforeMount, ref } from 'vue'
 
@@ -142,12 +138,8 @@ export default {
 
 ### Prompt for update
 
-Since VitePress uses SSR/SSG, we need to call the `vite-plugin-pwa` virtual module using a dynamic `import`.
-
-The best place to include the virtual call will be in theme layout of the application:
-
 ::: details .vitepress/theme/index.ts
-```vue
+```ts
 import { h } from 'vue'
 import Theme from 'vitepress/theme'
 
@@ -165,7 +157,7 @@ export default {
 :::
 
 ::: details  .vitepress/theme/components/ReloadPrompt.vue
-```html
+```vue
 <script setup lang="ts">
     import { onBeforeMount, ref } from 'vue'
 
