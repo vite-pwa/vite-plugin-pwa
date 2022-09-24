@@ -63,8 +63,8 @@ export interface KitOptions {
   outDir?: string
 
   /**
-     * @see https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback
-     */
+   * @see https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback
+   */
   adapterFallback?: string
 
   /**
