@@ -4,32 +4,114 @@ title: SvelteKit | Frameworks
 
 # SvelteKit
 
+::: warning
+From SvelteKit version `1.0.0-next.358+`, SvelteKit is just another Vite plugin, and latest versions will also require you to update your application to use Vite 3.
+:::
+
 ::: info
 For `Type declarations`, `Prompt for update` and `Periodic SW Updates` go to [Svelte](/frameworks/svelte) entry.
 :::
 
+::: tip
 You should remove all references to [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker) to disable it on your application.
+:::
 
-Since `SvelteKit` uses `SSR / SSG`, we need to add the `ReloadPrompt` component using `dynamic import`. `Vite Plugin PWA` will only register the service worker on build, it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker).
+## SvelteKit PWA Plugin
 
-The best place to include the `ReloadPrompt` is on the main layout of the application:
+`vite-plugin-pwa` provides the new `SvelteKitPWA` plugin that will allow you to use `vite-plugin-pwa` in your SvelteKit applications.
 
-::: details src/routes/__layout.svelte
+You will need to install `SvelteKitPWA` using:
+```shell
+pnpm add -D @vite-pwa/sveltekit
+```
+
+To update your project to use the new `vite-plugin-pwa` for SvelteKit, you only need to change the Vite config file (you don't need oldest `pwa` and `pwa-configuration` modules):
+```ts
+// vite.config.js / vite-config.ts
+import { SvelteKitPWA } from '@vite-pwa/sveltekit';
+
+/** @type {import('vite').UserConfig} */
+const config = {
+  plugins: [
+    sveltekit(),
+    SvelteKitPWA({/* pwa options */})
+  ],
+}
+
+export default config
+```
+
+## SvelteKit Pages
+
+If you want your application to work offline, you should ensure you have not set `hydrate: false` on any of your pages since it will prevent injecting JavaScript into the layout for offline support.
+
+### Auto Update
+
+Since SvelteKit uses SSR/SSG, we need to call the `vite-plugin-pwa` virtual module using a dynamic `import`.
+
+The best place to include the virtual call will be in main layout of the application (you should register it in any layout):
+
+::: details src/routes/+layout.svelte
 ```html
 <script>
   import { onMount } from 'svelte'
-  import { browser, dev } from '$app/env'
-
-  let ReloadPrompt
+  import { pwaInfo } from 'virtual:pwa-info'
+  
   onMount(async () => {
-    !dev && browser && (ReloadPrompt = (await import('$lib/components/ReloadPrompt.svelte')).default)
+    if (pwaInfo) {
+      const { registerSW } = await import('virtual:pwa-register')
+      registerSW({
+        immediate: true,
+        onRegistered(r) {
+          // uncomment following code if you want check for updates
+          // r && setInterval(() => {
+          //    console.log('Checking for sw update')
+          //    r.update()
+          // }, 20000 /* 20s for testing purposes */)
+          console.log(`SW Registered: ${r}`)
+        },
+        onRegisterError(error) {
+          console.log('SW registration error', error)
+        }
+      })
+    }
   })
+  
+  $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''
 </script>
 
 <svelte:head>
-  {#if (!dev && browser)}
-    <link rel="manifest" href="/_app/manifest.webmanifest">
-  {/if}
+    {@html webManifest}
+</svelte:head>
+
+<main>
+  <slot />
+</main>
+```
+:::
+
+### Prompt for update
+
+Since SvelteKit uses SSR/SSG, we need to add the `ReloadPrompt` component using a dynamic `import`. `vite-plugin-pwa` plugin will only register the service worker on build (check the [Development section](/guide/development)), it is aligned with the current behavior of [SvelteKit service worker module](https://kit.svelte.dev/docs#modules-$service-worker).
+
+The best place to include the `ReloadPrompt` component will be in main layout of the application (you should register it in any layout):
+
+::: details src/routes/+layout.svelte
+```html
+<script>
+  import { onMount } from 'svelte'
+  import { pwaInfo } from 'virtual:pwa-info'
+
+  let ReloadPrompt
+  onMount(async () => {
+    pwaInfo && (ReloadPrompt = (await import('$lib/ReloadPrompt.svelte')).default)
+  })
+
+  $: webManifest = pwaInfo ? pwaInfo.webManifest.linkTag : ''  
+</script>
+
+<svelte:head>
+    {@html webManifest}
 </svelte:head>
 
 <main>
@@ -42,174 +124,126 @@ The best place to include the `ReloadPrompt` is on the main layout of the applic
 ```
 :::
 
+::: details $lib/ReloadPrompt.svelte
+```html
+<script lang="ts">
+	import { useRegisterSW } from 'virtual:pwa-register/svelte'
+	const {
+		needRefresh,
+		updateServiceWorker
+	} = useRegisterSW({
+		onRegistered(r) {
+		// uncomment following code if you want check for updates
+		// r && setInterval(() => {
+		//    console.log('Checking for sw update')
+		//    r.update()
+		// }, 20000 /* 20s for testing purposes */)
+			console.log(`SW Registered: ${r}`)
+		},
+		onRegisterError(error) {
+			console.log('SW registration error', error)
+		},
+	})
+	const close = () => {
+		offlineReady.set(false)
+		needRefresh.set(false)
+	}
+	$: toast = $offlineReady || $needRefresh
+</script>
+
+{#if toast}
+	<div class="pwa-toast" role="alert">
+		<div class="message">
+			{#if $offlineReady}
+				<span>
+					App ready to work offline
+				</span>
+			{:else}
+				<span>
+					New content available, click on reload button to update.
+				</span>
+			{/if}
+		</div>
+		{#if $needRefresh}
+			<button on:click={() => updateServiceWorker(true)}>
+				Reload
+			</button>
+		{/if}
+		<button on:click={close}>
+			Close
+		</button>
+	</div>
+{/if}
+
+<style>
+	.pwa-toast {
+		position: fixed;
+		right: 0;
+		bottom: 0;
+		margin: 16px;
+		padding: 12px;
+		border: 1px solid #8885;
+		border-radius: 4px;
+		z-index: 2;
+		text-align: left;
+		box-shadow: 3px 4px 5px 0 #8885;
+		background-color: white;
+	}
+	.pwa-toast .message {
+		margin-bottom: 8px;
+	}
+	.pwa-toast button {
+		border: 1px solid #8885;
+		outline: none;
+		margin-right: 5px;
+		border-radius: 2px;
+		padding: 3px 10px;
+	}
+</style>
+```
+:::
+
 ## SvelteKit Adapters
 
-The main problem with the current implementation of the service worker module of `SvelteKit` is that you don't have access to the result applied by any adapter you have configured on your application. The service worker module of `SvelteKit` will be called before the adapter logic is applied, and so, inside the service worker module, you don't have access to those resources. Your application will not work when the user is offline, since the pages will not be included on the service worker precache manifest.
+If you use some feature in your SvelteKit Adapter, you should also configure the PWA plugin properly using the `kit` option:
+- [base](https://kit.svelte.dev/docs/configuration#paths)
+- [outDir](https://kit.svelte.dev/docs/configuration#outdir)
+- [adapterFallback](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback)
+- [trailingSlash](https://kit.svelte.dev/docs/configuration#trailingslash)
 
-When using `Vite PWA Plugin` with any `SvelteKit Adapter` you need to provide an additional script to rebuild your `pwa` once `SvelteKit` finish building your application, that is, when the adapter configured finish its job.
+::: details SvelteKit PWA Plugin options
+```ts
+import type { VitePWAOptions } from 'vite-plugin-pwa'
 
-The biggest difference between this plugin and the SvelteKit service worker module is that this plugin does not require integration into the application logic - just configuration. You can take a look at [SvelteKit example](https://github.com/antfu/vite-plugin-pwa/tree/main/examples/sveltekit-pwa) to configure the additional scripts on your application, it is quite complex since we use it for multiple behaviors with the same codebase.
+export interface KitOptions {
+  /**
+     * The base path for your application: by default will use the Vite base.
+     *
+     * @default '/'
+     * @see https://kit.svelte.dev/docs/configuration#paths
+     * */
+  base?: string
 
-### Workbox manifestTransforms
+  /**
+     * @default '.svelte-kit'
+     * @see https://kit.svelte.dev/docs/configuration#outdir
+     */
+  outDir?: string
 
-We must provide a list of URLs for the service worker to load and precache. We provide these to workbox using the [the `manifestTransforms` option](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.ManifestTransform) under `workbox` or [`injectManifest`](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.injectManifest). The [manifest entries](https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-build#.ManifestEntry) provided via this option will contain all the assets specified in the `srcDir` option.
+  /**
+     * @see https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback
+     */
+  adapterFallback?: string
 
-Since `SvelteKit` outputs an `.html` page for each pre-rendered page, you can use `manifestTransforms` to generate the URL from the prerendered HTML file path. For an example, see the `pwa-configuration.js` module in the next example using `@sveltejs/adapter-static`.
-
-Pages which are not prerendered or are generated with a unique adapter will need to be handled separately and the `manifestTransforms` logic will need to be modified accordingly.
-
-### Static Adapter example
-
-As an example, when using [@sveltejs/adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) with `generateSW` strategy and `Prompt for update` behavior, you will need:
-
-::: details 1) add pwa.js script
-```js
-import { copyFileSync } from 'fs'
-import { resolveConfig } from 'vite'
-import { VitePWA } from 'vite-plugin-pwa'
-import { pwaConfiguration } from './pwa-configuration.js'
-
-const webmanifestDestinations = [
-  './.svelte-kit/output/client/',
-  './build/',
-]
-
-const swDestinations = [
-  './build/',
-]
-
-const buildPwa = async () => {
-  const config = await resolveConfig({ plugins: [VitePWA({ ...pwaConfiguration })] }, 'build', 'production')
-  // when `vite-plugin-pwa` is present, use it to regenerate SW after rendering
-  const pwaPlugin = config.plugins.find(i => i.name === 'vite-plugin-pwa')?.api
-  if (pwaPlugin?.generateSW) {
-    console.log('Generating PWA...')
-    await pwaPlugin.generateSW()
-    webmanifestDestinations.forEach((d) => {
-      copyFileSync('./.svelte-kit/output/client/_app/manifest.webmanifest', `${d}/manifest.webmanifest`)
-    })
-    // don't copy workbox, SvelteKit will copy it
-    swDestinations.forEach((d) => {
-      copyFileSync('./.svelte-kit/output/client/sw.js', `${d}/sw.js`)
-    })
-    console.log('Generation of PWA complete')
-  }
+  /**
+     * @default 'never'
+     * @see https://kit.svelte.dev/docs/configuration#trailingslash
+     * */
+  trailingSlash?: 'never' | 'always' | 'ignore'
 }
 
-buildPwa()
-```
-:::
-
-::: details 2) add pwa-configuration.js script
-
-```js
-const pwaConfiguration = {
-  srcDir: './build',
-  outDir: './.svelte-kit/output/client',
-  includeManifestIcons: false,
-  base: '/',
-  scope: '/',
-  manifest: {
-    short_name: '<YOUR APP SHORT NAME>',
-    name: '<YOUR APP NAME>',
-    scope: '/',
-    start_url: '/',
-    display: 'standalone',
-    theme_color: '#ffffff',
-    background_color: '#ffffff',
-    icons: [
-      {
-        src: '/pwa-192x192.png',
-        sizes: '192x192',
-        type: 'image/png'
-      },
-      {
-        src: '/pwa-512x512.png',
-        sizes: '512x512',
-        type: 'image/png'
-      },
-      {
-        src: '/pwa-512x512.png',
-        sizes: '512x512',
-        type: 'image/png',
-        purpose: 'any maskable'
-      }
-    ]
-  },
-  workbox: {
-    // mode: 'development',
-    navigateFallback: '/',
-    // vite and SvelteKit are not aligned: pwa plugin will use /\.[a-f0-9]{8}\./ by default: #164 optimize workbox work
-    dontCacheBustURLsMatching: /-[a-f0-9]{8}\./,
-    globDirectory: './build/',
-    globPatterns: ['robots.txt', '**/*.{js,css,html,ico,png,svg,webmanifest}'],
-    globIgnores: ['**/sw*', '**/workbox-*'],
-    manifestTransforms: [async (entries) => {
-      // manifest.webmanifest is added always by pwa plugin, so we remove it.
-      // EXCLUDE from the sw precache sw and workbox-*
-      const manifest = entries.filter(({ url }) =>
-        url !== 'manifest.webmanifest' && url !== 'sw.js' && !url.startsWith('workbox-')
-      ).map((e) => {
-        let url = e.url
-        if (url && url.endsWith('.html')) {
-          if (url.startsWith('/'))
-            url = url.slice(1)
-
-          if (url === 'index.html')
-            e.url = '/'
-          else if (url.endsWith('index.html'))
-            e.url = `/${url.substring(0, url.lastIndexOf('/'))}`
-          else if (url.endsWith('.html'))
-            e.url = `/${url.substring(0, url.length - '.html'.length)}`
-
-        }
-
-        return e
-      })
-
-      return { manifest }
-    }]
-  }
+export interface SvelteKitPWAOptions extends Partial<VitePWAOptions> {
+  kit?: KitOptions
 }
-
-export { pwaConfiguration }
-```
-:::
-
-::: details 3) modify your build script
-```json
-{
-  "scripts": {
-    "build": "svelte-kit build && node ./pwa.js"
-  }
-}
-```
-:::
-
-::: details 4) add Vite Plugin PWA to svelte.config.js
-```js
-import adapter from '@sveltejs/adapter-static'
-import preprocess from 'svelte-preprocess'
-import { VitePWA } from 'vite-plugin-pwa'
-import { pwaConfiguration } from './pwa-configuration.js'
-
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-  // Consult https://github.com/sveltejs/svelte-preprocess
-  // for more information about preprocessors
-  preprocess: preprocess(),
-
-  kit: {
-    adapter: adapter(),
-
-    // hydrate the <div id="svelte"> element in src/app.html
-    target: '#svelte',
-    vite: {
-      plugins: [VitePWA(pwaConfiguration)]
-    }
-  }
-}
-
-export default config
 ```
 :::
