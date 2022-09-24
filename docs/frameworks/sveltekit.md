@@ -5,7 +5,7 @@ title: SvelteKit | Frameworks
 # SvelteKit
 
 ::: warning
-From SvelteKit version `1.0.0-next.358+`, SvelteKit is just another Vite plugin, and latest versions will also require you to update your application to use Vite 3.
+From SvelteKit version `1.0.0-next.358+`, SvelteKit is just another Vite plugin, and latest versions will also require you to update your application to use Vite ^3.1.0 and Node 16.14+.
 :::
 
 ::: info
@@ -19,6 +19,10 @@ You should remove all references to [SvelteKit service worker module](https://ki
 ## SvelteKit PWA Plugin
 
 `vite-plugin-pwa` provides the new `SvelteKitPWA` plugin that will allow you to use `vite-plugin-pwa` in your SvelteKit applications.
+
+::: warning
+Requires Vite ^3.1.0 and Node 16.14+.
+:::
 
 You will need to install `SvelteKitPWA` using:
 ```shell
