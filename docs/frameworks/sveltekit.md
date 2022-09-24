@@ -20,10 +20,6 @@ You should remove all references to [SvelteKit service worker module](https://ki
 
 `vite-plugin-pwa` provides the new `SvelteKitPWA` plugin that will allow you to use `vite-plugin-pwa` in your SvelteKit applications.
 
-::: warning
-Requires Vite ^3.1.0 and Node 16.14+.
-:::
-
 You will need to install `SvelteKitPWA` using:
 ```shell
 pnpm add -D @vite-pwa/sveltekit
