@@ -41,6 +41,45 @@ const config = {
 export default config
 ```
 
+## SvelteKit PWA Plugin Options
+
+::: details SvelteKit PWA Plugin options
+```ts
+import type { VitePWAOptions } from 'vite-plugin-pwa'
+
+export interface KitOptions {
+  /**
+     * The base path for your application: by default will use the Vite base.
+     *
+     * @default '/'
+     * @see https://kit.svelte.dev/docs/configuration#paths
+     * */
+  base?: string
+
+  /**
+     * @default '.svelte-kit'
+     * @see https://kit.svelte.dev/docs/configuration#outdir
+     */
+  outDir?: string
+
+  /**
+     * @see https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback
+     */
+  adapterFallback?: string
+
+  /**
+     * @default 'never'
+     * @see https://kit.svelte.dev/docs/configuration#trailingslash
+     * */
+  trailingSlash?: 'never' | 'always' | 'ignore'
+}
+
+export interface SvelteKitPWAOptions extends Partial<VitePWAOptions> {
+  kit?: KitOptions
+}
+```
+:::
+
 ## SvelteKit Pages
 
 If you want your application to work offline, you should ensure you have not set `hydrate: false` on any of your pages since it will prevent injecting JavaScript into the layout for offline support.
@@ -210,40 +249,3 @@ If you use some feature in your SvelteKit Adapter, you should also configure the
 - [outDir](https://kit.svelte.dev/docs/configuration#outdir)
 - [adapterFallback](https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback)
 - [trailingSlash](https://kit.svelte.dev/docs/configuration#trailingslash)
-
-::: details SvelteKit PWA Plugin options
-```ts
-import type { VitePWAOptions } from 'vite-plugin-pwa'
-
-export interface KitOptions {
-  /**
-     * The base path for your application: by default will use the Vite base.
-     *
-     * @default '/'
-     * @see https://kit.svelte.dev/docs/configuration#paths
-     * */
-  base?: string
-
-  /**
-     * @default '.svelte-kit'
-     * @see https://kit.svelte.dev/docs/configuration#outdir
-     */
-  outDir?: string
-
-  /**
-     * @see https://github.com/sveltejs/kit/tree/master/packages/adapter-static#fallback
-     */
-  adapterFallback?: string
-
-  /**
-     * @default 'never'
-     * @see https://kit.svelte.dev/docs/configuration#trailingslash
-     * */
-  trailingSlash?: 'never' | 'always' | 'ignore'
-}
-
-export interface SvelteKitPWAOptions extends Partial<VitePWAOptions> {
-  kit?: KitOptions
-}
-```
-:::
