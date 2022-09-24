@@ -68,9 +68,9 @@ export interface KitOptions {
   adapterFallback?: string
 
   /**
-     * @default 'never'
-     * @see https://kit.svelte.dev/docs/configuration#trailingslash
-     * */
+   * @default 'never'
+   * @see https://kit.svelte.dev/docs/configuration#trailingslash
+   */
   trailingSlash?: 'never' | 'always' | 'ignore'
 }
 
