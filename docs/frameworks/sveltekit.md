@@ -57,9 +57,9 @@ export interface KitOptions {
   base?: string
 
   /**
-     * @default '.svelte-kit'
-     * @see https://kit.svelte.dev/docs/configuration#outdir
-     */
+   * @default '.svelte-kit'
+   * @see https://kit.svelte.dev/docs/configuration#outdir
+   */
   outDir?: string
 
   /**
