@@ -11,7 +11,7 @@ const _dirname = typeof __dirname !== 'undefined'
   ? __dirname
   : dirname(fileURLToPath(import.meta.url))
 
-async function loadWorkboxBuild() {
+async function loadWorkboxBuild(): Promise<typeof import('workbox-build')> {
   // Uses require to lazy load.
   // "workbox-build" is very large and it makes config loading slow.
   // Since it is not always used, load this when it is needed.
