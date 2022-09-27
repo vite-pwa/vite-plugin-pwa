@@ -123,7 +123,7 @@ const Frameworks = [
     link: '/frameworks/iles',
   },
   {
-    text: 'Astro (WIP)',
+    text: 'Astro',
     link: '/frameworks/astro',
   },
 ]
@@ -166,7 +166,7 @@ const Examples = [
     link: '/examples/iles',
   },
   {
-    text: 'Astro (WIP)',
+    text: 'Astro',
     link: '/examples/astro',
   },
 ]
