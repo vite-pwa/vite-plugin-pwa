@@ -270,7 +270,7 @@ If you're using some Application UI Framework in your Astro application, you can
 - [Vue 3](/frameworks/vue)
 - [React](/frameworks/react)
 - [Svelte](/frameworks/svelte)
-- [SolidJS](/frameworks/solid)
+- [SolidJS](/frameworks/solidjs)
 - [Preact](/frameworks/preact)
 
 Check also the documentation for [Astro Frameworks Components](https://docs.astro.build/en/core-concepts/framework-components/) for more information.
