@@ -117,7 +117,7 @@ import { pwaInfo } from 'virtual:pwa-info';
 import ReloadPrompt from '../components/ReloadPrompt.astro';
 
 export interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props as Props;
