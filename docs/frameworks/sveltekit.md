@@ -18,7 +18,7 @@ The best place to include the `ReloadPrompt` is on the main layout of the applic
 ```html
 <script>
   import { onMount } from 'svelte'
-  import { browser, dev } from '$app/env'
+  import { browser, dev } from '$app/environment'
 
   let ReloadPrompt
   onMount(async () => {
