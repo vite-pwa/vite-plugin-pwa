@@ -155,7 +155,9 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
           }
           return await fs.readFile(swDest, 'utf-8')
         }
-        const key = normalizePath(`${options.base}${id.substring(1)}`);
+        
+        const key = normalizePath(`${options.base}${id.startsWith('/') ? id.slice(1) : id}`)
+
         if (swDevOptions.workboxPaths.has(key))
           return await fs.readFile(swDevOptions.workboxPaths.get(key)!, 'utf-8')
       }
