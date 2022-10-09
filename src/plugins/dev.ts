@@ -155,9 +155,9 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
           }
           return await fs.readFile(swDest, 'utf-8')
         }
-
-        if (swDevOptions.workboxPaths.has(id))
-          return await fs.readFile(swDevOptions.workboxPaths.get(id)!, 'utf-8')
+        const key = normalizePath(`${options.base}${id.substring(1)}`);
+        if (swDevOptions.workboxPaths.has(key))
+          return await fs.readFile(swDevOptions.workboxPaths.get(key)!, 'utf-8')
       }
     },
   }
