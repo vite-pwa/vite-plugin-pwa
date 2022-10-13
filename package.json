@@ -70,6 +70,7 @@
     "workbox-window": "^6.5.4"
   },
   "dependencies": {
+    "@rollup/plugin-replace": "^4.0.0",
     "debug": "^4.3.4",
     "fast-glob": "^3.2.11",
     "pretty-bytes": "^6.0.0",

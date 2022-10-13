@@ -3,6 +3,7 @@ import { promises as fs } from 'fs'
 import { fileURLToPath } from 'url'
 import type { BuildResult } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
+import replace from '@rollup/plugin-replace'
 import type { ResolvedVitePWAOptions } from './types'
 import { logWorkboxResult } from './log'
 import { defaultInjectManifestVitePlugins } from './constants'
@@ -98,7 +99,13 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   if (includedPluginNames.length === 0)
     includedPluginNames.push(...defaultInjectManifestVitePlugins)
 
-  const plugins = viteOptions.plugins.filter(p => includedPluginNames.includes(p.name))
+  const plugins = [
+    replace({
+      'preventAssignment': true,
+      'process.env.NODE_ENV': JSON.stringify(options.mode),
+    }),
+    ...viteOptions.plugins.filter(p => includedPluginNames.includes(p.name)),
+  ]
   const { rollup } = await import('rollup')
   const bundle = await rollup({
     input: options.swSrc,
@@ -123,10 +130,6 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     // this will not fail since there is an injectionPoint
     swSrc: options.injectManifest.swDest,
   }
-
-  // options.injectManifest.mode won't work!!!
-  // error during build: ValidationError: "mode" is not allowed
-  // delete injectManifestOptions.mode
 
   const { injectManifest } = await loadWorkboxBuild()
 
