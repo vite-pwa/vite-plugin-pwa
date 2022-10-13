@@ -70,7 +70,6 @@
     "workbox-window": "^6.5.4"
   },
   "dependencies": {
-    "@rollup/plugin-replace": "^4.0.0",
     "debug": "^4.3.4",
     "fast-glob": "^3.2.11",
     "pretty-bytes": "^6.0.0",
@@ -81,6 +80,7 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.26.3",
     "@antfu/ni": "^0.18.0",
+    "@rollup/plugin-replace": "^4.0.0",
     "@types/debug": "^4.1.7",
     "@types/node": "^18.7.15",
     "@types/prompts": "^2.4.0",

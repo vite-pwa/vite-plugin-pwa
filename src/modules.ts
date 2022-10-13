@@ -3,7 +3,6 @@ import { promises as fs } from 'fs'
 import { fileURLToPath } from 'url'
 import type { BuildResult } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
-import replace from '@rollup/plugin-replace'
 import type { ResolvedVitePWAOptions } from './types'
 import { logWorkboxResult } from './log'
 import { defaultInjectManifestVitePlugins } from './constants'
@@ -98,6 +97,8 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
 
   if (includedPluginNames.length === 0)
     includedPluginNames.push(...defaultInjectManifestVitePlugins)
+
+  const { default: replace } = await import('@rollup/plugin-replace')
 
   const plugins = [
     replace({

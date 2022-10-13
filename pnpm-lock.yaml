@@ -32,7 +32,6 @@ importers:
       workbox-build: ^6.5.4
       workbox-window: ^6.5.4
     dependencies:
-      '@rollup/plugin-replace': 4.0.0_rollup@2.79.0
       debug: 4.3.4
       fast-glob: 3.2.11
       pretty-bytes: 6.0.0
@@ -42,6 +41,7 @@ importers:
     devDependencies:
       '@antfu/eslint-config': 0.26.3_yqf6kl63nyoq5megxukfnom5rm
       '@antfu/ni': 0.18.0
+      '@rollup/plugin-replace': 4.0.0_rollup@2.79.0
       '@types/debug': 4.1.7
       '@types/node': 18.7.15
       '@types/prompts': 2.4.0
@@ -278,7 +278,7 @@ importers:
     devDependencies:
       '@rollup/plugin-replace': 4.0.0_rollup@2.79.0
       '@sveltejs/adapter-static': 1.0.0-next.44
-      '@sveltejs/kit': 1.0.0-next.515_svelte@3.50.0+vite@3.1.0
+      '@sveltejs/kit': 1.0.0-next.516_svelte@3.50.0+vite@3.1.0
       '@typescript-eslint/eslint-plugin': 5.36.2_iurrlxgqcgk5svigzxakafpeuu
       '@typescript-eslint/parser': 5.36.2_yqf6kl63nyoq5megxukfnom5rm
       cross-env: 7.0.3
@@ -2121,6 +2121,7 @@ packages:
       '@rollup/pluginutils': 3.1.0_rollup@2.79.0
       magic-string: 0.25.9
       rollup: 2.79.0
+    dev: true
 
   /@rollup/pluginutils/3.1.0_rollup@2.79.0:
     resolution: {integrity: sha512-GksZ6pr6TpIjHm8h9lSQ8pi8BE9VeubNT0OMJ3B5uZJ8pz73NPiqOtCog/x2/QzM1ENChPKxMDhiQuRHsqc+lg==}
@@ -2188,8 +2189,8 @@ packages:
     resolution: {integrity: sha512-qBtkmIMYGiDv5r2F3AfSG0ABHZim2NC+1PL2YVCa+QYz8IVCm1E/wGQ0RW4KVrANZ3MZk8y52PPajx+8/fwmNw==}
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.515_svelte@3.50.0+vite@3.1.0:
-    resolution: {integrity: sha512-Ck+T16bci7VWc4CNP61xvfMrbDHX1Q8aPZWgthnrSH8hsdx9w1MP80D9V4A98WX0cyhCQ02JzlTmxgf2UpYRbQ==}
+  /@sveltejs/kit/1.0.0-next.516_svelte@3.50.0+vite@3.1.0:
+    resolution: {integrity: sha512-n0oGcv7xpgJ81ld1oER5HVREP4TdeDUJ8S64XNDcl3Y2xfQLKk8C4SLYQw2D6V+DxUm8V3aRrj7N7/tm4CQm6A==}
     engines: {node: '>=16.14'}
     hasBin: true
     requiresBuild: true
