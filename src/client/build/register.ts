@@ -32,6 +32,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
   const updateServiceWorker = async (reloadPage = true) => {
     await registerPromise
     if (!auto) {
+/*
       // Assuming the user accepted the update, set up a listener
       // that will reload the page as soon as the previously waiting
       // service worker has taken control.
@@ -41,6 +42,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
             window.location.reload()
         })
       }
+*/
 
       await sendSkipWaitingMessage?.()
     }
@@ -48,18 +50,18 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   async function register() {
     if ('serviceWorker' in navigator) {
-      const { Workbox, messageSW } = await import('workbox-window')
+      const { Workbox/*, messageSW*/ } = await import('workbox-window')
+      // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
+      wb = new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
       sendSkipWaitingMessage = async () => {
         if (registration && registration.waiting) {
           // Send a message to the waiting service worker,
           // instructing it to activate.
           // Note: for this to work, you have to add a message
           // listener in your service worker. See below.
-          await messageSW(registration.waiting, { type: 'SKIP_WAITING' })
+          await wb?.messageSkipWaiting() // messageSW(registration.waiting, { type: 'SKIP_WAITING' })
         }
       }
-      // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
-      wb = new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
 
       wb.addEventListener('activated', (event) => {
         // this will only controls the offline request.
@@ -81,6 +83,14 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
           // Assumes your app has some sort of prompt UI element
           // that a user can either accept or reject.
+          // Assuming the user accepted the update, set up a listener
+          // that will reload the page as soon as the previously waiting
+          // service worker has taken control.
+          wb?.addEventListener('controlling', (event) => {
+            if (event.isUpdate)
+              window.location.reload()
+          })
+
           onNeedRefresh?.()
         }
 
