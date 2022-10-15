@@ -142,7 +142,7 @@ export function generateWebManifestFile(options: ResolvedVitePWAOptions, bundle?
     }, new Map())
     manifest.icons = manifest.icons.map((icon) => {
       const iconSrc = icon.src
-      if (manifestEntries && iconSrc) {
+      if (iconSrc) {
         const src = normalizeIconPath(iconSrc.startsWith('.') ? iconSrc.slice(1) : iconSrc)
         const url = assets.get(src)
         if (url) {
