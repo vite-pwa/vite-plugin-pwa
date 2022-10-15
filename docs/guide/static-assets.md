@@ -10,6 +10,10 @@ You can also add another static assets such as `favicon`, `svg` and `font` files
 
 ## Reusing src/assets images
 
+::: warning
+This feature is only available from version `0.13.2+`.
+:::
+
 If you are using images in your application via `src/assets` directory, and you want to reuse those images in your `PWA Manifest` icons, you can use them with these 2 limitations:
 - any image under `src/assets` directory must be used in your application via static import or directly on the `src` attribute
 - you must reference the images in the `PWA Manifest` icons using the assets directory path relative to the root folder: `./src/assets/logo.png` or `src/assets/logo.png`
