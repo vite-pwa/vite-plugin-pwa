@@ -149,9 +149,9 @@ export function generateWebManifestFile(options: ResolvedVitePWAOptions, bundle?
           // remove it from the manifest if present
           manifestEntries.splice(0, manifestEntries.length, ...manifestEntries.filter((me) => {
             if (typeof me === 'string')
-              return me !== src
+              return me !== iconSrc
             else
-              return me.url !== src
+              return me.url !== iconSrc
           }))
           // we also need to add it to the sw precache manifest
           manifestEntries.push({ url, revision: null })
