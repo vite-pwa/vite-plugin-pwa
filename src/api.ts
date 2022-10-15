@@ -32,7 +32,7 @@ export function _generateBundle({ options, viteConfig, useImportRegister }: PWAP
       isAsset: true,
       type: 'asset',
       name: undefined,
-      source: generateWebManifestFile(options),
+      source: generateWebManifestFile(options, bundle),
       fileName: options.manifestFilename,
     }
   }

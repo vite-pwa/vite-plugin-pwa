@@ -4,6 +4,7 @@ import crypto from 'crypto'
 import fg from 'fast-glob'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
+import type { OutputBundle } from 'rollup'
 import type { ResolvedVitePWAOptions } from './types'
 
 function buildManifestEntry(
@@ -120,15 +121,65 @@ export async function configureStaticAssets(
       revision: `${cHash.digest('hex')}`,
     })
   }
-  if (manifestEntries.length > 0) {
-    if (useInjectManifest)
-      injectManifest.additionalManifestEntries = manifestEntries
-
-    else
-      workbox.additionalManifestEntries = manifestEntries
-  }
+  if (useInjectManifest)
+    injectManifest.additionalManifestEntries = manifestEntries ?? []
+  else
+    workbox.additionalManifestEntries = manifestEntries ?? []
 }
 
-export function generateWebManifestFile(options: ResolvedVitePWAOptions): string {
-  return `${JSON.stringify(options.manifest, null, options.minify ? 0 : 2)}\n`
+export function generateWebManifestFile(options: ResolvedVitePWAOptions, bundle?: OutputBundle): string {
+  const { manifest } = options
+  if (bundle && manifest && manifest.icons) {
+    const manifestEntries = options.strategies === 'generateSW'
+      ? options.workbox.additionalManifestEntries!
+      : options.injectManifest.additionalManifestEntries!
+    const assets: Map<string, string> = Object.keys(bundle).reduce((acc, key) => {
+      const { fileName, name } = bundle[key]
+      if (name)
+        acc.set(normalizeIconPath(name.startsWith('.') ? name.slice(1) : name), normalizeIconPath(fileName))
+
+      return acc
+    }, new Map())
+    manifest.icons = manifest.icons.map((icon) => {
+      const iconSrc = icon.src
+      if (manifestEntries && iconSrc) {
+        const src = normalizeIconPath(iconSrc.startsWith('.') ? iconSrc.slice(1) : iconSrc)
+        const url = assets.get(src)
+        if (url) {
+          // remove it from the manifest if present
+          manifestEntries.splice(0, manifestEntries.length, ...manifestEntries.filter((me) => {
+            if (typeof me === 'string')
+              return me !== src
+            else
+              return me.url !== src
+          }))
+          // we also need to add it to the sw precache manifest
+          manifestEntries.push({ url, revision: null })
+          icon.src = url
+        }
+      }
+
+      return icon
+    })
+    // we also need to recalculate the revision for the new webmanifest
+    const webManifest = options.manifestFilename
+    const idx = manifestEntries.findIndex((me) => {
+      if (typeof me === 'string')
+        return me === webManifest
+      else
+        return me.url === webManifest
+    })
+    if (idx > -1) {
+      const newWebManifest = `${JSON.stringify(manifest, null, options.minify ? 0 : 2)}\n`
+      const cHash = crypto.createHash('MD5')
+      cHash.update(newWebManifest)
+      manifestEntries.splice(idx, 1, {
+        url: webManifest,
+        revision: `${cHash.digest('hex')}`,
+      })
+      return newWebManifest
+    }
+  }
+
+  return `${JSON.stringify(manifest, null, options.minify ? 0 : 2)}\n`
 }

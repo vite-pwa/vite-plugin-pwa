@@ -14,7 +14,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
     theme_color: '#ffffff',
     icons: [
       {
-        src: 'pwa-192x192.png', // <== don't add slash, for testing
+        src: 'src/assets/pwa-192x192.png', // assets test
         sizes: '192x192',
         type: 'image/png',
       },
