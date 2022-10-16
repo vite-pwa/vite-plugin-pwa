@@ -13,11 +13,25 @@ const pwaOptions: Partial<VitePWAOptions> = {
     short_name: 'PWA Router',
     theme_color: '#ffffff',
     icons: [
+      /*
+      {
+        src: 'src/assets/pwa-32x32.png', // assets test
+        sizes: '192x192',
+        type: 'image/png',
+      },
+*/
       {
         src: 'src/assets/pwa-192x192.png', // assets test
         sizes: '192x192',
         type: 'image/png',
       },
+      /*
+      {
+        src: 'pwa-192x192.png', // <== don't add slash, for testing
+        sizes: '192x192',
+        type: 'image/png',
+      },
+*/
       {
         src: '/pwa-512x512.png', // <== don't remove slash, for testing
         sizes: '512x512',

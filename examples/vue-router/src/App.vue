@@ -2,6 +2,7 @@
 import { onBeforeMount, ref } from 'vue'
 import { useTimeAgo } from '@vueuse/core'
 import MyWorker from './my-worker.js?worker'
+//  DONT'T REMOVE: ASSETS TESTS
 // import logo from './assets/pwa-192x192.png'
 
 import ReloadPrompt from './ReloadPrompt.vue'
@@ -52,7 +53,13 @@ onBeforeMount(() => {
   </template>
   <br>
   <br>
-  <!--  <img :src="logo" width="192" height="192" alt="Vite PWA logo"> -->
+  <!-- DONT'T REMOVE: ASSETS TESTS -->
+  <!--
+    <img :src="logo" width="192" height="192" alt="Vite PWA logo">
+-->
   <img src="./assets/pwa-192x192.png" width="192" height="192" alt="Vite PWA logo">
+  <!--
+  <img src="./assets/pwa-32x32.png?url" width="32" height="32" alt="Vite PWA logo">
+-->
   <ReloadPrompt />
 </template>

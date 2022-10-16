@@ -4,7 +4,7 @@ title: Static assets handling | Guide
 
 # Static assets handling
 
-By default, all icons on `PWA Web App Manifest` option found under `Vite's publicDir` option directory, will be included in the service worker *precache*. You can disable this option using `includeManifestIcons: false`.
+By default, all icons on `PWA Web App Manifest` option found under Vite's `publicDir` option directory, will be included in the service worker *precache*. You can disable this option using `includeManifestIcons: false`.
 
 You can also add another static assets such as `favicon`, `svg` and `font` files using `includeAssets` option. The `includeAssets` option will be resolved using `fast-glob` found under Vite's `publicDir` option directory, and so you can use regular expressions to include those assets, for example: `includeAssets: ['fonts/*.ttf', 'images/*.png']`. You don't need to configure `PWA Manifest icons` on `includeAssets` option.
 
@@ -14,38 +14,49 @@ You can also add another static assets such as `favicon`, `svg` and `font` files
 This feature is only available from version `0.13.2+`.
 :::
 
-If you are using images in your application via `src/assets` directory, and you want to reuse those images in your `PWA Manifest` icons, you can use them with these 2 limitations:
-- any image under `src/assets` directory must be used in your application via static import or directly on the `src` attribute
+If you are using images in your application via `src/assets` directory (or any other directory), and you want to reuse those images in your `PWA Manifest` icons, you can use them with these 3 limitations:
+- any image under `src/assets` directory (or any other directory) must be used in your application via static import or directly on the `src` attribute
 - you must reference the images in the `PWA Manifest` icons using the assets directory path relative to the root folder: `./src/assets/logo.png` or `src/assets/logo.png`
+- inlined icons cannot be used (refer to [Vite's assetsInlineLimit option](https://vitejs.dev/config/build-options.html#build-assetsinlinelimit)): in that case you will need to copy/move those images to the Vite's `publicDir` option directory
+
+::: warning
+If you're using `PWA Manifest` icons from any asset folder, but you are not using those images in your application (via static import or in src attribute), Vite will not emit those assets, and so missing from the build output:
+
+```shell
+Error while trying to use the following icon from the Manifest: https://localhost/src/assets/pwa-192x192.png (Download error or resource isn't a valid image)
+```
+
+In that case, you need to copy or move those images to the Vite's `publicDir` option directory (defaults to `public`) and configure the icons properly.
+:::
 
 For example, if you have the following image `src/assets/logo-192x192.png` you can add it to your `PWA Manifest` icon using:
 
 ```json
 {
-  "src": "./src/assets/logo-192x192.png", // or src/assets/logo-192x192.png
+  "src": "./src/assets/logo-192x192.png",
   "sizes": "192x192",
   "type": "image/png"
 }
 ```
 
 then, in your codebase, you must use it via static import:
-```vue
-<!-- src/App.vue -->
-<script setup>
+
+```js
+// src/main.js or src/main.ts 
+// can be any js/ts/jsx/tsx module or single file component
 import logo from './assets/logo-192x192.png'
-</script>
-<template>
-  <img :src="logo" alt="logo" width="192" height="192" />
-</template>
+
+document.getElementById('logo-img').src = logo
 ```
 
 or using the `src` attribute:
 
-```vue
-<!-- src/App.vue -->
-<template>
-  <img src="./assets/logo-192x192.png" alt="logo" width="192" height="192" />
-</template>
+```js
+// src/main.js or src/main.ts
+// can be any js/ts/jsx/tsx module or single file component
+document.getElementById('#app').innerHTML = `
+  <img src="./assets/logo-192x192.png" alt="Logo" width="192" height="192" />
+`
 ```
 
 ## globPatterns
