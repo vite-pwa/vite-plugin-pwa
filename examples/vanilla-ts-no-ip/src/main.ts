@@ -12,7 +12,7 @@ app.innerHTML = `
   <div>
    <img src="/favicon.svg" alt="PWA Logo" width="60" height="60">
     <h1>Vite + TypeScript</h1>
-    <p>Testing SW with <b>injectRegister=auto,inline,script</b></p>
+    <p>Testing SW without <b>Injection Point (self.__WB_MANIFEST)</b></p>
     <br/>
     <p>${date}</p>
     <br/>
@@ -27,7 +27,7 @@ const reload = registerSW({
 function onNeedRefresh() {
   const btn = document.createElement('button')
   btn.addEventListener('click', () => reload())
-  btn.textContent = 'New version available, click to Reload'
+  btn.textContent = 'New version available, click to ReloadX'
   app.append(btn)
 }
 
