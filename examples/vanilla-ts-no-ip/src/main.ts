@@ -25,11 +25,9 @@ const reload = registerSW({
 })
 
 function onNeedRefresh() {
-  if (reload) {
-    const btn = document.createElement('button')
-    btn.addEventListener('click', () => reload())
-    btn.textContent = 'New version available, click to Reload'
-    app.append(btn)
-  }
+  const btn = document.createElement('button')
+  btn.addEventListener('click', () => reload())
+  btn.textContent = 'New version available, click to Reload'
+  app.append(btn)
 }
 
