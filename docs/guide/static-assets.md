@@ -17,7 +17,8 @@ This feature is only available from version `0.13.2+`.
 If you are using images in your application via `src/assets` directory (or any other directory), and you want to reuse those images in your `PWA Manifest` icons, you can use them with these 3 limitations:
 - any image under `src/assets` directory (or any other directory) must be used in your application via static import or directly on the `src` attribute
 - you must reference the images in the `PWA Manifest` icons using the assets directory path relative to the root folder: `./src/assets/logo.png` or `src/assets/logo.png`
-- inlined icons cannot be used (refer to [Vite's assetsInlineLimit option](https://vitejs.dev/config/build-options.html#build-assetsinlinelimit)): in that case you will need to copy/move those images to the Vite's `publicDir` option directory
+- inlined icons cannot be used, in that case you will need to copy/move those images to the Vite's `publicDir` option directory: refer to [Importing Asset as URL](https://vitejs.dev/guide/assets.html#importing-asset-as-url) and [Vite's assetsInlineLimit option](https://vitejs.dev/config/build-options.html#build-assetsinlinelimit)
+
 
 ::: warning
 If you're using `PWA Manifest` icons from any asset folder, but you are not using those images in your application (via static import or in src attribute), Vite will not emit those assets, and so missing from the build output:
