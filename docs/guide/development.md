@@ -191,10 +191,6 @@ if ('serviceWorker' in navigator) {
 }
 ```
 
-When you change your service worker source code, `Vite` will force a full reload, since we're using `workbox-window` to register it (by default, you can register it manually) you may have some problems with the service worker events.
-
-<HeuristicWorkboxWindow />
-
 ## Example
 
 You can find an example here: [vue-router](https://github.com/antfu/vite-plugin-pwa/tree/main/examples/vue-router).

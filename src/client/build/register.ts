@@ -64,10 +64,15 @@ export function registerSW(options: RegisterSWOptions = {}) {
       }
 
       wb.addEventListener('activated', (event) => {
-        // this will only controls the offline request.
+        // This will only controls the offline request.
         // event.isUpdate will be true if another version of the service
         // worker was controlling the page when this version was registered.
-        if (event.isUpdate)
+        // When using multiple clients, if the client that fires the update is not the current one,
+        // workbox-window will fire this event with isUpdate=undefined and isExternal=true
+        // we only need to check this case and force reloading the page, otherwise use current logic
+        if (!event.isUpdate && event.isExternal)
+          window.location.reload()
+        else if (event.isUpdate)
           auto && window.location.reload()
         else if (!autoDestroy)
           onOfflineReady?.()

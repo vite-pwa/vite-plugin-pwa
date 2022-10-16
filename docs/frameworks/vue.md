@@ -140,8 +140,6 @@ const updateServiceWorker = useRegisterSW({
 
 The interval must be in milliseconds, in the example above it is configured to check the service worker every hour.
 
-<HeuristicWorkboxWindow />
-
 ## Vue 2
 
 Since this plugin only supports `Vue 3`, you cannot use the virtual module `virtual:pwa-register/vue`.
@@ -297,5 +295,3 @@ export default {
 ```
 
 The interval must be in milliseconds, in the example above it is configured to check the service worker every hour.
-
-<HeuristicWorkboxWindow />
