@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite'
-import reactRefresh from '@vitejs/plugin-react-refresh'
+import react from '@vitejs/plugin-react'
 import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'
 import { VitePWA } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
@@ -69,7 +69,7 @@ export default defineConfig({
     sourcemap: process.env.SOURCE_MAP === 'true',
   },
   plugins: [
-    reactRefresh(),
+    react(),
     VitePWA(pwaOptions),
     replace(replaceOptions),
   ],
