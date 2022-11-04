@@ -30,8 +30,8 @@ async function loadRollupReplacePlugin() {
 
   try {
     const { createRequire } = await import('module').then(m => m.default || m)
-    const require = createRequire(_dirname)
-    return require('@rollup/plugin-replace')
+    const nodeRequire = createRequire(_dirname)
+    return nodeRequire('@rollup/plugin-replace')
   }
   catch (_) {
     return require('@rollup/plugin-replace')
