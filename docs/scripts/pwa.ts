@@ -5,6 +5,7 @@ export const pwa = () => {
     outDir: '.vitepress/dist',
     registerType: 'prompt',
     includeManifestIcons: false,
+    selfDestroying: true,
     manifest: {
       id: '/',
       name: 'Vite Plugin PWA',
