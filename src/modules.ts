@@ -25,6 +25,19 @@ async function loadWorkboxBuild(): Promise<typeof import('workbox-build')> {
   }
 }
 
+async function loadRollupReplacePlugin() {
+  // Uses require to lazy load.
+
+  try {
+    const { createRequire } = await import('module').then(m => m.default || m)
+    const nodeRequire = createRequire(_dirname)
+    return nodeRequire('@rollup/plugin-replace')
+  }
+  catch (_) {
+    return require('@rollup/plugin-replace')
+  }
+}
+
 export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 'build' | 'dev', source = 'register') {
   const sw = options.base + options.filename
   const scope = options.scope
@@ -98,11 +111,18 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   if (includedPluginNames.length === 0)
     includedPluginNames.push(...defaultInjectManifestVitePlugins)
 
-  const plugins = viteOptions.plugins.filter(p => includedPluginNames.includes(p.name))
+  const replace = await loadRollupReplacePlugin()
+
+  const plugins = [
+    replace({
+      'preventAssignment': true,
+      'process.env.NODE_ENV': JSON.stringify(options.mode),
+    }),
+    ...viteOptions.plugins.filter(p => includedPluginNames.includes(p.name)),
+  ]
   const { rollup } = await import('rollup')
   const bundle = await rollup({
     input: options.swSrc,
-    // @ts-expect-error Vite and Rollup plugin shouldn't be aligned?
     plugins,
   })
   try {
@@ -127,10 +147,6 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     // this will not fail since there is an injectionPoint
     swSrc: options.injectManifest.swDest,
   }
-
-  // options.injectManifest.mode won't work!!!
-  // error during build: ValidationError: "mode" is not allowed
-  // delete injectManifestOptions.mode
 
   const { injectManifest } = await loadWorkboxBuild()
 
