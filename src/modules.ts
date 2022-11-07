@@ -25,6 +25,19 @@ async function loadWorkboxBuild(): Promise<typeof import('workbox-build')> {
   }
 }
 
+async function loadRollupReplacePlugin() {
+  // Uses require to lazy load.
+
+  try {
+    const { createRequire } = await import('module').then(m => m.default || m)
+    const nodeRequire = createRequire(_dirname)
+    return nodeRequire('@rollup/plugin-replace')
+  }
+  catch (_) {
+    return require('@rollup/plugin-replace')
+  }
+}
+
 export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 'build' | 'dev', source = 'register') {
   const sw = options.base + options.filename
   const scope = options.scope
@@ -98,7 +111,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   if (includedPluginNames.length === 0)
     includedPluginNames.push(...defaultInjectManifestVitePlugins)
 
-  const { default: replace } = await import('@rollup/plugin-replace')
+  const replace = await loadRollupReplacePlugin()
 
   const plugins = [
     replace({
@@ -110,7 +123,6 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   const { rollup } = await import('rollup')
   const bundle = await rollup({
     input: options.swSrc,
-    // @ts-expect-error Vite and Rollup plugin shouldn't be aligned?
     plugins,
   })
   try {
