@@ -19,15 +19,15 @@ app.innerHTML = `
   </div>
 `
 
-const reload = registerSW({
+registerSW({
   immediate: true,
-  onNeedRefresh,
+  onNeedRefresh() {
+    // eslint-disable-next-line no-console
+    console.log('onNeedRefresh message should not appear')
+  },
+  onOfflineReady() {
+    // eslint-disable-next-line no-console
+    console.log('onOfflineReady message should not appear')
+  },
 })
-
-function onNeedRefresh() {
-  const btn = document.createElement('button')
-  btn.addEventListener('click', () => reload())
-  btn.textContent = 'New version available, click to ReloadX'
-  app.append(btn)
-}
 

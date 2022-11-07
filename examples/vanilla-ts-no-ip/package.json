@@ -4,11 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "rimraf dev-dist && cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true vite --force",
-    "dev-claims": "rimraf dev-dist && cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true CLAIMS=true SW=true vite --force",
-    "run-build-sw": "rimraf dist && cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true SW=true vite build",
-    "run-build-sw-claims": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true CLAIMS=true SW=true vite build",
+    "run-build-sw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
     "start-sw": "npm run run-build-sw && npm run serve",
-    "start-sw-claims": "npm run run-build-sw-claims && npm run serve",
     "serve": "serve dist"
   },
   "devDependencies": {

@@ -17,5 +17,5 @@
     "skipLibCheck": true,
     "types": ["vite-plugin-pwa", "vite-plugin-pwa/client", "vite-plugin-pwa/info"]
   },
-  "include": ["src"]
+  "include": ["src/**/*.ts"]
 }

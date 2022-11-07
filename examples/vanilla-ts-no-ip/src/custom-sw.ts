@@ -1,7 +1,13 @@
+import { clientsClaim } from 'workbox-core'
 import { registerRoute } from 'workbox-routing'
 import { CacheFirst, NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies'
 import { CacheableResponsePlugin } from 'workbox-cacheable-response'
 import { ExpirationPlugin } from 'workbox-expiration'
+
+declare let self: ServiceWorkerGlobalScope
+
+self.skipWaiting()
+clientsClaim()
 
 if (import.meta.env.DEV) {
   // Avoid caching on dev: force always go to the server
@@ -17,9 +23,6 @@ if (import.meta.env.DEV) {
 }
 
 if (import.meta.env.PROD) {
-  // eslint-disable-next-line no-console
-  console.log(`sw date: ${__DATE__}`)
-
   // Cache page navigations (html) with a Network First strategy
   registerRoute(
     ({ request }) => {
@@ -37,9 +40,9 @@ if (import.meta.env.PROD) {
   registerRoute(
     ({ request }) =>
       request.destination === 'style'
-        || request.destination === 'manifest'
-        || request.destination === 'script'
-        || request.destination === 'worker',
+            || request.destination === 'manifest'
+            || request.destination === 'script'
+            || request.destination === 'worker',
     new StaleWhileRevalidate({
       cacheName: 'assets',
       plugins: [
@@ -61,4 +64,3 @@ if (import.meta.env.PROD) {
     }),
   )
 }
-

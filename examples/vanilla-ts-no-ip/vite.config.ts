@@ -14,9 +14,9 @@ export default defineConfig({
       mode: 'development',
       base: '/',
       strategies: 'injectManifest',
-      registerType: process.env.CLAIMS === 'true' ? 'autoUpdate' : 'prompt',
+      registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
-      filename: process.env.CLAIMS === 'true' ? 'claims-sw.ts' : 'prompt-sw.ts',
+      filename: 'custom-sw.ts',
       srcDir: 'src',
       manifest: {
         name: 'PWA Router',
@@ -47,8 +47,6 @@ export default defineConfig({
       devOptions: {
         enabled: process.env.SW_DEV === 'true',
         type: 'module',
-        /* when using generateSW the PWA plugin will switch to classic */
-        navigateFallback: 'index.html',
       },
     }),
   ],
