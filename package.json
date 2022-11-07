@@ -74,13 +74,13 @@
     "fast-glob": "^3.2.11",
     "pretty-bytes": "^6.0.0",
     "rollup": "^2.79.0",
+    "@rollup/plugin-replace": "^4.0.0",
     "workbox-build": "^6.5.4",
     "workbox-window": "^6.5.4"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.26.3",
     "@antfu/ni": "^0.18.0",
-    "@rollup/plugin-replace": "^4.0.0",
     "@types/debug": "^4.1.7",
     "@types/node": "^18.7.15",
     "@types/prompts": "^2.4.0",
