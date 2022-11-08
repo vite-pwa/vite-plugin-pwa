@@ -16,7 +16,7 @@
     "jsx": "react",
     "types": [
       "vite-plugin-pwa",
-      "vite-plugin-pwa/client"
+      "vite-plugin-pwa/react"
     ]
   },
   "include": ["./src"]

@@ -15,7 +15,7 @@
     "allowJs": true,
     "checkJs": true,
     "types": [
-      "vite-plugin-pwa/client"
+      "vite-plugin-pwa/svelte"
     ]
   },
   "include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"]

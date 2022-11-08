@@ -1,4 +1,8 @@
-declare module 'virtual:pwa-register' {
+declare module 'virtual:pwa-register/vue' {
+  // eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+  // @ts-ignore ignore when vue is not installed
+  import type { Ref } from 'vue'
+
   export interface RegisterSWOptions {
     immediate?: boolean
     onNeedRefresh?: () => void
@@ -20,5 +24,9 @@ declare module 'virtual:pwa-register' {
     onRegisterError?: (error: any) => void
   }
 
-  export function registerSW(options?: RegisterSWOptions): (reloadPage?: boolean) => Promise<void>
+  export function useRegisterSW(options?: RegisterSWOptions): {
+    needRefresh: Ref<boolean>
+    offlineReady: Ref<boolean>
+    updateServiceWorker: (reloadPage?: boolean) => Promise<void>
+  }
 }
