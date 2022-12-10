@@ -77,11 +77,13 @@ const FRAMEWORKS: Framework[] = [
     color: red,
     dir: 'svelte-routify',
   },
+  /*
   {
     name: 'sveltekit',
     color: blue,
     dir: 'sveltekit-pwa',
   },
+*/
   {
     name: 'solid',
     color: yellow,
@@ -105,7 +107,6 @@ async function init() {
         name: 'framework',
         message: reset('Select a framework:'),
         initial: 0,
-        // @ts-expect-error casting
         choices: FRAMEWORKS.map((framework) => {
           const frameworkColor = framework.color
           return {
@@ -119,7 +120,6 @@ async function init() {
         name: 'strategy',
         message: reset('Select a strategy:'),
         initial: 0,
-        // @ts-expect-error casting
         choices: STRATEGIES.map((strategy) => {
           const strategyColor = strategy.color
           return {
@@ -133,7 +133,6 @@ async function init() {
         name: 'behavior',
         message: reset('Select a behavior:'),
         initial: 0,
-        // @ts-expect-error casting
         choices: BEHAVIORS.map((behavior) => {
           const behaviorColor = behavior.color
           return {
