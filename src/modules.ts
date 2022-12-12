@@ -138,6 +138,10 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     await bundle.close()
   }
 
+  // don't force user to include injection point
+  if (!options.injectManifest.injectionPoint)
+    return
+
   const injectManifestOptions = {
     ...options.injectManifest,
     // this will not fail since there is an injectionPoint

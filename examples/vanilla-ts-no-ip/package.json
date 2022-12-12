@@ -1,0 +1,24 @@
+{
+  "name": "vanilla-ts-no-ip",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "rimraf dev-dist && cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true vite --force",
+    "run-build-sw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
+    "start-sw": "npm run run-build-sw && npm run serve",
+    "serve": "serve dist"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.2",
+    "vite": "^3.1.0",
+    "vite-plugin-pwa": "workspace:*",
+    "workbox-cacheable-response": "^6.5.4",
+    "workbox-core": "^6.5.4",
+    "workbox-expiration": "^6.5.4",
+    "workbox-routing": "^6.5.4",
+    "workbox-strategies": "^6.5.4",
+    "workbox-window": "^6.5.4"
+  }
+}
