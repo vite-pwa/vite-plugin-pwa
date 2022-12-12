@@ -29,43 +29,38 @@ export function registerSW(options: RegisterSWOptions = {}) {
   let registerPromise: Promise<void>
   let sendSkipWaitingMessage: () => Promise<void> | undefined
 
-  const updateServiceWorker = async (reloadPage = true) => {
+  const updateServiceWorker = async (_reloadPage = true) => {
     await registerPromise
     if (!auto) {
-      // Assuming the user accepted the update, set up a listener
-      // that will reload the page as soon as the previously waiting
-      // service worker has taken control.
-      if (reloadPage) {
-        wb?.addEventListener('controlling', (event) => {
-          if (event.isUpdate)
-            window.location.reload()
-        })
-      }
-
       await sendSkipWaitingMessage?.()
     }
   }
 
   async function register() {
     if ('serviceWorker' in navigator) {
-      const { Workbox, messageSW } = await import('workbox-window')
+      const { Workbox } = await import('workbox-window')
+      // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
+      wb = new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
       sendSkipWaitingMessage = async () => {
         if (registration && registration.waiting) {
           // Send a message to the waiting service worker,
           // instructing it to activate.
           // Note: for this to work, you have to add a message
           // listener in your service worker. See below.
-          await messageSW(registration.waiting, { type: 'SKIP_WAITING' })
+          await wb?.messageSkipWaiting()
         }
       }
-      // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
-      wb = new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
 
       wb.addEventListener('activated', (event) => {
-        // this will only controls the offline request.
+        // This will only controls the offline request.
         // event.isUpdate will be true if another version of the service
         // worker was controlling the page when this version was registered.
-        if (event.isUpdate)
+        // When using multiple clients, if the client that fires the update is not the current one,
+        // workbox-window will fire this event with isUpdate=undefined and isExternal=true
+        // we only need to check this case and force reloading the page, otherwise use current logic
+        if (!event.isUpdate && event.isExternal)
+          window.location.reload()
+        else if (event.isUpdate)
           auto && window.location.reload()
         else if (!autoDestroy)
           onOfflineReady?.()
@@ -81,6 +76,14 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
           // Assumes your app has some sort of prompt UI element
           // that a user can either accept or reject.
+          // Assuming the user accepted the update, set up a listener
+          // that will reload the page as soon as the previously waiting
+          // service worker has taken control.
+          wb?.addEventListener('controlling', (event) => {
+            if (event.isUpdate)
+              window.location.reload()
+          })
+
           onNeedRefresh?.()
         }
 
