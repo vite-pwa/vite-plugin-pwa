@@ -13,7 +13,6 @@ declare module '@vue/runtime-core' {
     ExamplesInjectManifest: typeof import('./theme/components/ExamplesInjectManifest.md')['default']
     GenerateSWCleanupOutdatedCaches: typeof import('./theme/components/GenerateSWCleanupOutdatedCaches.md')['default']
     GenerateSWSourceMap: typeof import('./theme/components/GenerateSWSourceMap.md')['default']
-    HeuristicWorkboxWindow: typeof import('./theme/components/HeuristicWorkboxWindow.md')['default']
     HomePage: typeof import('./theme/components/HomePage.vue')['default']
     InjectManifestCleanupOutdatedCaches: typeof import('./theme/components/InjectManifestCleanupOutdatedCaches.md')['default']
     InjectManifestSourceMap: typeof import('./theme/components/InjectManifestSourceMap.md')['default']

@@ -162,5 +162,3 @@ const updateServiceWorker = useRegisterSW({
 ```
 
 The interval must be in milliseconds, in the example above it is configured to check the service worker every hour.
-
-<HeuristicWorkboxWindow />

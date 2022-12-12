@@ -20,6 +20,12 @@ declare module 'virtual:pwa-register' {
     onRegisterError?: (error: any) => void
   }
 
+  /**
+   * Registers the service worker returning a callback to reload the current page when an update is found.
+   *
+   * @param options the options to register the service worker.
+   * @return (reloadPage?: boolean) => Promise<void> From version 0.13.2+ `reloadPage` param is not used anymore.
+   */
   export function registerSW(options?: RegisterSWOptions): (reloadPage?: boolean) => Promise<void>
 }
 
@@ -52,6 +58,11 @@ declare module 'virtual:pwa-register/vue' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: Ref<boolean>
     offlineReady: Ref<boolean>
+    /**
+     * Reloads the current window to allow the service worker take the control.
+     *
+     * @param reloadPage From version 0.13.2+ this param is not used anymore.
+     */
     updateServiceWorker: (reloadPage?: boolean) => Promise<void>
   }
 }
@@ -85,6 +96,11 @@ declare module 'virtual:pwa-register/svelte' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: Writable<boolean>
     offlineReady: Writable<boolean>
+    /**
+     * Reloads the current window to allow the service worker take the control.
+     *
+     * @param reloadPage From version 0.13.2+ this param is not used anymore.
+     */
     updateServiceWorker: (reloadPage?: boolean) => Promise<void>
   }
 }
@@ -118,6 +134,11 @@ declare module 'virtual:pwa-register/react' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: [boolean, Dispatch<SetStateAction<boolean>>]
     offlineReady: [boolean, Dispatch<SetStateAction<boolean>>]
+    /**
+     * Reloads the current window to allow the service worker take the control.
+     *
+     * @param reloadPage From version 0.13.2+ this param is not used anymore.
+     */
     updateServiceWorker: (reloadPage?: boolean) => Promise<void>
   }
 }
@@ -151,6 +172,11 @@ declare module 'virtual:pwa-register/solid' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: [Accessor<boolean>, Setter<boolean>]
     offlineReady: [Accessor<boolean>, Setter<boolean>]
+    /**
+     * Reloads the current window to allow the service worker take the control.
+     *
+     * @param reloadPage From version 0.13.2+ this param is not used anymore.
+     */
     updateServiceWorker: (reloadPage?: boolean) => Promise<void>
   }
 }
@@ -184,6 +210,11 @@ declare module 'virtual:pwa-register/preact' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: [boolean, StateUpdater<boolean>]
     offlineReady: [boolean, StateUpdater<boolean>]
+    /**
+     * Reloads the current window to allow the service worker take the control.
+     *
+     * @param reloadPage From version 0.13.2+ this param is not used anymore.
+     */
     updateServiceWorker: (reloadPage?: boolean) => Promise<void>
   }
 }
