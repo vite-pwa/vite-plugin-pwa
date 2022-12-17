@@ -62,7 +62,6 @@ export function registerSW(options: RegisterSWOptions = {}) {
         else {
           let onNeedRefreshCalled = false
           const showSkipWaitingPrompt = () => {
-            console.log(arguments)
             onNeedRefreshCalled = true
             // \`event.wasWaitingBeforeRegister\` will be false if this is
             // the first time the updated service worker is waiting.
