@@ -25,7 +25,6 @@ export function registerSW(options: RegisterSWOptions = {}) {
   } = options
 
   let wb: import('workbox-window').Workbox | undefined
-  let registration: ServiceWorkerRegistration | undefined
   let registerPromise: Promise<void>
   let sendSkipWaitingMessage: () => Promise<void> | undefined
 
@@ -42,61 +41,76 @@ export function registerSW(options: RegisterSWOptions = {}) {
       // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
       wb = new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
       sendSkipWaitingMessage = async () => {
-        if (registration && registration.waiting) {
-          // Send a message to the waiting service worker,
-          // instructing it to activate.
-          // Note: for this to work, you have to add a message
-          // listener in your service worker. See below.
-          await wb?.messageSkipWaiting()
-        }
+        // Send a message to the waiting service worker,
+        // instructing it to activate.
+        // Note: for this to work, you have to add a message
+        // listener in your service worker. See below.
+        await wb?.messageSkipWaiting()
       }
-
-      wb.addEventListener('activated', (event) => {
-        // This will only controls the offline request.
-        // event.isUpdate will be true if another version of the service
-        // worker was controlling the page when this version was registered.
-        // When using multiple clients, if the client that fires the update is not the current one,
-        // workbox-window will fire this event with isUpdate=undefined and isExternal=true
-        // we only need to check this case and force reloading the page, otherwise use current logic
-        if (!event.isUpdate && event.isExternal)
-          window.location.reload()
-        else if (event.isUpdate)
-          auto && window.location.reload()
-        else if (!autoDestroy)
-          onOfflineReady?.()
-      })
-
-      if (!auto) {
-        const showSkipWaitingPrompt = () => {
-          // \`event.wasWaitingBeforeRegister\` will be false if this is
-          // the first time the updated service worker is waiting.
-          // When \`event.wasWaitingBeforeRegister\` is true, a previously
-          // updated service worker is still waiting.
-          // You may want to customize the UI prompt accordingly.
-
-          // Assumes your app has some sort of prompt UI element
-          // that a user can either accept or reject.
-          // Assuming the user accepted the update, set up a listener
-          // that will reload the page as soon as the previously waiting
-          // service worker has taken control.
-          wb?.addEventListener('controlling', (event) => {
-            if (event.isUpdate)
+      if (!autoDestroy) {
+        if (auto) {
+          wb.addEventListener('activated', (event) => {
+            if (event.isUpdate || event.isExternal)
               window.location.reload()
           })
-
-          onNeedRefresh?.()
+          wb.addEventListener('installed', (event) => {
+            if (!event.isUpdate) {
+              onOfflineReady?.()
+            }
+          });
         }
+        else {
+          let onNeedRefreshCalled = false
+          const showSkipWaitingPrompt = () => {
+            console.log(arguments)
+            onNeedRefreshCalled = true
+            // \`event.wasWaitingBeforeRegister\` will be false if this is
+            // the first time the updated service worker is waiting.
+            // When \`event.wasWaitingBeforeRegister\` is true, a previously
+            // updated service worker is still waiting.
+            // You may want to customize the UI prompt accordingly.
 
-        // Add an event listener to detect when the registered
-        // service worker has installed but is waiting to activate.
-        wb.addEventListener('waiting', showSkipWaitingPrompt)
-        // @ts-expect-error event listener provided by workbox-window
-        wb.addEventListener('externalwaiting', showSkipWaitingPrompt)
+            // Assumes your app has some sort of prompt UI element
+            // that a user can either accept or reject.
+            // Assuming the user accepted the update, set up a listener
+            // that will reload the page as soon as the previously waiting
+            // service worker has taken control.
+            wb?.addEventListener('controlling', (event) => {
+              if (event.isUpdate)
+                window.location.reload()
+            })
+
+            onNeedRefresh?.()
+          }
+          wb.addEventListener('installed', (event) => {
+            if (typeof event.isUpdate === 'undefined') {
+              if (typeof event.isExternal !== 'undefined') {
+                if (event.isExternal)
+                  showSkipWaitingPrompt()
+                else
+                  !onNeedRefreshCalled && onOfflineReady?.()
+              }
+              else {
+                if (event.isExternal)
+                  window.location.reload()
+                else
+                  !onNeedRefreshCalled && onOfflineReady?.()
+              }
+            }
+            else if (!event.isUpdate) {
+              onOfflineReady?.()
+            }
+          });
+          // Add an event listener to detect when the registered
+          // service worker has installed but is waiting to activate.
+          wb.addEventListener('waiting', showSkipWaitingPrompt)
+          // @ts-expect-error event listener provided by workbox-window
+          wb.addEventListener('externalwaiting', showSkipWaitingPrompt)
+        }
       }
 
       // register the service worker
       wb.register({ immediate }).then((r) => {
-        registration = r
         if (onRegisteredSW)
           onRegisteredSW('__SW__', r)
         else
