@@ -35,4 +35,4 @@ There are many test sites, but we suggest you use `WebPageTest` as this is the m
 
 Enter the url of your application, click `Start Test` button, wait for the test to finish, the `WebPageTest` result will hint you what things on your application must be fixed/changed. The `WebPageTest` result will also score your application, it will also test your site with `Lighthouse`.
 
-For example, go to [WebPageTest](https://www.webpagetest.org/), enter `https://vite-plugin-pwa.netlify.app/`, click `Start Test` button, wait a few seconds for the test to finish, and see the results for this site.
+For example, go to [WebPageTest](https://www.webpagetest.org/), enter `https://vite-pwa-org.netlify.app/`, click `Start Test` button, wait a few seconds for the test to finish, and see the results for this site.

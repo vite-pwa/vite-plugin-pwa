@@ -1,5 +1,5 @@
 <p align='center'>
-<img src='https://vite-plugin-pwa.netlify.app/banner_light.svg' alt="vite-plugin-pwa - Zero-config PWA for Vite"><br>
+<img src='https://vite-pwa-org.netlify.app/banner_light.svg' alt="vite-plugin-pwa - Zero-config PWA for Vite"><br>
 Zero-config PWA Framework-agnostic Plugin for Vite
 </p>
 
@@ -10,7 +10,7 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 <a href="https://www.npmjs.com/package/vite-plugin-pwa" target="__blank">
     <img alt="NPM Downloads" src="https://img.shields.io/npm/dm/vite-plugin-pwa?color=476582&label=">
 </a>
-<a href="https://vite-plugin-pwa.netlify.app/" target="__blank">
+<a href="https://vite-pwa-org.netlify.app/" target="__blank">
     <img src="https://img.shields.io/static/v1?label=&message=docs%20%26%20guides&color=2e859c" alt="Docs & Guides">
 </a>
 <br>
@@ -30,7 +30,7 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 
 ## 🚀 Features
 
-- 📖 [**Documentation & guides**](https://vite-plugin-pwa.netlify.app/)
+- 📖 [**Documentation & guides**](https://vite-pwa-org.netlify.app/)
 - 👌 **Zero-Config**: sensible built-in default configs for common use cases
 - 🔩 **Extensible**: expose the full ability to customize the behavior of the plugin
 - 🦾 **Type Strong**: written in [TypeScript](https://www.typescriptlang.org/)
@@ -70,7 +70,7 @@ export default {
 }
 ```
 
-Read the [📖 documentation](https://vite-plugin-pwa.netlify.app/guide/) for a complete guide on how to configure and use 
+Read the [📖 documentation](https://vite-pwa-org.netlify.app/guide/) for a complete guide on how to configure and use 
 this plugin.
 
 Check out the client type declarations [client.d.ts](./client.d.ts) for built-in frameworks support.
