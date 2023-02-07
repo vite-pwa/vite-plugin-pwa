@@ -168,7 +168,7 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
 
 export interface ShareTargetFiles {
   name: string
-  accept: string
+  accept: string | string[]
 }
 
 export interface ManifestOptions {
