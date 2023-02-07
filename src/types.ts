@@ -166,6 +166,11 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   vitePlugins: InjectManifestVitePlugins
 }
 
+export interface ShareTargetFiles {
+  name: string
+  accept: string
+}
+
 export interface ManifestOptions {
   /**
    * @default _npm_package_name_
@@ -278,6 +283,17 @@ export interface ManifestOptions {
    * @default ''
    */
   iarc_rating_id: string
+  share_target: {
+    action: string
+    method?: string
+    enctype?: string
+    params: {
+      title?: string
+      text?: string
+      url?: string
+      files?: ShareTargetFiles | ShareTargetFiles[]
+    }
+  }
 }
 
 export interface WebManifestData {
