@@ -278,6 +278,20 @@ export interface ManifestOptions {
    * @default ''
    */
   iarc_rating_id: string
+  share_target: {
+    action: string
+    method?: string
+    enctype?: string
+    params: {
+      title?: string
+      text?: string
+      url?: string
+      files?: {
+        name: string
+        accept: string | string[]
+      }[]
+    }
+  }
 }
 
 export interface WebManifestData {
