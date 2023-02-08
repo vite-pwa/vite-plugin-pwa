@@ -29,6 +29,7 @@ export function _generateBundle({ options, viteConfig, useImportRegister }: PWAP
 
   if (options.manifest) {
     bundle[options.manifestFilename] = {
+      // @ts-expect-error: for Vite 3 support, Vite 4 has removed `isAsset` property
       isAsset: true,
       type: 'asset',
       name: undefined,
@@ -43,6 +44,7 @@ export function _generateBundle({ options, viteConfig, useImportRegister }: PWAP
 
   if (options.injectRegister === 'script' && !existsSync(resolve(viteConfig.publicDir, FILE_SW_REGISTER))) {
     bundle[FILE_SW_REGISTER] = {
+      // @ts-expect-error: for Vite 3 support, Vite 4 has removed `isAsset` property
       isAsset: true,
       type: 'asset',
       name: undefined,
@@ -77,7 +79,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       }
 
       return {
-        href: `${options.base}${url}`,
+        href: `${ctx.devEnvironment ? options.base : options.buildBase}${url}`,
         useCredentials: ctx.options.useCredentials,
         toLinkTag() {
           return manifest
@@ -109,13 +111,15 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
         script = generateRegisterSW(options, false)
       }
 
+      const base = ctx.devEnvironment ? options.base : options.buildBase
+
       return {
         // hint when required
         shouldRegisterSW,
         inline: options.injectRegister === 'inline',
         scope: options.scope,
-        inlinePath: `${options.base}${ctx.devEnvironment ? DEV_SW_NAME : options.filename}`,
-        registerPath: `${options.base}${FILE_SW_REGISTER}`,
+        inlinePath: `${base}${ctx.devEnvironment ? DEV_SW_NAME : options.filename}`,
+        registerPath: `${base}${FILE_SW_REGISTER}`,
         type,
         toScriptTag() {
           return script

@@ -2,7 +2,7 @@ export function slash(str: string) {
   return str.replace(/\\/g, '/')
 }
 
-export function resolveBathPath(base: string) {
+export function resolveBasePath(base: string) {
   if (isAbsolute(base))
     return base
   return !base.startsWith('/') && !base.startsWith('./')

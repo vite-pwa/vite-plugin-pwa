@@ -155,6 +155,18 @@ export interface VitePWAOptions {
    * @default false
    */
   selfDestroying?: boolean
+  /**
+   * When Vite's build folder is not the same as your build folder, configure it here.
+   *
+   * This option will be useful for integrations like `vite-plugin-laravel` where Vite's build folder is `public/build` but Laravel's build folder is `public`.
+   *
+   * This option will be used to configure the path for `registerSW` and the web manifest.
+   *
+   * For example, if your base path is `/` then in your Laravel PWA configuration use `buildPath: /build/`.
+   *
+   * By default, `viteConf.base`.
+   */
+  buildBase?: string
 }
 
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
@@ -426,4 +438,10 @@ export interface DevOptions {
    * @see navigateFallbackAllowlist
    */
   webManifestUrl?: string
+  /**
+   * Where to store generated service worker in development when using `generateSW` strategy.
+   *
+   * Use it with caution, it should be used only by framework integrations.
+   */
+  resolveTempFolder?: () => string | Promise<string>
 }

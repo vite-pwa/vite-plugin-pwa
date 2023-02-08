@@ -2,7 +2,7 @@ declare module 'virtual:pwa-info' {
     export interface PwaInfo {
         pwaInDevEnvironment: boolean
         /**
-         * The webmanifest will be always here.
+         * The web manifest will be always here.
          */
         webManifest: {
             href: string
@@ -10,7 +10,7 @@ declare module 'virtual:pwa-info' {
             /**
              * The link tag with or without `crossorigin`:
              * - `<link rel="manifest" href="<webManifestUrl>" />`.
-             * - `<link rel="manifest" href="<webManifestUrl>" crossorigin=use-credentials" />`.
+             * - `<link rel="manifest" href="<webManifestUrl>" crossorigin="use-credentials" />`.
              */
             linkTag: string
         }
