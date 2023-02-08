@@ -160,9 +160,9 @@ export interface VitePWAOptions {
    *
    * This option will be useful for integrations like `vite-plugin-laravel` where Vite's build folder is `public/build` but Laravel's base path is `public`.
    *
-   * This option will be used to configure the path for `registerSW` and the web manifest.
+   * This option will be used to configure the path for the `service worker`, `registerSW.js` and the web manifest assets.
    *
-   * For example, if your base path is `/` then in your Laravel PWA configuration use `buildPath: '/build/'`.
+   * For example, if your base path is `/`, then, in your Laravel PWA configuration use `buildPath: '/build/'`.
    *
    * By default: `vite.base`.
    */
