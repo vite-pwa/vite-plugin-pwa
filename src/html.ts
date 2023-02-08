@@ -8,7 +8,7 @@ import {
 import type { ResolvedVitePWAOptions } from './types'
 
 export function generateSimpleSWRegister(options: ResolvedVitePWAOptions, dev: boolean) {
-  const path = dev ? `${options.base}${DEV_SW_NAME}` : `${options.base}${options.filename}`
+  const path = dev ? `${options.base}${DEV_SW_NAME}` : `${options.buildBase}${options.filename}`
 
   // we are using HMR to load this script: DO NOT ADD window::load event listener
   if (dev) {
@@ -50,7 +50,7 @@ export function generateWebManifest(options: ResolvedVitePWAOptions, dev: boolea
     return options.manifest ? `<link rel="manifest" href="${name}"${crossorigin}>` : ''
   }
   else {
-    return options.manifest ? `<link rel="manifest" href="${options.base}${options.manifestFilename}"${crossorigin}>` : ''
+    return options.manifest ? `<link rel="manifest" href="${options.buildBase}${options.manifestFilename}"${crossorigin}>` : ''
   }
 }
 
@@ -58,7 +58,7 @@ export function generateRegisterSW(options: ResolvedVitePWAOptions, dev: boolean
   if (options.injectRegister === 'inline')
     return `<script id="vite-plugin-pwa:inline-sw">${generateSimpleSWRegister(options, dev)}</script>`
   else if (options.injectRegister === 'script')
-    return `<script id="vite-plugin-pwa:register-sw" src="${options.base}${FILE_SW_REGISTER}"></script>`
+    return `<script id="vite-plugin-pwa:register-sw" src="${dev ? options.base : options.buildBase}${FILE_SW_REGISTER}"></script>`
 
   return undefined
 }

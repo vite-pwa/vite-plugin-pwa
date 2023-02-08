@@ -4,7 +4,7 @@ import type { ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
 import type { ManifestOptions, ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { configureStaticAssets } from './assets'
-import { resolveBathPath } from './utils'
+import { resolveBasePath } from './utils'
 import { defaultInjectManifestVitePlugins } from './constants'
 
 function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, outDir: string, filename: string): {
@@ -57,9 +57,10 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     devOptions = { enabled: false, type: 'classic' },
     selfDestroying = false,
     integration = {},
+    buildBase,
   } = options
 
-  const basePath = resolveBathPath(base)
+  const basePath = resolveBasePath(base)
   // check typescript service worker for injectManifest strategy
   const { swSrc, swDest, useFilename } = resolveSwPaths(
     strategies === 'injectManifest',
@@ -157,6 +158,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     rollupFormat,
     vitePlugins,
     selfDestroying,
+    buildBase: buildBase ?? basePath,
   }
 
   await configureStaticAssets(resolvedVitePWAOptions, viteConfig)

@@ -114,9 +114,9 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
           return undefined
         }
         if (id.endsWith(swDevOptions.swUrl)) {
-          const globDirectory = resolve(viteConfig.root, 'dev-dist')
+          const globDirectory = await resolveDevDistFolder(options, viteConfig)
           if (!existsSync(globDirectory))
-            mkdirSync(globDirectory)
+            mkdirSync(globDirectory, { recursive: true })
 
           const swDest = resolve(globDirectory, 'sw.js')
           if (!swDevOptions.swDevGenerated || !existsSync(swDest)) {
@@ -155,7 +155,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
           }
           return await fs.readFile(swDest, 'utf-8')
         }
-        
+
         const key = normalizePath(`${options.base}${id.startsWith('/') ? id.slice(1) : id}`)
 
         if (swDevOptions.workboxPaths.has(key))
@@ -165,9 +165,15 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
   }
 }
 
+async function resolveDevDistFolder(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
+  return options.devOptions.resolveTempFolder
+    ? await options.devOptions.resolveTempFolder()
+    : resolve(viteConfig.root, 'dev-dist')
+}
+
 async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
   if (options.injectRegister === 'script') {
-    const devDist = resolve(viteConfig.root, 'dev-dist')
+    const devDist = await resolveDevDistFolder(options, viteConfig)
     if (!existsSync(devDist))
       mkdirSync(devDist)
 
