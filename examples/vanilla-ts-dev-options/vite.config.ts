@@ -12,6 +12,7 @@ export default defineConfig({
     VitePWA({
       mode: 'development',
       base: '/',
+      /* buildBase: '/test-build-base/', */
       includeAssets: ['favicon.svg'],
       injectRegister,
       selfDestroying,
