@@ -13,6 +13,7 @@ export default defineConfig({
     VitePWA({
       mode: 'development',
       base: '/',
+      /* buildBase: '/test-build-base/', */
       strategies: 'injectManifest',
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
