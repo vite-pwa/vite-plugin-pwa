@@ -111,6 +111,10 @@ const Frameworks = [
     link: '/frameworks/solidjs',
   },
   {
+    text: 'SolidStart',
+    link: '/frameworks/solid-start',
+  },
+  {
     text: 'Preact',
     link: '/frameworks/preact',
   },
