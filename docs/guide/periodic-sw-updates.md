@@ -49,7 +49,7 @@ const intervalMS = 60 * 60 * 1000
 const updateSW = registerSW({
   onRegisteredSW(swUrl, r) {
     r && setInterval(async () => {
-      if (!(!r.installing && navigator))
+      if (r.installing || !navigator))
         return
 
       if (('connection' in navigator) && !navigator.onLine)
