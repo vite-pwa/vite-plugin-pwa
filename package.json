@@ -31,6 +31,27 @@
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
     },
+    "./register-options": {
+        "types": "./register-options.d.ts"
+    },
+    "./preact": {
+      "types": "./preact.d.ts"
+    },
+    "./react": {
+      "types": "./react.d.ts"
+    },
+    "./solid": {
+      "types": "./solid.d.ts"
+    },
+    "./svelte": {
+      "types": "./svelte.d.ts"
+    },
+    "./vanillajs": {
+      "types": "./vanillajs.d.ts"
+    },
+    "./vue": {
+      "types": "./vue.d.ts"
+    },
     "./client": {
       "types": "./client.d.ts"
     },

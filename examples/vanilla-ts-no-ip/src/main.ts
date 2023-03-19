@@ -28,6 +28,6 @@ registerSW({
   onOfflineReady() {
     // eslint-disable-next-line no-console
     console.log('onOfflineReady message should not appear')
-  },
+  }
 })
 
