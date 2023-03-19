@@ -31,6 +31,12 @@
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
     },
+    "./client": {
+      "types": "./client.d.ts"
+    },
+    "./info": {
+      "types": "./info.d.ts"
+    },
     "./*": "./*"
   },
   "main": "dist/index.js",
