@@ -28,11 +28,8 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
-    },
-    "./register-options": {
-        "types": "./register-options.d.ts"
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
     "./preact": {
       "types": "./preact.d.ts"
@@ -63,17 +60,10 @@
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "index.d.ts",
-  "typesVersions": {
-    "*": {
-      "*": [
-        "./dist/*",
-        "./*"
-      ]
-    }
-  },
   "files": [
     "dist",
-    "*.d.ts"
+    "*.d.ts",
+    "types"
   ],
   "scripts": {
     "docs": "npm -C docs run dev",
