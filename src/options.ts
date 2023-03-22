@@ -161,7 +161,13 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     buildBase: buildBase ?? basePath,
   }
 
-  await configureStaticAssets(resolvedVitePWAOptions, viteConfig)
+  // calculate hash only when required
+  const calculateHash = !resolvedVitePWAOptions.disable
+      && resolvedVitePWAOptions.manifest
+      && (viteConfig.command === 'build' || resolvedVitePWAOptions.devOptions.enabled)
+
+  if (calculateHash)
+    await configureStaticAssets(resolvedVitePWAOptions, viteConfig)
 
   return resolvedVitePWAOptions
 }
