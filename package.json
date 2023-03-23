@@ -31,6 +31,9 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
+    "./types": {
+      "types": "./types/index.d.ts"
+    },
     "./preact": {
       "types": "./preact.d.ts"
     },
