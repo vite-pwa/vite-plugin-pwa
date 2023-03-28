@@ -104,7 +104,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       let shouldRegisterSW = options.injectRegister === 'inline' || options.injectRegister === 'script'
       if (ctx.devEnvironment && ctx.options.devOptions.enabled === true) {
         type = ctx.options.devOptions.type ?? 'classic'
-        script = generateRegisterDevSW()
+        script = generateRegisterDevSW(ctx.options.base)
         shouldRegisterSW = true
       }
       else if (shouldRegisterSW) {
