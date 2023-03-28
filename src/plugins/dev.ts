@@ -41,7 +41,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
 
         return html.replace(
           '</body>',
-            `${generateRegisterDevSW()}
+            `${generateRegisterDevSW(options.base)}
 </body>`,
         )
       },
