@@ -144,6 +144,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
 
   const injectManifestOptions = {
     ...options.injectManifest,
+    manifestTransforms: options.workbox.manifestTransforms || [],
     // this will not fail since there is an injectionPoint
     swSrc: options.injectManifest.swDest,
   }
