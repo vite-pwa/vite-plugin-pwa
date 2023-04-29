@@ -1,4 +1,4 @@
-import type { ResolvedConfig } from 'vite'
+import type { Plugin, ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle } from 'rollup'
 
@@ -7,6 +7,8 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
   /**
    * Configure the format to use in the Rollup build.
    *
+   * Since `v0.14.8` we use `Vite` to build the service worker, format will be used to configure `Rollup` options.
+   *
    * @default 'es'
    */
   rollupFormat?: 'es' | 'iife'
@@ -14,8 +16,13 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    * `Vite` plugin ids to use on `Rollup` build.
    *
    * **WARN**: this option is for advanced usage, beware, you can break the service worker build.
+   * @deprecated use `plugins` instead
    */
   vitePlugins?: InjectManifestVitePlugins
+  /**
+   * Since `v0.14.8` you can add custom plugin to build the service worker.
+   */
+  plugins?: Plugin | Plugin[]
 }
 
 export interface PWAIntegration {
@@ -176,6 +183,7 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   injectManifest: InjectManifestOptions
   rollupFormat: 'es' | 'iife'
   vitePlugins: InjectManifestVitePlugins
+  plugins?: Plugin[]
 }
 
 export interface ShareTargetFiles {

@@ -5,7 +5,6 @@ import type { BuildResult } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions } from './types'
 import { logWorkboxResult } from './log'
-import { defaultInjectManifestVitePlugins } from './constants'
 
 const _dirname = typeof __dirname !== 'undefined'
   ? __dirname
@@ -22,19 +21,6 @@ async function loadWorkboxBuild(): Promise<typeof import('workbox-build')> {
   }
   catch (_) {
     return require('workbox-build')
-  }
-}
-
-async function loadRollupReplacePlugin() {
-  // Uses require to lazy load.
-
-  try {
-    const { createRequire } = await import('module').then(m => m.default || m)
-    const nodeRequire = createRequire(_dirname)
-    return nodeRequire('@rollup/plugin-replace')
-  }
-  catch (_) {
-    return require('@rollup/plugin-replace')
   }
 }
 
@@ -101,42 +87,33 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   // self.__WB_MANIFEST is default injection point
   precacheAndRoute(self.__WB_MANIFEST)
   */
-  const vitePlugins = options.vitePlugins
-  const includedPluginNames: string[] = []
-  if (typeof vitePlugins === 'function')
-    includedPluginNames.push(...vitePlugins(viteOptions.plugins.map(p => p.name)))
-  else
-    includedPluginNames.push(...vitePlugins)
 
-  if (includedPluginNames.length === 0)
-    includedPluginNames.push(...defaultInjectManifestVitePlugins)
+  const { build } = await import('vite')
 
-  const replace = await loadRollupReplacePlugin()
+  const define: Record<string, any> = viteOptions.define ?? {}
+  define['process.env.NODE_ENV'] = JSON.stringify(options.mode)
 
-  const plugins = [
-    replace({
-      'preventAssignment': true,
-      'process.env.NODE_ENV': JSON.stringify(options.mode),
-    }),
-    ...viteOptions.plugins.filter(p => includedPluginNames.includes(p.name)),
-  ]
-  const { rollup } = await import('rollup')
-  const bundle = await rollup({
-    input: options.swSrc,
-    plugins,
-  })
-  try {
-    await bundle.write({
-      format: options.rollupFormat,
-      exports: 'none',
-      inlineDynamicImports: true,
-      file: options.injectManifest.swDest,
+  await build({
+    base: viteOptions.base,
+    build: {
       sourcemap: viteOptions.build.sourcemap,
-    })
-  }
-  finally {
-    await bundle.close()
-  }
+      lib: {
+        entry: options.swSrc,
+        name: 'app',
+        formats: [options.rollupFormat],
+      },
+      rollupOptions: {
+        output: {
+          entryFileNames: options.filename,
+        },
+      },
+      outDir: options.outDir,
+      emptyOutDir: false,
+    },
+    configFile: false,
+    define,
+    plugins: options.plugins,
+  })
 
   // don't force user to include injection point
   if (!options.injectManifest.injectionPoint)
