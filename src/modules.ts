@@ -88,12 +88,12 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   precacheAndRoute(self.__WB_MANIFEST)
   */
 
-  const { build } = await import('vite')
+  const { build, mergeConfig } = await import('vite')
 
   const define: Record<string, any> = { ...(viteOptions.define ?? {}) }
   define['process.env.NODE_ENV'] = JSON.stringify(options.mode)
 
-  await build({
+  const newViteOptions = mergeConfig(options.injectManifestViteOptions, {
     base: viteOptions.base,
     build: {
       sourcemap: viteOptions.build.sourcemap,
@@ -112,8 +112,9 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     },
     configFile: false,
     define,
-    plugins: options.plugins,
   })
+
+  await build(newViteOptions)
 
   // don't force user to include injection point
   if (!options.injectManifest.injectionPoint)

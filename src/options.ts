@@ -106,7 +106,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     : Object.assign({}, defaultManifest, options.manifest || {})
   const {
     vitePlugins = defaultInjectManifestVitePlugins,
-    plugins,
+    injectManifestViteOptions = {},
     rollupFormat = 'es',
     ...userInjectManifest
   } = options.injectManifest || {}
@@ -160,7 +160,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     vitePlugins,
     selfDestroying,
     buildBase: buildBase ?? basePath,
-    plugins,
+    injectManifestViteOptions,
   }
 
   // calculate hash only when required
