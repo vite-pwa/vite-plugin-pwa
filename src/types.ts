@@ -7,7 +7,7 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
   /**
    * Configure the format to use in the Rollup build.
    *
-   * Since `v0.14.8` we use `Vite` to build the service worker, format will be used to configure `Rollup` options.
+   * Since `v0.15.0` we use `Vite` to build the service worker, format will be used to configure `Rollup` options.
    *
    * @default 'es'
    */
@@ -20,9 +20,9 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    */
   vitePlugins?: InjectManifestVitePlugins
   /**
-   * Since `v0.14.8` you can add custom plugin to build the service worker.
+   * Since `v0.15.0` you can add custom plugin to build the service worker.
    */
-  plugins?: Plugin | Plugin[]
+  plugins?: Plugin[]
 }
 
 export interface PWAIntegration {

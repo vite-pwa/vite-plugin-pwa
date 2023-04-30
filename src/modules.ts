@@ -90,7 +90,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
 
   const { build } = await import('vite')
 
-  const define: Record<string, any> = viteOptions.define ?? {}
+  const define: Record<string, any> = { ...(viteOptions.define ?? {}) }
   define['process.env.NODE_ENV'] = JSON.stringify(options.mode)
 
   await build({

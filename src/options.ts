@@ -160,7 +160,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     vitePlugins,
     selfDestroying,
     buildBase: buildBase ?? basePath,
-    plugins: plugins ? (Array.isArray(plugins) ? plugins : [plugins]) : undefined,
+    plugins,
   }
 
   // calculate hash only when required
