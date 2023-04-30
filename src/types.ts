@@ -21,14 +21,14 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    */
   vitePlugins?: InjectManifestVitePlugins
   /**
-   * Since `v0.15.0` you can add custom Vite options to build your service worker.
-   *
-   * When sing `injectManifest` there are 2 builds, your application and the service worker.
-   * If you're using custom configuration for your service worker (for example custom plugins) you can use this option to configure the service worker build.
-   * Both configurations cannot be shared, and so you'll need to duplicate the configuration, with the exception of `define`.
-   *
-   * **WARN**: this option is for advanced usage, beware, you can break your service worker build.
-   */
+     * Since `v0.15.0` you can add custom Vite options to build your service worker.
+     *
+     * When using `injectManifest` there are 2 builds, your application and the service worker.
+     * If you're using custom configuration for your service worker (for example custom plugins) you can use this option to configure the service worker build.
+     * Both configurations cannot be shared, and so you'll need to duplicate the configuration, with the exception of `define`.
+     *
+     * **WARN**: this option is for advanced usage, beware, you can break your service worker build.
+     */
   injectManifestViteOptions?: Omit<UserConfig, 'define'>
 }
 
