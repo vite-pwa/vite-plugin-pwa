@@ -7,7 +7,7 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
   /**
    * Configure the format to use in the Rollup build.
    *
-   * Since `v0.15.0` we use `Vite` to build the service worker, format will be used to configure `Rollup` output options.
+   * Since `v0.15.0` we use `Vite` to build your service worker, this option will be used to configure `Rollup` output options.
    *
    * @default 'es'
    */
@@ -15,7 +15,7 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
   /**
    * `Vite` plugin ids to use on `Rollup` build.
    *
-   * **WARN**: this option is for advanced usage, beware, you can break your service worker build.
+   * **WARN**: this option is for advanced usage, beware, you can break your application build.
    *
    * @deprecated use `injectManifestViteOptions.plugins` instead
    */
@@ -27,7 +27,7 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
      * If you're using custom configuration for your service worker (for example custom plugins) you can use this option to configure the service worker build.
      * Both configurations cannot be shared, and so you'll need to duplicate the configuration, with the exception of `define`.
      *
-     * **WARN**: this option is for advanced usage, beware, you can break your service worker build.
+     * **WARN**: this option is for advanced usage, beware, you can break your application build.
      */
   injectManifestViteOptions?: Omit<UserConfig, 'define'>
 }
