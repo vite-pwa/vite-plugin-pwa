@@ -1,13 +1,11 @@
-import type { ResolvedConfig, UserConfig } from 'vite'
+import type { Plugin, ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
-import type { OutputBundle } from 'rollup'
+import type { OutputBundle, RollupOptions } from 'rollup'
 
 export type InjectManifestVitePlugins = string[] | ((vitePluginIds: string[]) => string[])
 export type CustomInjectManifestOptions = InjectManifestOptions & {
   /**
    * Configure the format to use in the Rollup build.
-   *
-   * Since `v0.15.0` we use `Vite` to build your service worker, this option will be used to configure `Rollup` output options.
    *
    * @default 'es'
    */
@@ -17,19 +15,23 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    *
    * **WARN**: this option is for advanced usage, beware, you can break your application build.
    *
-   * @deprecated use `injectManifestViteOptions.plugins` instead
+   * @deprecated use `plugins` instead
    */
   vitePlugins?: InjectManifestVitePlugins
   /**
-     * Since `v0.15.0` you can add custom Vite options to build your service worker.
-     *
-     * When using `injectManifest` there are 2 builds, your application and the service worker.
-     * If you're using custom configuration for your service worker (for example custom plugins) you can use this option to configure the service worker build.
-     * Both configurations cannot be shared, and so you'll need to duplicate the configuration, with the exception of `define`.
-     *
-     * **WARN**: this option is for advanced usage, beware, you can break your application build.
-     */
-  injectManifestViteOptions?: Omit<UserConfig, 'define'>
+   * Since `v0.15.0` you can add plugins to build your service worker.
+   *
+   * When using `injectManifest` there are 2 builds, your application and the service worker.
+   * If you're using custom configuration for your service worker (for example custom plugins) you can use this option to configure the service worker build.
+   * Both configurations cannot be shared, and so you'll need to duplicate the configuration, with the exception of `define`.
+   *
+   * **WARN**: this option is for advanced usage, beware, you can break your application build.
+   */
+  plugins?: Plugin[]
+  /**
+   * Since `v0.15.0` you can add custom Rollup options to build your service worker: we expose the same configuration to build a worker using Vite.
+   */
+  rollupOptions?: Omit<RollupOptions, 'plugins' | 'output'>
 }
 
 export interface PWAIntegration {
@@ -183,6 +185,12 @@ export interface VitePWAOptions {
   buildBase?: string
 }
 
+export interface ResolvedServiceWorkerOptions {
+  format: 'es' | 'iife'
+  plugins: Plugin[]
+  rollupOptions: RollupOptions
+}
+
 export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   swSrc: string
   swDest: string
@@ -190,7 +198,7 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   injectManifest: InjectManifestOptions
   rollupFormat: 'es' | 'iife'
   vitePlugins: InjectManifestVitePlugins
-  injectManifestViteOptions: Omit<UserConfig, 'define'>
+  injectManifestRollupOptions: ResolvedServiceWorkerOptions
 }
 
 export interface ShareTargetFiles {
