@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import Components from 'unplugin-vue-components/vite'
-import { presetAttributify, presetUno } from 'unocss'
+import { presetAttributify, presetIcons, presetUno } from 'unocss'
 import Unocss from 'unocss/vite'
 import NavbarFix from './plugins/navbar'
 
@@ -48,7 +48,29 @@ export default defineConfig({
 
     // https://github.com/unocss/unocss
     Unocss({
-      presets: [presetUno(), presetAttributify()],
+      theme: {
+        breakpoints: {
+          'xs': '468px',
+          'sm': '640px',
+          'md': '768px',
+          'lg': '1024px',
+          'xl': '1280px',
+          '2xl': '1536px',
+        },
+      },
+      shortcuts: [
+        { 'pb-input': 'grid grid-cols-[150px_1fr] gap-x-1rem items-baseline lt-sm:grid-cols-[1fr]' },
+        { 'pb-error': 'animate-shake-x animate-count-1 animate-delay-0.5s animate-duration-1s' },
+        { 'pb-input-enter': 'animate-zoom-in animate-count-1 animate-duration-0.5s' },
+        { 'pb-input-leave': 'animate-zoom-out animate-count-1 animate-duration-0.3s' },
+        { 'pb-errors-enter': 'animate-zoom-in animate-count-1 animate-duration-0.5s' },
+        { 'pb-errors-leave': 'animate-zoom-out animate-count-1 animate-duration-0.3s' },
+      ],
+      presets: [
+        presetIcons(),
+        presetUno(),
+        presetAttributify(),
+      ],
     }),
   ],
 })

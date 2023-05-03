@@ -63,6 +63,7 @@ importers:
 
   docs:
     specifiers:
+      '@iconify-json/line-md': ^1.1.13
       '@types/fs-extra': ^9.0.13
       '@vitejs/plugin-vue': ^3.1.0
       '@vueuse/core': ^9.2.0
@@ -85,6 +86,7 @@ importers:
       '@vueuse/shared': 9.2.0_vue@3.2.38
       vue: 3.2.38
     devDependencies:
+      '@iconify-json/line-md': 1.1.13
       '@types/fs-extra': 9.0.13
       '@vitejs/plugin-vue': 3.1.0_vite@3.1.0+vue@3.2.38
       esbuild-register: 3.3.3_esbuild@0.16.4
@@ -2268,6 +2270,12 @@ packages:
 
   /@humanwhocodes/object-schema/1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
+    dev: true
+
+  /@iconify-json/line-md/1.1.13:
+    resolution: {integrity: sha512-LEyIQBAb4wdSnWayI+RuX9aIDZcpnlak4Zz9sBUR59u7Tcz7aVQcNpIzlS1YbZlufWgh84cs+0F9PfNYOacoZg==}
+    dependencies:
+      '@iconify/types': 1.1.0
     dev: true
 
   /@iconify/types/1.1.0:

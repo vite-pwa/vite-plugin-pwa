@@ -1,0 +1,38 @@
+import React from 'react'
+import './PWAPrompt.css'
+
+import { useRegisterSW } from 'virtual:pwa-register/react'
+
+function PWAPrompt() {
+  const {
+    offlineReady: [offlineReady, setOfflineReady],
+  } = useRegisterSW({
+    onRegistered(r) {
+      // eslint-disable-next-line prefer-template,no-console
+      console.log('SW Registered: ' + r)
+    },
+    onRegisterError(error) {
+      // eslint-disable-next-line no-console
+      console.log('SW registration error', error)
+    },
+  })
+
+  const close = () => {
+    setOfflineReady(false)
+  }
+
+  return (
+    <div className="PWAPrompt-container">
+      { (offlineReady)
+          && <div className="PWAPrompt-toast">
+            <div className="PWAPrompt-message">
+              <span>App ready to work offline.</span>
+            </div>
+            <button className="PWAPrompt-toast-button" onClick={() => close()}>Close</button>
+          </div>
+      }
+    </div>
+  )
+}
+
+export default PWAPrompt

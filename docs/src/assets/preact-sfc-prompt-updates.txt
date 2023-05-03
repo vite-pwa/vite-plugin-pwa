@@ -1,0 +1,42 @@
+import './PWAPrompt.css'
+
+import { useRegisterSW } from 'virtual:pwa-register/preact'
+
+function PWAPrompt() {
+  const {
+    needRefresh: [needRefresh, setNeedRefresh],
+    updateServiceWorker,
+  } = useRegisterSW({
+    onRegistered(r) {
+      r && setInterval(() => {
+        // eslint-disable-next-line no-console
+        console.log('Checking for sw update')
+        r.update()
+      }, 20000 /* 20s for testing purposes */)
+    },
+    onRegisterError(error) {
+      // eslint-disable-next-line no-console
+      console.log('SW registration error', error)
+    },
+  })
+
+  const close = () => {
+    setNeedRefresh(false)
+  }
+
+  return (
+    <div className="PWAPrompt-container">
+      { (needRefresh)
+          && <div className="PWAPrompt-toast">
+            <div className="PWAPrompt-message">
+              <span>New content available, click on reload button to update.</span>
+            </div>
+            <button className="PWAPrompt-toast-button" onClick={() => updateServiceWorker(true)}>Reload</button>
+            <button className="PWAPrompt-toast-button" onClick={() => close()}>Close</button>
+          </div>
+      }
+    </div>
+  )
+}
+
+export default PWAPrompt

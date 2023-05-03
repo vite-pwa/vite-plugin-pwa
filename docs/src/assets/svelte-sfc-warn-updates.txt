@@ -1,0 +1,39 @@
+<script>
+  import { useRegisterSW } from 'virtual:pwa-register/svelte';
+
+  const {
+      offlineReady
+  } = useRegisterSW({
+    onRegistered(r) {
+      r && setInterval(() => {
+        console.log('Checking for sw update');
+        r.update();
+      }, 20000 /* 20s for testing purposes */);
+    },
+    onRegisterError(error) {
+      console.log('SW registration error', error);
+    }
+  });
+
+  function close() {
+    offlineReady.set(false);
+  }
+
+  $: toast = $offlineReady;
+</script>
+
+{#if toast}
+  <div
+    class="pwa-toast"
+    role="alert"
+  >
+    <div class="message">
+      <span>
+        App ready to work offline.
+      </span>
+    </div>
+    <button on:click={close}>
+      Close
+    </button>
+  </div>
+{/if}

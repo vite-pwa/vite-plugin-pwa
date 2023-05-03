@@ -1,0 +1,40 @@
+<script>
+  import { useRegisterSW } from 'virtual:pwa-register/svelte';
+
+  const {
+      needRefresh,
+      updateServiceWorker
+  } = useRegisterSW({
+    onRegistered(r) {
+      console.log(`SW Registered: ${r}`);
+    },
+    onRegisterError(error) {
+      console.log('SW registration error', error);
+    }
+  });
+
+  function close() {
+    needRefresh.set(false);
+  }
+
+  $: toast = $needRefresh;
+</script>
+
+{#if toast}
+  <div
+    class="pwa-toast"
+    role="alert"
+  >
+    <div class="message">
+      <span>
+        New content available, click on reload button to update.
+      </span>
+    </div>
+    <button on:click={() => updateServiceWorker(true)}>
+      Reload
+    </button>
+    <button on:click={close}>
+      Close
+    </button>
+  </div>
+{/if}
