@@ -86,8 +86,9 @@
     "test-vue": "pnpm -C examples/vue-router run test",
     "test-react": "pnpm -C examples/react-router run test",
     "test-preact": "pnpm -C examples/preact-router run test",
+    "test-solid": "pnpm -C examples/solid-router run test",
     "test-svelte": "pnpm -C examples/svelte-routify run test",
-    "test": "pnpm run test-vue && pnpm run test-react && pnpm run test-preact && pnpm run test-svelte"
+    "test": "pnpm run test-vue && pnpm run test-react && pnpm run test-preact && pnpm run test-solid && pnpm run test-svelte"
   },
   "peerDependencies": {
     "vite": "^3.1.0 || ^4.0.0",
