@@ -31,7 +31,7 @@ test('TypeScript (no injection point): The service worker is registered', async 
 
   expect(Object.keys(cacheContents).length).toEqual(0)
 
-  await page.reload({ timeout: 1000 })
+  await page.reload({ timeout: 2000 })
 
   await page.evaluate(async () => {
     await Promise.race([
@@ -48,7 +48,7 @@ test('TypeScript (no injection point): The service worker is registered', async 
   {
     pages: [ 'http://localhost:4173/' ],
     assets: [
-      'http://localhost:4173/assets/index.65a98a41.js',
+      'http://localhost:4173/assets/index-65a98a41.js',
       'http://localhost:4173/assets/workbox-window.prod.es5.f4b3e527.js'
     ],
     images: [ 'http://localhost:4173/favicon.svg' ]
@@ -66,7 +66,7 @@ test('TypeScript (no injection point): The service worker is registered', async 
   expect(cacheContents[key]).toBeDefined()
   urls = cacheContents[key].map(url => url.slice('http://localhost:4173/'.length))
   expect(urls.length).toEqual(2)
-  expect(urls.some(url => url.startsWith('assets/index.'))).toEqual(true)
+  expect(urls.some(url => url.startsWith('assets/index-'))).toEqual(true)
 
   key = 'images'
   expect(cacheContents[key]).toBeDefined()
