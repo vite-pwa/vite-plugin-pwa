@@ -3,7 +3,7 @@ import { expect, test } from '@playwright/test'
 const injectManifest = process.env.SW === 'true'
 const swName = `${injectManifest ? 'claims-sw.js' : 'sw.js'}`
 
-test('Vue3: The service worker is registered and cache storage is present', async ({ page }) => {
+test('React: The service worker is registered and cache storage is present', async ({ page }) => {
   await page.goto('/')
 
   const swURL = await page.evaluate(async () => {

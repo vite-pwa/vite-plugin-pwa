@@ -14,7 +14,7 @@ const resolvePath = (...paths: string[]) => {
   return resolve(_dirname, ...paths).replace(/\\/g, '/')
 }
 
-describe('test-build', () => {
+describe('Svelte: test-build', () => {
   it(`service worker is generated: ${swName}`, () => {
     const swPath = resolvePath(_dirname, `../dist/${swName}`)
     console.log(swPath)

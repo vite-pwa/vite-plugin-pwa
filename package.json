@@ -84,8 +84,9 @@
     "example:vue:build:cdn": "npm -C examples/vue-basic-cdn run build",
     "example:vue:start:cdn": "npm -C examples/vue-basic-cdn run start",
     "test-vue": "pnpm -C examples/vue-router run test",
+    "test-react": "pnpm -C examples/react-router run test",
     "test-svelte": "pnpm -C examples/svelte-routify run test",
-    "test": "pnpm run test-vue && pnpm run test-svelte"
+    "test": "pnpm run test-vue && pnpm run test-react && pnpm run test-svelte"
   },
   "peerDependencies": {
     "vite": "^3.1.0 || ^4.0.0",
