@@ -6,7 +6,9 @@
     "dev": "rimraf dev-dist && cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true vite --force",
     "run-build-sw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
     "start-sw": "npm run run-build-sw && npm run serve",
-    "serve": "serve dist"
+    "serve": "serve dist",
+    "start-preview": "vite preview --port=4173",
+    "test": "npm run run-build-sw && vitest run && playwright test"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
