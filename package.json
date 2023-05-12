@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-pwa",
   "version": "0.14.7",
-  "packageManager": "pnpm@7.18.1",
+  "packageManager": "pnpm@8.5.0",
   "description": "Zero-config PWA for Vite",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -82,7 +82,9 @@
     "examples": "esno scripts/run-examples.ts",
     "example:vue:dev:cdn": "npm -C examples/vue-basic-cdn run dev",
     "example:vue:build:cdn": "npm -C examples/vue-basic-cdn run build",
-    "example:vue:start:cdn": "npm -C examples/vue-basic-cdn run start"
+    "example:vue:start:cdn": "npm -C examples/vue-basic-cdn run start",
+    "test-vue": "pnpm -C examples/vue-router run test",
+    "test": "pnpm run test-vue"
   },
   "peerDependencies": {
     "vite": "^3.1.0 || ^4.0.0",
@@ -101,8 +103,9 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.33.1",
     "@antfu/ni": "^0.18.8",
+    "@playwright/test": "^1.33.0",
     "@types/debug": "^4.1.7",
-    "@types/node": "^18.11.12",
+    "@types/node": "^18.16.8",
     "@types/prompts": "^2.4.2",
     "@types/react": "^18.0.26",
     "@types/workbox-build": "^5.0.1",
@@ -119,6 +122,7 @@
     "tsup": "^6.2.3",
     "typescript": "^4.9.4",
     "vite": "^4.0.0",
+    "vitest": "^0.31.0",
     "vue": "^3.2.45"
   }
 }

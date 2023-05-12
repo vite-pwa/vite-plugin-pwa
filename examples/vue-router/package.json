@@ -40,7 +40,11 @@
     "run-build-sw-reloadsw-destroy": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true SW_DESTROY=true RELOAD_SW=true SW=true vite build",
     "run-build-sw-claims-destroy": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true SW_DESTROY=true CLAIMS=true SW=true vite build",
     "run-build-sw-reloadsw-claims-destroy": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true SW_DESTROY=true CLAIMS=true RELOAD_SW=true SW=true vite build",
-    "serve": "serve dist"
+    "serve": "serve dist",
+    "start-preview": "vite preview --port=4173",
+    "test-build-claims": "pnpm run run-build-claims && vitest run && playwright test",
+    "test-build-sw-claims": "pnpm run run-build-sw-claims && cross-env SW=true vitest run && cross-env SW=true playwright test",
+    "test": "pnpm run test-build-claims && pnpm run test-build-sw-claims"
   },
   "dependencies": {
     "vue": "^3.2.45",
