@@ -83,6 +83,7 @@
     "example:vue:dev:cdn": "npm -C examples/vue-basic-cdn run dev",
     "example:vue:build:cdn": "npm -C examples/vue-basic-cdn run build",
     "example:vue:start:cdn": "npm -C examples/vue-basic-cdn run start",
+    "deploy": "nr build && nr docs:build",
     "test-vue": "pnpm -C examples/vue-router run test",
     "test-react": "pnpm -C examples/react-router run test",
     "test-preact": "pnpm -C examples/preact-router run test",
