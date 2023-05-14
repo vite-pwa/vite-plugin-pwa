@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
+const customSW = process.env.SW === 'true'
+
 export default defineConfig({
   logLevel: 'info',
   define: {
@@ -14,10 +16,10 @@ export default defineConfig({
       mode: 'development',
       base: '/',
       /* buildBase: '/test-build-base/', */
-      strategies: 'injectManifest',
+      strategies: customSW ? 'injectManifest' : 'generateSW',
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
-      filename: 'custom-sw.ts',
+      filename: customSW ? 'custom-sw.ts' : undefined,
       srcDir: 'src',
       manifest: {
         name: 'PWA Router',

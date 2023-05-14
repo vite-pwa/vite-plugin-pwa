@@ -8,7 +8,9 @@
     "start-sw": "npm run run-build-sw && npm run serve",
     "serve": "serve dist",
     "start-preview": "vite preview --port=4173",
-    "test": "npm run run-build-sw && vitest run && playwright test"
+    "test-custom-sw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true SW=true vite build && cross-env SW=true vitest run && cross-env SW=true playwright test",
+    "test-generate-sw": "nr run-build-sw && vitest run && playwright test",
+    "test": "nr test-generate-sw && nr test-custom-sw"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",

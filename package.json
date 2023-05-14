@@ -90,7 +90,8 @@
     "test-solid": "pnpm -C examples/solid-router run test",
     "test-svelte": "pnpm -C examples/svelte-routify run test",
     "test-typescrypt": "pnpm -C examples/vanilla-ts-no-ip run test",
-    "test": "pnpm run test-vue && pnpm run test-react && pnpm run test-preact && pnpm run test-solid && pnpm run test-svelte && pnpm run test-typescrypt"
+    "test": "pnpm run test-vue && pnpm run test-react && pnpm run test-preact && pnpm run test-solid && pnpm run test-svelte && pnpm run test-typescrypt",
+    "test:vite-ecosystem-ci": "nr test-typescrypt"
   },
   "peerDependencies": {
     "vite": "^3.1.0 || ^4.0.0",

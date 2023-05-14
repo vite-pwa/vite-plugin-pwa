@@ -1,4 +1,3 @@
 packages:
   - docs/
   - examples/*
-  - '!examples/sveltekit-pwa'
