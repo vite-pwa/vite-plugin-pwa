@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "rimraf dev-dist && cross-env DEBUG=vite-plugin-pwa:* SW_DEV=true vite --force",
     "run-build-sw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true vite build",
-    "start-sw": "npm run run-build-sw && npm run serve",
+    "start-sw": "nr run-build-sw && npm nr serve",
     "serve": "serve dist",
     "start-preview": "vite preview --port=4173",
     "test-custom-sw": "cross-env DEBUG=vite-plugin-pwa:* BASE_URL=/ SOURCE_MAP=true SW=true vite build && cross-env SW=true vitest run && cross-env SW=true playwright test",
