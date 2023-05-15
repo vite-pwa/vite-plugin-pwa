@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-pwa",
   "version": "0.14.7",
-  "packageManager": "pnpm@8.5.0",
+  "packageManager": "pnpm@8.5.1",
   "description": "Zero-config PWA for Vite",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -69,10 +69,10 @@
     "types"
   ],
   "scripts": {
-    "docs": "npm -C docs run dev",
-    "docs:build": "npm -C docs run build",
-    "docs:serve": "npm -C docs run serve",
-    "docs:preview": "npm -C docs run preview",
+    "docs": "pnpm -C docs run dev",
+    "docs:build": "pnpm -C docs run build",
+    "docs:serve": "pnpm -C docs run serve",
+    "docs:preview": "pnpm -C docs run preview",
     "lint": "eslint .",
     "lint-fix": "nr lint --fix",
     "dev": "esno scripts/dev.ts",
@@ -80,9 +80,9 @@
     "prepublishOnly": "npm run build",
     "release": "npx bumpp --push --tag --commit && npm publish",
     "examples": "esno scripts/run-examples.ts",
-    "example:vue:dev:cdn": "npm -C examples/vue-basic-cdn run dev",
-    "example:vue:build:cdn": "npm -C examples/vue-basic-cdn run build",
-    "example:vue:start:cdn": "npm -C examples/vue-basic-cdn run start",
+    "example:vue:dev:cdn": "pnpm -C examples/vue-basic-cdn run dev",
+    "example:vue:build:cdn": "pnpm -C examples/vue-basic-cdn run build",
+    "example:vue:start:cdn": "pnpm -C examples/vue-basic-cdn run start",
     "deploy": "nr build && nr docs:build",
     "test-vue": "pnpm -C examples/vue-router run test",
     "test-react": "pnpm -C examples/react-router run test",
@@ -90,7 +90,7 @@
     "test-solid": "pnpm -C examples/solid-router run test",
     "test-svelte": "pnpm -C examples/svelte-routify run test",
     "test-typescrypt": "pnpm -C examples/vanilla-ts-no-ip run test",
-    "test": "pnpm run test-vue && pnpm run test-react && pnpm run test-preact && pnpm run test-solid && pnpm run test-svelte && pnpm run test-typescrypt",
+    "test": "nr test-vue && nr test-react && nr test-preact && nr test-solid && nr test-svelte && nr test-typescrypt",
     "test:vite-ecosystem-ci": "nr test-typescrypt"
   },
   "peerDependencies": {
@@ -108,8 +108,8 @@
     "workbox-window": "^6.5.4"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.33.1",
-    "@antfu/ni": "^0.18.8",
+    "@antfu/eslint-config": "^0.38.6",
+    "@antfu/ni": "^0.21.3",
     "@playwright/test": "^1.33.0",
     "@types/debug": "^4.1.7",
     "@types/node": "^18.16.8",
@@ -127,7 +127,7 @@
     "solid-js": "^1.6.4",
     "svelte": "^3.54.0",
     "tsup": "^6.2.3",
-    "typescript": "^4.9.4",
+    "typescript": "^5.0.4",
     "vite": "^4.0.0",
     "vitest": "^0.31.0",
     "vue": "^3.2.45"

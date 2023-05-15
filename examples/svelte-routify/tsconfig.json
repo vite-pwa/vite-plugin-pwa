@@ -5,6 +5,7 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "baseUrl": ".",
+    "ignoreDeprecations": "5.0",
     "lib": ["DOM", "DOM.Iterable", "ESNext", "WebWorker"],
     /**
       * Typecheck JS in `.svelte` and `.js` files by default.
