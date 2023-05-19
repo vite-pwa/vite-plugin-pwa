@@ -38,10 +38,12 @@ The `vite-plugin-pwa` repo includes a set of examples where you can test the cha
 
 > If your changes are specific to some behavior, just use the corresponding option on the `cli`.
 
+## Running tests
+
+Before running tests, you'll need to install [Playwright](https://playwright.dev/) Chromium browser: `pnpm playwright install chromium`.
+
+Run `pnpm run test` in root folder or inside each examples folder after build `vite-plugin-pwa`.
+
 ## Testing website docs changes
 
-`vite-plugin-pwa` uses `Vitepress` for the website docs, if your changes are about the documentation, you can find the website on the `docs` folder. 
-
-Once you made the changes to the documentation, you can test them running `pnpm run docs` from the root folder.
-
-To check the website build, just run `pnpm run docs:serve` from the root folder.
+`vite-plugin-pwa` docs website has been moved to [docs repository](https://github.com/vite-pwa/docs).
