@@ -95,8 +95,6 @@
     "debug": "^4.3.4",
     "fast-glob": "^3.2.12",
     "pretty-bytes": "^6.0.0",
-    "rollup": "^3.7.2",
-    "@rollup/plugin-replace": "^5.0.1",
     "workbox-build": "^6.5.4",
     "workbox-window": "^6.5.4"
   },
