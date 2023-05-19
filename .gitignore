@@ -6,3 +6,6 @@ dev-dist
 .idea/
 # routify
 .routify/
+examples/*/test-results/
+examples/*/playwright-report/
+examples/*/playwright/.cache/
