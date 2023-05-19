@@ -42,7 +42,7 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
   const sw = options.buildBase + options.filename
   const scope = options.scope
 
-  const content = await fs.readFile(resolve(_dirname, `client/${mode}/${source}.mjs`), 'utf-8')
+  const content = await fs.readFile(resolve(_dirname, `client/${mode}/${source}.js`), 'utf-8')
 
   return content
     .replace(/__SW__/g, sw)
