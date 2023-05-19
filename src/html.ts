@@ -63,9 +63,10 @@ export function generateRegisterSW(options: ResolvedVitePWAOptions, dev: boolean
   return undefined
 }
 
-export function generateRegisterDevSW() {
+export function generateRegisterDevSW(base: string) {
+  const path = `${base.endsWith('/') ? base : `${base}/`}${DEV_SW_VIRTUAL.slice(1)}`
   return `<script id="vite-plugin-pwa:register-dev-sw" type="module">
-import registerDevSW from '${DEV_SW_VIRTUAL}';
+import registerDevSW from '${path}';
 registerDevSW();
 </script>`
 }
