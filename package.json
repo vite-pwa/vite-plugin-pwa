@@ -1,5 +1,6 @@
 {
   "name": "vite-plugin-pwa",
+  "type": "module",
   "version": "0.14.7",
   "packageManager": "pnpm@8.5.1",
   "description": "Zero-config PWA for Vite",
@@ -25,11 +26,12 @@
     "vite",
     "vite-plugin"
   ],
+  "sideEffects": false,
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
     },
     "./types": {
       "types": "./types/index.d.ts"
@@ -61,12 +63,12 @@
     "./*": "./*"
   },
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "index.d.ts",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "*.d.ts",
-    "types"
+    "types",
+    "*.d.ts"
   ],
   "scripts": {
     "docs": "pnpm -C docs run dev",
@@ -102,8 +104,6 @@
     "debug": "^4.3.4",
     "fast-glob": "^3.2.12",
     "pretty-bytes": "^6.0.0",
-    "rollup": "^3.7.2",
-    "@rollup/plugin-replace": "^5.0.1",
     "workbox-build": "^6.5.4",
     "workbox-window": "^6.5.4"
   },
