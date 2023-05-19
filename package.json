@@ -29,21 +29,12 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "require": {
-        "types": "./index.d.cts",
-        "default": "./dist/index.cjs"
-      },
-      "import": {
-        "types": "./dist/index.d.ts",
-        "default": "./dist/index.js"
-      }
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
     },
     "./types": {
-      "types": {
-        "import": "./types/index.d.mts",
-        "require": "./types/index.d.cts",
-        "default": "./types/index.d.ts"
-      }
+      "types": "./types/index.d.ts"
     },
     "./preact": {
       "types": "./preact.d.ts"
@@ -73,13 +64,11 @@
   },
   "main": "dist/index.js",
   "module": "dist/index.js",
-  "types": "index.d.ts",
+  "types": "dist/index.d.ts",
   "files": [
     "dist",
-    "*.d.ts",
-    "*.d.cts",
-    "*.d.mts",
-    "types"
+    "types",
+    "*.d.ts"
   ],
   "scripts": {
     "docs": "npm -C docs run dev",
