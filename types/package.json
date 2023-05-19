@@ -1,3 +1,3 @@
 {
-  "//": "this file is here to make typescript happy when moduleResolution=node16+"
+  "type": "module"
 }
