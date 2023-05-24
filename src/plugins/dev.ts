@@ -1,5 +1,5 @@
-import { basename, resolve } from 'path'
-import { existsSync, promises as fs, mkdirSync } from 'fs'
+import { basename, resolve } from 'node:path'
+import { existsSync, promises as fs, mkdirSync } from 'node:fs'
 import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite'
 import {
   generateRegisterDevSW,
@@ -26,7 +26,7 @@ export const swDevOptions = {
   workboxPaths: new Map<string, string>(),
 }
 
-export function DevPlugin(ctx: PWAPluginContext): Plugin {
+export function DevPlugin(ctx: PWAPluginContext) {
   return <Plugin>{
     name: 'vite-plugin-pwa:dev-sw',
     apply: 'serve',
@@ -77,7 +77,7 @@ export function DevPlugin(ctx: PWAPluginContext): Plugin {
         // - the .ts source file
         // in both cases we need to resolve the id to the source file to load it and add empty injection point on loadDev
         // we need to always return the path to source file name to resolve imports on the sw
-        return name === swDevOptions.swUrl || name === options.injectManifest.swSrc
+        return (name === swDevOptions.swUrl || name === options.injectManifest.swSrc)
           ? options.injectManifest.swSrc
           : undefined
       }
@@ -216,4 +216,3 @@ function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): 
     }
   }
 }
-

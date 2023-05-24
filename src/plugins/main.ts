@@ -10,8 +10,8 @@ import type { PWAPluginContext } from '../context'
 import type { VitePluginPWAAPI } from '../types'
 import { swDevOptions } from './dev'
 
-export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI): Plugin {
-  return {
+export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
+  return <Plugin>{
     name: 'vite-plugin-pwa',
     enforce: 'pre',
     config() {
@@ -49,7 +49,7 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI): Plugin
         else {
           return generateRegisterSW(
             ctx.options,
-            !ctx.options.disable && ctx.viteConfig.command === 'build' ? 'build' : 'dev',
+            (!ctx.options.disable && ctx.viteConfig.command === 'build') ? 'build' : 'dev',
             VIRTUAL_MODULES_MAP[id],
           )
         }
@@ -58,4 +58,3 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI): Plugin
     api,
   }
 }
-

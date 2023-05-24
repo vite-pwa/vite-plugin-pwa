@@ -1,5 +1,5 @@
-import fs from 'fs'
-import { extname, resolve } from 'path'
+import fs from 'node:fs'
+import { extname, resolve } from 'node:path'
 import type { ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
 import type { ManifestOptions, ResolvedVitePWAOptions, VitePWAOptions } from './types'
@@ -101,7 +101,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
   }
 
   const workbox = Object.assign({}, defaultWorkbox, options.workbox || {})
-  const manifest = typeof options.manifest === 'boolean' && !options.manifest
+  const manifest = (typeof options.manifest === 'boolean' && !options.manifest)
     ? false
     : Object.assign({}, defaultManifest, options.manifest || {})
   const {

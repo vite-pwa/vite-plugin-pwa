@@ -1,5 +1,5 @@
-import { resolve } from 'path'
-import { existsSync } from 'fs'
+import { resolve } from 'node:path'
+import { existsSync } from 'node:fs'
 import type { OutputBundle } from 'rollup'
 import { generateInjectManifest, generateServiceWorker } from './modules'
 import { generateWebManifestFile } from './assets'

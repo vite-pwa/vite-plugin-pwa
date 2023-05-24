@@ -1,6 +1,6 @@
-import { dirname, resolve } from 'path'
-import { promises as fs } from 'fs'
-import { fileURLToPath } from 'url'
+import { dirname, resolve } from 'node:path'
+import { promises as fs } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import type { BuildResult } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions } from './types'
@@ -20,6 +20,7 @@ async function loadWorkboxBuild(): Promise<typeof import('workbox-build')> {
     return workbox.default ?? workbox
   }
   catch (_) {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     return require('workbox-build')
   }
 }
@@ -96,6 +97,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   const { format, plugins, rollupOptions } = options.injectManifestRollupOptions
 
   await build({
+    root: viteOptions.root,
     base: viteOptions.base,
     build: {
       sourcemap: viteOptions.build.sourcemap,
