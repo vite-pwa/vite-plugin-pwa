@@ -86,4 +86,4 @@ Check out the type declaration [src/types.ts](./src/types.ts) and the following 
 
 ## 📄 License
 
-MIT License © 2020-PRESENT [Anthony Fu](https://github.com/antfu)
+[MIT](./LICENSE) License &copy; 2020-PRESENT [Anthony Fu](https://github.com/antfu)
