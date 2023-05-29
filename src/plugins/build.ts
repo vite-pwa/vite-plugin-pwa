@@ -23,7 +23,7 @@ export function BuildPlugin(ctx: PWAPluginContext) {
       },
     },
     generateBundle(_, bundle) {
-      return _generateBundle(ctx, bundle)
+      _generateBundle(ctx, bundle)
     },
     closeBundle: {
       sequential: true,
