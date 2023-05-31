@@ -62,9 +62,9 @@
     "typescript": "^5.0.4",
     "vite": "^4.0.0",
     "vite-plugin-pwa": "workspace:*",
-    "workbox-core": "^6.5.4",
-    "workbox-precaching": "^6.5.4",
-    "workbox-routing": "^6.5.4"
+    "workbox-core": "^7.0.0",
+    "workbox-precaching": "^7.0.0",
+    "workbox-routing": "^7.0.0"
   },
   "eslintConfig": {
     "root": true,
