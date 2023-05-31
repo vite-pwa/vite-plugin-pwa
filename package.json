@@ -97,15 +97,15 @@
   },
   "peerDependencies": {
     "vite": "^3.1.0 || ^4.0.0",
-    "workbox-build": "^6.5.4",
-    "workbox-window": "^6.5.4"
+    "workbox-build": "^7.0.0",
+    "workbox-window": "^7.0.0"
   },
   "dependencies": {
     "debug": "^4.3.4",
     "fast-glob": "^3.2.12",
     "pretty-bytes": "^6.0.0",
-    "workbox-build": "^6.5.4",
-    "workbox-window": "^6.5.4"
+    "workbox-build": "^7.0.0",
+    "workbox-window": "^7.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.38.6",
@@ -115,7 +115,6 @@
     "@types/node": "^18.16.8",
     "@types/prompts": "^2.4.2",
     "@types/react": "^18.0.26",
-    "@types/workbox-build": "^5.0.1",
     "@typescript-eslint/eslint-plugin": "^5.46.0",
     "eslint": "^8.29.0",
     "esno": "0.16.3",
@@ -131,5 +130,8 @@
     "vite": "^4.0.0",
     "vitest": "^0.31.0",
     "vue": "^3.2.45"
+  },
+  "engines" : {
+    "node" : ">=16.0.0"
   }
 }
