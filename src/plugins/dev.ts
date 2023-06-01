@@ -156,10 +156,12 @@ export function DevPlugin(ctx: PWAPluginContext) {
           return await fs.readFile(swDest, 'utf-8')
         }
 
-        const key = normalizePath(`${options.base}${id.startsWith('/') ? id.slice(1) : id}`)
-
-        if (swDevOptions.workboxPaths.has(key))
-          return await fs.readFile(swDevOptions.workboxPaths.get(key)!, 'utf-8')
+        // check the entry only if the request starts with the base, otherwise ignore the request
+        if (id.startsWith(options.base)) {
+          const key = normalizePath(id)
+          if (swDevOptions.workboxPaths.has(key))
+            return await fs.readFile(swDevOptions.workboxPaths.get(key)!, 'utf-8')
+        }
       }
     },
   }
