@@ -465,6 +465,17 @@ export interface DevOptions {
    * Where to store generated service worker in development when using `generateSW` strategy.
    *
    * Use it with caution, it should be used only by framework integrations.
+   *
+   * @default resolve(viteConfig.root, 'dev-dist')
    */
   resolveTempFolder?: () => string | Promise<string>
+  /**
+   * Suppress workbox-build warnings?.
+   *
+   * **WARNING**: this option will only be used when using `generateSW` strategy.
+   * If enabled, `globPatterns` will be changed to `[*.js]` and a new empty `suppress-warnings.js` file will be created in .
+   *
+   * @default false
+   */
+  suppressWarnings?: boolean
 }

@@ -54,7 +54,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     includeManifestIcons = true,
     useCredentials = false,
     disable = false,
-    devOptions = { enabled: false, type: 'classic' },
+    devOptions = { enabled: false, type: 'classic', suppressWarnings: false },
     selfDestroying = false,
     integration = {},
     buildBase,

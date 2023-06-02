@@ -120,6 +120,15 @@ export function DevPlugin(ctx: PWAPluginContext) {
 
           const swDest = resolve(globDirectory, 'sw.js')
           if (!swDevOptions.swDevGenerated || !existsSync(swDest)) {
+            // add empty js file to suppress workbox-build warnings
+            let suppressWarnings: string | undefined
+            if (options.devOptions.suppressWarnings === true) {
+              suppressWarnings = normalizePath(resolve(globDirectory, 'suppress-warnings.js'))
+              await fs.writeFile(suppressWarnings, '', 'utf-8')
+            }
+            const globPatterns = options.devOptions.suppressWarnings === true
+              ? ['*.js']
+              : options.workbox.globPatterns
             // we only need to generate sw on dev-dist folder and then read the content
             // the sw precache (self.__SW_MANIFEST) will be empty since we're using `dev-dist` folder
             // we only need to add the navigateFallback if configured
@@ -134,11 +143,16 @@ export function DevPlugin(ctx: PWAPluginContext) {
                     ...options.workbox,
                     navigateFallbackAllowlist: options.devOptions.navigateFallbackAllowlist ?? [/^\/$/],
                     runtimeCaching: options.devOptions.disableRuntimeConfig ? undefined : options.workbox.runtimeCaching,
-                    // we only include navigateFallback
-                    additionalManifestEntries: navigateFallback ? [navigateFallback] : undefined,
+                    // we only include navigateFallback: add revision to remove workbox-build warning
+                    additionalManifestEntries: navigateFallback
+                      ? [{
+                          url: navigateFallback, revision: Math.random().toString(32),
+                        }]
+                      : undefined,
                     cleanupOutdatedCaches: true,
-                    globDirectory: globDirectory.replace(/\\/g, '/'),
-                    swDest: swDest.replace(/\\/g, '/'),
+                    globDirectory: normalizePath(globDirectory),
+                    globPatterns,
+                    swDest: normalizePath(swDest),
                   },
                 },
               ),
@@ -151,6 +165,12 @@ export function DevPlugin(ctx: PWAPluginContext) {
               if (name !== 'sw.js')
                 swDevOptions.workboxPaths.set(normalizePath(`${options.base}${name}`), we)
             })
+            if (suppressWarnings) {
+              swDevOptions.workboxPaths.set(
+                normalizePath(`${options.base}${basename(suppressWarnings)}`),
+                suppressWarnings,
+              )
+            }
             swDevOptions.swDevGenerated = true
           }
           return await fs.readFile(swDest, 'utf-8')
