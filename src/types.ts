@@ -206,6 +206,11 @@ export interface ShareTargetFiles {
   accept: string | string[]
 }
 
+/**
+ * https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
+ */
+export type LauncherHandleClientMode = 'auto' | 'focus-existing' | 'navigate-existing' | 'navigate-new'
+
 export interface ManifestOptions {
   /**
    * @default _npm_package_name_
@@ -328,6 +333,22 @@ export interface ManifestOptions {
       url?: string
       files?: ShareTargetFiles | ShareTargetFiles[]
     }
+  }
+  /**
+   * https://github.com/WICG/pwa-url-handler/blob/main/handle_links/explainer.md#handle_links-manifest-member
+   */
+  handle_links?: 'auto' | 'preferred' | 'not-preferred'
+  /**
+   * https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
+   */
+  launch_handler?: {
+    client_mode: LauncherHandleClientMode | LauncherHandleClientMode[]
+  }
+  /**
+   * https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/sidebar#enable-sidebar-support-in-your-pwa
+   */
+  edge_side_panel?: {
+    preferred_width?: number
   }
 }
 
