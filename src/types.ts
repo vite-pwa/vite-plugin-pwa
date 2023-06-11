@@ -209,7 +209,7 @@ export interface ShareTargetFiles {
 /**
  * https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
  */
-export type LauncherHandleClientMode = 'auto' | 'focus-existing' | 'navigate-existing' | 'navigate-new'
+export type LauncherHandlerClientMode = 'auto' | 'focus-existing' | 'navigate-existing' | 'navigate-new'
 
 export interface ManifestOptions {
   /**
@@ -342,7 +342,7 @@ export interface ManifestOptions {
    * https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
    */
   launch_handler?: {
-    client_mode: LauncherHandleClientMode | LauncherHandleClientMode[]
+    client_mode: LauncherHandlerClientMode | LauncherHandlerClientMode[]
   }
   /**
    * https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/sidebar#enable-sidebar-support-in-your-pwa
