@@ -65,6 +65,7 @@ export async function configureStaticAssets(
     includeAssets,
     includeManifestIcons,
     manifestFilename,
+    buildBase,
   } = resolvedVitePWAOptions
 
   const useInjectManifest = strategies === 'injectManifest'
@@ -116,7 +117,7 @@ export async function configureStaticAssets(
     const cHash = crypto.createHash('MD5')
     cHash.update(generateWebManifestFile(resolvedVitePWAOptions))
     manifestEntries.push({
-      url: manifestFilename,
+      url: buildBase + manifestFilename,
       revision: `${cHash.digest('hex')}`,
     })
   }
