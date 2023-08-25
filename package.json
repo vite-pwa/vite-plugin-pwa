@@ -2,7 +2,7 @@
   "name": "vite-plugin-pwa",
   "type": "module",
   "version": "0.16.4",
-  "packageManager": "pnpm@8.6.1",
+  "packageManager": "pnpm@8.6.12",
   "description": "Zero-config PWA for Vite",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -29,9 +29,14 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "require": {
+        "types": "./index.d.cts",
+        "default": "./index.cjs"
+      },
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
     },
     "./types": {
       "types": "./types/index.d.ts"
@@ -68,8 +73,13 @@
   "files": [
     "dist",
     "types",
+    "*.cjs",
+    "*.d.cts",
     "*.d.ts"
   ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "docs": "pnpm -C docs run dev",
     "docs:build": "pnpm -C docs run build",
@@ -96,7 +106,7 @@
     "test:vite-ecosystem-ci": "nr test-typescrypt"
   },
   "peerDependencies": {
-    "vite": "^3.1.0 || ^4.0.0",
+    "vite": "^3.1.0 || ^4.0.0 || ^5.0.0-0",
     "workbox-build": "^7.0.0",
     "workbox-window": "^7.0.0"
   },
@@ -127,12 +137,9 @@
     "solid-js": "^1.6.4",
     "svelte": "^3.54.0",
     "tsup": "^6.2.3",
-    "typescript": "^5.0.4",
+    "typescript": "^5.1.6",
     "vite": "^4.0.0",
     "vitest": "^0.31.0",
     "vue": "^3.2.45"
-  },
-  "engines": {
-    "node": ">=16.0.0"
   }
 }

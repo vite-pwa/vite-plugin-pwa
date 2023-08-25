@@ -11,7 +11,7 @@ const customSW = process.env.SW === 'true'
 
 const swName = customSW ? 'custom-sw.js' : 'sw.js'
 
-const resolvePath = (...paths: string[]) => {
+function resolvePath(...paths: string[]) {
   return resolve(_dirname, ...paths).replace(/\\/g, '/')
 }
 

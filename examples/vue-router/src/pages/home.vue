@@ -3,13 +3,13 @@ import { ref } from 'vue'
 import { useTimeAgo } from '@vueuse/core'
 import { useRouter } from 'vue-router'
 
-// replaced dyanmicaly
+// replaced dynamically
 const date = '__DATE__'
 const timeAgo = useTimeAgo(date)
 const router = useRouter()
 const name = ref('')
 
-const go = () => {
+function go() {
   if (name.value)
     router.push(`/hi/${encodeURIComponent(name.value)}`)
 }

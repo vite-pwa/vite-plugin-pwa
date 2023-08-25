@@ -1,5 +1,6 @@
 {
   "name": "vanilla-ts-no-ip",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -14,7 +15,7 @@
   },
   "devDependencies": {
     "rimraf": "^3.0.2",
-    "typescript": "^5.0.4",
+    "typescript": "^5.1.6",
     "vite": "^4.0.0",
     "vite-plugin-pwa": "workspace:*",
     "workbox-cacheable-response": "^7.0.0",

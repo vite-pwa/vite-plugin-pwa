@@ -50,6 +50,7 @@ To configure the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web
 Following with the example, here a minimal configuration (you must provide all the icons and images):
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     VitePWA({

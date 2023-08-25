@@ -91,7 +91,8 @@ For example, using `vue-router`, you can register the service worker for `autoUp
 
 ```ts
 import type { Router } from 'vue-router'
-export const registerPWA = (router: Router) => {
+
+export function registerPWA(router: Router) {
   router.isReady().then(async () => {
     const { registerSW } = await import('virtual:pwa-register')
     registerSW({ immediate: true })
@@ -107,6 +108,7 @@ If you are using `prompt` strategy, you will need to load the `ReloadPrompt` com
 // src/App.vue
 <script setup lang='ts'>
 import { defineAsyncComponent } from 'vue'
+
 const ClientReloadPrompt = typeof window !== 'undefined'
   ? defineAsyncComponent(() => import('./ReloadPrompt.vue'))
   : null
@@ -160,10 +162,10 @@ const needRefresh = ref(false)
 
 let updateServiceWorker: (() => Promise<void>) | undefined
 
-const onNeedRefresh = () => {
+function onNeedRefresh() {
   needRefresh.value = true
 }
-const close = async () => {
+async function close() {
   needRefresh.value = false
 }
 

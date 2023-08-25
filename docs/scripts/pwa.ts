@@ -1,6 +1,6 @@
 import { VitePWA } from 'vite-plugin-pwa'
 
-export const pwa = () => {
+export function pwa() {
   return VitePWA({
     outDir: '.vitepress/dist',
     registerType: 'prompt',

@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 import { createSignal } from 'solid-js'
 import { useNavigate } from 'solid-app-router'
 import styles from './home.module.css'

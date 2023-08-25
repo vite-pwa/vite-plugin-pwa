@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 import type { Component } from 'solid-js'
 import { useRoutes } from 'solid-app-router'
 import { routes } from './routes'

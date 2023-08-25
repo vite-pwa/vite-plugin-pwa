@@ -9,6 +9,7 @@ title: Register Service Worker | Guide
 If you want to configure the `injectRegister` plugin option:
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     VitePWA({

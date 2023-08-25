@@ -85,7 +85,7 @@ const data = {
 
 const cacheName = cacheNames.runtime
 
-const buildStrategy = (): Strategy => {
+function buildStrategy(): Strategy {
   if (race) {
     class CacheNetworkRace extends Strategy {
       _handle(request: Request, handler: StrategyHandler): Promise<Response | undefined> {

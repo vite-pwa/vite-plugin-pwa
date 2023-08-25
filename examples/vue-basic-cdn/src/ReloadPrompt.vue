@@ -12,7 +12,7 @@ const {
   },
 })
 
-const close = async () => {
+async function close() {
   offlineReady.value = false
   needRefresh.value = false
 }

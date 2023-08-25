@@ -5,7 +5,7 @@ const customSW = process.env.SW === 'true'
 
 const swName = customSW ? 'custom-sw.js' : 'sw.js'
 
-const findCache = async (page: Page) => {
+async function findCache(page: Page) {
   return await page.evaluate(async () => {
     const cacheState: Record<string, Array<string>> = {}
     for (const cacheName of await caches.keys()) {
@@ -32,7 +32,6 @@ test('TypeScript (no injection point): The service worker is registered', async 
   let cacheContents = await findCache(page)
 
   if (customSW) {
-
     expect(Object.keys(cacheContents).length).toEqual(0)
 
     await page.reload({ timeout: 2000 })

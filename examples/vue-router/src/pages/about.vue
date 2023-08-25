@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { useTimeAgo } from '@vueuse/core'
 import { useRouter } from 'vue-router'
-// replaced dyanmicaly
+
+// replaced dynamically
 const date = '__DATE__'
 const timeAgo = useTimeAgo(date)
 const router = useRouter()

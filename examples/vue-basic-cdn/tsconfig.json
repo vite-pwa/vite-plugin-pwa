@@ -15,7 +15,7 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "skipLibCheck": true,
-    "types": ["vite-plugin-pwa/vanillajs", "vite-plugin-pwa/info"]
+    "types": ["vite/client", "vite-plugin-pwa/vue", "vite-plugin-pwa/info"]
   },
-  "include": ["src"]
+  "include": ["src/**/*.ts"]
 }

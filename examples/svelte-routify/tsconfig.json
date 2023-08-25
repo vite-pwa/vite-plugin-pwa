@@ -4,6 +4,7 @@
     "target": "esnext",
     "module": "esnext",
     "resolveJsonModule": true,
+    "moduleResolution": "bundler",
     "baseUrl": ".",
     "ignoreDeprecations": "5.0",
     "lib": ["DOM", "DOM.Iterable", "ESNext", "WebWorker"],

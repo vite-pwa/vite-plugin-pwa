@@ -10,14 +10,14 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
     "jsxFactory": "h",
     "jsxFragmentFactory": "Fragment",
-    "types": ["vite/client", "vite-plugin-pwa/client", "vite-plugin-pwa/info"]
+    "types": ["vite/client", "vite-plugin-pwa/preact", "vite-plugin-pwa/info"]
   },
   "include": ["src"]
 }

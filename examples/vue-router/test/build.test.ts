@@ -10,7 +10,7 @@ const _dirname = typeof __dirname !== 'undefined'
 const injectManifest = process.env.SW === 'true'
 const swName = `${injectManifest ? 'claims-sw.js' : 'sw.js'}`
 
-const resolvePath = (...paths: string[]) => {
+function resolvePath(...paths: string[]) {
   return resolve(_dirname, ...paths).replace(/\\/g, '/')
 }
 

@@ -1,5 +1,6 @@
 {
   "name": "example-solid-router",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -54,7 +55,7 @@
     "@rollup/plugin-replace": "^5.0.1",
     "https-localhost": "^4.7.1",
     "rimraf": "^3.0.2",
-    "typescript": "^5.0.4",
+    "typescript": "^5.1.6",
     "vite": "^4.0.0",
     "vite-plugin-pwa": "workspace:*",
     "vite-plugin-solid": "^2.5.0",

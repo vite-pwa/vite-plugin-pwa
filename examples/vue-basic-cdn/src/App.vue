@@ -2,7 +2,7 @@
 import { useTimeAgo } from '@vueuse/core'
 import ReloadPrompt from './ReloadPrompt.vue'
 
-// replaced dyanmicaly
+// replaced dynamicaly
 const date = '__DATE__'
 const timeAgo = useTimeAgo(date)
 </script>

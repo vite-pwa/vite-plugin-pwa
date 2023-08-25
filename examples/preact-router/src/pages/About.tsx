@@ -1,5 +1,5 @@
 function About() {
-  // replaced dyanmicaly
+  // replaced dynamically
   const date = '__DATE__'
   return (
     <div className="About">
