@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build && esno scripts/build.ts",
+    "build:debug": "DEBUG=true vitepress build && esno scripts/build.ts",
     "preview": "npm run build && vitepress serve",
     "serve": "npm run build && serve .vitepress/dist"
   },
@@ -25,9 +26,9 @@
     "typescript": "^4.8.2",
     "unocss": "^0.45.18",
     "unplugin-vue-components": "^0.22.4",
-    "vite": "^3.1.0",
+    "vite": "^4.0.0",
     "vite-plugin-pwa": "workspace:*",
     "vitepress": "1.0.0-alpha.13",
-    "workbox-window": "^6.5.4"
+    "workbox-window": "^7.0.0"
   }
 }

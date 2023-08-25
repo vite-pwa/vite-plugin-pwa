@@ -1,5 +1,7 @@
 import { VitePWA } from 'vite-plugin-pwa'
 
+console.log(typeof VitePWA)
+
 export function pwa() {
   return VitePWA({
     outDir: '.vitepress/dist',

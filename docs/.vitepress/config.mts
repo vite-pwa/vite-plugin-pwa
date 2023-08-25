@@ -332,6 +332,7 @@ export default defineConfig({
   },
   vite: {
     plugins: [
+      // @ts-expect-error Vite 3 and plugin types, just ignore it
       pwa(),
     ],
   },
