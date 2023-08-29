@@ -11,7 +11,7 @@ To develop and test the `vite-plugin-pwa` package:
 
 1. Fork the `vite-plugin-pwa` repository to your own GitHub account and then clone it to your local device.
 
-2. Ensure using the latest Node.js (16.x), from version 0.16.0 `vite-plugin-pwa` requires Node.js 16.x.
+2. Ensure using the latest Node.js (18.x), from version 0.17.0 `vite-plugin-pwa` requires Node.js 18.x.
 
 3. `vite-plugin-pwa` uses pnpm v8. If you are working on multiple projects with different versions of pnpm, it's recommend to enable [Corepack](https://github.com/nodejs/corepack) by running `corepack enable`.
 
