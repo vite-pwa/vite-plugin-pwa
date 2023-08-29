@@ -2,7 +2,7 @@
   "name": "vite-plugin-pwa",
   "type": "module",
   "version": "0.16.4",
-  "packageManager": "pnpm@8.6.12",
+  "packageManager": "pnpm@8.7.0",
   "description": "Zero-config PWA for Vite",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -78,7 +78,7 @@
     "*.d.ts"
   ],
   "engines": {
-    "node": ">=16.0.0"
+    "node": "^18.0.0 || >=20.0.0"
   },
   "scripts": {
     "docs": "pnpm -C docs run dev",
