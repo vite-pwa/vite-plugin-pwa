@@ -350,6 +350,13 @@ export interface ManifestOptions {
   edge_side_panel?: {
     preferred_width?: number
   }
+  /**
+   * https://github.com/WICG/manifest-incubations/blob/gh-pages/scope_extensions-explainer.md
+   * @default []
+   */
+  scope_extensions: {
+    origin: string
+  }[]
 }
 
 export interface WebManifestData {
