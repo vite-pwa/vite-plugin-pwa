@@ -312,7 +312,8 @@ export interface ManifestOptions {
     src: string
     sizes: string
     label?: string
-    platform?: 'narrow' | 'wide' | 'android' | 'ios' | 'kaios' | 'macos' | 'windows' | 'windows10x' | 'chrome_web_store' | 'play' | 'itunes' | 'microsoft-inbox' | 'microsoft-store' | string
+    platform?: 'android' | 'ios' | 'kaios' | 'macos' | 'windows' | 'windows10x' | 'chrome_web_store' | 'play' | 'itunes' | 'microsoft-inbox' | 'microsoft-store' | string
+    form_factor?: 'narrow' | 'wide'
     type?: string
   }[]
   /**
