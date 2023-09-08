@@ -1,6 +1,7 @@
 {
   "name": "example-react-router",
   "version": "0.0.0",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DEV=true vite --force",
