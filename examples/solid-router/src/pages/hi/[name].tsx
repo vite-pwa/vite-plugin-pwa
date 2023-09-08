@@ -1,4 +1,4 @@
-import { Link, useRouteData } from 'solid-app-router'
+import { Link, useRouteData } from '@solidjs/router'
 
 export default function Hi() {
   // replaced dyanmicaly

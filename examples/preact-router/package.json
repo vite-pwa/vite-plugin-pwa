@@ -47,15 +47,15 @@
     "test": "nr test-build-claims && nr test-build-sw-claims"
   },
   "dependencies": {
-    "preact": "^10.10.6",
-    "preact-router": "^4.1.0"
+    "preact": "^10.17.1",
+    "preact-router": "^4.1.2"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.4.0",
-    "@rollup/plugin-replace": "^5.0.1",
+    "@preact/preset-vite": "^2.5.0",
+    "@rollup/plugin-replace": "^5.0.2",
     "https-localhost": "^4.7.1",
-    "rimraf": "^3.0.2",
-    "typescript": "^5.0.4",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.2.2",
     "vite": "^4.0.0",
     "vite-plugin-pwa": "workspace:*",
     "workbox-core": "^7.0.0",

@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import { extname, resolve } from 'node:path'
+import process from 'node:process'
 import type { ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
 import type { ManifestOptions, ResolvedVitePWAOptions, VitePWAOptions } from './types'

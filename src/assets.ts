@@ -34,8 +34,8 @@ function lookupAdditionalManifestEntries(
   workbox: Partial<GenerateSWOptions>,
 ): (string | ManifestEntry)[] {
   return useInjectManifest
-    ? injectManifest.additionalManifestEntries || []
-    : workbox.additionalManifestEntries || []
+    ? (injectManifest.additionalManifestEntries || [])
+    : (workbox.additionalManifestEntries || [])
 }
 
 // we need to make icons relative, we can have for example icon entries with: /pwa.png

@@ -47,16 +47,16 @@
     "test": "nr test-build-claims && nr test-build-sw-claims"
   },
   "dependencies": {
-    "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue": "^3.3.4",
+    "vue-router": "^4.2.4"
   },
   "devDependencies": {
-    "@rollup/plugin-replace": "^5.0.1",
-    "@vitejs/plugin-vue": "^4.0.0",
-    "@vueuse/core": "^9.6.0",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@vitejs/plugin-vue": "^4.3.4",
+    "@vueuse/core": "^10.4.1",
     "https-localhost": "^4.7.1",
-    "rimraf": "^3.0.2",
-    "typescript": "^5.0.4",
+    "rimraf": "^5.0.1",
+    "typescript": "^5.2.2",
     "vite": "^4.0.0",
     "vite-plugin-pwa": "workspace:*",
     "workbox-core": "^7.0.0",

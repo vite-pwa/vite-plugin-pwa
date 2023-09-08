@@ -57,6 +57,7 @@ Edit your `vite.config.js / vite.config.ts` file and add the `vite-plugin-pwa`:
 
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     VitePWA({ registerType: 'autoUpdate' })
@@ -74,6 +75,7 @@ If you are **NOT** using `vite-plugin-pwa` version `0.12.2+`, there is a bug han
 If you're using a `vite-plugin-pwa` plugin version prior to `0.12.2`, you can fix the bug using this plugin configuration:
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     VitePWA({
@@ -91,6 +93,7 @@ export default defineConfig({
 If you want to check it in `dev`, add the `devOptions` option to the plugin configuration (you will have the [Web App Manifest](https://developer.mozilla.org/en-US/docs/Web/Manifest) and the generated service worker):
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     VitePWA({

@@ -10,14 +10,14 @@
     "serve": "serve dist"
   },
   "dependencies": {
-    "vue": "^3.2.45"
+    "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@rollup/plugin-replace": "^5.0.1",
-    "@vitejs/plugin-vue": "^4.0.0",
-    "@vueuse/core": "^9.6.0",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@vitejs/plugin-vue": "^4.3.4",
+    "@vueuse/core": "^10.4.1",
     "https-localhost": "^4.7.1",
-    "typescript": "^5.0.4",
+    "typescript": "^5.2.2",
     "vite": "^4.0.0",
     "vite-plugin-pwa": "workspace:*"
   }

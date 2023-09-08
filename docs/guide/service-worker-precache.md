@@ -37,6 +37,7 @@ You can find more information in the [Static assets handling](/guide/static-asse
 For example, if you need to add `ico`, `png` and `svg` resources in the example from the [Configuring vite-plugin-pwa - Guide](/guide/#configuring-vite-plugin-pwa) section, you will need to add `globPatterns` under `workbox` entry, since we're using the default `vite-plugin-pwa` strategy (`generateSW`):
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     VitePWA({

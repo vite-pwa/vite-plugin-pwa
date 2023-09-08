@@ -13,13 +13,13 @@ const worker = new MyWorker()
 const date = '__DATE__'
 const timeAgo = useTimeAgo(date)
 
-const runWorker = async () => {
+async function runWorker() {
   worker.postMessage('ping')
 }
-const resetMessage = async () => {
+async function resetMessage() {
   worker.postMessage('clear')
 }
-const messageFromWorker = async ({ data: { msg, mode: useMode } }) => {
+async function messageFromWorker({ data: { msg, mode: useMode } }) {
   pong.value = msg
   mode.value = useMode
 }

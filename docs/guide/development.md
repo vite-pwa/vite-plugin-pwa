@@ -20,6 +20,7 @@ To enable the service worker on development, you only need to add the following 
 
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     VitePWA({

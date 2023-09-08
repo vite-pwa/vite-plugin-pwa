@@ -64,7 +64,7 @@ As an example, when using [@sveltejs/adapter-static](https://github.com/sveltejs
 
 ::: details 1) add pwa.js script
 ```js
-import { copyFileSync } from 'fs'
+import { copyFileSync } from 'node:fs'
 import { resolveConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { pwaConfiguration } from './pwa-configuration.js'
@@ -78,7 +78,7 @@ const swDestinations = [
   './build/',
 ]
 
-const buildPwa = async () => {
+async function buildPwa() {
   const config = await resolveConfig({ plugins: [VitePWA({ ...pwaConfiguration })] }, 'build', 'production')
   // when `vite-plugin-pwa` is present, use it to regenerate SW after rendering
   const pwaPlugin = config.plugins.find(i => i.name === 'vite-plugin-pwa')?.api
