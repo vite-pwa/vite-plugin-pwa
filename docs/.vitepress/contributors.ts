@@ -16,7 +16,7 @@ export interface CoreTeam {
   links?: SocialEntry[]
 }
 
-const createLinks = (tm: CoreTeam): CoreTeam => {
+function createLinks(tm: CoreTeam): CoreTeam {
   tm.links = [
     { icon: 'github', link: `https://github.com/${tm.github}` },
     { icon: 'twitter', link: `https://twitter.com/${tm.twitter}` },

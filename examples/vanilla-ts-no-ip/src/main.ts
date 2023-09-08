@@ -30,4 +30,3 @@ registerSW({
     console.log('onOfflineReady message should not appear')
   },
 })
-

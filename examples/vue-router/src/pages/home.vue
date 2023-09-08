@@ -9,7 +9,7 @@ const timeAgo = useTimeAgo(date)
 const router = useRouter()
 const name = ref('')
 
-const go = () => {
+function go() {
   if (name.value)
     router.push(`/hi/${encodeURIComponent(name.value)}`)
 }

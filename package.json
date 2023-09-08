@@ -2,7 +2,7 @@
   "name": "vite-plugin-pwa",
   "type": "module",
   "version": "0.16.4",
-  "packageManager": "pnpm@8.6.1",
+  "packageManager": "pnpm@8.7.4",
   "description": "Zero-config PWA for Vite",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -70,6 +70,9 @@
     "types",
     "*.d.ts"
   ],
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "docs": "pnpm -C docs run dev",
     "docs:build": "pnpm -C docs run build",
@@ -102,37 +105,34 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "fast-glob": "^3.2.12",
-    "pretty-bytes": "^6.0.0",
+    "fast-glob": "^3.3.1",
+    "pretty-bytes": "^6.1.1",
     "workbox-build": "^7.0.0",
     "workbox-window": "^7.0.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.38.6",
-    "@antfu/ni": "^0.21.3",
-    "@playwright/test": "^1.33.0",
-    "@types/debug": "^4.1.7",
-    "@types/node": "^18.16.8",
-    "@types/prompts": "^2.4.2",
-    "@types/react": "^18.0.26",
-    "@typescript-eslint/eslint-plugin": "^5.46.0",
-    "bumpp": "^9.1.1",
-    "eslint": "^8.29.0",
-    "esno": "0.16.3",
-    "kolorist": "^1.6.0",
-    "preact": "^10.11.3",
+    "@antfu/eslint-config": "^0.41.0",
+    "@antfu/ni": "^0.21.8",
+    "@playwright/test": "^1.37.1",
+    "@types/debug": "^4.1.8",
+    "@types/node": "^18.17.14",
+    "@types/prompts": "^2.4.4",
+    "@types/react": "^18.2.21",
+    "@typescript-eslint/eslint-plugin": "^6.6.0",
+    "bumpp": "^9.2.0",
+    "eslint": "^8.48.0",
+    "esno": "0.17.0",
+    "kolorist": "^1.8.0",
+    "preact": "^10.17.1",
     "prompts": "^2.4.2",
     "react": "^18.2.0",
-    "rollup": "^3.7.2",
-    "solid-js": "^1.6.4",
-    "svelte": "^3.54.0",
-    "tsup": "^6.2.3",
-    "typescript": "^5.0.4",
+    "rollup": "^3.29.0",
+    "solid-js": "^1.7.11",
+    "svelte": "^4.2.0",
+    "tsup": "^7.2.0",
+    "typescript": "^5.2.2",
     "vite": "^4.0.0",
-    "vitest": "^0.31.0",
-    "vue": "^3.2.45"
-  },
-  "engines": {
-    "node": ">=16.0.0"
+    "vitest": "^0.34.4",
+    "vue": "^3.3.4"
   }
 }

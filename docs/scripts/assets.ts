@@ -1,6 +1,5 @@
 import fg from 'fast-glob'
 import fs from 'fs-extra'
-// import critical from 'critical'
 
 const firaFont = 'https://fonts.googleapis.com/css2?family=Fira+Code&display=swap'
 

@@ -6,6 +6,7 @@ If you want to generate the source map of your service worker, you can use this 
 
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     VitePWA({

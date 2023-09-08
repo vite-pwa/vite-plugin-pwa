@@ -17,6 +17,7 @@ If you want to change the location and/or the service worker name, you will need
 For example, if your service worker is located at `/src/my-sw.js` you must configure it using:
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     VitePWA({

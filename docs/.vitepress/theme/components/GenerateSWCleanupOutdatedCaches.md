@@ -6,6 +6,7 @@ We strongly recommend you to **NOT** deactivate the option. If you are curious, 
 
 ```ts
 import { VitePWA } from 'vite-plugin-pwa'
+
 export default defineConfig({
   plugins: [
     VitePWA({

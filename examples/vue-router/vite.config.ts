@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'

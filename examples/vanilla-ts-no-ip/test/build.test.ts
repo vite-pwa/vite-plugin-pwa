@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import process from 'node:process'
 import { describe, expect, it } from 'vitest'
 
 const _dirname = typeof __dirname !== 'undefined'
@@ -11,7 +12,7 @@ const customSW = process.env.SW === 'true'
 
 const swName = customSW ? 'custom-sw.js' : 'sw.js'
 
-const resolvePath = (...paths: string[]) => {
+function resolvePath(...paths: string[]) {
   return resolve(_dirname, ...paths).replace(/\\/g, '/')
 }
 

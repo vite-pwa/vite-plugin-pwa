@@ -1,5 +1,5 @@
 import { lazy } from 'solid-js'
-import type { RouteDefinition } from 'solid-app-router'
+import type { RouteDefinition } from '@solidjs/router'
 
 import Home from './pages/home'
 import HiData from './pages/hi/[name].data'

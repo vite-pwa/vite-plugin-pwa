@@ -3,7 +3,7 @@ import type { VitePluginPWAAPI } from 'vite-plugin-pwa'
 import { optimizePages } from './assets'
 import { pwa } from './pwa'
 
-export const buildEnd = async () => {
+export async function buildEnd() {
   await optimizePages()
   const config = await resolveConfig({ plugins: [pwa()] }, 'build', 'production')
   // when `vite-plugin-pwa` is presented, use it to regenerate SW after rendering

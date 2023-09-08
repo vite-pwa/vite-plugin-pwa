@@ -1,4 +1,4 @@
-import type { RouteDataFunc } from 'solid-app-router'
+import type { RouteDataFunc } from '@solidjs/router'
 
 const HiData: RouteDataFunc = (args) => {
   const name = args.params.name || ''

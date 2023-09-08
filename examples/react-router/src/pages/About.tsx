@@ -1,4 +1,5 @@
 import React from 'react'
+
 function About() {
   // replaced dyanmicaly
   const date = '__DATE__'

@@ -1,6 +1,5 @@
-/* eslint-disable react/no-unknown-property */
 import type { Component } from 'solid-js'
-import { useRoutes } from 'solid-app-router'
+import { useRoutes } from '@solidjs/router'
 import { routes } from './routes'
 import styles from './app.module.css'
 import ReloadPrompt from './ReloadPrompt'
