@@ -100,7 +100,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     root: viteOptions.root,
     base: viteOptions.base,
     resolve: viteOptions.resolve,
-    // don't copy anything from public folder
+    mode: options.mode,
     publicDir: false,
     build: {
       sourcemap: viteOptions.build.sourcemap,
