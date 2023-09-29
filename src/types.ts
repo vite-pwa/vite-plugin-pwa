@@ -51,7 +51,7 @@ export interface VitePWAOptions {
    *
    * @default process.env.NODE_ENV or "production"
    */
-  mode?: 'development' | 'production'
+  mode?: 'development' | 'production' | string
   /**
    * @default 'public'
    */
