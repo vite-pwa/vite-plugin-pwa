@@ -251,11 +251,11 @@ export interface ManifestOptions {
   /**
    * @default `standalone`
    */
-  display: string
+  display: 'fullscreen' | 'standalone' | 'minimal-ui' | 'browser'
   /**
    * @default []
    */
-  display_override: string[]
+  display_override: Array<'fullscreen' | 'standalone' | 'minimal-ui' | 'browser' | 'window-controls-overlay'>
   /**
    * @default `#ffffff`
    */
