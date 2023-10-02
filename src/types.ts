@@ -227,7 +227,12 @@ export interface ManifestOptions {
   /**
    *
    */
-  icons: Array<Record<'sizes' | 'src' | 'type', string> & { purpose?: 'monochrome' | 'maskable' | 'any' }>
+  icons: {
+    sizes?: string
+    src: string
+    type?: string
+    purpose?: 'monochrome' | 'maskable' | 'any'
+  }[]
   /**
    *
    */
