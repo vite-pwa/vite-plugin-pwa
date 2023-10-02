@@ -339,7 +339,7 @@ export interface ManifestOptions {
   iarc_rating_id: string
   share_target: {
     action: string
-    method?: string
+    method?: 'GET' | 'POST'
     enctype?: string
     params: {
       title?: string
