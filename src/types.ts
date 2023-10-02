@@ -236,7 +236,10 @@ export interface ManifestOptions {
   /**
    *
    */
-  file_handlers: Record<string, any>[]
+  file_handlers: {
+    action: string
+    accept: Record<string, string[]>
+  }[]
   /**
    * @default `routerBase + '?standalone=true'`
    */
