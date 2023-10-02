@@ -311,7 +311,12 @@ export interface ManifestOptions {
     short_name?: string
     url: string
     description?: string
-    icons?: Record<string, any>[]
+    icons?: {
+      sizes?: string
+      src: string
+      type?: string
+      purpose?: 'monochrome' | 'maskable' | 'any'
+    }[]
   }[]
   /**
    * @default []
