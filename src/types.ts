@@ -211,6 +211,13 @@ export interface ShareTargetFiles {
  */
 export type LaunchHandlerClientMode = 'auto' | 'focus-existing' | 'navigate-existing' | 'navigate-new'
 
+export interface IconResource {
+  sizes?: string
+  src: string
+  type?: string
+  purpose?: 'monochrome' | 'maskable' | 'any'
+}
+
 export interface ManifestOptions {
   /**
    * @default _npm_package_name_
@@ -227,12 +234,7 @@ export interface ManifestOptions {
   /**
    *
    */
-  icons: {
-    sizes?: string
-    src: string
-    type?: string
-    purpose?: 'monochrome' | 'maskable' | 'any'
-  }[]
+  icons: IconResource[]
   /**
    *
    */
@@ -311,12 +313,7 @@ export interface ManifestOptions {
     short_name?: string
     url: string
     description?: string
-    icons?: {
-      sizes?: string
-      src: string
-      type?: string
-      purpose?: 'monochrome' | 'maskable' | 'any'
-    }[]
+    icons?: IconResource[]
   }[]
   /**
    * @default []
