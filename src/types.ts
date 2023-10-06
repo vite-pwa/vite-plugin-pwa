@@ -207,10 +207,13 @@ export interface ShareTargetFiles {
 }
 
 /**
- * https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
+ * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
  */
 export type LaunchHandlerClientMode = 'auto' | 'focus-existing' | 'navigate-existing' | 'navigate-new'
 
+/**
+ * @see https://w3c.github.io/manifest/#manifest-image-resources
+ */
 export interface IconResource {
   sizes?: string
   src: string
@@ -232,11 +235,15 @@ export interface ManifestOptions {
    */
   description: string
   /**
-   *
+   * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/icons
+   * @see https://w3c.github.io/manifest/#icons-member
    */
   icons: IconResource[]
   /**
-   *
+   * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/file_handlers
+   * @see https://wicg.github.io/manifest-incubations/#file_handlers-member
    */
   file_handlers: {
     action: string
@@ -260,10 +267,14 @@ export interface ManifestOptions {
   orientation: 'any' | 'natural' | 'landscape' | 'landscape-primary' | 'landscape-secondary' | 'portrait' | 'portrait-primary' | 'portrait-secondary'
   /**
    * @default `standalone`
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/display
+   * @see https://w3c.github.io/manifest/#display-member
    */
   display: 'fullscreen' | 'standalone' | 'minimal-ui' | 'browser'
   /**
    * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/display_override
+   * @see https://wicg.github.io/manifest-incubations/#display_override-member
    */
   display_override: Array<'fullscreen' | 'standalone' | 'minimal-ui' | 'browser' | 'window-controls-overlay'>
   /**
@@ -307,6 +318,8 @@ export interface ManifestOptions {
   }[]
   /**
    * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/shortcuts
+   * @see https://w3c.github.io/manifest/#shortcuts-member
    */
   shortcuts: {
     name: string
@@ -334,6 +347,10 @@ export interface ManifestOptions {
    * @default ''
    */
   iarc_rating_id: string
+  /**
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target
+   * @see https://w3c.github.io/web-share-target/level-2/#share_target-member
+   */
   share_target: {
     action: string
     method?: 'GET' | 'POST'
