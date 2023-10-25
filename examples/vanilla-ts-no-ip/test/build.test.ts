@@ -44,9 +44,23 @@ describe('Typescript (no injection point): test-build', () => {
     expect(existsSync(webManifest), `${webManifest} doesn't exist`).toBeTruthy()
     const swContent = readFileSync(swPath, 'utf-8')
     let match = swContent.match(/define\(\['\.\/(workbox-\w+)'/)
-    expect(match && match.length === 2, `workbox-***.js entry not found in ${swName}`).toBeTruthy()
-    const workboxName = resolvePath(_dirname, `../dist/${match?.[1]}.js`)
-    expect(existsSync(workboxName), `${workboxName} doesn't exist`).toBeTruthy()
+    // vite 5 beta 8 change rollup from v3 to v4: sw deps now inlined
+    if (match) {
+      expect(match && match.length === 2, `workbox-***.js entry not found in ${swName}`).toBeTruthy()
+      const workboxName = resolvePath(_dirname, `../dist/${match?.[1]}.js`)
+      expect(existsSync(workboxName), `${workboxName} doesn't exist`).toBeTruthy()
+      const workboxContent = readFileSync(workboxName, 'utf-8')
+      match = workboxContent.match(/self\['workbox:core:[0-9.]+']/)
+      expect(match && match.length === 1, 'missing workbox:core module').toBeTruthy()
+      match = swContent.match(/self\.skipWaiting\(\);?\s*workbox\.clientsClaim\(\)/)
+      expect(match && match.length === 1, 'missing self.skipWaiting and clientsClaim workbox calls').toBeTruthy()
+    }
+    else {
+      match = swContent.match(/self\['workbox:core:[0-9.]+']/)
+      expect(match && match.length === 1, 'missing workbox:core module').toBeTruthy()
+      match = swContent.match(/self\.skipWaiting\(\);?\s*clientsClaim\(\)/)
+      expect(match && match.length === 1, 'missing self.skipWaiting and clientsClaim workbox calls').toBeTruthy()
+    }
     match = swContent.match(/"url":\s*"manifest\.webmanifest"/)
     expect(match && match.length === 1, 'missing manifest.webmanifest in sw precache manifest').toBeTruthy()
     match = swContent.match(/"url":\s*"index.html"/)
