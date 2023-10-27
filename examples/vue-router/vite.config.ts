@@ -41,9 +41,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
   },
 }
 
-const replaceOptions = { __DATE__: new Date().toISOString() }
 const claims = process.env.CLAIMS === 'true'
-const reload = process.env.RELOAD_SW === 'true'
 const selfDestroying = process.env.SW_DESTROY === 'true'
 
 if (process.env.SW === 'true') {
@@ -57,11 +55,6 @@ if (process.env.SW === 'true') {
 if (claims)
   pwaOptions.registerType = 'autoUpdate'
 
-if (reload) {
-  // @ts-expect-error overrides
-  replaceOptions.__RELOAD_SW__ = 'true'
-}
-
 if (selfDestroying)
   pwaOptions.selfDestroying = selfDestroying
 
@@ -73,6 +66,9 @@ export default defineConfig({
   plugins: [
     Vue(),
     VitePWA(pwaOptions),
-    replace(replaceOptions),
+    replace({
+      __DATE__: new Date().toISOString(),
+      __RELOAD_SW__: process.env.RELOAD_SW === 'true' ? 'true' : 'false',
+    }),
   ],
 })
