@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { VitePWA } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
+import process from "node:process";
 
 const pwaOptions = {
   mode: 'development',
@@ -38,9 +39,7 @@ const pwaOptions = {
   },
 }
 
-const replaceOptions = { __DATE__: new Date().toISOString() }
 const claims = process.env.CLAIMS === 'true'
-const reload = process.env.RELOAD_SW === 'true'
 const selfDestroying = process.env.SW_DESTROY === 'true'
 
 if (process.env.SW === 'true') {
@@ -54,11 +53,6 @@ if (process.env.SW === 'true') {
 if (claims)
   pwaOptions.registerType = 'autoUpdate'
 
-if (reload) {
-  // @ts-ignore
-  replaceOptions.__RELOAD_SW__ = 'true'
-}
-
 if (selfDestroying)
   pwaOptions.selfDestroying = selfDestroying
 
@@ -70,7 +64,10 @@ export default defineConfig({
   plugins: [
     svelte(),
     VitePWA(pwaOptions),
-    replace(replaceOptions),
+    replace({
+      __DATE__: new Date().toISOString(),
+      __RELOAD_SW__: process.env.RELOAD_SW === 'true' ? 'true' : 'false',
+    }),
   ],
 })
 
