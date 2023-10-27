@@ -28,7 +28,7 @@ const pwaOptions: Partial<VitePWAOptions> = {
         src: 'pwa-512x512.png', // <== don't add slash, for testing
         sizes: '512x512',
         type: 'image/png',
-        purpose: 'any maskable',
+        purpose: ['any', 'maskable'], // testing new type declaration
       },
     ],
   },

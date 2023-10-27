@@ -135,6 +135,30 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     devOptions.type = 'classic'
   }
 
+  // convert icons' purpose
+  if (manifest) {
+    if (manifest.icons) {
+      manifest.icons = manifest.icons.map((icon) => {
+        if (icon.purpose && Array.isArray(icon.purpose))
+          icon.purpose = icon.purpose.join(' ')
+
+        return icon
+      })
+    }
+    if (manifest.shortcuts) {
+      manifest.shortcuts.forEach((shortcut) => {
+        if (shortcut.icons) {
+          shortcut.icons = shortcut.icons.map((icon) => {
+            if (icon.purpose && Array.isArray(icon.purpose))
+              icon.purpose = icon.purpose.join(' ')
+
+            return icon
+          })
+        }
+      })
+    }
+  }
+
   const resolvedVitePWAOptions: ResolvedVitePWAOptions = {
     base: basePath,
     mode,

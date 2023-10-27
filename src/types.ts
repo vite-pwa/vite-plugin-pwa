@@ -207,9 +207,26 @@ export interface ShareTargetFiles {
 }
 
 /**
- * https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
+ * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
  */
 export type LaunchHandlerClientMode = 'auto' | 'focus-existing' | 'navigate-existing' | 'navigate-new'
+
+export type Display = 'fullscreen' | 'standalone' | 'minimal-ui' | 'browser'
+export type DisplayOverride = Display | 'window-controls-overlay'
+export type IconPurpose = 'monochrome' | 'maskable' | 'any'
+
+/**
+ * @see https://w3c.github.io/manifest/#manifest-image-resources
+ */
+export interface IconResource {
+  sizes?: string
+  src: string
+  type?: string
+  /**
+   * **NOTE**: string values for backward compatibility with the old type.
+   */
+  purpose?: string | IconPurpose | IconPurpose[]
+}
 
 export interface ManifestOptions {
   /**
@@ -225,13 +242,20 @@ export interface ManifestOptions {
    */
   description: string
   /**
-   *
+   * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/icons
+   * @see https://w3c.github.io/manifest/#icons-member
    */
-  icons: Record<string, any>[]
+  icons: IconResource[]
   /**
-   *
+   * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/file_handlers
+   * @see https://wicg.github.io/manifest-incubations/#file_handlers-member
    */
-  file_handlers: Record<string, any>[]
+  file_handlers: {
+    action: string
+    accept: Record<string, string[]>
+  }[]
   /**
    * @default `routerBase + '?standalone=true'`
    */
@@ -250,12 +274,16 @@ export interface ManifestOptions {
   orientation: 'any' | 'natural' | 'landscape' | 'landscape-primary' | 'landscape-secondary' | 'portrait' | 'portrait-primary' | 'portrait-secondary'
   /**
    * @default `standalone`
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/display
+   * @see https://w3c.github.io/manifest/#display-member
    */
-  display: string
+  display: Display
   /**
    * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/display_override
+   * @see https://wicg.github.io/manifest-incubations/#display_override-member
    */
-  display_override: string[]
+  display_override: DisplayOverride[]
   /**
    * @default `#ffffff`
    */
@@ -297,16 +325,19 @@ export interface ManifestOptions {
   }[]
   /**
    * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/shortcuts
+   * @see https://w3c.github.io/manifest/#shortcuts-member
    */
   shortcuts: {
     name: string
     short_name?: string
     url: string
     description?: string
-    icons?: Record<string, any>[]
+    icons?: IconResource[]
   }[]
   /**
    * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/screenshots
    */
   screenshots: {
     src: string
@@ -324,9 +355,13 @@ export interface ManifestOptions {
    * @default ''
    */
   iarc_rating_id: string
+  /**
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target
+   * @see https://w3c.github.io/web-share-target/level-2/#share_target-member
+   */
   share_target: {
     action: string
-    method?: string
+    method?: 'GET' | 'POST'
     enctype?: string
     params: {
       title?: string
@@ -336,23 +371,23 @@ export interface ManifestOptions {
     }
   }
   /**
-   * https://github.com/WICG/pwa-url-handler/blob/main/handle_links/explainer.md#handle_links-manifest-member
+   * @see https://github.com/WICG/pwa-url-handler/blob/main/handle_links/explainer.md#handle_links-manifest-member
    */
   handle_links?: 'auto' | 'preferred' | 'not-preferred'
   /**
-   * https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
    */
   launch_handler?: {
     client_mode: LaunchHandlerClientMode | LaunchHandlerClientMode[]
   }
   /**
-   * https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/sidebar#enable-sidebar-support-in-your-pwa
+   * @see https://learn.microsoft.com/en-us/microsoft-edge/progressive-web-apps-chromium/how-to/sidebar#enable-sidebar-support-in-your-pwa
    */
   edge_side_panel?: {
     preferred_width?: number
   }
   /**
-   * https://github.com/WICG/manifest-incubations/blob/gh-pages/scope_extensions-explainer.md
+   * @see https://github.com/WICG/manifest-incubations/blob/gh-pages/scope_extensions-explainer.md
    * @default []
    */
   scope_extensions: {
@@ -407,7 +442,7 @@ export interface VitePluginPWAAPI {
    */
   pwaInDevEnvironment: boolean
   /**
-   * Returns the PWA webmanifest url for the manifest link:
+   * Returns the PWA web manifest url for the manifest link:
    * <link rel="manifest" href="<webManifestUrl>" />
    *
    * Will also return if the manifest will require credentials:
