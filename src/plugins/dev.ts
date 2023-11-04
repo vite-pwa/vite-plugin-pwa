@@ -27,23 +27,31 @@ export const swDevOptions = {
 }
 
 export function DevPlugin(ctx: PWAPluginContext) {
+  const transformIndexHtmlHandler = (html: string) => {
+    const { options } = ctx
+    if (options.disable || !options.manifest || !options.devOptions.enabled)
+      return html
+
+    html = injectServiceWorker(html, options, true)
+
+    return html.replace(
+      '</body>',
+        `${generateRegisterDevSW(options.base)}
+</body>`,
+    )
+  }
+
   return <Plugin>{
     name: 'vite-plugin-pwa:dev-sw',
     apply: 'serve',
     transformIndexHtml: {
-      enforce: 'post',
-      async transform(html) {
-        const { options } = ctx
-        if (options.disable || !options.manifest || !options.devOptions.enabled)
-          return html
-
-        html = injectServiceWorker(html, options, true)
-
-        return html.replace(
-          '</body>',
-            `${generateRegisterDevSW(options.base)}
-</body>`,
-        )
+      order: 'post',
+      async handler(html) {
+        return transformIndexHtmlHandler(html)
+      },
+      enforce: 'post', // deprecated since Vite 4
+      async transform(html) { // deprecated since Vite 4
+        return transformIndexHtmlHandler(html)
       },
     },
     configureServer(server) {

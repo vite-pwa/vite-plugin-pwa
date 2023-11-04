@@ -4,22 +4,30 @@ import { _generateBundle, _generateSW } from '../api'
 import type { PWAPluginContext } from '../context'
 
 export function BuildPlugin(ctx: PWAPluginContext) {
+  const transformIndexHtmlHandler = (html: string) => {
+    const { options, useImportRegister } = ctx
+    if (options.disable)
+      return html
+
+    // if virtual register is requested, do not inject.
+    if (options.injectRegister === 'auto')
+      options.injectRegister = useImportRegister ? null : 'script'
+
+    return injectServiceWorker(html, options, false)
+  }
+
   return <Plugin>{
     name: 'vite-plugin-pwa:build',
     enforce: 'post',
     apply: 'build',
     transformIndexHtml: {
-      enforce: 'post',
-      transform(html) {
-        const { options, useImportRegister } = ctx
-        if (options.disable)
-          return html
-
-        // if virtual register is requested, do not inject.
-        if (options.injectRegister === 'auto')
-          options.injectRegister = useImportRegister ? null : 'script'
-
-        return injectServiceWorker(html, options, false)
+      order: 'post',
+      handler(html) {
+        return transformIndexHtmlHandler(html)
+      },
+      enforce: 'post', // deprecated since Vite 4
+      async transform(html) { // deprecated since Vite 4
+        return transformIndexHtmlHandler(html)
       },
     },
     generateBundle(_, bundle) {
