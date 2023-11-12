@@ -7,12 +7,12 @@
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
   "funding": "https://github.com/sponsors/antfu",
-  "homepage": "https://github.com/antfu/vite-plugin-pwa",
+  "homepage": "https://github.com/vite-pwa/vite-plugin-pwa#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/antfu/vite-plugin-pwa"
+    "url": "https://github.com/vite-pwa/vite-plugin-pwa.git"
   },
-  "bugs": "https://github.com/antfu/vite-plugin-pwa/issues",
+  "bugs": "https://github.com/vite-pwa/vite-plugin-pwa/issues",
   "keywords": [
     "react",
     "pwa",
