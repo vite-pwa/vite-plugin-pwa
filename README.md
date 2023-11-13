@@ -41,7 +41,7 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 - ✨ **Static assets handling**: configure static assets for offline support
 - 🐞 **Development Support**: debug your custom service worker logic as you develop your application
 - 🛠️ **Versatile**: integration with meta frameworks: [îles](https://github.com/ElMassimo/iles), [SvelteKit](https://github.com/sveltejs/kit), [VitePress](https://github.com/vuejs/vitepress), [Astro](https://github.com/withastro/astro), and [Nuxt 3](https://github.com/nuxt/nuxt)
-- 💥 PWA Assets Generator: generate all the PWA assets from a single command and a single source image
+- 💥 **PWA Assets Generator**: generate all the PWA assets from a single command and a single source image
 
 ## 📦 Install
 
