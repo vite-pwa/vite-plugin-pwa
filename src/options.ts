@@ -76,7 +76,8 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
   if (assetsDir[assetsDir.length - 1] !== '/')
     assetsDir += '/'
 
-  const dontCacheBustURLsMatching = new RegExp(`^${assetsDir}`)
+  // remove './' prefix from assetsDir
+  const dontCacheBustURLsMatching = new RegExp(`^${assetsDir.replace(/^.*?\//, '')}`)
 
   const defaultWorkbox: GenerateSWOptions = {
     swDest,
