@@ -77,7 +77,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     globDirectory: outDirRoot,
     offlineGoogleAnalytics: false,
     cleanupOutdatedCaches: true,
-    dontCacheBustURLsMatching: /[.-][a-f0-9]{8}\./,
+    dontCacheBustURLsMatching: /^assets\//,
     mode,
     navigateFallback: 'index.html',
   }
@@ -86,7 +86,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     swSrc,
     swDest,
     globDirectory: outDirRoot,
-    dontCacheBustURLsMatching: /[.-][a-f0-9]{8}\./,
+    dontCacheBustURLsMatching: /^assets\//,
     injectionPoint: 'self.__WB_MANIFEST',
   }
 
