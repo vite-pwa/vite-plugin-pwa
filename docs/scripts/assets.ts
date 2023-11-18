@@ -13,7 +13,7 @@ const preconnect = `
     <link rel="preconnect" crossorigin="anonymous" href="${gstatic}">
 `
 
-export const optimizePages = async () => {
+export async function optimizePages() {
   const names = await fg('./.vitepress/dist/**/*.html', { onlyFiles: true })
 
   await Promise.all(names.map(async (i) => {

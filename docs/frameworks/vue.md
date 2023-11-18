@@ -182,7 +182,6 @@ export default {
     catch {
       console.log('PWA disabled.')
     }
-
   },
   methods: {
     async closePromptUpdateSW() {
