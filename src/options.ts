@@ -5,7 +5,7 @@ import type { ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
 import type { ManifestOptions, ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { configureStaticAssets } from './assets'
-import { resolveBasePath } from './utils'
+import { resolveBasePath, slash} from './utils'
 import { defaultInjectManifestVitePlugins } from './constants'
 
 function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, outDir: string, filename: string): {
@@ -40,7 +40,6 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
 
   const {
     // prevent tsup replacing `process.env`
-    // eslint-disable-next-line dot-notation
     mode = (process['env']['NODE_ENV'] || 'production') as ('production' | 'development'),
     srcDir = 'public',
     outDir = viteConfig.build.outDir || 'dist',
@@ -73,12 +72,19 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
   const outDirRoot = resolve(root, outDir)
   const scope = options.scope || basePath
 
+  let assetsDir = slash(viteConfig.build.assetsDir ?? 'assets')
+  if (assetsDir[assetsDir.length - 1] !== '/')
+    assetsDir += '/'
+
+  // remove './' prefix from assetsDir
+  const dontCacheBustURLsMatching = new RegExp(`^${assetsDir.replace(/^\.*?\//, '')}`)
+
   const defaultWorkbox: GenerateSWOptions = {
     swDest,
     globDirectory: outDirRoot,
     offlineGoogleAnalytics: false,
     cleanupOutdatedCaches: true,
-    dontCacheBustURLsMatching: /[.-][a-f0-9]{8}\./,
+    dontCacheBustURLsMatching,
     mode,
     navigateFallback: 'index.html',
   }
@@ -87,7 +93,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     swSrc,
     swDest,
     globDirectory: outDirRoot,
-    dontCacheBustURLsMatching: /[.-][a-f0-9]{8}\./,
+    dontCacheBustURLsMatching,
     injectionPoint: 'self.__WB_MANIFEST',
   }
 

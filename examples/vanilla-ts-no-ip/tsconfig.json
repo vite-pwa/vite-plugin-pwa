@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
     "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "WebWorker"],
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "lib": ["ES2020", "DOM", "DOM.Iterable", "WebWorker"],
-    "skipLibCheck": true,
-    "types": ["vite/client", "vite-plugin-pwa/vanillajs", "vite-plugin-pwa/info"],
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "types": ["vite/client", "vite-plugin-pwa/vanillajs", "vite-plugin-pwa/info"],
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "isolatedModules": true,
     "noEmit": true,
+    "isolatedModules": true,
 
     /* Linting */
     "strict": true,
+    "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "skipLibCheck": true
   },
   "include": ["src"]
 }

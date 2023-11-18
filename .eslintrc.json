@@ -8,6 +8,7 @@
       "rules": {
         "@typescript-eslint/no-this-alias": "off",
         "n/handle-callback-err": "off",
+        "no-restricted-globals": "off",
         "no-restricted-syntax": "off",
         "no-labels": "off"
       }

@@ -161,7 +161,6 @@ const pwaConfiguration = {
             e.url = `/${url.substring(0, url.lastIndexOf('/'))}`
           else if (url.endsWith('.html'))
             e.url = `/${url.substring(0, url.length - '.html'.length)}`
-
         }
 
         return e

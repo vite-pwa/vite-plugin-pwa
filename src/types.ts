@@ -35,6 +35,7 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
 }
 
 export interface PWAIntegration {
+  beforeBuildServiceWorker?: (options: ResolvedVitePWAOptions) => void | Promise<void>
   closeBundleOrder?: 'pre' | 'post' | null
   configureOptions?: (
     viteOptions: ResolvedConfig,

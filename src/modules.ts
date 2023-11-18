@@ -64,6 +64,8 @@ self.addEventListener('activate', function(e) {
     }
   }
 
+  await options.integration?.beforeBuildServiceWorker?.(options)
+
   const { generateSW } = await loadWorkboxBuild()
 
   // generate the service worker
@@ -126,6 +128,8 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   // don't force user to include injection point
   if (!options.injectManifest.injectionPoint)
     return
+
+  await options.integration?.beforeBuildServiceWorker?.(options)
 
   const injectManifestOptions = {
     ...options.injectManifest,
