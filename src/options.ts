@@ -72,12 +72,16 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
   const outDirRoot = resolve(root, outDir)
   const scope = options.scope || basePath
 
+  const dontCacheBustURLsMatching = viteConfig.build.assetsDir
+      ? new RegExp(`^${viteConfig.build.assetsDir}/`)
+      : /^assets\//
+
   const defaultWorkbox: GenerateSWOptions = {
     swDest,
     globDirectory: outDirRoot,
     offlineGoogleAnalytics: false,
     cleanupOutdatedCaches: true,
-    dontCacheBustURLsMatching: /^assets\//,
+    dontCacheBustURLsMatching,
     mode,
     navigateFallback: 'index.html',
   }
@@ -86,7 +90,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     swSrc,
     swDest,
     globDirectory: outDirRoot,
-    dontCacheBustURLsMatching: /^assets\//,
+    dontCacheBustURLsMatching,
     injectionPoint: 'self.__WB_MANIFEST',
   }
 
