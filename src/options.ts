@@ -72,9 +72,11 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
   const outDirRoot = resolve(root, outDir)
   const scope = options.scope || basePath
 
-  const dontCacheBustURLsMatching = viteConfig.build.assetsDir
-      ? new RegExp(`^${viteConfig.build.assetsDir}/`)
-      : /^assets\//
+  let assetsDir = viteConfig.build.assetsDir
+  if (assetsDir[assetsDir.length - 1] !== '/')
+    assetsDir += '/'
+
+  const dontCacheBustURLsMatching = new RegExp(`^${assetsDir}`)
 
   const defaultWorkbox: GenerateSWOptions = {
     swDest,
