@@ -1,8 +1,8 @@
+import process from 'node:process'
 import { defineConfig } from 'vite'
 import { svelte } from '@sveltejs/vite-plugin-svelte'
 import { VitePWA } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
-import process from "node:process";
 
 const pwaOptions = {
   mode: 'development',
@@ -70,4 +70,3 @@ export default defineConfig({
     }),
   ],
 })
-

@@ -91,7 +91,8 @@ export async function configureStaticAssets(
   }
   if (globs.length > 0) {
     let assets = await fg(
-      globs, {
+      globs,
+      {
         cwd: publicDir,
         onlyFiles: true,
         unique: true,

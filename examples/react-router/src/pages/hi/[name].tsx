@@ -7,8 +7,17 @@ function Hi() {
   const params = useParams()
   return (
     <div>
-      <div><strong>/hi</strong> route, built at: { date }</div>
-      <p>Hi: { params.name }</p>
+      <div>
+        <strong>/hi</strong>
+        {' '}
+        route, built at:
+        {' '}
+        { date }
+      </div>
+      <p>
+        Hi:
+        { params.name }
+      </p>
       <br />
       <a href="/">Go Home</a>
     </div>

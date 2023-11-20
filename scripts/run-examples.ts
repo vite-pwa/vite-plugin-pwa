@@ -157,8 +157,7 @@ async function init() {
         active: 'yes',
         inactive: 'no',
       },
-    ],
-    {
+    ], {
       onCancel: () => {
         throw new Error(`${red('✖')} Operation cancelled`)
       },

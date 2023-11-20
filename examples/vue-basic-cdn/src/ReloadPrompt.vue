@@ -7,7 +7,6 @@ const {
   updateServiceWorker,
 } = useRegisterSW({
   onRegisteredSW(swUrl) {
-    // eslint-disable-next-line no-console
     console.log(`Service Worker at: ${swUrl}`)
   },
 })

@@ -3,7 +3,6 @@ import { registerSW } from 'virtual:pwa-register'
 
 const date = __DATE__
 
-// eslint-disable-next-line no-console
 console.log(pwaInfo)
 
 const app = document.querySelector<HTMLDivElement>('#app')!
@@ -22,11 +21,9 @@ app.innerHTML = `
 registerSW({
   immediate: true,
   onNeedRefresh() {
-    // eslint-disable-next-line no-console
     console.log('onNeedRefresh message should not appear')
   },
   onOfflineReady() {
-    // eslint-disable-next-line no-console
     console.log('onOfflineReady message should not appear')
   },
 })

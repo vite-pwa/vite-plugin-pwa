@@ -10,13 +10,14 @@ const _dirname = typeof __dirname !== 'undefined'
 const injectManifest = process.env.SW === 'true'
 const swName = `${injectManifest ? 'claims-sw.js' : 'sw.js'}`
 
-const resolvePath = (...paths: string[]) => {
+function resolvePath(...paths: string[]) {
   return resolve(_dirname, ...paths).replace(/\\/g, '/')
 }
 
-describe('Svelte: test-build', () => {
+describe('svelte: test-build', () => {
   it(`service worker is generated: ${swName}`, () => {
     const swPath = resolvePath(_dirname, `../dist/${swName}`)
+
     console.log(swPath)
     expect(existsSync(swPath), `${swPath} doesn't exist`).toBeTruthy()
     const webManifest = resolvePath(_dirname, '../dist/manifest.webmanifest')

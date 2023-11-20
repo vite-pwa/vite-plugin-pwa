@@ -4,7 +4,6 @@ import { useRegisterSW } from 'virtual:pwa-register/solid'
 import { pwaInfo } from 'virtual:pwa-info'
 import styles from './ReloadPrompt.module.css'
 
-// eslint-disable-next-line no-console
 console.log(pwaInfo)
 
 const ReloadPrompt: Component = () => {
@@ -17,18 +16,15 @@ const ReloadPrompt: Component = () => {
   } = useRegisterSW({
     immediate: true,
     onRegisteredSW(swUrl, r) {
-      // eslint-disable-next-line no-console
       console.log(`Service Worker at: ${swUrl}`)
       // @ts-expect-error just ignore
       if (reloadSW === 'true') {
         r && setInterval(() => {
-          // eslint-disable-next-line no-console
           console.log('Checking for sw update')
           r.update()
         }, 20000 /* 20s for testing purposes */)
       }
       else {
-        // eslint-disable-next-line no-console
         console.log(`SW Registered: ${r}`)
       }
     },

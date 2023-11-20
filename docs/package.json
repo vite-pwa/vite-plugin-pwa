@@ -18,7 +18,7 @@
     "@vitejs/plugin-vue": "^3.1.0",
     "@vueuse/core": "^9.2.0",
     "esbuild-register": "^3.3.3",
-    "eslint": "^8.23.0",
+    "eslint": "^8.54.0",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.1.0",
     "https-localhost": "^4.7.1",

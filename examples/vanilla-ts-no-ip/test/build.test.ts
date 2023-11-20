@@ -16,7 +16,7 @@ function resolvePath(...paths: string[]) {
   return resolve(_dirname, ...paths).replace(/\\/g, '/')
 }
 
-describe('Typescript (no injection point): test-build', () => {
+describe('typescript (no injection point): test-build', () => {
   it.runIf(customSW)(`service worker is generated: ${swName}`, () => {
     const swPath = resolvePath(_dirname, `../dist/${swName}`)
     expect(existsSync(swPath), `${swPath} doesn't exist`).toBeTruthy()

@@ -15,7 +15,10 @@ export function App() {
       <main className="App">
         <img src="/favicon.svg" alt="PWA Logo" width="60" height="60" />
         <h1 className="Home-title">PWA Preact!</h1>
-        <div className="Home-built">Built at: {date}</div>
+        <div className="Home-built">
+          Built at:
+          {date}
+        </div>
         <Router>
           <Home default path="/" />
           <About path="/about" />

@@ -6,7 +6,13 @@ export default function About() {
 
   return (
     <div>
-      <div><strong>/about</strong> route, built at: { date }</div>
+      <div>
+        <strong>/about</strong>
+        {' '}
+        route, built at:
+        {' '}
+        { date }
+      </div>
       <br />
       <Link href="/">
         Go Home

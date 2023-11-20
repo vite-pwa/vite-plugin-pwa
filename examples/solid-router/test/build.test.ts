@@ -15,7 +15,7 @@ function resolvePath(...paths: string[]) {
   return resolve(_dirname, ...paths).replace(/\\/g, '/')
 }
 
-describe('Solid: test-build', () => {
+describe('solid: test-build', () => {
   it(`service worker is generated: ${swName}`, () => {
     const swPath = resolvePath(_dirname, `../dist/${swName}`)
     expect(existsSync(swPath), `${swPath} doesn't exist`).toBeTruthy()

@@ -14,7 +14,10 @@ const App: Component = () => {
     <main class={styles.App}>
       <img src="/favicon.svg" alt="PWA Logo" width="60" height="60" />
       <h1 class={styles.Title}>PWA SolidJS!</h1>
-      <div class={styles.Built}>Built at: {date}</div>
+      <div class={styles.Built}>
+        Built at:
+        {date}
+      </div>
       <Route />
       <ReloadPrompt />
     </main>

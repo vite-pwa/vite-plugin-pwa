@@ -1,5 +1,6 @@
 {
   "name": "example-sveltekit-pwa",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -53,7 +54,7 @@
     "@typescript-eslint/eslint-plugin": "^5.30.3",
     "@typescript-eslint/parser": "^5.30.3",
     "cross-env": "^7.0.3",
-    "eslint": "^8.19.0",
+    "eslint": "^8.54.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "https-localhost": "^4.7.1",
     "minimist": "^1.2.6",
@@ -67,6 +68,5 @@
     "workbox-core": "^7.0.0",
     "workbox-precaching": "^7.0.0",
     "workbox-routing": "^7.0.0"
-  },
-  "type": "module"
+  }
 }

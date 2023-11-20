@@ -43,7 +43,8 @@ export async function optimizePages() {
       <link rel="stylesheet" crossorigin="anonymous" href="${firaFont}" />
     </noscript>
     <link rel="prefetch" href="/manifest.webmanifest">${preloadImg}
-    <link rel="manifest" href="/manifest.webmanifest">\n`).trim()
+    <link rel="manifest" href="/manifest.webmanifest">\n`,
+    ).trim()
 
     // html = html.replace(
     //   '</head>',

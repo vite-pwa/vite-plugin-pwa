@@ -5,7 +5,7 @@ import type { ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
 import type { ManifestOptions, ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { configureStaticAssets } from './assets'
-import { resolveBasePath, slash} from './utils'
+import { resolveBasePath, slash } from './utils'
 import { defaultInjectManifestVitePlugins } from './constants'
 
 function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, outDir: string, filename: string): {
@@ -40,7 +40,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
 
   const {
     // prevent tsup replacing `process.env`
-    mode = (process['env']['NODE_ENV'] || 'production') as ('production' | 'development'),
+    mode = (process.env.NODE_ENV || 'production') as ('production' | 'development'),
     srcDir = 'public',
     outDir = viteConfig.build.outDir || 'dist',
     injectRegister = 'auto',
@@ -201,8 +201,8 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
 
   // calculate hash only when required
   const calculateHash = !resolvedVitePWAOptions.disable
-      && resolvedVitePWAOptions.manifest
-      && (viteConfig.command === 'build' || resolvedVitePWAOptions.devOptions.enabled)
+    && resolvedVitePWAOptions.manifest
+    && (viteConfig.command === 'build' || resolvedVitePWAOptions.devOptions.enabled)
 
   if (calculateHash)
     await configureStaticAssets(resolvedVitePWAOptions, viteConfig)
