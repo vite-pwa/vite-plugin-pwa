@@ -40,7 +40,8 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
 
   const {
     // prevent tsup replacing `process.env`
-    mode = (process.env.NODE_ENV || 'production') as ('production' | 'development'),
+    // eslint-disable-next-line dot-notation
+    mode = (process['env']['NODE_ENV'] || 'production') as ('production' | 'development'),
     srcDir = 'public',
     outDir = viteConfig.build.outDir || 'dist',
     injectRegister = 'auto',
