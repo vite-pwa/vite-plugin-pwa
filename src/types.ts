@@ -87,13 +87,15 @@ export interface VitePWAOptions {
    *
    * `inline` - inject a simple register, inlined with the generated html
    *
-   * `script` - inject <script/> in <head>, with the `sr` to a generated simple register
+   * `script` - inject `<script/>` in `<head>`, with the `sr` to a generated simple register
+   *
+   * `script-defer` - inject `<script defer />` in `<head>`, with the `sr` to a generated simple register
    *
    * `null` - do nothing, you will need to register the sw you self, or imports from `virtual:pwa-register`
    *
    * @default 'auto'
    */
-  injectRegister: 'inline' | 'script' | 'auto' | null | false
+  injectRegister: 'inline' | 'script' | 'strict-defer' | 'auto' | null | false
   /**
    * Mode for the virtual register.
    * Does NOT available for `injectRegister` set to `inline` or `script`

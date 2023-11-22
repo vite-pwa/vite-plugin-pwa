@@ -32,7 +32,7 @@ export function injectServiceWorker(html: string, options: ResolvedVitePWAOption
     if (script) {
       return html.replace(
         '</head>',
-          `${manifest}${script}</head>`,
+        `${manifest}${script}</head>`,
       )
     }
   }
@@ -57,8 +57,10 @@ export function generateWebManifest(options: ResolvedVitePWAOptions, dev: boolea
 export function generateRegisterSW(options: ResolvedVitePWAOptions, dev: boolean) {
   if (options.injectRegister === 'inline')
     return `<script id="vite-plugin-pwa:inline-sw">${generateSimpleSWRegister(options, dev)}</script>`
-  else if (options.injectRegister === 'script')
-    return `<script id="vite-plugin-pwa:register-sw" src="${dev ? options.base : options.buildBase}${FILE_SW_REGISTER}"></script>`
+  else if (options.injectRegister === 'script' || options.injectRegister === 'strict-defer') {
+    const hasDefer = options.injectRegister === 'strict-defer'
+    return `<script id="vite-plugin-pwa:register-sw" src="${dev ? options.base : options.buildBase}${FILE_SW_REGISTER}" ${hasDefer ? 'defer' : ''}></script>`
+  }
 
   return undefined
 }

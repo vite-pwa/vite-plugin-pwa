@@ -42,7 +42,7 @@ export function _generateBundle({ options, viteConfig, useImportRegister }: PWAP
   if (options.injectRegister === 'auto')
     options.injectRegister = useImportRegister ? null : 'script'
 
-  if (options.injectRegister === 'script' && !existsSync(resolve(viteConfig.publicDir, FILE_SW_REGISTER))) {
+  if ((options.injectRegister === 'script' || options.injectRegister === 'strict-defer') && !existsSync(resolve(viteConfig.publicDir, FILE_SW_REGISTER))) {
     bundle[FILE_SW_REGISTER] = {
       // @ts-expect-error: for Vite 3 support, Vite 4 has removed `isAsset` property
       isAsset: true,
@@ -101,7 +101,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       // 3: otherwise we always return the info
       let type: WorkerType = 'classic'
       let script: string | undefined
-      let shouldRegisterSW = options.injectRegister === 'inline' || options.injectRegister === 'script'
+      let shouldRegisterSW = options.injectRegister === 'inline' || options.injectRegister === 'script' || options.injectRegister === 'strict-defer'
       if (ctx.devEnvironment && ctx.options.devOptions.enabled === true) {
         type = ctx.options.devOptions.type ?? 'classic'
         script = generateRegisterDevSW(ctx.options.base)
