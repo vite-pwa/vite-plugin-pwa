@@ -5,7 +5,7 @@ import type { ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
 import type { ManifestOptions, ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { configureStaticAssets } from './assets'
-import { resolveBasePath, slash} from './utils'
+import { resolveBasePath, slash } from './utils'
 import { defaultInjectManifestVitePlugins } from './constants'
 
 function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, outDir: string, filename: string): {
