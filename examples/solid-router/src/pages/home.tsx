@@ -22,7 +22,9 @@ export default function Home() {
     <div class={styles.Home}>
       <p>
         <button type="button" onClick={() => setCount(count() + 1)}>
-          count is: {count}
+          count is:
+          {' '}
+          {count}
         </button>
       </p>
       <br />
@@ -30,9 +32,9 @@ export default function Home() {
         <input value={name()} onChange={handleChange} type="text" aria-label="What's your name?" placeholder="What's your name?" />
         <button type="submit">GO</button>
       </form>
-      <br/>
+      <br />
       <a href="/about">About</a>
-      <br/>
+      <br />
     </div>
   )
 }

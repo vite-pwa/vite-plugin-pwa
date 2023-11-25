@@ -23,7 +23,9 @@ function Home() {
     <div className="Home">
       <p>
         <button type="button" onClick={() => setCount(count => count + 1)}>
-            count is: {count}
+          count is:
+          {' '}
+          {count}
         </button>
       </p>
       <br />
@@ -31,9 +33,9 @@ function Home() {
         <input value={name} onChange={handleChange} type="text" aria-label="What's your name?" placeholder="What's your name?" />
         <button type="submit">GO</button>
       </form>
-      <br/>
+      <br />
       <a href="/about">About</a>
-      <br/>
+      <br />
     </div>
   )
 }

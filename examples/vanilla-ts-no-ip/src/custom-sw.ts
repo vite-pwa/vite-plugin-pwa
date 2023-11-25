@@ -40,9 +40,9 @@ if (import.meta.env.PROD) {
   registerRoute(
     ({ request }) =>
       request.destination === 'style'
-            || request.destination === 'manifest'
-            || request.destination === 'script'
-            || request.destination === 'worker',
+      || request.destination === 'manifest'
+      || request.destination === 'script'
+      || request.destination === 'worker',
     new StaleWhileRevalidate({
       cacheName: 'assets',
       plugins: [

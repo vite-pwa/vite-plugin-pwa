@@ -10,7 +10,6 @@ precacheAndRoute(self.__WB_MANIFEST)
 // clean old assets
 cleanupOutdatedCaches()
 
-
 let allowlist: undefined | RegExp[]
 if (import.meta.env.DEV)
   allowlist = [/^\/$/]

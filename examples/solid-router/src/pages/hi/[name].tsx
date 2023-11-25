@@ -7,8 +7,17 @@ export default function Hi() {
 
   return (
     <div>
-      <div><strong>/hi</strong> route, built at: { date }</div>
-      <p>Hi: { data.name }</p>
+      <div>
+        <strong>/hi</strong>
+        {' '}
+        route, built at:
+        {' '}
+        { date }
+      </div>
+      <p>
+        Hi:
+        { data.name }
+      </p>
       <br />
       <Link href="/">
         Go Home

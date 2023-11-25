@@ -20,7 +20,7 @@ async function loadWorkboxBuild(): Promise<typeof import('workbox-build')> {
     return workbox.default ?? workbox
   }
   catch (_) {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    // eslint-disable-next-line ts/no-require-imports
     return require('workbox-build')
   }
 }

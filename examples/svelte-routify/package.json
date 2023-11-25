@@ -1,8 +1,8 @@
 {
   "name": "example-svelte-routify",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
-  "type": "module",
   "scripts": {
     "dev": "rimraf dev-dist && routify -b && DEBUG=vite-plugin-pwa SW_DEV=true vite --force",
     "dev-claims": "rimraf dev-dist && routify -b && DEBUG=vite-plugin-pwa SW_DEV=true CLAIMS=true SW=true vite --force",

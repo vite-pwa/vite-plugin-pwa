@@ -5,10 +5,10 @@ const autoUpdateMode = '__SW_AUTO_UPDATE__'
 // __SW_SELF_DESTROYING__ will be replaced by virtual module
 const selfDestroying = '__SW_SELF_DESTROYING__'
 
-// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+// eslint-disable-next-line ts/prefer-ts-expect-error
 // @ts-ignore replace at build
 const auto = autoUpdateMode === 'true'
-// eslint-disable-next-line @typescript-eslint/prefer-ts-expect-error
+// eslint-disable-next-line ts/prefer-ts-expect-error
 // @ts-ignore replace at build time
 const autoDestroy = selfDestroying === 'true'
 

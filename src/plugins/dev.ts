@@ -13,7 +13,8 @@ import {
   DEV_REGISTER_SW_NAME,
   DEV_SW_NAME,
   DEV_SW_VIRTUAL,
-  FILE_SW_REGISTER, RESOLVED_DEV_SW_VIRTUAL,
+  FILE_SW_REGISTER,
+  RESOLVED_DEV_SW_VIRTUAL,
 } from '../constants'
 import type { ResolvedVitePWAOptions } from '../types'
 import { generateServiceWorker } from '../modules'
@@ -154,7 +155,8 @@ export function DevPlugin(ctx: PWAPluginContext) {
                     // we only include navigateFallback: add revision to remove workbox-build warning
                     additionalManifestEntries: navigateFallback
                       ? [{
-                          url: navigateFallback, revision: Math.random().toString(32),
+                          url: navigateFallback,
+                          revision: Math.random().toString(32),
                         }]
                       : undefined,
                     cleanupOutdatedCaches: true,

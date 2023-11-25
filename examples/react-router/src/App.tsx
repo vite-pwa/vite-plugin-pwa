@@ -11,7 +11,10 @@ function App() {
     <main className="App">
       <img src="/favicon.svg" alt="PWA Logo" width="60" height="60" />
       <h1 className="Home-title">PWA React!</h1>
-      <div className="Home-built">Built at: {date}</div>
+      <div className="Home-built">
+        Built at:
+        {date}
+      </div>
       <Outlet />
       <ReloadPrompt />
     </main>
