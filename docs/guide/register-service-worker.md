@@ -22,7 +22,6 @@ export default defineConfig({
 The `injectRegister` plugin configuration option, will control how to register the service worker in your application:
 - `inline`: injects a simple register script, inlined in the application entry point
 - `script`: injects a `script` tag in the `head` with the `service worker` to a generated simple register
-- `scrip-defer`: injects a `script` tag with `defer` attribute in the `head` with the `service worker` to a generated simple register
 - `null` (manual): do nothing, you will need to register the service worker yourself, or import any of the virtual modules exposed by the plugin
 - **`auto` (default value)**: depends on whether you use any of the virtual modules exposed by the plugin, it will do nothing or switch to `script` mode
 
@@ -48,7 +47,7 @@ When configuring `injectRegister: 'inline'` in the plugin configuration, the plu
 
 ## Script Registration
 
-When configuring `injectRegister: 'script'` or `injectRegister: 'script-defer'` in the plugin configuration, the plugin will generate a `registerSW.js` script adding it to your application entry point:
+When configuring `injectRegister: 'script'` in the plugin configuration, the plugin will generate a `registerSW.js` script adding it to your application entry point:
 ::: details **head script**
 ```html
 <head>
