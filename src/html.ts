@@ -32,7 +32,7 @@ export function injectServiceWorker(html: string, options: ResolvedVitePWAOption
     if (script) {
       return html.replace(
         '</head>',
-          `${manifest}${script}</head>`,
+        `${manifest}${script}</head>`,
       )
     }
   }
@@ -57,8 +57,10 @@ export function generateWebManifest(options: ResolvedVitePWAOptions, dev: boolea
 export function generateRegisterSW(options: ResolvedVitePWAOptions, dev: boolean) {
   if (options.injectRegister === 'inline')
     return `<script id="vite-plugin-pwa:inline-sw">${generateSimpleSWRegister(options, dev)}</script>`
-  else if (options.injectRegister === 'script')
-    return `<script id="vite-plugin-pwa:register-sw" src="${dev ? options.base : options.buildBase}${FILE_SW_REGISTER}"></script>`
+  else if (options.injectRegister === 'script' || options.injectRegister === 'script-defer') {
+    const hasDefer = options.injectRegister === 'script-defer'
+    return `<script id="vite-plugin-pwa:register-sw" src="${dev ? options.base : options.buildBase}${FILE_SW_REGISTER}" ${hasDefer ? 'defer' : ''}></script>`
+  }
 
   return undefined
 }
@@ -72,9 +74,10 @@ registerDevSW();
 }
 
 export function generateSWHMR() {
+  // defer attribute: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes
   return `
-import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ inline, inlinePath, registerPath, scope, swType = 'classic' }) => {
-  if (inline) {
+import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ mode, inlinePath, registerPath, scope, swType = 'classic' }) => {
+  if (mode == 'inline') {
     if('serviceWorker' in navigator) {
       navigator.serviceWorker.register(inlinePath, { scope, type: swType });
     }
@@ -82,6 +85,7 @@ import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ inline, inlinePath, registerPat
   else {
     const registerSW = document.createElement('script');
     registerSW.setAttribute('id', 'vite-plugin-pwa:register-sw');
+    if (mode === 'script-defer') registerSW.setAttribute('defer', 'defer');
     registerSW.setAttribute('src', registerPath);
     document.head.appendChild(registerSW);
   }

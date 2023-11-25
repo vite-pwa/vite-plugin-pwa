@@ -2,7 +2,7 @@ import process from 'node:process'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 
-const injectRegister = (process.env.SW_INLINE ?? 'auto') as 'inline' | 'auto' | 'script'
+const injectRegister = (process.env.SW_INLINE ?? 'auto') as 'inline' | 'auto' | 'script' | 'script-defer'
 const selfDestroying = process.env.SW_DESTROY === 'true'
 
 export default defineConfig({
