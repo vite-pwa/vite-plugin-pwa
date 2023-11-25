@@ -202,7 +202,7 @@ async function resolveDevDistFolder(options: ResolvedVitePWAOptions, viteConfig:
 }
 
 async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
-  if (options.injectRegister === 'script') {
+  if (options.injectRegister === 'script' || options.injectRegister === 'script-defer') {
     const devDist = await resolveDevDistFolder(options, viteConfig)
     if (!existsSync(devDist))
       mkdirSync(devDist)
@@ -236,7 +236,7 @@ function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): 
         type: 'custom',
         event: DEV_REGISTER_SW_NAME,
         data: {
-          inline: options.injectRegister === 'inline',
+          mode: options.injectRegister,
           scope,
           inlinePath: `${base}${DEV_SW_NAME}`,
           registerPath: `${base}${FILE_SW_REGISTER}`,
