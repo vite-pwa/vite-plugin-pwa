@@ -95,7 +95,7 @@ export interface VitePWAOptions {
    *
    * @default 'auto'
    */
-  injectRegister: 'inline' | 'script' | 'strict-defer' | 'auto' | null | false
+  injectRegister: 'inline' | 'script' | 'script-defer' | 'auto' | null | false
   /**
    * Mode for the virtual register.
    * Does NOT available for `injectRegister` set to `inline` or `script`
