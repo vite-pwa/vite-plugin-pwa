@@ -16,6 +16,7 @@
     "build-auto": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DEV=true SW_INLINE=auto vite build --force",
     "build-inline": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DEV=true SW_INLINE=inline vite build --force",
     "build-script": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DEV=true SW_INLINE=script vite build --force",
+    "build-script-defer": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DEV=true SW_INLINE=script-defer vite build --force",
     "serve": "serve dist"
   },
   "devDependencies": {

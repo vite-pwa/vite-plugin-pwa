@@ -117,6 +117,7 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
         // hint when required
         shouldRegisterSW,
         inline: options.injectRegister === 'inline',
+        mode: mode === 'auto' ? 'script' : mode,
         scope: options.scope,
         inlinePath: `${base}${ctx.devEnvironment ? DEV_SW_NAME : options.filename}`,
         registerPath: `${base}${FILE_SW_REGISTER}`,

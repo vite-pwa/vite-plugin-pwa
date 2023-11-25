@@ -410,9 +410,17 @@ export interface WebManifestData {
 export interface RegisterSWData {
   shouldRegisterSW: boolean
   /**
-   * When this flag is `true` the service worker must be registered via inline script otherwise registered via script with src attribute `registerSW.js` .
+   * When this flag is `true` the service worker must be registered via inline script otherwise registered via script with src attribute `registerSW.js`.
+   *
+   * @deprecated From `v0.17.2` this flag is deprecated, use `mode` instead.
    */
   inline: boolean
+  /**
+   * When this flag is `inline` the service worker must be registered via inline script otherwise registered via script with src attribute `registerSW.js`.
+   *
+   * Otherwise, the service worker should be registered using the `script` mode.
+   */
+  mode: 'inline' | 'script' | 'script-defer'
   /**
    * The path for the inline script: will contain the service worker url.
    */
