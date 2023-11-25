@@ -417,8 +417,6 @@ export interface RegisterSWData {
   inline: boolean
   /**
    * When this flag is `inline` the service worker must be registered via inline script otherwise registered via script with src attribute `registerSW.js`.
-   *
-   * Otherwise, the service worker should be registered using the `script` mode.
    */
   mode: 'inline' | 'script' | 'script-defer'
   /**
