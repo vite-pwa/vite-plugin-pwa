@@ -42,16 +42,27 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
 export async function generateServiceWorker(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig): Promise<BuildResult> {
   if (options.selfDestroying) {
     const selfDestroyingSW = `
-self.addEventListener('install', function(e) {
+self.addEventListener('install', (e) => {
   self.skipWaiting();
 });
-self.addEventListener('activate', function(e) {
+self.addEventListener('activate', (e) => {
   self.registration.unregister()
-    .then(function() {
-      return self.clients.matchAll();
+    .then(() => self.clients.matchAll())
+    .then((clients) => {
+      clients.forEach((client) => {
+        if (client instanceof WindowClient)
+          client.navigate(client.url);
+      });
+      return Promise.resolve();
     })
-    .then(function(clients) {
-      clients.forEach(client => client.navigate(client.url))
+    .then(() => {
+      self.caches.keys().then((cacheNames) => {
+        Promise.all(
+          cacheNames.map((cacheName) => {
+            return self.caches.delete(cacheName);
+          }),
+        );
+      })
     });
 });
     `
