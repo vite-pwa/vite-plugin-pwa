@@ -32,7 +32,11 @@ interface VirtualPwaInfo {
     linkTag: string
   }
   registerSW?: {
+    /**
+     * @deprecated use `mode` instead
+     */
     inline: boolean
+    mode: 'inline' | 'script' | 'script-defer'
     inlinePath: string
     registerPath: string
     scope: string
@@ -61,9 +65,10 @@ function generatePwaInfo(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
   if (registerSWData) {
     const scriptTag = registerSWData.toScriptTag()
     if (scriptTag) {
-      const { inline, inlinePath, registerPath, type, scope } = registerSWData
+      const { inline, mode, inlinePath, registerPath, type, scope } = registerSWData
       entry.registerSW = {
         inline,
+        mode,
         inlinePath,
         registerPath,
         type,

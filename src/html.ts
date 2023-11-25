@@ -55,11 +55,12 @@ export function generateWebManifest(options: ResolvedVitePWAOptions, dev: boolea
 }
 
 export function generateRegisterSW(options: ResolvedVitePWAOptions, dev: boolean) {
-  if (options.injectRegister === 'inline')
+  if (options.injectRegister === 'inline') {
     return `<script id="vite-plugin-pwa:inline-sw">${generateSimpleSWRegister(options, dev)}</script>`
+  }
   else if (options.injectRegister === 'script' || options.injectRegister === 'script-defer') {
     const hasDefer = options.injectRegister === 'script-defer'
-    return `<script id="vite-plugin-pwa:register-sw" src="${dev ? options.base : options.buildBase}${FILE_SW_REGISTER}" ${hasDefer ? 'defer' : ''}></script>`
+    return `<script id="vite-plugin-pwa:register-sw" src="${dev ? options.base : options.buildBase}${FILE_SW_REGISTER}"${hasDefer ? ' defer' : ''}></script>`
   }
 
   return undefined
