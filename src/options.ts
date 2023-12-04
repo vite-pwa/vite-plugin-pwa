@@ -202,7 +202,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
 
   // calculate hash only when required
   const calculateHash = !resolvedVitePWAOptions.disable
-    && resolvedVitePWAOptions.manifest
+    && (resolvedVitePWAOptions.manifest || resolvedVitePWAOptions.includeAssets)
     && (viteConfig.command === 'build' || resolvedVitePWAOptions.devOptions.enabled)
 
   if (calculateHash)
