@@ -228,7 +228,7 @@ export interface IconResource {
   /**
    * **NOTE**: string values for backward compatibility with the old type.
    */
-  purpose?: string | IconPurpose | IconPurpose[]
+  purpose?: IconPurpose | (string & {}) | IconPurpose[]
 }
 
 export interface ManifestOptions {
