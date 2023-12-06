@@ -14,6 +14,9 @@ importers:
       fast-glob:
         specifier: ^3.3.2
         version: 3.3.2
+      kolorist:
+        specifier: ^1.8.0
+        version: 1.8.0
       pretty-bytes:
         specifier: ^6.1.1
         version: 6.1.1
@@ -57,9 +60,6 @@ importers:
       esno:
         specifier: 0.17.0
         version: 0.17.0
-      kolorist:
-        specifier: ^1.8.0
-        version: 1.8.0
       preact:
         specifier: ^10.19.2
         version: 10.19.2
@@ -7504,7 +7504,6 @@ packages:
 
   /kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
-    dev: true
 
   /leven@3.1.0:
     resolution: {integrity: sha512-qsda+H8jTaUaN/x5vzW2rzc+8Rw4TAQ/4KjB46IwK5VH+IlVeeeje/EoZRpiXvIqjFgK84QffqPztGI3VBLG1A==}

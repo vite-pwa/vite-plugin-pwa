@@ -111,6 +111,7 @@
   "dependencies": {
     "debug": "^4.3.4",
     "fast-glob": "^3.3.2",
+    "kolorist": "^1.8.0",
     "pretty-bytes": "^6.1.1",
     "workbox-build": "^7.0.0",
     "workbox-window": "^7.0.0"
@@ -127,7 +128,6 @@
     "bumpp": "^9.2.0",
     "eslint": "^8.54.0",
     "esno": "0.17.0",
-    "kolorist": "^1.8.0",
     "preact": "^10.19.2",
     "prompts": "^2.4.2",
     "publint": "^0.2.5",
