@@ -218,6 +218,15 @@ export type Display = 'fullscreen' | 'standalone' | 'minimal-ui' | 'browser'
 export type DisplayOverride = Display | 'window-controls-overlay'
 export type IconPurpose = 'monochrome' | 'maskable' | 'any'
 
+interface Nothing {}
+
+/**
+ * type StringLiteralUnion<'maskable'> = 'maskable' | string
+ * This has auto completion whereas `'maskable' | string` doesn't
+ * Adapted from https://github.com/microsoft/TypeScript/issues/29729
+ */
+export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
+
 /**
  * @see https://w3c.github.io/manifest/#manifest-image-resources
  */
@@ -228,7 +237,7 @@ export interface IconResource {
   /**
    * **NOTE**: string values for backward compatibility with the old type.
    */
-  purpose?: IconPurpose | (string & {}) | IconPurpose[]
+  purpose?: StringLiteralUnion<IconPurpose> | IconPurpose[]
 }
 
 export interface ManifestOptions {
