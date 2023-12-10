@@ -1,6 +1,9 @@
+import type { Buffer } from 'node:buffer'
 import type { Plugin, ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle, RollupOptions } from 'rollup'
+import type { AppleSplashScreens, BuiltInPreset, Assets as Preset } from '@vite-pwa/assets-generator/config'
+import type { HtmlLinkPreset } from '@vite-pwa/assets-generator/api'
 
 export type InjectManifestVitePlugins = string[] | ((vitePluginIds: string[]) => string[])
 export type CustomInjectManifestOptions = InjectManifestOptions & {
@@ -35,6 +38,7 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
 }
 
 export interface PWAIntegration {
+  disableAssets?: boolean
   beforeBuildServiceWorker?: (options: ResolvedVitePWAOptions) => void | Promise<void>
   closeBundleOrder?: 'pre' | 'post' | null
   configureOptions?: (
@@ -183,9 +187,17 @@ export interface VitePWAOptions {
    *
    * For example, if your base path is `/`, then, in your Laravel PWA configuration use `buildPath: '/build/'`.
    *
-   * By default: `vite.base`.
+   * @default `vite.base`.
    */
   buildBase?: string
+
+  /**
+   * PWA assets generation and injection.
+   *
+   * @experimental
+   * @default false
+   */
+  assets?: false | PWAAssets
 }
 
 export interface ResolvedServiceWorkerOptions {
@@ -217,6 +229,54 @@ export type LaunchHandlerClientMode = 'auto' | 'focus-existing' | 'navigate-exis
 export type Display = 'fullscreen' | 'standalone' | 'minimal-ui' | 'browser'
 export type DisplayOverride = Display | 'window-controls-overlay'
 export type IconPurpose = 'monochrome' | 'maskable' | 'any'
+
+/**
+ * PWA assets generation and injection options.
+ */
+export interface PWAAssets {
+  /**
+   * Image should be located in `publicDir` folder (`public` by default).
+   *
+   * @see https://vitejs.dev/config/shared-options.html#publicdir
+   */
+  image: string
+  /**
+   * The preset to use.
+   */
+  preset: BuiltInPreset | Preset
+  /**
+   * The preset for the favicons.
+   *
+   * If using the built-in preset option (`minimal` or `minimal-2023`), this option will be ignored (will be set to `default` or `2023` for `minimal` and `minimal-2023` respectively).
+   *
+   * @default 'default'
+   */
+  faviconPreset?: HtmlLinkPreset
+  /**
+   * Should the generated PWA assets be copied to public folder or emit them as assets?.
+   *
+   * @default true
+   */
+  copyToPublicDir?: boolean
+  appleSplashScreens?: AppleSplashScreens
+}
+
+export interface IconAsset {
+  file: string
+  path: string
+  buffer: () => Promise<Buffer>
+  save: () => Promise<void>
+}
+
+export interface FaviconAsset extends IconAsset {
+  link: string
+}
+
+export interface ResolvedPWAAssets {
+  favicons: Map<string, FaviconAsset>
+  pwaIcons: Map<string, IconAsset>
+  appleTouchIcon?: FaviconAsset
+}
 
 interface Nothing {}
 

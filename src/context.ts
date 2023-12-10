@@ -1,5 +1,5 @@
 import type { ResolvedConfig } from 'vite'
-import type { ResolvedVitePWAOptions, VitePWAOptions } from './types'
+import type { ResolvedPWAAssets, ResolvedVitePWAOptions, VitePWAOptions } from './types'
 
 export interface PWAPluginContext {
   viteConfig: ResolvedConfig
@@ -7,6 +7,8 @@ export interface PWAPluginContext {
   options: ResolvedVitePWAOptions
   useImportRegister: boolean
   devEnvironment: boolean
+  disableAssets: boolean
+  assets: Promise<ResolvedPWAAssets | undefined>
 }
 
 export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginContext {
@@ -16,5 +18,7 @@ export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginCo
     viteConfig: undefined!,
     useImportRegister: false,
     devEnvironment: false,
+    disableAssets: true,
+    assets: Promise.resolve(undefined),
   }
 }

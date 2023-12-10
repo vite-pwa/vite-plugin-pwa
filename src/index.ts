@@ -1,6 +1,7 @@
 import type { Plugin } from 'vite'
 import { createContext } from './context'
 import type { VitePWAOptions } from './types'
+import { AssetsPlugin } from './plugins/assets'
 import { BuildPlugin } from './plugins/build'
 import { DevPlugin } from './plugins/dev'
 import { MainPlugin } from './plugins/main'
@@ -15,6 +16,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
     InfoPlugin(ctx, api),
     BuildPlugin(ctx),
     DevPlugin(ctx),
+    AssetsPlugin(ctx),
   ]
 }
 

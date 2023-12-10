@@ -1,0 +1,21 @@
+{
+  "name": "assets-generator",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "sharp": "^0.32.6",
+    "sharp-ico": "^0.1.5",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vite-plugin-pwa": "workspace:*",
+    "@vite-pwa/assets-generator": "^0.1.0",
+    "workbox-window": "^7.0.0"
+  }
+}

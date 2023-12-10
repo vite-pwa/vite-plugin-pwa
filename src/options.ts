@@ -59,6 +59,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     selfDestroying = false,
     integration = {},
     buildBase,
+    assets = false,
   } = options
 
   const basePath = resolveBasePath(base)
@@ -198,6 +199,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
       rollupOptions,
       format: rollupFormat,
     },
+    assets,
   }
 
   // calculate hash only when required

@@ -1,5 +1,5 @@
 export const commands = [
-  'npx tsup src/index.ts --dts --target esnext --format cjs,esm',
+  'npx tsup src/index.ts --dts --target esnext --external @vite-pwa/assets-generator --format cjs,esm',
   'npx tsup src/client/build/register.ts --target esnext --format esm -d dist/client/build',
   'npx tsup src/client/build/vue.ts --external vue --target esnext --format esm -d dist/client/build',
   'npx tsup src/client/build/svelte.ts --external svelte/store --target esnext --format esm -d dist/client/build',
