@@ -104,7 +104,7 @@ export function loadInstructions(ctx: PWAPluginContext) {
           ?? assetsInstructions.appleSplashScreen[path]
 
         if (result)
-          return [path, result.mimeType, result.buffer()]
+          return { path, mimeType: result.mimeType, buffer: result.buffer() }
       },
       resolveHtmlLinks() {
         return generateHtmlMarkup(assetsInstructions)

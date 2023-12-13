@@ -30,8 +30,8 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         if (!icon)
           return next()
 
-        const buffer = await icon[2]
-        res.setHeader('Content-Type', icon[1])
+        const buffer = await icon.buffer
+        res.setHeader('Content-Type', icon.mimeType)
         res.setHeader('Content-Length', buffer.length)
         res.setHeader('Cache-Control', 'public,max-age=0,must-revalidate')
         res.statusCode = 200

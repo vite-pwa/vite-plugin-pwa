@@ -516,8 +516,12 @@ export interface RegisterSWData {
   toScriptTag: () => string | undefined
 }
 
-// eslint-disable-next-line node/prefer-global/buffer
-export type ResolvedIconAsset = [path: string, mimeType: string, buffer: Promise<Buffer>]
+export interface ResolvedIconAsset {
+  path: string
+  mimeType: string
+  // eslint-disable-next-line node/prefer-global/buffer
+  buffer: Promise<Buffer>
+}
 
 export interface PWAAssetsGenerator {
   generate(): Promise<void>
