@@ -28,11 +28,11 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
       ctx.viteConfig = config
       ctx.userOptions?.integration?.configureOptions?.(config, ctx.userOptions)
       ctx.options = await resolveOptions(ctx.userOptions, config)
-      try {
-        ctx.assets = await import('../asset-generator').then(({ loadInstructions }) => loadInstructions(ctx))
-      }
-      catch (e) {
-        if (ctx.options.assets) {
+      if (ctx.options.assets) {
+        try {
+          ctx.assets = await import('../asset-generator').then(({ loadInstructions }) => loadInstructions(ctx))
+        }
+        catch (e) {
           console.error([
             '',
             cyan(`PWA v${ctx.version}`),
