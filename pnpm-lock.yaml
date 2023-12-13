@@ -49,8 +49,8 @@ importers:
         specifier: ^6.11.0
         version: 6.11.0(@typescript-eslint/parser@6.11.0)(eslint@8.54.0)(typescript@5.2.2)
       '@vite-pwa/assets-generator':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.2.1
+        version: 0.2.1
       bumpp:
         specifier: ^9.2.0
         version: 9.2.0
@@ -158,8 +158,8 @@ importers:
   examples/assets-generator:
     devDependencies:
       '@vite-pwa/assets-generator':
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: ^0.2.1
+        version: 0.2.1
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -4090,7 +4090,7 @@ packages:
     engines: {node: '>=14'}
     dependencies:
       '@unocss/core': 0.45.18
-      unconfig: 0.3.6
+      unconfig: 0.3.11
     dev: true
 
   /@unocss/core@0.45.18:
@@ -4209,8 +4209,8 @@ packages:
       vite: 3.1.0
     dev: true
 
-  /@vite-pwa/assets-generator@0.1.0:
-    resolution: {integrity: sha512-2JZ4BTo/1as0yUZuXyJmUyo7dXaibhVHkvlGKstW3epnSNJCakqVO6v2eps7F/EjzBB3HUZtkWixIR8ncZzo+g==}
+  /@vite-pwa/assets-generator@0.2.1:
+    resolution: {integrity: sha512-NoFsE/XzmkF3WDr+1NjbjdP4GDBZMPQ49eFS33H8FlIH50g4AAK5+W3Y2xeRy7tKE5nB7MLYybesSqk+zD4L0Q==}
     engines: {node: '>=16.14.0'}
     hasBin: true
     dependencies:
@@ -5561,10 +5561,6 @@ packages:
       has-property-descriptors: 1.0.0
       object-keys: 1.1.1
     dev: false
-
-  /defu@6.1.0:
-    resolution: {integrity: sha512-pOFYRTIhoKujrmbTRhcW5lYQLBXw/dlTwfI8IguF1QCDJOcJzNH1w+YFjxqy6BAuJrClTy6MUE8q+oKJ2FLsIw==}
-    dev: true
 
   /defu@6.1.2:
     resolution: {integrity: sha512-+uO4+qr7msjNNWKYPHqN/3+Dx3NFkmIzayk2L1MyZQlvgZb/J1A0fo410dpKrN2SnqFjt8n4JL8fDJE0wIgjFQ==}
@@ -6944,7 +6940,7 @@ packages:
     resolution: {integrity: sha512-HsLoS07HiQ5oqvObOI+Qb2tyZH4Gj5nYGfF9qQcZNrPw+uEFhdXtgJr01aO2pWadGHucajYDLxxbtQkm97ON2A==}
     hasBin: true
     dependencies:
-      colorette: 2.0.19
+      colorette: 2.0.20
       defu: 6.1.2
       https-proxy-agent: 5.0.1
       mri: 1.2.0
@@ -7529,11 +7525,6 @@ packages:
       supports-color: 7.2.0
     dev: false
 
-  /jiti@1.15.0:
-    resolution: {integrity: sha512-cClBkETOCVIpPMjX3ULlivuBvmt8l2Xtz+SHrULO06OqdtV0QFR2cuhc4FJnXByjUUX4CY0pl1nph0aFh9D3yA==}
-    hasBin: true
-    dev: true
-
   /jiti@1.18.2:
     resolution: {integrity: sha512-QAdOptna2NYiSSpv0O/BwoHBSmz4YhpzJHyi+fnMRTXFjp7B8i/YG5Z8IfusxB1ufjcD2Sre1F3R+nX3fvy7gg==}
     hasBin: true
@@ -8030,7 +8021,7 @@ packages:
   /mlly@1.4.2:
     resolution: {integrity: sha512-i/Ykufi2t1EZ6NaPLdfnZk2AX8cs0d+mTzVKuPfqPKPatxLApaBoxJQ9x1/uckXtrS/U5oisPMDkNs0yQTaBRg==}
     dependencies:
-      acorn: 8.10.0
+      acorn: 8.11.2
       pathe: 1.1.1
       pkg-types: 1.0.3
       ufo: 1.3.0
@@ -10162,14 +10153,6 @@ packages:
       defu: 6.1.2
       jiti: 1.21.0
       mlly: 1.4.2
-    dev: true
-
-  /unconfig@0.3.6:
-    resolution: {integrity: sha512-JWefWyjLrDAbzs30sFkzcE9YpvAhN9+UPMZBwnNUmaY9X7QhI+wCGP4hoEWfZDzvkP+WIaZDPcMUJjarpxFvKg==}
-    dependencies:
-      '@antfu/utils': 0.5.2
-      defu: 6.1.0
-      jiti: 1.15.0
     dev: true
 
   /undici@5.14.0:

@@ -144,5 +144,8 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       if (result != null)
         options[configField].additionalManifestEntries = result
     },
+    assetsGenerator() {
+      return ctx.assets()
+    },
   }
 }

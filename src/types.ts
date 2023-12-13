@@ -1,9 +1,6 @@
-import type { Buffer } from 'node:buffer'
 import type { Plugin, ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle, RollupOptions } from 'rollup'
-import type { AppleSplashScreens, BuiltInPreset, Assets as Preset } from '@vite-pwa/assets-generator/config'
-import type { HtmlLinkPreset } from '@vite-pwa/assets-generator/api'
 
 export type InjectManifestVitePlugins = string[] | ((vitePluginIds: string[]) => string[])
 export type CustomInjectManifestOptions = InjectManifestOptions & {
@@ -194,10 +191,42 @@ export interface VitePWAOptions {
   /**
    * PWA assets generation and injection.
    *
+   * If enabled via boolean value, the plugin will search for the pwa assets generator files in the root directory of your project:
+   * - pwa-assets.config.js
+   * - pwa-assets.config.mjs
+   * - pwa-assets.config.cjs
+   * - pwa-assets.config.cts
+   * - pwa-assets.config.mts
+   *
+   * If enabled via a custom string path, it should be relative to the root directory of your project.
+   *
    * @experimental
    * @default false
+   * @see https://vite-pwa-org.netlify.app/assets-generator/cli.html#configurations
    */
-  assets?: false | PWAAssets
+  assets?: {
+    /**
+     * PWA assets generation and injection.
+     *
+     * If `true` the plugin will search for the pwa assets generator files in the root directory of your project:
+     * - pwa-assets.config.js
+     * - pwa-assets.config.mjs
+     * - pwa-assets.config.cjs
+     * - pwa-assets.config.cts
+     * - pwa-assets.config.mts
+     *
+     * If enabled via a custom string path, it should be relative to the root directory of your project.
+     *
+     * @experimental
+     * @default false
+     * @see https://vite-pwa-org.netlify.app/assets-generator/cli.html#configurations
+     */
+    path?: true | string
+    /**
+     * PWA Assets Generation and Injection options
+     */
+    options: PWAAssets
+  }
 }
 
 export interface ResolvedServiceWorkerOptions {
@@ -206,7 +235,7 @@ export interface ResolvedServiceWorkerOptions {
   rollupOptions: RollupOptions
 }
 
-export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
+export interface ResolvedVitePWAOptions extends Required<Omit<VitePWAOptions, 'assets'>> {
   swSrc: string
   swDest: string
   workbox: GenerateSWOptions
@@ -214,6 +243,7 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   rollupFormat: 'es' | 'iife'
   vitePlugins: InjectManifestVitePlugins
   injectManifestRollupOptions: ResolvedServiceWorkerOptions
+  assets: VitePWAOptions['assets']
 }
 
 export interface ShareTargetFiles {
@@ -235,47 +265,23 @@ export type IconPurpose = 'monochrome' | 'maskable' | 'any'
  */
 export interface PWAAssets {
   /**
-   * Image should be located in `publicDir` folder (`public` by default).
-   *
-   * @see https://vitejs.dev/config/shared-options.html#publicdir
-   */
-  image: string
-  /**
-   * The preset to use.
-   */
-  preset: BuiltInPreset | Preset
-  /**
-   * The preset for the favicons.
-   *
-   * If using the built-in preset option (`minimal` or `minimal-2023`), this option will be ignored (will be set to `default` or `2023` for `minimal` and `minimal-2023` respectively).
-   *
-   * @default 'default'
-   */
-  faviconPreset?: HtmlLinkPreset
-  /**
-   * Should the generated PWA assets be copied to public folder or emit them as assets?.
+   * Should the plugin include html head links?
    *
    * @default true
    */
-  copyToPublicDir?: boolean
-  appleSplashScreens?: AppleSplashScreens
-}
-
-export interface IconAsset {
-  file: string
-  path: string
-  buffer: () => Promise<Buffer>
-  save: () => Promise<void>
-}
-
-export interface FaviconAsset extends IconAsset {
-  link: string
-}
-
-export interface ResolvedPWAAssets {
-  favicons: Map<string, FaviconAsset>
-  pwaIcons: Map<string, IconAsset>
-  appleTouchIcon?: FaviconAsset
+  includeHtmlHeadLinks?: boolean
+  /**
+   * Should the plugin override the PWA web manifest icons' entry?
+   *
+   * @default false
+   */
+  overrideManifestIcons?: boolean
+  /**
+   * Shoud the PWA web manifest `theme_color` be injected in the html head?
+   *
+   * @default false
+   */
+  injectThemeColor?: boolean
 }
 
 interface Nothing {}
@@ -510,6 +516,18 @@ export interface RegisterSWData {
   toScriptTag: () => string | undefined
 }
 
+// eslint-disable-next-line node/prefer-global/buffer
+export type ResolvedIconAsset = [path: string, mimeType: string, buffer: Promise<Buffer>]
+
+export interface PWAAssetsGenerator {
+  generate(): Promise<void>
+  findIconAsset(path: string): (ResolvedIconAsset | undefined) | Promise<ResolvedIconAsset | undefined>
+  resolveHtmlLinks(): string[] | Promise<string[]>
+  transformIndexHtmlHandler: (html: string) => string | Promise<string>
+  injectManifestIcons: () => void | Promise<void>
+  lookupPWAAssetInstructions(): unknown
+}
+
 export interface VitePluginPWAAPI {
   /**
    * Is the plugin disabled?
@@ -542,6 +560,7 @@ export interface VitePluginPWAAPI {
    * Explicitly generate the PWA services worker.
    */
   generateSW(): Promise<void>
+  assetsGenerator(): Promise<PWAAssetsGenerator | undefined>
 }
 
 export type ExtendManifestEntriesHook = (manifestEntries: (string | ManifestEntry)[]) => (string | ManifestEntry)[] | undefined

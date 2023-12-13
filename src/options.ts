@@ -59,7 +59,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     selfDestroying = false,
     integration = {},
     buildBase,
-    assets = false,
+    assets,
   } = options
 
   const basePath = resolveBasePath(base)

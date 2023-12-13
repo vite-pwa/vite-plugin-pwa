@@ -21,33 +21,13 @@ export default defineConfig({
         name: 'Vite PWA',
         short_name: 'Vite PWA',
         theme_color: '#ffffff',
-        icons: [
-          {
-            src: 'pwa-64x64.png',
-            sizes: '64x64',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: 'pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: 'maskable-icon-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'maskable',
-          },
-        ],
       },
       assets: {
-        preset: 'minimal-2023',
-        image: 'favicon.svg',
+        options: {
+          includeHtmlHeadLinks: true,
+          overrideManifestIcons: true,
+          injectThemeColor: true,
+        },
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,svg,ico}'],

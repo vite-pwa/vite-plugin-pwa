@@ -1,24 +1,25 @@
 import type { ResolvedConfig } from 'vite'
-import type { ResolvedPWAAssets, ResolvedVitePWAOptions, VitePWAOptions } from './types'
+import { version } from '../package.json'
+import type { PWAAssetsGenerator, ResolvedVitePWAOptions, VitePWAOptions } from './types'
 
 export interface PWAPluginContext {
+  version: string
   viteConfig: ResolvedConfig
   userOptions: Partial<VitePWAOptions>
   options: ResolvedVitePWAOptions
   useImportRegister: boolean
   devEnvironment: boolean
-  disableAssets: boolean
-  assets: Promise<ResolvedPWAAssets | undefined>
+  assets: () => Promise<PWAAssetsGenerator | undefined>
 }
 
 export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginContext {
   return {
+    version,
     userOptions,
     options: undefined!,
     viteConfig: undefined!,
     useImportRegister: false,
     devEnvironment: false,
-    disableAssets: true,
-    assets: Promise.resolve(undefined),
+    assets: () => Promise.resolve(undefined),
   }
 }

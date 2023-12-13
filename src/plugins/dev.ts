@@ -61,8 +61,10 @@ export function DevPlugin(ctx: PWAPluginContext) {
       if (!options.disable && options.manifest && options.devOptions.enabled) {
         server.ws.on(DEV_READY_NAME, createSWResponseHandler(server, ctx))
         const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
-        server.middlewares.use((req, res, next) => {
+        server.middlewares.use(async (req, res, next) => {
           if (req.url === name) {
+            const assetsGenerator = await ctx.assets()
+            await assetsGenerator?.injectManifestIcons()
             res.statusCode = 200
             res.setHeader('Content-Type', 'application/manifest+json')
             res.write(generateWebManifestFile(options), 'utf-8')
