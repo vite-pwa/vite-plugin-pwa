@@ -22,7 +22,7 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         if (!url)
           return next()
 
-        const assetsGenerator = await ctx.assets()
+        const assetsGenerator = await ctx.assets
         if (!assetsGenerator)
           return next()
 
@@ -30,9 +30,21 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         if (!icon)
           return next()
 
+        if (icon.age > 0) {
+          const ifModifiedSince = req.headers['if-modified-since'] ?? req.headers['If-Modified-Since']
+          const useIfModifiedSince = ifModifiedSince ? Array.isArray(ifModifiedSince) ? ifModifiedSince[0] : ifModifiedSince : undefined
+          if (useIfModifiedSince && new Date(icon.lastModified).getTime() / 1000 >= new Date(useIfModifiedSince).getTime() / 1000) {
+            res.statusCode = 304
+            res.end()
+            return
+          }
+        }
+
         const buffer = await icon.buffer
+        res.setHeader('Age', icon.age / 1000)
         res.setHeader('Content-Type', icon.mimeType)
         res.setHeader('Content-Length', buffer.length)
+        res.setHeader('Last-Modified', new Date(icon.lastModified).toUTCString())
         res.statusCode = 200
         res.end(buffer)
       })
@@ -40,7 +52,7 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
   }
 
   async function transformIndexHtmlHandler(html: string) {
-    const assetsGenerator = await ctx.assets()
+    const assetsGenerator = await ctx.assets
     if (!assetsGenerator)
       return html
 

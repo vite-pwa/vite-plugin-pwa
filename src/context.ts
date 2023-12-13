@@ -9,7 +9,7 @@ export interface PWAPluginContext {
   options: ResolvedVitePWAOptions
   useImportRegister: boolean
   devEnvironment: boolean
-  assets: () => Promise<PWAAssetsGenerator | undefined>
+  assets: Promise<PWAAssetsGenerator | undefined>
 }
 
 export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginContext {
@@ -20,6 +20,6 @@ export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginCo
     viteConfig: undefined!,
     useImportRegister: false,
     devEnvironment: false,
-    assets: () => Promise.resolve(undefined),
+    assets: Promise.resolve(undefined),
   }
 }

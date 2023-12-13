@@ -63,7 +63,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
         const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
         server.middlewares.use(async (req, res, next) => {
           if (req.url === name) {
-            const assetsGenerator = await ctx.assets()
+            const assetsGenerator = await ctx.assets
             await assetsGenerator?.injectManifestIcons()
             res.statusCode = 200
             res.setHeader('Content-Type', 'application/manifest+json')

@@ -8,7 +8,7 @@ import type { UserConfig } from '@vite-pwa/assets-generator/config'
 import { cyan, red } from 'kolorist'
 import { generateManifestIconsEntry } from '@vite-pwa/assets-generator/api/generate-manifest-icons-entry'
 import type { PWAPluginContext } from './context'
-import type { PWAAssetsGenerator } from './types'
+import type { PWAAssetsGenerator, ResolvedIconAsset } from './types'
 
 export function loadInstructions(ctx: PWAPluginContext) {
   return async (): Promise<PWAAssetsGenerator | undefined> => {
@@ -91,20 +91,38 @@ export function loadInstructions(ctx: PWAPluginContext) {
       injectThemeColor = false,
     } = ctx.options.assets.options
 
+    const cache = new Map<string, ResolvedIconAsset>()
+    const lastModified = Date.now()
+
     return {
       async generate() {
         await mkdir(imageOutDir, { recursive: true })
         await generateAssets(assetsInstructions, true, imageOutDir)
       },
       async findIconAsset(path: string) {
-        const result = assetsInstructions.transparent[path]
+        let resolved = cache.get(path)
+        if (resolved) {
+          resolved.age = Date.now() - resolved.lastModified
+          return resolved
+        }
+
+        const iconAsset = assetsInstructions.transparent[path]
           ?? assetsInstructions.maskable[path]
           ?? assetsInstructions.apple[path]
           ?? assetsInstructions.favicon[path]
           ?? assetsInstructions.appleSplashScreen[path]
 
-        if (result)
-          return { path, mimeType: result.mimeType, buffer: result.buffer() }
+        if (iconAsset) {
+          resolved = {
+            path,
+            mimeType: iconAsset.mimeType,
+            buffer: iconAsset.buffer(),
+            lastModified,
+            age: 0,
+          } satisfies ResolvedIconAsset
+          cache.set(path, resolved)
+          return resolved
+        }
       },
       resolveHtmlLinks() {
         return generateHtmlMarkup(assetsInstructions)

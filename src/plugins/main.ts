@@ -30,7 +30,8 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
       ctx.options = await resolveOptions(ctx.userOptions, config)
       if (ctx.options.assets) {
         try {
-          ctx.assets = await import('../asset-generator').then(({ loadInstructions }) => loadInstructions(ctx))
+          const { loadInstructions } = await import('../asset-generator')
+          ctx.assets = loadInstructions(ctx)()
         }
         catch (e) {
           console.error([

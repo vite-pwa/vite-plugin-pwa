@@ -31,7 +31,7 @@ export function BuildPlugin(ctx: PWAPluginContext) {
       },
     },
     async generateBundle(_, bundle) {
-      const assetsGenerator = await ctx.assets()
+      const assetsGenerator = await ctx.assets
       if (assetsGenerator)
         await assetsGenerator.injectManifestIcons()
 
@@ -42,7 +42,7 @@ export function BuildPlugin(ctx: PWAPluginContext) {
       order: ctx.userOptions?.integration?.closeBundleOrder,
       async handler() {
         if (!ctx.viteConfig.build.ssr) {
-          const assetsGenerator = await ctx.assets()
+          const assetsGenerator = await ctx.assets
           if (assetsGenerator)
             await assetsGenerator.generate()
 

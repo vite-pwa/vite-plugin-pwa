@@ -512,6 +512,8 @@ export interface ResolvedIconAsset {
   mimeType: string
   // eslint-disable-next-line node/prefer-global/buffer
   buffer: Promise<Buffer>
+  age: number
+  lastModified: number
 }
 
 export interface PWAAssetsGenerator {
