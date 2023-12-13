@@ -1,6 +1,7 @@
 import {
   DEV_READY_NAME,
   DEV_REGISTER_SW_NAME,
+  DEV_RELOAD_PAGE_NAME,
   DEV_SW_NAME,
   DEV_SW_VIRTUAL,
   FILE_SW_REGISTER,
@@ -77,6 +78,9 @@ registerDevSW();
 export function generateSWHMR() {
   // defer attribute: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes
   return `
+import.meta.hot.on('${DEV_RELOAD_PAGE_NAME}', () => {
+  window.location.reload();
+});  
 import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ mode, inlinePath, registerPath, scope, swType = 'classic' }) => {
   if (mode == 'inline') {
     if('serviceWorker' in navigator) {

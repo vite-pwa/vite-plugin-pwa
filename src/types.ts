@@ -523,6 +523,7 @@ export interface PWAAssetsGenerator {
   transformIndexHtmlHandler: (html: string) => string | Promise<string>
   injectManifestIcons: () => void | Promise<void>
   lookupPWAAssetInstructions(): unknown
+  checkHotUpdate(path: string): Promise<boolean>
 }
 
 export interface VitePluginPWAAPI {

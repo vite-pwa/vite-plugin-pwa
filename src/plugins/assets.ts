@@ -1,6 +1,7 @@
 import type { Plugin } from 'vite'
 
 import type { PWAPluginContext } from '../context'
+import { DEV_RELOAD_PAGE_NAME } from '../constants'
 
 export function AssetsPlugin(ctx: PWAPluginContext) {
   return <Plugin>{
@@ -15,6 +16,16 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
       async transform(html) { // deprecated since Vite 4
         return await transformIndexHtmlHandler(html)
       },
+    },
+    async handleHotUpdate({ file, server }) {
+      const assetsGenerator = await ctx.assets
+      if (await assetsGenerator?.checkHotUpdate(file)) {
+        server.ws.send({
+          type: 'custom',
+          event: DEV_RELOAD_PAGE_NAME,
+        })
+        return []
+      }
     },
     configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
