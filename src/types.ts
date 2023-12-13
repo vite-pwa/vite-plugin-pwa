@@ -191,31 +191,22 @@ export interface VitePWAOptions {
   /**
    * PWA assets generation and injection.
    *
-   * If enabled via boolean value, the plugin will search for the pwa assets generator files in the root directory of your project:
-   * - pwa-assets.config.js
-   * - pwa-assets.config.mjs
-   * - pwa-assets.config.cjs
-   * - pwa-assets.config.cts
-   * - pwa-assets.config.mts
-   *
-   * If enabled via a custom string path, it should be relative to the root directory of your project.
-   *
    * @experimental
    * @default false
-   * @see https://vite-pwa-org.netlify.app/assets-generator/cli.html#configurations
    */
   assets?: {
     /**
      * PWA assets generation and injection.
      *
-     * If `true` the plugin will search for the pwa assets generator files in the root directory of your project:
+     * If `true` the plugin will search for the pwa assets generator configuration file in the root directory of your project:
      * - pwa-assets.config.js
      * - pwa-assets.config.mjs
      * - pwa-assets.config.cjs
+     * - pwa-assets.config.ts
      * - pwa-assets.config.cts
      * - pwa-assets.config.mts
      *
-     * If enabled via a custom string path, it should be relative to the root directory of your project.
+     * If using a string path, it should be relative to the root directory of your project.
      *
      * @experimental
      * @default false
