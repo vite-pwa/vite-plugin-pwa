@@ -33,7 +33,6 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         const buffer = await icon.buffer
         res.setHeader('Content-Type', icon.mimeType)
         res.setHeader('Content-Length', buffer.length)
-        res.setHeader('Cache-Control', 'public,max-age=0,must-revalidate')
         res.statusCode = 200
         res.end(buffer)
       })
