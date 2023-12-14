@@ -33,6 +33,9 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         if (!url)
           return next()
 
+        if (!url.match(/\.(ico|png|svg|webp)$/))
+          return next()
+
         const assetsGenerator = await ctx.assets
         if (!assetsGenerator)
           return next()
