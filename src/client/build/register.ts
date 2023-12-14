@@ -18,6 +18,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
   const {
     immediate = false,
     onNeedRefresh,
+    onBeginUpdate,
     onOfflineReady,
     onRegistered,
     onRegisteredSW,
@@ -81,6 +82,11 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
             onNeedRefresh?.()
           }
+          // Add an event listener to detect when the new service worker
+          // start to be installed but not yet installed.
+          wb.addEventListener('installing', (event) => {
+            event.isUpdate && onBeginUpdate?.()
+          })
           wb.addEventListener('installed', (event) => {
             if (typeof event.isUpdate === 'undefined') {
               if (typeof event.isExternal !== 'undefined') {
