@@ -33,7 +33,7 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         if (!url)
           return next()
 
-        if (!url.match(/\.(ico|png|svg|webp)$/))
+        if (!/\.(ico|png|svg|webp)$/.test(url))
           return next()
 
         const assetsGenerator = await ctx.assets
