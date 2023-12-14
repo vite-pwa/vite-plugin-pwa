@@ -522,7 +522,8 @@ export interface PWAAssetsGenerator {
   resolveHtmlLinks(): string[] | Promise<string[]>
   transformIndexHtmlHandler: (html: string) => string | Promise<string>
   injectManifestIcons: () => void | Promise<void>
-  lookupPWAAssetInstructions(): unknown
+  /** @return {import('@vite-pwa/assets-generator/api').ImageAssetsInstructions} */
+  lookupPWAAssetInstructions(): any
   checkHotUpdate(path: string): Promise<boolean>
 }
 
