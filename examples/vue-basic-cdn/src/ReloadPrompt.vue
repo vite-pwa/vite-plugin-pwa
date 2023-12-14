@@ -9,6 +9,9 @@ const {
   onRegisteredSW(swUrl) {
     console.log(`Service Worker at: ${swUrl}`)
   },
+  onBeginUpdate() {
+    console.log('Begin to update')
+  },
 })
 
 async function close() {
