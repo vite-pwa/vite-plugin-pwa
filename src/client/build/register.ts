@@ -82,8 +82,6 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
             onNeedRefresh?.()
           }
-          // Add an event listener to detect when the new service worker
-          // start to be installed but not yet installed.
           wb.addEventListener('installed', (event) => {
             if (typeof event.isUpdate === 'undefined') {
               if (typeof event.isExternal !== 'undefined') {
