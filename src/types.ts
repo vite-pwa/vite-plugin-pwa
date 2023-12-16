@@ -528,9 +528,8 @@ export interface PWAAssetsGenerator {
   resolveDevHtmlAssets(): DevHtmlAssets
   transformIndexHtmlHandler: (html: string) => string | Promise<string>
   injectManifestIcons: () => void | Promise<void>
-  // eslint-disable-next-line ts/prefer-ts-expect-error
-  // @ts-ignore ignore when @vite-pwa/assets-generator/api is not installed
-  lookupPWAAssetsInstructions(): import('@vite-pwa/assets-generator/api').ImageAssetsInstructions
+  /* import('@vite-pwa/assets-generator/api').ImageAssetsInstructions */
+  lookupPWAAssetsInstructions(): any
   checkHotUpdate(path: string): Promise<boolean>
 }
 
