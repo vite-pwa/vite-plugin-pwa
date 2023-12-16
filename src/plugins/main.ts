@@ -29,20 +29,18 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
       ctx.userOptions?.integration?.configureOptions?.(config, ctx.userOptions)
       ctx.options = await resolveOptions(ctx.userOptions, config)
       if (ctx.options.assets) {
-        try {
-          const { loadInstructions } = await import('../asset-generator')
-          ctx.assets = loadInstructions(ctx)()
-        }
-        catch (e) {
-          console.error([
-            '',
-            cyan(`PWA v${ctx.version}`),
-            yellow('WARNING: you must install the following dev dependencies to use the PWA assets generator:'),
-            yellow('- "@vite-pwa/assets-generator"'),
-            yellow('- "sharp"'),
-            yellow('- "sharp-ico"'),
-          ].join('\n'), e)
-        }
+        ctx.assets = import('../asset-generator').then(({ loadInstructions }) => loadInstructions(ctx))
+          .catch((e) => {
+            console.error([
+              '',
+              cyan(`PWA v${ctx.version}`),
+              yellow('WARNING: you must install the following dev dependencies to use the PWA assets generator:'),
+              yellow('- "@vite-pwa/assets-generator"'),
+              yellow('- "sharp"'),
+              yellow('- "sharp-ico"'),
+            ].join('\n'), e)
+            return Promise.resolve(undefined)
+          })
       }
     },
     resolveId(id) {

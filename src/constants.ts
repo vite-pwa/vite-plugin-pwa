@@ -32,3 +32,4 @@ export const RESOLVED_DEV_SW_VIRTUAL = `\0${DEV_SW_VIRTUAL}`
 export const DEV_READY_NAME = 'vite-pwa-plugin:dev-ready'
 export const DEV_REGISTER_SW_NAME = 'vite-plugin-pwa:register-sw'
 export const DEV_RELOAD_PAGE_NAME = 'vite-plugin-pwa:reload-page'
+export const DEV_HTML_ASSETS_NAME = 'vite-plugin-pwa:html-assets'

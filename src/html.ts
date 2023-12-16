@@ -1,4 +1,5 @@
 import {
+  DEV_HTML_ASSETS_NAME,
   DEV_READY_NAME,
   DEV_REGISTER_SW_NAME,
   DEV_RELOAD_PAGE_NAME,
@@ -80,6 +81,28 @@ export function generateSWHMR() {
   return `
 import.meta.hot.on('${DEV_RELOAD_PAGE_NAME}', () => {
   window.location.reload();
+});  
+import.meta.hot.on('${DEV_HTML_ASSETS_NAME}', ({ themeColor, links }) => {
+  if (themeColor) {
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.content = themeColor;
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('name', 'theme-color');
+      meta.setAttribute('content', themeColor);
+      document.head.appendChild(meta);
+    }
+  }
+  if (links) {
+    links.map((l) => {
+      const link = document.createElement('link');
+      Object.entries(l).map(([key, value]) => {
+        link.setAttribute(key, value);
+      });
+      document.head.appendChild(link);
+    });
+  }  
 });  
 import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ mode, inlinePath, registerPath, scope, swType = 'classic' }) => {
   if (mode == 'inline') {

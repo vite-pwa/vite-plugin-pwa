@@ -516,14 +516,21 @@ export interface ResolvedIconAsset {
   lastModified: number
 }
 
+export interface DevHtmlAssets {
+  themeColor?: string
+  links?: Record<string, string>[]
+}
+
 export interface PWAAssetsGenerator {
   generate(): Promise<void>
   findIconAsset(path: string): (ResolvedIconAsset | undefined) | Promise<ResolvedIconAsset | undefined>
   resolveHtmlLinks(): string[] | Promise<string[]>
+  resolveDevHtmlAssets(): DevHtmlAssets
   transformIndexHtmlHandler: (html: string) => string | Promise<string>
   injectManifestIcons: () => void | Promise<void>
-  /** @return {import('@vite-pwa/assets-generator/api').ImageAssetsInstructions} */
-  lookupPWAAssetInstructions(): any
+  // eslint-disable-next-line ts/prefer-ts-expect-error
+  // @ts-ignore ignore when @vite-pwa/assets-generator/api is not installed
+  lookupPWAAssetsInstructions(): import('@vite-pwa/assets-generator/api').ImageAssetsInstructions
   checkHotUpdate(path: string): Promise<boolean>
 }
 

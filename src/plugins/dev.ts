@@ -59,7 +59,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
       ctx.devEnvironment = true
       const { options } = ctx
       if (!options.disable && options.manifest && options.devOptions.enabled) {
-        server.ws.on(DEV_READY_NAME, createSWResponseHandler(server, ctx))
+        server.ws.on(DEV_READY_NAME, createWSResponseHandler(server, ctx))
         const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
         server.middlewares.use(async (req, res, next) => {
           if (req.url === name) {
@@ -83,7 +83,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
       const { options } = ctx
       if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest' && !options.selfDestroying) {
         const name = id.startsWith('/') ? id.slice(1) : id
-        // the sw must be registered with .js extension on browser, here we detect that request:
+        // the sw must be registered with .js extension in the browser, here we detect that request:
         // - the .js file and source with .ts, or
         // - the .ts source file
         // in both cases we need to resolve the id to the source file to load it and add empty injection point on loadDev
@@ -225,7 +225,7 @@ async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: 
   }
 }
 
-function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): () => Promise<void> {
+function createWSResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): () => Promise<void> {
   return async () => {
     const { options, useImportRegister } = ctx
     const { injectRegister, scope, base } = options
