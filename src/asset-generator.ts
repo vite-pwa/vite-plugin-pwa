@@ -35,7 +35,7 @@ export async function loadInstructions(ctx: PWAPluginContext) {
   if (ctx.options.disable || !ctx.options.assets || !ctx.options.manifest || (ctx.devEnvironment && !ctx.options.devOptions.enabled))
     return
 
-  const assetsContext = await loadContext()
+  const assetsContext = await loadAssetsGeneratorContext(ctx)
   if (!assetsContext)
     return
 
@@ -155,34 +155,48 @@ export async function loadInstructions(ctx: PWAPluginContext) {
     async checkHotUpdate(file) {
       const result = assetsContext.sources.includes(file)
       if (result)
-        await loadContext(assetsContext)
+        await loadAssetsGeneratorContext(ctx, assetsContext)
 
       return result
     },
   } satisfies PWAAssetsGenerator
+}
 
-  async function loadContext(assetContext?: AssetsGeneratorContext) {
-    const root = ctx.viteConfig.root ?? process.cwd()
-    const { config, sources } = await loadConfig<UserConfig>(
-      root,
-      typeof ctx.options.assets!.path === 'boolean' ? root : { config: ctx.options.assets!.path },
-    )
-    if (!config.preset) {
-      console.error([
-        '',
-        cyan(`PWA v${ctx.version}`),
-        red('ERROR: No preset for assets generator found'),
-      ].join('\n'))
-      return
-    }
+async function loadAssetsGeneratorContext(
+  ctx: PWAPluginContext,
+  assetContext?: AssetsGeneratorContext,
+) {
+  const root = ctx.viteConfig.root ?? process.cwd()
+  const { config, sources } = await loadConfig<UserConfig>(
+    root,
+    typeof ctx.options.assets!.path === 'boolean' ? root : { config: ctx.options.assets!.path },
+  )
+  if (!config.preset) {
+    console.error([
+      '',
+      cyan(`PWA v${ctx.version}`),
+      red('ERROR: No preset for assets generator found'),
+    ].join('\n'))
+    return
+  }
 
-    const {
-      preset,
-      images,
-      headLinkOptions: userHeadLinkOptions,
-    } = config
+  const {
+    preset,
+    images,
+    headLinkOptions: userHeadLinkOptions,
+  } = config
 
-    if (!images) {
+  if (!images) {
+    console.error([
+      '',
+      cyan(`PWA v${ctx.version}`),
+      red('ERROR: No image provided for assets generator'),
+    ].join('\n'))
+    return
+  }
+
+  if (Array.isArray(images)) {
+    if (!images.length) {
       console.error([
         '',
         cyan(`PWA v${ctx.version}`),
@@ -190,83 +204,72 @@ export async function loadInstructions(ctx: PWAPluginContext) {
       ].join('\n'))
       return
     }
-
-    if (Array.isArray(images)) {
-      if (!images.length) {
-        console.error([
-          '',
-          cyan(`PWA v${ctx.version}`),
-          red('ERROR: No image provided for assets generator'),
-        ].join('\n'))
-        return
-      }
-      if (images.length > 1) {
-        console.error([
-          '',
-          cyan(`PWA v${ctx.version}`),
-          red('ERROR: Only one image is supported for assets generator'),
-        ].join('\n'))
-        return
-      }
+    if (images.length > 1) {
+      console.error([
+        '',
+        cyan(`PWA v${ctx.version}`),
+        red('ERROR: Only one image is supported for assets generator'),
+      ].join('\n'))
+      return
     }
-
-    const useImage = Array.isArray(images) ? images[0] : images
-    const imageFile = resolve(root, useImage)
-    const publicDir = resolve(root, ctx.viteConfig.publicDir ?? 'public')
-    const outDir = resolve(root, ctx.viteConfig.build?.outDir ?? 'dist')
-    const imageName = relative(publicDir, imageFile)
-    const imageOutDir = dirname(resolve(outDir, imageName))
-
-    const xhtml = userHeadLinkOptions?.xhtml === true
-    const includeId = userHeadLinkOptions?.includeId === true
-    const assetsInstructions = await instructions({
-      imageResolver: () => readFile(resolve(root, useImage)),
-      imageName,
-      preset,
-      faviconPreset: userHeadLinkOptions?.preset,
-      htmlLinks: { xhtml, includeId },
-      basePath: ctx.viteConfig.base ?? '/',
-      resolveSvgName: userHeadLinkOptions?.resolveSvgName ?? (name => basename(name)),
-    })
-    const {
-      includeHtmlHeadLinks = true,
-      overrideManifestIcons = false,
-      injectThemeColor = false,
-    } = ctx.options.assets!.options
-
-    if (assetContext === undefined) {
-      return {
-        lastModified: Date.now(),
-        assetsInstructions,
-        cache: new Map<string, ResolvedIconAsset>(),
-        useImage,
-        imageFile,
-        publicDir,
-        outDir,
-        imageName,
-        imageOutDir,
-        xhtml,
-        includeId,
-        // normalize sources
-        sources: sources.map(source => source.replace(/\\/g, '/')),
-        injectThemeColor,
-        includeHtmlHeadLinks,
-        overrideManifestIcons,
-      } satisfies AssetsGeneratorContext
-    }
-
-    assetContext.lastModified = Date.now()
-    assetContext.assetsInstructions = assetsInstructions
-    assetContext.useImage = useImage
-    assetContext.imageFile = imageFile
-    assetContext.outDir = outDir
-    assetContext.imageName = imageName
-    assetContext.imageOutDir = imageOutDir
-    assetContext.xhtml = xhtml
-    assetContext.includeId = includeId
-    assetContext.injectThemeColor = injectThemeColor
-    assetContext.includeHtmlHeadLinks = includeHtmlHeadLinks
-    assetContext.overrideManifestIcons = overrideManifestIcons
-    assetContext.cache.clear()
   }
+
+  const useImage = Array.isArray(images) ? images[0] : images
+  const imageFile = resolve(root, useImage)
+  const publicDir = resolve(root, ctx.viteConfig.publicDir ?? 'public')
+  const outDir = resolve(root, ctx.viteConfig.build?.outDir ?? 'dist')
+  const imageName = relative(publicDir, imageFile)
+  const imageOutDir = dirname(resolve(outDir, imageName))
+
+  const xhtml = userHeadLinkOptions?.xhtml === true
+  const includeId = userHeadLinkOptions?.includeId === true
+  const assetsInstructions = await instructions({
+    imageResolver: () => readFile(resolve(root, useImage)),
+    imageName,
+    preset,
+    faviconPreset: userHeadLinkOptions?.preset,
+    htmlLinks: { xhtml, includeId },
+    basePath: ctx.viteConfig.base ?? '/',
+    resolveSvgName: userHeadLinkOptions?.resolveSvgName ?? (name => basename(name)),
+  })
+  const {
+    includeHtmlHeadLinks = true,
+    overrideManifestIcons = false,
+    injectThemeColor = false,
+  } = ctx.options.assets!.options
+
+  if (assetContext === undefined) {
+    return {
+      lastModified: Date.now(),
+      assetsInstructions,
+      cache: new Map<string, ResolvedIconAsset>(),
+      useImage,
+      imageFile,
+      publicDir,
+      outDir,
+      imageName,
+      imageOutDir,
+      xhtml,
+      includeId,
+      // normalize sources
+      sources: sources.map(source => source.replace(/\\/g, '/')),
+      injectThemeColor,
+      includeHtmlHeadLinks,
+      overrideManifestIcons,
+    } satisfies AssetsGeneratorContext
+  }
+
+  assetContext.lastModified = Date.now()
+  assetContext.assetsInstructions = assetsInstructions
+  assetContext.useImage = useImage
+  assetContext.imageFile = imageFile
+  assetContext.outDir = outDir
+  assetContext.imageName = imageName
+  assetContext.imageOutDir = imageOutDir
+  assetContext.xhtml = xhtml
+  assetContext.includeId = includeId
+  assetContext.injectThemeColor = injectThemeColor
+  assetContext.includeHtmlHeadLinks = includeHtmlHeadLinks
+  assetContext.overrideManifestIcons = overrideManifestIcons
+  assetContext.cache.clear()
 }

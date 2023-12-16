@@ -14,11 +14,11 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
     transformIndexHtml: {
       order: 'post',
       async handler(html) {
-        return await transformIndexHtmlHandler(html)
+        return await transformIndexHtmlHandler(ctx, html)
       },
       enforce: 'post', // deprecated since Vite 4
       async transform(html) { // deprecated since Vite 4
-        return await transformIndexHtmlHandler(html)
+        return await transformIndexHtmlHandler(ctx, html)
       },
     },
     async handleHotUpdate({ file, server }) {
@@ -32,7 +32,7 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
       }
     },
     configureServer(server) {
-      server.ws.on(DEV_READY_NAME, createWSResponseHandler(server))
+      server.ws.on(DEV_READY_NAME, createWSResponseHandler(ctx, server))
       server.middlewares.use(async (req, res, next) => {
         const url = req.url
         if (!url)
@@ -69,30 +69,30 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
       })
     },
   }
+}
 
-  async function transformIndexHtmlHandler(html: string) {
-    // dev: color-theme and icon links injected using createWSResponseHandler
-    if (ctx.devEnvironment)
-      return html
+async function transformIndexHtmlHandler(ctx: PWAPluginContext, html: string) {
+  // dev: color-theme and icon links injected using createWSResponseHandler
+  if (ctx.devEnvironment)
+    return html
 
+  const assetsGenerator = await ctx.assets
+  if (!assetsGenerator)
+    return html
+
+  return assetsGenerator.transformIndexHtmlHandler(html)
+}
+
+function createWSResponseHandler(ctx: PWAPluginContext, server: ViteDevServer): () => Promise<void> {
+  return async () => {
     const assetsGenerator = await ctx.assets
-    if (!assetsGenerator)
-      return html
-
-    return assetsGenerator.transformIndexHtmlHandler(html)
-  }
-
-  function createWSResponseHandler(server: ViteDevServer): () => Promise<void> {
-    return async () => {
-      const assetsGenerator = await ctx.assets
-      if (assetsGenerator) {
-        const data = assetsGenerator.resolveDevHtmlAssets()
-        server.ws.send({
-          type: 'custom',
-          event: DEV_HTML_ASSETS_NAME,
-          data,
-        })
-      }
+    if (assetsGenerator) {
+      const data = assetsGenerator.resolveDevHtmlAssets()
+      server.ws.send({
+        type: 'custom',
+        event: DEV_HTML_ASSETS_NAME,
+        data,
+      })
     }
   }
 }
