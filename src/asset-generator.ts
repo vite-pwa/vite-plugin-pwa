@@ -31,7 +31,7 @@ interface AssetsGeneratorContext {
 }
 
 export async function loadInstructions(ctx: PWAPluginContext) {
-// if disabled, no assets enabled or no manifest
+  // if disabled, no assets enabled or no manifest
   if (ctx.options.disable || !ctx.options.assets || !ctx.options.manifest || (ctx.devEnvironment && !ctx.options.devOptions.enabled))
     return
 
@@ -78,6 +78,9 @@ export async function loadInstructions(ctx: PWAPluginContext) {
         ?? assetsContext.assetsInstructions.apple[path]
         ?? assetsContext.assetsInstructions.favicon[path]
         ?? assetsContext.assetsInstructions.appleSplashScreen[path]
+
+      if (!iconAsset)
+        return
 
       if (iconAsset) {
         resolved = {
