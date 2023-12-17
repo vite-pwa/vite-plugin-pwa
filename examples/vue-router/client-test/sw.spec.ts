@@ -12,7 +12,7 @@ test('Vue3: The service worker is registered and cache storage is present', asyn
       navigator.serviceWorker.ready,
       new Promise((_resolve, reject) => setTimeout(() => reject(new Error('Service worker registration failed: time out')), 10000)),
     ])
-    // @ts-expect-error registration is of type unknown
+    // @ts-expect-error registration is of type any
     return registration.active?.scriptURL
   })
   expect(swURL).toBe(`http://localhost:4173/${swName}`)
