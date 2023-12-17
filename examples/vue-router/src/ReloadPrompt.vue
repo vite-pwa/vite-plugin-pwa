@@ -36,7 +36,7 @@ const {
   },
 })
 
-watch(computed(() => [offlineReady.value, needRefresh.value]), ([offlineReadyVal, needRefreshVal]) => {
+watch(() => [offlineReady.value, needRefresh.value], ([offlineReadyVal, needRefreshVal]) => {
   if (offlineReadyVal || needRefreshVal)
     beginUpdateServiceWorker.value = false
 })
