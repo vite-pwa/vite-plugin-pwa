@@ -109,32 +109,63 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
 
   const { format, plugins, rollupOptions } = options.injectManifestRollupOptions
 
-  await build({
-    root: viteOptions.root,
-    base: viteOptions.base,
-    resolve: viteOptions.resolve,
-    // don't copy anything from public folder
-    publicDir: false,
-    build: {
-      sourcemap: viteOptions.build.sourcemap,
-      lib: {
-        entry: options.swSrc,
-        name: 'app',
-        formats: [format],
-      },
-      rollupOptions: {
-        ...rollupOptions,
-        plugins,
-        output: {
-          entryFileNames: options.filename,
+  if (format === 'iife') {
+    await build({
+      root: viteOptions.root,
+      base: viteOptions.base,
+      resolve: viteOptions.resolve,
+      mode: options.mode,
+      // don't copy anything from public folder
+      publicDir: false,
+      build: {
+        sourcemap: viteOptions.build.sourcemap,
+        lib: {
+          entry: options.swSrc,
+          name: 'app',
+          formats: [format],
         },
+        rollupOptions: {
+          ...rollupOptions,
+          plugins,
+          output: {
+            entryFileNames: options.filename,
+          },
+        },
+        outDir: options.outDir,
+        emptyOutDir: false,
       },
-      outDir: options.outDir,
-      emptyOutDir: false,
-    },
-    configFile: false,
-    define,
-  })
+      configFile: false,
+      define,
+    })
+  }
+  else {
+    await build({
+      root: viteOptions.root,
+      base: viteOptions.base,
+      resolve: viteOptions.resolve,
+      mode: options.mode,
+      // don't copy anything from public folder
+      publicDir: false,
+      build: {
+        modulePreload: false,
+        sourcemap: viteOptions.build.sourcemap,
+        rollupOptions: {
+          ...rollupOptions,
+          plugins,
+          input: options.swSrc,
+          output: {
+            entryFileNames: 'service-worker.mjs',
+            inlineDynamicImports: true,
+          },
+        },
+        outDir: options.outDir,
+        emptyOutDir: false,
+      },
+      configFile: false,
+      define,
+    })
+    await fs.rename(`${options.outDir}/service-worker.mjs`, `${options.outDir}/${options.filename}`)
+  }
 
   // don't force user to include injection point
   if (!options.injectManifest.injectionPoint)
