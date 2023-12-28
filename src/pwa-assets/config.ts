@@ -71,7 +71,7 @@ export async function loadAssetsGeneratorContext(
     preset,
     faviconPreset: userHeadLinkOptions?.preset,
     htmlLinks: { xhtml, includeId },
-    basePath: ctx.viteConfig.base ?? '/',
+    basePath: ctx.viteConfig.base || '/',
     resolveSvgName: userHeadLinkOptions?.resolveSvgName ?? (name => basename(name)),
   })
   const {
