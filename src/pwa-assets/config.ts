@@ -81,10 +81,10 @@ export async function loadAssetsGeneratorContext(
   } = ctx.options.pwaAssets
 
   // do not override icons if:
-  // - manifest is false
-  // - manifest.icons is present and explicitly enabled
+  // - manifest is false or undefined or
+  // - manifest.icons present and overrideManifestIcons explicitly enabled
   // otherwise, override icons
-  const overrideManifestIcons = ctx.options.manifest === false
+  const overrideManifestIcons = ctx.options.manifest === false || !ctx.options.manifest
     ? false
     : 'icons' in ctx.options.manifest
       ? useOverrideManifestIcons
