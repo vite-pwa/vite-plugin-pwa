@@ -8,7 +8,7 @@ export async function findIconAsset(
 ) {
   let resolved = cache.get(path)
   if (resolved) {
-    resolved.age = Date.now() - resolved.lastModified
+    resolved.age = Date.now() - lastModified
     return resolved
   }
 
@@ -26,7 +26,7 @@ export async function findIconAsset(
       path,
       mimeType: iconAsset.mimeType,
       buffer: iconAsset.buffer(),
-      lastModified,
+      lastModified: Date.now(),
       age: 0,
     } satisfies ResolvedIconAsset
     cache.set(path, resolved)
