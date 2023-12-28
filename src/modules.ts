@@ -2,7 +2,7 @@ import { dirname, resolve } from 'node:path'
 import { promises as fs } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import type { BuildResult } from 'workbox-build'
-import type { ResolvedConfig } from 'vite'
+import type { InlineConfig, ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions } from './types'
 import { logWorkboxResult } from './log'
 
@@ -109,63 +109,53 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
 
   const { format, plugins, rollupOptions } = options.injectManifestRollupOptions
 
+  const inlineConfig: InlineConfig = {
+    root: viteOptions.root,
+    base: viteOptions.base,
+    resolve: viteOptions.resolve,
+    mode: options.mode,
+    // don't copy anything from public folder
+    publicDir: false,
+    build: {
+      sourcemap: viteOptions.build.sourcemap,
+      outDir: options.outDir,
+      emptyOutDir: false,
+    },
+    configFile: false,
+    define,
+  }
+
   if (format === 'iife') {
-    await build({
-      root: viteOptions.root,
-      base: viteOptions.base,
-      resolve: viteOptions.resolve,
-      mode: options.mode,
-      // don't copy anything from public folder
-      publicDir: false,
-      build: {
-        sourcemap: viteOptions.build.sourcemap,
-        lib: {
-          entry: options.swSrc,
-          name: 'app',
-          formats: [format],
-        },
-        rollupOptions: {
-          ...rollupOptions,
-          plugins,
-          output: {
-            entryFileNames: options.filename,
-          },
-        },
-        outDir: options.outDir,
-        emptyOutDir: false,
+    inlineConfig.build!.lib = {
+      entry: options.swSrc,
+      name: 'app',
+      formats: [format],
+    }
+    inlineConfig.build!.rollupOptions = {
+      ...rollupOptions,
+      plugins,
+      output: {
+        entryFileNames: options.filename,
       },
-      configFile: false,
-      define,
-    })
+    }
   }
   else {
-    await build({
-      root: viteOptions.root,
-      base: viteOptions.base,
-      resolve: viteOptions.resolve,
-      mode: options.mode,
-      // don't copy anything from public folder
-      publicDir: false,
-      build: {
-        modulePreload: false,
-        sourcemap: viteOptions.build.sourcemap,
-        rollupOptions: {
-          ...rollupOptions,
-          plugins,
-          input: options.swSrc,
-          output: {
-            entryFileNames: 'service-worker.mjs',
-            inlineDynamicImports: true,
-          },
-        },
-        outDir: options.outDir,
-        emptyOutDir: false,
+    inlineConfig.build!.modulePreload = false
+    inlineConfig.build!.rollupOptions = {
+      ...rollupOptions,
+      plugins,
+      input: options.swSrc,
+      output: {
+        entryFileNames: 'service-worker.mjs',
+        inlineDynamicImports: true,
       },
-      configFile: false,
-      define,
-    })
-    await fs.rename(`${options.outDir}/service-worker.mjs`, `${options.outDir}/${options.filename}`)
+    }
   }
+
+  await build(inlineConfig)
+
+  if (format !== 'iife')
+    await fs.rename(`${options.outDir}/service-worker.mjs`, `${options.outDir}/${options.filename}`)
 
   // don't force user to include injection point
   if (!options.injectManifest.injectionPoint)
