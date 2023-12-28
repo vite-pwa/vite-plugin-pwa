@@ -8,7 +8,7 @@
     /* Bundler mode */
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
-    "types": ["vite/client", "vite-plugin-pwa/vanillajs", "vite-plugin-pwa/info"],
+    "types": ["vite/client", "vite-plugin-pwa/vanillajs", "vite-plugin-pwa/info", "vite-plugin-pwa/pwa-assets"],
     "allowImportingTsExtensions": true,
 
     /* Linting */

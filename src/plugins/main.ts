@@ -27,9 +27,9 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
       ctx.useImportRegister = false
       ctx.viteConfig = config
       ctx.userOptions?.integration?.configureOptions?.(config, ctx.userOptions)
-      ctx.options = await resolveOptions(ctx.userOptions, config)
-      if (ctx.options.assets) {
-        ctx.assets = import('../asset-generator').then(({ loadInstructions }) => loadInstructions(ctx))
+      ctx.options = await resolveOptions(ctx)
+      if (!ctx.options.pwaAssets.disabled) {
+        ctx.pwaAssetsGenerator = import('../pwa-assets/generator').then(({ loadInstructions }) => loadInstructions(ctx))
           .catch((e) => {
             console.error([
               '',

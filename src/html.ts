@@ -1,8 +1,7 @@
 import {
-  DEV_HTML_ASSETS_NAME,
+  DEV_PWA_ASSETS_NAME,
   DEV_READY_NAME,
   DEV_REGISTER_SW_NAME,
-  DEV_RELOAD_PAGE_NAME,
   DEV_SW_NAME,
   DEV_SW_VIRTUAL,
   FILE_SW_REGISTER,
@@ -79,31 +78,6 @@ registerDevSW();
 export function generateSWHMR() {
   // defer attribute: https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#boolean-attributes
   return `
-import.meta.hot.on('${DEV_RELOAD_PAGE_NAME}', () => {
-  window.location.reload();
-});  
-import.meta.hot.on('${DEV_HTML_ASSETS_NAME}', ({ themeColor, links }) => {
-  if (themeColor) {
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-      metaThemeColor.content = themeColor;
-    } else {
-      const meta = document.createElement('meta');
-      meta.setAttribute('name', 'theme-color');
-      meta.setAttribute('content', themeColor);
-      document.head.appendChild(meta);
-    }
-  }
-  if (links) {
-    links.map((l) => {
-      const link = document.createElement('link');
-      Object.entries(l).map(([key, value]) => {
-        link.setAttribute(key, value);
-      });
-      document.head.appendChild(link);
-    });
-  }  
-});  
 import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ mode, inlinePath, registerPath, scope, swType = 'classic' }) => {
   if (mode == 'inline') {
     if('serviceWorker' in navigator) {
@@ -118,6 +92,31 @@ import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ mode, inlinePath, registerPath,
     document.head.appendChild(registerSW);
   }
 });
+import.meta.hot.on('${DEV_PWA_ASSETS_NAME}', ({ themeColor, links }) => {
+  if (themeColor) {
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.content = themeColor.content;
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('name', 'theme-color');
+      meta.setAttribute('content', themeColor.content);
+      document.head.appendChild(meta);
+    }
+  }
+  if (links) {
+    links.map((l) => {
+      const link = document.createElement('link');
+      if (l.id) link.setAttribute('id', l.id);
+      link.setAttribute('rel', l.rel);
+      link.setAttribute('href', l.href);
+      if (l.media) link.setAttribute('media', l.media);
+      if (l.sizes) link.setAttribute('sizes', l.sizes);
+      if (l.type) link.setAttribute('type', l.type);
+      document.head.appendChild(link);
+    });
+  }  
+});  
 function registerDevSW() {
   try {
     import.meta.hot.send('${DEV_READY_NAME}');

@@ -25,11 +25,14 @@ export const defaultInjectManifestVitePlugins = [
 
 export const PWA_INFO_VIRTUAL = 'virtual:pwa-info'
 export const RESOLVED_PWA_INFO_VIRTUAL = `\0${PWA_INFO_VIRTUAL}`
+export const PWA_ASSETS_HEAD_VIRTUAL = 'virtual:pwa-assets/head'
+export const RESOLVED_PWA_ASSETS_HEAD_VIRTUAL = `\0${PWA_ASSETS_HEAD_VIRTUAL}`
+export const PWA_ASSETS_ICONS_VIRTUAL = 'virtual:pwa-assets/icons'
+export const RESOLVED_PWA_ASSETS_ICONS_VIRTUAL = `\0${PWA_ASSETS_ICONS_VIRTUAL}`
 
 export const DEV_SW_NAME = 'dev-sw.js?dev-sw'
 export const DEV_SW_VIRTUAL = `${VIRTUAL_MODULES_RESOLVE_PREFIX}pwa-entry-point-loaded`
 export const RESOLVED_DEV_SW_VIRTUAL = `\0${DEV_SW_VIRTUAL}`
 export const DEV_READY_NAME = 'vite-pwa-plugin:dev-ready'
 export const DEV_REGISTER_SW_NAME = 'vite-plugin-pwa:register-sw'
-export const DEV_RELOAD_PAGE_NAME = 'vite-plugin-pwa:reload-page'
-export const DEV_HTML_ASSETS_NAME = 'vite-plugin-pwa:html-assets'
+export const DEV_PWA_ASSETS_NAME = 'vite-plugin-pwa:pwa-assets'

@@ -1,12 +1,13 @@
 import fs from 'node:fs'
 import { extname, resolve } from 'node:path'
 import process from 'node:process'
-import type { ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
-import type { ManifestOptions, ResolvedVitePWAOptions, VitePWAOptions } from './types'
+import type { ManifestOptions, ResolvedVitePWAOptions } from './types'
 import { configureStaticAssets } from './assets'
 import { resolveBasePath, slash } from './utils'
 import { defaultInjectManifestVitePlugins } from './constants'
+import type { PWAPluginContext } from './context'
+import { resolvePWAAssetsOptions } from './pwa-assets/options'
 
 function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, outDir: string, filename: string): {
   swSrc: string
@@ -32,7 +33,8 @@ function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, o
   }
 }
 
-export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfig: ResolvedConfig): Promise<ResolvedVitePWAOptions> {
+export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVitePWAOptions> {
+  const { userOptions: options, viteConfig } = ctx
   const root = viteConfig.root
   const pkg = fs.existsSync('package.json')
     ? JSON.parse(fs.readFileSync('package.json', 'utf-8'))
@@ -59,7 +61,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     selfDestroying = false,
     integration = {},
     buildBase,
-    assets,
+    pwaAssets,
   } = options
 
   const basePath = resolveBasePath(base)
@@ -199,7 +201,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
       rollupOptions,
       format: rollupFormat,
     },
-    assets,
+    pwaAssets: resolvePWAAssetsOptions(pwaAssets),
   }
 
   // calculate hash only when required

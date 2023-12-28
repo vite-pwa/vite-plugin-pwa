@@ -31,9 +31,9 @@ export function BuildPlugin(ctx: PWAPluginContext) {
       },
     },
     async generateBundle(_, bundle) {
-      const assetsGenerator = await ctx.assets
-      if (assetsGenerator)
-        await assetsGenerator.injectManifestIcons()
+      const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
+      if (pwaAssetsGenerator)
+        pwaAssetsGenerator.injectManifestIcons()
 
       return _generateBundle(ctx, bundle)
     },
@@ -42,9 +42,9 @@ export function BuildPlugin(ctx: PWAPluginContext) {
       order: ctx.userOptions?.integration?.closeBundleOrder,
       async handler() {
         if (!ctx.viteConfig.build.ssr && !ctx.options.disable) {
-          const assetsGenerator = await ctx.assets
-          if (assetsGenerator)
-            await assetsGenerator.generate()
+          const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
+          if (pwaAssetsGenerator)
+            await pwaAssetsGenerator.generate()
 
           await _generateSW(ctx)
         }

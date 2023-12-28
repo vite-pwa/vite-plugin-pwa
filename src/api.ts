@@ -1,6 +1,7 @@
 import { resolve } from 'node:path'
 import { existsSync } from 'node:fs'
 import type { OutputBundle } from 'rollup'
+import { cyan, yellow } from 'kolorist'
 import { generateInjectManifest, generateServiceWorker } from './modules'
 import { generateWebManifestFile } from './assets'
 import { DEV_SW_NAME, FILE_SW_REGISTER } from './constants'
@@ -23,11 +24,19 @@ export async function _generateSW({ options, viteConfig }: PWAPluginContext) {
     await generateServiceWorker(options, viteConfig)
 }
 
-export function _generateBundle({ options, viteConfig, useImportRegister }: PWAPluginContext, bundle?: OutputBundle) {
+export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle) {
+  const { options, viteConfig, useImportRegister } = ctx
   if (options.disable || !bundle)
     return
 
   if (options.manifest) {
+    if (!options.manifest.theme_color) {
+      console.warn([
+        '',
+        `${cyan(`PWA v${ctx.version}`)}`,
+        `${yellow('WARNING: "theme_color" is missing from the web manifest, your application will not be able to be installed')}`,
+      ].join('\n'))
+    }
     bundle[options.manifestFilename] = {
       // @ts-expect-error: for Vite 3 support, Vite 4 has removed `isAsset` property
       isAsset: true,
@@ -55,7 +64,7 @@ export function _generateBundle({ options, viteConfig, useImportRegister }: PWAP
   return bundle
 }
 
-export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
+export function createAPI(ctx: PWAPluginContext) {
   return {
     get disabled() {
       return ctx?.options?.disable
@@ -144,8 +153,8 @@ export function createAPI(ctx: PWAPluginContext): VitePluginPWAAPI {
       if (result != null)
         options[configField].additionalManifestEntries = result
     },
-    assetsGenerator() {
-      return ctx.assets
+    pwaAssetsGenerator() {
+      return ctx.pwaAssetsGenerator
     },
-  }
+  } satisfies VitePluginPWAAPI
 }

@@ -22,12 +22,9 @@ export default defineConfig({
         short_name: 'Vite PWA',
         theme_color: '#ffffff',
       },
-      assets: {
-        options: {
-          includeHtmlHeadLinks: true,
-          overrideManifestIcons: true,
-          injectThemeColor: true,
-        },
+      pwaAssets: {
+        config: true,
+        overrideManifestIcons: true,
       },
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,svg,ico}'],

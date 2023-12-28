@@ -1,6 +1,7 @@
 import { basename, resolve } from 'node:path'
 import { existsSync, promises as fs, mkdirSync } from 'node:fs'
 import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite'
+import { cyan, yellow } from 'kolorist'
 import {
   generateRegisterDevSW,
   generateSWHMR,
@@ -63,8 +64,15 @@ export function DevPlugin(ctx: PWAPluginContext) {
         const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
         server.middlewares.use(async (req, res, next) => {
           if (req.url === name) {
-            const assetsGenerator = await ctx.assets
-            await assetsGenerator?.injectManifestIcons()
+            const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
+            pwaAssetsGenerator?.injectManifestIcons()
+            if (ctx.options.manifest && !ctx.options.manifest.theme_color) {
+              console.warn([
+                '',
+                `${cyan(`PWA v${ctx.version}`)}`,
+                `${yellow('WARNING: "theme_color" is missing from the web manifest, your application will not be able to be installed')}`,
+              ].join('\n'))
+            }
             res.statusCode = 200
             res.setHeader('Content-Type', 'application/manifest+json')
             res.write(generateWebManifestFile(options), 'utf-8')
