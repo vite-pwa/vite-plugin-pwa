@@ -82,7 +82,7 @@ export async function loadAssetsGeneratorContext(
 
   // override manifest icons when:
   // - manifest is defined and
-  // - missing manifest.icons entry or overrideManifestIcons is true
+  // - missing manifest.icons entry or manifest.icons present and overrideManifestIcons is enabled
   const overrideManifestIcons = ctx.options.manifest === false || !ctx.options.manifest
     ? false
     : 'icons' in ctx.options.manifest
