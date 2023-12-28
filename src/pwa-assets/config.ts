@@ -76,9 +76,19 @@ export async function loadAssetsGeneratorContext(
   })
   const {
     includeHtmlHeadLinks = true,
-    overrideManifestIcons = false,
+    overrideManifestIcons: useOverrideManifestIcons,
     injectThemeColor = false,
-  } = ctx.options.pwaAssets!
+  } = ctx.options.pwaAssets
+
+  // do not override icons if:
+  // - manifest is false
+  // - manifest.icons is present and explicitly enabled
+  // otherwise, override icons
+  const overrideManifestIcons = ctx.options.manifest === false
+    ? false
+    : 'icons' in ctx.options.manifest
+      ? useOverrideManifestIcons
+      : true
 
   if (assetsGeneratorContext === undefined) {
     return {

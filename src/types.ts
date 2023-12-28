@@ -109,6 +109,8 @@ export interface PWAAssetsOptions {
   /**
    * Should the plugin override the PWA web manifest icons' entry?
    *
+   * The plugin will auto-detect the icons from the manifest, if missing, then the plugin will ignore this option and will include the icons.
+   *
    * @default false
    */
   overrideManifestIcons?: boolean
