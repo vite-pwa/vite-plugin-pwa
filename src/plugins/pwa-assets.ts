@@ -1,4 +1,4 @@
-import type { Plugin, ViteDevServer } from 'vite'
+import type { ModuleNode, Plugin, ViteDevServer } from 'vite'
 import type { PWAPluginContext } from '../context'
 import {
   DEV_PWA_ASSETS_NAME,
@@ -50,6 +50,14 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
     async handleHotUpdate({ file, server }) {
       const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
       if (await pwaAssetsGenerator?.checkHotUpdate(file)) {
+        const modules: ModuleNode[] = []
+        const head = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_HEAD_VIRTUAL)
+        head && modules.push(head)
+        const icons = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_ICONS_VIRTUAL)
+        icons && modules.push(icons)
+        if (modules)
+          return modules
+
         server.ws.send({ type: 'full-reload' })
         return []
       }

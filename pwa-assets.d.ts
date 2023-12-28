@@ -1,3 +1,5 @@
+/* WARNING: these virtual modules are meant to be used by integrations and not being consumed directly from applications */
+
 declare module 'virtual:pwa-assets/head' {
   export interface PWAAssetHeadLink {
     id?: string
@@ -22,19 +24,16 @@ declare module 'virtual:pwa-assets/head' {
 }
 
 declare module 'virtual:pwa-assets/icons' {
-  import type {
-    AppleSplashScreenLink,
-    FaviconLink,
-    HtmlLink,
-    IconAsset,
-  } from '@vite-pwa/assets-generator/api'
+  import type { AppleSplashScreenLink, FaviconLink, HtmlLink, IconAsset } from '@vite-pwa/assets-generator/api'
+
+  export type PWAAssetIcon<T extends HtmlLink> = Omit<IconAsset<T>, 'buffer'>
 
   export interface PWAAssetsIcons {
-    favicon: Record<string, Omit<IconAsset<FaviconLink>, 'buffer'>>
-    transparent: Record<string, Omit<IconAsset<HtmlLink>, 'buffer'>>
-    maskable: Record<string, Omit<IconAsset<HtmlLink>, 'buffer'>>
-    apple: Record<string, Omit<IconAsset<HtmlLink>, 'buffer'>>
-    appleSplashScreen: Record<string, Omit<IconAsset<AppleSplashScreenLink>, 'buffer'>>
+    favicon: Record<string, PWAAssetIcon<FaviconLink>>
+    transparent: Record<string, PWAAssetIcon<HtmlLink>>
+    maskable: Record<string, PWAAssetIcon<HtmlLink>>
+    apple: Record<string, PWAAssetIcon<HtmlLink>>
+    appleSplashScreen: Record<string, PWAAssetIcon<AppleSplashScreenLink>>
   }
 
   export const pwaAssetsIcons: PWAAssetsIcons
