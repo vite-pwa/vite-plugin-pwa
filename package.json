@@ -86,7 +86,7 @@
     "lint": "eslint .",
     "lint-fix": "nr lint --fix",
     "dev": "esno scripts/dev.ts",
-    "build": "esno scripts/build.ts",
+    "build": "rimraf dist && esno scripts/build.ts",
     "prepublishOnly": "npm run build",
     "release": "bumpp && npm publish",
     "examples": "esno scripts/run-examples.ts",

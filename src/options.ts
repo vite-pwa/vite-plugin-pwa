@@ -117,7 +117,10 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     plugins = [],
     rollupOptions = {},
     rollupFormat = 'es',
-    target,
+    target = viteConfig.build.target,
+    minify: minifySW = viteConfig.build.minify,
+    sourcemap = viteConfig.build.sourcemap,
+    enableWorkboxModulesLogs,
     ...userInjectManifest
   } = options.injectManifest || {}
   const injectManifest = Object.assign({}, defaultInjectManifest, userInjectManifest)
@@ -201,6 +204,9 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     },
     injectManifestBuildOptions: {
       target,
+      minify: minifySW,
+      sourcemap,
+      enableWorkboxModulesLogs,
     },
   }
 

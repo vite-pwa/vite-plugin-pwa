@@ -52,6 +52,8 @@ export default defineConfig({
         skipWaiting: true,
       },
       injectManifest: {
+        minify: false,
+        enableWorkboxModulesLogs: true,
         injectionPoint: undefined,
       },
       devOptions: {

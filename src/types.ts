@@ -11,9 +11,38 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    */
   rollupFormat?: 'es' | 'iife'
   /**
-   * Configure the custom Vite build target.
+   * Configure the custom Vite build target option.
+   *
+   * @default Vite build target option
+   * @since v0.18.0
    */
   target?: BuildOptions['target']
+  /**
+   * Configure the custom Vite build minify option.
+   *
+   * @default Vite build minify option
+   * @since v0.18.0
+   */
+  minify?: BuildOptions['minify']
+  /**
+   * Configure the custom Vite build sourcemap option.
+   *
+   * @default Vite build sourcemap option
+   * @since v0.18.0
+   */
+  sourcemap?: BuildOptions['sourcemap']
+  /**
+   * Should use `process.env.NODE_ENV` to remove dead code?
+   *
+   * If you want to keep logs from `workbox` modules, you can set this option to `true`,
+   * the plugin will configure `process.env.NODE_ENV` to `"development"`.
+   *
+   * If this option is not configured, the plugin will use `process.env.NODE_ENV`.
+   *
+   * @default `process.env.NODE_ENV === 'production'`
+   * @since v0.18.0
+   */
+  enableWorkboxModulesLogs?: true
   /**
    * `Vite` plugin ids to use on `Rollup` build.
    *
@@ -52,8 +81,19 @@ export interface PWAIntegration {
  */
 export interface VitePWAOptions {
   /**
-   * Build mode
+   * Build mode.
    *
+   * From `v0.18.0` this option is ignored when using `injectManifest` strategy:
+   * - the new Vite build will use the same mode as the application when using `injectManifest` strategy.
+   * - if you don't want to minify your service worker, configure `injectManifest.minify = false` in your PWA configuration.
+   * - if you want the sourcemap only for the service worker, configure `injectManifest.sourcemap = true` in your PWA configuration.
+   * - if you want workbox logs in your service worker when using production build, configure `injectManifest.enableWorkboxModulesLogs = true` in your PWA configuration.
+   * - you can use `import.meta.env.MODE` to access the Vite mode inside your service worker.
+   * - you can use `import.meta.env.DEV` or `import.meta.env.PROD` to check if the service worker is
+   *   running on development or production (equivalent to `process.env.NODE_ENV`,
+   *   check Vite [NODE_ENV and Modes](https://vitejs.dev/guide/env-and-mode#node-env-and-modes)) docs.
+   *
+   * @see https://vitejs.dev/guide/env-and-mode#node-env-and-modes
    * @default process.env.NODE_ENV or "production"
    */
   mode?: 'development' | 'production'
@@ -208,6 +248,9 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   injectManifestRollupOptions: ResolvedServiceWorkerOptions
   injectManifestBuildOptions: {
     target?: BuildOptions['target']
+    minify?: BuildOptions['minify']
+    sourcemap?: BuildOptions['sourcemap']
+    enableWorkboxModulesLogs?: true
   }
 }
 

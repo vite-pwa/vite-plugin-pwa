@@ -51,6 +51,10 @@ if (process.env.SW === 'true') {
   pwaOptions.strategies = 'injectManifest'
   ;(pwaOptions.manifest as Partial<ManifestOptions>).name = 'PWA Inject Manifest'
   ;(pwaOptions.manifest as Partial<ManifestOptions>).short_name = 'PWA Inject'
+  pwaOptions.injectManifest = {
+    minify: false,
+    enableWorkboxModulesLogs: true,
+  }
 }
 
 if (claims)
