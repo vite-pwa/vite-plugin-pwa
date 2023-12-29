@@ -109,7 +109,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
 
   const { format, plugins, rollupOptions } = options.injectManifestRollupOptions
 
-  const inlineConfig: InlineConfig = {
+  const inlineConfig = {
     root: viteOptions.root,
     base: viteOptions.base,
     resolve: viteOptions.resolve,
@@ -117,45 +117,68 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     // don't copy anything from public folder
     publicDir: false,
     build: {
+      target: options.injectManifestBuildOptions.target,
+      minify: options.mode === 'production',
       sourcemap: viteOptions.build.sourcemap,
       outDir: options.outDir,
       emptyOutDir: false,
     },
     configFile: false,
     define,
-  }
+  } satisfies InlineConfig
 
   if (format === 'iife') {
-    inlineConfig.build!.lib = {
-      entry: options.swSrc,
-      name: 'app',
-      formats: [format],
-    }
-    inlineConfig.build!.rollupOptions = {
-      ...rollupOptions,
-      plugins,
-      output: {
-        entryFileNames: options.filename,
+    Object.assign(inlineConfig.build, {
+      ...inlineConfig.build,
+      lib: {
+        entry: options.swSrc,
+        name: 'app',
+        formats: [format],
       },
-    }
+      rollupOptions: {
+        ...rollupOptions,
+        plugins,
+        output: {
+          entryFileNames: options.filename,
+        },
+      },
+    })
   }
   else {
-    inlineConfig.build!.modulePreload = false
-    inlineConfig.build!.rollupOptions = {
-      ...rollupOptions,
-      plugins,
-      input: options.swSrc,
-      output: {
-        entryFileNames: 'service-worker.mjs',
-        inlineDynamicImports: true,
-      },
+    if (viteOptions.build.sourcemap) {
+      Object.assign(inlineConfig, {
+        ...inlineConfig,
+        esbuild: {
+          sourcemap: viteOptions.build.sourcemap === 'hidden' ? true : viteOptions.build.sourcemap,
+        },
+      } satisfies InlineConfig)
     }
+    Object.assign(inlineConfig.build, {
+      ...inlineConfig.build,
+      modulePreload: false,
+      rollupOptions: {
+        ...rollupOptions,
+        plugins,
+        input: options.swSrc,
+        output: {
+          entryFileNames: 'service-worker.mjs',
+          inlineDynamicImports: true,
+        },
+      },
+    } satisfies InlineConfig['build'])
   }
+
+  // eslint-disable-next-line no-console
+  console.log(inlineConfig)
 
   await build(inlineConfig)
 
-  if (format !== 'iife')
+  if (format !== 'iife') {
     await fs.rename(`${options.outDir}/service-worker.mjs`, `${options.outDir}/${options.filename}`)
+    const sourceMap = await fs.lstat(`${options.outDir}/service-worker.mjs.map`).then(s => s.isFile()).catch(() => false)
+    if (sourceMap)
+      await fs.rename(`${options.outDir}/service-worker.mjs.map`, `${options.outDir}/${options.filename}.map`)
+  }
 
   // don't force user to include injection point
   if (!options.injectManifest.injectionPoint)

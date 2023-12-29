@@ -117,6 +117,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
     plugins = [],
     rollupOptions = {},
     rollupFormat = 'es',
+    target,
     ...userInjectManifest
   } = options.injectManifest || {}
   const injectManifest = Object.assign({}, defaultInjectManifest, userInjectManifest)
@@ -197,6 +198,9 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
       plugins,
       rollupOptions,
       format: rollupFormat,
+    },
+    injectManifestBuildOptions: {
+      target,
     },
   }
 
