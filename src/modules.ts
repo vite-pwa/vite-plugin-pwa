@@ -1,10 +1,11 @@
-import { dirname, resolve } from 'node:path'
+import { basename, dirname, relative, resolve } from 'node:path'
 import { promises as fs } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import type { BuildResult } from 'workbox-build'
 import type { InlineConfig, ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions } from './types'
-import { logWorkboxResult } from './log'
+import { logSWViteBuild, logWorkboxResult } from './log'
+import { normalizePath } from './utils'
 
 const _dirname = typeof __dirname !== 'undefined'
   ? __dirname
@@ -127,6 +128,9 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     define,
   } satisfies InlineConfig
 
+  const swName = basename(options.swDest)
+  const swMjsName = swName.replace(/\.js$/, '.mjs')
+
   if (format === 'iife') {
     Object.assign(inlineConfig.build, {
       ...inlineConfig.build,
@@ -139,7 +143,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
         ...rollupOptions,
         plugins,
         output: {
-          entryFileNames: options.filename,
+          entryFileNames: swName,
         },
       },
     })
@@ -162,20 +166,34 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
         plugins,
         input: options.swSrc,
         output: {
-          entryFileNames: 'service-worker.mjs',
+          entryFileNames: swMjsName,
           inlineDynamicImports: true,
         },
       },
     } satisfies InlineConfig['build'])
   }
 
+  // log sw build
+  logSWViteBuild(normalizePath(relative(viteOptions.root, options.swSrc)), viteOptions, format)
+
   await build(inlineConfig)
 
   if (format !== 'iife') {
-    await fs.rename(`${options.outDir}/service-worker.mjs`, `${options.outDir}/${options.filename}`)
-    const sourceMap = await fs.lstat(`${options.outDir}/service-worker.mjs.map`).then(s => s.isFile()).catch(() => false)
-    if (sourceMap)
-      await fs.rename(`${options.outDir}/service-worker.mjs.map`, `${options.outDir}/${options.filename}.map`)
+    await fs.rename(
+        `${options.outDir}/${swMjsName}`,
+        `${options.outDir}/${swName}`,
+    )
+    const sourceMap = await fs.lstat(`${options.outDir}/${swMjsName}.map`).then(s => s.isFile()).catch(() => false)
+    if (sourceMap) {
+      await Promise.all([
+        fs.readFile(`${options.outDir}/${swName}`, 'utf-8').then(content => fs.writeFile(
+              `${options.outDir}/${swName}`,
+              content.replace(`${swMjsName}.map`, `${swName}.map`),
+              'utf-8',
+        )),
+        fs.rename(`${options.outDir}/${swMjsName}.map`, `${options.outDir}/${swName}.map`),
+      ])
+    }
   }
 
   // don't force user to include injection point
@@ -195,5 +213,5 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
   // inject the manifest
   const buildResult = await injectManifest(injectManifestOptions)
   // log workbox result
-  logWorkboxResult('injectManifest', buildResult, viteOptions)
+  logWorkboxResult('injectManifest', buildResult, viteOptions, format)
 }
