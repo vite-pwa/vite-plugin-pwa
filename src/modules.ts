@@ -153,6 +153,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
         },
       } satisfies InlineConfig)
     }
+
     Object.assign(inlineConfig.build, {
       ...inlineConfig.build,
       modulePreload: false,
@@ -167,9 +168,6 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
       },
     } satisfies InlineConfig['build'])
   }
-
-  // eslint-disable-next-line no-console
-  console.log(inlineConfig)
 
   await build(inlineConfig)
 
