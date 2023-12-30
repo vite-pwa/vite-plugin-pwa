@@ -106,14 +106,18 @@ import.meta.hot.on('${DEV_PWA_ASSETS_NAME}', ({ themeColor, links }) => {
   }
   if (links) {
     links.map((l) => {
-      const link = document.createElement('link');
+      const link = document.querySelector(\`link[href="\${l.href}"]\`) ?? document.createElement('link');
       if (l.id) link.setAttribute('id', l.id);
+      else link.removeAttribute('id');
       link.setAttribute('rel', l.rel);
       link.setAttribute('href', l.href);
       if (l.media) link.setAttribute('media', l.media);
+      else link.removeAttribute('media');
       if (l.sizes) link.setAttribute('sizes', l.sizes);
+      else link.removeAttribute('sizes');
       if (l.type) link.setAttribute('type', l.type);
-      document.head.appendChild(link);
+      else link.removeAttribute('type');
+      if (!link.parentNode) document.head.appendChild(link);
     });
   }  
 });  
