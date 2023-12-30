@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev-assets": "rimraf dev-dist && DEBUG=vite-plugin-pwa PWA_ASSETS=true SW_DEV=true vite --force",
     "dev": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DEV=true vite --force",
     "dev-claims": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DEV=true CLAIMS=true SW=true vite --force",
     "dev-destroy": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DESTROY=true SW_DEV=true vite --force",
