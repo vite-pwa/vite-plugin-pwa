@@ -106,14 +106,14 @@
   "peerDependencies": {
     "vite": "^3.1.0 || ^4.0.0 || ^5.0.0",
     "workbox-build": "^7.0.0",
-    "workbox-window": "^7.0.0"
+    "@vite-pwa/workbox-window": "^8.0.0"
   },
   "dependencies": {
     "debug": "^4.3.4",
     "fast-glob": "^3.3.2",
     "pretty-bytes": "^6.1.1",
     "workbox-build": "^7.0.0",
-    "workbox-window": "^7.0.0"
+    "@vite-pwa/workbox-window": "^8.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.0.0",

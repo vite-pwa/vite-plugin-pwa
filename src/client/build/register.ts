@@ -22,9 +22,11 @@ export function registerSW(options: RegisterSWOptions = {}) {
     onRegistered,
     onRegisteredSW,
     onRegisterError,
+    onInstalling,
+    onUpdateFound,
   } = options
 
-  let wb: import('workbox-window').Workbox | undefined
+  let wb: import('@vite-pwa/workbox-window').Workbox | undefined
   let registerPromise: Promise<void>
   let sendSkipWaitingMessage: () => Promise<void> | undefined
 
@@ -37,7 +39,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   async function register() {
     if ('serviceWorker' in navigator) {
-      const { Workbox } = await import('workbox-window')
+      const { Workbox } = await import('@vite-pwa/workbox-window')
       // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
       wb = new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
       sendSkipWaitingMessage = async () => {
@@ -49,6 +51,11 @@ export function registerSW(options: RegisterSWOptions = {}) {
       }
       if (!autoDestroy) {
         if (auto) {
+          wb.addEventListener('installing', (event) => {
+            event.isUpdate === true || event.isExternal === true
+              ? onUpdateFound?.(true, event.sw)
+              : onInstalling?.(true, event.sw)
+          })
           wb.addEventListener('activated', (event) => {
             if (event.isUpdate || event.isExternal)
               window.location.reload()
@@ -61,7 +68,18 @@ export function registerSW(options: RegisterSWOptions = {}) {
         }
         else {
           let onNeedRefreshCalled = false
-          const showSkipWaitingPrompt = () => {
+          const showSkipWaitingPrompt = (event?: import('@vite-pwa/workbox-window').WorkboxLifecycleWaitingEvent) => {
+            /*
+             FIX:
+             - open page in a new tab and navigate to home page
+             - add a new sw version
+             - open a new second tab and navigate to home page
+             - click reload on the first tab
+             - second tab refreshed, but the first tab doesn't (still with prompt)
+             */
+            if (event && onNeedRefreshCalled && event.isExternal)
+              window.location.reload()
+
             onNeedRefreshCalled = true
             // \`event.wasWaitingBeforeRegister\` will be false if this is
             // the first time the updated service worker is waiting.
@@ -81,7 +99,16 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
             onNeedRefresh?.()
           }
+          wb.addEventListener('installing', (event) => {
+            event.isUpdate === true || event.isExternal === true
+              ? onUpdateFound?.(true, event.sw)
+              : onInstalling?.(true, event.sw)
+          })
           wb.addEventListener('installed', (event) => {
+            event.isUpdate === true || event.isExternal === true
+              ? onUpdateFound?.(false, event.sw)
+              : onInstalling?.(false, event.sw)
+
             if (typeof event.isUpdate === 'undefined') {
               if (typeof event.isExternal !== 'undefined') {
                 if (event.isExternal)
@@ -103,8 +130,6 @@ export function registerSW(options: RegisterSWOptions = {}) {
           // Add an event listener to detect when the registered
           // service worker has installed but is waiting to activate.
           wb.addEventListener('waiting', showSkipWaitingPrompt)
-          // @ts-expect-error event listener provided by workbox-window
-          wb.addEventListener('externalwaiting', showSkipWaitingPrompt)
         }
       }
 

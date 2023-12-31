@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^5.0.5",
+    "@vite-pwa/workbox-window": "^8.0.0",
     "https-localhost": "^4.7.1",
     "rimraf": "^5.0.5",
     "typescript": "^5.2.2",
@@ -61,7 +62,6 @@
     "vite-plugin-solid": "^2.7.2",
     "workbox-core": "^7.0.0",
     "workbox-precaching": "^7.0.0",
-    "workbox-routing": "^7.0.0",
-    "workbox-window": "^7.0.0"
+    "workbox-routing": "^7.0.0"
   }
 }

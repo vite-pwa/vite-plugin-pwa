@@ -52,6 +52,7 @@
     "@roxi/routify": "^2.18.12",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
     "@tsconfig/svelte": "^5.0.2",
+    "@vite-pwa/workbox-window": "^8.0.0",
     "eslint": "^8.54.0",
     "eslint-plugin-svelte3": "^4.0.0",
     "https-localhost": "^4.7.1",

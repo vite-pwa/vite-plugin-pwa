@@ -17,4 +17,22 @@ export interface RegisterSWOptions {
    */
   onRegisteredSW?: (swScriptUrl: string, registration: ServiceWorkerRegistration | undefined) => void
   onRegisterError?: (error: any) => void
+  /**
+   * Called when the service worker is installing for the first time.
+   *
+   * This callback will also be called when the service worker is installed .
+   *
+   * @param state true when the service worker is installing for first time and false when installed.
+   * @param sw The service worker instance.
+   */
+  onInstalling?: (state: boolean, sw?: ServiceWorker) => void
+  /**
+   * Called when a new service worker version is found and it is installing.
+   *
+   * This callback will also be called when the service worker is installed.
+   *
+   * @param state true when the service worker is installing and false when installed.
+   * @param sw The service worker instance.
+   */
+  onUpdateFound?: (state: boolean, sw?: ServiceWorker) => void
 }

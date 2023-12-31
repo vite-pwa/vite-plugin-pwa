@@ -6,6 +6,8 @@ export type { RegisterSWOptions }
 export function useRegisterSW(_options: RegisterSWOptions = {}) {
   const needRefresh = ref(false)
   const offlineReady = ref(false)
+  const installingSW = ref(false)
+  const updatingSW = ref(false)
 
   const updateServiceWorker = (_reloadPage?: boolean) => {}
 
@@ -13,5 +15,7 @@ export function useRegisterSW(_options: RegisterSWOptions = {}) {
     updateServiceWorker,
     offlineReady,
     needRefresh,
+    installingSW,
+    updatingSW,
   }
 }

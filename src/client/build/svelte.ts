@@ -12,10 +12,14 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
     onRegistered,
     onRegisteredSW,
     onRegisterError,
+    onInstalling,
+    onUpdateFound,
   } = options
 
   const needRefresh = writable(false)
   const offlineReady = writable(false)
+  const installingSW = writable(false)
+  const updatingSW = writable(false)
 
   const updateServiceWorker = registerSW({
     immediate,
@@ -27,6 +31,14 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
       needRefresh.set(true)
       onNeedRefresh?.()
     },
+    onInstalling(state, sw) {
+      installingSW.set(state)
+      onInstalling?.(state, sw)
+    },
+    onUpdateFound(state, sw) {
+      updatingSW.set(state)
+      onUpdateFound?.(state, sw)
+    },
     onRegistered,
     onRegisteredSW,
     onRegisterError,
@@ -35,6 +47,8 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
   return {
     needRefresh,
     offlineReady,
+    installingSW,
+    updatingSW,
     updateServiceWorker,
   }
 }

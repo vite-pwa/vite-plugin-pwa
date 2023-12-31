@@ -25,6 +25,12 @@ const {
       console.log(`SW Registered: ${r}`)
     }
   },
+  onInstalling(state) {
+    console.log(`SW Installing: ${state}`)
+  },
+  onUpdateFound(state) {
+    console.log(`SW Updating: ${state}`)
+  },
 })
 
 async function close() {

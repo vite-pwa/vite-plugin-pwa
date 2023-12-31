@@ -1,4 +1,4 @@
-import type { Plugin, UserConfig } from 'vite'
+import type { Plugin } from 'vite'
 import {
   VIRTUAL_MODULES,
   VIRTUAL_MODULES_MAP,
@@ -14,14 +14,6 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
   return <Plugin>{
     name: 'vite-plugin-pwa',
     enforce: 'pre',
-    config() {
-      return <UserConfig>{
-        ssr: {
-          // TODO: remove until workbox-window support native ESM
-          noExternal: ['workbox-window'],
-        },
-      }
-    },
     async configResolved(config) {
       ctx.useImportRegister = false
       ctx.viteConfig = config
