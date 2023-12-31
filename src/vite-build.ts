@@ -18,6 +18,9 @@ export async function buildSW(
   precacheAndRoute(self.__WB_MANIFEST)
   */
 
+  // allow integrations to modify also build options
+  await options.integration?.beforeBuildServiceWorker?.(options)
+
   const { build } = await import('vite')
 
   const {
@@ -53,8 +56,6 @@ export async function buildSW(
   // don't force user to include injection point
   if (!options.injectManifest.injectionPoint)
     return
-
-  await options.integration?.beforeBuildServiceWorker?.(options)
 
   const injectManifestOptions = {
     ...options.injectManifest,

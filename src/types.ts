@@ -90,8 +90,8 @@ export interface VitePWAOptions {
    * - if you want workbox logs in your service worker when using production build, configure `injectManifest.enableWorkboxModulesLogs = true` in your PWA configuration.
    * - you can use `import.meta.env.MODE` to access the Vite mode inside your service worker.
    * - you can use `import.meta.env.DEV` or `import.meta.env.PROD` to check if the service worker is
-   *   running on development or production (equivalent to `process.env.NODE_ENV`,
-   *   check Vite [NODE_ENV and Modes](https://vitejs.dev/guide/env-and-mode#node-env-and-modes)) docs.
+   *   running on development or production (equivalent to `process.env.NODE_ENV`),
+   *   check Vite [NODE_ENV and Modes](https://vitejs.dev/guide/env-and-mode#node-env-and-modes) docs.
    *
    * @see https://vitejs.dev/guide/env-and-mode#node-env-and-modes
    * @default process.env.NODE_ENV or "production"

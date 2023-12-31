@@ -96,7 +96,7 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
 
   const [workbox, buildSW] = await Promise.all([
     loadWorkboxBuild(),
-    import('./vite').then(({ buildSW }) => buildSW),
+    import('./vite-build').then(({ buildSW }) => buildSW),
   ])
 
   await buildSW(options, viteOptions, workbox)
