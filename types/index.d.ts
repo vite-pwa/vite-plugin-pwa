@@ -20,7 +20,9 @@ export interface RegisterSWOptions {
   /**
    * Called when the service worker is installing for the first time.
    *
-   * This callback will also be called when the service worker is installed .
+   * The service worker's `installing` event is transient:
+   * - this callback is called when the service worker is installing for the first time
+   * - once the service worker has been installed, the callback is called again with state `false`
    *
    * @param state true when the service worker is installing for first time and false when installed.
    * @param sw The service worker instance.
@@ -29,7 +31,9 @@ export interface RegisterSWOptions {
   /**
    * Called when a new service worker version is found and it is installing.
    *
-   * This callback will also be called when the service worker is installed.
+   * The service worker's `installing` event is transient:
+   * - this callback is called when a new service worker version has been detected
+   * - once the new service worker has been installed, the callback is called again with state `false`
    *
    * @param state true when the service worker is installing and false when installed.
    * @param sw The service worker instance.
