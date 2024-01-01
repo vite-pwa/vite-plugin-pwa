@@ -54,7 +54,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
               window.location.reload()
           })
           wb.addEventListener('installed', (event) => {
-            if (!event.isUpdate) {
+            if (event.isUpdate === false) {
               onOfflineReady?.()
             }
           });
@@ -86,7 +86,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
             // that will reload the page as soon as the previously waiting
             // service worker has taken control.
             wb?.addEventListener('controlling', (event) => {
-              if (event.isUpdate)
+              if (event.isUpdate === true || event.isExternal === true)
                 window.location.reload()
             })
 
