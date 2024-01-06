@@ -107,24 +107,7 @@ function prepareViteBuild(
   const swName = basename(options.swDest)
   const swMjsName = swName.replace(/\.js$/, '.mjs')
 
-  if (format === 'iife') {
-    Object.assign(inlineConfig.build, {
-      ...inlineConfig.build,
-      lib: {
-        entry: options.swSrc,
-        name: 'app',
-        formats: [format],
-      },
-      rollupOptions: {
-        ...rollupOptions,
-        plugins,
-        output: {
-          entryFileNames: swName,
-        },
-      },
-    })
-  }
-  else {
+  if (format !== 'iife') {
     if (viteOptions.build.sourcemap) {
       Object.assign(inlineConfig, {
         ...inlineConfig,
@@ -147,6 +130,23 @@ function prepareViteBuild(
         },
       },
     } satisfies InlineConfig['build'])
+  }
+  else {
+    Object.assign(inlineConfig.build, {
+      ...inlineConfig.build,
+      lib: {
+        entry: options.swSrc,
+        name: 'app',
+        formats: [format],
+      },
+      rollupOptions: {
+        ...rollupOptions,
+        plugins,
+        output: {
+          entryFileNames: swName,
+        },
+      },
+    })
   }
 
   return {
