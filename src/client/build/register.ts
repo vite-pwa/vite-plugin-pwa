@@ -37,7 +37,14 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   async function register() {
     if ('serviceWorker' in navigator) {
-      const { Workbox } = await import('workbox-window')
+      const WorkboxWindow = await import('workbox-window').catch((e) => 
+        onRegisterError?.(e)
+      )
+      if (!WorkboxWindow) {
+        return
+      }
+
+      const { Workbox } = WorkboxWindow
       // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
       wb = new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
       sendSkipWaitingMessage = async () => {
