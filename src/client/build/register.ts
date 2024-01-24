@@ -37,16 +37,17 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   async function register() {
     if ('serviceWorker' in navigator) {
-      const WorkboxWindow = await import('workbox-window').catch((e) => 
+      wb = await import('workbox-window').then(({ Workbox }) => {
+        // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
+        return new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
+      }).catch((e) => {
         onRegisterError?.(e)
-      )
-      if (!WorkboxWindow) {
-        return
-      }
+        return undefined
+      })
 
-      const { Workbox } = WorkboxWindow
-      // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
-      wb = new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
+      if (!wb)
+        return
+
       sendSkipWaitingMessage = async () => {
         // Send a message to the waiting service worker,
         // instructing it to activate.
