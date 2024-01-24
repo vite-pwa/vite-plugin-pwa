@@ -206,8 +206,8 @@ async function resolveDevDistFolder(options: ResolvedVitePWAOptions, viteConfig:
 async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
   if (options.injectRegister === 'script' || options.injectRegister === 'script-defer') {
     const devDist = await resolveDevDistFolder(options, viteConfig)
-    if (!existsSync(devDist))
-      mkdirSync(devDist)
+
+    mkdirSync(devDist)
 
     const registerSW = resolve(devDist, FILE_SW_REGISTER)
     if (existsSync(registerSW)) {
@@ -225,6 +225,11 @@ async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: 
 
 function createSWResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): () => Promise<void> {
   return async () => {
+    const devDist = await resolveDevDistFolder(ctx.options, ctx.viteConfig)
+
+    if (existsSync(devDist))
+      await fs.rm(devDist, { recursive: true, force: true })
+
     const { options, useImportRegister } = ctx
     const { injectRegister, scope, base } = options
     // don't send the sw registration if virtual imported or disabled
