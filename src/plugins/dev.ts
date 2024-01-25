@@ -211,17 +211,12 @@ async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: 
       mkdirSync(devDist, { recursive: true })
 
     const registerSW = resolve(devDist, FILE_SW_REGISTER)
-    if (swDevOptions.registerSWGenerated) {
-      // since we don't delete the dev-dist folder, we just add it if already exists
-      if (!swDevOptions.workboxPaths.has(registerSW))
-        swDevOptions.workboxPaths.set(normalizePath(`${options.base}${FILE_SW_REGISTER}`), registerSW)
-
-      return
+    if (!swDevOptions.registerSWGenerated) {
+      await fs.writeFile(registerSW, generateSimpleSWRegister(options, true), { encoding: 'utf8' })
+      swDevOptions.registerSWGenerated = true
     }
 
-    await fs.writeFile(registerSW, generateSimpleSWRegister(options, true), { encoding: 'utf8' })
     swDevOptions.workboxPaths.set(normalizePath(`${options.base}${FILE_SW_REGISTER}`), registerSW)
-    swDevOptions.registerSWGenerated = true
   }
 }
 
