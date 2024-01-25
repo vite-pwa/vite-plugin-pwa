@@ -9,10 +9,10 @@ test('Solid: The service worker is registered and cache storage is present', asy
 
   const swURL = await page.evaluate(async () => {
     const registration = await Promise.race([
-      // @ts-expect-error TS2339: Property 'serviceWorker' does not exist on type 'WorkerNavigator'.
       navigator.serviceWorker.ready,
       new Promise((_resolve, reject) => setTimeout(() => reject(new Error('Service worker registration failed: time out')), 10000)),
     ])
+    // @ts-expect-error registration is of type any
     return registration.active?.scriptURL
   })
   expect(swURL).toBe(`http://localhost:4173/${swName}`)

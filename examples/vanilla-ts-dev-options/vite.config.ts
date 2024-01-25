@@ -44,6 +44,7 @@ export default defineConfig({
         enabled: process.env.SW_DEV === 'true',
         /* when using generateSW the PWA plugin will switch to classic */
         navigateFallback: 'index.html',
+        suppressWarnings: true,
       },
     }),
   ],
