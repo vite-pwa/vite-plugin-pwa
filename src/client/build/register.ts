@@ -39,9 +39,16 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   async function register() {
     if ('serviceWorker' in navigator) {
-      const { Workbox } = await import('@vite-pwa/workbox-window')
-      // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
-      wb = new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
+      wb = await import('@vite-pwa/workbox-window').then(({ Workbox }) => {
+        // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
+        return new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
+      }).catch((e) => {
+        onRegisterError?.(e)
+        return undefined
+      })
+
+      if (!wb)
+        return
       sendSkipWaitingMessage = async () => {
         // Send a message to the waiting service worker,
         // instructing it to activate.

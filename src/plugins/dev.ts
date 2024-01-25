@@ -24,6 +24,7 @@ import type { PWAPluginContext } from '../context'
 export const swDevOptions = {
   swUrl: DEV_SW_NAME,
   swDevGenerated: false,
+  registerSWGenerated: false,
   workboxPaths: new Map<string, string>(),
 }
 
@@ -128,7 +129,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
             mkdirSync(globDirectory, { recursive: true })
 
           const swDest = resolve(globDirectory, 'sw.js')
-          if (!swDevOptions.swDevGenerated || !existsSync(swDest)) {
+          if (!swDevOptions.swDevGenerated) {
             // add empty js file to suppress workbox-build warnings
             let suppressWarnings: string | undefined
             if (options.devOptions.suppressWarnings === true) {
@@ -136,7 +137,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
               await fs.writeFile(suppressWarnings, '', 'utf-8')
             }
             const globPatterns = options.devOptions.suppressWarnings === true
-              ? ['*.js']
+              ? ['suppress-warnings.js']
               : options.workbox.globPatterns
             // we only need to generate sw on dev-dist folder and then read the content
             // the sw precache (self.__SW_MANIFEST) will be empty since we're using `dev-dist` folder
@@ -207,18 +208,14 @@ async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: 
   if (options.injectRegister === 'script' || options.injectRegister === 'script-defer') {
     const devDist = await resolveDevDistFolder(options, viteConfig)
     if (!existsSync(devDist))
-      mkdirSync(devDist)
+      mkdirSync(devDist, { recursive: true })
 
     const registerSW = resolve(devDist, FILE_SW_REGISTER)
-    if (existsSync(registerSW)) {
-      // since we don't delete the dev-dist folder, we just add it if already exists
-      if (!swDevOptions.workboxPaths.has(registerSW))
-        swDevOptions.workboxPaths.set(normalizePath(`${options.base}${FILE_SW_REGISTER}`), registerSW)
-
-      return
+    if (!swDevOptions.registerSWGenerated) {
+      await fs.writeFile(registerSW, generateSimpleSWRegister(options, true), { encoding: 'utf8' })
+      swDevOptions.registerSWGenerated = true
     }
 
-    await fs.writeFile(registerSW, generateSimpleSWRegister(options, true), { encoding: 'utf8' })
     swDevOptions.workboxPaths.set(normalizePath(`${options.base}${FILE_SW_REGISTER}`), registerSW)
   }
 }
