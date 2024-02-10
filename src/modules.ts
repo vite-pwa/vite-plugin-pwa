@@ -94,64 +94,10 @@ export async function generateInjectManifest(options: ResolvedVitePWAOptions, vi
     return
   }
 
-  // we will have something like this from swSrc:
-  /*
-  // sw.js
-  import { precacheAndRoute } from 'workbox-precaching'
-  // self.__WB_MANIFEST is default injection point
-  precacheAndRoute(self.__WB_MANIFEST)
-  */
+  const [workbox, buildSW] = await Promise.all([
+    loadWorkboxBuild(),
+    import('./vite-build').then(({ buildSW }) => buildSW),
+  ])
 
-  const { build } = await import('vite')
-
-  const define: Record<string, any> = { ...(viteOptions.define ?? {}) }
-  define['process.env.NODE_ENV'] = JSON.stringify(options.mode)
-
-  const { format, plugins, rollupOptions } = options.injectManifestRollupOptions
-
-  await build({
-    root: viteOptions.root,
-    base: viteOptions.base,
-    resolve: viteOptions.resolve,
-    // don't copy anything from public folder
-    publicDir: false,
-    build: {
-      sourcemap: viteOptions.build.sourcemap,
-      lib: {
-        entry: options.swSrc,
-        name: 'app',
-        formats: [format],
-      },
-      rollupOptions: {
-        ...rollupOptions,
-        plugins,
-        output: {
-          entryFileNames: options.filename,
-        },
-      },
-      outDir: options.outDir,
-      emptyOutDir: false,
-    },
-    configFile: false,
-    define,
-  })
-
-  // don't force user to include injection point
-  if (!options.injectManifest.injectionPoint)
-    return
-
-  await options.integration?.beforeBuildServiceWorker?.(options)
-
-  const injectManifestOptions = {
-    ...options.injectManifest,
-    // this will not fail since there is an injectionPoint
-    swSrc: options.injectManifest.swDest,
-  }
-
-  const { injectManifest } = await loadWorkboxBuild()
-
-  // inject the manifest
-  const buildResult = await injectManifest(injectManifestOptions)
-  // log workbox result
-  logWorkboxResult('injectManifest', buildResult, viteOptions)
+  await buildSW(options, viteOptions, workbox)
 }
