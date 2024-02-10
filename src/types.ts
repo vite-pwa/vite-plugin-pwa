@@ -354,12 +354,12 @@ export interface ResolvedVitePWAOptions extends Required<Omit<VitePWAOptions, 'p
   vitePlugins: InjectManifestVitePlugins
   buildPlugins?: CustomInjectManifestOptions['buildPlugins']
   injectManifestRollupOptions: ResolvedServiceWorkerOptions
-    injectManifestBuildOptions: {
-        target?: BuildOptions['target']
-        minify?: BuildOptions['minify']
-        sourcemap?: BuildOptions['sourcemap']
-        enableWorkboxModulesLogs?: true
-    }
+  injectManifestBuildOptions: {
+    target?: BuildOptions['target']
+    minify?: BuildOptions['minify']
+    sourcemap?: BuildOptions['sourcemap']
+    enableWorkboxModulesLogs?: true
+  }
   pwaAssets: ResolvedPWAAssetsOptions
 }
 

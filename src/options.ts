@@ -207,12 +207,12 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
       rollupOptions,
       format: rollupFormat,
     },
-      injectManifestBuildOptions: {
-          target,
-          minify: minifySW,
-          sourcemap,
-          enableWorkboxModulesLogs,
-      },
+    injectManifestBuildOptions: {
+      target,
+      minify: minifySW,
+      sourcemap,
+      enableWorkboxModulesLogs,
+    },
     pwaAssets: resolvePWAAssetsOptions(pwaAssets),
   }
 
