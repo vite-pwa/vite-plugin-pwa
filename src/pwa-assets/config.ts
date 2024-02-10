@@ -5,6 +5,7 @@ import { loadConfig } from '@vite-pwa/assets-generator/config'
 import { cyan, red } from 'kolorist'
 import { instructions } from '@vite-pwa/assets-generator/api/instructions'
 import type { PWAPluginContext } from '../context'
+import type { ResolvedPWAAssetsOptions } from '../types'
 import type { AssetsGeneratorContext, ResolvedIconAsset } from './types'
 
 export async function loadAssetsGeneratorContext(
@@ -78,7 +79,7 @@ export async function loadAssetsGeneratorContext(
     includeHtmlHeadLinks = true,
     overrideManifestIcons: useOverrideManifestIcons,
     injectThemeColor = false,
-  } = ctx.options.pwaAssets
+  } = ctx.options.pwaAssets as ResolvedPWAAssetsOptions
 
   // override manifest icons when:
   // - manifest is defined and
@@ -126,7 +127,7 @@ export async function loadAssetsGeneratorContext(
 }
 
 async function loadConfiguration(root: string, ctx: PWAPluginContext) {
-  const pwaAssets = ctx.options.pwaAssets
+  const pwaAssets = ctx.options.pwaAssets as ResolvedPWAAssetsOptions
   if (pwaAssets.config === false) {
     return await loadConfig<UserConfig>(root, {
       config: false,

@@ -3,6 +3,9 @@ import type { PWAAssetsOptions, ResolvedPWAAssetsOptions } from '../types'
 export function resolvePWAAssetsOptions(
   options?: PWAAssetsOptions,
 ) {
+  if (!options)
+    return false
+
   const {
     disabled: useDisabled,
     config,

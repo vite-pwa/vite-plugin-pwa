@@ -360,7 +360,7 @@ export interface ResolvedVitePWAOptions extends Required<Omit<VitePWAOptions, 'p
     sourcemap?: BuildOptions['sourcemap']
     enableWorkboxModulesLogs?: true
   }
-  pwaAssets: ResolvedPWAAssetsOptions
+  pwaAssets: false | ResolvedPWAAssetsOptions
 }
 
 export interface ShareTargetFiles {
