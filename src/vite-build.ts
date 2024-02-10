@@ -84,6 +84,7 @@ function prepareViteBuild(
 
   define['process.env.NODE_ENV'] = JSON.stringify(nodeEnv)
 
+  const buildPlugins = options.buildPlugins
   const { format, plugins, rollupOptions } = options.injectManifestRollupOptions
 
   const inlineConfig = {
@@ -102,6 +103,7 @@ function prepareViteBuild(
     },
     configFile: false,
     define,
+    plugins: buildPlugins?.vite,
   } satisfies InlineConfig
 
   const swName = basename(options.swDest)
@@ -122,7 +124,7 @@ function prepareViteBuild(
       modulePreload: false,
       rollupOptions: {
         ...rollupOptions,
-        plugins,
+        plugins: buildPlugins?.rollup ?? plugins,
         input: options.swSrc,
         output: {
           entryFileNames: swMjsName,
@@ -141,7 +143,7 @@ function prepareViteBuild(
       },
       rollupOptions: {
         ...rollupOptions,
-        plugins,
+        plugins: buildPlugins?.rollup ?? plugins,
         output: {
           entryFileNames: swName,
         },

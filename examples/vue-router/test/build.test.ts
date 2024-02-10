@@ -23,7 +23,10 @@ describe('vue 3: test-build', () => {
     expect(existsSync(webManifest), `${webManifest} doesn't exist`).toBeTruthy()
     const swContent = readFileSync(swPath, 'utf-8')
     let match: RegExpMatchArray | null
-    if (!injectManifest) {
+    if (injectManifest) {
+      expect(swContent.includes('Message from Virtual Module Plugin'), 'missing virtual module message').toBeTruthy()
+    }
+    else {
       match = swContent.match(/define\(\['\.\/(workbox-\w+)'/)
       // vite 5 beta 8 change rollup from v3 to v4: sw deps now inlined
       if (match) {

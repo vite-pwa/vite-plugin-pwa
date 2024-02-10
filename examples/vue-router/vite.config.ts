@@ -50,9 +50,23 @@ if (process.env.SW === 'true') {
   pwaOptions.strategies = 'injectManifest'
   ;(pwaOptions.manifest as Partial<ManifestOptions>).name = 'PWA Inject Manifest'
   ;(pwaOptions.manifest as Partial<ManifestOptions>).short_name = 'PWA Inject'
+  const virtual = 'virtual:message'
+  const resolvedVirtual = `\0${virtual}`
   pwaOptions.injectManifest = {
     minify: false,
     enableWorkboxModulesLogs: true,
+    buildPlugins: {
+      vite: [{
+        name: 'vite-plugin-test',
+        resolveId(id) {
+          return id === virtual ? resolvedVirtual : null
+        },
+        load(id) {
+          if (id === resolvedVirtual)
+            return `export const message = 'Message from Virtual Module Plugin'`
+        },
+      }],
+    },
   }
 }
 

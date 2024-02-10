@@ -1,4 +1,4 @@
-import type { BuildOptions, Plugin, ResolvedConfig } from 'vite'
+import type { BuildOptions, Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle, RollupOptions } from 'rollup'
 
@@ -59,8 +59,25 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    * Both configurations cannot be shared, and so you'll need to duplicate the configuration, with the exception of `define`.
    *
    * **WARN**: this option is for advanced usage, beware, you can break your application build.
+   *
+   * This option will be ignored if `buildPlugins.rollup` is configured.
+   *
+   * @deprecated use `buildPlugins` instead
    */
   plugins?: Plugin[]
+  /**
+   * Since `v0.18.0` you can add custom Rollup and/or Vite plugins to build your service worker.
+   *
+   * **WARN**: don't share plugins between the application and the service worker build, you need to include new plugins for each configuration.
+   *
+   * If you are using `plugins` option, use this option to configure the Rollup plugins or move them to `vite` option.
+   *
+   * **WARN**: this option is for advanced usage, beware, you can break your application build.
+   */
+  buildPlugins?: {
+    rollup?: RollupOptions['plugins']
+    vite?: UserConfig['plugins']
+  }
   /**
    * Since `v0.15.0` you can add custom Rollup options to build your service worker: we expose the same configuration to build a worker using Vite.
    */
@@ -234,7 +251,7 @@ export interface VitePWAOptions {
 
 export interface ResolvedServiceWorkerOptions {
   format: 'es' | 'iife'
-  plugins: Plugin[]
+  plugins?: Plugin[]
   rollupOptions: RollupOptions
 }
 
@@ -245,6 +262,7 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
   injectManifest: InjectManifestOptions
   rollupFormat: 'es' | 'iife'
   vitePlugins: InjectManifestVitePlugins
+  buildPlugins?: CustomInjectManifestOptions['buildPlugins']
   injectManifestRollupOptions: ResolvedServiceWorkerOptions
   injectManifestBuildOptions: {
     target?: BuildOptions['target']
