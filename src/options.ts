@@ -117,9 +117,14 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     : Object.assign({}, defaultManifest, options.manifest || {})
   const {
     vitePlugins = defaultInjectManifestVitePlugins,
-    plugins = [],
+    plugins,
     rollupOptions = {},
     rollupFormat = 'es',
+    target = viteConfig.build.target,
+    minify: minifySW = viteConfig.build.minify,
+    sourcemap = viteConfig.build.sourcemap,
+    enableWorkboxModulesLogs,
+    buildPlugins,
     ...userInjectManifest
   } = options.injectManifest || {}
   const injectManifest = Object.assign({}, defaultInjectManifest, userInjectManifest)
@@ -194,6 +199,7 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     devOptions,
     rollupFormat,
     vitePlugins,
+    buildPlugins,
     selfDestroying,
     buildBase: buildBase ?? basePath,
     injectManifestRollupOptions: {
@@ -201,6 +207,12 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
       rollupOptions,
       format: rollupFormat,
     },
+      injectManifestBuildOptions: {
+          target,
+          minify: minifySW,
+          sourcemap,
+          enableWorkboxModulesLogs,
+      },
     pwaAssets: resolvePWAAssetsOptions(pwaAssets),
   }
 

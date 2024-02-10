@@ -1,4 +1,4 @@
-import type { Plugin, ResolvedConfig } from 'vite'
+import type { BuildOptions, Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle, RollupOptions } from 'rollup'
 import type { BuiltInPreset, Preset } from '@vite-pwa/assets-generator/config'
@@ -13,6 +13,39 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    * @default 'es'
    */
   rollupFormat?: 'es' | 'iife'
+  /**
+   * Configure the custom Vite build target option.
+   *
+   * @default Vite build target option
+   * @since v0.18.0
+   */
+  target?: BuildOptions['target']
+  /**
+   * Configure the custom Vite build minify option.
+   *
+   * @default Vite build minify option
+   * @since v0.18.0
+   */
+  minify?: BuildOptions['minify']
+  /**
+   * Configure the custom Vite build sourcemap option.
+   *
+   * @default Vite build sourcemap option
+   * @since v0.18.0
+   */
+  sourcemap?: BuildOptions['sourcemap']
+  /**
+   * Should use `process.env.NODE_ENV` to remove dead code?
+   *
+   * If you want to keep logs from `workbox` modules, you can set this option to `true`,
+   * the plugin will configure `process.env.NODE_ENV` to `"development"`.
+   *
+   * If this option is not configured, the plugin will use `process.env.NODE_ENV`.
+   *
+   * @default `process.env.NODE_ENV === 'production'`
+   * @since v0.18.0
+   */
+  enableWorkboxModulesLogs?: true
   /**
    * `Vite` plugin ids to use on `Rollup` build.
    *
@@ -29,8 +62,25 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    * Both configurations cannot be shared, and so you'll need to duplicate the configuration, with the exception of `define`.
    *
    * **WARN**: this option is for advanced usage, beware, you can break your application build.
+   *
+   * This option will be ignored if `buildPlugins.rollup` is configured.
+   *
+   * @deprecated use `buildPlugins` instead
    */
   plugins?: Plugin[]
+  /**
+   * Since `v0.18.0` you can add custom Rollup and/or Vite plugins to build your service worker.
+   *
+   * **WARN**: don't share plugins between the application and the service worker build, you need to include new plugins for each configuration.
+   *
+   * If you are using `plugins` option, use this option to configure the Rollup plugins or move them to `vite` option.
+   *
+   * **WARN**: this option is for advanced usage, beware, you can break your application build.
+   */
+  buildPlugins?: {
+    rollup?: RollupOptions['plugins']
+    vite?: UserConfig['plugins']
+  }
   /**
    * Since `v0.15.0` you can add custom Rollup options to build your service worker: we expose the same configuration to build a worker using Vite.
    */
@@ -131,8 +181,19 @@ export interface ResolvedPWAAssetsOptions extends Required<Omit<PWAAssetsOptions
  */
 export interface VitePWAOptions {
   /**
-   * Build mode
+   * Build mode.
    *
+   * From `v0.18.0` this option is ignored when using `injectManifest` strategy:
+   * - the new Vite build will use the same mode as the application when using `injectManifest` strategy.
+   * - if you don't want to minify your service worker, configure `injectManifest.minify = false` in your PWA configuration.
+   * - if you want the sourcemap only for the service worker, configure `injectManifest.sourcemap = true` in your PWA configuration.
+   * - if you want workbox logs in your service worker when using production build, configure `injectManifest.enableWorkboxModulesLogs = true` in your PWA configuration.
+   * - you can use `import.meta.env.MODE` to access the Vite mode inside your service worker.
+   * - you can use `import.meta.env.DEV` or `import.meta.env.PROD` to check if the service worker is
+   *   running on development or production (equivalent to `process.env.NODE_ENV`),
+   *   check Vite [NODE_ENV and Modes](https://vitejs.dev/guide/env-and-mode#node-env-and-modes) docs.
+   *
+   * @see https://vitejs.dev/guide/env-and-mode#node-env-and-modes
    * @default process.env.NODE_ENV or "production"
    */
   mode?: 'development' | 'production'
@@ -280,7 +341,7 @@ export interface VitePWAOptions {
 
 export interface ResolvedServiceWorkerOptions {
   format: 'es' | 'iife'
-  plugins: Plugin[]
+  plugins?: Plugin[]
   rollupOptions: RollupOptions
 }
 
@@ -291,7 +352,14 @@ export interface ResolvedVitePWAOptions extends Required<Omit<VitePWAOptions, 'p
   injectManifest: InjectManifestOptions
   rollupFormat: 'es' | 'iife'
   vitePlugins: InjectManifestVitePlugins
+  buildPlugins?: CustomInjectManifestOptions['buildPlugins']
   injectManifestRollupOptions: ResolvedServiceWorkerOptions
+    injectManifestBuildOptions: {
+        target?: BuildOptions['target']
+        minify?: BuildOptions['minify']
+        sourcemap?: BuildOptions['sourcemap']
+        enableWorkboxModulesLogs?: true
+    }
   pwaAssets: ResolvedPWAAssetsOptions
 }
 

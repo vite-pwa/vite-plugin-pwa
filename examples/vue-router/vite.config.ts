@@ -1,4 +1,5 @@
 import process from 'node:process'
+import type { Plugin } from 'vite'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'
@@ -53,12 +54,34 @@ if (pwaAssets) {
 const claims = process.env.CLAIMS === 'true'
 const selfDestroying = process.env.SW_DESTROY === 'true'
 
+function virtualMessagePlugin() {
+  const virtual = 'virtual:message'
+  const resolvedVirtual = `\0${virtual}`
+  return {
+    name: 'vite-plugin-test',
+    resolveId(id) {
+      return id === virtual ? resolvedVirtual : null
+    },
+    load(id) {
+      if (id === resolvedVirtual)
+        return `export const message = 'Message from Virtual Module Plugin'`
+    },
+  } satisfies Plugin
+}
+
 if (process.env.SW === 'true') {
   pwaOptions.srcDir = 'src'
   pwaOptions.filename = claims ? 'claims-sw.ts' : 'prompt-sw.ts'
   pwaOptions.strategies = 'injectManifest'
   ;(pwaOptions.manifest as Partial<ManifestOptions>).name = 'PWA Inject Manifest'
   ;(pwaOptions.manifest as Partial<ManifestOptions>).short_name = 'PWA Inject'
+  pwaOptions.injectManifest = {
+    minify: false,
+    enableWorkboxModulesLogs: true,
+    buildPlugins: {
+      vite: [virtualMessagePlugin()],
+    },
+  }
 }
 
 if (claims)
@@ -74,6 +97,7 @@ export default defineConfig({
   },
   plugins: [
     Vue(),
+    virtualMessagePlugin(),
     VitePWA(pwaOptions),
     replace({
       __DATE__: new Date().toISOString(),

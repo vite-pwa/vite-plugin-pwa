@@ -62,14 +62,25 @@ export function registerSW(options: RegisterSWOptions = {}) {
               window.location.reload()
           })
           wb.addEventListener('installed', (event) => {
-            if (!event.isUpdate) {
+            if (event.isUpdate === false) {
               onOfflineReady?.()
             }
           });
         }
         else {
           let onNeedRefreshCalled = false
-          const showSkipWaitingPrompt = () => {
+          const showSkipWaitingPrompt = (event?: import('workbox-window').WorkboxLifecycleWaitingEvent) => {
+            /*
+             FIX:
+             - open page in a new tab and navigate to home page
+             - add a new sw version
+             - open a new second tab and navigate to home page
+             - click reload on the first tab
+             - second tab refreshed, but the first tab doesn't (still with prompt)
+             */
+            if (event && onNeedRefreshCalled && event.isExternal)
+              window.location.reload()
+
             onNeedRefreshCalled = true
             // \`event.wasWaitingBeforeRegister\` will be false if this is
             // the first time the updated service worker is waiting.
@@ -83,7 +94,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
             // that will reload the page as soon as the previously waiting
             // service worker has taken control.
             wb?.addEventListener('controlling', (event) => {
-              if (event.isUpdate)
+              if (event.isUpdate === true || event.isExternal === true)
                 window.location.reload()
             })
 
@@ -111,8 +122,6 @@ export function registerSW(options: RegisterSWOptions = {}) {
           // Add an event listener to detect when the registered
           // service worker has installed but is waiting to activate.
           wb.addEventListener('waiting', showSkipWaitingPrompt)
-          // @ts-expect-error event listener provided by workbox-window
-          wb.addEventListener('externalwaiting', showSkipWaitingPrompt)
         }
       }
 
