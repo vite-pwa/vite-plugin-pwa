@@ -122,6 +122,7 @@
     "@types/prompts": "^2.4.8",
     "@types/react": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@vite-pwa/assets-generator": "^0.2.4",
     "bumpp": "^9.2.0",
     "eslint": "^8.54.0",
     "esno": "0.17.0",

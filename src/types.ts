@@ -185,7 +185,8 @@ export interface PWAAssetsOptions {
   }
 }
 
-export interface ResolvedPWAAssetsOptions extends Required<Omit<PWAAssetsOptions, 'image'>> {
+export interface ResolvedPWAAssetsOptions extends Required<Omit<PWAAssetsOptions, 'image' | 'integration'>> {
+  integration?: PWAAssetsOptions['integration']
   images: string[]
 }
 

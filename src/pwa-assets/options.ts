@@ -15,6 +15,7 @@ export function resolvePWAAssetsOptions(
     overrideManifestIcons = false,
     includeHtmlHeadLinks = true,
     injectThemeColor = true,
+    integration,
   } = options ?? {}
 
   const disabled = useDisabled || (!config && !preset)
@@ -28,5 +29,6 @@ export function resolvePWAAssetsOptions(
     overrideManifestIcons,
     includeHtmlHeadLinks,
     injectThemeColor,
+    integration,
   } satisfies ResolvedPWAAssetsOptions
 }
