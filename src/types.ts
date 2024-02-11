@@ -170,6 +170,19 @@ export interface PWAAssetsOptions {
    * @default true
    */
   injectThemeColor?: boolean
+  /**
+   * PWA Assets integration support.
+   *
+   * This option should be only used by integrations, it is not meant to be used by end users.
+   */
+  integration?: {
+    /**
+     * The base url for the PWA assets.
+     *
+     * @default `vite.base`
+     */
+    baseUrl?: string
+  }
 }
 
 export interface ResolvedPWAAssetsOptions extends Required<Omit<PWAAssetsOptions, 'image'>> {

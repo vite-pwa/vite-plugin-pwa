@@ -18,7 +18,7 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
     "vite-plugin-pwa": "workspace:*",
-    "@vite-pwa/assets-generator": "^0.2.1",
+    "@vite-pwa/assets-generator": "^0.2.4",
     "workbox-window": "^7.0.0"
   }
 }

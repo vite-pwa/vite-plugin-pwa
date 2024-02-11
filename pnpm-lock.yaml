@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@vite-pwa/assets-generator':
-        specifier: ^0.2.0
-        version: 0.2.2
+        specifier: ^0.2.4
+        version: 0.2.4
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -158,8 +158,8 @@ importers:
   examples/assets-generator:
     devDependencies:
       '@vite-pwa/assets-generator':
-        specifier: ^0.2.1
-        version: 0.2.1
+        specifier: ^0.2.4
+        version: 0.2.4
       rimraf:
         specifier: ^5.0.5
         version: 5.0.5
@@ -4210,8 +4210,8 @@ packages:
       vite: 3.1.0
     dev: true
 
-  /@vite-pwa/assets-generator@0.2.1:
-    resolution: {integrity: sha512-NoFsE/XzmkF3WDr+1NjbjdP4GDBZMPQ49eFS33H8FlIH50g4AAK5+W3Y2xeRy7tKE5nB7MLYybesSqk+zD4L0Q==}
+  /@vite-pwa/assets-generator@0.2.4:
+    resolution: {integrity: sha512-DXyPLPR/IpbZPSpo1amZEPghY/ziIwpTUKNaz0v1xG+ELzCXmrVQhVzEMqr2JLSqRxjc+UzKfGJA/YdUuaao3w==}
     engines: {node: '>=16.14.0'}
     hasBin: true
     dependencies:
@@ -4221,20 +4221,6 @@ packages:
       sharp: 0.32.6
       sharp-ico: 0.1.5
       unconfig: 0.3.11
-    dev: true
-
-  /@vite-pwa/assets-generator@0.2.2:
-    resolution: {integrity: sha512-Trk0ryNl33te5iSmMIQmGMSaEpcSSmgQwhN45DMVm1cSAueUFCj1WnEfEBOQrWH2NPpTcRKuD3pWrSYgSlorUA==}
-    engines: {node: '>=16.14.0'}
-    hasBin: true
-    dependencies:
-      cac: 6.7.14
-      colorette: 2.0.20
-      consola: 3.2.3
-      sharp: 0.32.6
-      sharp-ico: 0.1.5
-      unconfig: 0.3.11
-    dev: false
 
   /@vitejs/plugin-react@4.2.0(vite@5.0.10):
     resolution: {integrity: sha512-+MHTH/e6H12kRp5HUkzOGqPMksezRMmW+TNzlh/QXfI8rRf6l2Z2yH/v12no1UvTwhZgEDMuQ7g7rrfMseU6FQ==}

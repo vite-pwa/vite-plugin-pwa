@@ -5,7 +5,7 @@ import { loadConfig } from '@vite-pwa/assets-generator/config'
 import { cyan, red } from 'kolorist'
 import { instructions } from '@vite-pwa/assets-generator/api/instructions'
 import type { PWAPluginContext } from '../context'
-import type { ResolvedPWAAssetsOptions } from '../types'
+import type { PWAAssetsOptions, ResolvedPWAAssetsOptions } from '../types'
 import type { AssetsGeneratorContext, ResolvedIconAsset } from './types'
 
 export async function loadAssetsGeneratorContext(
@@ -64,6 +64,7 @@ export async function loadAssetsGeneratorContext(
   const imageName = relative(publicDir, imageFile)
   const imageOutDir = dirname(resolve(outDir, imageName))
 
+  const userPwaAssets = ctx.userOptions.pwaAssets as PWAAssetsOptions
   const xhtml = userHeadLinkOptions?.xhtml === true
   const includeId = userHeadLinkOptions?.includeId === true
   const assetsInstructions = await instructions({
@@ -72,7 +73,7 @@ export async function loadAssetsGeneratorContext(
     preset,
     faviconPreset: userHeadLinkOptions?.preset,
     htmlLinks: { xhtml, includeId },
-    basePath: ctx.viteConfig.base || '/',
+    basePath: userPwaAssets.integration?.baseUrl || ctx.viteConfig.base || '/',
     resolveSvgName: userHeadLinkOptions?.resolveSvgName ?? (name => basename(name)),
   })
   const {
