@@ -81,11 +81,11 @@ export function DevPlugin(ctx: PWAPluginContext) {
 
       const { options } = ctx
       if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest' && !options.selfDestroying) {
-        const name = id.startsWith('/') ? id.slice(1) : id
-        // the sw must be registered with .js extension on browser, here we detect that request:
+        const name = id.startsWith(options.base) ? id.slice(options.base.length) : id
+        // the sw must be registered with .js extension in the browser, here we detect that request:
         // - the .js file and source with .ts, or
         // - the .ts source file
-        // in both cases we need to resolve the id to the source file to load it and add empty injection point on loadDev
+        // in any case, we need to resolve the id to the source file to load it and add empty injection point on loadDev
         // we need to always return the path to source file name to resolve imports on the sw
         return (name === swDevOptions.swUrl || name === options.injectManifest.swSrc)
           ? options.injectManifest.swSrc
@@ -190,6 +190,14 @@ export function DevPlugin(ctx: PWAPluginContext) {
         // check the entry only if the request starts with the base, otherwise ignore the request
         if (id.startsWith(options.base)) {
           const key = normalizePath(id)
+          if (swDevOptions.workboxPaths.has(key))
+            return await fs.readFile(swDevOptions.workboxPaths.get(key)!, 'utf-8')
+        }
+        else if (options.base !== '/') {
+          // Vite will remove the base from the request, so we need to add it back and check if present.
+          // An example is using /test/registerSW.js, the request will be /registerSW.js.
+          // So we can handle that request in the middleware or just check it here.
+          const key = normalizePath(`${options.base}${id.length > 0 && id[0] === '/' ? id.slice(1) : id}`)
           if (swDevOptions.workboxPaths.has(key))
             return await fs.readFile(swDevOptions.workboxPaths.get(key)!, 'utf-8')
         }
