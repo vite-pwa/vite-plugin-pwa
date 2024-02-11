@@ -49,6 +49,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
       if (!wb)
         return
+
       sendSkipWaitingMessage = async () => {
         // Send a message to the waiting service worker,
         // instructing it to activate.
