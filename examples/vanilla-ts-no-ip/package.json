@@ -5,16 +5,19 @@
   "private": true,
   "scripts": {
     "dev": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DEV=true vite --force",
+    "dev-custom": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW=true SW_DEV=true vite --force",
     "run-build-sw": "DEBUG=vite-plugin-pwa BASE_URL=/ SOURCE_MAP=true vite build",
+    "run-build-custom-sw": "DEBUG=vite-plugin-pwa BASE_URL=/ SOURCE_MAP=true SW=true vite build",
     "start-sw": "nr run-build-sw && nr serve",
     "serve": "serve dist",
     "start-preview": "vite preview --port=4173",
-    "test-custom-sw": "DEBUG=vite-plugin-pwa BASE_URL=/ SOURCE_MAP=true SW=true vite build && SW=true vitest run && SW=true playwright test",
+    "test-custom-sw": "nr run-build-custom-sw && SW=true vitest run && SW=true playwright test",
     "test-generate-sw": "nr run-build-sw && vitest run && playwright test",
     "test": "nr test-generate-sw && nr test-custom-sw"
   },
   "devDependencies": {
     "@vite-pwa/workbox-window": "^8.0.0",
+    "lodash-es": "^4.17.21",
     "rimraf": "^5.0.5",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
@@ -23,6 +26,7 @@
     "workbox-core": "^7.0.0",
     "workbox-expiration": "^7.0.0",
     "workbox-routing": "^7.0.0",
-    "workbox-strategies": "^7.0.0"
+    "workbox-strategies": "^7.0.0",
+    "workbox-window": "^7.0.0"
   }
 }

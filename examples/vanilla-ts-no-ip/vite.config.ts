@@ -5,6 +5,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 const customSW = process.env.SW === 'true'
 
 export default defineConfig({
+  mode: 'development',
   logLevel: 'info',
   define: {
     __DATE__: `'${new Date().toISOString()}'`,
@@ -51,6 +52,8 @@ export default defineConfig({
         skipWaiting: true,
       },
       injectManifest: {
+        minify: false,
+        enableWorkboxModulesLogs: true,
         injectionPoint: undefined,
       },
       devOptions: {
