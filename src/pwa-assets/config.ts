@@ -57,18 +57,22 @@ export async function loadAssetsGeneratorContext(
     }
   }
 
+  const pwaAssets = ctx.options.pwaAssets as ResolvedPWAAssetsOptions
+
   const useImage = Array.isArray(images) ? images[0] : images
+  // the image must be relative to the root directory
   const imageFile = resolve(root, useImage)
-  const publicDir = resolve(root, ctx.viteConfig.publicDir || 'public')
-  const outDir = resolve(root, ctx.viteConfig.build?.outDir || 'dist')
+  const publicDir = pwaAssets.integration?.publicDir ?? resolve(root, ctx.viteConfig.publicDir || 'public')
+  const outDir = pwaAssets.integration?.outDir ?? resolve(root, ctx.viteConfig.build?.outDir || 'dist')
+  // image can be inside public subdirectory: public/pwa/icon.svg => pwa/icon.svg
   const imageName = relative(publicDir, imageFile)
+  // resolve the output folder for the image: <outDir>/pwa/icon.svg
   const imageOutDir = dirname(resolve(outDir, imageName))
 
-  const pwaAssets = ctx.options.pwaAssets as ResolvedPWAAssetsOptions
   const xhtml = userHeadLinkOptions?.xhtml === true
   const includeId = userHeadLinkOptions?.includeId === true
   const assetsInstructions = await instructions({
-    imageResolver: () => readFile(resolve(root, useImage)),
+    imageResolver: () => readFile(imageFile),
     imageName,
     preset,
     faviconPreset: userHeadLinkOptions?.preset,

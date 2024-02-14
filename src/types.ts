@@ -182,6 +182,18 @@ export interface PWAAssetsOptions {
      * @default `vite.base`
      */
     baseUrl?: string
+    /**
+     * The public directory to resolve the image: should be an absolute path.
+     *
+     * @default `vite.root/vite.publicDir`
+     */
+    publicDir?: string
+    /**
+     * The output directory: should be an absolute path.
+     *
+     * @default `vite.root/vite.build.outDir`
+     */
+    outDir?: string
   }
 }
 
