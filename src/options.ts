@@ -101,7 +101,7 @@ export async function resolveOptions(options: Partial<VitePWAOptions>, viteConfi
   const defaultManifest: Partial<ManifestOptions> = {
     name: pkg.name,
     short_name: pkg.name,
-    start_url: basePath,
+    start_url: basePath + '?standalone=true',
     display: 'standalone',
     background_color: '#ffffff',
     lang: 'en',
