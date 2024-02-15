@@ -1,4 +1,4 @@
-import { basename, relative } from 'node:path'
+import { basename, dirname, relative, resolve } from 'node:path'
 import { promises as fs } from 'node:fs'
 import type { InlineConfig, ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions } from './types'
@@ -36,19 +36,20 @@ export async function buildSW(
   await build(inlineConfig)
 
   if (format !== 'iife') {
-    await fs.rename(
-        `${options.outDir}/${swMjsName}`,
-        `${options.outDir}/${swName}`,
-    )
-    const sourceMap = await fs.lstat(`${options.outDir}/${swMjsName}.map`).then(s => s.isFile()).catch(() => false)
+    const swDestDir = dirname(options.swDest)
+    const mjsPath = resolve(swDestDir, swMjsName)
+    const jsPath = resolve(swDestDir, swName)
+    await fs.rename(mjsPath, jsPath)
+    const mjsMapPath = `${mjsPath}.map`
+    const sourceMap = await fs.lstat(mjsMapPath).then(s => s.isFile()).catch(() => false)
     if (sourceMap) {
       await Promise.all([
-        fs.readFile(`${options.outDir}/${swName}`, 'utf-8').then(content => fs.writeFile(
-            `${options.outDir}/${swName}`,
-            content.replace(`${swMjsName}.map`, `${swName}.map`),
-            'utf-8',
+        fs.readFile(jsPath, 'utf-8').then(content => fs.writeFile(
+          jsPath,
+          content.replace(`${swMjsName}.map`, `${swName}.map`),
+          'utf-8',
         )),
-        fs.rename(`${options.outDir}/${swMjsName}.map`, `${options.outDir}/${swName}.map`),
+        fs.rename(mjsMapPath, `${jsPath}.map`),
       ])
     }
   }
