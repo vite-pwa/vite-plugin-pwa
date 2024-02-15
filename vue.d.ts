@@ -9,6 +9,8 @@ declare module 'virtual:pwa-register/vue' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: Ref<boolean>
     offlineReady: Ref<boolean>
+    installingSW: Ref<boolean>
+    updatingSW: Ref<boolean>
     /**
      * Reloads the current window to allow the service worker take the control.
      *

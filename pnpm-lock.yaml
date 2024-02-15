@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@vite-pwa/workbox-window':
+        specifier: ^8.0.0
+        version: 8.0.0
       debug:
         specifier: ^4.3.4
         version: 4.3.4
@@ -18,9 +21,6 @@ importers:
         specifier: ^6.1.1
         version: 6.1.1
       workbox-build:
-        specifier: ^7.0.0
-        version: 7.0.0
-      workbox-window:
         specifier: ^7.0.0
         version: 7.0.0
     devDependencies:
@@ -167,6 +167,9 @@ importers:
       '@rollup/plugin-replace':
         specifier: ^5.0.5
         version: 5.0.5(rollup@4.4.1)
+      '@vite-pwa/workbox-window':
+        specifier: ^8.0.0
+        version: 8.0.0
       https-localhost:
         specifier: ^4.7.1
         version: 4.7.1
@@ -189,9 +192,6 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       workbox-routing:
-        specifier: ^7.0.0
-        version: 7.0.0
-      workbox-window:
         specifier: ^7.0.0
         version: 7.0.0
 
@@ -228,6 +228,9 @@ importers:
       '@types/react-router-dom':
         specifier: ^5.3.3
         version: 5.3.3
+      '@vite-pwa/workbox-window':
+        specifier: ^8.0.0
+        version: 8.0.0
       '@vitejs/plugin-react':
         specifier: ^4.2.0
         version: 4.2.0(vite@5.0.0)
@@ -255,9 +258,6 @@ importers:
       workbox-routing:
         specifier: ^7.0.0
         version: 7.0.0
-      workbox-window:
-        specifier: ^7.0.0
-        version: 7.0.0
 
   examples/solid-router:
     dependencies:
@@ -271,6 +271,9 @@ importers:
       '@rollup/plugin-replace':
         specifier: ^5.0.5
         version: 5.0.5(rollup@4.4.1)
+      '@vite-pwa/workbox-window':
+        specifier: ^8.0.0
+        version: 8.0.0
       https-localhost:
         specifier: ^4.7.1
         version: 4.7.1
@@ -298,9 +301,6 @@ importers:
       workbox-routing:
         specifier: ^7.0.0
         version: 7.0.0
-      workbox-window:
-        specifier: ^7.0.0
-        version: 7.0.0
 
   examples/svelte-routify:
     devDependencies:
@@ -316,6 +316,9 @@ importers:
       '@tsconfig/svelte':
         specifier: ^5.0.2
         version: 5.0.2
+      '@vite-pwa/workbox-window':
+        specifier: ^8.0.0
+        version: 8.0.0
       eslint:
         specifier: ^8.54.0
         version: 8.54.0
@@ -463,6 +466,9 @@ importers:
 
   examples/vanilla-ts-no-ip:
     devDependencies:
+      '@vite-pwa/workbox-window':
+        specifier: ^8.0.0
+        version: 8.0.0
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -537,6 +543,9 @@ importers:
       '@rollup/plugin-replace':
         specifier: ^5.0.5
         version: 5.0.5(rollup@4.4.1)
+      '@vite-pwa/workbox-window':
+        specifier: ^8.0.0
+        version: 8.0.0
       '@vitejs/plugin-vue':
         specifier: ^4.5.0
         version: 4.5.0(vite@5.0.0)(vue@3.3.8)
@@ -565,9 +574,6 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
       workbox-routing:
-        specifier: ^7.0.0
-        version: 7.0.0
-      workbox-window:
         specifier: ^7.0.0
         version: 7.0.0
 
@@ -4200,6 +4206,9 @@ packages:
       magic-string: 0.26.7
       vite: 3.1.0
     dev: true
+
+  /@vite-pwa/workbox-window@8.0.0:
+    resolution: {integrity: sha512-FLM90ZQTGp5u/ZobN9U7c440PwtrqThIsJwTGuJPtbQm5HqKiFKkPMpE7P1HKG4az1izTcg+e4HLpJCKOP5Usw==}
 
   /@vitejs/plugin-react@4.2.0(vite@5.0.0):
     resolution: {integrity: sha512-+MHTH/e6H12kRp5HUkzOGqPMksezRMmW+TNzlh/QXfI8rRf6l2Z2yH/v12no1UvTwhZgEDMuQ7g7rrfMseU6FQ==}

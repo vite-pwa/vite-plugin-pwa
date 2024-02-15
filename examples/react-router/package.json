@@ -60,6 +60,7 @@
     "@types/react-dom": "^18.2.15",
     "@types/react-router-config": "^5.0.10",
     "@types/react-router-dom": "^5.3.3",
+    "@vite-pwa/workbox-window": "^8.0.0",
     "@vitejs/plugin-react": "^4.2.0",
     "https-localhost": "^4.7.1",
     "rimraf": "^5.0.5",
@@ -68,7 +69,6 @@
     "vite-plugin-pwa": "workspace:*",
     "workbox-core": "^7.0.0",
     "workbox-precaching": "^7.0.0",
-    "workbox-routing": "^7.0.0",
-    "workbox-window": "^7.0.0"
+    "workbox-routing": "^7.0.0"
   }
 }

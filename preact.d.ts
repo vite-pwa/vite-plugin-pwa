@@ -9,6 +9,8 @@ declare module 'virtual:pwa-register/preact' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: [boolean, StateUpdater<boolean>]
     offlineReady: [boolean, StateUpdater<boolean>]
+    installingSW: [boolean, StateUpdater<boolean>]
+    updatingSW: [boolean, StateUpdater<boolean>]
     /**
      * Reloads the current window to allow the service worker take the control.
      *

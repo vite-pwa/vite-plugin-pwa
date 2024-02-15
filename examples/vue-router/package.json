@@ -53,6 +53,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^5.0.5",
+    "@vite-pwa/workbox-window": "^8.0.0",
     "@vitejs/plugin-vue": "^4.5.0",
     "@vueuse/core": "^10.6.1",
     "https-localhost": "^4.7.1",
@@ -62,7 +63,6 @@
     "vite-plugin-pwa": "workspace:*",
     "workbox-core": "^7.0.0",
     "workbox-precaching": "^7.0.0",
-    "workbox-routing": "^7.0.0",
-    "workbox-window": "^7.0.0"
+    "workbox-routing": "^7.0.0"
   }
 }

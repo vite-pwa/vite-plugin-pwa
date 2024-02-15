@@ -9,6 +9,8 @@ declare module 'virtual:pwa-register/svelte' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: Writable<boolean>
     offlineReady: Writable<boolean>
+    installingSW: Writable<boolean>
+    updatingSW: Writable<boolean>
     /**
      * Reloads the current window to allow the service worker take the control.
      *

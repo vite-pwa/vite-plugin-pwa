@@ -9,6 +9,8 @@ declare module 'virtual:pwa-register/solid' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: [Accessor<boolean>, Setter<boolean>]
     offlineReady: [Accessor<boolean>, Setter<boolean>]
+    installingSW: [Accessor<boolean>, Setter<boolean>]
+    updatingSW: [Accessor<boolean>, Setter<boolean>]
     /**
      * Reloads the current window to allow the service worker take the control.
      *

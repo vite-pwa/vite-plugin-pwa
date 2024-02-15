@@ -12,10 +12,14 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
     onRegistered,
     onRegisteredSW,
     onRegisterError,
+    onInstalling,
+    onUpdateFound,
   } = options
 
   const [needRefresh, setNeedRefresh] = useState(false)
   const [offlineReady, setOfflineReady] = useState(false)
+  const [installingSW, setInstallingSW] = useState(false)
+  const [updatingSW, setUpdatingSW] = useState(false)
 
   const [updateServiceWorker] = useState(() => {
     return registerSW({
@@ -28,6 +32,14 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
         setNeedRefresh(true)
         onNeedRefresh?.()
       },
+      onInstalling(state, sw) {
+        setInstallingSW(state)
+        onInstalling?.(state, sw)
+      },
+      onUpdateFound(state, sw) {
+        setUpdatingSW(state)
+        onUpdateFound?.(state, sw)
+      },
       onRegistered,
       onRegisteredSW,
       onRegisterError,
@@ -37,6 +49,8 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
   return {
     needRefresh: [needRefresh, setNeedRefresh],
     offlineReady: [offlineReady, setOfflineReady],
+    installingSW: [installingSW, setInstallingSW],
+    updatingSW: [updatingSW, setUpdatingSW],
     updateServiceWorker,
   }
 }

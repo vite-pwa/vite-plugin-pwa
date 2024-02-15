@@ -9,6 +9,8 @@ declare module 'virtual:pwa-register/react' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: [boolean, Dispatch<SetStateAction<boolean>>]
     offlineReady: [boolean, Dispatch<SetStateAction<boolean>>]
+    installingSW: [boolean, Dispatch<SetStateAction<boolean>>]
+    updatingSW: [boolean, Dispatch<SetStateAction<boolean>>]
     /**
      * Reloads the current window to allow the service worker take the control.
      *

@@ -22,9 +22,11 @@ export function registerSW(options: RegisterSWOptions = {}) {
     onRegistered,
     onRegisteredSW,
     onRegisterError,
+    onInstalling,
+    onUpdateFound,
   } = options
 
-  let wb: import('workbox-window').Workbox | undefined
+  let wb: import('@vite-pwa/workbox-window').Workbox | undefined
   let registerPromise: Promise<void>
   let sendSkipWaitingMessage: () => Promise<void> | undefined
 
@@ -37,7 +39,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   async function register() {
     if ('serviceWorker' in navigator) {
-      wb = await import('workbox-window').then(({ Workbox }) => {
+      wb = await import('@vite-pwa/workbox-window').then(({ Workbox }) => {
         // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
         return new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
       }).catch((e) => {
@@ -57,19 +59,26 @@ export function registerSW(options: RegisterSWOptions = {}) {
       }
       if (!autoDestroy) {
         if (auto) {
+          wb.addEventListener('installing', (event) => {
+            event.isUpdate === true || event.isExternal === true
+              ? onUpdateFound?.(true, event.sw)
+              : onInstalling?.(true, event.sw)
+          })
           wb.addEventListener('activated', (event) => {
             if (event.isUpdate || event.isExternal)
               window.location.reload()
           })
           wb.addEventListener('installed', (event) => {
-            if (event.isUpdate === false) {
+            event.isUpdate || event.isExternal
+                ? onUpdateFound?.(false, event.sw)
+                : onInstalling?.(false, event.sw)
+            if (event.isUpdate === false)
               onOfflineReady?.()
-            }
           });
         }
         else {
           let onNeedRefreshCalled = false
-          const showSkipWaitingPrompt = (event?: import('workbox-window').WorkboxLifecycleWaitingEvent) => {
+          const showSkipWaitingPrompt = (event?: import('@vite-pwa/workbox-window').WorkboxLifecycleWaitingEvent) => {
             /*
              FIX:
              - open page in a new tab and navigate to home page
@@ -100,7 +109,16 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
             onNeedRefresh?.()
           }
+          wb.addEventListener('installing', (event) => {
+            event.isUpdate === true || event.isExternal === true
+              ? onUpdateFound?.(true, event.sw)
+              : onInstalling?.(true, event.sw)
+          })
           wb.addEventListener('installed', (event) => {
+            event.isUpdate === true || event.isExternal === true
+              ? onUpdateFound?.(false, event.sw)
+              : onInstalling?.(false, event.sw)
+
             if (typeof event.isUpdate === 'undefined') {
               if (typeof event.isExternal !== 'undefined') {
                 if (event.isExternal)
