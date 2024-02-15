@@ -40,7 +40,7 @@ export function _generateBundle({ options, viteConfig, useImportRegister }: PWAP
 
   // if virtual register is requested, do not inject.
   if (options.injectRegister === 'auto')
-    options.injectRegister = useImportRegister ? null : 'script'
+    options.injectRegister = useImportRegister ? false : 'script'
 
   if ((options.injectRegister === 'script' || options.injectRegister === 'script-defer') && !existsSync(resolve(viteConfig.publicDir, FILE_SW_REGISTER))) {
     bundle[FILE_SW_REGISTER] = {
