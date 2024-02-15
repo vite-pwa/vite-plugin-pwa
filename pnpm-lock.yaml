@@ -419,6 +419,33 @@ importers:
         specifier: ^7.0.0
         version: 7.0.0
 
+  examples/vanilla-js-custom-sw:
+    devDependencies:
+      vite:
+        specifier: ^5.0.0
+        version: 5.0.0(@types/node@18.17.14)
+      vite-plugin-pwa:
+        specifier: workspace:*
+        version: link:../..
+      workbox-cacheable-response:
+        specifier: ^7.0.0
+        version: 7.0.0
+      workbox-core:
+        specifier: ^7.0.0
+        version: 7.0.0
+      workbox-expiration:
+        specifier: ^7.0.0
+        version: 7.0.0
+      workbox-routing:
+        specifier: ^7.0.0
+        version: 7.0.0
+      workbox-strategies:
+        specifier: ^7.0.0
+        version: 7.0.0
+      workbox-window:
+        specifier: ^7.0.0
+        version: 7.0.0
+
   examples/vanilla-ts-dev-options:
     devDependencies:
       rimraf:
