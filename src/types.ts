@@ -152,7 +152,9 @@ export interface VitePWAOptions {
    *
    * `script-defer` - inject `<script defer />` in `<head>`, with `src` attribute to a generated script to register the service worker
    *
-   * `null` - do nothing, you will need to register the sw you self, or imports from `virtual:pwa-register`
+   * `null` - deprecated, use `false` instead
+   *
+   * `false` - do nothing, you will need to register the sw you self, or imports from `virtual:pwa-register`
    *
    * @default 'auto'
    */
