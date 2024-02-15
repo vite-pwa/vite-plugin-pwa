@@ -339,7 +339,7 @@ export interface ManifestOptions {
     accept: Record<string, string[]>
   }[]
   /**
-   * @default `routerBase + '?standalone=true'`
+   * @default `routerBase`
    */
   start_url: string
   /**
