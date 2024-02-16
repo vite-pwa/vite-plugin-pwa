@@ -104,7 +104,7 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
 
 async function transformIndexHtmlHandler(html: string, ctx: PWAPluginContext) {
   // dev: color-theme and icon links injected using createWSResponseHandler
-  if (ctx.devEnvironment)
+  if (ctx.devEnvironment && ctx.options.devOptions.enabled)
     return html
 
   const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
