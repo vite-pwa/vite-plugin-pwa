@@ -453,7 +453,7 @@ importers:
     devDependencies:
       vite:
         specifier: ^5.0.0
-        version: 5.0.0(@types/node@18.17.14)
+        version: 5.0.12(@types/node@18.17.14)
       vite-plugin-pwa:
         specifier: workspace:*
         version: link:../..
@@ -4419,7 +4419,7 @@ packages:
       '@vue/shared': 3.2.45
       estree-walker: 2.0.2
       magic-string: 0.25.9
-      postcss: 8.4.31
+      postcss: 8.4.32
       source-map: 0.6.1
     dev: true
 
