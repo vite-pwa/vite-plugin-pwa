@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "dev-assets": "rimraf dev-dist && DEBUG=vite-plugin-pwa PWA_ASSETS=true SW_DEV=true vite --force",
     "dev": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DEV=true vite --force",
     "dev-claims": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DEV=true CLAIMS=true SW=true vite --force",
     "dev-destroy": "rimraf dev-dist && DEBUG=vite-plugin-pwa SW_DESTROY=true SW_DEV=true vite --force",
@@ -57,8 +58,8 @@
     "@vueuse/core": "^10.6.1",
     "https-localhost": "^4.7.1",
     "rimraf": "^5.0.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
     "vite-plugin-pwa": "workspace:*",
     "workbox-core": "^7.0.0",
     "workbox-precaching": "^7.0.0",

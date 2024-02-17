@@ -6,6 +6,8 @@ import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'
 import { VitePWA } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
 
+const pwaAssets = process.env.PWA_ASSETS === 'true'
+
 const pwaOptions: Partial<VitePWAOptions> = {
   mode: 'development',
   base: '/',
@@ -40,6 +42,13 @@ const pwaOptions: Partial<VitePWAOptions> = {
     navigateFallback: 'index.html',
     suppressWarnings: true,
   },
+}
+
+if (pwaAssets) {
+  pwaOptions.pwaAssets = {
+    preset: 'minimal-2023',
+    overrideManifestIcons: true,
+  }
 }
 
 const claims = process.env.CLAIMS === 'true'

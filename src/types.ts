@@ -1,6 +1,9 @@
 import type { BuildOptions, Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle, RollupOptions } from 'rollup'
+import type { BuiltInPreset, Preset } from '@vite-pwa/assets-generator/config'
+import type { HtmlLinkPreset } from '@vite-pwa/assets-generator/api'
+import type { PWAAssetsGenerator } from './pwa-assets/types'
 
 export type InjectManifestVitePlugins = string[] | ((vitePluginIds: string[]) => string[])
 export type CustomInjectManifestOptions = InjectManifestOptions & {
@@ -91,6 +94,112 @@ export interface PWAIntegration {
     viteOptions: ResolvedConfig,
     options: Partial<VitePWAOptions>,
   ) => void | Promise<void>
+}
+
+/**
+ * PWA assets generation and injection options.
+ */
+export interface PWAAssetsOptions {
+  disabled?: boolean
+  /**
+   * PWA assets generation and injection.
+   *
+   * By default, the plugin will search for the pwa assets generator configuration file in the root directory of your project:
+   * - pwa-assets.config.js
+   * - pwa-assets.config.mjs
+   * - pwa-assets.config.cjs
+   * - pwa-assets.config.ts
+   * - pwa-assets.config.cts
+   * - pwa-assets.config.mts
+   *
+   * If using a string path, it should be relative to the root directory of your project.
+   *
+   * Setting to `false` will disable config resolving.
+   *
+   * **WARNING**: You can use only one image in the configuration file.
+   *
+   * @default false
+   * @see https://vite-pwa-org.netlify.app/assets-generator/cli.html#configurations
+   */
+  config?: string | boolean
+  /**
+   * Preset to use.
+   *
+   * If the `config` option is enabled, this option will be ignored.
+   *
+   * Setting this option `false` will disable PWA assets generation (if the `config` option is also disabled).
+   *
+   * @default 'minimal-2023'
+   */
+  preset?: false | BuiltInPreset | Preset
+  /**
+   * Path relative to `root` folder where to find the image to use for generating PWA assets.
+   *
+   * If the `config` option is enabled, this option will be ignored.
+   *
+   * @default `public/favicon.svg`
+   */
+  image?: string
+  /**
+   * The preset to use for head links (favicon links).
+   *
+   * If the `config` option is enabled, this option will be ignored.
+   *
+   * @see https://vite-pwa-org.netlify.app/assets-generator/#preset-minimal-2023
+   * @see https://vite-pwa-org.netlify.app/assets-generator/#preset-minimal
+   * @default '2023'
+   */
+  htmlPreset?: HtmlLinkPreset
+  /**
+   * Should the plugin include html head links?
+   *
+   * @default true
+   */
+  includeHtmlHeadLinks?: boolean
+  /**
+   * Should the plugin override the PWA web manifest icons' entry?
+   *
+   * The plugin will auto-detect the icons from the manifest, if missing, then the plugin will ignore this option and will include the icons.
+   *
+   * @default false
+   */
+  overrideManifestIcons?: boolean
+  /**
+   * Should the PWA web manifest `theme_color` be injected in the html head?
+   *
+   * @default true
+   */
+  injectThemeColor?: boolean
+  /**
+   * PWA Assets integration support.
+   *
+   * This option should be only used by integrations, it is not meant to be used by end users.
+   */
+  integration?: {
+    /**
+     * The base url for the PWA assets.
+     *
+     * @default `vite.base`
+     */
+    baseUrl?: string
+    /**
+     * The public directory to resolve the image: should be an absolute path.
+     *
+     * @default `vite.root/vite.publicDir`
+     */
+    publicDir?: string
+    /**
+     * The output directory: should be an absolute path.
+     *
+     * @default `vite.root/vite.build.outDir`
+     */
+    outDir?: string
+  }
+}
+
+export interface ResolvedPWAAssetsOptions extends Required<Omit<PWAAssetsOptions, 'image' | 'integration'>> {
+  integration?: PWAAssetsOptions['integration']
+  images: string[]
 }
 
 /**
@@ -246,9 +355,16 @@ export interface VitePWAOptions {
    *
    * For example, if your base path is `/`, then, in your Laravel PWA configuration use `buildPath: '/build/'`.
    *
-   * By default: `vite.base`.
+   * @default `vite.base`.
    */
   buildBase?: string
+
+  /**
+   * PWA assets generation and injection.
+   *
+   * @experimental
+   */
+  pwaAssets?: PWAAssetsOptions
 }
 
 export interface ResolvedServiceWorkerOptions {
@@ -257,7 +373,7 @@ export interface ResolvedServiceWorkerOptions {
   rollupOptions: RollupOptions
 }
 
-export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
+export interface ResolvedVitePWAOptions extends Required<Omit<VitePWAOptions, 'pwaAssets'>> {
   swSrc: string
   swDest: string
   workbox: GenerateSWOptions
@@ -272,6 +388,7 @@ export interface ResolvedVitePWAOptions extends Required<VitePWAOptions> {
     sourcemap?: BuildOptions['sourcemap']
     enableWorkboxModulesLogs?: true
   }
+  pwaAssets: false | ResolvedPWAAssetsOptions
 }
 
 export interface ShareTargetFiles {
@@ -552,6 +669,7 @@ export interface VitePluginPWAAPI {
    * Explicitly generate the PWA services worker.
    */
   generateSW(): Promise<void>
+  pwaAssetsGenerator(): Promise<PWAAssetsGenerator | undefined>
 }
 
 export type ExtendManifestEntriesHook = (manifestEntries: (string | ManifestEntry)[]) => (string | ManifestEntry)[] | undefined

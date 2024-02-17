@@ -1,0 +1,24 @@
+{
+  "name": "assets-generator",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "dev:png": "PNG=true vite",
+    "build:png": "PNG=true vite build",
+    "preview:png": "PNG=true vite preview"
+  },
+  "devDependencies": {
+    "rimraf": "^5.0.5",
+    "sharp": "^0.32.6",
+    "sharp-ico": "^0.1.5",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.10",
+    "vite-plugin-pwa": "workspace:*",
+    "@vite-pwa/assets-generator": "^0.2.4",
+    "workbox-window": "^7.0.0"
+  }
+}

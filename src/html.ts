@@ -1,4 +1,5 @@
 import {
+  DEV_PWA_ASSETS_NAME,
   DEV_READY_NAME,
   DEV_REGISTER_SW_NAME,
   DEV_SW_NAME,
@@ -91,6 +92,35 @@ import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ mode, inlinePath, registerPath,
     document.head.appendChild(registerSW);
   }
 });
+import.meta.hot.on('${DEV_PWA_ASSETS_NAME}', ({ themeColor, links }) => {
+  if (themeColor) {
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.content = themeColor.content;
+    } else {
+      const meta = document.createElement('meta');
+      meta.setAttribute('name', 'theme-color');
+      meta.setAttribute('content', themeColor.content);
+      document.head.appendChild(meta);
+    }
+  }
+  if (links) {
+    links.map((l) => {
+      const link = document.querySelector(\`link[href="\${l.href}"]\`) ?? document.createElement('link');
+      if (l.id) link.setAttribute('id', l.id);
+      else link.removeAttribute('id');
+      link.setAttribute('rel', l.rel);
+      link.setAttribute('href', l.href);
+      if (l.media) link.setAttribute('media', l.media);
+      else link.removeAttribute('media');
+      if (l.sizes) link.setAttribute('sizes', l.sizes);
+      else link.removeAttribute('sizes');
+      if (l.type) link.setAttribute('type', l.type);
+      else link.removeAttribute('type');
+      if (!link.parentNode) document.head.appendChild(link);
+    });
+  }  
+});  
 function registerDevSW() {
   try {
     import.meta.hot.send('${DEV_READY_NAME}');

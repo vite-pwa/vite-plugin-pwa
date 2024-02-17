@@ -1,4 +1,5 @@
 import type { Plugin, UserConfig } from 'vite'
+import { cyan, yellow } from 'kolorist'
 import {
   VIRTUAL_MODULES,
   VIRTUAL_MODULES_MAP,
@@ -26,7 +27,21 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
       ctx.useImportRegister = false
       ctx.viteConfig = config
       ctx.userOptions?.integration?.configureOptions?.(config, ctx.userOptions)
-      ctx.options = await resolveOptions(ctx.userOptions, config)
+      ctx.options = await resolveOptions(ctx)
+      if (ctx.options.pwaAssets && !ctx.options.pwaAssets.disabled) {
+        ctx.pwaAssetsGenerator = import('../pwa-assets/generator').then(({ loadInstructions }) => loadInstructions(ctx))
+          .catch((e) => {
+            console.error([
+              '',
+              cyan(`PWA v${ctx.version}`),
+              yellow('WARNING: you must install the following dev dependencies to use the PWA assets generator:'),
+              yellow('- "@vite-pwa/assets-generator"'),
+              yellow('- "sharp" (should be installed when installing @vite-pwa/assets-generator)'),
+              yellow('- "sharp-ico" (should be installed when installing @vite-pwa/assets-generator)'),
+            ].join('\n'), e)
+            return Promise.resolve(undefined)
+          })
+      }
     },
     resolveId(id) {
       return VIRTUAL_MODULES.includes(id) ? VIRTUAL_MODULES_RESOLVE_PREFIX + id : undefined

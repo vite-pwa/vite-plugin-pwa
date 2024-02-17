@@ -26,19 +26,28 @@ export function BuildPlugin(ctx: PWAPluginContext) {
         return transformIndexHtmlHandler(html)
       },
       enforce: 'post', // deprecated since Vite 4
-      async transform(html) { // deprecated since Vite 4
+      transform(html) { // deprecated since Vite 4
         return transformIndexHtmlHandler(html)
       },
     },
-    generateBundle(_, bundle) {
+    async generateBundle(_, bundle) {
+      const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
+      if (pwaAssetsGenerator)
+        pwaAssetsGenerator.injectManifestIcons()
+
       return _generateBundle(ctx, bundle)
     },
     closeBundle: {
       sequential: true,
       order: ctx.userOptions?.integration?.closeBundleOrder,
       async handler() {
-        if (!ctx.viteConfig.build.ssr && !ctx.options.disable)
+        if (!ctx.viteConfig.build.ssr && !ctx.options.disable) {
+          const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
+          if (pwaAssetsGenerator)
+            await pwaAssetsGenerator.generate()
+
           await _generateSW(ctx)
+        }
       },
     },
     async buildEnd(error) {

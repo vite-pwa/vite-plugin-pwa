@@ -65,6 +65,9 @@
     "./info": {
       "types": "./info.d.ts"
     },
+    "./pwa-assets": {
+      "types": "./pwa-assets.d.ts"
+    },
     "./*": "./*"
   },
   "main": "dist/index.cjs",
@@ -105,11 +108,6 @@
     "test": "nr test-vue && nr test-react && nr test-preact && nr test-solid && nr test-svelte && nr test-typescript",
     "test:vite-ecosystem-ci": "nr test-typescript"
   },
-  "peerDependencies": {
-    "vite": "^3.1.0 || ^4.0.0 || ^5.0.0",
-    "workbox-build": "^7.0.0",
-    "workbox-window": "^7.0.0"
-  },
   "dependencies": {
     "debug": "^4.3.4",
     "fast-glob": "^3.3.2",
@@ -126,6 +124,7 @@
     "@types/prompts": "^2.4.8",
     "@types/react": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@vite-pwa/assets-generator": "^0.2.4",
     "bumpp": "^9.2.0",
     "eslint": "^8.54.0",
     "esno": "0.17.0",
@@ -138,9 +137,20 @@
     "solid-js": "^1.8.5",
     "svelte": "^4.2.5",
     "tsup": "^7.3.0",
-    "typescript": "^5.2.2",
-    "vite": "^5.0.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.12",
     "vitest": "1.0.0-beta.4",
     "vue": "^3.3.8"
+  },
+  "peerDependencies": {
+    "@vite-pwa/assets-generator": "^0.2.4",
+    "vite": "^3.1.0 || ^4.0.0 || ^5.0.0",
+    "workbox-build": "^7.0.0",
+    "workbox-window": "^7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vite-pwa/assets-generator": {
+      "optional": true
+    }
   }
 }
