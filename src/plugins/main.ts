@@ -36,8 +36,8 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
               cyan(`PWA v${ctx.version}`),
               yellow('WARNING: you must install the following dev dependencies to use the PWA assets generator:'),
               yellow('- "@vite-pwa/assets-generator"'),
-              yellow('- "sharp"'),
-              yellow('- "sharp-ico"'),
+              yellow('- "sharp" (should be installed when installing @vite-pwa/assets-generator)'),
+              yellow('- "sharp-ico" (should be installed when installing @vite-pwa/assets-generator)'),
             ].join('\n'), e)
             return Promise.resolve(undefined)
           })

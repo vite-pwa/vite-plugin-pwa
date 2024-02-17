@@ -125,9 +125,9 @@ export interface PWAAssetsOptions {
   /**
    * Preset to use.
    *
-   * If `config` option is enabled, this option will be ignored.
+   * If the `config` option is enabled, this option will be ignored.
    *
-   * Setting to `false` will disable PWA assets generation if `config` option disabled.
+   * Setting this option `false` will disable PWA assets generation (if the `config` option is also disabled).
    *
    * @default 'minimal-2023'
    */
@@ -135,7 +135,7 @@ export interface PWAAssetsOptions {
   /**
    * Path relative to `root` folder where to find the image to use for generating PWA assets.
    *
-   * If `config` option is enabled, this option will be ignored.
+   * If the `config` option is enabled, this option will be ignored.
    *
    * @default `public/favicon.svg`
    */
@@ -143,7 +143,7 @@ export interface PWAAssetsOptions {
   /**
    * The preset to use for head links (favicon links).
    *
-   * If `config` option is enabled, this option will be ignored.
+   * If the `config` option is enabled, this option will be ignored.
    *
    * @see https://vite-pwa-org.netlify.app/assets-generator/#preset-minimal-2023
    * @see https://vite-pwa-org.netlify.app/assets-generator/#preset-minimal
