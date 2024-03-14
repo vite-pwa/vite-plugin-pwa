@@ -108,6 +108,17 @@
     "test": "nr test-vue && nr test-react && nr test-preact && nr test-solid && nr test-svelte && nr test-typescript",
     "test:vite-ecosystem-ci": "nr test-typescript"
   },
+  "peerDependencies": {
+    "@vite-pwa/assets-generator": "^0.2.4",
+    "vite": "^3.1.0 || ^4.0.0 || ^5.0.0",
+    "workbox-build": "^7.0.0",
+    "workbox-window": "^7.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@vite-pwa/assets-generator": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "debug": "^4.3.4",
     "fast-glob": "^3.3.2",
@@ -141,16 +152,5 @@
     "vite": "^5.0.12",
     "vitest": "1.0.0-beta.4",
     "vue": "^3.3.8"
-  },
-  "peerDependencies": {
-    "@vite-pwa/assets-generator": "^0.2.4",
-    "vite": "^3.1.0 || ^4.0.0 || ^5.0.0",
-    "workbox-build": "^7.0.0",
-    "workbox-window": "^7.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vite-pwa/assets-generator": {
-      "optional": true
-    }
   }
 }

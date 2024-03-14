@@ -1,5 +1,15 @@
 import { defineConfig } from 'vite'
+import type { PWAAssetsOptions } from 'vite-plugin-pwa'
 import { VitePWA } from 'vite-plugin-pwa'
+
+const pwaAssets: PWAAssetsOptions = process.env.INLINE_PWA_ASSETS
+  ? {
+      image: process.env.PNG ? 'public/source-test.png' : 'public/favicon.svg',
+    }
+  : {
+      config: true,
+      overrideManifestIcons: true,
+    }
 
 export default defineConfig({
   logLevel: 'info',
@@ -22,10 +32,7 @@ export default defineConfig({
         short_name: 'Vite PWA',
         theme_color: '#ffffff',
       },
-      pwaAssets: {
-        config: true,
-        overrideManifestIcons: true,
-      },
+      pwaAssets,
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
         cleanupOutdatedCaches: true,
