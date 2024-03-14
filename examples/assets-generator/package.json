@@ -9,7 +9,13 @@
     "preview": "vite preview",
     "dev:png": "PNG=true vite",
     "build:png": "PNG=true vite build",
-    "preview:png": "PNG=true vite preview"
+    "preview:png": "PNG=true vite preview",
+    "dev:inline:svg": "INLINE_PWA_ASSETS=true vite",
+    "build:inline:svg": "INLINE_PWA_ASSETS=true vite build",
+    "preview:inline:svg": "INLINE_PWA_ASSETS=true vite preview",
+    "dev:inline:png": "INLINE_PWA_ASSETS=true PNG=true vite",
+    "build:inline:png": "INLINE_PWA_ASSETS=true PNG=true vite build",
+    "preview:inline:png": "INLINE_PWA_ASSETS=true PNG=true vite preview"
   },
   "devDependencies": {
     "rimraf": "^5.0.5",
