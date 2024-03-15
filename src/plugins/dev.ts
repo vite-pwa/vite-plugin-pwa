@@ -32,7 +32,7 @@ export const swDevOptions = {
 export function DevPlugin(ctx: PWAPluginContext) {
   const transformIndexHtmlHandler = (html: string) => {
     const { options } = ctx
-    if (options.disable || !options.manifest || !options.devOptions.enabled)
+    if (options.disable || !options.devOptions.enabled)
       return html
 
     html = injectServiceWorker(html, options, true)
@@ -60,29 +60,31 @@ export function DevPlugin(ctx: PWAPluginContext) {
     configureServer(server) {
       ctx.devEnvironment = true
       const { options } = ctx
-      if (!options.disable && options.manifest && options.devOptions.enabled) {
+      if (!options.disable && options.devOptions.enabled) {
         server.ws.on(DEV_READY_NAME, createWSResponseHandler(server, ctx))
-        const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
-        server.middlewares.use(async (req, res, next) => {
-          if (req.url === name) {
-            const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
-            pwaAssetsGenerator?.injectManifestIcons()
-            if (ctx.options.manifest && !ctx.options.manifest.theme_color) {
-              console.warn([
-                '',
-                `${cyan(`PWA v${ctx.version}`)}`,
-                `${yellow('WARNING: "theme_color" is missing from the web manifest, your application will not be able to be installed')}`,
-              ].join('\n'))
+        if (options.manifest) {
+          const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
+          server.middlewares.use(async (req, res, next) => {
+            if (req.url === name) {
+              const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
+              pwaAssetsGenerator?.injectManifestIcons()
+              if (ctx.options.manifest && !ctx.options.manifest.theme_color) {
+                console.warn([
+                  '',
+                  `${cyan(`PWA v${ctx.version}`)}`,
+                  `${yellow('WARNING: "theme_color" is missing from the web manifest, your application will not be able to be installed')}`,
+                ].join('\n'))
+              }
+              res.statusCode = 200
+              res.setHeader('Content-Type', 'application/manifest+json')
+              res.write(generateWebManifestFile(options), 'utf-8')
+              res.end()
             }
-            res.statusCode = 200
-            res.setHeader('Content-Type', 'application/manifest+json')
-            res.write(generateWebManifestFile(options), 'utf-8')
-            res.end()
-          }
-          else {
-            next()
-          }
-        })
+            else {
+              next()
+            }
+          })
+        }
       }
     },
     resolveId(id) {
