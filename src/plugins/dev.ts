@@ -32,7 +32,7 @@ export const swDevOptions = {
 export function DevPlugin(ctx: PWAPluginContext) {
   const transformIndexHtmlHandler = (html: string) => {
     const { options } = ctx
-    if (options.disable || !options.manifest || !options.devOptions.enabled)
+    if (options.disable || !options.devOptions.enabled)
       return html
 
     html = injectServiceWorker(html, options, true)
