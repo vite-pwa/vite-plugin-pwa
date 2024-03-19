@@ -93,7 +93,10 @@ export function DevPlugin(ctx: PWAPluginContext) {
 
       const { options } = ctx
       if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest' && !options.selfDestroying) {
-        const name = id.startsWith(options.base) ? id.slice(options.base.length) : id
+        let name = id.startsWith(options.base) ? id.slice(options.base.length) : id
+        // Vite will remove the base from the request, and so we need to remove the leading /: fixes issue #683
+        if (name.length && name[0] === '/')
+          name = name.slice(1)
         // the sw must be registered with .js extension in the browser, here we detect that request:
         // - the .js file and source with .ts, or
         // - the .ts source file
