@@ -1,4 +1,4 @@
-import type { BuildOptions, Plugin, ResolvedConfig, UserConfig } from 'vite'
+import type { BuildOptions, InlineConfig, Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { OutputBundle, RollupOptions } from 'rollup'
 import type { BuiltInPreset, Preset } from '@vite-pwa/assets-generator/config'
@@ -85,6 +85,26 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    * Since `v0.15.0` you can add custom Rollup options to build your service worker: we expose the same configuration to build a worker using Vite.
    */
   rollupOptions?: Omit<RollupOptions, 'plugins' | 'output'>
+
+  /**
+   * Environment options.
+   *
+   * @since v0.19.6
+   */
+  envOptions?: {
+    /**
+     * Configure Vite `envDir` option.
+     *
+     * @default Vite `envDir`.
+     */
+    envDir?: UserConfig['envDir']
+    /**
+     * Configure Vite `envPrefix` option.
+     *
+     * @default Vite `envPrefix`.
+     */
+    envPrefix?: UserConfig['envPrefix']
+  }
 }
 
 export interface PWAIntegration {
@@ -94,6 +114,14 @@ export interface PWAIntegration {
     viteOptions: ResolvedConfig,
     options: Partial<VitePWAOptions>,
   ) => void | Promise<void>
+  /**
+   * Allow integrations to configure Vite options for custom service worker build.
+   *
+   * @param options Vite options for custom service worker build.
+   * @see src/vite-build.ts module
+   * @since v0.19.6
+   */
+  configureCustomSWViteBuild?: (options: InlineConfig) => void | Promise<void>
 }
 
 /**
@@ -387,6 +415,10 @@ export interface ResolvedVitePWAOptions extends Required<Omit<VitePWAOptions, 'p
     minify?: BuildOptions['minify']
     sourcemap?: BuildOptions['sourcemap']
     enableWorkboxModulesLogs?: true
+  }
+  injectManifestEnvOptions: {
+    envDir: ResolvedConfig['envDir']
+    envPrefix: ResolvedConfig['envPrefix']
   }
   pwaAssets: false | ResolvedPWAAssetsOptions
 }
