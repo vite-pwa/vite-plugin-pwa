@@ -33,6 +33,9 @@ export async function buildSW(
   // log sw build
   logSWViteBuild(normalizePath(relative(viteOptions.root, options.swSrc)), viteOptions, format)
 
+  // allow integrations to modify the build config
+  await options.integration?.configureCustomSWViteBuild?.(inlineConfig)
+
   await build(inlineConfig)
 
   if (format !== 'iife') {
@@ -86,13 +89,19 @@ function prepareViteBuild(
   define['process.env.NODE_ENV'] = JSON.stringify(nodeEnv)
 
   const buildPlugins = options.buildPlugins
-  const { format, plugins, rollupOptions } = options.injectManifestRollupOptions
+  const {
+    format,
+    plugins,
+    rollupOptions,
+  } = options.injectManifestRollupOptions
 
   const inlineConfig = {
     root: viteOptions.root,
     base: viteOptions.base,
     resolve: viteOptions.resolve,
     mode: viteOptions.mode,
+    envDir: options.injectManifestEnvOptions.envDir,
+    envPrefix: options.injectManifestEnvOptions.envPrefix,
     // don't copy anything from public folder
     publicDir: false,
     build: {

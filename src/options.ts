@@ -125,6 +125,7 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     sourcemap = viteConfig.build.sourcemap,
     enableWorkboxModulesLogs,
     buildPlugins,
+    envOptions = {},
     ...userInjectManifest
   } = options.injectManifest || {}
   const injectManifest = Object.assign({}, defaultInjectManifest, userInjectManifest)
@@ -174,6 +175,11 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     }
   }
 
+  const {
+    envDir = viteConfig.envDir,
+    envPrefix = viteConfig.envPrefix,
+  } = envOptions
+
   const resolvedVitePWAOptions: ResolvedVitePWAOptions = {
     base: basePath,
     mode,
@@ -212,6 +218,10 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
       minify: minifySW,
       sourcemap,
       enableWorkboxModulesLogs,
+    },
+    injectManifestEnvOptions: {
+      envDir,
+      envPrefix,
     },
     pwaAssets: resolvePWAAssetsOptions(pwaAssets),
   }
