@@ -41,12 +41,13 @@ export function BuildPlugin(ctx: PWAPluginContext) {
       sequential: true,
       order: ctx.userOptions?.integration?.closeBundleOrder,
       async handler() {
-        if (!ctx.viteConfig.build.ssr && !ctx.options.disable) {
+        if (!ctx.viteConfig.build.ssr) {
           const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
           if (pwaAssetsGenerator)
             await pwaAssetsGenerator.generate()
 
-          await _generateSW(ctx)
+          if (!ctx.options.disable)
+            await _generateSW(ctx)
         }
       },
     },
