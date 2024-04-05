@@ -6,6 +6,7 @@ const pwaAssets: PWAAssetsOptions = process.env.INLINE_PWA_ASSETS
   ? {
       // disabled: false,
       // config: false,
+      // preset: false,
       /* preset: {
         transparent: {
           sizes: [48, 72, 96, 144, 192, 256, 384, 512], // Comprehensive sizes for various Android devices
