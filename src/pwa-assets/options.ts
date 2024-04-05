@@ -16,9 +16,9 @@ export function resolvePWAAssetsOptions(
     integration,
   } = options ?? {}
 
-  const configIncluded = 'config' in options && options.config !== undefined && options.config
-  const presetIncluded = 'preset' in options && options.preset !== undefined && options.preset
-  const usePreset = !configIncluded && !presetIncluded ? 'minimal-2023' : false
+  const configIncluded = 'config' in options && options.config !== undefined && !!options.config
+  const presetIncluded = 'preset' in options && options.preset !== undefined && !!options.preset
+  const usePreset = !configIncluded && !presetIncluded ? 'minimal-2023' : (options.preset || false)
 
   const disabled = useDisabled || (!configIncluded && !usePreset)
 
