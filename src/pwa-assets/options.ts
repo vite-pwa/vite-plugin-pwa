@@ -7,7 +7,8 @@ export function resolvePWAAssetsOptions(
     return false
 
   const {
-    disabled: useDisabled,
+    disabled,
+    preset = 'minimal-2023',
     image = 'public/favicon.svg',
     htmlPreset = '2023',
     overrideManifestIcons = false,
@@ -16,21 +17,32 @@ export function resolvePWAAssetsOptions(
     integration,
   } = options ?? {}
 
-  const configIncluded = 'config' in options && options.config !== undefined && options.config
-  const presetIncluded = 'preset' in options && options.preset !== undefined && options.preset
-  const usePreset = !configIncluded && !presetIncluded ? 'minimal-2023' : false
-
-  const disabled = useDisabled || (!configIncluded && !usePreset)
-
-  return {
-    disabled,
-    config: disabled || !configIncluded ? false : configIncluded,
-    preset: disabled || configIncluded ? false : usePreset,
+  const resolvedConfiguration: ResolvedPWAAssetsOptions = {
+    disabled: true,
+    config: false,
+    preset: false,
     images: [image],
     htmlPreset,
     overrideManifestIcons,
     includeHtmlHeadLinks,
     injectThemeColor,
     integration,
-  } satisfies ResolvedPWAAssetsOptions
+  }
+
+  if (disabled === true)
+    return resolvedConfiguration
+
+  if ('config' in options && !!options.config) {
+    resolvedConfiguration.disabled = false
+    resolvedConfiguration.config = options.config
+    return resolvedConfiguration
+  }
+
+  if (preset === false)
+    return resolvedConfiguration
+
+  resolvedConfiguration.disabled = false
+  resolvedConfiguration.preset = preset
+
+  return resolvedConfiguration
 }
