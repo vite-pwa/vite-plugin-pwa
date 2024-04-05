@@ -75,7 +75,7 @@ export async function loadAssetsGeneratorContext(
     imageResolver: () => readFile(imageFile),
     imageName,
     preset,
-    faviconPreset: userHeadLinkOptions?.preset ?? pwaAssets.htmlPreset ?? '2023',
+    faviconPreset: userHeadLinkOptions?.preset ?? pwaAssets.htmlPreset,
     htmlLinks: { xhtml, includeId },
     basePath: pwaAssets.integration?.baseUrl || ctx.viteConfig.base || '/',
     resolveSvgName: userHeadLinkOptions?.resolveSvgName ?? (name => basename(name)),
