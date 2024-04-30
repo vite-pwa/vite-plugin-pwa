@@ -111,8 +111,8 @@
   "peerDependencies": {
     "@vite-pwa/assets-generator": "^0.2.4",
     "vite": "^3.1.0 || ^4.0.0 || ^5.0.0",
-    "workbox-build": "^7.0.0",
-    "workbox-window": "^7.0.0"
+    "workbox-build": "^7.1.0",
+    "workbox-window": "^7.1.0"
   },
   "peerDependenciesMeta": {
     "@vite-pwa/assets-generator": {
@@ -123,8 +123,8 @@
     "debug": "^4.3.4",
     "fast-glob": "^3.3.2",
     "pretty-bytes": "^6.1.1",
-    "workbox-build": "^7.0.0",
-    "workbox-window": "^7.0.0"
+    "workbox-build": "^7.1.0",
+    "workbox-window": "^7.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.0.0",
