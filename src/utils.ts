@@ -3,12 +3,13 @@ export function slash(str: string) {
 }
 
 export function resolveBasePath(base: string) {
-  if (isAbsolute(base))
-    return base
-
   let basePath = base
+
   if (!basePath.endsWith('/'))
     basePath = `${basePath}/`
+
+  if (isAbsolute(basePath))
+    return basePath
 
   if (!basePath.startsWith('/') && !basePath.startsWith('./'))
     basePath = `/${basePath}`
