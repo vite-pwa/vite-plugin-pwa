@@ -5,9 +5,15 @@ export function slash(str: string) {
 export function resolveBasePath(base: string) {
   if (isAbsolute(base))
     return base
-  return (!base.startsWith('/') && !base.startsWith('./'))
-    ? `/${base}`
-    : base
+
+  let basePath = base
+  if (!basePath.endsWith('/'))
+    basePath = `${basePath}/`
+
+  if (!basePath.startsWith('/') && !basePath.startsWith('./'))
+    basePath = `/${basePath}`
+
+  return basePath
 }
 
 export function isAbsolute(url: string) {
