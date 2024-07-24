@@ -1,7 +1,7 @@
 import { resolve as resolveFs } from 'node:path'
 import fs from 'node:fs'
 import crypto from 'node:crypto'
-import fg from 'fast-glob'
+import tg from 'tinyglobby'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions } from './types'
@@ -90,12 +90,12 @@ export async function configureStaticAssets(
     })
   }
   if (globs.length > 0) {
-    let assets = await fg(
+    let assets = await tg(
       globs,
       {
         cwd: publicDir,
+        expandDirectories: false,
         onlyFiles: true,
-        unique: true,
       },
     )
     // we also need to remove from the list existing included by the user
