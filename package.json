@@ -121,8 +121,8 @@
   },
   "dependencies": {
     "debug": "^4.3.4",
-    "fast-glob": "^3.3.2",
     "pretty-bytes": "^6.1.1",
+    "tinyglobby": "^0.2.0",
     "workbox-build": "^7.1.0",
     "workbox-window": "^7.1.0"
   },
