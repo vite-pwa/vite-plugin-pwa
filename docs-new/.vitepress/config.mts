@@ -8,6 +8,7 @@ import { pwa } from '../scripts/pwa'
 import { buildEnd } from '../scripts/build'
 import { en } from '../config/en'
 import { zh, search as zhSearch } from '../config/zh'
+import NavbarFix from '../plugins/navbar'
 
 const ogUrl = 'https://vite-pwa-org.netlify.app/'
 const ogImage = 'https://vite-pwa-org.netlify.app/og-image.png'
@@ -50,6 +51,23 @@ export default defineConfig({
     },
   },
   vite: {
+    build: {
+      // sourcemap: true,
+      // minify: false,
+      ssrManifest: false,
+      manifest: false,
+    },
+    optimizeDeps: {
+      exclude: [
+        '@vueuse/core',
+        'vitepress',
+      ],
+    },
+    server: {
+      hmr: {
+        overlay: false,
+      },
+    },
     plugins: [
       pwa(),
       Unocss({
@@ -68,6 +86,7 @@ export default defineConfig({
         // generate `components.d.ts` for ts support with Volar
         dts: '.vitepress/components.d.ts',
       }),
+      NavbarFix(),
     ],
   },
   buildEnd,

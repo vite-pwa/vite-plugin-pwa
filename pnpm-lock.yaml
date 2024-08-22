@@ -159,7 +159,32 @@ importers:
         version: 6.5.4
 
   docs-new:
+    dependencies:
+      '@vueuse/core':
+        specifier: ^10.6.1
+        version: 10.6.1(vue@3.4.38(typescript@5.3.3))
+      '@vueuse/shared':
+        specifier: ^11.0.1
+        version: 11.0.1(vue@3.4.38(typescript@5.3.3))
+      vue:
+        specifier: ^3.3.8
+        version: 3.4.38(typescript@5.3.3)
     devDependencies:
+      '@types/fs-extra':
+        specifier: ^11.0.4
+        version: 11.0.4
+      '@vitejs/plugin-vue':
+        specifier: ^5.1.2
+        version: 5.1.2(vite@5.4.2(@types/node@18.17.14)(terser@5.31.0))(vue@3.4.38(typescript@5.3.3))
+      fast-glob:
+        specifier: ^3.3.2
+        version: 3.3.2
+      fs-extra:
+        specifier: ^11.2.0
+        version: 11.2.0
+      https-localhost:
+        specifier: ^4.7.1
+        version: 4.7.1
       latest:
         specifier: ^0.2.0
         version: 0.2.0
@@ -181,6 +206,9 @@ importers:
       vitepress:
         specifier: ^1.3.3
         version: 1.3.3(@algolia/client-search@4.24.0)(@types/node@18.17.14)(@types/react@18.2.37)(postcss@8.4.41)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.16.3)(terser@5.31.0)(typescript@5.3.3)
+      workbox-window:
+        specifier: ^7.1.0
+        version: 7.1.0
 
   examples/assets-generator:
     devDependencies:
@@ -2449,6 +2477,9 @@ packages:
   '@types/estree@1.0.5':
     resolution: {integrity: sha512-/kYRxGDLWzHOB7q+wtSUQlFrtcdUccpfy+X+9iMBpHK8QLLhx2wIPYuS5DYtR9Wa/YlZAbIovy7qVdB1Aq6Lyw==}
 
+  '@types/fs-extra@11.0.4':
+    resolution: {integrity: sha512-yTbItCNreRooED33qjunPthRcSjERP1r4MqCZc7wv0u2sUkzTFp45tgUfS5+r7FrZPdmCCNflLhVSP/o+SemsQ==}
+
   '@types/fs-extra@9.0.13':
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
 
@@ -2460,6 +2491,9 @@ packages:
 
   '@types/json-schema@7.0.12':
     resolution: {integrity: sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA==}
+
+  '@types/jsonfile@6.1.4':
+    resolution: {integrity: sha512-D5qGUYwjvnNNextdU59/+fI+spnwtTFmyQP0h+PfIOSkNfpU6AOICUOkm4i0OnSk+NyjdPJrxCDro0sJsWlRpQ==}
 
   '@types/linkify-it@5.0.0':
     resolution: {integrity: sha512-sVDA58zAw4eWAffKOaQH5/5j3XeayukzDk+ewSsnv3p4yJEZHCCzMDiZM8e0OUrRvmpGZ85jf4yDHkHsgBNr9Q==}
@@ -4135,6 +4169,10 @@ packages:
   fs-extra@10.1.0:
     resolution: {integrity: sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==}
     engines: {node: '>=12'}
+
+  fs-extra@11.2.0:
+    resolution: {integrity: sha512-PmDi3uwK5nFuXh7XDTlVnS17xJS7vW36is2+w3xcv8SVxiB4NyATf4ctkVY5bkSjX0Y4nbvZCq1/EjtEyr9ktw==}
+    engines: {node: '>=14.14'}
 
   fs-extra@9.1.0:
     resolution: {integrity: sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==}
@@ -8541,6 +8579,11 @@ snapshots:
 
   '@types/estree@1.0.5': {}
 
+  '@types/fs-extra@11.0.4':
+    dependencies:
+      '@types/jsonfile': 6.1.4
+      '@types/node': 18.17.14
+
   '@types/fs-extra@9.0.13':
     dependencies:
       '@types/node': 18.17.14
@@ -8552,6 +8595,10 @@ snapshots:
   '@types/history@4.7.11': {}
 
   '@types/json-schema@7.0.12': {}
+
+  '@types/jsonfile@6.1.4':
+    dependencies:
+      '@types/node': 18.17.14
 
   '@types/linkify-it@5.0.0': {}
 
@@ -10613,6 +10660,12 @@ snapshots:
   fs-constants@1.0.0: {}
 
   fs-extra@10.1.0:
+    dependencies:
+      graceful-fs: 4.2.10
+      jsonfile: 6.1.0
+      universalify: 2.0.0
+
+  fs-extra@11.2.0:
     dependencies:
       graceful-fs: 4.2.10
       jsonfile: 6.1.0
