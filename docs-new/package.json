@@ -1,0 +1,19 @@
+{
+  "name": "vite-plugin-pwa-docs",
+  "version": "0.0.0",
+  "private": "true",
+  "scripts": {
+    "dev": "vitepress dev",
+    "build": "vitepress build && esno scripts/build.ts",
+    "preview": "npm run build && vitepress serve",
+    "serve": "npm run build && serve .vitepress/dist"
+  },
+  "devDependencies": {
+    "latest": "^0.2.0",
+    "typescript": "^5.0.0",
+    "unplugin-vue-components": "^0.27.4",
+    "vite": "^5.4.2",
+    "vite-plugin-pwa": "workspace:*",
+    "vitepress": "^1.3.3"
+  }
+}

@@ -10,3 +10,5 @@ dist-examples-root
 examples/*/test-results/
 examples/*/playwright-report/
 examples/*/playwright/.cache/
+docs-new/.vitepress/dist
+docs-new/.vitepress/cache
