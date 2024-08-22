@@ -8,7 +8,7 @@ hero:
   name: PWA
   text: Vite Plugin
   tagline: |
-    零配置且与框架无关的 Vite PWA 插件
+    零配置与框架无关的 PWA Vite 插件
   image:
     light:
       src: /icon_light.svg
@@ -27,27 +27,27 @@ hero:
 features:
   - icon: 👌
     title: 零配置
-    details: Sensible built-in default configs for common use cases
+    details: 针对常见使用场景内置了合理的默认配置。
   - icon: 🔩
     title: 可扩展
-    details: Expose the full ability to customize the behavior of the plugin
+    details: 提供完全定制插件行为的能力
   - icon: 🔌
     title: 离线支持
-    details: Generate Service Worker with Offline support (via Workbox)
+    details: 生成带有离线支持的 Service Worker（通过 Workbox）
   - icon: ⚡
     title: 可摇树优化
-    details: Auto inject Web App Manifest
+    details: 自动注入 Web 应用程序清单
   - icon: 💬
-    title: Prompt for new content
-    details: Built-in support for Vanilla JavaScript, Vue 3, React, Svelte, SolidJS and Preact
+    title: 提示新内容
+    details: 内置支持原生 JavaScript、Vue 3、React、Svelte、SolidJS 和 Preact
   - icon: ⚙️
     title: Stale-while-revalidate
-    details: Automatic reload when new content is available
+    details: 当有新的内容可用时自动刷新
   - icon: ✨
-    title: Static assets handling
-    details: Configure static assets for offline support
+    title: 静态资源处理
+    details: 为离线支持配置静态资源
   - icon: 🐞
-    title: Development Support
-    details: Debug your custom service worker logic as you develop your application
+    title: 开发支持
+    details: 在开发应用程序时调试自定义 Service Worker 逻辑
 
 ---
