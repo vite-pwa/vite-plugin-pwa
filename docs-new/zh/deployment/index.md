@@ -1,9 +1,9 @@
 ---
-title: Getting Started | Deploy
+title: 开始 | Deploy
 prev: Astro | Examples
 ---
 
-# Getting Started
+# 开始
 
 Since you need to install your application as a [Progressive Web App](https://web.dev/progressive-web-apps/), you must configure your server to meet [PWA Minimal Requirements](/guide/#pwa-minimal-requirements), that is, your server **must**:
 - serve `manifest.webmanifest` with `application/manifest+json` mime type

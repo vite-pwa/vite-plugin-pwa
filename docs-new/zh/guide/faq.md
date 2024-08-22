@@ -1,6 +1,6 @@
 ---
 title: FAQ | Guide
-next: Getting Started | Frameworks
+next: 开始 | Frameworks
 ---
 
 # FAQ

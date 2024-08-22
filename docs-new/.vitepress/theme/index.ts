@@ -2,16 +2,24 @@
 import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import './style.css'
+
+import './styles/main.css'
+import './styles/vars.css'
+
+import 'uno.css'
+
+import HomePage from './components/HomePage.vue'
+import ReloadPrompt from './components/ReloadPrompt.vue'
 
 export default {
   extends: DefaultTheme,
   Layout: () => {
     return h(DefaultTheme.Layout, null, {
-      // https://vitepress.dev/guide/extending-default-theme#layout-slots
+      'home-features-after': () => h(HomePage),
+      'layout-bottom': () => h(ReloadPrompt),
     })
   },
   enhanceApp({ app, router, siteData }) {
     // ...
-  }
+  },
 } satisfies Theme

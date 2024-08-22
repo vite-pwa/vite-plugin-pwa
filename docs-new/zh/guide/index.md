@@ -1,8 +1,8 @@
 ---
-title: Getting Started | Guide
+title: 开始 | Guide
 ---
 
-# Getting Started
+# 开始
 
 ::: tip [Learn PWA](https://web.dev/learn/pwa/)
 Progressive Web Apps (PWAs) are web application built and enhanced with modern APIs to deliver enhanced capabilities, reliability, and installability while reaching anyone, anywhere, on any device, all with a single codebase.

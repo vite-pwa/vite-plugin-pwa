@@ -1,6 +1,6 @@
 ---
 title: Astro | Examples
-next: Getting Started | Deploy
+next: 开始 | Deploy
 ---
 
 # Astro

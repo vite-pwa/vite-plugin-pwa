@@ -1,9 +1,9 @@
 ---
-title: Getting Started | Examples
+title: 开始 | Examples
 prev: Astro | Frameworks
 ---
 
-# Getting Started
+# 开始
 
 You can find a set of examples projects on [Vite Plugin PWA GitHub repo](https://github.com/antfu/vite-plugin-pwa/tree/main/examples).
 

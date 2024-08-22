@@ -1,0 +1,155 @@
+.dark [img-light],
+.dark .logo[light-logo] {
+  display: none;
+}
+
+html:not(.dark) [img-dark],
+html:not(.dark) .logo[dark-logo] {
+  display: none;
+}
+
+/* Overrides */
+
+.VPSocialLink {
+  transform: scale(0.9);
+}
+
+.vp-doc th,
+.vp-doc td {
+  padding: 6px 10px;
+  border: 1px solid #8882;
+}
+
+html:not(.dark) .vp-doc [class*=language-]:before {
+  color: var(--vp-custom-block-details-text);
+}
+
+html:not(.dark) .vp-doc [class*='language-']:not(:hover) > span.copy,
+html:not(.dark) .vp-doc [class*='language-']:not(:hover) > span.copy.copied:before {
+  background-color: var(--vp-code-block-hover-bg);
+  opacity: 0;
+}
+
+html:not(.dark) .vp-doc [class*='language-']:hover > span.copy:hover {
+  opacity: 1;
+  background-color: var(--vp-code-block-hover-bg);
+}
+
+html:not(.dark) .vp-doc [class*='language-']:hover > span.copy.copied,
+html:not(.dark) .vp-doc [class*='language-']:hover > span.copy.copied:hover {
+  opacity: 1;
+  background-color: var(--vp-code-block-hover-bg);
+}
+
+html:not(.dark) .vp-doc [class*='language-']:hover > span.copy.copied:before,
+html:not(.dark) .vp-doc [class*='language-']:hover > span.copy.copied:hover:before {
+  color: var(--vp-custom-block-details-text);
+  background-color: var(--vp-code-block-hover-bg);
+}
+
+/* h3 breaks SEO => replaced with h2 with the same size */
+.home-content h2 {
+  margin-top: 2rem;
+  font-size: 1.35rem;
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+img.resizable-img {
+  width: unset;
+  height: unset;
+}
+
+.dark .prompt-img {
+  filter: invert(86%);
+}
+
+.tagline {
+  white-space: pre-wrap;
+}
+
+details > summary:hover {
+  cursor: pointer;
+}
+/* remove the gray color from code block inside details > summary */
+.vp-doc .custom-block div[class*=language-] code,
+.vp-doc details > summary + div[class*='language-'] > pre > code {
+  --vp-code-block-bg: transparent;
+}
+
+.pwa-toast {
+  --c-divider: var(--vp-c-divider-light);
+}
+.pwa-toast .pwa-refresh {
+  border-color: var(--vp-button-brand-border);
+  color: var(--vp-button-brand-text);
+  background-color: var(--vp-button-brand-bg);
+}
+.pwa-toast .pwa-refresh:hover {
+  border-color: var(--vp-button-brand-hover-border);
+  color: var(--vp-button-brand-hover-text);
+  background-color: var(--vp-button-brand-hover-bg);
+}
+.pwa-toast .pwa-refresh:active {
+  border-color: var(--vp-button-brand-active-border);
+  color: var(--vp-button-brand-active-text);
+  background-color: var(--vp-button-brand-active-bg);
+}
+.pwa-toast .pwa-cancel {
+  border-color: var(--vp-button-alt-border);
+  color: var(--vp-button-alt-text);
+  background-color: var(--vp-button-alt-bg);
+}
+.pwa-toast .pwa-cancel:hover {
+  border-color: var(--vp-button-alt-hover-border);
+  color: var(--vp-button-alt-hover-text);
+  background-color: var(--vp-button-alt-hover-bg);
+}
+.pwa-toast .pwa-cancel:active {
+  border-color: var(--vp-button-alt-active-border);
+  color: var(--vp-button-alt-active-text);
+  background-color: var(--vp-button-alt-active-bg);
+}
+.dark .pwa-toast {
+  --pwa-divider: var(--vp-c-divider-dark-1);
+}
+
+.vp-doc :not(pre) > code {
+  padding: 1px 6px;
+}
+
+/* fix height ~ 2 lines of text: 3 cards per row */
+.VPTeamMembersItem.medium .profile .data .affiliation {
+  min-height: 3rem;
+}
+.VPTeamMembersItem.medium .profile .data .desc {
+  min-height: 3rem;
+}
+
+/* fix height ~ 2 lines of text: 3 cards per row */
+@media (min-width: 1009px) {
+  .VPTeamMembersItem.medium .profile .data .affiliation {
+    min-height: 4rem;
+  }
+  .VPTeamMembersItem.medium .profile .data .desc {
+    min-height: 4rem;
+  }
+}
+/* fix height ~ 2 lines of text: 2 cards per row */
+@media (min-width: 697px) and (max-width: 985px) {
+  .VPTeamMembersItem.medium .profile .data .affiliation {
+    min-height: 4rem;
+  }
+  .VPTeamMembersItem.medium .profile .data .desc {
+    min-height: 4rem;
+  }
+}
+/* fix height: one card per row */
+@media (max-width: 696px) {
+  .VPTeamMembersItem.medium .profile .data .affiliation {
+    min-height: unset;
+  }
+  .VPTeamMembersItem.medium .profile .data .desc {
+    min-height: unset;
+  }
+}

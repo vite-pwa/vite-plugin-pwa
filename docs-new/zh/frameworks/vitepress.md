@@ -9,7 +9,7 @@ on top of [Vite](https://vitejs.dev/), the integration with this plugin is grace
 
 ## Plugin Configuration
 
-Just follow the [Getting Started](/guide/) section and use one of the `registerType` option to configure
+Just follow the [开始](/guide/) section and use one of the `registerType` option to configure
 the behavior:
 
 - [Prompt for update](/guide/prompt-for-update): prompt for new content refreshing

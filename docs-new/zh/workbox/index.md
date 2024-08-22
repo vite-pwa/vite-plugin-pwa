@@ -1,11 +1,11 @@
 ---
-title: Getting Started | Workbox
+title: 开始 | Workbox
 prev:
   text: Apache Http Server 2.4+ | Deployment
   link: /deployment/apache
 ---
 
-# Getting Started
+# 开始
 
 [**Workbox**](https://developers.google.com/web/tools/workbox/) is a massive package with many modules to make service worker development more enjoyable and remove the need to deal with the low-level service worker API.
 

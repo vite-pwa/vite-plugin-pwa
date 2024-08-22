@@ -4,7 +4,7 @@ import { version } from '../../package.json'
 
 const Guide = [
   {
-    text: 'Getting Started',
+    text: '开始',
     link: '/zh/guide/',
   },
   {
@@ -59,7 +59,7 @@ const Guide = [
 
 const Deployment = [
   {
-    text: 'Getting Started',
+    text: '开始',
     link: '/zh/deployment/',
   },
   {
@@ -86,7 +86,7 @@ const Deployment = [
 
 const Frameworks = [
   {
-    text: 'Getting Started',
+    text: '开始',
     link: '/zh/frameworks/',
   },
   {
@@ -129,7 +129,7 @@ const Frameworks = [
 
 const Examples = [
   {
-    text: 'Getting Started',
+    text: '开始',
     link: '/zh/examples/',
   },
   {
@@ -172,7 +172,7 @@ const Examples = [
 
 const Workbox = [
   {
-    text: 'Getting Started',
+    text: '开始',
     link: '/zh/workbox/',
   },
   {
@@ -263,7 +263,7 @@ export const zh = defineConfig({
         text: '指南',
         items: [
           {
-            text: 'Getting Started',
+            text: '开始',
             link: '/zh/guide/',
           },
           {

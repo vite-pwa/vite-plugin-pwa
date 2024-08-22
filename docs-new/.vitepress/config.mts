@@ -1,4 +1,7 @@
 import { defineConfig } from 'vitepress'
+import { presetAttributify, presetUno } from 'unocss'
+import Unocss from 'unocss/vite'
+import Components from 'unplugin-vue-components/vite'
 
 import { pwa } from '../scripts/pwa'
 
@@ -47,7 +50,25 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [pwa()],
+    plugins: [
+      pwa(),
+      Unocss({
+        presets: [presetUno(), presetAttributify()],
+      }),
+      Components({
+        dirs: [
+          '.vitepress/theme/components',
+        ],
+        // allow auto load markdown components under `./src/components/`
+        extensions: ['vue', 'md'],
+
+        // allow auto import and register components used in markdown
+        include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+
+        // generate `components.d.ts` for ts support with Volar
+        dts: '.vitepress/components.d.ts',
+      }),
+    ],
   },
   buildEnd,
   themeConfig: {
