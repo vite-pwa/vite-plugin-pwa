@@ -2,7 +2,7 @@
   "name": "vite-plugin-pwa",
   "type": "module",
   "version": "0.20.1",
-  "packageManager": "pnpm@9.6.0",
+  "packageManager": "pnpm@9.9.0",
   "description": "Zero-config PWA for Vite",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
