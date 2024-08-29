@@ -35,10 +35,10 @@ const pwaOptions: Partial<VitePWAOptions> = {
       },
     ],
   },
-  /* showMaximumFileSizeToCacheInBytesWarning: true,
-  workbox: {
-    maximumFileSizeToCacheInBytes: 12000,
-  }, */
+  // showMaximumFileSizeToCacheInBytesWarning: true,
+  // workbox: {
+  //   maximumFileSizeToCacheInBytes: 12000,
+  // },
   devOptions: {
     enabled: process.env.SW_DEV === 'true',
     /* when using generateSW the PWA plugin will switch to classic */
@@ -85,6 +85,7 @@ if (process.env.SW === 'true') {
     buildPlugins: {
       vite: [virtualMessagePlugin()],
     },
+    // maximumFileSizeToCacheInBytes: 1000,
   }
 }
 
