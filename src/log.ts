@@ -26,11 +26,18 @@ export function logSWViteBuild(
 }
 
 export function logWorkboxResult(
+  throwMaximumFileSizeToCacheInBytes: boolean,
   strategy: ResolvedVitePWAOptions['strategies'],
   buildResult: BuildResult,
   viteOptions: ResolvedConfig,
   format: 'es' | 'iife' | 'none' = 'none',
 ) {
+  if (throwMaximumFileSizeToCacheInBytes) {
+    const entries = buildResult.warnings.filter(w => w.includes('maximumFileSizeToCacheInBytes'))
+    if (entries.length)
+      throw new Error(`\n${entries.map(w => `  - ${w}`).join('\n')}`)
+  }
+
   const { root, logLevel = 'info' } = viteOptions
 
   if (logLevel === 'silent')

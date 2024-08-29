@@ -82,7 +82,12 @@ self.addEventListener('activate', (e) => {
   // generate the service worker
   const buildResult = await generateSW(options.workbox)
   // log workbox result
-  logWorkboxResult('generateSW', buildResult, viteOptions)
+  logWorkboxResult(
+    options.throwMaximumFileSizeToCacheInBytes,
+    'generateSW',
+    buildResult,
+    viteOptions,
+  )
 
   return buildResult
 }
