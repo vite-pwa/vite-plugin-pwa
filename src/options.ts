@@ -62,6 +62,7 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     integration = {},
     buildBase,
     pwaAssets,
+    showMaximumFileSizeToCacheInBytesWarning = false,
   } = options
 
   const basePath = resolveBasePath(base)
@@ -224,6 +225,7 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
       envPrefix,
     },
     pwaAssets: resolvePWAAssetsOptions(pwaAssets),
+    throwMaximumFileSizeToCacheInBytes: !showMaximumFileSizeToCacheInBytesWarning,
   }
 
   // calculate hash only when required

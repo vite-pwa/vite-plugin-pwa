@@ -393,6 +393,15 @@ export interface VitePWAOptions {
    * @experimental
    */
   pwaAssets?: PWAAssetsOptions
+
+  /**
+   * From version `0.20.2`, the plugin will throw an error if the `maximumFileSizeToCacheInBytes` warning is present when building the service worker.
+   *
+   * If you want the old behavior when building the service worker, set this option to `true`.
+   *
+   * @default false
+   */
+  showMaximumFileSizeToCacheInBytesWarning?: boolean
 }
 
 export interface ResolvedServiceWorkerOptions {
@@ -401,7 +410,7 @@ export interface ResolvedServiceWorkerOptions {
   rollupOptions: RollupOptions
 }
 
-export interface ResolvedVitePWAOptions extends Required<Omit<VitePWAOptions, 'pwaAssets'>> {
+export interface ResolvedVitePWAOptions extends Required<Omit<VitePWAOptions, 'pwaAssets' | 'showMaximumFileSizeToCacheInBytesWarning'>> {
   swSrc: string
   swDest: string
   workbox: GenerateSWOptions
@@ -421,6 +430,7 @@ export interface ResolvedVitePWAOptions extends Required<Omit<VitePWAOptions, 'p
     envPrefix: ResolvedConfig['envPrefix']
   }
   pwaAssets: false | ResolvedPWAAssetsOptions
+  throwMaximumFileSizeToCacheInBytes: boolean
 }
 
 export interface ShareTargetFiles {

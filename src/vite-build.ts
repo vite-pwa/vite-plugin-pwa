@@ -72,7 +72,13 @@ export async function buildSW(
   // inject the manifest
   const buildResult = await injectManifest(injectManifestOptions)
   // log workbox result
-  logWorkboxResult('injectManifest', buildResult, viteOptions, format)
+  logWorkboxResult(
+    options.throwMaximumFileSizeToCacheInBytes,
+    'injectManifest',
+    buildResult,
+    viteOptions,
+    format,
+  )
 }
 
 function prepareViteBuild(
