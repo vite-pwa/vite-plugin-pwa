@@ -10,7 +10,7 @@
   "homepage": "https://github.com/vite-pwa/vite-plugin-pwa#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/vite-pwa/vite-plugin-pwa.git"
+    "url": "git+https://github.com/vite-pwa/vite-plugin-pwa.git"
   },
   "bugs": "https://github.com/vite-pwa/vite-plugin-pwa/issues",
   "keywords": [
