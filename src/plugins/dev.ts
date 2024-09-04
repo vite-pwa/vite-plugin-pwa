@@ -159,6 +159,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
             // we only need to add the navigateFallback if configured
             const navigateFallback = options.workbox.navigateFallback
             const { filePaths } = await generateServiceWorker(
+              ctx.version,
               Object.assign(
                 {},
                 options,
