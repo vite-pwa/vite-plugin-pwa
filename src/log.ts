@@ -3,11 +3,11 @@ import { relative } from 'node:path'
 import type { BuildResult } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
 import { cyan, dim, green, magenta, yellow } from 'kolorist'
-import { version } from '../package.json'
 import { normalizePath } from './utils'
 import type { ResolvedVitePWAOptions } from './types'
 
 export function logSWViteBuild(
+  version: string,
   swName: string,
   viteOptions: ResolvedConfig,
   format: 'es' | 'iife',
@@ -26,6 +26,7 @@ export function logSWViteBuild(
 }
 
 export function logWorkboxResult(
+  version: string,
   throwMaximumFileSizeToCacheInBytes: boolean,
   strategy: ResolvedVitePWAOptions['strategies'],
   buildResult: BuildResult,
@@ -34,8 +35,15 @@ export function logWorkboxResult(
 ) {
   if (throwMaximumFileSizeToCacheInBytes) {
     const entries = buildResult.warnings.filter(w => w.includes('maximumFileSizeToCacheInBytes'))
-    if (entries.length)
-      throw new Error(`\n${entries.map(w => `  - ${w}`).join('\n')}`)
+    if (entries.length) {
+      const prefix = strategy === 'generateSW' ? 'workbox' : 'injectManifest'
+      throw new Error(`
+  Configure "${prefix}.maximumFileSizeToCacheInBytes" to change the limit: the default value is 2 MiB.
+  Check https://vite-pwa-org.netlify.app/guide/faq.html#missing-assets-from-sw-precache-manifest for more information.
+  Assets exceeding the limit:
+${entries.map(w => `  - ${w.replace('. Configure maximumFileSizeToCacheInBytes to change this limit', '')}`).join('\n')}
+`)
+    }
   }
 
   const { root, logLevel = 'info' } = viteOptions

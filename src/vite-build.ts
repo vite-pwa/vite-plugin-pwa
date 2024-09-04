@@ -6,9 +6,10 @@ import { logSWViteBuild, logWorkboxResult } from './log'
 import { normalizePath } from './utils'
 
 export async function buildSW(
+  version: string,
   options: ResolvedVitePWAOptions,
   viteOptions: ResolvedConfig,
-  workbox: typeof import('workbox-build'),
+  workboxPromise: Promise<typeof import('workbox-build')>,
 ) {
   // we will have something like this from swSrc:
   /*
@@ -31,7 +32,7 @@ export async function buildSW(
   } = prepareViteBuild(options, viteOptions)
 
   // log sw build
-  logSWViteBuild(normalizePath(relative(viteOptions.root, options.swSrc)), viteOptions, format)
+  logSWViteBuild(version, normalizePath(relative(viteOptions.root, options.swSrc)), viteOptions, format)
 
   // allow integrations to modify the build config
   await options.integration?.configureCustomSWViteBuild?.(inlineConfig)
@@ -67,12 +68,13 @@ export async function buildSW(
     swSrc: options.injectManifest.swDest,
   }
 
-  const { injectManifest } = workbox
+  const { injectManifest } = await workboxPromise
 
   // inject the manifest
   const buildResult = await injectManifest(injectManifestOptions)
   // log workbox result
   logWorkboxResult(
+    version,
     options.throwMaximumFileSizeToCacheInBytes,
     'injectManifest',
     buildResult,

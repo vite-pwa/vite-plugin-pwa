@@ -68,6 +68,7 @@
     "./pwa-assets": {
       "types": "./pwa-assets.d.ts"
     },
+    "./package.json": "./package.json",
     "./*": "./*"
   },
   "main": "dist/index.cjs",
@@ -109,7 +110,7 @@
     "test:vite-ecosystem-ci": "nr test-typescript"
   },
   "peerDependencies": {
-    "@vite-pwa/assets-generator": "^0.2.4",
+    "@vite-pwa/assets-generator": "^0.2.6",
     "vite": "^3.1.0 || ^4.0.0 || ^5.0.0",
     "workbox-build": "^7.1.0",
     "workbox-window": "^7.1.0"
@@ -120,7 +121,7 @@
     }
   },
   "dependencies": {
-    "debug": "^4.3.4",
+    "debug": "^4.3.6",
     "pretty-bytes": "^6.1.1",
     "tinyglobby": "^0.2.0",
     "workbox-build": "^7.1.0",
@@ -135,7 +136,7 @@
     "@types/prompts": "^2.4.8",
     "@types/react": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@vite-pwa/assets-generator": "^0.2.4",
+    "@vite-pwa/assets-generator": "^0.2.6",
     "bumpp": "^9.2.0",
     "eslint": "^8.54.0",
     "esno": "0.17.0",
