@@ -39,7 +39,7 @@ export async function generateRegisterSW(options: ResolvedVitePWAOptions, mode: 
     .replace('__TYPE__', `${options.devOptions.enabled ? options.devOptions.type : 'classic'}`)
 }
 
-export async function generateServiceWorker(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig): Promise<BuildResult> {
+export async function generateServiceWorker(version: string, options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig): Promise<BuildResult> {
   if (options.selfDestroying) {
     const selfDestroyingSW = `
 self.addEventListener('install', (e) => {
@@ -83,6 +83,7 @@ self.addEventListener('activate', (e) => {
   const buildResult = await generateSW(options.workbox)
   // log workbox result
   logWorkboxResult(
+    version,
     options.throwMaximumFileSizeToCacheInBytes,
     'generateSW',
     buildResult,
@@ -92,17 +93,12 @@ self.addEventListener('activate', (e) => {
   return buildResult
 }
 
-export async function generateInjectManifest(options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig) {
+export async function generateInjectManifest(version: string, options: ResolvedVitePWAOptions, viteOptions: ResolvedConfig) {
   const { selfDestroying } = options
   if (selfDestroying) {
-    await generateServiceWorker(options, viteOptions)
+    await generateServiceWorker(version, options, viteOptions)
     return
   }
 
-  const [workbox, buildSW] = await Promise.all([
-    loadWorkboxBuild(),
-    import('./vite-build').then(({ buildSW }) => buildSW),
-  ])
-
-  await buildSW(options, viteOptions, workbox)
+  await import('./vite-build').then(({ buildSW }) => buildSW(version, options, viteOptions, loadWorkboxBuild()))
 }

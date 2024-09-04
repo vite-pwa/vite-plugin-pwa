@@ -14,14 +14,14 @@ import {
 import type { PWAPluginContext } from './context'
 import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
 
-export async function _generateSW({ options, viteConfig }: PWAPluginContext) {
+export async function _generateSW({ options, version, viteConfig }: PWAPluginContext) {
   if (options.disable)
     return
 
   if (options.strategies === 'injectManifest')
-    await generateInjectManifest(options, viteConfig)
+    await generateInjectManifest(version, options, viteConfig)
   else
-    await generateServiceWorker(options, viteConfig)
+    await generateServiceWorker(version, options, viteConfig)
 }
 
 export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle) {

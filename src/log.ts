@@ -3,11 +3,11 @@ import { relative } from 'node:path'
 import type { BuildResult } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
 import { cyan, dim, green, magenta, yellow } from 'kolorist'
-import { version } from '../package.json'
 import { normalizePath } from './utils'
 import type { ResolvedVitePWAOptions } from './types'
 
 export function logSWViteBuild(
+  version: string,
   swName: string,
   viteOptions: ResolvedConfig,
   format: 'es' | 'iife',
@@ -26,6 +26,7 @@ export function logSWViteBuild(
 }
 
 export function logWorkboxResult(
+  version: string,
   throwMaximumFileSizeToCacheInBytes: boolean,
   strategy: ResolvedVitePWAOptions['strategies'],
   buildResult: BuildResult,
