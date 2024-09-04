@@ -35,8 +35,15 @@ export function logWorkboxResult(
 ) {
   if (throwMaximumFileSizeToCacheInBytes) {
     const entries = buildResult.warnings.filter(w => w.includes('maximumFileSizeToCacheInBytes'))
-    if (entries.length)
-      throw new Error(`\n${entries.map(w => `  - ${w}`).join('\n')}`)
+    if (entries.length) {
+      const prefix = strategy === 'generateSW' ? 'workbox' : 'injectManifest'
+      throw new Error(`
+  Configure "${prefix}.maximumFileSizeToCacheInBytes" to change the limit: the default value is 2 MiB.
+  Check https://vite-pwa-org.netlify.app/guide/faq.html#missing-assets-from-sw-precache-manifest for more information.
+  Assets exceeding the limit:
+${entries.map(w => `  - ${w.replace('. Configure maximumFileSizeToCacheInBytes to change this limit', '')}`).join('\n')}
+`)
+    }
   }
 
   const { root, logLevel = 'info' } = viteOptions
