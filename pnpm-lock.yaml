@@ -49,8 +49,8 @@ importers:
         specifier: ^6.11.0
         version: 6.11.0(@typescript-eslint/parser@6.11.0(eslint@8.54.0)(typescript@5.3.3))(eslint@8.54.0)(typescript@5.3.3)
       '@vite-pwa/assets-generator':
-        specifier: ^0.2.4
-        version: 0.2.4
+        specifier: ^0.2.6
+        version: 0.2.6
       bumpp:
         specifier: ^9.2.0
         version: 9.2.0
@@ -2390,6 +2390,11 @@ packages:
 
   '@vite-pwa/assets-generator@0.2.4':
     resolution: {integrity: sha512-DXyPLPR/IpbZPSpo1amZEPghY/ziIwpTUKNaz0v1xG+ELzCXmrVQhVzEMqr2JLSqRxjc+UzKfGJA/YdUuaao3w==}
+    engines: {node: '>=16.14.0'}
+    hasBin: true
+
+  '@vite-pwa/assets-generator@0.2.6':
+    resolution: {integrity: sha512-kK44dXltvoubEo5B+6tCGjUrOWOE1+dA4DForbFpO1rKy2wSkAVGrs8tyfN6DzTig89/QKyV8XYodgmaKyrYng==}
     engines: {node: '>=16.14.0'}
     hasBin: true
 
@@ -8295,6 +8300,15 @@ snapshots:
       vite: 3.1.0(terser@5.31.0)
 
   '@vite-pwa/assets-generator@0.2.4':
+    dependencies:
+      cac: 6.7.14
+      colorette: 2.0.20
+      consola: 3.2.3
+      sharp: 0.32.6
+      sharp-ico: 0.1.5
+      unconfig: 0.3.11
+
+  '@vite-pwa/assets-generator@0.2.6':
     dependencies:
       cac: 6.7.14
       colorette: 2.0.20
