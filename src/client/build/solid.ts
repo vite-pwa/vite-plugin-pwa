@@ -8,6 +8,7 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
   const {
     immediate = true,
     onNeedRefresh,
+    onBeginUpdate,
     onOfflineReady,
     onRegistered,
     onRegisteredSW,
@@ -19,6 +20,7 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
 
   const updateServiceWorker = registerSW({
     immediate,
+    onBeginUpdate,
     onOfflineReady() {
       setOfflineReady(true)
       onOfflineReady?.()

@@ -1,6 +1,7 @@
 export interface RegisterSWOptions {
   immediate?: boolean
   onNeedRefresh?: () => void
+  onBeginUpdate?: () => void
   onOfflineReady?: () => void
   /**
    * Called only if `onRegisteredSW` is not provided.
