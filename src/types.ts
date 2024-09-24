@@ -1,6 +1,5 @@
-import type { BuildOptions, InlineConfig, Plugin, ResolvedConfig, UserConfig } from 'vite'
+import type { BuildOptions, InlineConfig, Plugin, ResolvedConfig, Rollup, UserConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
-import type { OutputBundle, RollupOptions } from 'rollup'
 import type { BuiltInPreset, Preset } from '@vite-pwa/assets-generator/config'
 import type { HtmlLinkPreset } from '@vite-pwa/assets-generator/api'
 import type { PWAAssetsGenerator } from './pwa-assets/types'
@@ -78,13 +77,13 @@ export type CustomInjectManifestOptions = InjectManifestOptions & {
    * **WARN**: this option is for advanced usage, beware, you can break your application build.
    */
   buildPlugins?: {
-    rollup?: RollupOptions['plugins']
+    rollup?: Rollup.RollupOptions['plugins']
     vite?: UserConfig['plugins']
   }
   /**
    * Since `v0.15.0` you can add custom Rollup options to build your service worker: we expose the same configuration to build a worker using Vite.
    */
-  rollupOptions?: Omit<RollupOptions, 'plugins' | 'output'>
+  rollupOptions?: Omit<Rollup.RollupOptions, 'plugins' | 'output'>
 
   /**
    * Environment options.
@@ -407,7 +406,7 @@ export interface VitePWAOptions {
 export interface ResolvedServiceWorkerOptions {
   format: 'es' | 'iife'
   plugins?: Plugin[]
-  rollupOptions: RollupOptions
+  rollupOptions: Rollup.RollupOptions
 }
 
 export interface ResolvedVitePWAOptions extends Required<Omit<VitePWAOptions, 'pwaAssets' | 'showMaximumFileSizeToCacheInBytesWarning'>> {
@@ -706,7 +705,7 @@ export interface VitePluginPWAAPI {
   /*
    * Explicitly generate the manifests.
    */
-  generateBundle(bundle?: OutputBundle): OutputBundle | undefined
+  generateBundle(bundle?: Rollup.OutputBundle): Rollup.OutputBundle | undefined
   /*
    * Explicitly generate the PWA services worker.
    */
