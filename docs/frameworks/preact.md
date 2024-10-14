@@ -23,6 +23,7 @@ declare module 'virtual:pwa-register/preact' {
 
   export interface RegisterSWOptions {
     immediate?: boolean
+    searchQueryParams?: string | string[][] | URLSearchParams | Record<string, any>
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
     /**
