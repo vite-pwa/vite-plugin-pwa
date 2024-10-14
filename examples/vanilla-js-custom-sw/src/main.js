@@ -19,6 +19,7 @@ app.innerHTML = `
 
 registerSW({
   immediate: true,
+  searchParams: { version: '1.0' },
   onNeedRefresh() {
     console.log('onNeedRefresh message should not appear')
   },

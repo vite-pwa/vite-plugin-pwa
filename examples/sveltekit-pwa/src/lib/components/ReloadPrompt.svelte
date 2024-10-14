@@ -10,6 +10,7 @@
 		needRefresh,
 		updateServiceWorker
 	} = useRegisterSW({
+		searchParams: { version: '1.0' },
 		onRegistered(r) {
 			if (reloadSW === 'true') {
 				r && setInterval(() => {
