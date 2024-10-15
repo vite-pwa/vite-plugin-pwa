@@ -38,7 +38,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   // concatenate the service-worker url and the query search params (if is not empty)
   const flattenedSearchParams = new URLSearchParams(searchParams).toString();
-  const swScriptURL = ['__SW__', flattenedSearchParams].join("?");
+  const swScriptURL = ['__SW__', flattenedSearchParams].filter(Boolean).join("?");
 
   async function register() {
     if ('serviceWorker' in navigator) {
