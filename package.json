@@ -112,8 +112,8 @@
   "peerDependencies": {
     "@vite-pwa/assets-generator": "^0.2.6",
     "vite": "^3.1.0 || ^4.0.0 || ^5.0.0",
-    "workbox-build": "^7.1.0",
-    "workbox-window": "^7.1.0"
+    "workbox-build": "^7.3.0",
+    "workbox-window": "^7.3.0"
   },
   "peerDependenciesMeta": {
     "@vite-pwa/assets-generator": {
@@ -123,9 +123,9 @@
   "dependencies": {
     "debug": "^4.3.6",
     "pretty-bytes": "^6.1.1",
-    "tinyglobby": "^0.2.0",
-    "workbox-build": "^7.1.0",
-    "workbox-window": "^7.1.0"
+    "tinyglobby": "^0.2.10",
+    "workbox-build": "^7.3.0",
+    "workbox-window": "^7.3.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.0.0",
@@ -145,7 +145,6 @@
     "prompts": "^2.4.2",
     "publint": "^0.2.5",
     "react": "^18.2.0",
-    "rollup": "^4.4.1",
     "solid-js": "^1.8.5",
     "svelte": "^4.2.5",
     "tsup": "^7.3.0",
@@ -153,5 +152,10 @@
     "vite": "^5.0.12",
     "vitest": "1.0.0-beta.4",
     "vue": "^3.3.8"
+  },
+  "pnpm": {
+    "overrides": {
+      "rollup": "^4.4.1"
+    }
   }
 }
