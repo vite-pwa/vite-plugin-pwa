@@ -1,5 +1,6 @@
 import { generateHtmlMarkup } from '@vite-pwa/assets-generator/api/generate-html-markup'
 import type { PWAPluginContext } from '../context'
+import { checkForHtmlHead } from '../html'
 import type { AssetsGeneratorContext, PWAHtmlAssets } from './types'
 import { mapLink } from './utils'
 
@@ -11,7 +12,7 @@ export function transformIndexHtml(
   if (assetsGeneratorContext.injectThemeColor) {
     const manifest = ctx.options.manifest
     if (manifest && 'theme_color' in manifest && manifest.theme_color) {
-      html = html.replace(
+      html = checkForHtmlHead(html).replace(
         '</head>',
           `\n<meta name="theme-color" content="${manifest.theme_color}"></head>`,
       )
@@ -21,7 +22,7 @@ export function transformIndexHtml(
   if (assetsGeneratorContext.includeHtmlHeadLinks) {
     const link = generateHtmlMarkup(assetsGeneratorContext.assetsInstructions)
     if (link.length)
-      html = html.replace('</head>', `\n${link.join('\n')}</head>`)
+      html = checkForHtmlHead(html).replace('</head>', `\n${link.join('\n')}</head>`)
   }
 
   return html
