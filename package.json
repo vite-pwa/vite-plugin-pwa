@@ -2,7 +2,7 @@
   "name": "vite-plugin-pwa",
   "type": "module",
   "version": "0.21.0",
-  "packageManager": "pnpm@9.9.0",
+  "packageManager": "pnpm@9.12.3",
   "description": "Zero-config PWA for Vite",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -155,7 +155,7 @@
   },
   "pnpm": {
     "overrides": {
-      "rollup": "^4.4.1"
+      "rollup": "^4.22.4"
     }
   }
 }
