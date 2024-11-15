@@ -233,8 +233,13 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     && (resolvedVitePWAOptions.manifest || resolvedVitePWAOptions.includeAssets)
     && (viteConfig.command === 'build' || resolvedVitePWAOptions.devOptions.enabled)
 
-  if (calculateHash)
-    await configureStaticAssets(resolvedVitePWAOptions, viteConfig)
+  if (calculateHash) {
+    await configureStaticAssets(
+      resolvedVitePWAOptions,
+      viteConfig,
+      ctx.isVite6,
+    )
+  }
 
   return resolvedVitePWAOptions
 }

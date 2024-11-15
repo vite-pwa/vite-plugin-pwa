@@ -57,11 +57,15 @@ export function DevPlugin(ctx: PWAPluginContext) {
         return transformIndexHtmlHandler(html)
       },
     },
-    configureServer(server) {
+    async configureServer(server) {
       ctx.devEnvironment = true
       const { options } = ctx
       if (!options.disable && options.devOptions.enabled) {
-        server.ws.on(DEV_READY_NAME, createWSResponseHandler(server, ctx))
+        if (await ctx.isVite6)
+          server.environments.client.hot.on(DEV_READY_NAME, createWSResponseHandler(server, ctx))
+        else
+          server.ws.on(DEV_READY_NAME, createWSResponseHandler(server, ctx))
+
         if (options.manifest) {
           const name = options.devOptions.webManifestUrl ?? `${options.base}${options.manifestFilename}`
           server.middlewares.use(async (req, res, next) => {
@@ -255,7 +259,24 @@ function createWSResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): 
 
       await createDevRegisterSW(options, ctx.viteConfig)
 
-      server.ws.send({
+      const isVite6 = await ctx.isVite6
+
+      if (!isVite6) {
+        server.ws.send({
+          type: 'custom',
+          event: DEV_REGISTER_SW_NAME,
+          data: {
+            mode: options.injectRegister,
+            scope,
+            inlinePath: `${base}${DEV_SW_NAME}`,
+            registerPath: `${base}${FILE_SW_REGISTER}`,
+            swType: options.devOptions.type,
+          },
+        })
+        return
+      }
+
+      server.environments.client.hot.send({
         type: 'custom',
         event: DEV_REGISTER_SW_NAME,
         data: {
