@@ -50,19 +50,26 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
     async handleHotUpdate({ file, server }) {
       const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
       if (await pwaAssetsGenerator?.checkHotUpdate(file)) {
-        const modules: ModuleNode[] = []
-        const head = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_HEAD_VIRTUAL)
-        head && modules.push(head)
-        const icons = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_ICONS_VIRTUAL)
-        icons && modules.push(icons)
-        if (modules)
-          return modules
-
         const isVite6 = await ctx.isVite6
         if (!isVite6) {
+          const modules: ModuleNode[] = []
+          const head = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_HEAD_VIRTUAL)
+          head && modules.push(head)
+          const icons = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_ICONS_VIRTUAL)
+          icons && modules.push(icons)
+          if (modules.length)
+            return modules
           server.ws.send({ type: 'full-reload' })
           return []
         }
+
+        const modules: import('vite').EnvironmentModuleNode[] = []
+        const head = server.environments.client.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_HEAD_VIRTUAL)
+        head && modules.push(head)
+        const icons = server.environments.client.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_ICONS_VIRTUAL)
+        icons && modules.push(icons)
+        if (modules.length)
+          return modules
 
         server.environments.client.hot.send({ type: 'full-reload' })
         return []
