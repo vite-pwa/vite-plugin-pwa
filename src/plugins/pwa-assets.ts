@@ -58,7 +58,13 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         if (modules)
           return modules
 
-        server.ws.send({ type: 'full-reload' })
+        const isVite6 = await ctx.isVite6
+        if (!isVite6) {
+          server.ws.send({ type: 'full-reload' })
+          return []
+        }
+
+        server.environments.client.hot.send({ type: 'full-reload' })
         return []
       }
     },
