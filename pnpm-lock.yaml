@@ -7,6 +7,7 @@ settings:
 overrides:
   rollup: ^4.22.4
   vite: 6.0.0-beta.10
+  vitepress>vite: 5.0.12
 
 importers:
 
@@ -140,12 +141,15 @@ importers:
       unplugin-vue-components:
         specifier: ^0.22.4
         version: 0.22.4(@babel/parser@7.26.2)(esbuild@0.24.0)(rollup@4.26.0)(vite@6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0))(vue@3.5.12(typescript@4.8.2))
+      vite:
+        specifier: 6.0.0-beta.10
+        version: 6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0)
       vite-plugin-pwa:
-        specifier: workspace:*
-        version: link:..
+        specifier: 0.21.0
+        version: 0.21.0(@vite-pwa/assets-generator@0.2.6)(vite@6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0))(workbox-build@7.3.0(@types/babel__core@7.20.4))(workbox-window@7.3.0)
       vitepress:
         specifier: 1.0.1
-        version: 1.0.1(@algolia/client-search@5.13.0)(@types/node@18.17.14)(@types/react@18.2.37)(jiti@1.21.0)(postcss@8.4.49)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.17.2)(terser@5.31.0)(typescript@4.8.2)
+        version: 1.0.1(@algolia/client-search@5.13.0)(@types/node@18.17.14)(@types/react@18.2.37)(postcss@8.4.49)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.17.2)(terser@5.31.0)(typescript@4.8.2)
       workbox-window:
         specifier: ^7.3.0
         version: 7.3.0
@@ -6006,11 +6010,51 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
+  vite-plugin-pwa@0.21.0:
+    resolution: {integrity: sha512-gnDE5sN2hdxA4vTl0pe6PCTPXqChk175jH8dZVVTBjFhWarZZoXaAdoTIKCIa8Zbx94sC0CnCOyERBWpxvry+g==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@vite-pwa/assets-generator': ^0.2.6
+      vite: 6.0.0-beta.10
+      workbox-build: ^7.3.0
+      workbox-window: ^7.3.0
+    peerDependenciesMeta:
+      '@vite-pwa/assets-generator':
+        optional: true
+
   vite-plugin-solid@2.7.2:
     resolution: {integrity: sha512-GV2SMLAibOoXe76i02AsjAg7sbm/0lngBlERvJKVN67HOrJsHcWgkt0R6sfGLDJuFkv2aBe14Zm4vJcNME+7zw==}
     peerDependencies:
       solid-js: ^1.7.2
       vite: 6.0.0-beta.10
+
+  vite@5.0.12:
+    resolution: {integrity: sha512-4hsnEkG3q0N4Tzf1+t6NdN9dg/L3BM+q8SWgbSPnJvrgH2kgdyzfVJwbR1ic69/4uMJJ/3dqDZZE5/WwqW8U1w==}
+    engines: {node: ^18.0.0 || >=20.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || >=20.0.0
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.4.0
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
 
   vite@6.0.0-beta.10:
     resolution: {integrity: sha512-I+XjYmS0KAx8kxYTFidFZRkDG1h7bKfharrtjFWkKYZxGaUSKMqZZdsJ9Wsh0myRlzzWdRgty9jGC51bAl8BYA==}
@@ -8757,9 +8801,9 @@ snapshots:
       vite: 6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0)
       vue: 3.3.8(typescript@5.3.3)
 
-  '@vitejs/plugin-vue@5.1.5(vite@6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0))(vue@3.5.12(typescript@4.8.2))':
+  '@vitejs/plugin-vue@5.1.5(vite@5.0.12(@types/node@18.17.14)(terser@5.31.0))(vue@3.5.12(typescript@4.8.2))':
     dependencies:
-      vite: 6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0)
+      vite: 5.0.12(@types/node@18.17.14)(terser@5.31.0)
       vue: 3.5.12(typescript@4.8.2)
 
   '@vitest/expect@1.0.0-beta.4':
@@ -12447,6 +12491,19 @@ snapshots:
       - tsx
       - yaml
 
+  vite-plugin-pwa@0.21.0(@vite-pwa/assets-generator@0.2.6)(vite@6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0))(workbox-build@7.3.0(@types/babel__core@7.20.4))(workbox-window@7.3.0):
+    dependencies:
+      debug: 4.3.6
+      pretty-bytes: 6.1.1
+      tinyglobby: 0.2.10
+      vite: 6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0)
+      workbox-build: 7.3.0(@types/babel__core@7.20.4)
+      workbox-window: 7.3.0
+    optionalDependencies:
+      '@vite-pwa/assets-generator': 0.2.6
+    transitivePeerDependencies:
+      - supports-color
+
   vite-plugin-solid@2.7.2(solid-js@1.8.5)(vite@6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0)):
     dependencies:
       '@babel/core': 7.23.2
@@ -12460,6 +12517,16 @@ snapshots:
       vitefu: 0.2.4(vite@6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0))
     transitivePeerDependencies:
       - supports-color
+
+  vite@5.0.12(@types/node@18.17.14)(terser@5.31.0):
+    dependencies:
+      esbuild: 0.19.5
+      postcss: 8.4.49
+      rollup: 4.26.0
+    optionalDependencies:
+      '@types/node': 18.17.14
+      fsevents: 2.3.3
+      terser: 5.31.0
 
   vite@6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0):
     dependencies:
@@ -12480,14 +12547,14 @@ snapshots:
     optionalDependencies:
       vite: 6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0)
 
-  vitepress@1.0.1(@algolia/client-search@5.13.0)(@types/node@18.17.14)(@types/react@18.2.37)(jiti@1.21.0)(postcss@8.4.49)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.17.2)(terser@5.31.0)(typescript@4.8.2):
+  vitepress@1.0.1(@algolia/client-search@5.13.0)(@types/node@18.17.14)(@types/react@18.2.37)(postcss@8.4.49)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.17.2)(terser@5.31.0)(typescript@4.8.2):
     dependencies:
       '@docsearch/css': 3.7.0
       '@docsearch/js': 3.7.0(@algolia/client-search@5.13.0)(@types/react@18.2.37)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.17.2)
       '@shikijs/core': 1.22.2
       '@shikijs/transformers': 1.22.2
       '@types/markdown-it': 13.0.9
-      '@vitejs/plugin-vue': 5.1.5(vite@6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0))(vue@3.5.12(typescript@4.8.2))
+      '@vitejs/plugin-vue': 5.1.5(vite@5.0.12(@types/node@18.17.14)(terser@5.31.0))(vue@3.5.12(typescript@4.8.2))
       '@vue/devtools-api': 7.6.4
       '@vueuse/core': 10.11.1(vue@3.5.12(typescript@4.8.2))
       '@vueuse/integrations': 10.11.1(focus-trap@7.6.1)(vue@3.5.12(typescript@4.8.2))
@@ -12495,7 +12562,7 @@ snapshots:
       mark.js: 8.11.1
       minisearch: 6.3.0
       shiki: 1.22.2
-      vite: 6.0.0-beta.10(@types/node@18.17.14)(jiti@1.21.0)(terser@5.31.0)
+      vite: 5.0.12(@types/node@18.17.14)(terser@5.31.0)
       vue: 3.5.12(typescript@4.8.2)
     optionalDependencies:
       postcss: 8.4.49
@@ -12510,7 +12577,6 @@ snapshots:
       - drauu
       - fuse.js
       - idb-keyval
-      - jiti
       - jwt-decode
       - less
       - lightningcss
@@ -12519,16 +12585,13 @@ snapshots:
       - react
       - react-dom
       - sass
-      - sass-embedded
       - search-insights
       - sortablejs
       - stylus
       - sugarss
       - terser
-      - tsx
       - typescript
       - universal-cookie
-      - yaml
 
   vitest@1.0.0-beta.4(@types/node@18.17.14)(jiti@1.21.0)(jsdom@16.7.0(bufferutil@4.0.6)(utf-8-validate@5.0.9))(terser@5.31.0):
     dependencies:
