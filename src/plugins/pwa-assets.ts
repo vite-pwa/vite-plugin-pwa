@@ -62,8 +62,7 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         return []
       }
     },
-    configureServer(server) {
-      server.ws.on(DEV_READY_NAME, createWSResponseHandler(ctx, server))
+    async configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         const url = req.url
         if (!url)
@@ -98,6 +97,14 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         res.statusCode = 200
         res.end(buffer)
       })
+
+      const isVite6 = await ctx.isVite6
+      if (!isVite6) {
+        server.ws.on(DEV_READY_NAME, createWSResponseHandler(ctx, server))
+        return
+      }
+
+      server.environments.client.hot.on(DEV_READY_NAME, createWSResponseHandler(ctx, server))
     },
   }
 }
@@ -119,7 +126,17 @@ function createWSResponseHandler(ctx: PWAPluginContext, server: ViteDevServer): 
     const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
     if (pwaAssetsGenerator) {
       const data = pwaAssetsGenerator.resolveHtmlAssets()
-      server.ws.send({
+      const isVite6 = await ctx.isVite6
+      if (!isVite6) {
+        server.ws.send({
+          type: 'custom',
+          event: DEV_PWA_ASSETS_NAME,
+          data,
+        })
+        return
+      }
+
+      server.environments.client.hot.send({
         type: 'custom',
         event: DEV_PWA_ASSETS_NAME,
         data,

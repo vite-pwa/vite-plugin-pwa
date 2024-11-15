@@ -31,6 +31,9 @@ export function BuildPlugin(ctx: PWAPluginContext) {
       },
     },
     async generateBundle(_, bundle) {
+      if (await ctx.isVite6 && ctx.viteConfig.build.ssr)
+        return
+
       const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
       if (pwaAssetsGenerator)
         pwaAssetsGenerator.injectManifestIcons()
