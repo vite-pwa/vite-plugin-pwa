@@ -111,8 +111,6 @@ export function registerSW(options: RegisterSWOptions = {}) {
           // Add an event listener to detect when the registered
           // service worker has installed but is waiting to activate.
           wb.addEventListener('waiting', showSkipWaitingPrompt)
-          // @ts-expect-error event listener provided by workbox-window
-          wb.addEventListener('externalwaiting', showSkipWaitingPrompt)
         }
       }
 
