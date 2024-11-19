@@ -98,7 +98,10 @@ export function registerSW(options: RegisterSWOptions = {}) {
                   !onNeedRefreshCalled && onOfflineReady?.()
               }
               else {
-                !onNeedRefreshCalled && onOfflineReady?.()
+                if (event.isExternal)
+                  window.location.reload()
+                else
+                  !onNeedRefreshCalled && onOfflineReady?.()
               }
             }
             else if (!event.isUpdate) {
