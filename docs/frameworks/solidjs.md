@@ -23,7 +23,6 @@ declare module 'virtual:pwa-register/solid' {
 
   export interface RegisterSWOptions {
     immediate?: boolean
-    searchQueryParams?: string | string[][] | URLSearchParams | Record<string, any>
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
     /**
