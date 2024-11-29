@@ -17,6 +17,7 @@ export type { RegisterSWOptions }
 export function registerSW(options: RegisterSWOptions = {}) {
   const {
     immediate = false,
+    searchParams,
     onNeedRefresh,
     onOfflineReady,
     onRegistered,
@@ -35,11 +36,15 @@ export function registerSW(options: RegisterSWOptions = {}) {
     }
   }
 
+  // concatenate the service-worker url and the query search params (if is not empty)
+  const flattenedSearchParams = new URLSearchParams(searchParams).toString();
+  const swScriptURL = ['__SW__', flattenedSearchParams].filter(Boolean).join("?");
+
   async function register() {
     if ('serviceWorker' in navigator) {
       wb = await import('workbox-window').then(({ Workbox }) => {
         // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
-        return new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
+        return new Workbox(swScriptURL, { scope: '__SCOPE__', type: '__TYPE__' })
       }).catch((e) => {
         onRegisterError?.(e)
         return undefined
@@ -114,7 +119,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
       // register the service worker
       wb.register({ immediate }).then((r) => {
         if (onRegisteredSW)
-          onRegisteredSW('__SW__', r)
+          onRegisteredSW(swScriptURL, r)
         else
           onRegistered?.(r)
       }).catch((e) => {
