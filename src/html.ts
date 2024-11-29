@@ -1,3 +1,4 @@
+import { yellow } from 'kolorist'
 import {
   DEV_PWA_ASSETS_NAME,
   DEV_READY_NAME,
@@ -25,20 +26,43 @@ navigator.serviceWorker.register('${path}', { scope: '${options.scope}' })
 }`.replace(/\n/g, '')
 }
 
+export function checkForHtmlHead(html: string) {
+  if (!html.includes('</head>')) {
+    if (!html.includes('<body>')) {
+      console.warn([
+        '',
+        yellow('PWA WARNING:'),
+        '</head> and <body> tags not found in the html, the service worker and web manifest will not be injected.',
+      ].join('\n'))
+      return html
+    }
+    else {
+      console.warn([
+        '',
+        yellow('PWA WARNING:'),
+        '</head> not found in the html, adding it to the html tag: add empty <head></head> to your html to remove this warning.',
+      ].join('\n'))
+    }
+    return html.replace('<body>', `<head>\n</head>\n<body>`)
+  }
+
+  return html
+}
+
 export function injectServiceWorker(html: string, options: ResolvedVitePWAOptions, dev: boolean) {
   const manifest = generateWebManifest(options, dev)
 
   if (!dev) {
     const script = generateRegisterSW(options, dev)
     if (script) {
-      return html.replace(
+      return checkForHtmlHead(html).replace(
         '</head>',
         `${manifest}${script}</head>`,
       )
     }
   }
 
-  return html.replace(
+  return checkForHtmlHead(html).replace(
     '</head>',
     `${manifest}</head>`,
   )
