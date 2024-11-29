@@ -18,6 +18,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
   const {
     immediate = false,
     onNeedRefresh,
+    onBeginUpdate,
     onOfflineReady,
     onRegistered,
     onRegisteredSW,
@@ -113,6 +114,9 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
       // register the service worker
       wb.register({ immediate }).then((r) => {
+        r?.addEventListener("updatefound", () => {
+          onBeginUpdate?.()
+        })
         if (onRegisteredSW)
           onRegisteredSW('__SW__', r)
         else
