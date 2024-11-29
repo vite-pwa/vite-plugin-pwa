@@ -99,6 +99,8 @@ export default defineConfig({
   // base: process.env.BASE_URL || 'https://github.com/',
   build: {
     sourcemap: process.env.SOURCE_MAP === 'true',
+    // don't remove the manifest: testing also build
+    manifest: true,
   },
   plugins: [
     Vue(),
