@@ -155,7 +155,9 @@
   },
   "pnpm": {
     "overrides": {
-      "rollup": "^4.22.4"
+      "rollup": "^4.22.4",
+      "vite": "6.0.1",
+      "vitepress>vite": "5.0.12"
     }
   }
 }
