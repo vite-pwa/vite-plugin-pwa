@@ -41,7 +41,10 @@ export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle) {
       // @ts-expect-error: for Vite 3 support, Vite 4 has removed `isAsset` property
       isAsset: true,
       type: 'asset',
+      // vite 6 deprecation: replaced with names
       name: undefined,
+      // fix vite 6 build with manifest enabled
+      names: [],
       source: generateWebManifestFile(options),
       fileName: options.manifestFilename,
     }
@@ -56,7 +59,10 @@ export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle) {
       // @ts-expect-error: for Vite 3 support, Vite 4 has removed `isAsset` property
       isAsset: true,
       type: 'asset',
+      // vite 6 deprecation: replaced with names
       name: undefined,
+      // fix vite 6 build with manifest enabled
+      names: [],
       source: generateSimpleSWRegister(options, false),
       fileName: FILE_SW_REGISTER,
     }
