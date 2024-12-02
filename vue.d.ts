@@ -9,11 +9,15 @@ declare module 'virtual:pwa-register/vue' {
   export function useRegisterSW(options?: RegisterSWOptions): {
     needRefresh: Ref<boolean>
     offlineReady: Ref<boolean>
-    /**
-     * Reloads the current window to allow the service worker take the control.
-     *
-     * @param reloadPage From version 0.13.2+ this param is not used anymore.
-     */
-    updateServiceWorker: (reloadPage?: boolean) => Promise<void>
+    updateServiceWorker: {
+      /**
+       * Reloads the current window to allow the service worker take the control.
+       */
+      (): Promise<void>
+      /**
+       * @deprecated The `reloadPage` param is not used anymore sice 0.14.0
+       */
+      (reloadPage: boolean): Promise<void>
+    }
   }
 }
