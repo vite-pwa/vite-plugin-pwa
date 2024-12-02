@@ -51,7 +51,7 @@ const ReloadPrompt: Component = () => {
             </Show>
           </div>
           <Show when={needRefresh()}>
-            <button class={styles.ToastButton} onClick={() => updateServiceWorker(true)}>Reload</button>
+            <button class={styles.ToastButton} onClick={() => updateServiceWorker()}>Reload</button>
           </Show>
           <button class={styles.ToastButton} onClick={() => close()}>Close</button>
         </div>
