@@ -45,7 +45,7 @@
 			{/if}
 		</div>
 		{#if $needRefresh}
-			<button on:click={() => updateServiceWorker(true)}>
+			<button on:click={() => updateServiceWorker()}>
 				Reload
 			</button>
 		{/if}
