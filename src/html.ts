@@ -1,3 +1,4 @@
+import type { ResolvedVitePWAOptions } from './types'
 import { yellow } from 'kolorist'
 import {
   DEV_PWA_ASSETS_NAME,
@@ -7,7 +8,6 @@ import {
   DEV_SW_VIRTUAL,
   FILE_SW_REGISTER,
 } from './constants'
-import type { ResolvedVitePWAOptions } from './types'
 
 export function generateSimpleSWRegister(options: ResolvedVitePWAOptions, dev: boolean) {
   const path = dev ? `${options.base}${DEV_SW_NAME}` : `${options.buildBase}${options.filename}`

@@ -1,5 +1,5 @@
-import { writable } from 'svelte/store'
 import type { RegisterSWOptions } from '../type'
+import { writable } from 'svelte/store'
 
 export type { RegisterSWOptions }
 

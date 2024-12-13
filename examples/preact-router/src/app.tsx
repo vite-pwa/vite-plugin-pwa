@@ -1,9 +1,9 @@
 import { Router } from 'preact-router'
 
-import ReloadPrompt from './ReloadPrompt'
-import Home from './pages/Home'
 import About from './pages/About'
 import Hi from './pages/hi/[name]'
+import Home from './pages/Home'
+import ReloadPrompt from './ReloadPrompt'
 
 import './App.css'
 

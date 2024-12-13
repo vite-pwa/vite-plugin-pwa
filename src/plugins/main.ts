@@ -1,4 +1,6 @@
 import type { Plugin, UserConfig } from 'vite'
+import type { PWAPluginContext } from '../context'
+import type { VitePluginPWAAPI } from '../types'
 import { cyan, yellow } from 'kolorist'
 import {
   VIRTUAL_MODULES,
@@ -7,8 +9,6 @@ import {
 } from '../constants'
 import { generateRegisterSW } from '../modules'
 import { resolveOptions } from '../options'
-import type { PWAPluginContext } from '../context'
-import type { VitePluginPWAAPI } from '../types'
 import { swDevOptions } from './dev'
 
 export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
@@ -29,7 +29,8 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
       ctx.userOptions?.integration?.configureOptions?.(config, ctx.userOptions)
       ctx.options = await resolveOptions(ctx)
       if (ctx.options.pwaAssets && !ctx.options.pwaAssets.disabled) {
-        ctx.pwaAssetsGenerator = import('../pwa-assets/generator').then(({ loadInstructions }) => loadInstructions(ctx))
+        ctx.pwaAssetsGenerator = import('../pwa-assets/generator')
+          .then(({ loadInstructions }) => loadInstructions(ctx))
           .catch((e) => {
             console.error([
               '',

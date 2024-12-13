@@ -1,6 +1,7 @@
 import { pwaInfo } from 'virtual:pwa-info'
 import { registerSW } from 'virtual:pwa-register'
 
+// eslint-disable-next-line no-undef
 const date = __DATE__
 
 console.log(pwaInfo)

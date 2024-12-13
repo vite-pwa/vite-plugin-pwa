@@ -1,7 +1,7 @@
-import { basename, dirname, relative, resolve } from 'node:path'
-import { promises as fs } from 'node:fs'
 import type { InlineConfig, ResolvedConfig } from 'vite'
 import type { ResolvedVitePWAOptions } from './types'
+import { promises as fs } from 'node:fs'
+import { basename, dirname, relative, resolve } from 'node:path'
 import { logSWViteBuild, logWorkboxResult } from './log'
 import { normalizePath } from './utils'
 

@@ -1,8 +1,8 @@
 import React from 'react'
-import './ReloadPrompt.css'
+import { pwaInfo } from 'virtual:pwa-info'
 
 import { useRegisterSW } from 'virtual:pwa-register/react'
-import { pwaInfo } from 'virtual:pwa-info'
+import './ReloadPrompt.css'
 
 console.log(pwaInfo)
 

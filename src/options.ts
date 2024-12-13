@@ -1,13 +1,13 @@
+import type { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
+import type { PWAPluginContext } from './context'
+import type { ManifestOptions, ResolvedVitePWAOptions } from './types'
 import fs from 'node:fs'
 import { extname, resolve } from 'node:path'
 import process from 'node:process'
-import type { GenerateSWOptions, InjectManifestOptions } from 'workbox-build'
-import type { ManifestOptions, ResolvedVitePWAOptions } from './types'
 import { configureStaticAssets } from './assets'
-import { resolveBasePath, slash } from './utils'
 import { defaultInjectManifestVitePlugins } from './constants'
-import type { PWAPluginContext } from './context'
 import { resolvePWAAssetsOptions } from './pwa-assets/options'
+import { resolveBasePath, slash } from './utils'
 
 function resolveSwPaths(injectManifest: boolean, root: string, srcDir: string, outDir: string, filename: string): {
   swSrc: string
@@ -82,7 +82,7 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     assetsDir += '/'
 
   // remove './' prefix from assetsDir
-  const dontCacheBustURLsMatching = new RegExp(`^${assetsDir.replace(/^\.*?\//, '')}`)
+  const dontCacheBustURLsMatching = new RegExp(`^${assetsDir.replace(/^\.*\//, '')}`)
 
   const defaultWorkbox: GenerateSWOptions = {
     swDest,

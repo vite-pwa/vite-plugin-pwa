@@ -1,12 +1,12 @@
 import type { Plugin } from 'vite'
-import { createContext } from './context'
 import type { VitePWAOptions } from './types'
-import { AssetsPlugin } from './plugins/pwa-assets'
+import { createAPI } from './api'
+import { createContext } from './context'
 import { BuildPlugin } from './plugins/build'
 import { DevPlugin } from './plugins/dev'
-import { MainPlugin } from './plugins/main'
 import { InfoPlugin } from './plugins/info'
-import { createAPI } from './api'
+import { MainPlugin } from './plugins/main'
+import { AssetsPlugin } from './plugins/pwa-assets'
 
 export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   const ctx = createContext(userOptions)
@@ -20,7 +20,7 @@ export function VitePWA(userOptions: Partial<VitePWAOptions> = {}): Plugin[] {
   ]
 }
 
-export * from './types'
 export { cachePreset } from './cache'
 export { defaultInjectManifestVitePlugins } from './constants'
+export * from './types'
 export type { VitePWAOptions as Options }

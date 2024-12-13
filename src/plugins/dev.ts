@@ -1,13 +1,9 @@
-import { basename, resolve } from 'node:path'
-import { existsSync, promises as fs, mkdirSync } from 'node:fs'
 import type { Plugin, ResolvedConfig, ViteDevServer } from 'vite'
+import type { PWAPluginContext } from '../context'
+import type { ResolvedVitePWAOptions } from '../types'
+import { existsSync, promises as fs, mkdirSync } from 'node:fs'
+import { basename, resolve } from 'node:path'
 import { cyan, yellow } from 'kolorist'
-import {
-  generateRegisterDevSW,
-  generateSWHMR,
-  generateSimpleSWRegister,
-  injectServiceWorker,
-} from '../html'
 import { generateWebManifestFile } from '../assets'
 import {
   DEV_READY_NAME,
@@ -17,10 +13,14 @@ import {
   FILE_SW_REGISTER,
   RESOLVED_DEV_SW_VIRTUAL,
 } from '../constants'
-import type { ResolvedVitePWAOptions } from '../types'
+import {
+  generateRegisterDevSW,
+  generateSimpleSWRegister,
+  generateSWHMR,
+  injectServiceWorker,
+} from '../html'
 import { generateServiceWorker } from '../modules'
 import { normalizePath } from '../utils'
-import type { PWAPluginContext } from '../context'
 
 export const swDevOptions = {
   swUrl: DEV_SW_NAME,
@@ -39,7 +39,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
 
     return html.replace(
       '</body>',
-        `${generateRegisterDevSW(options.base)}
+      `${generateRegisterDevSW(options.base)}
 </body>`,
     )
   }

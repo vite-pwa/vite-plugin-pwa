@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
-import { injectServiceWorker } from '../html'
-import { _generateBundle, _generateSW } from '../api'
 import type { PWAPluginContext } from '../context'
+import { _generateBundle, _generateSW } from '../api'
+import { injectServiceWorker } from '../html'
 
 export function BuildPlugin(ctx: PWAPluginContext) {
   const transformIndexHtmlHandler = (html: string) => {

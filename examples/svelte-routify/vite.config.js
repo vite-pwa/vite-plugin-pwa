@@ -1,8 +1,8 @@
 import process from 'node:process'
-import { defineConfig } from 'vite'
-import { svelte } from '@sveltejs/vite-plugin-svelte'
-import { VitePWA } from 'vite-plugin-pwa'
 import replace from '@rollup/plugin-replace'
+import { svelte } from '@sveltejs/vite-plugin-svelte'
+import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
 
 /** @type { Partial<import('vite-plugin-pwa').VitePWAOptions> } */
 const pwaOptions = {

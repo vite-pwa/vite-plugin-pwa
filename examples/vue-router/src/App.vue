@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from 'vue'
 import { useTimeAgo } from '@vueuse/core'
+import { onBeforeMount, ref } from 'vue'
 import MyWorker from './my-worker?worker'
 
 import ReloadPrompt from './ReloadPrompt.vue'

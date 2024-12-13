@@ -1,8 +1,9 @@
-import { resolve } from 'node:path'
-import { existsSync } from 'node:fs'
 import type { OutputBundle } from 'rollup'
+import type { PWAPluginContext } from './context'
+import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
+import { existsSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { cyan, yellow } from 'kolorist'
-import { generateInjectManifest, generateServiceWorker } from './modules'
 import { generateWebManifestFile } from './assets'
 import { DEV_SW_NAME, FILE_SW_REGISTER } from './constants'
 import {
@@ -11,8 +12,7 @@ import {
   generateSimpleSWRegister,
   generateWebManifest,
 } from './html'
-import type { PWAPluginContext } from './context'
-import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
+import { generateInjectManifest, generateServiceWorker } from './modules'
 
 export async function _generateSW({ options, version, viteConfig }: PWAPluginContext) {
   if (options.disable)

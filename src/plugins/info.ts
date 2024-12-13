@@ -1,10 +1,10 @@
 import type { Plugin } from 'vite'
 import type { PWAPluginContext } from '../context'
+import type { VitePluginPWAAPI } from '../types'
 import {
   PWA_INFO_VIRTUAL,
   RESOLVED_PWA_INFO_VIRTUAL,
 } from '../constants'
-import type { VitePluginPWAAPI } from '../types'
 
 export function InfoPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
   return <Plugin>{

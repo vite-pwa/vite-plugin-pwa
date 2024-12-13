@@ -1,9 +1,9 @@
-import process from 'node:process'
-import { defineConfig } from 'vite'
-import solidPlugin from 'vite-plugin-solid'
-import { VitePWA } from 'vite-plugin-pwa'
 import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'
+import process from 'node:process'
 import replace from '@rollup/plugin-replace'
+import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
+import solidPlugin from 'vite-plugin-solid'
 
 const pwaOptions: Partial<VitePWAOptions> = {
   mode: 'development',
