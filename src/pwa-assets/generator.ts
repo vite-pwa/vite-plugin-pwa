@@ -1,7 +1,7 @@
 import type { PWAPluginContext } from '../context'
 import type { PWAAssetsGenerator } from './types'
-import { loadAssetsGeneratorContext } from './config'
 import { generate } from './build'
+import { loadAssetsGeneratorContext } from './config'
 import { checkHotUpdate, findIconAsset } from './dev'
 import { resolveHtmlAssets, transformIndexHtml } from './html'
 import { injectManifestIcons } from './manifest'

@@ -1,7 +1,7 @@
 import type { Component } from 'solid-js'
 import { Show } from 'solid-js'
-import { useRegisterSW } from 'virtual:pwa-register/solid'
 import { pwaInfo } from 'virtual:pwa-info'
+import { useRegisterSW } from 'virtual:pwa-register/solid'
 import styles from './ReloadPrompt.module.css'
 
 console.log(pwaInfo)
