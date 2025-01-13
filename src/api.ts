@@ -2,6 +2,7 @@ import { resolve } from 'node:path'
 import { existsSync } from 'node:fs'
 import type { OutputBundle } from 'rollup'
 import { cyan, yellow } from 'kolorist'
+import { defu } from "defu";
 import { generateInjectManifest, generateServiceWorker } from './modules'
 import { generateWebManifestFile } from './assets'
 import { DEV_SW_NAME, FILE_SW_REGISTER } from './constants'
@@ -12,7 +13,7 @@ import {
   generateWebManifest,
 } from './html'
 import type { PWAPluginContext } from './context'
-import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
+import type { ExtendManifestEntriesHook, VitePluginPWAAPI, ResolvedVitePWAOptions } from './types'
 
 export async function _generateSW({ options, version, viteConfig }: PWAPluginContext) {
   if (options.disable)
@@ -142,11 +143,11 @@ export function createAPI(ctx: PWAPluginContext) {
         },
       }
     },
-    generateBundle(bundle) {
-      return _generateBundle(ctx, bundle)
+    generateBundle(bundle, optionsOverride?: Partial<ResolvedVitePWAOptions>) {      
+      return _generateBundle(defu({options: optionsOverride}, ctx), bundle)
     },
-    async generateSW() {
-      return await _generateSW(ctx)
+    async generateSW(optionsOverride?: Partial<ResolvedVitePWAOptions>) {
+      return await _generateSW(defu({options: optionsOverride}, ctx))
     },
     extendManifestEntries(fn: ExtendManifestEntriesHook) {
       const { options } = ctx
