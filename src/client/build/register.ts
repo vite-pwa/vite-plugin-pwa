@@ -17,6 +17,7 @@ export type { RegisterSWOptions }
 export function registerSW(options: RegisterSWOptions = {}) {
   const {
     immediate = false,
+    baseUrl = "",
     onNeedRefresh,
     onOfflineReady,
     onRegistered,
@@ -39,7 +40,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
     if ('serviceWorker' in navigator) {
       wb = await import('workbox-window').then(({ Workbox }) => {
         // __SW__, __SCOPE__ and __TYPE__ will be replaced by virtual module
-        return new Workbox('__SW__', { scope: '__SCOPE__', type: '__TYPE__' })
+        return new Workbox(baseUrl+'__SW__', { scope: baseUrl+'__SCOPE__', type: '__TYPE__' })
       }).catch((e) => {
         onRegisterError?.(e)
         return undefined

@@ -7,6 +7,7 @@ export type { RegisterSWOptions }
 export function useRegisterSW(options: RegisterSWOptions = {}) {
   const {
     immediate = true,
+    baseUrl,
     onNeedRefresh,
     onOfflineReady,
     onRegistered,
@@ -19,6 +20,7 @@ export function useRegisterSW(options: RegisterSWOptions = {}) {
 
   const updateServiceWorker = registerSW({
     immediate,
+    baseUrl,
     onNeedRefresh() {
       needRefresh.value = true
       onNeedRefresh?.()
