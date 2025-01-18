@@ -1,5 +1,6 @@
 export interface RegisterSWOptions {
   immediate?: boolean
+  baseUrl?: string
   onNeedRefresh?: () => void
   onOfflineReady?: () => void
   /**

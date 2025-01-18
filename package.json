@@ -122,6 +122,7 @@
   },
   "dependencies": {
     "debug": "^4.3.6",
+    "defu": "6.1.2",
     "pretty-bytes": "^6.1.1",
     "tinyglobby": "^0.2.10",
     "workbox-build": "^7.3.0",
