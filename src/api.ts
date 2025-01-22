@@ -18,10 +18,19 @@ export async function _generateSW({ options, version, viteConfig }: PWAPluginCon
   if (options.disable)
     return
 
-  if (options.strategies === 'injectManifest')
-    await generateInjectManifest(version, options, viteConfig)
-  else
-    await generateServiceWorker(version, options, viteConfig)
+  switch (options.strategies) {
+    case 'generateSW':
+      await generateServiceWorker(version, options, viteConfig)
+      break
+    case 'injectManifest':
+      await generateInjectManifest(version, options, viteConfig)
+      break
+    case 'webManifestOnly':
+      // do nothing
+      break
+    default:
+      throw new Error(`Unknown PWA strategy '${options.strategies}'`)
+  }
 }
 
 export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle) {
