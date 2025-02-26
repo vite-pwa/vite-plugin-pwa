@@ -11,7 +11,7 @@ const {
   },
 })
 
-async function close() {
+function close() {
   offlineReady.value = false
   needRefresh.value = false
 }
