@@ -1,5 +1,5 @@
 declare module 'virtual:pwa-register/solid' {
-  // eslint-disable-next-line ts/prefer-ts-expect-error
+  // eslint-disable-next-line ts/ban-ts-comment
   // @ts-ignore ignore when solid-js is not installed
   import type { Accessor, Setter } from 'solid-js'
   import type { RegisterSWOptions } from 'vite-plugin-pwa/types'

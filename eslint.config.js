@@ -3,8 +3,10 @@ import antfu from '@antfu/eslint-config'
 export default await antfu(
   {
     ignores: [
+      'netlify.toml',
       '**/build/**',
       '**/dist/**',
+      '**/docs/**',
       '**/dev-dist/**',
     ],
   },

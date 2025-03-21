@@ -1,10 +1,10 @@
-import process from 'node:process'
 import type { Plugin } from 'vite'
-import { defineConfig } from 'vite'
-import Vue from '@vitejs/plugin-vue'
 import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'
-import { VitePWA } from 'vite-plugin-pwa'
+import process from 'node:process'
 import replace from '@rollup/plugin-replace'
+import Vue from '@vitejs/plugin-vue'
+import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
 
 const pwaAssets = process.env.PWA_ASSETS === 'true'
 
