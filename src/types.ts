@@ -530,7 +530,7 @@ export interface ManifestOptions {
    */
   background_color: string
   /**
-   * @default '#42b883
+   * @default `#42b883`
    */
   theme_color: string
   /**
