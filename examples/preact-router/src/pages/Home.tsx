@@ -1,5 +1,5 @@
-import { useState } from 'preact/hooks'
 import { route } from 'preact-router'
+import { useState } from 'preact/hooks'
 import './Home.css'
 
 function Home() {

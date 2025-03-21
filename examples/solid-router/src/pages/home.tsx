@@ -1,5 +1,5 @@
-import { createSignal } from 'solid-js'
 import { useNavigate } from '@solidjs/router'
+import { createSignal } from 'solid-js'
 import styles from './home.module.css'
 
 export default function Home() {

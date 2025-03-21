@@ -1,12 +1,12 @@
-import { basename, dirname, relative, resolve } from 'node:path'
-import { readFile } from 'node:fs/promises'
 import type { UserConfig } from '@vite-pwa/assets-generator/config'
-import { loadConfig } from '@vite-pwa/assets-generator/config'
-import { cyan, red } from 'kolorist'
-import { instructions } from '@vite-pwa/assets-generator/api/instructions'
 import type { PWAPluginContext } from '../context'
 import type { ResolvedPWAAssetsOptions } from '../types'
 import type { AssetsGeneratorContext, ResolvedIconAsset } from './types'
+import { readFile } from 'node:fs/promises'
+import { basename, dirname, relative, resolve } from 'node:path'
+import { instructions } from '@vite-pwa/assets-generator/api/instructions'
+import { loadConfig } from '@vite-pwa/assets-generator/config'
+import { cyan, red } from 'kolorist'
 
 export async function loadAssetsGeneratorContext(
   ctx: PWAPluginContext,
