@@ -109,6 +109,7 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     start_url: basePath,
     display: 'standalone',
     background_color: '#ffffff',
+    theme_color: '#42b883',
     lang: 'en',
     scope,
   }
