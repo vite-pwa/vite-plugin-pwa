@@ -451,7 +451,7 @@ interface Nothing {}
 
 /**
  * type StringLiteralUnion<'maskable'> = 'maskable' | string
- * This has auto completion whereas `'maskable' | string` doesn't
+ * This has auto-completion whereas `'maskable' | string` doesn't
  * Adapted from https://github.com/microsoft/TypeScript/issues/29729
  */
 export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
