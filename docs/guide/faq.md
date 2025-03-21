@@ -165,7 +165,7 @@ let updateServiceWorker: (() => Promise<void>) | undefined
 function onNeedRefresh() {
   needRefresh.value = true
 }
-function close() {
+async function close() {
   needRefresh.value = false
 }
 

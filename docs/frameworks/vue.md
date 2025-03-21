@@ -63,7 +63,7 @@ const {
   updateServiceWorker,
 } = useRegisterSW()
 
-function close() {
+async function close() {
   offlineReady.value = false
   needRefresh.value = false
 }
