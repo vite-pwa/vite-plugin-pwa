@@ -35,7 +35,7 @@ export function BuildPlugin(ctx: PWAPluginContext) {
       if (pwaAssetsGenerator)
         pwaAssetsGenerator.injectManifestIcons()
 
-      return _generateBundle(ctx, bundle)
+      return _generateBundle(ctx, bundle, this)
     },
     closeBundle: {
       sequential: true,

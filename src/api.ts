@@ -1,4 +1,4 @@
-import type { OutputBundle } from 'rollup'
+import type { OutputAsset, OutputBundle, PluginContext } from 'rollup'
 import type { PWAPluginContext } from './context'
 import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
 import { existsSync } from 'node:fs'
@@ -24,7 +24,7 @@ export async function _generateSW({ options, version, viteConfig }: PWAPluginCon
     await generateServiceWorker(version, options, viteConfig)
 }
 
-export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle) {
+export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle, pluginCtx?: PluginContext) {
   const { options, viteConfig, useImportRegister } = ctx
   if (options.disable || !bundle)
     return
@@ -37,17 +37,10 @@ export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle) {
         `${yellow('WARNING: "theme_color" is missing from the web manifest, your application will not be able to be installed')}`,
       ].join('\n'))
     }
-    bundle[options.manifestFilename] = {
-      // @ts-expect-error: for Vite 3 support, Vite 4 has removed `isAsset` property
-      isAsset: true,
-      type: 'asset',
-      // vite 6 deprecation: replaced with names
-      name: undefined,
-      // fix vite 6 build with manifest enabled
-      names: [],
-      source: generateWebManifestFile(options),
+    emitFile({
       fileName: options.manifestFilename,
-    }
+      source: generateWebManifestFile(options),
+    }, bundle, pluginCtx)
   }
 
   // if virtual register is requested, do not inject.
@@ -55,7 +48,27 @@ export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle) {
     options.injectRegister = useImportRegister ? false : 'script'
 
   if ((options.injectRegister === 'script' || options.injectRegister === 'script-defer') && !existsSync(resolve(viteConfig.publicDir, FILE_SW_REGISTER))) {
-    bundle[FILE_SW_REGISTER] = {
+    emitFile({
+      fileName: FILE_SW_REGISTER,
+      source: generateSimpleSWRegister(options, false),
+    }, bundle, pluginCtx)
+  }
+  return bundle
+}
+
+function emitFile(asset: Pick<OutputAsset, 'fileName' | 'source'>, bundle: OutputBundle, pluginCtx?: PluginContext) {
+  if (pluginCtx) {
+    pluginCtx.emitFile({
+      type: 'asset',
+      fileName: asset.fileName,
+      source: asset.source,
+    })
+  }
+  else {
+    // NOTE: assigning to bundle[foo] directly is discouraged by rollup
+    // and is not supported by rolldown.
+    // The api consumers should pass in the pluginCtx in the future
+    bundle[asset.fileName] = {
       // @ts-expect-error: for Vite 3 support, Vite 4 has removed `isAsset` property
       isAsset: true,
       type: 'asset',
@@ -63,11 +76,10 @@ export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle) {
       name: undefined,
       // fix vite 6 build with manifest enabled
       names: [],
-      source: generateSimpleSWRegister(options, false),
-      fileName: FILE_SW_REGISTER,
+      source: asset.source,
+      fileName: asset.fileName,
     }
   }
-  return bundle
 }
 
 export function createAPI(ctx: PWAPluginContext) {
@@ -142,8 +154,8 @@ export function createAPI(ctx: PWAPluginContext) {
         },
       }
     },
-    generateBundle(bundle) {
-      return _generateBundle(ctx, bundle)
+    generateBundle(bundle, pluginCtx) {
+      return _generateBundle(ctx, bundle, pluginCtx)
     },
     async generateSW() {
       return await _generateSW(ctx)

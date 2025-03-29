@@ -1,6 +1,6 @@
 import type { HtmlLinkPreset } from '@vite-pwa/assets-generator/api'
 import type { BuiltInPreset, Preset } from '@vite-pwa/assets-generator/config'
-import type { OutputBundle, RollupOptions } from 'rollup'
+import type { OutputBundle, PluginContext, RollupOptions } from 'rollup'
 import type { BuildOptions, InlineConfig, Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { PWAAssetsGenerator } from './pwa-assets/types'
@@ -706,7 +706,7 @@ export interface VitePluginPWAAPI {
   /*
    * Explicitly generate the manifests.
    */
-  generateBundle: (bundle?: OutputBundle) => OutputBundle | undefined
+  generateBundle: (bundle?: OutputBundle, pluginCtx?: PluginContext) => OutputBundle | undefined
   /*
    * Explicitly generate the PWA services worker.
    */
