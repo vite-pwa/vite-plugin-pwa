@@ -18,13 +18,11 @@
     "preview:inline:png": "INLINE_PWA_ASSETS=true PNG=true vite preview"
   },
   "devDependencies": {
-    "@vite-pwa/assets-generator": "^0.2.4",
+    "@vite-pwa/assets-generator": "^1.0.0",
     "rimraf": "^5.0.5",
-    "sharp": "^0.32.6",
-    "sharp-ico": "^0.1.5",
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
     "vite-plugin-pwa": "workspace:*",
-    "workbox-window": "^7.1.0"
+    "workbox-window": "^7.3.0"
   }
 }

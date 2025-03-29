@@ -2,7 +2,7 @@
   "name": "vite-plugin-pwa",
   "type": "module",
   "version": "0.21.2",
-  "packageManager": "pnpm@10.6.5",
+  "packageManager": "pnpm@10.7.0",
   "description": "Zero-config PWA for Vite",
   "author": "antfu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -110,7 +110,7 @@
     "test:vite-ecosystem-ci": "nr test-typescript"
   },
   "peerDependencies": {
-    "@vite-pwa/assets-generator": "^0.2.6",
+    "@vite-pwa/assets-generator": "^1.0.0",
     "vite": "^3.1.0 || ^4.0.0 || ^5.0.0 || ^6.0.0",
     "workbox-build": "^7.3.0",
     "workbox-window": "^7.3.0"
@@ -128,7 +128,7 @@
     "workbox-window": "^7.3.0"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^4.10.2",
+    "@antfu/eslint-config": "^4.11.0",
     "@antfu/ni": "^0.21.9",
     "@playwright/test": "^1.40.0",
     "@types/debug": "^4.1.12",
@@ -136,7 +136,7 @@
     "@types/prompts": "^2.4.8",
     "@types/react": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^8.18.0",
-    "@vite-pwa/assets-generator": "^0.2.6",
+    "@vite-pwa/assets-generator": "^1.0.0",
     "bumpp": "^9.2.0",
     "eslint": "^9.23.0",
     "esno": "0.17.0",
@@ -156,6 +156,9 @@
   "pnpm": {
     "overrides": {
       "rollup": "^4.22.4"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
   }
 }
