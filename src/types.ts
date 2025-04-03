@@ -745,6 +745,8 @@ export interface DevOptions {
    * configure here the corresponding `url`, for example `navigateFallback: 'index.html'`.
    *
    * **WARNING**: this option will only be used when using `injectManifest` strategy.
+   *
+   * @default 'index.html'
    */
   navigateFallback?: string
 
