@@ -1,7 +1,7 @@
 import type { Component } from 'solid-js'
 import { Show } from 'solid-js'
-import { useRegisterSW } from 'virtual:pwa-register/solid'
 import { pwaInfo } from 'virtual:pwa-info'
+import { useRegisterSW } from 'virtual:pwa-register/solid'
 import styles from './ReloadPrompt.module.css'
 
 console.log(pwaInfo)
@@ -51,7 +51,7 @@ const ReloadPrompt: Component = () => {
             </Show>
           </div>
           <Show when={needRefresh()}>
-            <button class={styles.ToastButton} onClick={() => updateServiceWorker(true)}>Reload</button>
+            <button class={styles.ToastButton} onClick={() => updateServiceWorker()}>Reload</button>
           </Show>
           <button class={styles.ToastButton} onClick={() => close()}>Close</button>
         </div>

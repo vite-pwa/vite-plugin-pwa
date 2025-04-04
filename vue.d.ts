@@ -1,8 +1,8 @@
 declare module 'virtual:pwa-register/vue' {
-  // eslint-disable-next-line ts/prefer-ts-expect-error
+  import type { RegisterSWOptions } from 'vite-plugin-pwa/types'
+  // eslint-disable-next-line ts/ban-ts-comment
   // @ts-ignore ignore when vue is not installed
   import type { Ref } from 'vue'
-  import type { RegisterSWOptions } from 'vite-plugin-pwa/types'
 
   export type { RegisterSWOptions }
 

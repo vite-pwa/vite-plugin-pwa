@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useRegisterSW } from 'virtual:pwa-register/vue'
 import { pwaInfo } from 'virtual:pwa-info'
+import { useRegisterSW } from 'virtual:pwa-register/vue'
 
 console.log(pwaInfo)
 
@@ -27,7 +27,7 @@ const {
   },
 })
 
-async function close() {
+function close() {
   offlineReady.value = false
   needRefresh.value = false
 }
