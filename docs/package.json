@@ -2,6 +2,7 @@
   "name": "vite-plugin-pwa-docs",
   "version": "0.0.0",
   "private": "true",
+  "type": "module",
   "scripts": {
     "dev": "vitepress dev",
     "build": "vitepress build && esno scripts/build.ts",
@@ -10,8 +11,7 @@
   },
   "dependencies": {
     "@vueuse/core": "^9.2.0",
-    "@vueuse/shared": "^9.2.0",
-    "vue": "^3.2.38"
+    "@vueuse/shared": "^9.2.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
@@ -25,9 +25,8 @@
     "typescript": "^4.8.2",
     "unocss": "^0.45.18",
     "unplugin-vue-components": "^0.22.4",
-    "vite": "^3.1.0",
     "vite-plugin-pwa": "workspace:*",
-    "vitepress": "1.0.0-alpha.13",
-    "workbox-window": "^6.5.4"
+    "vitepress": "1.0.1",
+    "workbox-window": "^7.3.0"
   }
 }

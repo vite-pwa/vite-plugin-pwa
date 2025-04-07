@@ -1,8 +1,8 @@
+import type { HtmlLinkPreset } from '@vite-pwa/assets-generator/api'
+import type { BuiltInPreset, Preset } from '@vite-pwa/assets-generator/config'
+import type { OutputBundle, PluginContext, RollupOptions } from 'rollup'
 import type { BuildOptions, InlineConfig, Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
-import type { OutputBundle, RollupOptions } from 'rollup'
-import type { BuiltInPreset, Preset } from '@vite-pwa/assets-generator/config'
-import type { HtmlLinkPreset } from '@vite-pwa/assets-generator/api'
 import type { PWAAssetsGenerator } from './pwa-assets/types'
 
 export type InjectManifestVitePlugins = string[] | ((vitePluginIds: string[]) => string[])
@@ -530,7 +530,7 @@ export interface ManifestOptions {
    */
   background_color: string
   /**
-   * @default '#42b883
+   * @default `#42b883`
    */
   theme_color: string
   /**
@@ -695,23 +695,23 @@ export interface VitePluginPWAAPI {
    * Will also return if the manifest will require credentials:
    * <link rel="manifest" href="<webManifestUrl>" crossorigin="use-credentials" />
    */
-  webManifestData(): WebManifestData | undefined
+  webManifestData: () => WebManifestData | undefined
   /**
    * How the service worker is being registered in the application.
    *
    * This option will help some integrations to inject the corresponding script in the head.
    */
-  registerSWData(): RegisterSWData | undefined
-  extendManifestEntries(fn: ExtendManifestEntriesHook): void
+  registerSWData: () => RegisterSWData | undefined
+  extendManifestEntries: (fn: ExtendManifestEntriesHook) => void
   /*
    * Explicitly generate the manifests.
    */
-  generateBundle(bundle?: OutputBundle): OutputBundle | undefined
+  generateBundle: (bundle?: OutputBundle, pluginCtx?: PluginContext) => OutputBundle | undefined
   /*
    * Explicitly generate the PWA services worker.
    */
-  generateSW(): Promise<void>
-  pwaAssetsGenerator(): Promise<PWAAssetsGenerator | undefined>
+  generateSW: () => Promise<void>
+  pwaAssetsGenerator: () => Promise<PWAAssetsGenerator | undefined>
 }
 
 export type ExtendManifestEntriesHook = (manifestEntries: (string | ManifestEntry)[]) => (string | ManifestEntry)[] | undefined

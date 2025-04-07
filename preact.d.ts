@@ -1,5 +1,5 @@
 declare module 'virtual:pwa-register/preact' {
-  // eslint-disable-next-line ts/prefer-ts-expect-error
+  // eslint-disable-next-line ts/ban-ts-comment
   // @ts-ignore ignore when preact/hooks is not installed
   import type { StateUpdater } from 'preact/hooks'
   import type { RegisterSWOptions } from 'vite-plugin-pwa/types'

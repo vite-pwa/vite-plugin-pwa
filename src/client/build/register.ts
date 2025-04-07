@@ -27,12 +27,12 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   let wb: import('workbox-window').Workbox | undefined
   let registerPromise: Promise<void>
-  let sendSkipWaitingMessage: () => Promise<void> | undefined
+  let sendSkipWaitingMessage: () => void | undefined
 
   const updateServiceWorker = async (_reloadPage = true) => {
     await registerPromise
     if (!auto) {
-      await sendSkipWaitingMessage?.()
+      sendSkipWaitingMessage?.()
     }
   }
 
@@ -53,12 +53,12 @@ export function registerSW(options: RegisterSWOptions = {}) {
       if (!wb)
         return
 
-      sendSkipWaitingMessage = async () => {
+      sendSkipWaitingMessage = () => {
         // Send a message to the waiting service worker,
         // instructing it to activate.
         // Note: for this to work, you have to add a message
         // listener in your service worker. See below.
-        await wb?.messageSkipWaiting()
+        wb?.messageSkipWaiting()
       }
       if (!autoDestroy) {
         if (auto) {
@@ -103,10 +103,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
                   !onNeedRefreshCalled && onOfflineReady?.()
               }
               else {
-                if (event.isExternal)
-                  window.location.reload()
-                else
-                  !onNeedRefreshCalled && onOfflineReady?.()
+                !onNeedRefreshCalled && onOfflineReady?.()
               }
             }
             else if (!event.isUpdate) {
@@ -116,8 +113,6 @@ export function registerSW(options: RegisterSWOptions = {}) {
           // Add an event listener to detect when the registered
           // service worker has installed but is waiting to activate.
           wb.addEventListener('waiting', showSkipWaitingPrompt)
-          // @ts-expect-error event listener provided by workbox-window
-          wb.addEventListener('externalwaiting', showSkipWaitingPrompt)
         }
       }
 

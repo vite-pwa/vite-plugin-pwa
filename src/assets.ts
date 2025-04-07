@@ -1,10 +1,10 @@
-import { resolve as resolveFs } from 'node:path'
-import fs from 'node:fs'
-import crypto from 'node:crypto'
-import { glob } from 'tinyglobby'
-import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
+import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
 import type { ResolvedVitePWAOptions } from './types'
+import crypto from 'node:crypto'
+import fs from 'node:fs'
+import { resolve as resolveFs } from 'node:path'
+import { glob } from 'tinyglobby'
 
 function buildManifestEntry(
   publicDir: string,

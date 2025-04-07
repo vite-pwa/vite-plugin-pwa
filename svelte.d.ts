@@ -1,5 +1,5 @@
 declare module 'virtual:pwa-register/svelte' {
-  // eslint-disable-next-line ts/prefer-ts-expect-error
+  // eslint-disable-next-line ts/ban-ts-comment
   // @ts-ignore ignore when svelte is not installed
   import type { Writable } from 'svelte/store'
   import type { RegisterSWOptions } from 'vite-plugin-pwa/types'
