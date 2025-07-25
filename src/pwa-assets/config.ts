@@ -2,7 +2,8 @@ import type { UserConfig } from '@vite-pwa/assets-generator/config'
 import type { PWAPluginContext } from '../context'
 import type { ResolvedPWAAssetsOptions } from '../types'
 import type { AssetsGeneratorContext, ResolvedIconAsset } from './types'
-import { readFile } from 'node:fs/promises'
+import fs from 'node:fs'
+import { access, readFile } from 'node:fs/promises'
 import { basename, dirname, relative, resolve } from 'node:path'
 import { instructions } from '@vite-pwa/assets-generator/api/instructions'
 import { loadConfig } from '@vite-pwa/assets-generator/config'
@@ -61,7 +62,8 @@ export async function loadAssetsGeneratorContext(
 
   const useImage = Array.isArray(images) ? images[0] : images
   // the image must be relative to the root directory
-  const imageFile = resolve(root, useImage)
+  // const imageFile = resolve(root, useImage)
+  const imageFile = await tryToResolveImage(root, sources, useImage)
   const publicDir = pwaAssets.integration?.publicDir ?? resolve(root, ctx.viteConfig.publicDir || 'public')
   const outDir = pwaAssets.integration?.outDir ?? resolve(root, ctx.viteConfig.build?.outDir || 'dist')
   // image can be inside public subdirectory: public/pwa/icon.svg => pwa/icon.svg
@@ -148,4 +150,36 @@ async function loadConfiguration(root: string, ctx: PWAPluginContext) {
       ? root
       : { config: pwaAssets.config },
   )
+}
+
+async function checkFileExists(pathname: string): Promise<boolean> {
+  try {
+    await access(pathname, fs.constants.R_OK)
+  }
+  catch {
+    return false
+  }
+
+  return true
+}
+
+async function tryToResolveImage(
+  root: string,
+  sources: string[],
+  image: string,
+): Promise<string> {
+  const imagePath = resolve(root, image)
+  // first check if the image is in the root directory
+  if (await checkFileExists(imagePath)) {
+    return imagePath
+  }
+
+  for (const source of sources) {
+    const sourceImage = resolve(dirname(source), image)
+    if (await checkFileExists(sourceImage)) {
+      return sourceImage
+    }
+  }
+
+  return imagePath
 }
