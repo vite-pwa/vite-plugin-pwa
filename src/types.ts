@@ -163,6 +163,8 @@ export interface PWAAssetsOptions {
   /**
    * Path relative to `root` folder where to find the image to use for generating PWA assets.
    *
+   * Can be also relative to any of the PWA Assets configuration files.
+   *
    * If the `config` option is enabled, this option will be ignored.
    *
    * @default `public/favicon.svg`
