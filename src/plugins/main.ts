@@ -1,6 +1,7 @@
 import type { Plugin, UserConfig } from 'vite'
 import type { PWAPluginContext } from '../context'
 import type { VitePluginPWAAPI } from '../types'
+import { prefixRegex } from '@rolldown/pluginutils'
 import { cyan, yellow } from 'kolorist'
 import {
   VIRTUAL_MODULES,
@@ -42,32 +43,40 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
         })
       }
     },
-    resolveId(id) {
-      return VIRTUAL_MODULES.includes(id) ? VIRTUAL_MODULES_RESOLVE_PREFIX + id : undefined
+    resolveId: {
+      filter: { id: prefixRegex('virtual:pwa-register') },
+      handler(id) {
+        // condition is kept for backward compatibility for below Vite v6.3
+        return VIRTUAL_MODULES.includes(id) ? VIRTUAL_MODULES_RESOLVE_PREFIX + id : undefined
+      },
     },
-    load(id) {
-      if (id.startsWith(VIRTUAL_MODULES_RESOLVE_PREFIX))
-        id = id.slice(VIRTUAL_MODULES_RESOLVE_PREFIX.length)
-      else
-        return
+    load: {
+      filter: { id: prefixRegex(VIRTUAL_MODULES_RESOLVE_PREFIX) },
+      handler(id) {
+        // condition is kept for backward compatibility for below Vite v6.3
+        if (id.startsWith(VIRTUAL_MODULES_RESOLVE_PREFIX))
+          id = id.slice(VIRTUAL_MODULES_RESOLVE_PREFIX.length)
+        else
+          return
 
-      if (VIRTUAL_MODULES.includes(id)) {
-        ctx.useImportRegister = true
-        if (ctx.viteConfig.command === 'serve' && ctx.options.devOptions.enabled) {
-          return generateRegisterSW(
-            { ...ctx.options, filename: swDevOptions.swUrl },
-            'build',
-            VIRTUAL_MODULES_MAP[id],
-          )
+        if (VIRTUAL_MODULES.includes(id)) {
+          ctx.useImportRegister = true
+          if (ctx.viteConfig.command === 'serve' && ctx.options.devOptions.enabled) {
+            return generateRegisterSW(
+              { ...ctx.options, filename: swDevOptions.swUrl },
+              'build',
+              VIRTUAL_MODULES_MAP[id],
+            )
+          }
+          else {
+            return generateRegisterSW(
+              ctx.options,
+              (!ctx.options.disable && ctx.viteConfig.command === 'build') ? 'build' : 'dev',
+              VIRTUAL_MODULES_MAP[id],
+            )
+          }
         }
-        else {
-          return generateRegisterSW(
-            ctx.options,
-            (!ctx.options.disable && ctx.viteConfig.command === 'build') ? 'build' : 'dev',
-            VIRTUAL_MODULES_MAP[id],
-          )
-        }
-      }
+      },
     },
     api,
   }
