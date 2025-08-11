@@ -635,6 +635,7 @@ export interface ManifestOptions {
    */
   scope_extensions: {
     origin: string
+    type?: 'origin'
   }[]
 }
 
