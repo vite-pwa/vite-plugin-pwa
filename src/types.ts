@@ -641,8 +641,8 @@ export interface ManifestOptions {
   scope_extensions: {
     origin: string
     /**
-      * @default 'origin'
-      */
+     * @default 'origin'
+     */
     type?: StringLiteralUnion<ScopeExtensionsType> | ScopeExtensionsType
   }[]
 }
