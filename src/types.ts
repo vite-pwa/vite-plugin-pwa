@@ -459,6 +459,12 @@ interface Nothing {}
 export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
 
 /**
+ * @default 'origin'
+ * @see https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/scope_extensions
+ */
+export type ScopeExtensionsType = 'origin'
+
+/**
  * @see https://w3c.github.io/manifest/#manifest-image-resources
  */
 export interface IconResource {
@@ -635,7 +641,7 @@ export interface ManifestOptions {
    */
   scope_extensions: {
     origin: string
-    type?: 'origin'
+    type?: StringLiteralUnion<ScopeExtensionsType> | ScopeExtensionsType
   }[]
 }
 
