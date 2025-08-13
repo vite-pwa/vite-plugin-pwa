@@ -458,10 +458,7 @@ interface Nothing {}
  */
 export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
 
-/**
- * @default 'origin'
- * @see https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/scope_extensions
- */
+
 export type ScopeExtensionsType = 'origin'
 
 /**
@@ -635,12 +632,17 @@ export interface ManifestOptions {
   edge_side_panel?: {
     preferred_width?: number
   }
+
   /**
    * @see https://github.com/WICG/manifest-incubations/blob/gh-pages/scope_extensions-explainer.md
+   * @see https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/scope_extensions
    * @default []
    */
   scope_extensions: {
     origin: string
+    /**
+      * @default 'origin'
+      */
     type?: StringLiteralUnion<ScopeExtensionsType> | ScopeExtensionsType
   }[]
 }
