@@ -62,8 +62,9 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
         if (VIRTUAL_MODULES.includes(id)) {
           ctx.useImportRegister = true
           if (ctx.viteConfig.command === 'serve' && ctx.options.devOptions.enabled) {
+            // Vite 7.1 intercepting dev-sw.js?dev-sw => hack the middleware
             return generateRegisterSW(
-              { ...ctx.options, filename: swDevOptions.swUrl },
+              { ...ctx.options, filename: `@${swDevOptions.swUrl}` },
               'build',
               VIRTUAL_MODULES_MAP[id],
             )

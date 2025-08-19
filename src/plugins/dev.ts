@@ -51,7 +51,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
     options() {
       // ctx.options is available here, because the main plugin sets it in configResolved hook
       const { options } = ctx
-      if (!(!options.disable && options.devOptions.enabled)) {
+      if (!options.disable && options.devOptions.enabled) {
         // @ts-expect-error filter exists in Vite 6.3+
         delete plugin.resolveId!.filter
         // @ts-expect-error filter exists in Vite 6.3+
@@ -116,7 +116,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
           // - the .ts source file
           // in any case, we need to resolve the id to the source file to load it and add empty injection point on loadDev
           // we need to always return the path to source file name to resolve imports on the sw
-          return (name === swDevOptions.swUrl || name === options.injectManifest.swSrc)
+          return (name === swDevOptions.swUrl || name === `@${swDevOptions.swUrl}` || name === options.injectManifest.swSrc)
             ? options.injectManifest.swSrc
             : undefined
         }
