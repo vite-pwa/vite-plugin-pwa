@@ -176,6 +176,15 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
         }
       })
     }
+
+    if (manifest.scope_extensions) {
+      manifest.scope_extensions = manifest.scope_extensions.map((scopeExtension) => {
+        return {
+          origin: scopeExtension.origin,
+          type: scopeExtension.type ?? 'origin',
+        }
+      })
+    }
   }
 
   const {
