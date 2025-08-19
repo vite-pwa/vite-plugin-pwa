@@ -131,6 +131,7 @@
     "@antfu/eslint-config": "^4.11.0",
     "@antfu/ni": "^0.21.9",
     "@playwright/test": "^1.40.0",
+    "@rolldown/pluginutils": "1.0.0-beta.31",
     "@types/debug": "^4.1.12",
     "@types/node": "^18.17.14",
     "@types/prompts": "^2.4.8",

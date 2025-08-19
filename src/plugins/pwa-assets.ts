@@ -1,5 +1,6 @@
 import type { ModuleNode, Plugin, ViteDevServer } from 'vite'
 import type { PWAPluginContext } from '../context'
+import { exactRegex } from '@rolldown/pluginutils'
 import {
   DEV_PWA_ASSETS_NAME,
   DEV_READY_NAME,
@@ -24,28 +25,35 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         return await transformIndexHtmlHandler(html, ctx)
       },
     },
-    resolveId(id) {
-      switch (true) {
-        case id === PWA_ASSETS_HEAD_VIRTUAL:
-          return RESOLVED_PWA_ASSETS_HEAD_VIRTUAL
-        case id === PWA_ASSETS_ICONS_VIRTUAL:
-          return RESOLVED_PWA_ASSETS_ICONS_VIRTUAL
-        default:
-          return undefined
-      }
+    resolveId: {
+      filter: { id: [exactRegex(PWA_ASSETS_HEAD_VIRTUAL), exactRegex(PWA_ASSETS_ICONS_VIRTUAL)] },
+      handler(id) {
+        // condition is kept for backward compatibility for below Vite v6.3
+        switch (true) {
+          case id === PWA_ASSETS_HEAD_VIRTUAL:
+            return RESOLVED_PWA_ASSETS_HEAD_VIRTUAL
+          case id === PWA_ASSETS_ICONS_VIRTUAL:
+            return RESOLVED_PWA_ASSETS_ICONS_VIRTUAL
+          default:
+            return undefined
+        }
+      },
     },
-    async load(id) {
-      if (id === RESOLVED_PWA_ASSETS_HEAD_VIRTUAL) {
-        const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
-        const head = pwaAssetsGenerator?.resolveHtmlAssets() ?? { links: [], themeColor: undefined }
-        return `export const pwaAssetsHead = ${JSON.stringify(head)}`
-      }
-
-      if (id === RESOLVED_PWA_ASSETS_ICONS_VIRTUAL) {
-        const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
-        const icons = extractIcons(pwaAssetsGenerator?.instructions())
-        return `export const pwaAssetsIcons = ${JSON.stringify(icons)}`
-      }
+    load: {
+      filter: { id: [exactRegex(RESOLVED_PWA_ASSETS_HEAD_VIRTUAL), exactRegex(RESOLVED_PWA_ASSETS_ICONS_VIRTUAL)] },
+      async handler(id) {
+        // conditions are kept for backward compatibility for below Vite v6.3
+        if (id === RESOLVED_PWA_ASSETS_HEAD_VIRTUAL) {
+          const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
+          const head = pwaAssetsGenerator?.resolveHtmlAssets() ?? { links: [], themeColor: undefined }
+          return `export const pwaAssetsHead = ${JSON.stringify(head)}`
+        }
+        if (id === RESOLVED_PWA_ASSETS_ICONS_VIRTUAL) {
+          const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
+          const icons = extractIcons(pwaAssetsGenerator?.instructions())
+          return `export const pwaAssetsIcons = ${JSON.stringify(icons)}`
+        }
+      },
     },
     async handleHotUpdate({ file, server }) {
       const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
