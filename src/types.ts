@@ -458,7 +458,6 @@ interface Nothing {}
  */
 export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
 
-
 export type ScopeExtensionsType = 'origin'
 
 /**
@@ -643,7 +642,7 @@ export interface ManifestOptions {
     /**
      * @default 'origin'
      */
-    type?: StringLiteralUnion<ScopeExtensionsType> | ScopeExtensionsType
+    type?: StringLiteralUnion<ScopeExtensionsType>
   }[]
 }
 
