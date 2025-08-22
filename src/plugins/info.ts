@@ -1,6 +1,7 @@
 import type { Plugin } from 'vite'
 import type { PWAPluginContext } from '../context'
 import type { VitePluginPWAAPI } from '../types'
+import { exactRegex } from '@rolldown/pluginutils'
 import {
   PWA_INFO_VIRTUAL,
   RESOLVED_PWA_INFO_VIRTUAL,
@@ -10,15 +11,23 @@ export function InfoPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
   return <Plugin>{
     name: 'vite-plugin-pwa:info',
     enforce: 'post',
-    resolveId(id) {
-      if (id === PWA_INFO_VIRTUAL)
-        return RESOLVED_PWA_INFO_VIRTUAL
+    resolveId: {
+      filter: { id: exactRegex(PWA_INFO_VIRTUAL) },
+      handler(id) {
+        // condition is kept for backward compatibility for below Vite v6.3
+        if (id === PWA_INFO_VIRTUAL)
+          return RESOLVED_PWA_INFO_VIRTUAL
 
-      return undefined
+        return undefined
+      },
     },
-    load(id) {
-      if (id === RESOLVED_PWA_INFO_VIRTUAL)
-        return generatePwaInfo(ctx, api)
+    load: {
+      filter: { id: exactRegex(RESOLVED_PWA_INFO_VIRTUAL) },
+      handler(id) {
+        // condition is kept for backward compatibility for below Vite v6.3
+        if (id === RESOLVED_PWA_INFO_VIRTUAL)
+          return generatePwaInfo(ctx, api)
+      },
     },
   }
 }

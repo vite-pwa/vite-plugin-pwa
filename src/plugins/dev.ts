@@ -3,6 +3,7 @@ import type { PWAPluginContext } from '../context'
 import type { ResolvedVitePWAOptions } from '../types'
 import { existsSync, promises as fs, mkdirSync } from 'node:fs'
 import { basename, resolve } from 'node:path'
+import { exactRegex } from '@rolldown/pluginutils'
 import { cyan, yellow } from 'kolorist'
 import { generateWebManifestFile } from '../assets'
 import {
@@ -44,9 +45,19 @@ export function DevPlugin(ctx: PWAPluginContext) {
     )
   }
 
-  return <Plugin>{
+  const plugin: Plugin = {
     name: 'vite-plugin-pwa:dev-sw',
     apply: 'serve',
+    options() {
+      // ctx.options is available here, because the main plugin sets it in configResolved hook
+      const { options } = ctx
+      if (!options.disable && options.devOptions.enabled) {
+        // @ts-expect-error filter exists in Vite 6.3+
+        delete plugin.resolveId!.filter
+        // @ts-expect-error filter exists in Vite 6.3+
+        delete plugin.load!.filter
+      }
+    },
     transformIndexHtml: {
       order: 'post',
       async handler(html) {
@@ -87,139 +98,148 @@ export function DevPlugin(ctx: PWAPluginContext) {
         }
       }
     },
-    resolveId(id) {
-      if (id === DEV_SW_VIRTUAL)
-        return RESOLVED_DEV_SW_VIRTUAL
+    resolveId: {
+      // @ts-expect-error filter exists in Vite 6.3+
+      filter: { id: exactRegex(DEV_SW_VIRTUAL) }, // this is deleted if `!options.disable && options.devOptions.enabled` is true
+      handler(id) {
+        if (id === DEV_SW_VIRTUAL)
+          return RESOLVED_DEV_SW_VIRTUAL
 
-      const { options } = ctx
-      if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest' && !options.selfDestroying) {
-        let name = id.startsWith(options.base) ? id.slice(options.base.length) : id
-        // Vite will remove the base from the request, and so we need to remove the leading /: fixes issue #683
-        if (name.length && name[0] === '/')
-          name = name.slice(1)
-        // the sw must be registered with .js extension in the browser, here we detect that request:
-        // - the .js file and source with .ts, or
-        // - the .ts source file
-        // in any case, we need to resolve the id to the source file to load it and add empty injection point on loadDev
-        // we need to always return the path to source file name to resolve imports on the sw
-        return (name === swDevOptions.swUrl || name === options.injectManifest.swSrc)
-          ? options.injectManifest.swSrc
-          : undefined
-      }
+        const { options } = ctx
+        if (!options.disable && options.devOptions.enabled && options.strategies === 'injectManifest' && !options.selfDestroying) {
+          let name = id.startsWith(options.base) ? id.slice(options.base.length) : id
+          // Vite will remove the base from the request, and so we need to remove the leading /: fixes issue #683
+          if (name.length && name[0] === '/')
+            name = name.slice(1)
+          // the sw must be registered with .js extension in the browser, here we detect that request:
+          // - the .js file and source with .ts, or
+          // - the .ts source file
+          // in any case, we need to resolve the id to the source file to load it and add empty injection point on loadDev
+          // we need to always return the path to source file name to resolve imports on the sw
+          return (name === swDevOptions.swUrl || name === options.injectManifest.swSrc)
+            ? options.injectManifest.swSrc
+            : undefined
+        }
 
-      return undefined
+        return undefined
+      },
     },
-    async load(id) {
-      if (id === RESOLVED_DEV_SW_VIRTUAL)
-        return generateSWHMR()
+    load: {
+      // @ts-expect-error filter exists in Vite 6.3+
+      filter: { id: exactRegex(RESOLVED_DEV_SW_VIRTUAL) }, // this is deleted if `!options.disable && options.devOptions.enabled` is true
+      async handler(id) {
+        if (id === RESOLVED_DEV_SW_VIRTUAL)
+          return generateSWHMR()
 
-      const { options, viteConfig } = ctx
-      if (!options.disable && options.devOptions.enabled) {
-        if (options.strategies === 'injectManifest' && !options.selfDestroying) {
-          // we need to inject self.__WB_MANIFEST with an empty array: there is no pwa on dev
-          const swSrc = normalizePath(options.injectManifest.swSrc)
-          if (id === swSrc) {
-            let content = await fs.readFile(options.injectManifest.swSrc, 'utf-8')
-            const resolvedIP = options.injectManifest.injectionPoint
-            if (resolvedIP) {
-              const ip = new RegExp(resolvedIP, 'g')
-              const navigateFallback = options.devOptions.navigateFallback
-              // we only add the navigateFallback if using registerRoute for offline support on custom sw
-              if (navigateFallback)
-                content = content.replace(ip, `[{ url: '${navigateFallback}' }]`)
-              else
-                content = content.replace(ip, '[]')
+        const { options, viteConfig } = ctx
+        if (!options.disable && options.devOptions.enabled) {
+          if (options.strategies === 'injectManifest' && !options.selfDestroying) {
+            // we need to inject self.__WB_MANIFEST with an empty array: there is no pwa on dev
+            const swSrc = normalizePath(options.injectManifest.swSrc)
+            if (id === swSrc) {
+              let content = await fs.readFile(options.injectManifest.swSrc, 'utf-8')
+              const resolvedIP = options.injectManifest.injectionPoint
+              if (resolvedIP) {
+                const ip = new RegExp(resolvedIP, 'g')
+                const navigateFallback = options.devOptions.navigateFallback
+                // we only add the navigateFallback if using registerRoute for offline support on custom sw
+                if (navigateFallback)
+                  content = content.replace(ip, `[{ url: '${navigateFallback}' }]`)
+                else
+                  content = content.replace(ip, '[]')
+              }
+              return content
             }
-            return content
+
+            if (swDevOptions.workboxPaths.has(id))
+              return await fs.readFile(swDevOptions.workboxPaths.get(id)!, 'utf-8')
+
+            return undefined
           }
+          if (id.endsWith(swDevOptions.swUrl)) {
+            const globDirectory = await resolveDevDistFolder(options, viteConfig)
+            if (!existsSync(globDirectory))
+              mkdirSync(globDirectory, { recursive: true })
 
-          if (swDevOptions.workboxPaths.has(id))
-            return await fs.readFile(swDevOptions.workboxPaths.get(id)!, 'utf-8')
-
-          return undefined
-        }
-        if (id.endsWith(swDevOptions.swUrl)) {
-          const globDirectory = await resolveDevDistFolder(options, viteConfig)
-          if (!existsSync(globDirectory))
-            mkdirSync(globDirectory, { recursive: true })
-
-          const swDest = resolve(globDirectory, 'sw.js')
-          if (!swDevOptions.swDevGenerated) {
-            // add empty js file to suppress workbox-build warnings
-            let suppressWarnings: string | undefined
-            if (options.devOptions.suppressWarnings === true) {
-              suppressWarnings = normalizePath(resolve(globDirectory, 'suppress-warnings.js'))
-              await fs.writeFile(suppressWarnings, '', 'utf-8')
-            }
-            const globPatterns = options.devOptions.suppressWarnings === true
-              ? ['suppress-warnings.js']
-              : options.workbox.globPatterns
-            // we only need to generate sw on dev-dist folder and then read the content
-            // the sw precache (self.__SW_MANIFEST) will be empty since we're using `dev-dist` folder
-            // we only need to add the navigateFallback if configured
-            const navigateFallback = options.workbox.navigateFallback
-            const { filePaths } = await generateServiceWorker(
-              ctx.version,
-              Object.assign(
-                {},
-                options,
-                {
-                  swDest: options.selfDestroying ? swDest : options.swDest,
-                  workbox: {
-                    ...options.workbox,
-                    navigateFallbackAllowlist: options.devOptions.navigateFallbackAllowlist ?? [/^\/$/],
-                    runtimeCaching: options.devOptions.disableRuntimeConfig ? undefined : options.workbox.runtimeCaching,
-                    // we only include navigateFallback: add revision to remove workbox-build warning
-                    additionalManifestEntries: navigateFallback
-                      ? [{
-                          url: navigateFallback,
-                          revision: Math.random().toString(32),
-                        }]
-                      : undefined,
-                    cleanupOutdatedCaches: true,
-                    globDirectory: normalizePath(globDirectory),
-                    globPatterns,
-                    swDest: normalizePath(swDest),
+            const swDest = resolve(globDirectory, 'sw.js')
+            if (!swDevOptions.swDevGenerated) {
+              // add empty js file to suppress workbox-build warnings
+              let suppressWarnings: string | undefined
+              if (options.devOptions.suppressWarnings === true) {
+                suppressWarnings = normalizePath(resolve(globDirectory, 'suppress-warnings.js'))
+                await fs.writeFile(suppressWarnings, '', 'utf-8')
+              }
+              const globPatterns = options.devOptions.suppressWarnings === true
+                ? ['suppress-warnings.js']
+                : options.workbox.globPatterns
+              // we only need to generate sw on dev-dist folder and then read the content
+              // the sw precache (self.__SW_MANIFEST) will be empty since we're using `dev-dist` folder
+              // we only need to add the navigateFallback if configured
+              const navigateFallback = options.workbox.navigateFallback
+              const { filePaths } = await generateServiceWorker(
+                ctx.version,
+                Object.assign(
+                  {},
+                  options,
+                  {
+                    swDest: options.selfDestroying ? swDest : options.swDest,
+                    workbox: {
+                      ...options.workbox,
+                      navigateFallbackAllowlist: options.devOptions.navigateFallbackAllowlist ?? [/^\/$/],
+                      runtimeCaching: options.devOptions.disableRuntimeConfig ? undefined : options.workbox.runtimeCaching,
+                      // we only include navigateFallback: add revision to remove workbox-build warning
+                      additionalManifestEntries: navigateFallback
+                        ? [{
+                            url: navigateFallback,
+                            revision: Math.random().toString(32),
+                          }]
+                        : undefined,
+                      cleanupOutdatedCaches: true,
+                      globDirectory: normalizePath(globDirectory),
+                      globPatterns,
+                      swDest: normalizePath(swDest),
+                    },
                   },
-                },
-              ),
-              viteConfig,
-            )
-            // we store workbox dependencies, and so we can then resolve them when requested: at least workbox-**.js
-            filePaths.forEach((we) => {
-              const name = basename(we)
-              // we exclude the sw itself
-              if (name !== 'sw.js')
-                swDevOptions.workboxPaths.set(normalizePath(`${options.base}${name}`), we)
-            })
-            if (suppressWarnings) {
-              swDevOptions.workboxPaths.set(
-                normalizePath(`${options.base}${basename(suppressWarnings)}`),
-                suppressWarnings,
+                ),
+                viteConfig,
               )
+              // we store workbox dependencies, and so we can then resolve them when requested: at least workbox-**.js
+              filePaths.forEach((we) => {
+                const name = basename(we)
+                // we exclude the sw itself
+                if (name !== 'sw.js')
+                  swDevOptions.workboxPaths.set(normalizePath(`${options.base}${name}`), we)
+              })
+              if (suppressWarnings) {
+                swDevOptions.workboxPaths.set(
+                  normalizePath(`${options.base}${basename(suppressWarnings)}`),
+                  suppressWarnings,
+                )
+              }
+              swDevOptions.swDevGenerated = true
             }
-            swDevOptions.swDevGenerated = true
+            return await fs.readFile(swDest, 'utf-8')
           }
-          return await fs.readFile(swDest, 'utf-8')
-        }
 
-        // check the entry only if the request starts with the base, otherwise ignore the request
-        if (id.startsWith(options.base)) {
-          const key = normalizePath(id)
-          if (swDevOptions.workboxPaths.has(key))
-            return await fs.readFile(swDevOptions.workboxPaths.get(key)!, 'utf-8')
+          // check the entry only if the request starts with the base, otherwise ignore the request
+          if (id.startsWith(options.base)) {
+            const key = normalizePath(id)
+            if (swDevOptions.workboxPaths.has(key))
+              return await fs.readFile(swDevOptions.workboxPaths.get(key)!, 'utf-8')
+          }
+          else if (options.base !== '/') {
+            // Vite will remove the base from the request, so we need to add it back and check if present.
+            // An example is using /test/registerSW.js, the request will be /registerSW.js.
+            // So we can handle that request in the middleware or just check it here.
+            const key = normalizePath(`${options.base}${id.length > 0 && id[0] === '/' ? id.slice(1) : id}`)
+            if (swDevOptions.workboxPaths.has(key))
+              return await fs.readFile(swDevOptions.workboxPaths.get(key)!, 'utf-8')
+          }
         }
-        else if (options.base !== '/') {
-          // Vite will remove the base from the request, so we need to add it back and check if present.
-          // An example is using /test/registerSW.js, the request will be /registerSW.js.
-          // So we can handle that request in the middleware or just check it here.
-          const key = normalizePath(`${options.base}${id.length > 0 && id[0] === '/' ? id.slice(1) : id}`)
-          if (swDevOptions.workboxPaths.has(key))
-            return await fs.readFile(swDevOptions.workboxPaths.get(key)!, 'utf-8')
-        }
-      }
+      },
     },
   }
+  return plugin
 }
 
 async function resolveDevDistFolder(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
