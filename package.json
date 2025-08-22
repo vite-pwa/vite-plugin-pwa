@@ -155,7 +155,7 @@
   },
   "pnpm": {
     "overrides": {
-      "rollup": "^4.22.4"
+      "rollup": "^4.35.0"
     },
     "onlyBuiltDependencies": [
       "sharp"
