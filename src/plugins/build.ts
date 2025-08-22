@@ -40,7 +40,10 @@ export function BuildPlugin(ctx: PWAPluginContext) {
     closeBundle: {
       sequential: true,
       order: ctx.userOptions?.integration?.closeBundleOrder,
-      async handler() {
+      async handler(error) {
+        if (error)
+          return
+
         if (!ctx.viteConfig.build.ssr) {
           const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
           if (pwaAssetsGenerator)
