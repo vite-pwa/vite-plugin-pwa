@@ -300,7 +300,7 @@ export interface VitePWAOptions {
   injectRegister: 'inline' | 'script' | 'script-defer' | 'auto' | null | false
   /**
    * Mode for the virtual register.
-   * Does NOT available for `injectRegister` set to `inline` or `script`
+   * Is NOT available for strategy `injectRegister`, only use for strategy `generateSW`
    *
    * `prompt` - you will need to show a popup/dialog to the user to confirm the reload.
    *
