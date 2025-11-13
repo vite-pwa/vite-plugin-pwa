@@ -16,12 +16,33 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
   return <Plugin>{
     name: 'vite-plugin-pwa',
     enforce: 'pre',
-    config() {
+    async config() {
+      if (await ctx.isVite6)
+        return
+
       return <UserConfig>{
         ssr: {
           // TODO: remove until workbox-window support native ESM
           noExternal: ['workbox-window'],
         },
+      }
+    },
+    configEnvironment(name, config) {
+      if (config.consumer === 'server') {
+        return {
+          resolve: {
+            noExternal: ['workbox-window'],
+          },
+        }
+      }
+      else if (config.consumer === 'client') {
+        return {
+          dev: {
+            optionsDeps: {
+              include: ['workbox-window'],
+            },
+          },
+        }
       }
     },
     async configResolved(config) {
@@ -52,7 +73,7 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
     },
     load: {
       filter: { id: prefixRegex(VIRTUAL_MODULES_RESOLVE_PREFIX) },
-      handler(id) {
+      async handler(id) {
         // condition is kept for backward compatibility for below Vite v6.3
         if (id.startsWith(VIRTUAL_MODULES_RESOLVE_PREFIX))
           id = id.slice(VIRTUAL_MODULES_RESOLVE_PREFIX.length)
@@ -61,6 +82,14 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
 
         if (VIRTUAL_MODULES.includes(id)) {
           ctx.useImportRegister = true
+          if (await ctx.isVite6 && this.environment.config.consumer === 'server') {
+            return generateRegisterSW(
+              ctx.options,
+              'dev',
+              VIRTUAL_MODULES_MAP[id],
+            )
+          }
+
           if (ctx.viteConfig.command === 'serve' && ctx.options.devOptions.enabled) {
             return generateRegisterSW(
               { ...ctx.options, filename: swDevOptions.swUrl },

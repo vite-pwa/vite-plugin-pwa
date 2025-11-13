@@ -56,7 +56,11 @@ function includeIcons(icons: Record<string, any>[], globs: string[]) {
 export async function configureStaticAssets(
   resolvedVitePWAOptions: ResolvedVitePWAOptions,
   viteConfig: ResolvedConfig,
+  isVite6: Promise<boolean>,
 ) {
+  if (viteConfig.command === 'build' && await isVite6 && viteConfig.build.ssr)
+    return
+
   const {
     manifest,
     strategies,

@@ -13,6 +13,7 @@ export interface PWAPluginContext {
   useImportRegister: boolean
   devEnvironment: boolean
   pwaAssetsGenerator: Promise<PWAAssetsGenerator | undefined>
+  isVite6: Promise<boolean>
 }
 
 export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginContext {
@@ -30,5 +31,9 @@ export function createContext(userOptions: Partial<VitePWAOptions>): PWAPluginCo
     useImportRegister: false,
     devEnvironment: false,
     pwaAssetsGenerator: Promise.resolve(undefined),
+    isVite6: import('vite').then((v) => {
+      const viteVersion = Number.parseInt(v.version.split('.')[0])
+      return !Number.isNaN(viteVersion) ? viteVersion >= 6 : false
+    }).catch(() => false),
   }
 }
