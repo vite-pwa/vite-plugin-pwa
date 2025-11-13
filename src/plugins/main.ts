@@ -27,7 +27,7 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
         },
       }
     },
-    configEnvironment(name, config) {
+    configEnvironment(_name, config) {
       if (config.consumer === 'server') {
         return {
           resolve: {
@@ -82,7 +82,7 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
 
         if (VIRTUAL_MODULES.includes(id)) {
           ctx.useImportRegister = true
-          if (await ctx.isVite6 && this.environment.config.consumer === 'server') {
+          if (ctx.options.enableEnvironmentApi && await ctx.isVite6 && this.environment.config.consumer === 'server') {
             return generateRegisterSW(
               ctx.options,
               'dev',

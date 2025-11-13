@@ -58,7 +58,7 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
     async handleHotUpdate({ file, server }) {
       const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
       if (await pwaAssetsGenerator?.checkHotUpdate(file)) {
-        const isVite6 = await ctx.isVite6
+        const isVite6 = ctx.options.enableEnvironmentApi && await ctx.isVite6
         if (!isVite6) {
           const modules: ModuleNode[] = []
           const head = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_HEAD_VIRTUAL)
@@ -119,7 +119,7 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         res.end(buffer)
       })
 
-      const isVite6 = await ctx.isVite6
+      const isVite6 = ctx.options.enableEnvironmentApi && await ctx.isVite6
       if (!isVite6) {
         server.ws.on(DEV_READY_NAME, createWSResponseHandler(ctx, server))
         return
@@ -147,7 +147,7 @@ function createWSResponseHandler(ctx: PWAPluginContext, server: ViteDevServer): 
     const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
     if (pwaAssetsGenerator) {
       const data = pwaAssetsGenerator.resolveHtmlAssets()
-      const isVite6 = await ctx.isVite6
+      const isVite6 = ctx.options.enableEnvironmentApi && await ctx.isVite6
       if (!isVite6) {
         server.ws.send({
           type: 'custom',

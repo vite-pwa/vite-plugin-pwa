@@ -72,7 +72,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
       ctx.devEnvironment = true
       const { options } = ctx
       if (!options.disable && options.devOptions.enabled) {
-        if (await ctx.isVite6)
+        if (options.enableEnvironmentApi && await ctx.isVite6)
           server.environments.client.hot.on(DEV_READY_NAME, createWSResponseHandler(server, ctx))
         else
           server.ws.on(DEV_READY_NAME, createWSResponseHandler(server, ctx))
@@ -278,7 +278,7 @@ function createWSResponseHandler(server: ViteDevServer, ctx: PWAPluginContext): 
 
       await createDevRegisterSW(options, ctx.viteConfig)
 
-      const isVite6 = await ctx.isVite6
+      const isVite6 = options.enableEnvironmentApi && await ctx.isVite6
 
       if (!isVite6) {
         server.ws.send({

@@ -404,6 +404,14 @@ export interface VitePWAOptions {
    * @default false
    */
   showMaximumFileSizeToCacheInBytesWarning?: boolean
+
+  /**
+   * Enable [Environment API](https://vite.dev/guide/api-environment)?
+   *
+   * @experimental
+   * @default false
+   */
+  enableEnvironmentApi?: boolean
 }
 
 export interface ResolvedServiceWorkerOptions {

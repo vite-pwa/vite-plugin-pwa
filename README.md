@@ -45,6 +45,12 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 
 ## 📦 Install
 
+> From v1.2.0, `vite-plugin-pwa` supports **Vite Environment API**.
+
+> From v1.0.1, `vite-plugin-pwa` supports **Vite 7**.
+
+> From v0.21.1, `vite-plugin-pwa` supports **Vite 6**.
+
 > From v0.17, `vite-plugin-pwa` requires **Vite 5**.
 
 > From v0.16 `vite-plugin-pwa` requires **Node 16 or above**: `workbox v7` requires **Node 16 or above**.
