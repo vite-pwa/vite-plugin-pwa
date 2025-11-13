@@ -144,9 +144,12 @@ importers:
       unplugin-vue-components:
         specifier: ^0.22.4
         version: 0.22.4(@babel/parser@7.26.2)(esbuild@0.24.2)(rollup@4.47.1)(vite@6.0.1(@types/node@18.17.14)(jiti@2.4.2)(terser@5.31.0)(yaml@2.7.0))(vue@3.5.12(typescript@4.8.2))
+      vite:
+        specifier: 6.0.1
+        version: 6.0.1(@types/node@18.17.14)(jiti@2.4.2)(terser@5.31.0)(yaml@2.7.0)
       vite-plugin-pwa:
-        specifier: workspace:*
-        version: link:..
+        specifier: 0.21.0
+        version: 0.21.0(@vite-pwa/assets-generator@1.0.0)(vite@6.0.1(@types/node@18.17.14)(jiti@2.4.2)(terser@5.31.0)(yaml@2.7.0))(workbox-build@7.3.0(@types/babel__core@7.20.4))(workbox-window@7.3.0)
       vitepress:
         specifier: 1.0.1
         version: 1.0.1(@algolia/client-search@5.13.0)(@types/node@18.17.14)(@types/react@18.2.37)(postcss@8.4.49)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(search-insights@2.17.2)(terser@5.31.0)(typescript@4.8.2)
@@ -6462,6 +6465,18 @@ packages:
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
 
+  vite-plugin-pwa@0.21.0:
+    resolution: {integrity: sha512-gnDE5sN2hdxA4vTl0pe6PCTPXqChk175jH8dZVVTBjFhWarZZoXaAdoTIKCIa8Zbx94sC0CnCOyERBWpxvry+g==}
+    engines: {node: '>=16.0.0'}
+    peerDependencies:
+      '@vite-pwa/assets-generator': ^0.2.6
+      vite: 6.0.1
+      workbox-build: ^7.3.0
+      workbox-window: ^7.3.0
+    peerDependenciesMeta:
+      '@vite-pwa/assets-generator':
+        optional: true
+
   vite-plugin-solid@2.7.2:
     resolution: {integrity: sha512-GV2SMLAibOoXe76i02AsjAg7sbm/0lngBlERvJKVN67HOrJsHcWgkt0R6sfGLDJuFkv2aBe14Zm4vJcNME+7zw==}
     peerDependencies:
@@ -7119,7 +7134,7 @@ snapshots:
       '@babel/traverse': 7.24.5
       '@babel/types': 7.24.5
       convert-source-map: 2.0.0
-      debug: 4.3.6
+      debug: 4.4.0
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -7976,7 +7991,7 @@ snapshots:
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/parser': 7.24.5
       '@babel/types': 7.24.5
-      debug: 4.3.6
+      debug: 4.4.0
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -7991,7 +8006,7 @@ snapshots:
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/parser': 7.24.5
       '@babel/types': 7.24.5
-      debug: 4.3.6
+      debug: 4.4.0
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -8006,7 +8021,7 @@ snapshots:
       '@babel/helper-split-export-declaration': 7.24.5
       '@babel/parser': 7.24.5
       '@babel/types': 7.24.5
-      debug: 4.3.6
+      debug: 4.4.0
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -8459,7 +8474,7 @@ snapshots:
       '@antfu/install-pkg': 0.1.0
       '@antfu/utils': 0.5.2
       '@iconify/types': 1.1.0
-      debug: 4.3.6
+      debug: 4.4.0
       kolorist: 1.8.0
       local-pkg: 0.4.3
     transitivePeerDependencies:
@@ -8922,7 +8937,7 @@ snapshots:
   '@sveltejs/vite-plugin-svelte-inspector@1.0.4(@sveltejs/vite-plugin-svelte@2.4.6(svelte@3.50.0)(vite@6.0.1(@types/node@18.17.14)(jiti@2.4.2)(terser@5.31.0)(yaml@2.7.0)))(svelte@3.50.0)(vite@6.0.1(@types/node@18.17.14)(jiti@2.4.2)(terser@5.31.0)(yaml@2.7.0))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 2.4.6(svelte@3.50.0)(vite@6.0.1(@types/node@18.17.14)(jiti@2.4.2)(terser@5.31.0)(yaml@2.7.0))
-      debug: 4.3.6
+      debug: 4.4.0
       svelte: 3.50.0
       vite: 6.0.1(@types/node@18.17.14)(jiti@2.4.2)(terser@5.31.0)(yaml@2.7.0)
     transitivePeerDependencies:
@@ -9206,7 +9221,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/typescript-estree': 8.27.0(typescript@5.3.3)
       '@typescript-eslint/utils': 8.27.0(eslint@9.23.0(jiti@2.4.2))(typescript@5.3.3)
-      debug: 4.3.6
+      debug: 4.4.0
       eslint: 9.23.0(jiti@2.4.2)
       ts-api-utils: 2.1.0(typescript@5.3.3)
       typescript: 5.3.3
@@ -9235,7 +9250,7 @@ snapshots:
     dependencies:
       '@typescript-eslint/types': 8.27.0
       '@typescript-eslint/visitor-keys': 8.27.0
-      debug: 4.3.6
+      debug: 4.4.0
       fast-glob: 3.3.2
       is-glob: 4.0.3
       minimatch: 9.0.5
@@ -12851,7 +12866,7 @@ snapshots:
 
   spdy-transport@3.0.0:
     dependencies:
-      debug: 4.3.6
+      debug: 4.4.0
       detect-node: 2.1.0
       hpack.js: 2.1.6
       obuf: 1.1.2
@@ -13511,6 +13526,19 @@ snapshots:
       - terser
       - tsx
       - yaml
+
+  vite-plugin-pwa@0.21.0(@vite-pwa/assets-generator@1.0.0)(vite@6.0.1(@types/node@18.17.14)(jiti@2.4.2)(terser@5.31.0)(yaml@2.7.0))(workbox-build@7.3.0(@types/babel__core@7.20.4))(workbox-window@7.3.0):
+    dependencies:
+      debug: 4.4.0
+      pretty-bytes: 6.1.1
+      tinyglobby: 0.2.12
+      vite: 6.0.1(@types/node@18.17.14)(jiti@2.4.2)(terser@5.31.0)(yaml@2.7.0)
+      workbox-build: 7.3.0(@types/babel__core@7.20.4)
+      workbox-window: 7.3.0
+    optionalDependencies:
+      '@vite-pwa/assets-generator': 1.0.0
+    transitivePeerDependencies:
+      - supports-color
 
   vite-plugin-solid@2.7.2(solid-js@1.8.5)(vite@6.0.1(@types/node@18.17.14)(jiti@2.4.2)(terser@5.31.0)(yaml@2.7.0)):
     dependencies:
