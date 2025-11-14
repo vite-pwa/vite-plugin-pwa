@@ -1,6 +1,5 @@
 import type { ResolvedConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
-import type { PWAPluginContext } from './context'
 import type { ResolvedVitePWAOptions } from './types'
 import crypto from 'node:crypto'
 import fs from 'node:fs'
@@ -57,9 +56,9 @@ function includeIcons(icons: Record<string, any>[], globs: string[]) {
 export async function configureStaticAssets(
   resolvedVitePWAOptions: ResolvedVitePWAOptions,
   viteConfig: ResolvedConfig,
-  ctx: PWAPluginContext,
+  isVite6: Promise<boolean>,
 ) {
-  if (viteConfig.command === 'build' && ctx.options.enableEnvironmentApi && await ctx.isVite6 && viteConfig.build.ssr)
+  if (viteConfig.command === 'build' && resolvedVitePWAOptions.enableEnvironmentApi && await isVite6 && viteConfig.build.ssr)
     return
 
   const {

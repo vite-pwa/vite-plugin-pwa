@@ -250,7 +250,7 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     await configureStaticAssets(
       resolvedVitePWAOptions,
       viteConfig,
-      ctx,
+      ctx.isVite6,
     )
   }
 
