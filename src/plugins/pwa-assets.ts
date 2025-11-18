@@ -15,6 +15,8 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
   return <Plugin>{
     name: 'vite-plugin-pwa:pwa-assets',
     enforce: 'post',
+    // we only need one instance here
+    sharedDuringBuild: true,
     transformIndexHtml: {
       order: 'post',
       async handler(html) {

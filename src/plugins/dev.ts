@@ -48,6 +48,8 @@ export function DevPlugin(ctx: PWAPluginContext) {
   const plugin: Plugin = {
     name: 'vite-plugin-pwa:dev-sw',
     apply: 'serve',
+    // we only need one instance here
+    sharedDuringBuild: true,
     options() {
       // ctx.options is available here, because the main plugin sets it in configResolved hook
       const { options } = ctx

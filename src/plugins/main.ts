@@ -16,6 +16,8 @@ export function MainPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
   return <Plugin>{
     name: 'vite-plugin-pwa',
     enforce: 'pre',
+    // we only need one instance here
+    sharedDuringBuild: true,
     async config() {
       if (await ctx.isVite6)
         return

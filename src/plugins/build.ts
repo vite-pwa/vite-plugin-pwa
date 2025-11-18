@@ -20,6 +20,8 @@ export function BuildPlugin(ctx: PWAPluginContext) {
     name: 'vite-plugin-pwa:build',
     enforce: 'post',
     apply: 'build',
+    // we only need one instance here
+    sharedDuringBuild: true,
     transformIndexHtml: {
       order: 'post',
       handler(html) {
