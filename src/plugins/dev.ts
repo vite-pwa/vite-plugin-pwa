@@ -245,7 +245,7 @@ export function DevPlugin(ctx: PWAPluginContext) {
 async function resolveDevDistFolder(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
   return options.devOptions.resolveTempFolder
     ? await options.devOptions.resolveTempFolder()
-    : resolve(viteConfig.root, 'dev-dist')
+    : resolve(viteConfig.outDir, 'dev-dist')
 }
 
 async function createDevRegisterSW(options: ResolvedVitePWAOptions, viteConfig: ResolvedConfig) {
