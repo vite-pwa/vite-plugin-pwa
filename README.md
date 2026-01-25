@@ -45,7 +45,7 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 
 ## 📦 Install
 
-> From v1.2.0, `vite-plugin-pwa` supports **Vite Environment API**.
+> From v1.3.0, `vite-plugin-pwa` supports **Vite Environment API**.
 
 > From v1.0.1, `vite-plugin-pwa` supports **Vite 7**.
 

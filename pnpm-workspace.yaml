@@ -1,5 +1,16 @@
+autoInstallPeers: true
+
+ignoreWorkspaceRootCheck: true
+
+shamefullyHoist: true
+
+shellEmulator: true
+
 packages:
   - docs/
   - examples/*
+
 onlyBuiltDependencies:
   - sharp
+
+strictPeerDependencies: false
