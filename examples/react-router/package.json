@@ -66,9 +66,9 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.10",
     "vite-plugin-pwa": "workspace:*",
-    "workbox-core": "^7.3.0",
-    "workbox-precaching": "^7.3.0",
-    "workbox-routing": "^7.3.0",
-    "workbox-window": "^7.3.0"
+    "workbox-core": "^7.4.0",
+    "workbox-precaching": "^7.4.0",
+    "workbox-routing": "^7.4.0",
+    "workbox-window": "^7.4.0"
   }
 }

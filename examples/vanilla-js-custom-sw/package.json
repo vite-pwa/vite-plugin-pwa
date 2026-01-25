@@ -12,11 +12,11 @@
   "devDependencies": {
     "vite": "^5.0.0",
     "vite-plugin-pwa": "workspace:*",
-    "workbox-cacheable-response": "^7.3.0",
-    "workbox-core": "^7.3.0",
-    "workbox-expiration": "^7.3.0",
-    "workbox-routing": "^7.3.0",
-    "workbox-strategies": "^7.3.0",
-    "workbox-window": "^7.3.0"
+    "workbox-cacheable-response": "^7.4.0",
+    "workbox-core": "^7.4.0",
+    "workbox-expiration": "^7.4.0",
+    "workbox-routing": "^7.4.0",
+    "workbox-strategies": "^7.4.0",
+    "workbox-window": "^7.4.0"
   }
 }
