@@ -21,6 +21,7 @@ declare module 'virtual:pwa-register/vue' {
 
   export interface RegisterSWOptions {
     immediate?: boolean
+    onNeedReload?: () => void
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
     /**

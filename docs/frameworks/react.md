@@ -23,6 +23,7 @@ declare module 'virtual:pwa-register/react' {
 
   export interface RegisterSWOptions {
     immediate?: boolean
+    onNeedReload?: () => void
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
     /**

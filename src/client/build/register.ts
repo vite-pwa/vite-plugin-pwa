@@ -17,6 +17,7 @@ export type { RegisterSWOptions }
 export function registerSW(options: RegisterSWOptions = {}) {
   const {
     immediate = false,
+    onNeedReload,
     onNeedRefresh,
     onOfflineReady,
     onRegistered,
@@ -58,8 +59,12 @@ export function registerSW(options: RegisterSWOptions = {}) {
       if (!autoDestroy) {
         if (auto) {
           wb.addEventListener('activated', (event) => {
-            if (event.isUpdate || event.isExternal)
-              window.location.reload()
+            if (event.isUpdate || event.isExternal) {
+              if (onNeedReload)
+                onNeedReload()
+              else
+                window.location.reload()
+            }
           })
           wb.addEventListener('installed', (event) => {
             if (!event.isUpdate) {
@@ -83,8 +88,12 @@ export function registerSW(options: RegisterSWOptions = {}) {
             // that will reload the page as soon as the previously waiting
             // service worker has taken control.
             wb?.addEventListener('controlling', (event) => {
-              if (event.isUpdate)
-                window.location.reload()
+              if (event.isUpdate) {
+                if (onNeedReload)
+                  onNeedReload()
+                else
+                  window.location.reload()
+              }
             })
 
             onNeedRefresh?.()
