@@ -1,5 +1,6 @@
 export interface RegisterSWOptions {
   immediate?: boolean
+  searchParams?: string | string[][] | URLSearchParams | Record<string, any>
   onNeedRefresh?: () => void
   onOfflineReady?: () => void
   /**

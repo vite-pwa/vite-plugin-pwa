@@ -17,6 +17,7 @@ function ReloadPrompt() {
     needRefresh: [needRefresh, setNeedRefresh],
     updateServiceWorker,
   } = useRegisterSW({
+    searchParams: { version: '1.0' },
     onRegisteredSW(swUrl, r) {
       console.log(`Service Worker at: ${swUrl}`)
       // @ts-expect-error just ignore

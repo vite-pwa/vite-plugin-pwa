@@ -13,6 +13,7 @@ const {
   updateServiceWorker,
 } = useRegisterSW({
   immediate: true,
+  searchParams: { version: '1.0' },
   onRegisteredSW(swUrl, r) {
     console.log(`Service Worker at: ${swUrl}`)
     if (reloadSW === 'true') {

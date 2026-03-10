@@ -16,6 +16,7 @@
       needRefresh,
       updateServiceWorker,
   } = useRegisterSW({
+    searchParams: { version: '1.0' },
     onRegisteredSW(swUrl, r) {
         // eslint-disable-next-line no-console
         console.log(`Service Worker at: ${swUrl}`)
