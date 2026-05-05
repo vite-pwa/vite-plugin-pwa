@@ -20,6 +20,8 @@ export function BuildPlugin(ctx: PWAPluginContext) {
     name: 'vite-plugin-pwa:build',
     enforce: 'post',
     apply: 'build',
+    // we only need one instance here
+    sharedDuringBuild: true,
     transformIndexHtml: {
       order: 'post',
       handler(html) {
@@ -31,6 +33,8 @@ export function BuildPlugin(ctx: PWAPluginContext) {
       },
     },
     async generateBundle(_, bundle) {
+      if (ctx.options.enableEnvironmentApi && await ctx.isVite6 && ctx.viteConfig.build.ssr)
+        return
       const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
       if (pwaAssetsGenerator)
         pwaAssetsGenerator.injectManifestIcons()

@@ -15,6 +15,8 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
   return <Plugin>{
     name: 'vite-plugin-pwa:pwa-assets',
     enforce: 'post',
+    // we only need one instance here
+    sharedDuringBuild: true,
     transformIndexHtml: {
       order: 'post',
       async handler(html) {
@@ -58,20 +60,32 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
     async handleHotUpdate({ file, server }) {
       const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
       if (await pwaAssetsGenerator?.checkHotUpdate(file)) {
-        const modules: ModuleNode[] = []
-        const head = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_HEAD_VIRTUAL)
+        const isVite6 = ctx.options.enableEnvironmentApi && await ctx.isVite6
+        if (!isVite6) {
+          const modules: ModuleNode[] = []
+          const head = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_HEAD_VIRTUAL)
+          head && modules.push(head)
+          const icons = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_ICONS_VIRTUAL)
+          icons && modules.push(icons)
+          if (modules.length)
+            return modules
+          server.ws.send({ type: 'full-reload' })
+          return []
+        }
+
+        const modules: import('vite').EnvironmentModuleNode[] = []
+        const head = server.environments.client.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_HEAD_VIRTUAL)
         head && modules.push(head)
-        const icons = server.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_ICONS_VIRTUAL)
+        const icons = server.environments.client.moduleGraph.getModuleById(RESOLVED_PWA_ASSETS_ICONS_VIRTUAL)
         icons && modules.push(icons)
-        if (modules)
+        if (modules.length)
           return modules
 
-        server.ws.send({ type: 'full-reload' })
+        server.environments.client.hot.send({ type: 'full-reload' })
         return []
       }
     },
-    configureServer(server) {
-      server.ws.on(DEV_READY_NAME, createWSResponseHandler(ctx, server))
+    async configureServer(server) {
       server.middlewares.use(async (req, res, next) => {
         const url = req.url
         if (!url)
@@ -106,6 +120,14 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         res.statusCode = 200
         res.end(buffer)
       })
+
+      const isVite6 = ctx.options.enableEnvironmentApi && await ctx.isVite6
+      if (!isVite6) {
+        server.ws.on(DEV_READY_NAME, createWSResponseHandler(ctx, server))
+        return
+      }
+
+      server.environments.client.hot.on(DEV_READY_NAME, createWSResponseHandler(ctx, server))
     },
   }
 }
@@ -127,7 +149,17 @@ function createWSResponseHandler(ctx: PWAPluginContext, server: ViteDevServer): 
     const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
     if (pwaAssetsGenerator) {
       const data = pwaAssetsGenerator.resolveHtmlAssets()
-      server.ws.send({
+      const isVite6 = ctx.options.enableEnvironmentApi && await ctx.isVite6
+      if (!isVite6) {
+        server.ws.send({
+          type: 'custom',
+          event: DEV_PWA_ASSETS_NAME,
+          data,
+        })
+        return
+      }
+
+      server.environments.client.hot.send({
         type: 'custom',
         event: DEV_PWA_ASSETS_NAME,
         data,

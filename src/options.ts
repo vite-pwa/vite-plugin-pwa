@@ -63,6 +63,7 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     buildBase,
     pwaAssets,
     showMaximumFileSizeToCacheInBytesWarning = false,
+    enableEnvironmentApi = false,
   } = options
 
   const basePath = resolveBasePath(base)
@@ -237,6 +238,7 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     },
     pwaAssets: resolvePWAAssetsOptions(pwaAssets),
     throwMaximumFileSizeToCacheInBytes: !showMaximumFileSizeToCacheInBytesWarning,
+    enableEnvironmentApi,
   }
 
   // calculate hash only when required
@@ -244,8 +246,13 @@ export async function resolveOptions(ctx: PWAPluginContext): Promise<ResolvedVit
     && (resolvedVitePWAOptions.manifest || resolvedVitePWAOptions.includeAssets)
     && (viteConfig.command === 'build' || resolvedVitePWAOptions.devOptions.enabled)
 
-  if (calculateHash)
-    await configureStaticAssets(resolvedVitePWAOptions, viteConfig)
+  if (calculateHash) {
+    await configureStaticAssets(
+      resolvedVitePWAOptions,
+      viteConfig,
+      ctx.isVite6,
+    )
+  }
 
   return resolvedVitePWAOptions
 }

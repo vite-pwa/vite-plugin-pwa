@@ -11,6 +11,8 @@ export function InfoPlugin(ctx: PWAPluginContext, api: VitePluginPWAAPI) {
   return <Plugin>{
     name: 'vite-plugin-pwa:info',
     enforce: 'post',
+    // we only need one instance here
+    sharedDuringBuild: true,
     resolveId: {
       filter: { id: exactRegex(PWA_INFO_VIRTUAL) },
       handler(id) {
