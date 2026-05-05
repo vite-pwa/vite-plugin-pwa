@@ -6,5 +6,5 @@ next: Getting Started | Examples
 # Astro
 
 ::: info WIP
-Will coming soon.
+Coming soon.
 :::
