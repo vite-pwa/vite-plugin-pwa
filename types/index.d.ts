@@ -1,5 +1,12 @@
 export interface RegisterSWOptions {
   immediate?: boolean
+  /**
+   * Called when the service worker has taken control and the page would normally reload.
+   *
+   * Useful to fully control the reload flow (for example, to defer reload until the next
+   * SPA navigation).
+   */
+  onNeedReload?: () => void
   onNeedRefresh?: () => void
   onOfflineReady?: () => void
   /**

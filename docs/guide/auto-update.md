@@ -6,6 +6,8 @@ title: Automatic reload | Guide
 
 With this behavior, once the browser detects a new version of your application, then, it will update the caches and will reload any browser windows/tabs with the application opened automatically to take the control.
 
+If you need full control over *when* the app reloads (for example, to defer the reload until the next SPA navigation), provide an `onNeedReload` callback when registering the service worker.
+
 The disadvantage of using this behavior is that the user can lose data in any browser windows/tabs in which the application is open and is filling in a form.
 
 If your application has forms, we recommend you to change the behavior to use default `prompt` option to allow the user decide when to update the content of the application.
@@ -51,6 +53,10 @@ import { registerSW } from 'virtual:pwa-register'
 
 const updateSW = registerSW({
   onOfflineReady() {},
+  onNeedReload() {
+    // called when the updated service worker takes control.
+    // default behavior (when omitted) is: window.location.reload()
+  },
 })
 ```
 
@@ -61,4 +67,3 @@ When the user clicks the `OK` button, just hide the prompt shown on `onOfflineRe
 ### SSR/SSG
 
 <SsrSsg />
-

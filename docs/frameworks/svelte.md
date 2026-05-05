@@ -23,6 +23,7 @@ declare module 'virtual:pwa-register/svelte' {
 
   export interface RegisterSWOptions {
     immediate?: boolean
+    onNeedReload?: () => void
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
     /**

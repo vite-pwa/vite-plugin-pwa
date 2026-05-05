@@ -23,6 +23,7 @@ declare module 'virtual:pwa-register/preact' {
 
   export interface RegisterSWOptions {
     immediate?: boolean
+    onNeedReload?: () => void
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
     /**

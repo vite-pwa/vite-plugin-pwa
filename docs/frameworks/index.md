@@ -30,6 +30,7 @@ You can find all the `vite-plugin-pwa` virtual modules declarations in the follo
 declare module 'virtual:pwa-register' {
   export interface RegisterSWOptions {
     immediate?: boolean
+    onNeedReload?: () => void
     onNeedRefresh?: () => void
     onOfflineReady?: () => void
     /**
