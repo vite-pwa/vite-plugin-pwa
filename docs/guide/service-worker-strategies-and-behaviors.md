@@ -8,9 +8,10 @@ A service worker strategy is related to how the `vite-plugin-pwa` plugin will ge
 
 ## Service Worker Strategies
 
-As we mention in [Configuring vite-plugin-pwa](/guide/#configuring-vite-plugin-pwa) section, `vite-plugin-pwa` plugin will use `workbox-build` node library to generate your service worker. There are 2 available strategies, `generateSW` and `injectManifest`:
+As we mention in [Configuring vite-plugin-pwa](/guide/#configuring-vite-plugin-pwa) section, `vite-plugin-pwa` plugin will use `workbox-build` node library to generate your service worker. There are 3 available strategies, `generateSW`, `injectManifest` and `webManifestOnly`:
 - `generateSW`: the `vite-plugin-pwa` will generate the service worker for you, you don't need to write the code for the service worker
 - `injectManifest`: the `vite-plugin-pwa` plugin will compile your custom service worker and inject its precache manifest
+- `webManifestOnly`: the `vite-plugin-pwa` plugin will only generate a webmanifest file and no service worker
 
 To configure the service worker strategy, use the `strategies`' plugin option with `generateSW` (**default strategy**) or `injectManifest` value.
 

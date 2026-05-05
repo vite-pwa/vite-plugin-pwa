@@ -272,7 +272,7 @@ export interface VitePWAOptions {
   /**
    * @default 'generateSW'
    */
-  strategies?: 'generateSW' | 'injectManifest'
+  strategies?: 'generateSW' | 'injectManifest' | 'webManifestOnly'
   /**
    * The scope to register the Service Worker
    *
