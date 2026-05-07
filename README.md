@@ -27,7 +27,6 @@ Zero-config PWA Framework-agnostic Plugin for Vite
   </a>
 </p>
 
-
 ## 🚀 Features
 
 - 📖 [**Documentation & guides**](https://vite-pwa-org.netlify.app/)
@@ -53,12 +52,12 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 > From v0.13, `vite-plugin-pwa` requires **Vite 3.1 or above**.
 
 ```bash
-npm i vite-plugin-pwa -D 
+npm i vite-plugin-pwa -D
 
-# yarn 
+# yarn
 yarn add vite-plugin-pwa -D
 
-# pnpm 
+# pnpm
 pnpm add vite-plugin-pwa -D
 ```
 
@@ -77,7 +76,7 @@ export default {
 }
 ```
 
-Read the [📖 documentation](https://vite-pwa-org.netlify.app/guide/) for a complete guide on how to configure and use 
+Read the [📖 documentation](https://vite-pwa-org.netlify.app/guide/) for a complete guide on how to configure and use
 this plugin.
 
 Check out the client type declarations [client.d.ts](./client.d.ts) for built-in frameworks support.
@@ -88,7 +87,6 @@ Check out the type declaration [src/types.ts](./src/types.ts) and the following 
 
 - [Web app manifests](https://developer.mozilla.org/en-US/docs/Web/Manifest)
 - [Workbox](https://developers.google.com/web/tools/workbox)
-
 
 ## 📄 License
 

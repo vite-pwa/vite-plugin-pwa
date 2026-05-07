@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import { relative } from 'node:path'
-import type { BuildResult } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
+import type { BuildResult } from 'workbox-build'
+import type { ResolvedVitePWAOptions } from './types'
+import { relative } from 'node:path'
 import { cyan, dim, green, magenta, yellow } from 'kolorist'
 import { normalizePath } from './utils'
-import type { ResolvedVitePWAOptions } from './types'
 
 export function logSWViteBuild(
   version: string,
@@ -63,9 +63,9 @@ ${entries.map(w => `  - ${w.replace('. Configure maximumFileSizeToCacheInBytes t
       entries.push(`format:   ${magenta(format)}`)
 
     entries.push(
-        `precache  ${green(`${count} entries`)} ${dim(`(${(size / 1024).toFixed(2)} KiB)`)}`,
-        'files generated',
-        ...filePaths.map(p => `  ${dim(normalizePath(relative(root, p)))}`),
+      `precache  ${green(`${count} entries`)} ${dim(`(${(size / 1024).toFixed(2)} KiB)`)}`,
+      'files generated',
+      ...filePaths.map(p => `  ${dim(normalizePath(relative(root, p)))}`),
     )
 
     console.info(entries.join('\n'))

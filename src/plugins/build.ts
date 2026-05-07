@@ -1,7 +1,7 @@
 import type { Plugin } from 'vite'
-import { injectServiceWorker } from '../html'
-import { _generateBundle, _generateSW } from '../api'
 import type { PWAPluginContext } from '../context'
+import { _generateBundle, _generateSW } from '../api'
+import { injectServiceWorker } from '../html'
 
 export function BuildPlugin(ctx: PWAPluginContext) {
   const transformIndexHtmlHandler = (html: string) => {
@@ -35,12 +35,15 @@ export function BuildPlugin(ctx: PWAPluginContext) {
       if (pwaAssetsGenerator)
         pwaAssetsGenerator.injectManifestIcons()
 
-      return _generateBundle(ctx, bundle)
+      return _generateBundle(ctx, bundle, this)
     },
     closeBundle: {
       sequential: true,
       order: ctx.userOptions?.integration?.closeBundleOrder,
-      async handler() {
+      async handler(error) {
+        if (error)
+          return
+
         if (!ctx.viteConfig.build.ssr) {
           const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
           if (pwaAssetsGenerator)

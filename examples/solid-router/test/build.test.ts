@@ -1,7 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 import process from 'node:process'
+import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 
 const _dirname = typeof __dirname !== 'undefined'
@@ -31,13 +31,13 @@ describe('solid: test-build', () => {
         const workboxName = resolvePath(_dirname, `../dist/${match?.[1]}.js`)
         expect(existsSync(workboxName), `${workboxName} doesn't exist`).toBeTruthy()
         const workboxContent = readFileSync(workboxName, 'utf-8')
-        match = workboxContent.match(/self\['workbox:core:[0-9.]+']/)
+        match = workboxContent.match(/self\['workbox:core:[0-9.]+'\]/)
         expect(match && match.length === 1, 'missing workbox:core module').toBeTruthy()
         match = swContent.match(/self\.skipWaiting\(\);?\s*workbox\.clientsClaim\(\)/)
         expect(match && match.length === 1, 'missing self.skipWaiting and clientsClaim workbox calls').toBeTruthy()
       }
       else {
-        match = swContent.match(/self\['workbox:core:[0-9.]+']/)
+        match = swContent.match(/self\['workbox:core:[0-9.]+'\]/)
         expect(match && match.length === 1, 'missing workbox:core module').toBeTruthy()
         match = swContent.match(/self\.skipWaiting\(\);?\s*clientsClaim\(\)/)
         expect(match && match.length === 1, 'missing self.skipWaiting and clientsClaim workbox calls').toBeTruthy()

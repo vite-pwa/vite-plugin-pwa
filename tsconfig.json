@@ -3,7 +3,7 @@
     "target": "es2017",
     "lib": ["ESNext", "DOM", "WebWorker"],
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "strict": true,
     "strictNullChecks": true,

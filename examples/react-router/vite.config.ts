@@ -1,9 +1,9 @@
-import process from 'node:process'
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import type { ManifestOptions, VitePWAOptions } from 'vite-plugin-pwa'
-import { VitePWA } from 'vite-plugin-pwa'
+import process from 'node:process'
 import replace from '@rollup/plugin-replace'
+import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
 
 const pwaOptions: Partial<VitePWAOptions> = {
   mode: 'development',

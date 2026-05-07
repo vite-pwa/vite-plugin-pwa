@@ -1,5 +1,4 @@
 import { execSync } from 'node:child_process'
-import prompts from 'prompts'
 import {
   blue,
   cyan,
@@ -9,6 +8,7 @@ import {
   reset,
   yellow,
 } from 'kolorist'
+import prompts from 'prompts'
 
 type Color = (str: string | number) => string
 

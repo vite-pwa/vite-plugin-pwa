@@ -1,6 +1,6 @@
+import { message } from 'virtual:message'
 import { cleanupOutdatedCaches, createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching'
 import { NavigationRoute, registerRoute } from 'workbox-routing'
-import { message } from 'virtual:message'
 
 declare let self: ServiceWorkerGlobalScope
 

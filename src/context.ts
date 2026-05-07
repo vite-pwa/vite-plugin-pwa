@@ -1,9 +1,9 @@
+import type { ResolvedConfig } from 'vite'
+import type { PWAAssetsGenerator } from './pwa-assets/types'
+import type { ResolvedVitePWAOptions, VitePWAOptions } from './types'
 import { readFileSync } from 'node:fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { ResolvedConfig } from 'vite'
-import type { ResolvedVitePWAOptions, VitePWAOptions } from './types'
-import type { PWAAssetsGenerator } from './pwa-assets/types'
 
 export interface PWAPluginContext {
   version: string

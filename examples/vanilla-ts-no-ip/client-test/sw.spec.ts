@@ -1,5 +1,5 @@
-import process from 'node:process'
 import type { Page } from '@playwright/test'
+import process from 'node:process'
 import { expect, test } from '@playwright/test'
 
 const customSW = process.env.SW === 'true'

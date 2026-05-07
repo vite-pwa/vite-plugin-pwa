@@ -1,5 +1,5 @@
-import { useState } from 'preact/hooks'
 import type { RegisterSWOptions } from '../type'
+import { useState } from 'preact/hooks'
 
 export type { RegisterSWOptions }
 

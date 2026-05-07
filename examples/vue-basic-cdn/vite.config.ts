@@ -1,8 +1,8 @@
-import process from 'node:process'
 import type { UserConfig } from 'vite'
+import process from 'node:process'
+import replace from '@rollup/plugin-replace'
 import Vue from '@vitejs/plugin-vue'
 import { VitePWA } from 'vite-plugin-pwa'
-import replace from '@rollup/plugin-replace'
 
 const config: UserConfig = {
   base: 'https://cdn.com/',

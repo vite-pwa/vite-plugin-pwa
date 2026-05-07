@@ -1,5 +1,5 @@
-import { useState } from 'react'
 import type { RegisterSWOptions } from '../type'
+import { useState } from 'react'
 
 export type { RegisterSWOptions }
 

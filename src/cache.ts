@@ -37,7 +37,7 @@ export const cachePreset: RuntimeCaching[] = [
     },
   },
   {
-    urlPattern: /\.(?:js)$/i,
+    urlPattern: /\.js$/i,
     handler: 'StaleWhileRevalidate',
     options: {
       cacheName: 'static-js-assets',
@@ -83,6 +83,7 @@ export const cachePreset: RuntimeCaching[] = [
     },
   },
   {
+    // eslint-disable-next-line regexp/no-useless-flag
     urlPattern: /.*/i,
     handler: 'NetworkFirst',
     options: {

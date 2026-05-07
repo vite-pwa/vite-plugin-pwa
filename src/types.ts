@@ -1,8 +1,8 @@
+import type { HtmlLinkPreset } from '@vite-pwa/assets-generator/api'
+import type { BuiltInPreset, Preset } from '@vite-pwa/assets-generator/config'
+import type { OutputBundle, PluginContext, RollupOptions } from 'rollup'
 import type { BuildOptions, InlineConfig, Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { GenerateSWOptions, InjectManifestOptions, ManifestEntry } from 'workbox-build'
-import type { OutputBundle, RollupOptions } from 'rollup'
-import type { BuiltInPreset, Preset } from '@vite-pwa/assets-generator/config'
-import type { HtmlLinkPreset } from '@vite-pwa/assets-generator/api'
 import type { PWAAssetsGenerator } from './pwa-assets/types'
 
 export type InjectManifestVitePlugins = string[] | ((vitePluginIds: string[]) => string[])
@@ -163,6 +163,8 @@ export interface PWAAssetsOptions {
   /**
    * Path relative to `root` folder where to find the image to use for generating PWA assets.
    *
+   * Can be also relative to any of the PWA Assets configuration files.
+   *
    * If the `config` option is enabled, this option will be ignored.
    *
    * @default `public/favicon.svg`
@@ -298,7 +300,7 @@ export interface VitePWAOptions {
   injectRegister: 'inline' | 'script' | 'script-defer' | 'auto' | null | false
   /**
    * Mode for the virtual register.
-   * Does NOT available for `injectRegister` set to `inline` or `script`
+   * Is NOT available for strategy `injectRegister`, only use for strategy `generateSW`
    *
    * `prompt` - you will need to show a popup/dialog to the user to confirm the reload.
    *
@@ -456,6 +458,8 @@ interface Nothing {}
  */
 export type StringLiteralUnion<T extends U, U = string> = T | (U & Nothing)
 
+export type ScopeExtensionsType = 'origin'
+
 /**
  * @see https://w3c.github.io/manifest/#manifest-image-resources
  */
@@ -530,7 +534,7 @@ export interface ManifestOptions {
    */
   background_color: string
   /**
-   * @default '#42b883
+   * @default `#42b883`
    */
   theme_color: string
   /**
@@ -627,12 +631,18 @@ export interface ManifestOptions {
   edge_side_panel?: {
     preferred_width?: number
   }
+
   /**
    * @see https://github.com/WICG/manifest-incubations/blob/gh-pages/scope_extensions-explainer.md
+   * @see https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/scope_extensions
    * @default []
    */
   scope_extensions: {
     origin: string
+    /**
+     * @default 'origin'
+     */
+    type?: StringLiteralUnion<ScopeExtensionsType>
   }[]
 }
 
@@ -695,23 +705,23 @@ export interface VitePluginPWAAPI {
    * Will also return if the manifest will require credentials:
    * <link rel="manifest" href="<webManifestUrl>" crossorigin="use-credentials" />
    */
-  webManifestData(): WebManifestData | undefined
+  webManifestData: () => WebManifestData | undefined
   /**
    * How the service worker is being registered in the application.
    *
    * This option will help some integrations to inject the corresponding script in the head.
    */
-  registerSWData(): RegisterSWData | undefined
-  extendManifestEntries(fn: ExtendManifestEntriesHook): void
+  registerSWData: () => RegisterSWData | undefined
+  extendManifestEntries: (fn: ExtendManifestEntriesHook) => void
   /*
    * Explicitly generate the manifests.
    */
-  generateBundle(bundle?: OutputBundle): OutputBundle | undefined
+  generateBundle: (bundle?: OutputBundle, pluginCtx?: PluginContext) => OutputBundle | undefined
   /*
    * Explicitly generate the PWA services worker.
    */
-  generateSW(): Promise<void>
-  pwaAssetsGenerator(): Promise<PWAAssetsGenerator | undefined>
+  generateSW: () => Promise<void>
+  pwaAssetsGenerator: () => Promise<PWAAssetsGenerator | undefined>
 }
 
 export type ExtendManifestEntriesHook = (manifestEntries: (string | ManifestEntry)[]) => (string | ManifestEntry)[] | undefined
@@ -745,6 +755,8 @@ export interface DevOptions {
    * configure here the corresponding `url`, for example `navigateFallback: 'index.html'`.
    *
    * **WARNING**: this option will only be used when using `injectManifest` strategy.
+   *
+   * @default 'index.html'
    */
   navigateFallback?: string
 

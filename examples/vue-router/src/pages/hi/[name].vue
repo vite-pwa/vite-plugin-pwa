@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
-import { defineProps } from 'vue'
 import { useTimeAgo } from '@vueuse/core'
+import { defineProps } from 'vue'
+import { useRouter } from 'vue-router'
 
 const props = defineProps({
   name: {

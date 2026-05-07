@@ -1,10 +1,10 @@
-import { dirname, resolve } from 'node:path'
-import { promises as fs } from 'node:fs'
-import { fileURLToPath } from 'node:url'
-import { createRequire } from 'node:module'
-import type { BuildResult } from 'workbox-build'
 import type { ResolvedConfig } from 'vite'
+import type { BuildResult } from 'workbox-build'
 import type { ResolvedVitePWAOptions } from './types'
+import { promises as fs } from 'node:fs'
+import { createRequire } from 'node:module'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { logWorkboxResult } from './log'
 
 const _dirname = typeof __dirname !== 'undefined'
@@ -22,7 +22,7 @@ async function loadWorkboxBuild(): Promise<typeof import('workbox-build')> {
     const workbox = await import('workbox-build')
     return workbox.default ?? workbox
   }
-  catch (_) {
+  catch {
     return require('workbox-build')
   }
 }
