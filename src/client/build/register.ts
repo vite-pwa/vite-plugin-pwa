@@ -87,13 +87,11 @@ export function registerSW(options: RegisterSWOptions = {}) {
             // Assuming the user accepted the update, set up a listener
             // that will reload the page as soon as the previously waiting
             // service worker has taken control.
-            wb?.addEventListener('controlling', (event) => {
-              if (event.isUpdate) {
-                if (onNeedReload)
-                  onNeedReload()
-                else
-                  window.location.reload()
-              }
+            wb?.addEventListener('controlling', (_event) => {
+              if (onNeedReload)
+                onNeedReload()
+              else
+                window.location.reload()
             })
 
             onNeedRefresh?.()
