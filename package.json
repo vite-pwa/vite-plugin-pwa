@@ -100,14 +100,15 @@
     "example:vue:build:cdn": "pnpm -C examples/vue-basic-cdn run build",
     "example:vue:start:cdn": "pnpm -C examples/vue-basic-cdn run start",
     "deploy": "nr build && nr docs:build",
+    "test-client": "vitest run test/*.test.ts",
     "test-vue": "pnpm -C examples/vue-router run test",
     "test-react": "pnpm -C examples/react-router run test",
     "test-preact": "pnpm -C examples/preact-router run test",
     "test-solid": "pnpm -C examples/solid-router run test",
     "test-svelte": "pnpm -C examples/svelte-routify run test",
     "test-typescript": "pnpm -C examples/vanilla-ts-no-ip run test",
-    "test": "nr test-vue && nr test-react && nr test-preact && nr test-solid && nr test-typescript",
-    "test:node20": "nr test-vue && nr test-react && nr test-preact && nr test-solid && nr test-svelte && nr test-typescript",
+    "test": "nr test-client && nr test-vue && nr test-react && nr test-preact && nr test-solid && nr test-typescript",
+    "test:node20": "nr test-client && nr test-vue && nr test-react && nr test-preact && nr test-solid && nr test-svelte && nr test-typescript",
     "test:vite-ecosystem-ci": "nr test-typescript"
   },
   "peerDependencies": {
