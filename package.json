@@ -157,6 +157,7 @@
   },
   "pnpm": {
     "overrides": {
+      "baseline-browser-mapping": "^2.1.0",
       "rollup": "^4.35.0"
     },
     "onlyBuiltDependencies": [
