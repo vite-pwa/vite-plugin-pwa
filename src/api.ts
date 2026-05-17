@@ -2,7 +2,7 @@ import type { OutputAsset, OutputBundle, PluginContext } from 'rollup'
 import type { PWAPluginContext } from './context'
 import type { ExtendManifestEntriesHook, VitePluginPWAAPI } from './types'
 import { existsSync } from 'node:fs'
-import { resolve } from 'node:path'
+import { join, relative, resolve } from 'node:path'
 import { cyan, yellow } from 'kolorist'
 import { generateWebManifestFile } from './assets'
 import { DEV_SW_NAME, FILE_SW_REGISTER } from './constants'
@@ -37,8 +37,15 @@ export function _generateBundle(ctx: PWAPluginContext, bundle?: OutputBundle, pl
         `${yellow('WARNING: "theme_color" is missing from the web manifest, your application will not be able to be installed')}`,
       ].join('\n'))
     }
+    // calculate relative path from main Vite outDir to PWA custom outDir
+    const mainOutDir = resolve(viteConfig.root, viteConfig.build.outDir || 'dist')
+    const pwaOutDir = resolve(viteConfig.root, options.outDir)
+    const subDir = relative(mainOutDir, pwaOutDir)
+    const manifestFileName = subDir
+      ? join(subDir, options.manifestFilename)
+      : options.manifestFilename
     emitFile({
-      fileName: options.manifestFilename,
+      fileName: manifestFileName,
       source: generateWebManifestFile(options),
     }, bundle, pluginCtx)
   }
