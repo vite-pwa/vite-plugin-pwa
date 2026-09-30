@@ -7,7 +7,8 @@ on:
 
 jobs:
   release:
-    uses: sxzz/workflows/.github/workflows/release.yml@v1
+    # git ls-remote https://github.com/sxzz/workflows main
+    uses: sxzz/workflows/.github/workflows/release.yml@e3b122062c0844efea9328bd56c06ac337d72bc7 # main or v1
     with:
       publish: true
     permissions:
