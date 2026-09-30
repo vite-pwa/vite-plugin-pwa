@@ -80,7 +80,7 @@
     "types"
   ],
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=20.19.0"
   },
   "scripts": {
     "docs": "pnpm -C docs run dev",
@@ -111,7 +111,7 @@
     "test:vite-ecosystem-ci": "nr test-typescript"
   },
   "peerDependencies": {
-    "@vite-pwa/assets-generator": "^1.0.0",
+    "@vite-pwa/assets-generator": "^1.0.0 || ^2.0.0",
     "vite": "^3.1.0 || ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0",
     "workbox-build": "^7.4.1",
     "workbox-window": "^7.4.1"
