@@ -440,11 +440,7 @@ export interface ShareTargetFiles {
   accept: string | string[]
 }
 
-/**
- * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
- */
 export type LaunchHandlerClientMode = 'auto' | 'focus-existing' | 'navigate-existing' | 'navigate-new'
-
 export type Display = 'fullscreen' | 'standalone' | 'minimal-ui' | 'browser'
 export type DisplayOverride = Display | 'window-controls-overlay'
 export type IconPurpose = 'monochrome' | 'maskable' | 'any'
@@ -476,14 +472,20 @@ export interface IconResource {
 export interface ManifestOptions {
   /**
    * @default _npm_package_name_
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/name
+   * @see https://w3c.github.io/manifest/#name-member
    */
   name: string
   /**
    * @default _npm_package_name_
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/short_name
+   * @see https://w3c.github.io/manifest/#short_name-member
    */
   short_name: string
   /**
    * @default _npm_package_description_
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/description
+   * @see https://w3c.github.io/manifest-app-info/#description-member
    */
   description: string
   /**
@@ -503,18 +505,26 @@ export interface ManifestOptions {
   }[]
   /**
    * @default `routerBase`
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/start_url
+   * @see https://w3c.github.io/manifest/#start_url-member
    */
   start_url: string
   /**
    * Restricts what web pages can be viewed while the manifest is applied
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/scope
+   * @see https://w3c.github.io/manifest/#scope-member
    */
   scope: string
   /**
    * A string that represents the identity for the application
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/id
+   * @see https://w3c.github.io/manifest/#id-member
    */
   id: string
   /**
    * Defines the default orientation for all the website's top-level
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/orientation
+   * @see https://w3c.github.io/manifest/#orientation-member
    */
   orientation: 'any' | 'natural' | 'landscape' | 'landscape-primary' | 'landscape-secondary' | 'portrait' | 'portrait-primary' | 'portrait-secondary'
   /**
@@ -531,18 +541,24 @@ export interface ManifestOptions {
   display_override: DisplayOverride[]
   /**
    * @default `#ffffff`
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/background_color
+   * @see https://w3c.github.io/manifest/#background_color-member
    */
   background_color: string
   /**
-   * @default `#42b883`
+   * @default '#42b883
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/theme_color
+   * @see https://w3c.github.io/manifest/#theme_color-member
    */
   theme_color: string
   /**
    * @default `ltr`
+   * @see https://w3c.github.io/manifest/#dir-member
    */
   dir: 'ltr' | 'rtl'
   /**
    * @default `en`
+   * @see https://w3c.github.io/manifest/#lang-member
    */
   lang: string
   /**
@@ -551,6 +567,8 @@ export interface ManifestOptions {
   publicPath: string
   /**
    * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/related_applications
+   * @see https://w3c.github.io/manifest/#related_applications-member
    */
   related_applications: {
     platform: string
@@ -559,10 +577,14 @@ export interface ManifestOptions {
   }[]
   /**
    * @default false
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/prefer_related_applications
+   * @see https://w3c.github.io/manifest/#prefer_related_applications-member
    */
   prefer_related_applications: boolean
   /**
    * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/protocol_handlers
+   * @see https://wicg.github.io/manifest-incubations/#protocol_handlers-member
    */
   protocol_handlers: {
     protocol: string
@@ -583,6 +605,7 @@ export interface ManifestOptions {
   /**
    * @default []
    * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/screenshots
+   * @see https://w3c.github.io/manifest-app-info/#screenshots-member
    */
   screenshots: {
     src: string
@@ -594,15 +617,18 @@ export interface ManifestOptions {
   }[]
   /**
    * @default []
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/categories
+   * @see https://w3c.github.io/manifest-app-info/#categories-member
    */
   categories: string[]
   /**
    * @default ''
+   * @see https://w3c.github.io/manifest-app-info/#iarc_rating_id-member
    */
   iarc_rating_id: string
   /**
    * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/share_target
-   * @see https://w3c.github.io/web-share-target/level-2/#share_target-member
+   * @see https://w3c.github.io/web-share-target/#share_target-member
    */
   share_target: {
     action: string
@@ -620,7 +646,8 @@ export interface ManifestOptions {
    */
   handle_links?: 'auto' | 'preferred' | 'not-preferred'
   /**
-   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler#launch_handler_item_values
+   * @see https://developer.mozilla.org/en-US/docs/Web/Manifest/launch_handler
+   * @see https://wicg.github.io/web-app-launch/#launch_handler-member
    */
   launch_handler?: {
     client_mode: LaunchHandlerClientMode | LaunchHandlerClientMode[]
