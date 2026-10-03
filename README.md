@@ -45,7 +45,7 @@ Zero-config PWA Framework-agnostic Plugin for Vite
 
 ## 📦 Install
 
-> From v1.4.0, `vite-plugin-pwa` requires **Node 20.19.0 or above**
+> From v2.0.0, `vite-plugin-pwa` requires **Node 20.19.0 or above**
 
 > From v0.17, `vite-plugin-pwa` requires **Vite 5**.
 
