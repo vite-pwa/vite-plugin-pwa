@@ -83,8 +83,8 @@
     "node": ">=20.19.0"
   },
   "scripts": {
-    "update:workflows": "pnpm dlx actions-up --min-age 0 -y",
-    "update:workflows:dry": "pnpm dlx actions-up --min-age 0 --dry-run",
+    "update:workflows": "pnpm dlx actions-up -y",
+    "update:workflows:dry": "pnpm dlx actions-up --dry-run",
     "docs": "pnpm -C docs run dev",
     "docs:build": "pnpm -C docs run build",
     "docs:serve": "pnpm -C docs run serve",
