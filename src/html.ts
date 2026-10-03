@@ -116,17 +116,15 @@ import.meta.hot.on('${DEV_REGISTER_SW_NAME}', ({ mode, inlinePath, registerPath,
     document.head.appendChild(registerSW);
   }
 });
-import.meta.hot.on('${DEV_PWA_ASSETS_NAME}', ({ themeColor, links }) => {
-  if (themeColor) {
-    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
-    if (metaThemeColor) {
-      metaThemeColor.content = themeColor.content;
-    } else {
+import.meta.hot.on('${DEV_PWA_ASSETS_NAME}', ({ themeColors, links }) => {
+  if (themeColors.length) {
+    themeColors.forEach((themeColor) => {
       const meta = document.createElement('meta');
       meta.setAttribute('name', 'theme-color');
       meta.setAttribute('content', themeColor.content);
+      if (themeColor.media) meta.setAttribute('media', themeColor.media);
       document.head.appendChild(meta);
-    }
+    });
   }
   if (links) {
     links.map((l) => {
