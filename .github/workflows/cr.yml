@@ -4,20 +4,33 @@ env:
   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
 
 on:
+  push:
+    branches: [ main ]
   pull_request:
     branches: [main]
     types: [opened, synchronize, labeled, ready_for_review]
 
 permissions:
   contents: read
+  pull-requests: write
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number }}
+  group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   release:
-    if: ${{ !github.event.pull_request.draft && contains(github.event.pull_request.labels.*.name, 'cr-tracked') }}
+    # pr or main
+    # Skip pkg-pr-new on uppt release PRs (they don't include later main merges). Rely on main pushes instead.
+    if: |
+      github.event_name == 'push' || 
+      (
+        github.event_name == 'pull_request' && 
+        !github.event.pull_request.draft && 
+        contains(github.event.pull_request.labels.*.name, 'cr-tracked') && 
+        !startsWith(github.head_ref, 'release/v')
+      )
+#    if: ${{ !github.event.pull_request.draft && contains(github.event.pull_request.labels.*.name, 'cr-tracked') }}
     runs-on: ubuntu-latest
 
     steps:
