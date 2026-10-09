@@ -23,7 +23,7 @@ jobs:
     # pr or main
     # Skip pkg-pr-new on uppt release PRs (they don't include later main merges). Rely on main pushes instead.
     if: |
-      github.event_name == 'push' || 
+      (github.event_name == 'push' && !startsWith(github.ref, 'refs/heads/release/v')) || 
       (
         github.event_name == 'pull_request' && 
         !github.event.pull_request.draft && 
