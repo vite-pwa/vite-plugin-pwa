@@ -13,11 +13,12 @@ declare module 'virtual:pwa-assets/head' {
   export interface ColorSchemeMeta {
     name: string
     content: string
+    media?: string
   }
 
   export interface PWAAssetsHead {
     links: PWAAssetHeadLink[]
-    themeColor?: ColorSchemeMeta
+    themeColors: ColorSchemeMeta[]
   }
 
   export const pwaAssetsHead: PWAAssetsHead

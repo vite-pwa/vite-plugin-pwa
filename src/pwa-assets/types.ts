@@ -18,6 +18,7 @@ export interface PWAHtmlLink {
 export interface ColorSchemeMeta {
   name: string
   content: string
+  media?: string
 }
 
 export interface ResolvedIconAsset {
@@ -31,7 +32,7 @@ export interface ResolvedIconAsset {
 
 export interface PWAHtmlAssets {
   links: PWAHtmlLink[]
-  themeColor?: ColorSchemeMeta
+  themeColors: ColorSchemeMeta[]
 }
 
 export interface AssetsGeneratorContext {

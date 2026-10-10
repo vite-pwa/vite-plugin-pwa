@@ -1,5 +1,5 @@
 import type { PWAPluginContext } from '../context'
-import type { AssetsGeneratorContext, PWAHtmlAssets } from './types'
+import type { AssetsGeneratorContext, ColorSchemeMeta, PWAHtmlAssets } from './types'
 import { generateHtmlMarkup } from '@vite-pwa/assets-generator/api/generate-html-markup'
 import { checkForHtmlHead } from '../html'
 import { mapLink } from './utils'
@@ -10,11 +10,11 @@ export function transformIndexHtml(
   assetsGeneratorContext: AssetsGeneratorContext,
 ) {
   if (assetsGeneratorContext.injectThemeColor) {
-    const manifest = ctx.options.manifest
-    if (manifest && 'theme_color' in manifest && manifest.theme_color) {
+    const themeColors = resolveThemeColors(ctx)
+    if (themeColors.length) {
       html = checkForHtmlHead(html).replace(
         '</head>',
-        `\n<meta name="theme-color" content="${manifest.theme_color}"></head>`,
+        `\n${themeColors.map(colorSchemeMetaToHtml).join('\n')}</head>`,
       )
     }
   }
@@ -34,13 +34,10 @@ export function resolveHtmlAssets(
 ) {
   const header: PWAHtmlAssets = {
     links: [],
-    themeColor: undefined,
+    themeColors: [],
   }
-  if (assetsGeneratorContext.injectThemeColor) {
-    const manifest = ctx.options.manifest
-    if (manifest && 'theme_color' in manifest && manifest.theme_color)
-      header.themeColor = { name: 'theme-color', content: manifest.theme_color }
-  }
+  if (assetsGeneratorContext.injectThemeColor)
+    header.themeColors = resolveThemeColors(ctx)
 
   if (assetsGeneratorContext.includeHtmlHeadLinks) {
     const includeId = assetsGeneratorContext.includeId
@@ -54,4 +51,37 @@ export function resolveHtmlAssets(
   }
 
   return header
+}
+
+function resolveThemeColors(ctx: PWAPluginContext): ColorSchemeMeta[] {
+  const manifest = ctx.options.manifest
+  if (!manifest || !('theme_color' in manifest) || !manifest.theme_color)
+    return []
+
+  const themeColor: ColorSchemeMeta = {
+    name: 'theme-color',
+    content: manifest.theme_color,
+  }
+  if (
+    !('color_scheme_dark' in manifest)
+    || !manifest.color_scheme_dark
+    || !('theme_color' in manifest.color_scheme_dark)
+    || !manifest.color_scheme_dark.theme_color
+  ) {
+    return [themeColor]
+  }
+
+  themeColor.media = '(prefers-color-scheme: light)'
+  return [
+    themeColor,
+    {
+      name: 'theme-color',
+      content: manifest.color_scheme_dark.theme_color,
+      media: '(prefers-color-scheme: dark)',
+    },
+  ]
+}
+
+function colorSchemeMetaToHtml(meta: ColorSchemeMeta) {
+  return `<meta name="${meta.name}" content="${meta.content}"${meta.media ? ` media="${meta.media}"` : ''}>`
 }

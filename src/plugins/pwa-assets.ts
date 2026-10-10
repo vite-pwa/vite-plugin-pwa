@@ -45,7 +45,7 @@ export function AssetsPlugin(ctx: PWAPluginContext) {
         // conditions are kept for backward compatibility for below Vite v6.3
         if (id === RESOLVED_PWA_ASSETS_HEAD_VIRTUAL) {
           const pwaAssetsGenerator = await ctx.pwaAssetsGenerator
-          const head = pwaAssetsGenerator?.resolveHtmlAssets() ?? { links: [], themeColor: undefined }
+          const head = pwaAssetsGenerator?.resolveHtmlAssets() ?? { links: [], themeColors: [] }
           return `export const pwaAssetsHead = ${JSON.stringify(head)}`
         }
         if (id === RESOLVED_PWA_ASSETS_ICONS_VIRTUAL) {
