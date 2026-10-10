@@ -146,7 +146,7 @@ function prepareViteBuild(
         input: options.swSrc,
         output: {
           entryFileNames: swMjsName,
-          inlineDynamicImports: true,
+          codeSplitting: false,
         },
       },
     } satisfies InlineConfig['build'])
