@@ -22,14 +22,14 @@ export async function buildSW(
   // allow integrations to modify also build options
   await options.integration?.beforeBuildServiceWorker?.(options)
 
-  const { build } = await import('vite')
+  const vite = await import('vite')
 
   const {
     inlineConfig,
     format,
     swName,
     swMjsName,
-  } = prepareViteBuild(options, viteOptions)
+  } = prepareViteBuild(options, viteOptions, singleChunkOutputOptions(vite))
 
   // log sw build
   logSWViteBuild(version, normalizePath(relative(viteOptions.root, options.swSrc)), viteOptions, format)
@@ -37,7 +37,7 @@ export async function buildSW(
   // allow integrations to modify the build config
   await options.integration?.configureCustomSWViteBuild?.(inlineConfig)
 
-  await build(inlineConfig)
+  await vite.build(inlineConfig)
 
   if (format !== 'iife') {
     const swDestDir = dirname(options.swDest)
@@ -83,9 +83,19 @@ export async function buildSW(
   )
 }
 
+// Rolldown 1.0.0-rc.1 replaced `output.inlineDynamicImports` with `output.codeSplitting: false` and warns on the
+// old option; Rollup (Vite 3 to 7) and earlier Rolldown releases (rolldown-vite) only know `inlineDynamicImports`.
+function singleChunkOutputOptions(vite: typeof import('vite')) {
+  const rolldownVersion = 'rolldownVersion' in vite ? vite.rolldownVersion : undefined
+  return typeof rolldownVersion === 'string' && !/^(?:0\.|1\.0\.0-beta\.)/.test(rolldownVersion)
+    ? { codeSplitting: false }
+    : { inlineDynamicImports: true }
+}
+
 function prepareViteBuild(
   options: ResolvedVitePWAOptions,
   viteOptions: ResolvedConfig,
+  singleChunkOutput: ReturnType<typeof singleChunkOutputOptions>,
 ) {
   const define: Record<string, any> = { ...(viteOptions.define ?? {}) }
   const nodeEnv = options.injectManifestBuildOptions.enableWorkboxModulesLogs
@@ -146,7 +156,7 @@ function prepareViteBuild(
         input: options.swSrc,
         output: {
           entryFileNames: swMjsName,
-          inlineDynamicImports: true,
+          ...singleChunkOutput,
         },
       },
     } satisfies InlineConfig['build'])
