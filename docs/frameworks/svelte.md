@@ -6,6 +6,10 @@ title: Svelte | Frameworks
 
 You can use the built-in `Vite` virtual module `virtual:pwa-register/svelte` for `Svelte` which will return `writable` stores (`Writable<boolean>`) for `offlineReady` and `needRefresh`.
 
+::: tip
+`offlineReady` is a one-shot install toast, not a persistent offline-capable flag — it resets to `false` on reload. See [`offlineReady` vs `needRefresh`](/frameworks/#offlineready-vs-needrefresh).
+:::
+
 ::: warning
 You will need to add `workbox-window` as a `dev` dependency to your `Vite` project.
 :::
