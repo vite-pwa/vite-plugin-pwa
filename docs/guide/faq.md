@@ -9,6 +9,16 @@ next: Getting Started | Frameworks
 
 <TypeScriptError2307 />
 
+## `offlineReady` is `false` after reload
+
+`offlineReady` from the framework virtual modules (`virtual:pwa-register/vue`, `/react`, `/svelte`, `/solid`, `/preact`) is **not** a sticky “can work offline” state.
+
+It becomes `true` only when `onOfflineReady` runs: the service worker’s first successful install (not an update), after assets have been precached. On a later page load the reactive value starts `false` again, even if the app is already fully offline-capable via an existing controlling service worker.
+
+Treat `offlineReady` as a one-shot toast trigger (show “ready to work offline”, then dismiss). Prefer `onRegisteredSW` / `navigator.serviceWorker.controller` if you need to know whether a service worker is already active.
+
+See [Frameworks: offlineReady vs needRefresh](/frameworks/#offlineready-vs-needrefresh).
+
 ## Type declarations
 
 You can find the full list of the `vite-plugin-pwa` plugin configuration options in the following [types.ts module](https://github.com/antfu/vite-plugin-pwa/blob/main/src/types.ts).

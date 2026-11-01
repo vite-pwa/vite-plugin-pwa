@@ -110,6 +110,20 @@ These custom virtual modules will expose a wrapper for  <code>virtual:pwa-regist
 - <code>virtual:pwa-register/solid</code>: [createSignal](https://www.solidjs.com/docs/latest/api#createsignal) for <code>SolidJS</code>
 - <code>virtual:pwa-register/preact</code>: [useState](https://preactjs.com/guide/v10/hooks#usestate) for <code>Preact</code>
 
+### `offlineReady` vs `needRefresh`
+
+Framework helpers expose reactive `offlineReady` / `needRefresh` values that mirror the `onOfflineReady` / `onNeedRefresh` callbacks.
+
+`offlineReady` is a **one-shot install toast signal**, not a persistent “app is offline-capable” flag:
+
+- It becomes `true` when the service worker finishes installing for the **first** time (`installed` and not an update) — the moment precached assets are ready for offline use.
+- It starts as `false` again on every full page reload. Returning visitors who already have a controlling service worker will **not** see `offlineReady` flip to `true` again.
+- Use it to show a short “App ready to work offline” prompt once, then set it back to `false` when the user dismisses the toast (as in the framework examples).
+
+`needRefresh` is the separate signal for “a newer service worker is waiting”; it is unrelated to whether the current install can already work offline.
+
+See also the [FAQ entry](/guide/faq#offlineready-is-false-after-reload).
+
 **Note**: for [Vue 2](https://vuejs.org/) you need to use a custom `mixin` provided on [Vue 2](/frameworks/vue#vue-2) section.
 
 ## Frameworks
