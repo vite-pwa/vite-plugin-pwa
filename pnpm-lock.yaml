@@ -6,7 +6,6 @@ settings:
 
 overrides:
   rollup: ^4.35.0
-  serialize-javascript: ^7.1.3
 
 importers:
 
@@ -6017,8 +6016,8 @@ packages:
     resolution: {integrity: sha512-qqWzuOjSFOuqPjFe4NOsMLafToQQwBSOEpS+FwEt3A2V3vKubTquT3vmLTQpFgMXp8AlFWFuP1qKaJZOtPpVXg==}
     engines: {node: '>= 0.8.0'}
 
-  serialize-javascript@7.1.4:
-    resolution: {integrity: sha512-FqlEuoTq/zRmA4Lg6aOqyH3lCHbUtCB0bmHCeFniX2GBdDqMJM3FwdvEhlE5Pim1dlt2FfBdVPmUNNiGhhKqpw==}
+  serialize-javascript@7.0.5:
+    resolution: {integrity: sha512-F4LcB0UqUl1zErq+1nYEEzSHJnIwb3AF2XWB94b+afhrekOUijwooAYqFyRbjYkm2PAKBabx6oYv/xDxNi8IBw==}
     engines: {node: '>=20.0.0'}
 
   seroval@0.12.4:
@@ -9164,7 +9163,7 @@ snapshots:
 
   '@rollup/plugin-terser@1.0.0(rollup@4.47.1)':
     dependencies:
-      serialize-javascript: 7.1.4
+      serialize-javascript: 7.0.5
       smob: 1.5.0
       terser: 5.31.0
     optionalDependencies:
@@ -13325,7 +13324,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  serialize-javascript@7.1.4: {}
+  serialize-javascript@7.0.5: {}
 
   seroval@0.12.4: {}
 
