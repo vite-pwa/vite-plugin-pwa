@@ -157,7 +157,8 @@
   },
   "pnpm": {
     "overrides": {
-      "rollup": "^4.35.0"
+      "rollup": "^4.35.0",
+      "serialize-javascript": "^7.1.3"
     },
     "onlyBuiltDependencies": [
       "sharp"
