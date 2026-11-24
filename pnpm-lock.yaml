@@ -17,6 +17,9 @@ importers:
       pretty-bytes:
         specifier: ^6.1.1
         version: 6.1.1
+      serialize-javascript:
+        specifier: ^7.1.3
+        version: 7.1.4
       tinyglobby:
         specifier: ^0.2.10
         version: 0.2.10
