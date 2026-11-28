@@ -27,12 +27,12 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   let wb: import('workbox-window').Workbox | undefined
   let registerPromise: Promise<void>
-  let sendSkipWaitingMessage: () => void | undefined
+  let sendSkipWaitingMessage: () => Promisevoid | undefined
 
   const updateServiceWorker = async (_reloadPage = true) => {
     await registerPromise
     if (!auto) {
-      sendSkipWaitingMessage?.()
+      await sendSkipWaitingMessage?.()
     }
   }
 
@@ -49,12 +49,14 @@ export function registerSW(options: RegisterSWOptions = {}) {
       if (!wb)
         return
 
-      sendSkipWaitingMessage = () => {
+      sendSkipWaitingMessage = async () => {
         // Send a message to the waiting service worker,
         // instructing it to activate.
         // Note: for this to work, you have to add a message
         // listener in your service worker. See below.
         wb?.messageSkipWaiting()
+        const reg = await navigator.serviceWorker.getRegistration()
+        reg?.waiting?.postMessage({ type: 'SKIP_WAITING' })
       }
       if (!autoDestroy) {
         if (auto) {
@@ -88,7 +90,7 @@ export function registerSW(options: RegisterSWOptions = {}) {
             // that will reload the page as soon as the previously waiting
             // service worker has taken control.
             wb?.addEventListener('controlling', (event) => {
-              if (event.isUpdate) {
+              if (event.isUpdate || event.isExternal) {
                 if (onNeedReload)
                   onNeedReload()
                 else
@@ -136,3 +138,4 @@ export function registerSW(options: RegisterSWOptions = {}) {
 
   return updateServiceWorker
 }
+
